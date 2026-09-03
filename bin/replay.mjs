@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
 import { createReadStream } from "node:fs"
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises"
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises"
+import { execFileSync } from "node:child_process"
 import { createServer } from "node:http"
 import { dirname, extname, join, normalize, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, renderExecutionDiffText } from "../lib/execution-diff.mjs"
+import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
+import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -118,10 +121,133 @@ async function seed(args) {
   console.log(`wrote ${count} replay files to ${out}`)
 }
 
+function repoParts(value) {
+  try {
+    const url = new URL(value)
+    const parts = url.pathname.replace(/\.git$/, "").split("/").filter(Boolean)
+    if (url.hostname !== "github.com" || parts.length !== 2) return null
+    return { owner: parts[0], repo: parts[1], url: `https://github.com/${parts[0]}/${parts[1]}.git` }
+  } catch {
+    return null
+  }
+}
+
+async function githubJson(path, token) {
+  if (typeof token !== "string" || token === "") throw new Error("GITHUB_TOKEN is required for a GitHub repository URL")
+  const response = await fetch(`https://api.github.com${path}`, {
+    headers: { accept: "application/vnd.github+json", authorization: `Bearer ${token}` },
+  })
+  if (!response.ok) throw new Error(`GitHub API ${response.status} for ${path}`)
+  return response.json()
+}
+
+async function repositoryContext(repoUrl, token, repoDir) {
+  if (repoUrl !== null) {
+    const meta = await githubJson(`/repos/${repoUrl.owner}/${repoUrl.repo}`, token)
+    const contents = await githubJson(`/repos/${repoUrl.owner}/${repoUrl.repo}/contents`, token)
+    const files = Array.isArray(contents) ? contents.map((entry) => ({ filename: entry.name })) : []
+    return { meta, files, cloneUrl: repoUrl.url, repository: `${repoUrl.owner}/${repoUrl.repo}` }
+  }
+  const remote = (() => {
+    try {
+      return gitOutput(repoDir, ["remote", "get-url", "origin"])
+    } catch {
+      return null
+    }
+  })()
+  const parsed = remote === null ? null : repoParts(remote.replace(/\.git$/, ""))
+  const files = await localRootFiles(repoDir)
+  return {
+    meta: parsed === null ? {} : { private: false },
+    files,
+    cloneUrl: null,
+    repository: parsed === null ? "" : `${parsed.owner}/${parsed.repo}`,
+  }
+}
+
+function gitOutput(repoDir, args) {
+  return execFileSync("git", ["-C", repoDir, ...args], { encoding: "utf8" }).trim()
+}
+
+async function localRootFiles(repoDir) {
+  const entries = await readdir(repoDir, { withFileTypes: true })
+  return entries.filter((entry) => entry.isFile()).map((entry) => ({ filename: entry.name }))
+}
+
+async function cloneForReplay(source, cacheRoot) {
+  await mkdir(cacheRoot, { recursive: true })
+  const target = join(cacheRoot, `checkout-${Date.now().toString(36)}`)
+  const cloneSource = source.cloneUrl ?? source.repoDir
+  execFileSync("git", ["clone", cloneSource, target], { stdio: "pipe" })
+  return target
+}
+
+async function live(args) {
+  const target = args[0]
+  if (typeof target !== "string") throw new Error("live requires a repository URL or path")
+  const token = option(args, "--token", process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN)
+  const repoUrl = repoParts(target)
+  const localPath = repoUrl === null ? resolve(target) : null
+  const context = await repositoryContext(repoUrl, token, localPath)
+  let repoDir = localPath
+  if (repoUrl !== null || localPath !== null) {
+    repoDir = await cloneForReplay(repoUrl === null ? { repoDir: localPath } : { cloneUrl: repoUrl.url }, join(process.env.HOME ?? ROOT, ".cache", "garnet-replay"))
+  }
+  const preliminaryGate = assessLiveReplaySupport({
+    repoMeta: context.meta,
+    prMeta: { user: { login: "dependabot[bot]" } },
+    files: context.files,
+  })
+  if (!preliminaryGate.supported) {
+    console.log(`Live replay is not supported: ${preliminaryGate.reasons.filter((reason) => reason !== "Linux is required").join("; ")}`)
+    return
+  }
+  const explicitDependency = option(args, "--dependency", null)
+  const explicitFrom = option(args, "--from", null)
+  const explicitTo = option(args, "--to", null)
+  let dependency = explicitDependency
+  let from = explicitFrom
+  let to = explicitTo
+  if (args.includes("--pick-from-history")) {
+    const picked = pickDependencyFromHistory(repoDir)
+    if (picked === null) {
+      console.log("Live replay is not supported: no dependency version transition found in package.json history")
+      return
+    }
+    dependency = picked.dependency
+    from = picked.from
+    to = picked.to
+  }
+  if (dependency === null || from === null || to === null) {
+    throw new Error("live requires --dependency name --from x --to y or --pick-from-history")
+  }
+  const gate = assessLiveReplaySupport({
+    repoMeta: context.meta,
+    prMeta: { title: `Update ${dependency} from ${from} to ${to}`, user: { login: "dependabot[bot]" } },
+    files: context.files,
+  })
+  if (!gate.supported) {
+    console.log(`Live replay is not supported: ${gate.reasons.filter((reason) => reason !== "Linux is required").join("; ")}`)
+    return
+  }
+  const packageManager = detectPackageManager(context.files)
+  const plan = planReplay({ repoDir, dependency, from, to, packageManager })
+  if (args.includes("--dry-run")) {
+    console.log(`Live replay plan: ${dependency} ${from} to ${to} using ${packageManager}`)
+    console.log(`branch: ${plan.branch}`)
+    console.log(`checkout: ${repoDir}`)
+    return
+  }
+  const result = createReplayBranch({ repoDir, dependency, from, to, packageManager })
+  console.log(`created replay branch ${result.branch}`)
+  console.log(result.ghCommand)
+}
+
 async function main(args) {
   const command = args[0]
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))
+  if (command === "live") return live(args.slice(1))
   if (command === "serve") {
     const root = resolve(option(args.slice(1), "--root", join(ROOT, "public")))
     const port = Number(option(args.slice(1), "--port", "8787"))

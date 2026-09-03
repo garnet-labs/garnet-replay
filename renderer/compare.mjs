@@ -23,7 +23,7 @@
  *        node compare.mjs --print    render to stdout only
  */
 
-import { readFile, appendFile } from "node:fs/promises"
+import { readFile, appendFile, writeFile } from "node:fs/promises"
 import { argv } from "node:process"
 import { fileURLToPath } from "node:url"
 import {
@@ -34,6 +34,8 @@ import {
   renderRunProfile,
   summarizeProfile,
 } from "./review.mjs"
+import { diffDestinations } from "../lib/profile-diff.mjs"
+import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
 
 export const REPLAY_MARKER = "<!-- garnet-dependency-replay -->"
 
@@ -79,45 +81,6 @@ function defang(value) {
 
 function countPhrase(count, noun) {
   return `${count}&nbsp;${noun}${count === 1 ? "" : "s"}`
-}
-
-/**
- * Destination → sorted list of processes that reached it (last ancestry
- * element), from one summarized record.
- * @param {ReturnType<typeof summarizeProfile>} rec
- * @returns {Map<string, string[]>}
- */
-export function destinationIndex(rec) {
-  const index = new Map()
-  const egress = rec !== null && Array.isArray(rec.egress) ? rec.egress : []
-  for (const association of egress) {
-    const destination = association.name || association.address
-    if (typeof destination !== "string" || destination === "") continue
-    const actor = association.ancestry.length > 0
-      ? String(association.ancestry[association.ancestry.length - 1]).replace(/\d{4,}$/, "")
-      : "unknown (not recorded)"
-    const actors = index.get(destination) || new Set()
-    actors.add(actor)
-    index.set(destination, actors)
-  }
-  return new Map(
-    [...index.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([destination, actors]) => [destination, [...actors].sort((a, b) => a.localeCompare(b))]),
-  )
-}
-
-/**
- * @param {ReturnType<typeof summarizeProfile>} baseline
- * @param {ReturnType<typeof summarizeProfile>} update
- */
-export function diffDestinations(baseline, update) {
-  const before = destinationIndex(baseline)
-  const after = destinationIndex(update)
-  const added = [...after.keys()].filter((d) => !before.has(d))
-  const removed = [...before.keys()].filter((d) => !after.has(d))
-  const shared = [...after.keys()].filter((d) => before.has(d))
-  return { before, after, added, removed, shared }
 }
 
 function destinationLines(destinations, index) {
@@ -253,7 +216,7 @@ async function repostPrComment(cfg, body) {
   }
   const postRes = await fetch(base, { method: "POST", headers, body: JSON.stringify({ body }) })
   if (!postRes.ok) {
-    throw new Error(`Failed to create PR comment (${postRes.status}): ${await postRes.text()}`)
+    throw new Error(`Could not create PR comment (${postRes.status}): ${await postRes.text()}`)
   }
   console.log("Posted dependency replay comment.")
 }
@@ -268,6 +231,25 @@ async function main() {
   if (baseline === null) console.warn(`No baseline execution record at ${cfg.baselinePath}.`)
   if (update === null) console.warn(`No update execution record at ${cfg.updatePath}.`)
   const body = renderComparison({ baseline, update, replay: replay || {}, cfg })
+  const executionDiff = executionDiffFromProfiles({
+    baseline,
+    update,
+    meta: {
+      baselineSha: cfg.baselineSha,
+      headSha: cfg.headSha,
+      repository: cfg.repository,
+      prNumber: Number(cfg.prNumber),
+      runId: cfg.runId,
+      dependency: replay?.dependency,
+      from: replay?.from,
+      to: replay?.to,
+      prUrl: cfg.repository && cfg.prNumber
+        ? `${cfg.githubServerUrl}/${cfg.repository}/pull/${cfg.prNumber}`
+        : "",
+      title: replay?.dependency ? `Dependency replay: ${replay.dependency}` : "Dependency replay",
+    },
+  })
+  await writeFile(process.env.EXECUTION_DIFF_JSON_PATH || "execution-diff.json", `${JSON.stringify(executionDiff, null, 2)}\n`)
   if (argv.includes("--print")) {
     process.stdout.write(`${body}\n`)
     return
@@ -285,7 +267,7 @@ async function main() {
 const isDirectRun = argv[1] && fileURLToPath(import.meta.url) === argv[1]
 if (isDirectRun) {
   main().catch((err) => {
-    console.error(`Dependency replay comparison failed: ${err.message}`)
+    console.error(`Dependency replay comparison could not complete: ${err.message}`)
     if (readConfig().failOnError) process.exitCode = 1
   })
 }

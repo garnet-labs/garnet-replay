@@ -23,7 +23,7 @@ jobs:
       matrix:
         side: [baseline, update]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
@@ -37,13 +37,21 @@ jobs:
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      # Recording. Pinned to garnet-org/action v2.2.0 by commit SHA.
-      # The sensor needs a Garnet API token to start (free for open source at
-      # app.garnet.ai). Without it this job still runs the install; the
-      # comparison then reports "no execution record" for the side.
+      - name: Check Garnet API token
+        id: garnet-token
+        env:
+          GARNET_API_TOKEN: ${{ secrets.GARNET_API_TOKEN }}
+        run: |
+          if [ -n "$GARNET_API_TOKEN" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "No execution record: GARNET_API_TOKEN is not set, so the sensor did not start. The comment/JSON path still runs with GITHUB_TOKEN but has nothing to compare." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - uses: garnet-org/action@3d47f4a9004f7356c980a0e8d420ef5984750e3c # v2.2.0
         id: garnet
-        continue-on-error: true
+        if: steps.garnet-token.outputs.available == 'true'
         with:
           api_token: ${{ secrets.GARNET_API_TOKEN }}
 
@@ -52,6 +60,8 @@ jobs:
 
       - name: Export execution record
         if: always()
+        env:
+          PROFILE_JSON_PATH: /var/log/jibril.profile.json
         run: |
           set -uo pipefail
           sudo systemctl stop jibril.service || true
@@ -62,7 +72,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/profile"
           if sudo test -f /var/log/jibril.profile.json; then
             sudo cp /var/log/jibril.profile.json "$RUNNER_TEMP/profile/jibril.profile.json"
-            sudo chmod 644 "$RUNNER_TEMP/profile/jibril.profile.json"
+            sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/profile/jibril.profile.json"
             wc -c "$RUNNER_TEMP/profile/jibril.profile.json"
           else
             echo "No execution record found at /var/log/jibril.profile.json" >&2
@@ -83,7 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
@@ -102,7 +112,15 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           FAIL_ON_ERROR: "false"
+          EXECUTION_DIFF_JSON_PATH: ${{ runner.temp }}/execution-diff.json
         run: |
           set -uo pipefail
           export BASELINE_SHA="$(git rev-parse HEAD~1)"
           node .github/garnet-replay/compare.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: garnet-execution-diff
+          path: ${{ runner.temp }}/execution-diff.json
+          if-no-files-found: warn
