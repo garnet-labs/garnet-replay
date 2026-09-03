@@ -1,0 +1,97 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 143,
+    "url": "https://github.com/garnet-labs/posthog/pull/143",
+    "title": "chore(deps): Update posthog-js to 1.406.2",
+    "dependency": {
+      "name": "posthog-js",
+      "from": null,
+      "to": "1.406.2"
+    }
+  },
+  "base": {
+    "sha": "a54dac34a3f4f7302e79f4f9ba7b04d2a89a4790",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "dc5d44995e3cf33022d85c4497044407ae60b45e",
+    "profile_id": "01a027d7-c1dc-7d81-92ad-a663e592eec1",
+    "run_id": "32552959176"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "140.82.112.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.112.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 40,
+      "destinations": 11,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32552959176?profile=01a027d7-c1dc-7d81-92ad-a663e592eec1",
+    "head_json": "https://app.garnet.ai/api/public/runs/32552959176?profile=01a027d7-c1dc-7d81-92ad-a663e592eec1",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 05:00:41 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}

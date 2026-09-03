@@ -1,0 +1,222 @@
+[
+  {
+    "id": "real-139",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/139",
+    "replay_json": "/replays/github/garnet-labs/posthog/139.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552243818?profile=01a027c8-0525-7033-a2a3-8103c6ab91ba",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-140",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/140",
+    "replay_json": "/replays/github/garnet-labs/posthog/140.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552332708?profile=01a027c9-b711-76f5-894e-c4daa442dcc9",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-142",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/142",
+    "replay_json": "/replays/github/garnet-labs/posthog/142.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552873673?profile=01a027d8-06d3-772a-be8d-91a9fbb5025e",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-164",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/164",
+    "replay_json": "/replays/github/garnet-labs/posthog/164.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32553889517?profile=01a027e9-639b-7296-9ee4-fdb255b81b80",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-165",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/165",
+    "replay_json": "/replays/github/garnet-labs/posthog/165.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32553999649?profile=01a027eb-b102-7a3a-ac79-c48d8fd3203f",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-145",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/145",
+    "replay_json": "/replays/github/garnet-labs/posthog/145.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552962713?profile=01a027d7-7499-7739-8239-d6d3310cad4e",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-155",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/155",
+    "replay_json": "/replays/github/garnet-labs/posthog/155.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554012395?profile=01a027ec-0e24-7824-9f3c-de3bb5920c0b",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-173",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/173",
+    "replay_json": "/replays/github/garnet-labs/posthog/173.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554017766?profile=01a027ec-6084-7254-843a-75c9838a6f6c",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-176",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/176",
+    "replay_json": "/replays/github/garnet-labs/posthog/176.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554015539?profile=01a027eb-b4ca-7cbc-ae96-465f3ed3fcc5",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-182",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/182",
+    "replay_json": "/replays/github/garnet-labs/posthog/182.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554024296?profile=01a027eb-c43e-70c7-b358-c4d1ba5e5882",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-184",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/184",
+    "replay_json": "/replays/github/garnet-labs/posthog/184.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554028243?profile=01a027ec-7bef-7c2d-83d9-5b6ec9ba0f8a",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-186",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/186",
+    "replay_json": "/replays/github/garnet-labs/posthog/186.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32554009970?profile=01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-141",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/141",
+    "replay_json": "/replays/github/garnet-labs/posthog/141.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552914322?profile=01a027d7-a369-76fa-881f-93597fcb5da4",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-143",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/143",
+    "replay_json": "/replays/github/garnet-labs/posthog/143.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552959176?profile=01a027d7-c1dc-7d81-92ad-a663e592eec1",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-146",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/146",
+    "replay_json": "/replays/github/garnet-labs/posthog/146.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32553094019?profile=01a027d9-d800-7bc6-9120-9c7c7e88172f",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-147",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/147",
+    "replay_json": "/replays/github/garnet-labs/posthog/147.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552960691?profile=01a027d7-fc1a-7087-8b30-ca00008ffab1",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-148",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/148",
+    "replay_json": "/replays/github/garnet-labs/posthog/148.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552968036?profile=01a027d8-896e-7dbc-b4e9-45707abe8eb3",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-149",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/149",
+    "replay_json": "/replays/github/garnet-labs/posthog/149.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32553008814?profile=01a027d9-f7ea-724b-aff9-76acfc8f2237",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-150",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/150",
+    "replay_json": "/replays/github/garnet-labs/posthog/150.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32553222990?profile=01a027dc-5760-7560-bb36-29bfd18f015c",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "real-151",
+    "label": "real",
+    "source": "garnet-labs/posthog evidence-injection corpus",
+    "pr_url": "https://github.com/garnet-labs/posthog/pull/151",
+    "replay_json": "/replays/github/garnet-labs/posthog/151.json",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/32552914220?profile=01a027d8-2d61-7c70-b128-e5384fc43d09",
+    "note": "routine dependency replay; workload delta 0/0, all recorded change is runner background"
+  },
+  {
+    "id": "constructed-30304258281",
+    "label": "constructed",
+    "source": "garnet-labs/garnet-runtime-review-demo",
+    "pr_url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304258281",
+    "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30304258281.json",
+    "receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+  },
+  {
+    "id": "constructed-30304293294",
+    "label": "constructed",
+    "source": "garnet-labs/garnet-runtime-review-demo",
+    "pr_url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304293294",
+    "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30304293294.json",
+    "receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+  },
+  {
+    "id": "constructed-30305397518",
+    "label": "constructed",
+    "source": "garnet-labs/garnet-runtime-review-demo",
+    "pr_url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30305397518",
+    "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30305397518.json",
+    "receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+  },
+  {
+    "id": "constructed-30376868306",
+    "label": "constructed",
+    "source": "garnet-labs/garnet-runtime-review-demo",
+    "pr_url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30376868306",
+    "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30376868306.json",
+    "receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
+    "head_receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+  }
+]

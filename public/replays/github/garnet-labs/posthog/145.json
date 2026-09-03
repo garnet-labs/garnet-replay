@@ -1,0 +1,92 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 145,
+    "url": "https://github.com/garnet-labs/posthog/pull/145",
+    "title": "fix(error-tracking): declare quill charts dependency"
+  },
+  "base": {
+    "sha": "a96c9f5a5b7869c2c2466c4ed8ee67528c55e8c0",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "0de729b8ac3d191ccf4a636a636469acc6400202",
+    "profile_id": "01a027d7-7499-7739-8239-d6d3310cad4e",
+    "run_id": "32552962713"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "140.82.112.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 52,
+      "destinations": 11,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32552962713?profile=01a027d7-7499-7739-8239-d6d3310cad4e",
+    "head_json": "https://app.garnet.ai/api/public/runs/32552962713?profile=01a027d7-7499-7739-8239-d6d3310cad4e",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 05:00:19 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}

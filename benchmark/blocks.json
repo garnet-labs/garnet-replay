@@ -1,0 +1,1823 @@
+{
+  "139": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027c8-0525-7033-a2a3-8103c6ab91ba",
+      "head_sha": "5aba3c461a4872f7ca3d6a07ce739f2cb883e0cf",
+      "compared_sha": "c105d2b9b7cc6b0f4bca16f853a9a45d83c0f434",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 04:43:28 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 3,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 44,
+        "destinations": 13,
+        "added": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-01",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027c8-0525-7033-a2a3-8103c6ab91ba\nhead: 5aba3c461a4872f7ca3d6a07ce739f2cb883e0cf\ncompared with previous recorded head: c105d2b9b7cc6b0f4bca16f853a9a45d83c0f434\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 44 execution chains, 13 destinations\n  + 140.82.112.24 (runner background)\n  + 140.82.114.24 (runner background)\n  + hosted-compute-request-orchestrator-prod-iad-01 (runner background)\n  - 20.75.202.224 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 04:43:28 UTC · contract 6.10.0"
+  },
+  "140": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027c9-b711-76f5-894e-c4daa442dcc9",
+      "head_sha": "607ae123417df1a6816e0351f42b582741076be1",
+      "compared_sha": "d78663fb37b04cc51c4b4199a2dbb5c8b83616a5",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 04:45:23 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 54,
+        "destinations": 13,
+        "added": [],
+        "removed": [
+          {
+            "destination": "140.82.113.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027c9-b711-76f5-894e-c4daa442dcc9\nhead: 607ae123417df1a6816e0351f42b582741076be1\ncompared with previous recorded head: d78663fb37b04cc51c4b4199a2dbb5c8b83616a5\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 54 execution chains, 13 destinations\n  - 140.82.113.23 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 04:45:23 UTC · contract 6.10.0"
+  },
+  "141": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d7-a369-76fa-881f-93597fcb5da4",
+      "head_sha": "684bbd11dbf4b7b2aada2cb64f33c29f9318e959",
+      "compared_sha": "2a700fc1c706a4d7c462a37389470b9f295de888",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:00:36 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 50,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.112.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-01",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d7-a369-76fa-881f-93597fcb5da4\nhead: 684bbd11dbf4b7b2aada2cb64f33c29f9318e959\ncompared with previous recorded head: 2a700fc1c706a4d7c462a37389470b9f295de888\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 50 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - 140.82.112.23 (runner background)\n  - 140.82.114.23 (runner background)\n  - hosted-compute-request-orchestrator-prod-iad-01 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:00:36 UTC · contract 6.10.0"
+  },
+  "142": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d8-06d3-772a-be8d-91a9fbb5025e",
+      "head_sha": "60e3e792e21618431bf2e168a16238a1d3d4aee8",
+      "compared_sha": "b3da90eaee31198889ff21259aa29dbe9a79d872",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:00:58 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 5,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 43,
+        "destinations": 15,
+        "added": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.113.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d8-06d3-772a-be8d-91a9fbb5025e\nhead: 60e3e792e21618431bf2e168a16238a1d3d4aee8\ncompared with previous recorded head: b3da90eaee31198889ff21259aa29dbe9a79d872\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 43 execution chains, 15 destinations\n  + 140.82.112.24 (runner background)\n  + 140.82.113.24 (runner background)\n  + 140.82.114.24 (runner background)\n  + glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\n  + hosted-compute-request-orchestrator-prod-iad-02 (runner background)\n  - 20.75.202.224 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:00:58 UTC · contract 6.10.0"
+  },
+  "143": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d7-c1dc-7d81-92ad-a663e592eec1",
+      "head_sha": "dc5d44995e3cf33022d85c4497044407ae60b45e",
+      "compared_sha": "a54dac34a3f4f7302e79f4f9ba7b04d2a89a4790",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:00:41 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 40,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.112.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d7-c1dc-7d81-92ad-a663e592eec1\nhead: dc5d44995e3cf33022d85c4497044407ae60b45e\ncompared with previous recorded head: a54dac34a3f4f7302e79f4f9ba7b04d2a89a4790\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 40 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - 140.82.112.23 (runner background)\n  - 140.82.112.24 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:00:41 UTC · contract 6.10.0"
+  },
+  "145": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d7-7499-7739-8239-d6d3310cad4e",
+      "head_sha": "0de729b8ac3d191ccf4a636a636469acc6400202",
+      "compared_sha": "a96c9f5a5b7869c2c2466c4ed8ee67528c55e8c0",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:00:19 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 52,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d7-7499-7739-8239-d6d3310cad4e\nhead: 0de729b8ac3d191ccf4a636a636469acc6400202\ncompared with previous recorded head: a96c9f5a5b7869c2c2466c4ed8ee67528c55e8c0\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 52 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - 140.82.112.24 (runner background)\n  - 140.82.114.24 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:00:19 UTC · contract 6.10.0"
+  },
+  "146": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d9-d800-7bc6-9120-9c7c7e88172f",
+      "head_sha": "9215c2fd71220340a61904b5a1f343af88c1e195",
+      "compared_sha": "3824d30ca6c264c158c2676c86501ad0b24e7a09",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:02:59 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 4
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 49,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "glb-p4a577-public-internal.githubapp[.]com (20.75.202.224) (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.112.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (140.82.113.23) (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d9-d800-7bc6-9120-9c7c7e88172f\nhead: 9215c2fd71220340a61904b5a1f343af88c1e195\ncompared with previous recorded head: 3824d30ca6c264c158c2676c86501ad0b24e7a09\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 49 execution chains, 11 destinations\n  + glb-p4a577-public-internal.githubapp[.]com (20.75.202.224) (github infra) (runner background)\n  - 140.82.112.24 (runner background)\n  - 140.82.112.23 (runner background)\n  - 140.82.114.24 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (140.82.113.23) (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:02:59 UTC · contract 6.10.0"
+  },
+  "147": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d7-fc1a-7087-8b30-ca00008ffab1",
+      "head_sha": "0241ae7600764585ec74479bd6b7ce7e591ed2f5",
+      "compared_sha": "b4ddc3686c6b87aa6650eeb80e2c86e4c47201a2",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:00:58 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 49,
+        "destinations": 11,
+        "added": [],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d7-fc1a-7087-8b30-ca00008ffab1\nhead: 0241ae7600764585ec74479bd6b7ce7e591ed2f5\ncompared with previous recorded head: b4ddc3686c6b87aa6650eeb80e2c86e4c47201a2\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 49 execution chains, 11 destinations\n  no destination additions or removals recorded\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:00:58 UTC · contract 6.10.0"
+  },
+  "148": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d8-896e-7dbc-b4e9-45707abe8eb3",
+      "head_sha": "0c723113ed2c1592d1f6b0200491e29a13a26817",
+      "compared_sha": "548b2bf8f6d2727b5d85dd5ee66213f2e8a93d41",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:01:31 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 3,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 60,
+        "destinations": 13,
+        "added": [
+          {
+            "destination": "140.82.112.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "glb-p4a577-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d8-896e-7dbc-b4e9-45707abe8eb3\nhead: 0c723113ed2c1592d1f6b0200491e29a13a26817\ncompared with previous recorded head: 548b2bf8f6d2727b5d85dd5ee66213f2e8a93d41\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 60 execution chains, 13 destinations\n  + 140.82.112.23 (runner background)\n  + 140.82.114.24 (runner background)\n  + hosted-compute-request-orchestrator-prod-iad-02 (runner background)\n  - glb-p4a577-public-internal.githubapp[.]com (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:01:31 UTC · contract 6.10.0"
+  },
+  "149": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d9-f7ea-724b-aff9-76acfc8f2237",
+      "head_sha": "e6a6d6e3e16be47339883ffbb1b0f02d7862cf29",
+      "compared_sha": "351be8924699e2e188953c8e82b159baa3811290",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:03:07 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 62,
+        "destinations": 13,
+        "added": [
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d9-f7ea-724b-aff9-76acfc8f2237\nhead: e6a6d6e3e16be47339883ffbb1b0f02d7862cf29\ncompared with previous recorded head: 351be8924699e2e188953c8e82b159baa3811290\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 62 execution chains, 13 destinations\n  + hosted-compute-request-orchestrator-prod-iad-02 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:03:07 UTC · contract 6.10.0"
+  },
+  "150": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027dc-5760-7560-bb36-29bfd18f015c",
+      "head_sha": "7802cdb5aec4954704a734d470149e87949fd5d1",
+      "compared_sha": "1969a584b6dc6b50bffdd1a31e21a234aa2d7c7a",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:05:35 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 66,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027dc-5760-7560-bb36-29bfd18f015c\nhead: 7802cdb5aec4954704a734d470149e87949fd5d1\ncompared with previous recorded head: 1969a584b6dc6b50bffdd1a31e21a234aa2d7c7a\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 66 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra) (runner background)\n  - 140.82.112.24 (runner background)\n  - 140.82.114.24 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:05:35 UTC · contract 6.10.0"
+  },
+  "151": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027d8-2d61-7c70-b128-e5384fc43d09",
+      "head_sha": "ee9480eb208fb3479a69852aaa93dfcf9e8bcfe3",
+      "compared_sha": "e1ff8d1e98eee091a0c50ae6d099d56b81b5507e",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:01:05 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 49,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "glb-p4a577-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027d8-2d61-7c70-b128-e5384fc43d09\nhead: ee9480eb208fb3479a69852aaa93dfcf9e8bcfe3\ncompared with previous recorded head: e1ff8d1e98eee091a0c50ae6d099d56b81b5507e\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 49 execution chains, 11 destinations\n  + glb-p4a577-public-internal.githubapp[.]com (github infra) (runner background)\n  - 20.75.202.224 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:01:05 UTC · contract 6.10.0"
+  },
+  "155": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027ec-0e24-7824-9f3c-de3bb5920c0b",
+      "head_sha": "54327a9adb4e85088ae5cd9a8f3d1325a3f70a88",
+      "compared_sha": "4ac4f92c8c45b7fa3cf5c7c9f690452eaaeb7f6a",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:22:36 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 50,
+        "destinations": 12,
+        "added": [
+          {
+            "destination": "140.82.113.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.113.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027ec-0e24-7824-9f3c-de3bb5920c0b\nhead: 54327a9adb4e85088ae5cd9a8f3d1325a3f70a88\ncompared with previous recorded head: 4ac4f92c8c45b7fa3cf5c7c9f690452eaaeb7f6a\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 50 execution chains, 12 destinations\n  + 140.82.113.24 (runner background)\n  - 140.82.113.23 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\n  - hosted-compute-request-orchestrator-prod-iad-02 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:22:36 UTC · contract 6.10.0"
+  },
+  "164": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027e9-639b-7296-9ee4-fdb255b81b80",
+      "head_sha": "6cabf1e2195a45e7906ee063742cbda679c3ed5c",
+      "compared_sha": "3a5d32ed8f193a5fee46763357f51ab41bb2e481",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:19:52 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 2
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 45,
+        "destinations": 12,
+        "added": [],
+        "removed": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-01",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027e9-639b-7296-9ee4-fdb255b81b80\nhead: 6cabf1e2195a45e7906ee063742cbda679c3ed5c\ncompared with previous recorded head: 3a5d32ed8f193a5fee46763357f51ab41bb2e481\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 45 execution chains, 12 destinations\n  - 140.82.112.24 (runner background)\n  - hosted-compute-request-orchestrator-prod-iad-01 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:19:52 UTC · contract 6.10.0"
+  },
+  "165": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027eb-b102-7a3a-ac79-c48d8fd3203f",
+      "head_sha": "b8a15359a7d615f5b2d8e8e13ed269c172600872",
+      "compared_sha": "d4e26cbf112351bfdf333f5cbf99483082e724c3",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:22:26 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 2,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 55,
+        "destinations": 12,
+        "added": [
+          {
+            "destination": "140.82.113.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027eb-b102-7a3a-ac79-c48d8fd3203f\nhead: b8a15359a7d615f5b2d8e8e13ed269c172600872\ncompared with previous recorded head: d4e26cbf112351bfdf333f5cbf99483082e724c3\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 55 execution chains, 12 destinations\n  + 140.82.113.23 (runner background)\n  + glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\n  - 20.75.202.224 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:22:26 UTC · contract 6.10.0"
+  },
+  "173": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027ec-6084-7254-843a-75c9838a6f6c",
+      "head_sha": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+      "compared_sha": "2f44958190dfe0fcd12db5b1dc8d3f33599f8177",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:23:03 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 4,
+        "removed": 1
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 43,
+        "destinations": 14,
+        "added": [
+          {
+            "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.113.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027ec-6084-7254-843a-75c9838a6f6c\nhead: bef2df47fb3d955b1360233cd370a8afdedf7939\ncompared with previous recorded head: 2f44958190dfe0fcd12db5b1dc8d3f33599f8177\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 43 execution chains, 14 destinations\n  + hosted-compute-request-orchestrator-prod-iad-02 (runner background)\n  + 140.82.113.24 (runner background)\n  + 140.82.114.24 (runner background)\n  + glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\n  - 20.75.202.224 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:23:03 UTC · contract 6.10.0"
+  },
+  "176": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027eb-b4ca-7cbc-ae96-465f3ed3fcc5",
+      "head_sha": "1b8a00c309e70a49406fcad4a8739b85d80e019a",
+      "compared_sha": "754e83992558915af6657680fb06968fcde9ab33",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:22:27 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 47,
+        "destinations": 11,
+        "added": [],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027eb-b4ca-7cbc-ae96-465f3ed3fcc5\nhead: 1b8a00c309e70a49406fcad4a8739b85d80e019a\ncompared with previous recorded head: 754e83992558915af6657680fb06968fcde9ab33\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 47 execution chains, 11 destinations\n  no destination additions or removals recorded\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:22:27 UTC · contract 6.10.0"
+  },
+  "182": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027eb-c43e-70c7-b358-c4d1ba5e5882",
+      "head_sha": "fe0eab38106836974979fd8abdd0c81b0b61e383",
+      "compared_sha": "71a0e3aefb042405e33846c1797276eeb8539863",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:22:31 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 42,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027eb-c43e-70c7-b358-c4d1ba5e5882\nhead: fe0eab38106836974979fd8abdd0c81b0b61e383\ncompared with previous recorded head: 71a0e3aefb042405e33846c1797276eeb8539863\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 42 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra) (runner background)\n  - 140.82.112.24 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:22:31 UTC · contract 6.10.0"
+  },
+  "184": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027ec-7bef-7c2d-83d9-5b6ec9ba0f8a",
+      "head_sha": "701d58a537c442b03ffb29449f1563a5f2fe6445",
+      "compared_sha": "a02eec45028bbf54aa6b15e03e2eb072a454ff9e",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:23:19 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 3
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 43,
+        "destinations": 11,
+        "added": [
+          {
+            "destination": "20.75.202.224",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ],
+        "removed": [
+          {
+            "destination": "140.82.112.24",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "140.82.113.23",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          },
+          {
+            "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+            "section": "runner background",
+            "process": null,
+            "ancestry": []
+          }
+        ]
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027ec-7bef-7c2d-83d9-5b6ec9ba0f8a\nhead: 701d58a537c442b03ffb29449f1563a5f2fe6445\ncompared with previous recorded head: a02eec45028bbf54aa6b15e03e2eb072a454ff9e\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 43 execution chains, 11 destinations\n  + 20.75.202.224 (runner background)\n  - 140.82.112.24 (runner background)\n  - 140.82.113.23 (runner background)\n  - glb-2a3c35-public-internal.githubapp[.]com (github infra) (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:23:19 UTC · contract 6.10.0"
+  },
+  "186": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.10.0",
+      "receipt_id": "01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+      "head_sha": "9627308ba206b3eeb1018ee280f170620a0a3d11",
+      "compared_sha": "b4756ea355fdd17eceffb25d68191ccfa3b5165d",
+      "comparison": "available",
+      "recorded_at": "2026-08-22 05:22:59 UTC",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 0,
+        "jobs_unchanged": 1,
+        "destinations_added": 0,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 66,
+        "destinations": 13,
+        "added": [],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": false,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 01a027ec-2a00-72b9-bbac-e9ebb73f582c\nhead: 9627308ba206b3eeb1018ee280f170620a0a3d11\ncompared with previous recorded head: b4756ea355fdd17eceffb25d68191ccfa3b5165d\nworkload: 0 job(s) changed, 1 unchanged; destinations +0 -0\nrecorded network evidence: 66 execution chains, 13 destinations\n  no destination additions or removals recorded\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-08-22 05:22:59 UTC · contract 6.10.0"
+  },
+  "constructed-30304258281": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.9.8",
+      "receipt_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+      "head_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+      "compared_sha": null,
+      "comparison": "unavailable",
+      "recorded_at": "2026-07-27T20:51:01.179991156Z",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 1,
+        "jobs_unchanged": 0,
+        "destinations_added": 9,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 9,
+        "destinations": 6,
+        "added": [
+          {
+            "destination": "140.82.112.3",
+            "section": "workload",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          },
+          {
+            "destination": "api.github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "registry.npmjs.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "registry.npmjs.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "release-assets.githubusercontent.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          }
+        ],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": true,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 019fa558-63f3-7d3f-b208-8258d1755c50\nhead: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +9 -0\nrecorded network evidence: 9 execution chains, 6 destinations\n  + 140.82.112.3 (workload)\n  + api.github.com (workload)\n  + github.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:01.179991156Z · contract 6.9.8"
+  },
+  "constructed-30304293294": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.9.8",
+      "receipt_id": "019fa558-f02d-7744-bae2-27af1389ab34",
+      "head_sha": "64283ea0edf76eb17d41be0a6c49776cd85ee4fe",
+      "compared_sha": null,
+      "comparison": "unavailable",
+      "recorded_at": "2026-07-27T20:51:36.964907523Z",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 1,
+        "jobs_unchanged": 0,
+        "destinations_added": 11,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 11,
+        "destinations": 8,
+        "added": [
+          {
+            "destination": "140.82.112.24",
+            "section": "workload",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          },
+          {
+            "destination": "140.82.114.24",
+            "section": "workload",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "api.github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "github.com",
+            "section": "workload",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          },
+          {
+            "destination": "httpbin.org",
+            "section": "workload",
+            "process": "curl",
+            "ancestry": [
+              "node",
+              "dash",
+              "curl"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "curl",
+            "ancestry": [
+              "node",
+              "dash",
+              "curl"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "registry.npmjs.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "release-assets.githubusercontent.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          }
+        ],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": true,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 019fa558-f02d-7744-bae2-27af1389ab34\nhead: 64283ea0edf76eb17d41be0a6c49776cd85ee4fe\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +11 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + 140.82.112.24 (workload)\n  + 140.82.114.24 (workload)\n  + api.github.com (workload)\n  + github.com (workload)\n  + github.com (workload)\n  + httpbin.org (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:36.964907523Z · contract 6.9.8"
+  },
+  "constructed-30305397518": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.9.8",
+      "receipt_id": "019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
+      "head_sha": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
+      "compared_sha": null,
+      "comparison": "unavailable",
+      "recorded_at": "2026-07-27T21:06:51.954141994Z",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 1,
+        "jobs_unchanged": 0,
+        "destinations_added": 13,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 13,
+        "destinations": 10,
+        "added": [
+          {
+            "destination": "140.82.113.23",
+            "section": "workload",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          },
+          {
+            "destination": "api.github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "api.ipify.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "hosted-compute-watchdog-prod-iad-02.githubapp",
+            "section": "workload",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "httpbin.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "ip-api.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "registry.npmjs.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "release-assets.githubusercontent.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          }
+        ],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": true,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 019fa566-e5f7-7f9c-a8ed-4f19b855c17f\nhead: a4f3a42f851b27359950e8c477bfbcaf2296fa8b\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +13 -0\nrecorded network evidence: 13 execution chains, 10 destinations\n  + 140.82.113.23 (workload)\n  + api.github.com (workload)\n  + api.ipify.org (workload)\n  + github.com (workload)\n  + hosted-compute-watchdog-prod-iad-02.githubapp (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T21:06:51.954141994Z · contract 6.9.8"
+  },
+  "constructed-30376868306": {
+    "block": {
+      "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
+      "contract": "6.9.8",
+      "receipt_id": "019fa97d-a69b-7349-988f-7a029f5d6bd9",
+      "head_sha": "84940b2399a620559979dda042c979a54b5f0cf2",
+      "compared_sha": null,
+      "comparison": "unavailable",
+      "recorded_at": "2026-07-28T16:10:11.9426858Z",
+      "jobs_recorded": 1,
+      "workload": {
+        "jobs_changed": 1,
+        "jobs_unchanged": 0,
+        "destinations_added": 11,
+        "destinations_removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      },
+      "network_evidence": {
+        "recorded": true,
+        "execution_chains": 11,
+        "destinations": 8,
+        "added": [
+          {
+            "destination": "api.github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "api.ipify.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "github.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "httpbin.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "ip-api.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "node",
+              "dash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "localhost",
+            "section": "workload",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "registry.npmjs.org",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Worker",
+              "bash",
+              "node"
+            ]
+          },
+          {
+            "destination": "release-assets.githubusercontent.com",
+            "section": "workload",
+            "process": "node",
+            "ancestry": [
+              "Runner.Listener",
+              "Runner.Worker",
+              "node"
+            ]
+          }
+        ],
+        "removed": []
+      },
+      "process_evidence": {
+        "recorded": true,
+        "note": "processes appear as the execution chains behind each recorded action"
+      },
+      "file_evidence": {
+        "recorded": false,
+        "note": "no file evidence recorded for this run"
+      },
+      "deterministic_detections": [],
+      "detections_note": "none recorded",
+      "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
+    },
+    "rendered": "receipt_id: 019fa97d-a69b-7349-988f-7a029f5d6bd9\nhead: 84940b2399a620559979dda042c979a54b5f0cf2\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +11 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + api.github.com (workload)\n  + api.ipify.org (workload)\n  + github.com (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-28T16:10:11.9426858Z · contract 6.9.8"
+  }
+}

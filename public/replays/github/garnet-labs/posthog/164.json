@@ -1,0 +1,84 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 164,
+    "url": "https://github.com/garnet-labs/posthog/pull/164",
+    "title": "chore(typescript): bump native-preview to the 7.0 release build",
+    "dependency": {
+      "name": "native-preview",
+      "from": null,
+      "to": "the"
+    }
+  },
+  "base": {
+    "sha": "3a5d32ed8f193a5fee46763357f51ab41bb2e481",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "6cabf1e2195a45e7906ee063742cbda679c3ed5c",
+    "profile_id": "01a027e9-639b-7296-9ee4-fdb255b81b80",
+    "run_id": "32553889517"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [
+      {
+        "destination": "140.82.112.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-request-orchestrator-prod-iad-01",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 45,
+      "destinations": 12,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 2
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32553889517?profile=01a027e9-639b-7296-9ee4-fdb255b81b80",
+    "head_json": "https://app.garnet.ai/api/public/runs/32553889517?profile=01a027e9-639b-7296-9ee4-fdb255b81b80",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 05:19:52 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}

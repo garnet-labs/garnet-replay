@@ -1,0 +1,52 @@
+# Benchmark results
+
+| seed | label | arm | judgment_changed | severity_changed | evidence_grounded_findings |
+|---|---|---|---|---|---|
+| real-139 | real | control | not run | not run | not run |
+| real-139 | real | treatment | not run | not run | not run |
+| real-140 | real | control | not run | not run | not run |
+| real-140 | real | treatment | not run | not run | not run |
+| real-142 | real | control | not run | not run | not run |
+| real-142 | real | treatment | not run | not run | not run |
+| real-164 | real | control | not run | not run | not run |
+| real-164 | real | treatment | not run | not run | not run |
+| real-165 | real | control | not run | not run | not run |
+| real-165 | real | treatment | not run | not run | not run |
+| real-145 | real | control | not run | not run | not run |
+| real-145 | real | treatment | not run | not run | not run |
+| real-155 | real | control | not run | not run | not run |
+| real-155 | real | treatment | not run | not run | not run |
+| real-173 | real | control | not run | not run | not run |
+| real-173 | real | treatment | not run | not run | not run |
+| real-176 | real | control | not run | not run | not run |
+| real-176 | real | treatment | not run | not run | not run |
+| real-182 | real | control | not run | not run | not run |
+| real-182 | real | treatment | not run | not run | not run |
+| real-184 | real | control | not run | not run | not run |
+| real-184 | real | treatment | not run | not run | not run |
+| real-186 | real | control | not run | not run | not run |
+| real-186 | real | treatment | not run | not run | not run |
+| real-141 | real | control | not run | not run | not run |
+| real-141 | real | treatment | not run | not run | not run |
+| real-143 | real | control | not run | not run | not run |
+| real-143 | real | treatment | not run | not run | not run |
+| real-146 | real | control | not run | not run | not run |
+| real-146 | real | treatment | not run | not run | not run |
+| real-147 | real | control | not run | not run | not run |
+| real-147 | real | treatment | not run | not run | not run |
+| real-148 | real | control | not run | not run | not run |
+| real-148 | real | treatment | not run | not run | not run |
+| real-149 | real | control | not run | not run | not run |
+| real-149 | real | treatment | not run | not run | not run |
+| real-150 | real | control | not run | not run | not run |
+| real-150 | real | treatment | not run | not run | not run |
+| real-151 | real | control | not run | not run | not run |
+| real-151 | real | treatment | not run | not run | not run |
+| constructed-30304258281 | constructed | control | not run | not run | not run |
+| constructed-30304258281 | constructed | treatment | not run | not run | not run |
+| constructed-30304293294 | constructed | control | not run | not run | not run |
+| constructed-30304293294 | constructed | treatment | not run | not run | not run |
+| constructed-30305397518 | constructed | control | not run | not run | not run |
+| constructed-30305397518 | constructed | treatment | not run | not run | not run |
+| constructed-30376868306 | constructed | control | not run | not run | not run |
+| constructed-30376868306 | constructed | treatment | not run | not run | not run |

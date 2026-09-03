@@ -1,0 +1,73 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 140,
+    "url": "https://github.com/garnet-labs/posthog/pull/140",
+    "title": "chore(deps): bump @swc/core in hogvm to unblock pnpm update"
+  },
+  "base": {
+    "sha": "d78663fb37b04cc51c4b4199a2dbb5c8b83616a5",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "607ae123417df1a6816e0351f42b582741076be1",
+    "profile_id": "01a027c9-b711-76f5-894e-c4daa442dcc9",
+    "run_id": "32552332708"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [
+      {
+        "destination": "140.82.113.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 54,
+      "destinations": 13,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32552332708?profile=01a027c9-b711-76f5-894e-c4daa442dcc9",
+    "head_json": "https://app.garnet.ai/api/public/runs/32552332708?profile=01a027c9-b711-76f5-894e-c4daa442dcc9",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 04:45:23 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}

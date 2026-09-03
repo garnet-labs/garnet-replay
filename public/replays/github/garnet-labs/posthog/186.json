@@ -1,0 +1,66 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 186,
+    "url": "https://github.com/garnet-labs/posthog/pull/186",
+    "title": "fix(deps): align ai_gateway posthog-js lockfile entry to 1.391.7"
+  },
+  "base": {
+    "sha": "b4756ea355fdd17eceffb25d68191ccfa3b5165d",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "9627308ba206b3eeb1018ee280f170620a0a3d11",
+    "profile_id": "01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+    "run_id": "32554009970"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 66,
+      "destinations": 13,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32554009970?profile=01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+    "head_json": "https://app.garnet.ai/api/public/runs/32554009970?profile=01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 05:22:59 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}

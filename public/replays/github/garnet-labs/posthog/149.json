@@ -1,0 +1,78 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 149,
+    "url": "https://github.com/garnet-labs/posthog/pull/149",
+    "title": "chore(deps): Update posthog-js to 1.407.2",
+    "dependency": {
+      "name": "posthog-js",
+      "from": null,
+      "to": "1.407.2"
+    }
+  },
+  "base": {
+    "sha": "351be8924699e2e188953c8e82b159baa3811290",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "e6a6d6e3e16be47339883ffbb1b0f02d7862cf29",
+    "profile_id": "01a027d9-f7ea-724b-aff9-76acfc8f2237",
+    "run_id": "32553008814"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 62,
+      "destinations": 13,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/32553008814?profile=01a027d9-f7ea-724b-aff9-76acfc8f2237",
+    "head_json": "https://app.garnet.ai/api/public/runs/32553008814?profile=01a027d9-f7ea-724b-aff9-76acfc8f2237",
+    "pr_comment": null
+  },
+  "recorded": {
+    "at": "2026-08-22 05:03:07 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  }
+}
