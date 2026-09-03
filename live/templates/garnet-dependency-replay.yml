@@ -1,0 +1,108 @@
+# Garnet dependency replay: records the dependency install on the baseline
+# commit and on the update commit under the Garnet sensor, then posts one
+# comparison comment on the PR. Installed on the replay branch by
+# dependency-replay/replay.mjs together with .github/garnet-replay/.
+name: garnet-dependency-replay
+
+on:
+  pull_request:
+    paths:
+      - ".github/DEPENDENCY_REPLAY.md"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  record:
+    name: record ${{ matrix.side }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        side: [baseline, update]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+
+      - name: Select ${{ matrix.side }} commit
+        id: side
+        run: |
+          set -euo pipefail
+          if [ "${{ matrix.side }}" = "baseline" ]; then
+            git checkout --quiet HEAD~1
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      # Recording. Pinned to garnet-org/action v2.2.0 by commit SHA.
+      # The sensor needs a Garnet API token to start (free for open source at
+      # app.garnet.ai). Without it this job still runs the install; the
+      # comparison then reports "no execution record" for the side.
+      - uses: garnet-org/action@3d47f4a9004f7356c980a0e8d420ef5984750e3c # v2.2.0
+        id: garnet
+        continue-on-error: true
+        with:
+          api_token: ${{ secrets.GARNET_API_TOKEN }}
+
+      - name: Install dependencies (${{ matrix.side }})
+        run: bash .github/garnet-replay/install.sh
+
+      - name: Export execution record
+        if: always()
+        run: |
+          set -uo pipefail
+          sudo systemctl stop jibril.service || true
+          for i in $(seq 1 10); do
+            if sudo test -f /var/log/jibril.profile.json; then break; fi
+            sleep 1
+          done
+          mkdir -p "$RUNNER_TEMP/profile"
+          if sudo test -f /var/log/jibril.profile.json; then
+            sudo cp /var/log/jibril.profile.json "$RUNNER_TEMP/profile/jibril.profile.json"
+            sudo chmod 644 "$RUNNER_TEMP/profile/jibril.profile.json"
+            wc -c "$RUNNER_TEMP/profile/jibril.profile.json"
+          else
+            echo "No execution record found at /var/log/jibril.profile.json" >&2
+          fi
+          echo "${{ steps.side.outputs.sha }}" > "$RUNNER_TEMP/profile/sha"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: garnet-profile-${{ matrix.side }}
+          path: ${{ runner.temp }}/profile
+          if-no-files-found: warn
+
+  compare:
+    name: compare
+    needs: record
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: garnet-profile-*
+          path: profiles
+
+      - name: Render comparison and post PR comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASELINE_PROFILE_JSON_PATH: profiles/garnet-profile-baseline/jibril.profile.json
+          UPDATE_PROFILE_JSON_PATH: profiles/garnet-profile-update/jibril.profile.json
+          REPLAY_JSON_PATH: .github/garnet-replay/replay.json
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          FAIL_ON_ERROR: "false"
+        run: |
+          set -uo pipefail
+          export BASELINE_SHA="$(git rev-parse HEAD~1)"
+          node .github/garnet-replay/compare.mjs

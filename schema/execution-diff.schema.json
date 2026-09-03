@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://garnet.ai/schemas/execution-diff/v1.json",
+  "title": "Execution Diff",
+  "description": "Base execution vs head execution for one pull request, derived from kernel-recorded Execution Profiles. A rename of the posthog evidence-injection block (build_block.py); every field is machine-derived from the record, never hand-written.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "mode", "repo", "pull_request", "base", "head", "comparison", "execution_diff", "receipt_urls", "recorded"],
+  "properties": {
+    "schema_version": { "const": "execution-diff/v1" },
+    "mode": {
+      "type": "string",
+      "enum": ["known-evidence", "live-replay"],
+      "description": "known-evidence: resolved from an existing Garnet record on the PR. live-replay: recorded by the two-commit replay branch."
+    },
+    "label": {
+      "type": "string",
+      "enum": ["real", "constructed"],
+      "description": "real: a pull request that existed for its own reasons. constructed: a test case authored to exercise a shape (e.g. a postinstall beacon). Rendered on every surface."
+    },
+    "repo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "name", "url"],
+      "properties": {
+        "owner": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "pull_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "url", "title"],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "title": { "type": "string" },
+        "dependency": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "from": { "type": ["string", "null"] },
+            "to": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "base": { "$ref": "#/$defs/side" },
+    "head": { "$ref": "#/$defs/side" },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "scope"],
+      "properties": {
+        "available": { "type": "boolean" },
+        "scope": {
+          "type": "string",
+          "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "unavailable"],
+          "description": "Exactly which pair is compared. known-evidence compares the previous recorded head of the PR ref with the head; live-replay compares the baseline commit (immediate parent) with the update commit."
+        }
+      }
+    },
+    "execution_diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processes_added", "processes_removed", "network_added", "network_removed", "files_added", "files_removed", "kinds_recorded", "totals"],
+      "properties": {
+        "processes_added": { "type": "array", "items": { "$ref": "#/$defs/processEntry" } },
+        "processes_removed": { "type": "array", "items": { "$ref": "#/$defs/processEntry" } },
+        "network_added": { "type": "array", "items": { "$ref": "#/$defs/networkEntry" } },
+        "network_removed": { "type": "array", "items": { "$ref": "#/$defs/networkEntry" } },
+        "files_added": { "type": "array", "items": { "$ref": "#/$defs/fileEntry" } },
+        "files_removed": { "type": "array", "items": { "$ref": "#/$defs/fileEntry" } },
+        "kinds_recorded": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["network", "process", "file"] },
+          "description": "Observation classes present in the record. A kind absent here was not recorded, not observed-as-empty."
+        },
+        "totals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["execution_chains", "destinations", "jobs_recorded", "jobs_changed", "jobs_unchanged", "workload", "runner_background"],
+          "properties": {
+            "execution_chains": { "type": ["integer", "null"], "minimum": 0 },
+            "destinations": { "type": ["integer", "null"], "minimum": 0 },
+            "jobs_recorded": { "type": ["integer", "null"], "minimum": 0 },
+            "jobs_changed": { "type": ["integer", "null"], "minimum": 0 },
+            "jobs_unchanged": { "type": ["integer", "null"], "minimum": 0 },
+            "workload": { "$ref": "#/$defs/addedRemoved" },
+            "runner_background": { "$ref": "#/$defs/addedRemoved" }
+          }
+        }
+      }
+    },
+    "receipt_urls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base", "head"],
+      "properties": {
+        "base": { "type": ["string", "null"], "format": "uri" },
+        "head": { "type": ["string", "null"], "format": "uri" },
+        "head_json": { "type": ["string", "null"], "format": "uri" },
+        "pr_comment": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "recorded": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["at", "contract", "source"],
+      "properties": {
+        "at": { "type": ["string", "null"] },
+        "contract": { "type": ["string", "null"], "description": "Runtime Review contract version stamped on the record." },
+        "source": { "type": "string", "description": "Where the record was read from, e.g. github-app-comment, jibril-profile-json." }
+      }
+    }
+  },
+  "$defs": {
+    "sha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha", "profile_id", "run_id"],
+      "properties": {
+        "sha": { "$ref": "#/$defs/sha" },
+        "profile_id": { "type": ["string", "null"], "description": "Envelope Profile ID (the receipt id)." },
+        "run_id": { "type": ["string", "null"], "description": "GitHub Actions run id." }
+      }
+    },
+    "section": { "type": "string", "enum": ["workload", "runner background"] },
+    "addedRemoved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed"],
+      "properties": {
+        "added": { "type": ["integer", "null"], "minimum": 0 },
+        "removed": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "networkEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["destination", "section"],
+      "properties": {
+        "destination": { "type": "string" },
+        "section": { "$ref": "#/$defs/section" },
+        "process": { "type": ["string", "null"], "description": "Process that acted (last element of the execution chain) when the record carries it." },
+        "ancestry": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "processEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ancestry", "section"],
+      "properties": {
+        "ancestry": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "section": { "$ref": "#/$defs/section" },
+        "step": { "type": ["string", "null"] }
+      }
+    },
+    "fileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "section"],
+      "properties": {
+        "path": { "type": "string" },
+        "section": { "$ref": "#/$defs/section" },
+        "process": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
