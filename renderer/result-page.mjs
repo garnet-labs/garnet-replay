@@ -104,8 +104,9 @@ export function renderResultPage(diff, { jsonHref, pageUrl = "" }) {
   const scopeText = {
     "previous-recorded-head-to-head": "previous recorded head → this head",
     "immediate-parent-to-head": "baseline commit (immediate parent) → update commit",
+    "constructed-pair": "clean constructed install of the same demo repository → this head (not this PR's own parent)",
     unavailable: "no previous record to compare with",
-  }[diff.comparison.scope]
+  }[diff.comparison.scope] ?? diff.comparison.scope
   const fullEvidence = safeHref(diff.receipt_urls.head)
   const baseEvidence = safeHref(diff.receipt_urls.base)
   const prLink = safeHref(pr.url)

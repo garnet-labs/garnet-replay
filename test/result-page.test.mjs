@@ -56,3 +56,12 @@ test("constructed label is shown and hostile strings are escaped", () => {
   assert.ok(!html.includes("<script>alert"))
   assert.ok(!html.includes('href="javascript:'))
 })
+
+test("constructed-pair page names its non-parent base explicitly", async () => {
+  const { readFile } = await import("node:fs/promises")
+  const diff = JSON.parse(await readFile("public/replays/github/garnet-labs/garnet-runtime-review-demo/30304293294.json", "utf8"))
+  const html = renderResultPage(diff, { jsonHref: "../30304293294.json" })
+  assert.match(html, /not this PR's own parent/)
+  assert.match(html, /constructed test case/)
+  assert.match(html, /httpbin\.org/)
+})
