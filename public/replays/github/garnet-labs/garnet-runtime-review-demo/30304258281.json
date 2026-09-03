@@ -34,7 +34,14 @@
           "sudo",
           "provjobd"
         ],
-        "section": "workload"
+        "section": "runner background"
+      },
+      {
+        "ancestry": [
+          "systemd",
+          "hosted-compute-agent"
+        ],
+        "section": "runner background"
       },
       {
         "ancestry": [
@@ -51,20 +58,13 @@
           "node"
         ],
         "section": "workload"
-      },
-      {
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
-        ],
-        "section": "workload"
       }
     ],
     "processes_removed": [],
     "network_added": [
       {
         "destination": "140.82.112.3",
-        "section": "workload",
+        "section": "runner background",
         "process": "hosted-compute-agent",
         "ancestry": [
           "systemd",
@@ -93,6 +93,16 @@
       },
       {
         "destination": "localhost",
+        "section": "runner background",
+        "process": "provjobd",
+        "ancestry": [
+          "hosted-compute-agent",
+          "sudo",
+          "provjobd"
+        ]
+      },
+      {
+        "destination": "localhost",
         "section": "workload",
         "process": "node",
         "ancestry": [
@@ -109,16 +119,6 @@
           "Runner.Listener",
           "Runner.Worker",
           "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "provjobd",
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
         ]
       },
       {
@@ -166,11 +166,11 @@
       "jobs_changed": 1,
       "jobs_unchanged": 0,
       "workload": {
-        "added": 9,
+        "added": 7,
         "removed": 0
       },
       "runner_background": {
-        "added": 0,
+        "added": 2,
         "removed": 0
       }
     }

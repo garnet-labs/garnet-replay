@@ -13,9 +13,9 @@
     "title": "Constructed dependency replay"
   },
   "base": {
-    "sha": null,
-    "profile_id": null,
-    "run_id": null
+    "sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "run_id": "30304258281"
   },
   "head": {
     "sha": "64283ea0edf76eb17d41be0a6c49776cd85ee4fe",
@@ -23,47 +23,16 @@
     "run_id": "30304293294"
   },
   "comparison": {
-    "available": false,
-    "scope": "unavailable"
+    "available": true,
+    "scope": "constructed-pair"
   },
   "execution_diff": {
     "processes_added": [
       {
         "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
           "node",
           "dash",
           "curl"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
         ],
         "section": "workload"
       }
@@ -72,7 +41,7 @@
     "network_added": [
       {
         "destination": "140.82.112.24",
-        "section": "workload",
+        "section": "runner background",
         "process": "hosted-compute-agent",
         "ancestry": [
           "systemd",
@@ -81,41 +50,12 @@
       },
       {
         "destination": "140.82.114.24",
-        "section": "workload",
+        "section": "runner background",
         "process": "provjobd",
         "ancestry": [
           "hosted-compute-agent",
           "sudo",
           "provjobd"
-        ]
-      },
-      {
-        "destination": "api.github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "hosted-compute-agent",
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
         ]
       },
       {
@@ -127,59 +67,19 @@
           "dash",
           "curl"
         ]
-      },
+      }
+    ],
+    "network_removed": [
       {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
+        "destination": "140.82.112.3",
+        "section": "runner background",
+        "process": "hosted-compute-agent",
         "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "curl",
-        "ancestry": [
-          "node",
-          "dash",
-          "curl"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "release-assets.githubusercontent.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
+          "systemd",
+          "hosted-compute-agent"
         ]
       }
     ],
-    "network_removed": [],
     "files_added": [],
     "files_removed": [],
     "kinds_recorded": [
@@ -193,17 +93,17 @@
       "jobs_changed": 1,
       "jobs_unchanged": 0,
       "workload": {
-        "added": 11,
+        "added": 1,
         "removed": 0
       },
       "runner_background": {
-        "added": 0,
-        "removed": 0
+        "added": 2,
+        "removed": 1
       }
     }
   },
   "receipt_urls": {
-    "base": null,
+    "base": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     "head": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34"
   },
   "recorded": {

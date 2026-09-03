@@ -187,7 +187,8 @@
     "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30304258281.json",
     "receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
-    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR",
+    "title": "chore(deps): add dependency (clean install, constructed)"
   },
   {
     "id": "constructed-30304293294",
@@ -197,7 +198,8 @@
     "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30304293294.json",
     "receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
-    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
+    "title": "chore(deps): add dependency with postinstall beacon (constructed)"
   },
   {
     "id": "constructed-30305397518",
@@ -207,7 +209,8 @@
     "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30305397518.json",
     "receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
-    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
+    "title": "chore(deps): add dependency with transitive beacon (constructed)"
   },
   {
     "id": "constructed-30376868306",
@@ -217,6 +220,7 @@
     "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-demo/30376868306.json",
     "receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
-    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR"
+    "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
+    "title": "chore(deps): bump dependency — outbound egress during install (constructed)"
   }
 ]

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Execution Diff · garnet-labs/posthog #143</title>
+<style>
+:root{--fg:#1b1b1f;--muted:#6b6f76;--line:#e4e5e8;--add:#0f6b3a;--rem:#9b2c2c;--brand:#C8504A;--bg:#fff;--card:#fafafa}
+@media (prefers-color-scheme:dark){:root{--fg:#ececef;--muted:#9a9ea6;--line:#2c2e33;--add:#5fcf8f;--rem:#ff8a80;--bg:#111214;--card:#181a1e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 64px}
+code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+header h1{font-size:22px;margin:0 0 4px}
+header .repo{color:var(--muted);font-size:14px}
+.label{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--line);border-radius:999px;margin-left:6px;vertical-align:middle}
+.label.constructed{border-color:var(--brand);color:var(--brand)}
+.pair{margin:16px 0;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:8px;font-size:14px}
+.pair div+div{margin-top:4px}
+.summary{font-size:18px;margin:18px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 28px}
+.actions a,.actions button{font:inherit;font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);text-decoration:none;cursor:pointer}
+.actions a.primary{border-color:var(--brand);color:var(--brand)}
+.actions .disabled{opacity:.5;pointer-events:none}
+.kind{border-top:1px solid var(--line);padding:18px 0}
+.kind h2{font-size:16px;margin:0 0 8px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.count .delta{color:var(--add);font-weight:600}
+.count .zero{color:var(--muted)}
+.muted{color:var(--muted);font-weight:400}
+.entries{list-style:none;margin:6px 0;padding:0}
+.entries li{display:flex;gap:8px;align-items:baseline;padding:3px 0}
+.entries .sign{width:1em;font-weight:700}
+.added .sign{color:var(--add)}.removed .sign{color:var(--rem)}
+.who{color:var(--muted);font-size:13px}
+.bg-line{color:var(--muted);font-size:14px;margin:6px 0 0}
+details{margin-top:8px}summary{cursor:pointer;color:var(--muted);font-size:14px}
+footer{margin-top:32px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:14px}
+footer p{margin:6px 0}
+.note{border-left:3px solid var(--brand);padding:8px 12px;margin:0 0 16px;font-size:14px;background:var(--card)}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="repo">garnet-labs/posthog · pull request #143 · posthog-js 1.406.2</div>
+  <h1>chore(deps): Update posthog-js to 1.406.2<span class="label ">real pull request</span></h1>
+</header>
+
+<p class="summary">Nothing your workflow ran changed between a54dac3 and dc5d449. Recorded change is runner background only.</p>
+<div class="actions">
+  <a class="primary" href="https://app.garnet.ai/public/runs/32552959176?profile=01a027d7-c1dc-7d81-92ad-a663e592eec1">Full evidence ↗</a>
+  <a href="/replays/github/garnet-labs/posthog/143.json">JSON</a>
+  <button type="button" data-share="/replays/github/garnet-labs/posthog/143">Share</button>
+  <a href="https://github.com/garnet-labs/posthog/pull/143">Pull request ↗</a>
+</div>
+<div class="pair">
+  <div><strong>this head</strong> <code>dc5d44995e3cf33022d85c4497044407ae60b45e</code> · <a href="https://app.garnet.ai/public/runs/32552959176?profile=01a027d7-c1dc-7d81-92ad-a663e592eec1">Execution Profile ↗</a></div>
+  <div><strong>compared with</strong> <code>a54dac34a3f4f7302e79f4f9ba7b04d2a89a4790</code> · profile link not carried on this record</div>
+  <div><strong>scope</strong> previous recorded head → this head · <strong>mode</strong> known-evidence</div>
+</div>
+<section class="kind ">
+  <h2>Processes <span class="count"><span class="muted">40 execution chains on this head · per-item delta not carried on this receipt</span></span></h2>
+
+
+
+</section>
+<section class="kind ">
+  <h2>Network destinations <span class="count"><span class="zero">+0 −0</span> <span class="muted">in your workflow</span></span></h2>
+
+
+  <details><summary>runner background · +1 −3 · no recorded workflow step</summary><ul class="entries added"><li><span class="sign">+</span><code>20.75.202.224</code></li></ul><ul class="entries removed"><li><span class="sign">−</span><code>140.82.112.23</code></li><li><span class="sign">−</span><code>140.82.112.24</code></li><li><span class="sign">−</span><code>glb-2a3c35-public-internal.githubapp[.]com (github infra)</code></li></ul></details>
+</section>
+<section class="kind ">
+  <h2>Files <span class="count"><span class="muted">no file observations on this record</span></span></h2>
+
+
+
+</section>
+<footer>
+  <p>Recorded 2026-08-22 05:00:41 UTC · contract 6.10.0 · source github-app-comment · 40 execution chains and 11 destinations on this head</p>
+  <p>Workload = execution under a recorded workflow step or a <code>Runner.Worker</code> descent. Runner background = the runner's own agents, systemd-rooted with no recorded step. An execution chain is a root-to-action path.</p>
+</footer>
+</main>
+<script>
+document.querySelector("[data-share]").addEventListener("click",async(e)=>{const u=e.currentTarget.dataset.share||location.href;try{await navigator.clipboard.writeText(u);e.currentTarget.textContent="Copied"}catch{prompt("Copy this link",u)}});
+</script>
+</body>
+</html>

@@ -13,9 +13,9 @@
     "title": "Constructed dependency replay"
   },
   "base": {
-    "sha": null,
-    "profile_id": null,
-    "run_id": null
+    "sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "run_id": "30304258281"
   },
   "head": {
     "sha": "84940b2399a620559979dda042c979a54b5f0cf2",
@@ -23,19 +23,11 @@
     "run_id": "30376868306"
   },
   "comparison": {
-    "available": false,
-    "scope": "unavailable"
+    "available": true,
+    "scope": "constructed-pair"
   },
   "execution_diff": {
     "processes_added": [
-      {
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ],
-        "section": "workload"
-      },
       {
         "ancestry": [
           "node",
@@ -43,36 +35,18 @@
           "node"
         ],
         "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ],
-        "section": "workload"
       }
     ],
-    "processes_removed": [],
-    "network_added": [
+    "processes_removed": [
       {
-        "destination": "api.github.com",
-        "section": "workload",
-        "process": "node",
         "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
+          "systemd",
+          "hosted-compute-agent"
+        ],
+        "section": "runner background"
+      }
+    ],
+    "network_added": [
       {
         "destination": "api.ipify.org",
         "section": "workload",
@@ -80,16 +54,6 @@
         "ancestry": [
           "node",
           "dash",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
           "node"
         ]
       },
@@ -112,69 +76,19 @@
           "dash",
           "node"
         ]
-      },
+      }
+    ],
+    "network_removed": [
       {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
+        "destination": "140.82.112.3",
+        "section": "runner background",
+        "process": "hosted-compute-agent",
         "ancestry": [
-          "node",
-          "dash",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "provjobd",
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "release-assets.githubusercontent.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
+          "systemd",
+          "hosted-compute-agent"
         ]
       }
     ],
-    "network_removed": [],
     "files_added": [],
     "files_removed": [],
     "kinds_recorded": [
@@ -188,17 +102,17 @@
       "jobs_changed": 1,
       "jobs_unchanged": 0,
       "workload": {
-        "added": 11,
+        "added": 3,
         "removed": 0
       },
       "runner_background": {
         "added": 0,
-        "removed": 0
+        "removed": 1
       }
     }
   },
   "receipt_urls": {
-    "base": null,
+    "base": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     "head": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9"
   },
   "recorded": {

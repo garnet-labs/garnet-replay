@@ -6,17 +6,29 @@ Garnet Replay packages recorded execution evidence beside a source diff.
 
 ## What you get
 
-Each replay is an Execution Diff JSON document.
-It names the repository, pull request, and exact comparison pair.
-It records base and head commit SHAs.
-It carries profile and run identifiers for each side.
-It separates network, process, and file observations.
-Each observation keeps its workload or runner background section.
-Network observations include destinations and available ancestry.
-Process observations use distinct execution chains.
-Totals describe the recorded jobs, chains, and destinations.
-The comparison scope is explicit.
-Known Evidence and Live Replay use the same JSON shape.
+```json
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence | live-replay",
+  "label": "real | constructed",
+  "repo": { "owner": "...", "name": "...", "url": "..." },
+  "pull_request": { "number": 123, "url": "...", "title": "..." },
+  "base": { "sha": "...", "profile_id": "...", "run_id": "..." },
+  "head": { "sha": "...", "profile_id": "...", "run_id": "..." },
+  "comparison": { "available": true, "scope": "..." },
+  "execution_diff": {
+    "network_added": [{ "destination": "...", "section": "workload" }],
+    "network_removed": [],
+    "processes_added": [{ "ancestry": ["...", "..."], "section": "workload" }],
+    "processes_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "totals": { "workload": { "added": 1, "removed": 0 }, "runner_background": { "added": 0, "removed": 0 } }
+  },
+  "receipt_urls": { "base": "...", "head": "...", "head_json": "...", "pr_comment": "..." }
+}
+```
+Network and process observations identify workload versus runner background.
 
 ## Known Evidence
 
@@ -59,6 +71,7 @@ exist to exercise specific profile shapes.
 
 `seeds/seeds.json` lists the real corpus entries and constructed cases.
 Replay JSON files live below `public/replays`.
+The three constructed diffs compare against a clean constructed install from the same demo repository (`comparison.scope: constructed-pair`), not against the PR's own parent.
 
 ## Benchmark
 

@@ -25,25 +25,31 @@ test("live gate reports observation-only constraints", () => {
   assert.doesNotMatch(unsupported.reasons.join(" "), /\b(?:unsafe|risky|verified)\b/i)
 })
 
-test("constructed profile diffs validate and expose a single-side comparison", async () => {
-  const seed = seeds.find((entry) => entry.label === "constructed")
-  const profile = JSON.parse(await readFile(`test/fixtures/demo-profiles/${seed.id.replace("constructed-", "")}.json`, "utf8"))
+test("constructed profile diffs preserve workload and runner background sections", async () => {
+  const base = JSON.parse(await readFile("test/fixtures/demo-profiles/30304258281.json", "utf8"))
+  const profile = JSON.parse(await readFile("test/fixtures/demo-profiles/30304293294.json", "utf8"))
   const raw = profile.profiles[0]
   const diff = executionDiffFromProfiles({
+    baseline: base,
     update: profile,
     meta: {
       label: "constructed",
       repository: "garnet-labs/garnet-runtime-review-demo",
-      prNumber: Number(seed.id.replace("constructed-", "")),
+      prNumber: 30304293294,
       headSha: raw.run.commit_sha,
       runId: raw.run.run_id,
-      headReceiptUrl: seed.receipt_url,
+      comparisonScope: "constructed-pair",
+      baseReceiptUrl: "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     },
   })
   assert.deepEqual(validate(schema, diff), [])
   assert.equal(diff.mode, "live-replay")
-  assert.equal(diff.comparison.available, false)
-  assert.ok(diff.execution_diff.network_added.length > 0)
+  assert.deepEqual(diff.comparison, { available: true, scope: "constructed-pair" })
+  assert.deepEqual(diff.execution_diff.network_added.filter((entry) => entry.section === "workload").map((entry) => entry.destination), ["httpbin.org"])
+  const background = diff.execution_diff.network_added.filter((entry) => entry.section === "runner background")
+  assert.ok(background.some((entry) => entry.process === "hosted-compute-agent"))
+  assert.ok(background.some((entry) => entry.process === "provjobd"))
+  assert.ok(diff.execution_diff.totals.runner_background.added > 0)
 })
 
 test("every seed points to a schema-valid replay", async () => {

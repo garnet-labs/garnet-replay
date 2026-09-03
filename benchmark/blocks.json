@@ -1229,11 +1229,11 @@
       "workload": {
         "jobs_changed": 1,
         "jobs_unchanged": 0,
-        "destinations_added": 9,
+        "destinations_added": 7,
         "destinations_removed": 0
       },
       "runner_background": {
-        "added": 0,
+        "added": 2,
         "removed": 0
       },
       "network_evidence": {
@@ -1243,7 +1243,7 @@
         "added": [
           {
             "destination": "140.82.112.3",
-            "section": "workload",
+            "section": "runner background",
             "process": "hosted-compute-agent",
             "ancestry": [
               "systemd",
@@ -1272,6 +1272,16 @@
           },
           {
             "destination": "localhost",
+            "section": "runner background",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "localhost",
             "section": "workload",
             "process": "node",
             "ancestry": [
@@ -1288,16 +1298,6 @@
               "Runner.Listener",
               "Runner.Worker",
               "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "provjobd",
-            "ancestry": [
-              "hosted-compute-agent",
-              "sudo",
-              "provjobd"
             ]
           },
           {
@@ -1345,7 +1345,7 @@
       "detections_note": "none recorded",
       "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
     },
-    "rendered": "receipt_id: 019fa558-63f3-7d3f-b208-8258d1755c50\nhead: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +9 -0\nrecorded network evidence: 9 execution chains, 6 destinations\n  + 140.82.112.3 (workload)\n  + api.github.com (workload)\n  + github.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:01.179991156Z · contract 6.9.8"
+    "rendered": "receipt_id: 019fa558-63f3-7d3f-b208-8258d1755c50\nhead: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +7 -0\nrecorded network evidence: 9 execution chains, 6 destinations\n  + 140.82.112.3 (runner background)\n  + api.github.com (workload)\n  + github.com (workload)\n  + localhost (runner background)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:01.179991156Z · contract 6.9.8"
   },
   "constructed-30304293294": {
     "block": {
@@ -1353,19 +1353,19 @@
       "contract": "6.9.8",
       "receipt_id": "019fa558-f02d-7744-bae2-27af1389ab34",
       "head_sha": "64283ea0edf76eb17d41be0a6c49776cd85ee4fe",
-      "compared_sha": null,
-      "comparison": "unavailable",
+      "compared_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+      "comparison": "available",
       "recorded_at": "2026-07-27T20:51:36.964907523Z",
       "jobs_recorded": 1,
       "workload": {
         "jobs_changed": 1,
         "jobs_unchanged": 0,
-        "destinations_added": 11,
+        "destinations_added": 1,
         "destinations_removed": 0
       },
       "runner_background": {
-        "added": 0,
-        "removed": 0
+        "added": 2,
+        "removed": 1
       },
       "network_evidence": {
         "recorded": true,
@@ -1374,7 +1374,7 @@
         "added": [
           {
             "destination": "140.82.112.24",
-            "section": "workload",
+            "section": "runner background",
             "process": "hosted-compute-agent",
             "ancestry": [
               "systemd",
@@ -1383,41 +1383,12 @@
           },
           {
             "destination": "140.82.114.24",
-            "section": "workload",
+            "section": "runner background",
             "process": "provjobd",
             "ancestry": [
               "hosted-compute-agent",
               "sudo",
               "provjobd"
-            ]
-          },
-          {
-            "destination": "api.github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "github.com",
-            "section": "workload",
-            "process": "hosted-compute-agent",
-            "ancestry": [
-              "systemd",
-              "hosted-compute-agent"
             ]
           },
           {
@@ -1429,59 +1400,19 @@
               "dash",
               "curl"
             ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "curl",
-            "ancestry": [
-              "node",
-              "dash",
-              "curl"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "registry.npmjs.org",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "release-assets.githubusercontent.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
           }
         ],
-        "removed": []
+        "removed": [
+          {
+            "destination": "140.82.112.3",
+            "section": "runner background",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          }
+        ]
       },
       "process_evidence": {
         "recorded": true,
@@ -1495,7 +1426,7 @@
       "detections_note": "none recorded",
       "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
     },
-    "rendered": "receipt_id: 019fa558-f02d-7744-bae2-27af1389ab34\nhead: 64283ea0edf76eb17d41be0a6c49776cd85ee4fe\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +11 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + 140.82.112.24 (workload)\n  + 140.82.114.24 (workload)\n  + api.github.com (workload)\n  + github.com (workload)\n  + github.com (workload)\n  + httpbin.org (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:36.964907523Z · contract 6.9.8"
+    "rendered": "receipt_id: 019fa558-f02d-7744-bae2-27af1389ab34\nhead: 64283ea0edf76eb17d41be0a6c49776cd85ee4fe\ncompared with previous recorded head: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\nworkload: 1 job(s) changed, 0 unchanged; destinations +1 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + 140.82.112.24 (runner background)\n  + 140.82.114.24 (runner background)\n  + httpbin.org (workload)\n  - 140.82.112.3 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T20:51:36.964907523Z · contract 6.9.8"
   },
   "constructed-30305397518": {
     "block": {
@@ -1503,19 +1434,19 @@
       "contract": "6.9.8",
       "receipt_id": "019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
       "head_sha": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
-      "compared_sha": null,
-      "comparison": "unavailable",
+      "compared_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+      "comparison": "available",
       "recorded_at": "2026-07-27T21:06:51.954141994Z",
       "jobs_recorded": 1,
       "workload": {
         "jobs_changed": 1,
         "jobs_unchanged": 0,
-        "destinations_added": 13,
+        "destinations_added": 3,
         "destinations_removed": 0
       },
       "runner_background": {
-        "added": 0,
-        "removed": 0
+        "added": 2,
+        "removed": 1
       },
       "network_evidence": {
         "recorded": true,
@@ -1524,7 +1455,7 @@
         "added": [
           {
             "destination": "140.82.113.23",
-            "section": "workload",
+            "section": "runner background",
             "process": "hosted-compute-agent",
             "ancestry": [
               "systemd",
@@ -1532,16 +1463,6 @@
             ]
           },
           {
-            "destination": "api.github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
             "destination": "api.ipify.org",
             "section": "workload",
             "process": "node",
@@ -1552,18 +1473,8 @@
             ]
           },
           {
-            "destination": "github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
             "destination": "hosted-compute-watchdog-prod-iad-02.githubapp",
-            "section": "workload",
+            "section": "runner background",
             "process": "provjobd",
             "ancestry": [
               "hosted-compute-agent",
@@ -1590,69 +1501,19 @@
               "dash",
               "node"
             ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "node",
-              "dash",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "provjobd",
-            "ancestry": [
-              "hosted-compute-agent",
-              "sudo",
-              "provjobd"
-            ]
-          },
-          {
-            "destination": "registry.npmjs.org",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "release-assets.githubusercontent.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
           }
         ],
-        "removed": []
+        "removed": [
+          {
+            "destination": "140.82.112.3",
+            "section": "runner background",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          }
+        ]
       },
       "process_evidence": {
         "recorded": true,
@@ -1666,7 +1527,7 @@
       "detections_note": "none recorded",
       "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
     },
-    "rendered": "receipt_id: 019fa566-e5f7-7f9c-a8ed-4f19b855c17f\nhead: a4f3a42f851b27359950e8c477bfbcaf2296fa8b\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +13 -0\nrecorded network evidence: 13 execution chains, 10 destinations\n  + 140.82.113.23 (workload)\n  + api.github.com (workload)\n  + api.ipify.org (workload)\n  + github.com (workload)\n  + hosted-compute-watchdog-prod-iad-02.githubapp (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T21:06:51.954141994Z · contract 6.9.8"
+    "rendered": "receipt_id: 019fa566-e5f7-7f9c-a8ed-4f19b855c17f\nhead: a4f3a42f851b27359950e8c477bfbcaf2296fa8b\ncompared with previous recorded head: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\nworkload: 1 job(s) changed, 0 unchanged; destinations +3 -0\nrecorded network evidence: 13 execution chains, 10 destinations\n  + 140.82.113.23 (runner background)\n  + api.ipify.org (workload)\n  + hosted-compute-watchdog-prod-iad-02.githubapp (runner background)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  - 140.82.112.3 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-27T21:06:51.954141994Z · contract 6.9.8"
   },
   "constructed-30376868306": {
     "block": {
@@ -1674,19 +1535,19 @@
       "contract": "6.9.8",
       "receipt_id": "019fa97d-a69b-7349-988f-7a029f5d6bd9",
       "head_sha": "84940b2399a620559979dda042c979a54b5f0cf2",
-      "compared_sha": null,
-      "comparison": "unavailable",
+      "compared_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+      "comparison": "available",
       "recorded_at": "2026-07-28T16:10:11.9426858Z",
       "jobs_recorded": 1,
       "workload": {
         "jobs_changed": 1,
         "jobs_unchanged": 0,
-        "destinations_added": 11,
+        "destinations_added": 3,
         "destinations_removed": 0
       },
       "runner_background": {
         "added": 0,
-        "removed": 0
+        "removed": 1
       },
       "network_evidence": {
         "recorded": true,
@@ -1694,32 +1555,12 @@
         "destinations": 8,
         "added": [
           {
-            "destination": "api.github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
             "destination": "api.ipify.org",
             "section": "workload",
             "process": "node",
             "ancestry": [
               "node",
               "dash",
-              "node"
-            ]
-          },
-          {
-            "destination": "github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
               "node"
             ]
           },
@@ -1742,69 +1583,19 @@
               "dash",
               "node"
             ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "node",
-              "dash",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "provjobd",
-            "ancestry": [
-              "hosted-compute-agent",
-              "sudo",
-              "provjobd"
-            ]
-          },
-          {
-            "destination": "registry.npmjs.org",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "release-assets.githubusercontent.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
           }
         ],
-        "removed": []
+        "removed": [
+          {
+            "destination": "140.82.112.3",
+            "section": "runner background",
+            "process": "hosted-compute-agent",
+            "ancestry": [
+              "systemd",
+              "hosted-compute-agent"
+            ]
+          }
+        ]
       },
       "process_evidence": {
         "recorded": true,
@@ -1818,6 +1609,6 @@
       "detections_note": "none recorded",
       "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
     },
-    "rendered": "receipt_id: 019fa97d-a69b-7349-988f-7a029f5d6bd9\nhead: 84940b2399a620559979dda042c979a54b5f0cf2\ncomparison unavailable (no previous recorded head)\nworkload: 1 job(s) changed, 0 unchanged; destinations +11 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + api.github.com (workload)\n  + api.ipify.org (workload)\n  + github.com (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-28T16:10:11.9426858Z · contract 6.9.8"
+    "rendered": "receipt_id: 019fa97d-a69b-7349-988f-7a029f5d6bd9\nhead: 84940b2399a620559979dda042c979a54b5f0cf2\ncompared with previous recorded head: b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1\nworkload: 1 job(s) changed, 0 unchanged; destinations +3 -0\nrecorded network evidence: 11 execution chains, 8 destinations\n  + api.ipify.org (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  - 140.82.112.3 (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-07-28T16:10:11.9426858Z · contract 6.9.8"
   }
 }
