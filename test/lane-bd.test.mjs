@@ -65,3 +65,11 @@ test("every seed points to a schema-valid replay", async () => {
   assert.equal(seeds.filter((seed) => seed.label === "real").length, 20)
   assert.equal(seeds.filter((seed) => seed.label === "constructed").length, 4)
 })
+
+test("constructed replay titles follow seed metadata", async () => {
+  for (const seed of seeds.filter((entry) => entry.label === "constructed")) {
+    const replayPath = seed.replay_json.replace(/^\/?replays\//, "public/replays/")
+    const replay = JSON.parse(await readFile(replayPath, "utf8"))
+    assert.equal(replay.pull_request.title, seed.title, seed.id)
+  }
+})

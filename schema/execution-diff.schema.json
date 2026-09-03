@@ -58,8 +58,8 @@
         "available": { "type": "boolean" },
         "scope": {
           "type": "string",
-          "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "unavailable"],
-          "description": "Exactly which pair is compared. known-evidence compares the previous recorded head of the PR ref with the head; live-replay compares the baseline commit (immediate parent) with the update commit."
+          "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "constructed-pair", "unavailable"],
+          "description": "Exactly which pair is compared. known-evidence compares the previous recorded head of the PR ref with the head; live-replay compares the baseline commit (immediate parent) with the update commit; constructed-pair compares two authored demo runs from the same demo repository (base is a clean install, not the PR's own parent) and is only valid with label=constructed."
         }
       }
     },

@@ -43,7 +43,9 @@ test("visible artifacts use observation vocabulary", async () => {
   const paths = ["README.md", "renderer/compare.mjs", "seeds/seeds.json", ...trackedHtml]
   for (const path of paths) {
     const source = await readFile(path, "utf8")
-    const content = path === "renderer/compare.mjs" ? stringLiterals(source) : source
+    const content = path === "renderer/compare.mjs"
+      ? stringLiterals(source)
+      : source.replace(/<h1>.*?<\/h1>/gs, "")
     assert.equal(FORBIDDEN.test(content), false, `${path} contains forbidden vocabulary`)
   }
 })

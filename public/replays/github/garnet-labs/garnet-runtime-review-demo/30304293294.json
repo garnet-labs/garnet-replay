@@ -10,7 +10,7 @@
   "pull_request": {
     "number": 30304293294,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304293294",
-    "title": "Constructed dependency replay"
+    "title": "chore(deps): add dependency with postinstall beacon (constructed)"
   },
   "base": {
     "sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",

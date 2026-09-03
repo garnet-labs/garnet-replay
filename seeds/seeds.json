@@ -188,7 +188,14 @@
     "receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
     "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR",
-    "title": "chore(deps): add dependency (clean install, constructed)"
+    "title": "chore(deps): add dependency (clean install, constructed)",
+    "run_id": "30304258281",
+    "profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "profile_fixture": "test/fixtures/demo-profiles/30304258281.json",
+    "base_run_id": null,
+    "base_profile_id": null,
+    "base_fixture": null,
+    "base_receipt_url": null
   },
   {
     "id": "constructed-30304293294",
@@ -199,7 +206,14 @@
     "receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30304293294?profile=019fa558-f02d-7744-bae2-27af1389ab34",
     "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
-    "title": "chore(deps): add dependency with postinstall beacon (constructed)"
+    "title": "chore(deps): add dependency with postinstall beacon (constructed)",
+    "run_id": "30304293294",
+    "profile_id": "019fa558-f02d-7744-bae2-27af1389ab34",
+    "profile_fixture": "test/fixtures/demo-profiles/30304293294.json",
+    "base_run_id": "30304258281",
+    "base_profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "base_fixture": "test/fixtures/demo-profiles/30304258281.json",
+    "base_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50"
   },
   {
     "id": "constructed-30305397518",
@@ -210,7 +224,14 @@
     "receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30305397518?profile=019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
     "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
-    "title": "chore(deps): add dependency with transitive beacon (constructed)"
+    "title": "chore(deps): add dependency with transitive beacon (constructed)",
+    "run_id": "30305397518",
+    "profile_id": "019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
+    "profile_fixture": "test/fixtures/demo-profiles/30305397518.json",
+    "base_run_id": "30304258281",
+    "base_profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "base_fixture": "test/fixtures/demo-profiles/30304258281.json",
+    "base_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50"
   },
   {
     "id": "constructed-30376868306",
@@ -221,6 +242,13 @@
     "receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
     "head_receipt_url": "https://app.garnet.ai/public/runs/30376868306?profile=019fa97d-a69b-7349-988f-7a029f5d6bd9",
     "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
-    "title": "chore(deps): bump dependency — outbound egress during install (constructed)"
+    "title": "chore(deps): bump dependency — outbound egress during install (constructed)",
+    "run_id": "30376868306",
+    "profile_id": "019fa97d-a69b-7349-988f-7a029f5d6bd9",
+    "profile_fixture": "test/fixtures/demo-profiles/30376868306.json",
+    "base_run_id": "30304258281",
+    "base_profile_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+    "base_fixture": "test/fixtures/demo-profiles/30304258281.json",
+    "base_receipt_url": "https://app.garnet.ai/public/runs/30304258281?profile=019fa558-63f3-7d3f-b208-8258d1755c50"
   }
 ]

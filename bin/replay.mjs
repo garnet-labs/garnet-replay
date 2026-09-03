@@ -9,7 +9,9 @@ import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
+import { executionDiffFromProfiles } from "../lib/profile-diff.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
+import { validate } from "../lib/validate.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -119,6 +121,68 @@ async function seed(args) {
     count += 1
   }
   console.log(`wrote ${count} replay files to ${out}`)
+}
+
+async function seedConstructed(args) {
+  const seedsPath = args[0]
+  if (typeof seedsPath !== "string") throw new Error("seed-constructed requires a seeds path")
+  const out = resolve(option(args, "--out", join(ROOT, "public", "replays")))
+  const seeds = JSON.parse(await readFile(resolve(seedsPath), "utf8"))
+  const schema = JSON.parse(await readFile(join(ROOT, "schema", "execution-diff.schema.json"), "utf8"))
+  let count = 0
+  for (const seed of seeds.filter((entry) => entry.label === "constructed")) {
+    if (typeof seed.profile_fixture !== "string" || typeof seed.profile_id !== "string"
+      || typeof seed.run_id === "undefined" || typeof seed.title !== "string" || typeof seed.note !== "string") {
+      throw new Error(`constructed seed ${seed.id} is missing profile metadata`)
+    }
+    const profile = JSON.parse(await readFile(resolve(ROOT, seed.profile_fixture), "utf8"))
+    const parsedUrl = new URL(seed.pr_url)
+    const baseline = seed.base_fixture === null || seed.base_fixture === undefined
+      ? null
+      : JSON.parse(await readFile(resolve(ROOT, seed.base_fixture), "utf8"))
+    const raw = profile.profiles?.[0]
+    if (!raw?.run) throw new Error(`constructed profile ${seed.profile_fixture} is missing run metadata`)
+    if (raw.run.profile_id !== seed.profile_id || String(raw.run.run_id) !== String(seed.run_id)) {
+      throw new Error(`constructed seed ${seed.id} does not match its profile fixture`)
+    }
+    const baseRaw = baseline?.profiles?.[0]?.run
+    if (baseline !== null && (!baseRaw
+      || baseRaw.profile_id !== seed.base_profile_id
+      || String(baseRaw.run_id) !== String(seed.base_run_id))) {
+      throw new Error(`constructed seed ${seed.id} does not match its base fixture`)
+    }
+    const comparisonScope = baseline === null ? "unavailable" : "constructed-pair"
+    const diff = executionDiffFromProfiles({
+      baseline,
+      update: profile,
+      meta: {
+        label: "constructed",
+        repository: seed.source,
+        repoUrl: `https://github.com/${seed.source}`,
+        prNumber: Number(parsedUrl.pathname.split("/").at(-1)),
+        prUrl: seed.pr_url,
+        title: seed.title,
+        note: seed.note,
+        headSha: raw.run.commit_sha,
+        runId: raw.run.run_id,
+        headReceiptUrl: seed.head_receipt_url ?? seed.receipt_url ?? null,
+        comparisonScope,
+        ...(baseline === null ? {} : {
+          baselineSha: baseline.profiles?.[0]?.run?.commit_sha ?? null,
+          baseReceiptUrl: seed.base_receipt_url ?? null,
+        }),
+      },
+    })
+    const errors = validate(schema, diff)
+    if (errors.length > 0) throw new Error(`constructed seed ${seed.id} is invalid: ${errors.join(", ")}`)
+    await writeDiff(out, {
+      owner: parsedUrl.pathname.split("/")[1],
+      repo: parsedUrl.pathname.split("/")[2],
+      number: Number(parsedUrl.pathname.split("/").at(-1)),
+    }, diff)
+    count += 1
+  }
+  console.log(`wrote ${count} constructed replay files to ${out}`)
 }
 
 function repoParts(value) {
@@ -247,13 +311,14 @@ async function main(args) {
   const command = args[0]
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))
+  if (command === "seed-constructed") return seedConstructed(args.slice(1))
   if (command === "live") return live(args.slice(1))
   if (command === "serve") {
     const root = resolve(option(args.slice(1), "--root", join(ROOT, "public")))
     const port = Number(option(args.slice(1), "--port", "8787"))
     return serve(root, port)
   }
-  throw new Error("usage: replay.mjs known|serve|seed-from-corpus")
+  throw new Error("usage: replay.mjs known|serve|seed-from-corpus|seed-constructed")
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

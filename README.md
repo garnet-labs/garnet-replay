@@ -72,6 +72,7 @@ exist to exercise specific profile shapes.
 `seeds/seeds.json` lists the real corpus entries and constructed cases.
 Replay JSON files live below `public/replays`.
 The three constructed diffs compare against a clean constructed install from the same demo repository (`comparison.scope: constructed-pair`), not against the PR's own parent.
+Regenerate constructed replay JSON with `node bin/replay.mjs seed-constructed seeds/seeds.json --out public/replays`.
 
 ## Benchmark
 
