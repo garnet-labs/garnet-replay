@@ -29,10 +29,10 @@ test("live replay workflow uses GitHub OIDC by default", async () => {
   const workflow = await readFile("live/templates/garnet-dependency-replay.yml", "utf8")
   assert.match(workflow, /garnet-org\/action@e546567a72e4fede11ec39d6e9f75b539adef22c/)
   assert.match(workflow, /^\s+id-token: write$/m)
-  assert.match(workflow, /^\s+# api_token: \$\{\{ secrets\.GARNET_API_TOKEN \}\}$/m)
+  assert.match(workflow, /^\s+#\s+api_token: \$\{\{ secrets\.GARNET_API_TOKEN \}\}$/m)
   assert.doesNotMatch(workflow, /^\s+api_token:/m)
   assert.doesNotMatch(workflow, /GARNET_API_TOKEN is not set/)
-  assert.match(workflow, /OIDC exchange failed or id-token permission is missing/)
+  assert.match(workflow, /OIDC needs id-token: write and is unavailable on fork pull requests/)
 })
 
 test("constructed profile diffs preserve workload and runner background sections", async () => {

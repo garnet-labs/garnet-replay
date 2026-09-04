@@ -55,7 +55,7 @@ node bin/replay.mjs live https://github.com/owner/repo \
 
 The v0 gate requires a public repository, an npm, pnpm, or yarn lockfile, and
 a dependency pull request shape. Linux is the execution constraint.
-Recording uses GitHub OIDC by default through `id-token: write`; no Garnet secret is needed.
+Recording authenticates through GitHub OIDC (`id-token: write`), so no Garnet secret is needed. This path has not yet been exercised end-to-end from this tool.
 `GARNET_API_TOKEN` is an optional fallback, and fork pull requests cannot use OIDC.
 The generated workflow is pinned to unreleased main SHA `e546567` (v2.3.0 is not cut yet); repin to the v2.3.0 SHA at release.
 `GITHUB_TOKEN` is sufficient for the comment and JSON path, which then has no
