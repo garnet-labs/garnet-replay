@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
   pull-requests: write
 
 jobs:
@@ -37,23 +38,10 @@ jobs:
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Check Garnet API token
-        id: garnet-token
-        env:
-          GARNET_API_TOKEN: ${{ secrets.GARNET_API_TOKEN }}
-        run: |
-          if [ -n "$GARNET_API_TOKEN" ]; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "No execution record: GARNET_API_TOKEN is not set, so the sensor did not start. The comment/JSON path still runs with GITHUB_TOKEN but has nothing to compare." >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-      - uses: garnet-org/action@3d47f4a9004f7356c980a0e8d420ef5984750e3c # v2.2.0
+      - uses: garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c # main 2026-09-04, OIDC default, unreleased
         id: garnet
-        if: steps.garnet-token.outputs.available == 'true'
         with:
-          api_token: ${{ secrets.GARNET_API_TOKEN }}
+          # api_token: ${{ secrets.GARNET_API_TOKEN }}
 
       - name: Install dependencies (${{ matrix.side }})
         run: bash .github/garnet-replay/install.sh
@@ -75,6 +63,7 @@ jobs:
             sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/profile/jibril.profile.json"
             wc -c "$RUNNER_TEMP/profile/jibril.profile.json"
           else
+            echo "No execution record: GitHub OIDC exchange failed or id-token permission is missing. The optional GARNET_API_TOKEN fallback was unavailable. The comment/JSON path still runs with GITHUB_TOKEN but has nothing to compare." >> "$GITHUB_STEP_SUMMARY"
             echo "No execution record found at /var/log/jibril.profile.json" >&2
           fi
           echo "${{ steps.side.outputs.sha }}" > "$RUNNER_TEMP/profile/sha"

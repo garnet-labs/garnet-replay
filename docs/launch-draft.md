@@ -40,7 +40,7 @@ Two things we think are worth knowing before you try it.
 
 **2. When something does change, it is visible in the same record.** The seeded examples that show new execution come from `garnet-labs/garnet-runtime-review-demo`, a repository we authored to exercise specific shapes: a postinstall script that spawns `node` and connects out during `npm install`; a beacon two dependency levels deep. They are labelled `constructed` on every surface, in the JSON and on the page. We did not find these in a random Dependabot PR and we do not want anyone to think we did.
 
-The recorder is the open `garnet-org/action` (pinned by commit SHA in every workflow we generate). The renderer is dependency-free Node and posts with a plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording itself needs a Garnet API token at the current stable action release — we say that plainly in the README rather than pretend otherwise.
+The recorder is the open `garnet-org/action` (pinned by commit SHA in every workflow we generate). The renderer is dependency-free Node and posts with a plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording uses GitHub OIDC by default through `id-token: write`, so no Garnet secret is needed. `GARNET_API_TOKEN` remains an optional fallback, and fork pull requests cannot use OIDC. The generated workflow pins unreleased main SHA `e546567` (v2.3.0 is not cut yet); repin to the v2.3.0 SHA at release.
 
 There is also a small benchmark in the repo: the same LLM reviewer, source-only vs source + Execution Diff, over the seeded PRs, scored for whether its judgment changed and whether its findings cite something that is in the record. [RESULTS TABLE — fill from benchmark/ once run with a key; do not publish without it.]
 

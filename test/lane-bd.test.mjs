@@ -25,6 +25,16 @@ test("live gate reports observation-only constraints", () => {
   assert.doesNotMatch(unsupported.reasons.join(" "), /\b(?:unsafe|risky|verified)\b/i)
 })
 
+test("live replay workflow uses GitHub OIDC by default", async () => {
+  const workflow = await readFile("live/templates/garnet-dependency-replay.yml", "utf8")
+  assert.match(workflow, /garnet-org\/action@e546567a72e4fede11ec39d6e9f75b539adef22c/)
+  assert.match(workflow, /^\s+id-token: write$/m)
+  assert.match(workflow, /^\s+# api_token: \$\{\{ secrets\.GARNET_API_TOKEN \}\}$/m)
+  assert.doesNotMatch(workflow, /^\s+api_token:/m)
+  assert.doesNotMatch(workflow, /GARNET_API_TOKEN is not set/)
+  assert.match(workflow, /OIDC exchange failed or id-token permission is missing/)
+})
+
 test("constructed profile diffs preserve workload and runner background sections", async () => {
   const base = JSON.parse(await readFile("test/fixtures/demo-profiles/30304258281.json", "utf8"))
   const profile = JSON.parse(await readFile("test/fixtures/demo-profiles/30304293294.json", "utf8"))
