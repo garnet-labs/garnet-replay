@@ -18,6 +18,7 @@
       "enum": ["real", "constructed"],
       "description": "real: a pull request that existed for its own reasons. constructed: a test case authored to exercise a shape (e.g. a postinstall beacon). Rendered on every surface."
     },
+    "note": { "type": "string" },
     "repo": {
       "type": "object",
       "additionalProperties": false,

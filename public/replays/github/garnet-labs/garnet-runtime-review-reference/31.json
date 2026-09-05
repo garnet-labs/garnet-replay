@@ -1,0 +1,216 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "live-replay",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "garnet-runtime-review-reference",
+    "url": "https://github.com/garnet-labs/garnet-runtime-review-reference"
+  },
+  "note": "base and head are the PR's own two commits (immediate parent → head), both kernel-recorded running npm install in npm-testbed/app; recorded by two workflows (garnet-dependency-replay baseline job, Garnet Record head job) because the replay update job's agent registration returned HTTP 500 from the control plane",
+  "pull_request": {
+    "number": 31,
+    "url": "https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31",
+    "title": "Dependency replay: chart-helpers",
+    "dependency": {
+      "name": "chart-helpers",
+      "from": "none",
+      "to": "1.0.0"
+    }
+  },
+  "base": {
+    "sha": "f6578cbf3c6757c9d5431fd8584e6728e57d0238",
+    "profile_id": "01a06f30-8e1b-7de8-afa9-946bf4735d94",
+    "run_id": "33936362245"
+  },
+  "head": {
+    "sha": "fbea53e536143a2db79f048e7fd73845db2b5813",
+    "profile_id": "01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
+    "run_id": "33936362201"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "immediate-parent-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [
+      {
+        "ancestry": [
+          "hosted-compute-agent",
+          "sudo",
+          "provjobd"
+        ],
+        "section": "runner background"
+      },
+      {
+        "ancestry": [
+          "node",
+          "dash",
+          "node"
+        ],
+        "section": "workload"
+      },
+      {
+        "ancestry": [
+          "Runner.Listener",
+          "Runner.Worker",
+          "node"
+        ],
+        "section": "workload"
+      },
+      {
+        "ancestry": [
+          "Runner.Worker",
+          "bash",
+          "node"
+        ],
+        "section": "workload"
+      }
+    ],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": "provjobd",
+        "ancestry": [
+          "hosted-compute-agent",
+          "sudo",
+          "provjobd"
+        ]
+      },
+      {
+        "destination": "api.github.com",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Listener",
+          "Runner.Worker",
+          "node"
+        ]
+      },
+      {
+        "destination": "api.ipify.org",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "node",
+          "dash",
+          "node"
+        ]
+      },
+      {
+        "destination": "github.com",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Listener",
+          "Runner.Worker",
+          "node"
+        ]
+      },
+      {
+        "destination": "httpbin.org",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "node",
+          "dash",
+          "node"
+        ]
+      },
+      {
+        "destination": "ip-api.com",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "node",
+          "dash",
+          "node"
+        ]
+      },
+      {
+        "destination": "localhost",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Listener",
+          "Runner.Worker",
+          "node"
+        ]
+      },
+      {
+        "destination": "localhost",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "node",
+          "dash",
+          "node"
+        ]
+      },
+      {
+        "destination": "localhost",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Worker",
+          "bash",
+          "node"
+        ]
+      },
+      {
+        "destination": "registry.npmjs.org",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Worker",
+          "bash",
+          "node"
+        ]
+      },
+      {
+        "destination": "release-assets.githubusercontent.com",
+        "section": "workload",
+        "process": "node",
+        "ancestry": [
+          "Runner.Listener",
+          "Runner.Worker",
+          "node"
+        ]
+      }
+    ],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network",
+      "process"
+    ],
+    "totals": {
+      "execution_chains": 13,
+      "destinations": 10,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 10,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": "https://app.garnet.ai/public/runs/33936362245?profile=01a06f30-8e1b-7de8-afa9-946bf4735d94",
+    "head": "https://app.garnet.ai/public/runs/33936362201?profile=01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
+    "pr_comment": "https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31"
+  },
+  "recorded": {
+    "at": "2026-09-05T01:31:57.697446922Z",
+    "contract": "6.9.8",
+    "source": "live-replay-profile"
+  }
+}

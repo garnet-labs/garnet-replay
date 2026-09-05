@@ -170,8 +170,8 @@ test("every seed points to a schema-valid replay", async () => {
     assert.deepEqual(validate(schema, replay), [], seed.id)
     if (seed.label === "constructed") assert.match(seed.note, /constructed/)
   }
-  assert.equal(seeds.length, 24)
-  assert.equal(seeds.filter((seed) => seed.label === "real").length, 20)
+  assert.equal(seeds.length, 25)
+  assert.equal(seeds.filter((seed) => seed.label === "real").length, 21)
   assert.equal(seeds.filter((seed) => seed.label === "constructed").length, 4)
 })
 

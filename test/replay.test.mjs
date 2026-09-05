@@ -109,6 +109,41 @@ test("seed-from-corpus writes one JSON replay per exact-head PR", async () => {
   }
 })
 
+test("pair writes a schema-valid live replay with preserved pair metadata", async () => {
+  const out = await mkdtemp(join(tmpdir(), "garnet-replay-"))
+  try {
+    execFileSync("node", [
+      "bin/replay.mjs", "pair",
+      "--base", "test/fixtures/demo-profiles/30304258281.json",
+      "--head", "test/fixtures/demo-profiles/30304293294.json",
+      "--repo", "garnet-labs/garnet-runtime-review-demo",
+      "--pr", "30304293294",
+      "--base-sha", "1".repeat(40),
+      "--head-sha", "2".repeat(40),
+      "--base-receipt", "https://app.garnet.ai/public/runs/1?profile=019fa558-63f3-7d3f-b208-8258d1755c50",
+      "--head-receipt", "https://app.garnet.ai/public/runs/2?profile=019fa558-f02d-7744-bae2-27af1389ab34",
+      "--base-run", "1",
+      "--head-run", "2",
+      "--dependency", "ms",
+      "--from", "none",
+      "--to", "2.1.3",
+      "--scope", "constructed-pair",
+      "--note", "pair test",
+      "--out", out,
+    ], { cwd: ROOT, stdio: "pipe" })
+    const diff = JSON.parse(await readFile(join(out, "github", "garnet-labs", "garnet-runtime-review-demo", "30304293294.json"), "utf8"))
+    assert.deepEqual(validate(schema, diff), [])
+    assert.equal(diff.mode, "live-replay")
+    assert.deepEqual(diff.comparison, { available: true, scope: "constructed-pair" })
+    assert.equal(diff.receipt_urls.base, "https://app.garnet.ai/public/runs/1?profile=019fa558-63f3-7d3f-b208-8258d1755c50")
+    assert.equal(diff.receipt_urls.head, "https://app.garnet.ai/public/runs/2?profile=019fa558-f02d-7744-bae2-27af1389ab34")
+    assert.equal(diff.receipt_urls.pr_comment, "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304293294")
+    assert.equal(diff.note, "pair test")
+  } finally {
+    await rm(out, { recursive: true, force: true })
+  }
+})
+
 test("known evidence reports no record without making a network request", async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify({ message: "not found" }), { status: 404 })

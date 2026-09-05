@@ -6,10 +6,9 @@ import { execFileSync } from "node:child_process"
 import { createServer } from "node:http"
 import { dirname, extname, join, normalize, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { buildExecutionDiff, renderExecutionDiffText } from "../lib/execution-diff.mjs"
+import { buildExecutionDiff, executionDiffFromProfiles, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
-import { executionDiffFromProfiles } from "../lib/profile-diff.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
 
@@ -185,6 +184,75 @@ async function seedConstructed(args) {
   console.log(`wrote ${count} constructed replay files to ${out}`)
 }
 
+function profileIdFromReceipt(value) {
+  if (typeof value !== "string" || value === "") return null
+  try {
+    return new URL(value).searchParams.get("profile")
+  } catch {
+    return null
+  }
+}
+
+async function pair(args) {
+  const basePath = option(args, "--base", null)
+  const headPath = option(args, "--head", null)
+  const repository = option(args, "--repo", null)
+  const prNumber = Number(option(args, "--pr", ""))
+  const baseSha = option(args, "--base-sha", null)
+  const headSha = option(args, "--head-sha", null)
+  const baseReceiptUrl = option(args, "--base-receipt", null)
+  const headReceiptUrl = option(args, "--head-receipt", null)
+  const baseRunId = option(args, "--base-run", null)
+  const headRunId = option(args, "--head-run", null)
+  const dependency = option(args, "--dependency", null)
+  const from = option(args, "--from", null)
+  const to = option(args, "--to", null)
+  const comparisonScope = option(args, "--scope", "immediate-parent-to-head")
+  const note = option(args, "--note", null)
+  if ([basePath, headPath, repository, baseSha, headSha, baseReceiptUrl, headReceiptUrl, baseRunId, headRunId, dependency, from, to, note]
+    .some((value) => value === null)) {
+    throw new Error("pair requires base/head profiles, repository, commit/run/receipt metadata, dependency transition, and --note")
+  }
+  if (!Number.isInteger(prNumber) || prNumber < 1) throw new Error("pair requires a positive --pr number")
+  const parts = repository.split("/")
+  if (parts.length !== 2 || parts.some((part) => part === "")) throw new Error("pair requires --repo owner/name")
+  const base = JSON.parse(await readFile(resolve(basePath), "utf8"))
+  const head = JSON.parse(await readFile(resolve(headPath), "utf8"))
+  const diff = executionDiffFromProfiles({
+    baseline: base,
+    update: head,
+    meta: {
+      label: "real",
+      repository,
+      repoUrl: `https://github.com/${repository}`,
+      prNumber,
+      prUrl: `https://github.com/${repository}/pull/${prNumber}`,
+      title: `Dependency replay: ${dependency}`,
+      note,
+      dependency,
+      from,
+      to,
+      baselineSha: baseSha,
+      headSha,
+      baseRunId,
+      headRunId,
+      baseProfileId: profileIdFromReceipt(baseReceiptUrl),
+      headProfileId: profileIdFromReceipt(headReceiptUrl),
+      baseReceiptUrl,
+      headReceiptUrl,
+      prCommentUrl: `https://github.com/${repository}/pull/${prNumber}`,
+      comparisonScope,
+    },
+  })
+  const schema = JSON.parse(await readFile(join(ROOT, "schema", "execution-diff.schema.json"), "utf8"))
+  const errors = validate(schema, diff)
+  if (errors.length > 0) throw new Error(`pair output is invalid: ${errors.join(", ")}`)
+  const out = resolve(option(args, "--out", join(ROOT, "public", "replays")))
+  const path = await writeDiff(out, { owner: parts[0], repo: parts[1], number: prNumber }, diff)
+  console.log(`wrote ${path}`)
+  console.log(renderExecutionDiffText(diff))
+}
+
 function repoParts(value) {
   try {
     const url = new URL(value)
@@ -333,13 +401,14 @@ async function main(args) {
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))
   if (command === "seed-constructed") return seedConstructed(args.slice(1))
+  if (command === "pair") return pair(args.slice(1))
   if (command === "live") return live(args.slice(1))
   if (command === "serve") {
     const root = resolve(option(args.slice(1), "--root", join(ROOT, "public")))
     const port = Number(option(args.slice(1), "--port", "8787"))
     return serve(root, port)
   }
-  throw new Error("usage: replay.mjs known|serve|seed-from-corpus|seed-constructed")
+  throw new Error("usage: replay.mjs known|serve|seed-from-corpus|seed-constructed|pair")
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
