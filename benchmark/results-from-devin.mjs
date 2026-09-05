@@ -3,8 +3,7 @@
 // judgment_changed: approve|comment|request_changes differs between arms.
 // severity_changed: the highest issue severity differs between arms.
 // evidence_grounded: issues whose finding cites the record (evidence_grounded: true).
-// source_blind_spot: treatment raised severity with an evidence-grounded finding whose
-// destinations/chains appear nowhere in the control arm's text.
+// source_blind_spot: treatment raised the highest severity and its finding cites the record.
 import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 
 const RANK = { consider: 1, should_fix: 2, must_fix: 3 }

@@ -43,7 +43,8 @@ Two things we think are worth knowing before you try it.
 The recorder is the open `garnet-org/action` (pinned by commit SHA in every
 workflow we generate). The renderer is dependency-free Node and posts with a
 plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording
-uses GitHub OIDC with `id-token: write` and no `GARNET_API_TOKEN`. The generated
+uses GitHub OIDC with `id-token: write` and no `GARNET_API_TOKEN`; fork pull
+requests get no OIDC token and fall back to a local-only review. The generated
 workflow pins
 `e546567a72e4fede11ec39d6e9f75b539adef22c`, unreleased before v2.3.0. Repin it
 at the v2.3.0 tag.
@@ -73,9 +74,8 @@ What it does not do: it does not block, gate, or score the merge. It records, at
 
 - [x] `garnet-labs/garnet-replay` exists and is public
 - [ ] decide whether to keep the repository PUBLIC; the original ask was private
-- [ ] make a HN post
-- [ ] deploy result permalinks
-- [ ] website PR #141 is closed unmerged
+- [ ] post to HN (deliberately not done)
+- [ ] deploy result permalinks (deliberately not done; website PR #141 closed unmerged)
 - [x] benchmark run completed with the Devin reviewer and the table regenerated
 - [ ] `garnet/runtime-evidence` on PR #31 was last seen pending, not green
 - [ ] SHA1-HULUD / feed sentences: keep only if the backing repos are public
