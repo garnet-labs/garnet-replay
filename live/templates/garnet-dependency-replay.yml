@@ -41,6 +41,9 @@ jobs:
 
       - uses: garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c # main 2026-09-04, OIDC default, unreleased
         id: garnet
+        # Distinct names avoid the control-plane agent dedupe index collision between matrix legs.
+        env:
+          GARNET_PROFILE_JOB: record-${{ matrix.side }}
         # Fallback when OIDC is unavailable (fork pull requests):
         # with:
         #   api_token: ${{ secrets.GARNET_API_TOKEN }}
