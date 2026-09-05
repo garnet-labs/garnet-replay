@@ -1,17 +1,61 @@
-# Garnet Replay MVP: hard-mode plan (private, no publish)
+# Garnet Replay plan
 
-## Strategic object
-`PR → base execution + head execution → Execution Diff → JSON`, HTTP+JSON only.
-Launch narrative: the reviewer benchmark (source-only vs source + Execution Diff).
+## Product
 
-## Facts that shape the plan (all live-probed this session)
-1. Repo creation blocked: the Devin GitHub token is an App installation token; `POST /orgs/garnet-labs/repos` → 403. Farrukh must create the empty private repo `garnet-labs/garnet-replay` (or grant repo-creation). Until then the tool is built as a standalone git repo locally and mirrored as a draft PR branch in the private `garnet-labs/agent-install-kit`, so it stays reviewable now and moves with one `git push` later.
-2. Known Evidence is already control-plane truth: the App comment on a PR is rendered by control-plane from `ProfilesForGitHubPRCommit` + `PreviousGitHubPRCommitSHA` (`garnet:summary.previous`). Parsing that comment (fetch_corpus.py, exact-head gate) yields base/head SHAs, receipt ids and the diff, with only `GITHUB_TOKEN`. No control-plane change. Full head profile: `app.garnet.ai/api/public/runs/{run}?profile={id}` (200 logged out, probed).
-3. All 50 posthog corpus PRs are `garnet_exact_head=true` with contract 6.10.0 and zero workload delta (all churn is runner background). Hero deltas must come from `garnet-labs/garnet-runtime-review-demo` runs (30304293294 postinstall beacon, 30305397518 transitive beacon; both 200 logged out), labelled constructed.
-4. Live Replay recording needs `GARNET_API_TOKEN` at pinned `garnet-org/action@3d47f4a… # v2.2.0` (throws without `api_token`). Comment/JSON path is GITHUB_TOKEN-only. Stated as such in copy; never claimed tokenless.
-5. Vendored renderer is garnet-ui `cmd/garnet-runtime-review` at CONTRACT_VERSION 6.9.8 (origin/dev and origin/main both 6.9.8); the App comments are 6.10.0. Vendored byte-identical, labelled 6.9.8 in VENDORED.md; re-vendor when garnet-ui ships 6.10.0.
-6. Benchmark harness (`run_arms.py`, `score.py`) needs `ANTHROPIC_API_KEY`; not present in this environment. Wiring is staged and dry-run tested; the actual run is a human/keyed step.
-7. Website: #140 `dev-public-contract-reset` (draft) already adds the canonical exhibit `32909555254` and enforces "one exhibit". Permalink additions are staged as a draft PR stacked on that branch, and the one-exhibit tension is flagged rather than resolved unilaterally.
+`PR → base execution + head execution → Execution Diff → JSON`
+
+Static reviewers read the diff. Garnet Replay shows the run.
+
+The repository contains Known Evidence, Live Replay, a dependency-free result
+page, schema-validated JSON, constructed fixtures, real replay seeds, and a
+local reviewer benchmark.
+
+## Current hero
+
+The hero is
+`garnet-labs/garnet-runtime-review-reference#31`.
+
+The exact pair is:
+
+```text
+baseline 8703692eae2f094a41390b8af6c72d3f327afa46
+head     b639b38a8562e6bc39e65d5754652494e9d30faf
+run      33937541982
+scope    immediate-parent-to-head
+```
+
+Both profiles came from that single OIDC replay run. The workload delta is
++4 −0 destinations:
+
+- `api.ipify.org`, `httpbin.org`, and `ip-api.com` via `node → dash → node`
+- `registry.npmjs.org` via `bash → bash → node`
+
+Runner background is kept separate at +2 −2. This is a deliberately authored
+demo beacon package in a garnet-labs demo repository. It is a real pull request
+with a real kernel record, not a third-party incident.
+
+The generated workflow uses `id-token: write`, no `GARNET_API_TOKEN`, and pins
+`garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c`. That pin is
+unreleased before v2.3.0 and should be repinned at the tag.
+
+## Benchmark
+
+The Devin reviewer path is the default. It runs one pass per seed, not a human
+study, over 25 seeds: 21 real and 4 constructed.
+
+```text
+judgment changed: 7/25
+highest issue severity changed: 4/25
+evidence-grounded findings: 0 → 25
+source-only blind spots: 3
+```
+
+The one real escalation is `real-reference-31`:
+`comment` / `consider` → `request_changes` / `must_fix`. The 20 PostHog seeds
+only de-escalate open questions.
+
+The legacy Claude path remains available with `REVIEWER=claude` and
+`ANTHROPIC_API_KEY`. `DRY_RUN=1` writes local blocks and a not-run table.
 
 ## Repo layout (`garnet-replay/`)
 ```
@@ -30,23 +74,30 @@ live/templates/                garnet-dependency-replay.yml (SHA-pinned), instal
 public/replays/github/{owner}/{repo}/{n}.json   static GET shape
 public/replays/github/{owner}/{repo}/{n}/index.html
 seeds/seeds.json               20–30 entries, source + label (real-clean | constructed)
-benchmark/README.md, run.sh    wraps posthog run_arms.py/score.py over seeds; results table template
+benchmark/README.md, run.sh    Devin default; Claude legacy path; local result table
 docs/launch-draft.md           Show HN draft (unpublished)
 test/*.test.mjs                node:test; renderer --assert; schema validation; fixtures from corpus
 ```
 
-## Honesty gates (CI in the repo)
-- Every seed labelled `real-clean` must come from corpus.json with `garnet_exact_head=true`; every `constructed` seed must point at garnet-runtime-review-demo and carry the label in JSON and on the page.
-- Aggregates on the result page equal the lists rendered beneath them (adjacency test).
-- No verdict vocabulary in copy: `/verified|flagged|pass|warn|fail|threat|detected|caught|security scanner/i` gate over README, page, comment.
-- Vendored renderer `demo.mjs --assert` passes; vendored files byte-equal to recorded upstream SHA.
+## Honesty rules
 
-## Lanes
-- Lane A (sidekick, now): repo skeleton, schema, receipt/execution-diff ports, known-evidence CLI, static GET layout, tests. I author schema + gates text.
-- Lane B (sidekick, after A): Live Replay (replay-branch.mjs, templates, gate.mjs), compare.mjs integration, tests.
-- Lane C (me): result page HTML (rendered-browser artifact), cold read desktop + 390px.
-- Lane D (sidekick): seeds.json from corpus + demo cases, benchmark wiring + dry-run, launch draft skeleton from evidence-stories.ts (I write the copy).
-- Lane E (me): website permalink draft PR stacked on #140 branch; agent-install-kit mirror draft PR.
+- Keep workload and runner background separate.
+- An execution chain is a root-to-action path.
+- Every rendered count must equal the adjacent list.
+- Label constructed examples as constructed.
+- Do not present the authored hero beacon as a third-party incident.
+- Runtime evidence is unavailable or stale unless it is bound to the reviewed
+  head.
+- Keep launch copy unpublished until the remaining checks and decisions are
+  complete.
 
-## Deliberately undone (human triggers)
-Create `garnet-labs/garnet-replay` (private) and push · flip visibility · merge website permalink PR · merge #140 · run benchmark with a key · post anywhere.
+## Remaining decisions
+
+- Decide whether to keep the repository PUBLIC. The original ask was private.
+- Make no HN post yet.
+- Deploy no result permalinks yet.
+- Website PR #141 is closed unmerged.
+- The last observed `garnet/runtime-evidence` status for PR #31 was pending,
+  not green.
+- Repin the action when the v2.3.0 tag exists.
+- Do not modify protected `garnet-org` repositories.

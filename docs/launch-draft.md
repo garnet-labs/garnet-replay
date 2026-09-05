@@ -40,11 +40,24 @@ Two things we think are worth knowing before you try it.
 
 **2. When something does change, it is visible in the same record.** The seeded examples that show new execution come from `garnet-labs/garnet-runtime-review-demo`, a repository we authored to exercise specific shapes: a postinstall script that spawns `node` and connects out during `npm install`; a beacon two dependency levels deep. They are labelled `constructed` on every surface, in the JSON and on the page. We did not find these in a random Dependabot PR and we do not want anyone to think we did.
 
-The recorder is the open `garnet-org/action` (pinned by commit SHA in every workflow we generate). The renderer is dependency-free Node and posts with a plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording uses GitHub OIDC by default through `id-token: write`, so no Garnet secret is needed. `GARNET_API_TOKEN` remains an optional fallback, and fork pull requests cannot use OIDC. The generated workflow pins unreleased main SHA `e546567` (v2.3.0 is not cut yet); repin to the v2.3.0 SHA at release.
+The recorder is the open `garnet-org/action` (pinned by commit SHA in every
+workflow we generate). The renderer is dependency-free Node and posts with a
+plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording
+uses GitHub OIDC with `id-token: write` and no `GARNET_API_TOKEN`. The generated
+workflow pins
+`e546567a72e4fede11ec39d6e9f75b539adef22c`, unreleased before v2.3.0. Repin it
+at the v2.3.0 tag.
 
-There is also a small benchmark in the repo: the same LLM reviewer, source-only vs source + Execution Diff, over the seeded PRs, scored for whether its judgment changed and whether its findings cite something that is in the record. [RESULTS TABLE — fill from benchmark/ once run with a key; do not publish without it.]
+There is also a local benchmark in the repo. Devin reviewed both arms once per
+seed, not as a human study. Across 25 seeds, judgment changed 7/25, highest
+issue severity changed 4/25, evidence-grounded findings changed from 0 to 25,
+and there were 3 source-only blind spots. The one real escalation is
+`real-reference-31`, from `comment` / `consider` to
+`request_changes` / `must_fix`; the 20 PostHog seeds only de-escalate open
+questions. See `benchmark/results.md`.
 
-Links: [repo URL once public] · [3–5 permalinks once the website map is merged; until then link `app.garnet.ai/public/runs/{run}?profile={id}` directly].
+Links: the hero Run Profile receipts are in `seeds/seeds.json`. Deployed result
+permalinks and a public launch remain undone.
 
 ## First comment (author)
 
@@ -58,8 +71,12 @@ What it does not do: it does not block, gate, or score the merge. It records, at
 
 ## Pre-publish checklist (human)
 
-- [ ] `garnet-labs/garnet-replay` exists and is public (currently: not created; token cannot create org repos)
-- [ ] website #141 decision (merge, or close under the one-exhibit rule) and the permalinks re-probed logged-out after deploy
-- [ ] benchmark run with `ANTHROPIC_API_KEY`; table pasted; the "reviewer clearly did not have this" example chosen
+- [x] `garnet-labs/garnet-replay` exists and is public
+- [ ] decide whether to keep the repository PUBLIC; the original ask was private
+- [ ] make a HN post
+- [ ] deploy result permalinks
+- [ ] website PR #141 is closed unmerged
+- [x] benchmark run completed with the Devin reviewer and the table regenerated
+- [ ] `garnet/runtime-evidence` on PR #31 was last seen pending, not green
 - [ ] SHA1-HULUD / feed sentences: keep only if the backing repos are public
 - [ ] every URL in the post returns 200 logged out, on the day of posting
