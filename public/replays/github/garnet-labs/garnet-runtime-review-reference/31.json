@@ -7,7 +7,7 @@
     "name": "garnet-runtime-review-reference",
     "url": "https://github.com/garnet-labs/garnet-runtime-review-reference"
   },
-  "note": "base and head are the PR's own two commits (immediate parent → head), both kernel-recorded running npm install in npm-testbed/app; recorded by two workflows (garnet-dependency-replay baseline job, Garnet Record head job) because the replay update job's agent registration returned HTTP 500 from the control plane",
+  "note": "base and head are the PR's own two commits (immediate parent -> head), both kernel-recorded running npm install in npm-testbed/app in a single garnet-dependency-replay workflow run (record baseline and record update jobs; no separate workflow).",
   "pull_request": {
     "number": 31,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31",
@@ -19,14 +19,14 @@
     }
   },
   "base": {
-    "sha": "f6578cbf3c6757c9d5431fd8584e6728e57d0238",
-    "profile_id": "01a06f30-8e1b-7de8-afa9-946bf4735d94",
-    "run_id": "33936362245"
+    "sha": "8703692eae2f094a41390b8af6c72d3f327afa46",
+    "profile_id": "01a06f46-f4cd-73a8-87a8-d80fa592a1f6",
+    "run_id": "33937541982"
   },
   "head": {
-    "sha": "fbea53e536143a2db79f048e7fd73845db2b5813",
-    "profile_id": "01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
-    "run_id": "33936362201"
+    "sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+    "profile_id": "01a06f47-ebed-7501-8095-7176ce66c3df",
+    "run_id": "33937541982"
   },
   "comparison": {
     "available": true,
@@ -36,11 +36,11 @@
     "processes_added": [
       {
         "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
+          "bash",
+          "bash",
+          "node"
         ],
-        "section": "runner background"
+        "section": "workload"
       },
       {
         "ancestry": [
@@ -49,28 +49,20 @@
           "node"
         ],
         "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ],
-        "section": "workload"
       }
     ],
-    "processes_removed": [],
+    "processes_removed": [
+      {
+        "ancestry": [
+          "systemd",
+          "systemd-networkd"
+        ],
+        "section": "runner background"
+      }
+    ],
     "network_added": [
       {
-        "destination": "20.75.202.224",
+        "destination": "140.82.114.24",
         "section": "runner background",
         "process": "provjobd",
         "ancestry": [
@@ -80,13 +72,13 @@
         ]
       },
       {
-        "destination": "api.github.com",
-        "section": "workload",
-        "process": "node",
+        "destination": "169.254.169.254",
+        "section": "runner background",
+        "process": "python3.12",
         "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
+          "systemd",
+          "python3.12",
+          "python3.12"
         ]
       },
       {
@@ -96,16 +88,6 @@
         "ancestry": [
           "node",
           "dash",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
           "node"
         ]
       },
@@ -130,57 +112,37 @@
         ]
       },
       {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "node",
-          "dash",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
         "destination": "registry.npmjs.org",
         "section": "workload",
         "process": "node",
         "ancestry": [
-          "Runner.Worker",
           "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "release-assets.githubusercontent.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
+          "bash",
           "node"
         ]
       }
     ],
-    "network_removed": [],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-02.githubapp",
+        "section": "runner background",
+        "process": "provjobd",
+        "ancestry": [
+          "hosted-compute-agent",
+          "sudo",
+          "provjobd"
+        ]
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": "systemd-networkd",
+        "ancestry": [
+          "systemd",
+          "systemd-networkd"
+        ]
+      }
+    ],
     "files_added": [],
     "files_removed": [],
     "kinds_recorded": [
@@ -188,28 +150,28 @@
       "process"
     ],
     "totals": {
-      "execution_chains": 13,
-      "destinations": 10,
+      "execution_chains": 10,
+      "destinations": 8,
       "jobs_recorded": 1,
       "jobs_changed": 1,
       "jobs_unchanged": 0,
       "workload": {
-        "added": 10,
+        "added": 4,
         "removed": 0
       },
       "runner_background": {
-        "added": 1,
-        "removed": 0
+        "added": 2,
+        "removed": 2
       }
     }
   },
   "receipt_urls": {
-    "base": "https://app.garnet.ai/public/runs/33936362245?profile=01a06f30-8e1b-7de8-afa9-946bf4735d94",
-    "head": "https://app.garnet.ai/public/runs/33936362201?profile=01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
+    "base": "https://app.garnet.ai/public/runs/33937541982?profile=01a06f46-f4cd-73a8-87a8-d80fa592a1f6&utm_source=github&utm_medium=ci_log",
+    "head": "https://app.garnet.ai/public/runs/33937541982?profile=01a06f47-ebed-7501-8095-7176ce66c3df&utm_source=github&utm_medium=ci_log",
     "pr_comment": "https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31"
   },
   "recorded": {
-    "at": "2026-09-05T01:31:57.697446922Z",
+    "at": "2026-09-05T01:56:19.404113135Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
   }

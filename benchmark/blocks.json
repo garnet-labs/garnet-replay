@@ -1220,29 +1220,29 @@
     "block": {
       "source": "Garnet Runtime Review (kernel-recorded CI runtime evidence)",
       "contract": "6.9.8",
-      "receipt_id": "01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
-      "head_sha": "fbea53e536143a2db79f048e7fd73845db2b5813",
-      "compared_sha": "f6578cbf3c6757c9d5431fd8584e6728e57d0238",
+      "receipt_id": "01a06f47-ebed-7501-8095-7176ce66c3df",
+      "head_sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+      "compared_sha": "8703692eae2f094a41390b8af6c72d3f327afa46",
       "comparison": "available",
-      "recorded_at": "2026-09-05T01:31:57.697446922Z",
+      "recorded_at": "2026-09-05T01:56:19.404113135Z",
       "jobs_recorded": 1,
       "workload": {
         "jobs_changed": 1,
         "jobs_unchanged": 0,
-        "destinations_added": 10,
+        "destinations_added": 4,
         "destinations_removed": 0
       },
       "runner_background": {
-        "added": 1,
-        "removed": 0
+        "added": 2,
+        "removed": 2
       },
       "network_evidence": {
         "recorded": true,
-        "execution_chains": 13,
-        "destinations": 10,
+        "execution_chains": 10,
+        "destinations": 8,
         "added": [
           {
-            "destination": "20.75.202.224",
+            "destination": "140.82.114.24",
             "section": "runner background",
             "process": "provjobd",
             "ancestry": [
@@ -1252,13 +1252,13 @@
             ]
           },
           {
-            "destination": "api.github.com",
-            "section": "workload",
-            "process": "node",
+            "destination": "169.254.169.254",
+            "section": "runner background",
+            "process": "python3.12",
             "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
+              "systemd",
+              "python3.12",
+              "python3.12"
             ]
           },
           {
@@ -1268,16 +1268,6 @@
             "ancestry": [
               "node",
               "dash",
-              "node"
-            ]
-          },
-          {
-            "destination": "github.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
               "node"
             ]
           },
@@ -1302,57 +1292,37 @@
             ]
           },
           {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "node",
-              "dash",
-              "node"
-            ]
-          },
-          {
-            "destination": "localhost",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Worker",
-              "bash",
-              "node"
-            ]
-          },
-          {
             "destination": "registry.npmjs.org",
             "section": "workload",
             "process": "node",
             "ancestry": [
-              "Runner.Worker",
               "bash",
-              "node"
-            ]
-          },
-          {
-            "destination": "release-assets.githubusercontent.com",
-            "section": "workload",
-            "process": "node",
-            "ancestry": [
-              "Runner.Listener",
-              "Runner.Worker",
+              "bash",
               "node"
             ]
           }
         ],
-        "removed": []
+        "removed": [
+          {
+            "destination": "hosted-compute-watchdog-prod-eus-02.githubapp",
+            "section": "runner background",
+            "process": "provjobd",
+            "ancestry": [
+              "hosted-compute-agent",
+              "sudo",
+              "provjobd"
+            ]
+          },
+          {
+            "destination": "ip6-allrouters",
+            "section": "runner background",
+            "process": "systemd-networkd",
+            "ancestry": [
+              "systemd",
+              "systemd-networkd"
+            ]
+          }
+        ]
       },
       "process_evidence": {
         "recorded": true,
@@ -1366,7 +1336,7 @@
       "detections_note": "none recorded",
       "drill_down": "call the read-only garnet_drilldown tool to read the full recorded evidence for this head"
     },
-    "rendered": "receipt_id: 01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6\nhead: fbea53e536143a2db79f048e7fd73845db2b5813\ncompared with previous recorded head: f6578cbf3c6757c9d5431fd8584e6728e57d0238\nworkload: 1 job(s) changed, 0 unchanged; destinations +10 -0\nrecorded network evidence: 13 execution chains, 10 destinations\n  + 20.75.202.224 (runner background)\n  + api.github.com (workload)\n  + api.ipify.org (workload)\n  + github.com (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + localhost (workload)\n  + registry.npmjs.org (workload)\n  + release-assets.githubusercontent.com (workload)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-09-05T01:31:57.697446922Z · contract 6.9.8"
+    "rendered": "receipt_id: 01a06f47-ebed-7501-8095-7176ce66c3df\nhead: b639b38a8562e6bc39e65d5754652494e9d30faf\ncompared with previous recorded head: 8703692eae2f094a41390b8af6c72d3f327afa46\nworkload: 1 job(s) changed, 0 unchanged; destinations +4 -0\nrecorded network evidence: 10 execution chains, 8 destinations\n  + 140.82.114.24 (runner background)\n  + 169.254.169.254 (runner background)\n  + api.ipify.org (workload)\n  + httpbin.org (workload)\n  + ip-api.com (workload)\n  + registry.npmjs.org (workload)\n  - hosted-compute-watchdog-prod-eus-02.githubapp (runner background)\n  - ip6-allrouters (runner background)\nfile evidence: none recorded for this run\ndeterministic detections: none recorded\nrecorded at: 2026-09-05T01:56:19.404113135Z · contract 6.9.8"
   },
   "constructed-30304258281": {
     "block": {

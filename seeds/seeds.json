@@ -5,8 +5,12 @@
     "source": "live-replay",
     "pr_url": "https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31",
     "replay_json": "/replays/github/garnet-labs/garnet-runtime-review-reference/31.json",
-    "head_receipt_url": "https://app.garnet.ai/public/runs/33936362201?profile=01a06f31-9eb9-7bf2-b72a-4bdde61c8ef6",
-    "note": "base and head are the PR's own two commits (immediate parent → head), both kernel-recorded running `npm install` in npm-testbed/app; recorded by two workflows (garnet-dependency-replay baseline job, Garnet Record head job) because the replay update job's agent registration returned HTTP 500 from the control plane"
+    "head_receipt_url": "https://app.garnet.ai/public/runs/33937541982?profile=01a06f47-ebed-7501-8095-7176ce66c3df&utm_source=github&utm_medium=ci_log",
+    "note": "base and head are the PR's own two commits (immediate parent -> head), both kernel-recorded running `npm install` in npm-testbed/app in a single garnet-dependency-replay workflow run (record baseline and record update jobs; no separate workflow).",
+    "base_sha": "8703692eae2f094a41390b8af6c72d3f327afa46",
+    "head_sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+    "base_receipt_url": "https://app.garnet.ai/public/runs/33937541982?profile=01a06f46-f4cd-73a8-87a8-d80fa592a1f6&utm_source=github&utm_medium=ci_log",
+    "run_id": "33937541982"
   },
   {
     "id": "real-139",
