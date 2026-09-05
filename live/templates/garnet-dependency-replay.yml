@@ -51,6 +51,11 @@ jobs:
       - name: Install dependencies (${{ matrix.side }})
         run: bash .github/garnet-replay/install.sh
 
+      # Short-lived install flows need the sensor's flush cadence before stop.
+      - name: Let sensor settle
+        if: always()
+        run: sleep 30
+
       - name: Export execution record
         if: always()
         env:

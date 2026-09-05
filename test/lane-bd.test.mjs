@@ -103,6 +103,7 @@ test("live replay workflow uses GitHub OIDC by default", async () => {
   assert.match(workflow, /GARNET_PROFILE_JOB:\s+record-\$\{\{ matrix\.side \}\}/)
   assert.match(workflow, /OIDC needs id-token: write and is unavailable on fork pull requests/)
   assert.match(workflow, /max-parallel:\s+1/)
+  assert.match(workflow, /- name: Let sensor settle\s+if: always\(\)\s+run: sleep 30/)
   assert.match(workflow, /echo "\$\{\{ github\.run_id \}\}" > "\$RUNNER_TEMP\/profile\/run_id"/)
 })
 
