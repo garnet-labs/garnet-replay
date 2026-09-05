@@ -17,6 +17,7 @@
  *   BASELINE_SHA / HEAD_SHA      commits compared
  *   GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER   comment publication
  *   GITHUB_API_URL, GITHUB_SERVER_URL, GITHUB_STEP_SUMMARY
+ *   DRY_RUN                     "1" to print without posting
  *   FAIL_ON_ERROR                "false" to exit 0 on failure
  *
  * Usage: node compare.mjs            render + post (when GITHUB_TOKEN set)
@@ -24,6 +25,7 @@
  */
 
 import { readFile, appendFile, writeFile } from "node:fs/promises"
+import { resolve } from "node:path"
 import { argv } from "node:process"
 import { fileURLToPath } from "node:url"
 import {
@@ -34,8 +36,8 @@ import {
   renderRunProfile,
   summarizeProfile,
 } from "./review.mjs"
-import { diffDestinations } from "../lib/profile-diff.mjs"
-import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
+import { diffDestinations } from "./profile-diff.mjs"
+import { executionDiffFromProfiles } from "./execution-diff.mjs"
 
 export const REPLAY_MARKER = "<!-- garnet-dependency-replay -->"
 
@@ -54,6 +56,7 @@ function readConfig() {
     runId: process.env.GITHUB_RUN_ID || "",
     publicReportUrl: process.env.PUBLIC_REPORT_URL || "https://app.garnet.ai",
     permalinkUrl: "",
+    dryRun: process.env.DRY_RUN === "1",
     failOnError: (process.env.FAIL_ON_ERROR || "true") !== "false",
   }
 }
@@ -127,7 +130,10 @@ export function renderComparison({ baseline, update, replay, cfg }) {
   const headRec = summarizeProfile(update)
   const baselineSha = String(baseRec?.github?.sha || cfg.baselineSha || "")
   const headSha = String(headRec?.github?.sha || cfg.headSha || "")
-  const diff = diffDestinations(baseRec, headRec)
+  const comparisonAvailable = baseRec !== null && headRec !== null
+  const diff = comparisonAvailable
+    ? diffDestinations(baseRec, headRec)
+    : { added: [], removed: [], shared: [], before: new Map(), after: new Map() }
 
   const commitLink = (sha) => {
     const short = sha.slice(0, 7) || "unknown"
@@ -148,24 +154,31 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     machineMarker({ replay, baselineSha, headSha, diff }),
     `**Dependency replay: ${transition}**`,
     "",
-    `> *+${diff.added.length} −${diff.removed.length} destinations · ${countPhrase(diff.after.size, "destination")} after the update*`,
+    comparisonAvailable
+      ? `> *+${diff.added.length} −${diff.removed.length} destinations · ${countPhrase(diff.after.size, "destination")} after the update*`
+      : "> *comparison unavailable · no destination delta was derived*",
     `> <sub>baseline ${commitLink(baselineSha)} → update ${commitLink(headSha)} · immediate parent to head · recorded at the kernel by Garnet</sub>`,
     "",
   ]
 
-  if (diff.added.length > 0) {
+  if (comparisonAvailable && diff.added.length > 0) {
     lines.push(`<details open><summary>only in the update · ${countPhrase(diff.added.length, "destination")}</summary>`, "")
     lines.push("<pre>", ...destinationLines(diff.added, diff.after), "</pre>", "", "</details>", "")
   }
-  if (diff.removed.length > 0) {
+  if (comparisonAvailable && diff.removed.length > 0) {
     lines.push(`<details><summary>only in the baseline · ${countPhrase(diff.removed.length, "destination")}</summary>`, "")
     lines.push("<pre>", ...destinationLines(diff.removed, diff.before), "</pre>", "", "</details>", "")
   }
-  if (diff.shared.length > 0) {
+  if (comparisonAvailable && diff.shared.length > 0) {
     lines.push(`<details><summary>in both · ${countPhrase(diff.shared.length, "destination")}</summary>`, "")
     lines.push("<pre>", ...destinationLines(diff.shared, diff.after), "</pre>", "", "</details>", "")
   }
-  if (diff.added.length + diff.removed.length + diff.shared.length === 0) {
+  if (!comparisonAvailable) {
+    const missing = baseRec === null ? "baseline" : "update"
+    const missingSha = baseRec === null ? baselineSha : headSha
+    const sha = missingSha === "" ? "unknown SHA" : `\`${escapeCode(missingSha)}\``
+    lines.push(`<sub>no ${missing} execution record for ${sha}.</sub>`, "")
+  } else if (diff.added.length + diff.removed.length + diff.shared.length === 0) {
     lines.push("<sub>no outbound destinations recorded on either commit.</sub>", "")
   }
 
@@ -250,7 +263,7 @@ async function main() {
     },
   })
   await writeFile(process.env.EXECUTION_DIFF_JSON_PATH || "execution-diff.json", `${JSON.stringify(executionDiff, null, 2)}\n`)
-  if (argv.includes("--print")) {
+  if (argv.includes("--print") || cfg.dryRun) {
     process.stdout.write(`${body}\n`)
     return
   }
@@ -264,7 +277,7 @@ async function main() {
   }
 }
 
-const isDirectRun = argv[1] && fileURLToPath(import.meta.url) === argv[1]
+const isDirectRun = argv[1] && fileURLToPath(import.meta.url) === resolve(argv[1])
 if (isDirectRun) {
   main().catch((err) => {
     console.error(`Dependency replay comparison could not complete: ${err.message}`)

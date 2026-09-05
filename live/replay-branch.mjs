@@ -1,10 +1,11 @@
 import { execFileSync } from "node:child_process"
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, isAbsolute, join } from "node:path"
+import { basename, dirname, isAbsolute, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
 const WORKFLOW = join(ROOT, "live", "templates", "garnet-dependency-replay.yml")
+const LOCAL_IMPORT_RE = /(?:from\s+|import\s*\(\s*)(["'])(\.\.?\/[^"']+)\1/g
 
 function git(repoDir, args) {
   return execFileSync("git", ["-C", repoDir, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim()
@@ -40,6 +41,41 @@ function installScript(packageManager, packageDir) {
   return `#!/usr/bin/env bash\nset -euo pipefail\n${directory}${command}\n`
 }
 
+function collectReplayModules() {
+  const modules = new Map()
+  const visit = (sourcePath) => {
+    if (modules.has(sourcePath)) return
+    const targetName = basename(sourcePath)
+    modules.set(sourcePath, targetName)
+    const source = readFileSync(sourcePath, "utf8")
+    for (const match of source.matchAll(LOCAL_IMPORT_RE)) {
+      const importedPath = resolve(dirname(sourcePath), match[2])
+      if (importedPath === join(ROOT, "renderer", "review.mjs")) continue
+      if (!importedPath.startsWith(`${ROOT}/lib/`)) continue
+      visit(importedPath)
+    }
+  }
+  visit(join(ROOT, "lib", "profile-diff.mjs"))
+  visit(join(ROOT, "lib", "execution-diff.mjs"))
+  return modules
+}
+
+function copyReplayModules(replayDir) {
+  const modules = collectReplayModules()
+  for (const [sourcePath, targetName] of modules) {
+    const source = readFileSync(sourcePath, "utf8")
+    const rewritten = source.replace(LOCAL_IMPORT_RE, (match, quote, specifier) => {
+      const importedPath = resolve(dirname(sourcePath), specifier)
+      const target = importedPath === join(ROOT, "renderer", "review.mjs")
+        ? "review.mjs"
+        : modules.get(importedPath)
+      return target === undefined ? match : match.replace(`${quote}${specifier}${quote}`, `${quote}./${target}${quote}`)
+    })
+    writeFileSync(join(replayDir, targetName), rewritten)
+  }
+  return [...modules.values()].map((targetName) => `.github/garnet-replay/${targetName}`)
+}
+
 /**
  * Plan the files and commits for a two-commit dependency replay.
  * @param {{repoDir: string, packageDir?: string, dependency: string, from: string, to: string, packageManager: "npm"|"pnpm"|"yarn"}} input
@@ -53,6 +89,7 @@ export function planReplay(input) {
   if (typeof to !== "string" || to === "") throw new Error("to is required")
   if (!["npm", "pnpm", "yarn"].includes(packageManager)) throw new Error("unsupported package manager")
   const packageDir = packageDirectory(requestedPackageDir)
+  const replayModules = collectReplayModules()
   const branch = `garnet-replay/${branchPart(dependency)}-${branchPart(to)}-${Date.now().toString(36).slice(-8)}`
   return {
     branch,
@@ -68,6 +105,7 @@ export function planReplay(input) {
       ".github/garnet-replay/install.sh",
       ".github/garnet-replay/compare.mjs",
       ".github/garnet-replay/review.mjs",
+      ...[...replayModules.values()].map((targetName) => `.github/garnet-replay/${targetName}`),
       ".github/garnet-replay/replay.json",
     ],
   }
@@ -119,6 +157,7 @@ export function createReplayBranch(input) {
   writeFileSync(join(replayDir, "install.sh"), installScript(plan.packageManager, plan.packageDir), { mode: 0o755 })
   copyFileSync(join(ROOT, "renderer", "compare.mjs"), join(replayDir, "compare.mjs"))
   copyFileSync(join(ROOT, "renderer", "review.mjs"), join(replayDir, "review.mjs"))
+  copyReplayModules(replayDir)
   writeFileSync(join(replayDir, "replay.json"), `${JSON.stringify({
     dependency: plan.dependency,
     packageDir: plan.packageDir,

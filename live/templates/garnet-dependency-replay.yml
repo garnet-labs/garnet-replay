@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         side: [baseline, update]
     steps:
@@ -68,6 +69,7 @@ jobs:
             echo "No execution record found at /var/log/jibril.profile.json" >&2
           fi
           echo "${{ steps.side.outputs.sha }}" > "$RUNNER_TEMP/profile/sha"
+          echo "${{ github.run_id }}" > "$RUNNER_TEMP/profile/run_id"
 
       - uses: actions/upload-artifact@v4
         if: always()

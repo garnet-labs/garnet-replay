@@ -8,6 +8,7 @@ import test from "node:test"
 import { assessLiveReplaySupport } from "../lib/gate.mjs"
 import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
 import { createReplayBranch } from "../live/replay-branch.mjs"
+import { renderComparison } from "../renderer/compare.mjs"
 import { validate } from "../lib/validate.mjs"
 
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
@@ -67,6 +68,26 @@ test("live replay supports package subdirectories and dependency adds", async ()
     assert.equal(JSON.parse(await readFile(join(repoDir, ".github", "garnet-replay", "replay.json"), "utf8")).packageDir, "sub/app")
     assert.match(await readFile(join(repoDir, ".github", "DEPENDENCY_REPLAY.md"), "utf8"), /Baseline: not installed/)
     assert.match(await readFile(join(repoDir, ".github", "DEPENDENCY_REPLAY.md"), "utf8"), /Package dir: `sub\/app`/)
+    const packagedModules = ["compare.mjs", "review.mjs", "profile-diff.mjs", "execution-diff.mjs"]
+      .map((name) => join(repoDir, ".github", "garnet-replay", name))
+    for (const modulePath of packagedModules) {
+      execFileSync(process.execPath, ["--check", modulePath], { stdio: "ignore" })
+    }
+    const importPaths = packagedModules.filter((path) => path.endsWith("compare.mjs") || path.endsWith("profile-diff.mjs") || path.endsWith("execution-diff.mjs"))
+    const imported = execFileSync(process.execPath, [
+      "--input-type=module",
+      "-e",
+      'const { pathToFileURL } = await import("node:url"); const [compare, profile, execution] = await Promise.all([process.env.PACKAGED_COMPARE, process.env.PACKAGED_PROFILE, process.env.PACKAGED_EXECUTION].map((path) => import(pathToFileURL(path)))); if (typeof compare.renderComparison !== "function" || typeof profile.diffDestinations !== "function" || typeof execution.executionDiffFromProfiles !== "function") process.exit(1)',
+    ], {
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        PACKAGED_COMPARE: importPaths[0],
+        PACKAGED_PROFILE: importPaths[1],
+        PACKAGED_EXECUTION: importPaths[2],
+      },
+    })
+    assert.equal(imported, "")
   } finally {
     await rm(repoDir, { recursive: true, force: true })
   }
@@ -80,6 +101,37 @@ test("live replay workflow uses GitHub OIDC by default", async () => {
   assert.doesNotMatch(workflow, /^\s+api_token:/m)
   assert.doesNotMatch(workflow, /GARNET_API_TOKEN is not set/)
   assert.match(workflow, /OIDC needs id-token: write and is unavailable on fork pull requests/)
+  assert.match(workflow, /max-parallel:\s+1/)
+  assert.match(workflow, /echo "\$\{\{ github\.run_id \}\}" > "\$RUNNER_TEMP\/profile\/run_id"/)
+})
+
+test("missing replay profiles produce an unavailable diff and explicit comment line", async () => {
+  const profile = JSON.parse(await readFile("test/fixtures/demo-profiles/30304293294.json", "utf8"))
+  const raw = profile.profiles[0]
+  const headSha = raw.run.commit_sha
+  const baselineSha = "0".repeat(40)
+  const diff = executionDiffFromProfiles({
+    baseline: null,
+    update: profile,
+    meta: { baselineSha, headSha, repository: raw.run.repository, prNumber: 1 },
+  })
+  assert.deepEqual(validate(schema, diff), [])
+  assert.deepEqual(diff.comparison, { available: false, scope: "unavailable" })
+  assert.deepEqual(diff.execution_diff.network_added, [])
+  const body = renderComparison({
+    baseline: null,
+    update: null,
+    replay: {},
+    cfg: { baselineSha, headSha, repository: raw.run.repository, prNumber: "1", githubServerUrl: "https://github.com", githubApiUrl: "https://api.github.com", publicReportUrl: "https://app.garnet.ai" },
+  })
+  assert.match(body, new RegExp(`no baseline execution record for \\\`${baselineSha}\\\``))
+  const updateMissingBody = renderComparison({
+    baseline: {},
+    update: null,
+    replay: {},
+    cfg: { baselineSha, headSha, repository: raw.run.repository, prNumber: "1", githubServerUrl: "https://github.com", githubApiUrl: "https://api.github.com", publicReportUrl: "https://app.garnet.ai" },
+  })
+  assert.match(updateMissingBody, new RegExp(`no update execution record for \\\`${headSha}\\\``))
 })
 
 test("constructed profile diffs preserve workload and runner background sections", async () => {
