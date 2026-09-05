@@ -18,6 +18,7 @@
 
 Hero-demo PR #31 uses distinct Garnet profile job names per matrix side because the control-plane agent dedupe index includes the job name.
 Hero-demo PR #31 also lets the sensor settle for 30 seconds before export so short-lived install flows reach the sensor's flush cadence.
+Hero-demo PR #31 compare comments now bind commit markers and links to the recorded artifact SHAs, rather than the profile-stamped merge ref.
 
 Local commits (9, no remote): 8d65abd e92f56e 72e4a20 a8f0c07 fecbb96 0c15575 d14f677 8d7046d ee412d7. npm test 19/19, demo.mjs --assert ok.
 Open decisions for Farrukh: (a) create empty private garnet-labs/garnet-replay so I can push; (b) repin Live Replay to the v2.3.0 tag SHA at release; an end-to-end run has still NOT been executed; (c) 5 website exhibits vs one-exhibit rule on #141; (d) run benchmark for real (ANTHROPIC_API_KEY) before any launch claim; (e) renderer copy is 6.9.8, canonical is 6.10.0 — refresh before publish.

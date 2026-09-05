@@ -105,6 +105,8 @@ test("live replay workflow uses GitHub OIDC by default", async () => {
   assert.match(workflow, /max-parallel:\s+1/)
   assert.match(workflow, /- name: Let sensor settle\s+if: always\(\)\s+run: sleep 30/)
   assert.match(workflow, /echo "\$\{\{ github\.run_id \}\}" > "\$RUNNER_TEMP\/profile\/run_id"/)
+  assert.ok(workflow.includes('export BASELINE_SHA="$(cat profiles/garnet-profile-baseline/sha 2>/dev/null || git rev-parse HEAD~1)"'))
+  assert.ok(workflow.includes('export HEAD_SHA="$(cat profiles/garnet-profile-update/sha 2>/dev/null || echo "$HEAD_SHA")"'))
 })
 
 test("missing replay profiles produce an unavailable diff and explicit comment line", async () => {
@@ -134,6 +136,32 @@ test("missing replay profiles produce an unavailable diff and explicit comment l
     cfg: { baselineSha, headSha, repository: raw.run.repository, prNumber: "1", githubServerUrl: "https://github.com", githubApiUrl: "https://api.github.com", publicReportUrl: "https://app.garnet.ai" },
   })
   assert.match(updateMissingBody, new RegExp(`no update execution record for \\\`${headSha}\\\``))
+})
+
+test("compare comments prefer recorded replay SHAs over profile stamps", () => {
+  const stampedSha = "x".repeat(40)
+  const baselineSha = "a".repeat(40)
+  const headSha = "b".repeat(40)
+  const profile = (sha) => ({
+    github: { sha, repository: "owner/repo", workflow: "workflow", job: "record" },
+    egress: [],
+  })
+  const body = renderComparison({
+    baseline: profile(stampedSha),
+    update: profile(stampedSha),
+    replay: {},
+    cfg: {
+      baselineSha,
+      headSha,
+      repository: "owner/repo",
+      githubServerUrl: "https://github.com",
+      githubApiUrl: "https://api.github.com",
+      publicReportUrl: "https://app.garnet.ai",
+    },
+  })
+  assert.match(body, new RegExp(`garnet:commit ${headSha}`))
+  assert.match(body, new RegExp(`commit/${baselineSha}`))
+  assert.doesNotMatch(body, new RegExp(stampedSha))
 })
 
 test("constructed profile diffs preserve workload and runner background sections", async () => {

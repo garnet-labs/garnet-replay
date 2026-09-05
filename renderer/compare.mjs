@@ -128,8 +128,8 @@ function machineMarker({ replay, baselineSha, headSha, diff }) {
 export function renderComparison({ baseline, update, replay, cfg }) {
   const baseRec = summarizeProfile(baseline)
   const headRec = summarizeProfile(update)
-  const baselineSha = String(baseRec?.github?.sha || cfg.baselineSha || "")
-  const headSha = String(headRec?.github?.sha || cfg.headSha || "")
+  const baselineSha = String(cfg.baselineSha || baseRec?.github?.sha || "")
+  const headSha = String(cfg.headSha || headRec?.github?.sha || "")
   const comparisonAvailable = baseRec !== null && headRec !== null
   const diff = comparisonAvailable
     ? diffDestinations(baseRec, headRec)
@@ -191,7 +191,8 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     if (rec === null) {
       lines.push("<sub>no execution record found for this commit.</sub>", "")
     } else {
-      lines.push(sideBody(buildRunProfile(rec, { ...cfg, headSha: sha })), "")
+      const renderedRec = { ...rec, github: { ...rec.github, sha } }
+      lines.push(sideBody(buildRunProfile(renderedRec, cfg)), "")
     }
     lines.push("</details>", "")
   }

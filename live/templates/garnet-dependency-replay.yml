@@ -115,7 +115,8 @@ jobs:
           EXECUTION_DIFF_JSON_PATH: ${{ runner.temp }}/execution-diff.json
         run: |
           set -uo pipefail
-          export BASELINE_SHA="$(git rev-parse HEAD~1)"
+          export BASELINE_SHA="$(cat profiles/garnet-profile-baseline/sha 2>/dev/null || git rev-parse HEAD~1)"
+          export HEAD_SHA="$(cat profiles/garnet-profile-update/sha 2>/dev/null || echo "$HEAD_SHA")"
           node .github/garnet-replay/compare.mjs
 
       - uses: actions/upload-artifact@v4
