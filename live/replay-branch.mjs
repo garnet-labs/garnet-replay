@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process"
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname, join } from "node:path"
+import { dirname, isAbsolute, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
@@ -11,33 +11,53 @@ function git(repoDir, args) {
 }
 
 function branchPart(value) {
-  return String(value).replace(/^@/, "").replace(/[^A-Za-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "")
+  const part = String(value)
+    .replace(/^@/, "")
+    .replace(/[^A-Za-z0-9._-]+/g, "-")
+    .replace(/\.\.+/g, "-")
+    .replace(/\.lock$/i, "-lock")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60)
+  return part === "" ? "value" : part
 }
 
-function installScript(packageManager) {
+function packageDirectory(packageDir) {
+  if (packageDir === undefined) return "."
+  if (typeof packageDir !== "string" || packageDir === "" || isAbsolute(packageDir)
+    || packageDir.includes(`\\`) || packageDir.split("/").includes("..")) {
+    throw new Error("packageDir must be a relative directory")
+  }
+  return packageDir.replace(/\/+$/, "") || "."
+}
+
+function installScript(packageManager, packageDir) {
   const command = packageManager === "pnpm"
     ? "pnpm install --no-frozen-lockfile"
     : packageManager === "yarn"
       ? "yarn install"
       : "npm install"
-  return `#!/usr/bin/env bash\nset -euo pipefail\n${command}\n`
+  const directory = packageDir === "." ? "" : `cd "${packageDir.replace(/(["\\$`])/g, "\\$1")}"\n`
+  return `#!/usr/bin/env bash\nset -euo pipefail\n${directory}${command}\n`
 }
 
 /**
  * Plan the files and commits for a two-commit dependency replay.
- * @param {{repoDir: string, dependency: string, from: string, to: string, packageManager: "npm"|"pnpm"|"yarn"}} input
- * @returns {{branch: string, repoDir: string, dependency: string, from: string, to: string, packageManager: string, files: string[]}}
+ * @param {{repoDir: string, packageDir?: string, dependency: string, from: string, to: string, packageManager: "npm"|"pnpm"|"yarn"}} input
+ * @returns {{branch: string, repoDir: string, packageDir: string, dependency: string, from: string, to: string, packageManager: string, files: string[]}}
  */
-export function planReplay({ repoDir, dependency, from, to, packageManager }) {
+export function planReplay(input) {
+  const { repoDir, packageDir: requestedPackageDir, dependency, from, to, packageManager } = input ?? {}
   if (typeof repoDir !== "string" || repoDir === "") throw new Error("repoDir is required")
   if (typeof dependency !== "string" || dependency === "") throw new Error("dependency is required")
   if (typeof from !== "string" || from === "") throw new Error("from is required")
   if (typeof to !== "string" || to === "") throw new Error("to is required")
   if (!["npm", "pnpm", "yarn"].includes(packageManager)) throw new Error("unsupported package manager")
+  const packageDir = packageDirectory(requestedPackageDir)
   const branch = `garnet-replay/${branchPart(dependency)}-${branchPart(to)}-${Date.now().toString(36).slice(-8)}`
   return {
     branch,
     repoDir,
+    packageDir,
     dependency,
     from,
     to,
@@ -54,12 +74,25 @@ export function planReplay({ repoDir, dependency, from, to, packageManager }) {
 }
 
 function replayInstructions(plan) {
-  return `# Dependency replay\n\nThis branch records a dependency installation at two commits.\n\n- Dependency: \`${plan.dependency}\`\n- Baseline: \`${plan.from}\`\n- Update: \`${plan.to}\`\n- Scope: \`immediate-parent-to-head\`\n- This is a constructed replay of a historical bump; not a routine contribution.\n`
+  const packageDir = plan.packageDir === "." ? "" : `- Package dir: \`${plan.packageDir}\`\n`
+  const baseline = plan.from === "none" ? "not installed" : `\`${plan.from}\``
+  return `# Dependency replay\n\nThis branch records a dependency installation at two commits.\n\n- Dependency: \`${plan.dependency}\`\n- Baseline: ${baseline}\n- Update: \`${plan.to}\`\n${packageDir}- Scope: \`immediate-parent-to-head\`\n- This is a constructed replay of a historical bump; not a routine contribution.\n`
 }
 
-function replaceDependencyVersion(repoDir, dependency, from, to) {
-  const path = join(repoDir, "package.json")
+function replaceDependencyVersion(repoDir, packageDir, dependency, from, to) {
+  const path = join(repoDir, packageDir, "package.json")
   const source = readFileSync(path, "utf8")
+  if (from === "none") {
+    const manifest = JSON.parse(source)
+    const dependencies = manifest.dependencies ?? {}
+    if (Object.prototype.hasOwnProperty.call(dependencies, dependency)) {
+      throw new Error(`package.json already contains ${dependency}`)
+    }
+    dependencies[dependency] = to
+    manifest.dependencies = dependencies
+    writeFileSync(path, `${JSON.stringify(manifest, null, 2)}\n`)
+    return
+  }
   const escaped = dependency.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
   const exact = new RegExp(`(["'])${escaped}\\1(\\s*:\\s*)(${JSON.stringify(from).replace(/"/g, '\\"')})`)
   if (!exact.test(source)) {
@@ -71,7 +104,7 @@ function replaceDependencyVersion(repoDir, dependency, from, to) {
 
 /**
  * Create the baseline and update commits in a provided checkout.
- * @param {{repoDir: string, dependency: string, from: string, to: string, packageManager: "npm"|"pnpm"|"yarn", branch?: string}} input
+ * @param {{repoDir: string, packageDir?: string, dependency: string, from: string, to: string, packageManager: "npm"|"pnpm"|"yarn", branch?: string}} input
  * @returns {{branch: string, baselineCommit: string, updateCommit: string, repoDir: string, ghCommand: string}}
  */
 export function createReplayBranch(input) {
@@ -83,11 +116,12 @@ export function createReplayBranch(input) {
   mkdirSync(replayDir, { recursive: true })
   writeFileSync(join(plan.repoDir, ".github", "DEPENDENCY_REPLAY.md"), replayInstructions(plan))
   copyFileSync(WORKFLOW, join(plan.repoDir, ".github", "workflows", "garnet-dependency-replay.yml"))
-  writeFileSync(join(replayDir, "install.sh"), installScript(plan.packageManager), { mode: 0o755 })
+  writeFileSync(join(replayDir, "install.sh"), installScript(plan.packageManager, plan.packageDir), { mode: 0o755 })
   copyFileSync(join(ROOT, "renderer", "compare.mjs"), join(replayDir, "compare.mjs"))
   copyFileSync(join(ROOT, "renderer", "review.mjs"), join(replayDir, "review.mjs"))
   writeFileSync(join(replayDir, "replay.json"), `${JSON.stringify({
     dependency: plan.dependency,
+    packageDir: plan.packageDir,
     from: plan.from,
     to: plan.to,
     label: input.label === "constructed" ? "constructed" : "real",
@@ -95,9 +129,13 @@ export function createReplayBranch(input) {
   git(plan.repoDir, ["add", ...plan.files])
   git(plan.repoDir, ["commit", "-m", `chore(replay): baseline install for ${plan.dependency}@${plan.from}`])
   const baselineCommit = git(plan.repoDir, ["rev-parse", "HEAD"])
-  replaceDependencyVersion(plan.repoDir, plan.dependency, plan.from, plan.to)
-  git(plan.repoDir, ["add", "package.json"])
-  git(plan.repoDir, ["commit", "-m", `chore(deps): update ${plan.dependency} to ${plan.to}`])
+  replaceDependencyVersion(plan.repoDir, plan.packageDir, plan.dependency, plan.from, plan.to)
+  const packagePath = plan.packageDir === "." ? "package.json" : join(plan.packageDir, "package.json")
+  git(plan.repoDir, ["add", packagePath])
+  const updateMessage = plan.from === "none"
+    ? `chore(deps): add ${plan.dependency} ${plan.to}`
+    : `chore(deps): update ${plan.dependency} to ${plan.to}`
+  git(plan.repoDir, ["commit", "-m", updateMessage])
   const updateCommit = git(plan.repoDir, ["rev-parse", "HEAD"])
   const ghCommand = `gh pr create --head ${branch} --title "Dependency replay: ${plan.dependency} ${plan.from} to ${plan.to}" --body "Constructed dependency replay for ${plan.dependency}."`
   return { branch, baselineCommit, updateCommit, repoDir: plan.repoDir, ghCommand }
@@ -108,8 +146,10 @@ export function createReplayBranch(input) {
  * @param {string} repoDir
  * @returns {{dependency: string, from: string, to: string}|null}
  */
-export function pickDependencyFromHistory(repoDir) {
-  const log = git(repoDir, ["log", "-p", "--follow", "--format=@@@%H", "--", "package.json"])
+export function pickDependencyFromHistory(repoDir, packageDir = ".") {
+  const normalizedPackageDir = packageDirectory(packageDir)
+  const packagePath = normalizedPackageDir === "." ? "package.json" : join(normalizedPackageDir, "package.json")
+  const log = git(repoDir, ["log", "-p", "--follow", "--format=@@@%H", "--", packagePath])
   for (const chunk of log.split("@@@").slice(1)) {
     const removed = [...chunk.matchAll(/^-\\s*"([^"]+)"\\s*:\\s*"([^"]+)"/gm)]
     const added = [...chunk.matchAll(/^\+\\s*"([^"]+)"\\s*:\\s*"([^"]+)"/gm)]

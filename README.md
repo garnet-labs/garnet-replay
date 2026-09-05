@@ -53,8 +53,11 @@ node bin/replay.mjs live https://github.com/owner/repo \
   --dependency example --from 1.0.0 --to 1.1.0
 ```
 
-The v0 gate requires a public repository, an npm, pnpm, or yarn lockfile, and
-a dependency pull request shape. Linux is the execution constraint.
+Use `--dir sub/app` for a package subdirectory and `--from none` when adding a dependency absent from the baseline.
+
+The v0 gate requires a public repository, a package.json, and a dependency pull request shape.
+An npm, pnpm, or yarn lockfile selects the package manager; without one, npm is used.
+Linux is the execution constraint.
 Recording authenticates through GitHub OIDC (`id-token: write`), so no Garnet secret is needed. This path has not yet been exercised end-to-end from this tool.
 `GARNET_API_TOKEN` is an optional fallback, and fork pull requests cannot use OIDC.
 The generated workflow is pinned to unreleased main SHA `e546567` (v2.3.0 is not cut yet); repin to the v2.3.0 SHA at release.

@@ -1,9 +1,13 @@
 import assert from "node:assert/strict"
-import { access, readFile } from "node:fs/promises"
+import { execFileSync } from "node:child_process"
+import { access, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import test from "node:test"
 
 import { assessLiveReplaySupport } from "../lib/gate.mjs"
 import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
+import { createReplayBranch } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
 
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
@@ -18,11 +22,54 @@ test("live gate reports observation-only constraints", () => {
   assert.equal(supported.supported, true)
   assert.deepEqual(supported.reasons, ["Linux is required"])
 
+  const noLockfile = assessLiveReplaySupport({
+    repoMeta: { private: false },
+    prMeta: { title: "Add chart-helpers", user: { login: "dependabot[bot]" } },
+    files: [{ filename: "package.json" }],
+  })
+  assert.equal(noLockfile.supported, true)
+  assert.deepEqual(noLockfile.reasons, ["Linux is required"])
+
   const unsupported = assessLiveReplaySupport({ repoMeta: { private: true }, files: [] })
   assert.equal(unsupported.supported, false)
   assert.ok(unsupported.reasons.includes("repository is not public"))
-  assert.ok(unsupported.reasons.includes("no npm/pnpm/yarn lockfile"))
+  assert.ok(unsupported.reasons.includes("no package.json"))
   assert.doesNotMatch(unsupported.reasons.join(" "), /\b(?:unsafe|risky|verified)\b/i)
+})
+
+test("live replay supports package subdirectories and dependency adds", async () => {
+  const repoDir = await mkdtemp(join(tmpdir(), "garnet-replay-"))
+  const packagePath = join(repoDir, "sub", "app", "package.json")
+  try {
+    await mkdir(join(repoDir, "sub", "app"), { recursive: true })
+    await writeFile(packagePath, '{"name":"x","dependencies":{}}\n')
+    execFileSync("git", ["-C", repoDir, "init", "-b", "main"], { stdio: "ignore" })
+    execFileSync("git", ["-C", repoDir, "config", "user.email", "test@example.com"], { stdio: "ignore" })
+    execFileSync("git", ["-C", repoDir, "config", "user.name", "Test"], { stdio: "ignore" })
+    execFileSync("git", ["-C", repoDir, "add", "sub/app/package.json"], { stdio: "ignore" })
+    execFileSync("git", ["-C", repoDir, "commit", "-m", "initial"], { stdio: "ignore" })
+
+    const result = createReplayBranch({
+      repoDir,
+      packageDir: "sub/app",
+      dependency: "chart-helpers",
+      from: "none",
+      to: "file:../vendor/chart-helpers-1.0.0.tgz",
+      packageManager: "npm",
+    })
+    const baseline = JSON.parse(execFileSync("git", ["-C", repoDir, "show", `${result.baselineCommit}:sub/app/package.json`], { encoding: "utf8" }))
+    const update = JSON.parse(execFileSync("git", ["-C", repoDir, "show", `${result.updateCommit}:sub/app/package.json`], { encoding: "utf8" }))
+    assert.deepEqual(baseline, { name: "x", dependencies: {} })
+    assert.equal(update.dependencies["chart-helpers"], "file:../vendor/chart-helpers-1.0.0.tgz")
+    assert.notEqual(result.baselineCommit, result.updateCommit)
+    assert.equal(execFileSync("git", ["-C", repoDir, "rev-list", "--count", result.updateCommit], { encoding: "utf8" }).trim(), "3")
+    assert.match(await readFile(join(repoDir, ".github", "garnet-replay", "install.sh"), "utf8"), /cd "sub\/app"\nnpm install/)
+    assert.equal(JSON.parse(await readFile(join(repoDir, ".github", "garnet-replay", "replay.json"), "utf8")).packageDir, "sub/app")
+    assert.match(await readFile(join(repoDir, ".github", "DEPENDENCY_REPLAY.md"), "utf8"), /Baseline: not installed/)
+    assert.match(await readFile(join(repoDir, ".github", "DEPENDENCY_REPLAY.md"), "utf8"), /Package dir: `sub\/app`/)
+  } finally {
+    await rm(repoDir, { recursive: true, force: true })
+  }
 })
 
 test("live replay workflow uses GitHub OIDC by default", async () => {

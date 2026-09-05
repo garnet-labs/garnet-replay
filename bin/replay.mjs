@@ -205,11 +205,20 @@ async function githubJson(path, token) {
   return response.json()
 }
 
-async function repositoryContext(repoUrl, token, repoDir) {
+async function repositoryContext(repoUrl, token, repoDir, packageDir = ".") {
   if (repoUrl !== null) {
     const meta = await githubJson(`/repos/${repoUrl.owner}/${repoUrl.repo}`, token)
     const contents = await githubJson(`/repos/${repoUrl.owner}/${repoUrl.repo}/contents`, token)
     const files = Array.isArray(contents) ? contents.map((entry) => ({ filename: entry.name })) : []
+    if (packageDir !== ".") {
+      const path = packageDir.split("/").map(encodeURIComponent).join("/")
+      try {
+        await githubJson(`/repos/${repoUrl.owner}/${repoUrl.repo}/contents/${path}/package.json`, token)
+        files.push({ filename: `${packageDir}/package.json` })
+      } catch (error) {
+        if (!(error instanceof Error) || !error.message.includes("GitHub API 404")) throw error
+      }
+    }
     return { meta, files, cloneUrl: repoUrl.url, repository: `${repoUrl.owner}/${repoUrl.repo}` }
   }
   const remote = (() => {
@@ -220,7 +229,7 @@ async function repositoryContext(repoUrl, token, repoDir) {
     }
   })()
   const parsed = remote === null ? null : repoParts(remote.replace(/\.git$/, ""))
-  const files = await localRootFiles(repoDir)
+  const files = await localRootFiles(repoDir, packageDir)
   return {
     meta: parsed === null ? {} : { private: false },
     files,
@@ -233,9 +242,19 @@ function gitOutput(repoDir, args) {
   return execFileSync("git", ["-C", repoDir, ...args], { encoding: "utf8" }).trim()
 }
 
-async function localRootFiles(repoDir) {
+async function localRootFiles(repoDir, packageDir = ".") {
   const entries = await readdir(repoDir, { withFileTypes: true })
-  return entries.filter((entry) => entry.isFile()).map((entry) => ({ filename: entry.name }))
+  const files = entries.filter((entry) => entry.isFile()).map((entry) => ({ filename: entry.name }))
+  if (packageDir !== ".") {
+    try {
+      const packagePath = join(repoDir, packageDir, "package.json")
+      const packageStat = await stat(packagePath)
+      if (packageStat.isFile()) files.push({ filename: `${packageDir}/package.json` })
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error
+    }
+  }
+  return files
 }
 
 async function cloneForReplay(source, cacheRoot) {
@@ -250,9 +269,10 @@ async function live(args) {
   const target = args[0]
   if (typeof target !== "string") throw new Error("live requires a repository URL or path")
   const token = option(args, "--token", process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN)
+  const packageDir = option(args, "--dir", ".")
   const repoUrl = repoParts(target)
   const localPath = repoUrl === null ? resolve(target) : null
-  const context = await repositoryContext(repoUrl, token, localPath)
+  const context = await repositoryContext(repoUrl, token, localPath, packageDir)
   let repoDir = localPath
   if (repoUrl !== null || localPath !== null) {
     repoDir = await cloneForReplay(repoUrl === null ? { repoDir: localPath } : { cloneUrl: repoUrl.url }, join(process.env.HOME ?? ROOT, ".cache", "garnet-replay"))
@@ -273,7 +293,7 @@ async function live(args) {
   let from = explicitFrom
   let to = explicitTo
   if (args.includes("--pick-from-history")) {
-    const picked = pickDependencyFromHistory(repoDir)
+    const picked = pickDependencyFromHistory(repoDir, packageDir)
     if (picked === null) {
       console.log("Live replay is not supported: no dependency version transition found in package.json history")
       return
@@ -295,14 +315,15 @@ async function live(args) {
     return
   }
   const packageManager = detectPackageManager(context.files)
-  const plan = planReplay({ repoDir, dependency, from, to, packageManager })
+  const plan = planReplay({ repoDir, packageDir, dependency, from, to, packageManager })
   if (args.includes("--dry-run")) {
     console.log(`Live replay plan: ${dependency} ${from} to ${to} using ${packageManager}`)
+    console.log(`package dir: ${plan.packageDir}`)
     console.log(`branch: ${plan.branch}`)
     console.log(`checkout: ${repoDir}`)
     return
   }
-  const result = createReplayBranch({ repoDir, dependency, from, to, packageManager })
+  const result = createReplayBranch({ repoDir, packageDir, dependency, from, to, packageManager })
   console.log(`created replay branch ${result.branch}`)
   console.log(result.ghCommand)
 }
