@@ -1,0 +1,17 @@
+{
+  "seed": "real-182",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "fe0eab38106836974979fd8abdd0c81b0b61e383",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "Five new root devDependencies (postcss, cssnano, autoprefixer, postcss-preset-env, @tailwindcss/postcss)",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Large lockfile churn (+77/−105). autoprefixer pulls caniuse-lite and browserslist, which sometimes run update scripts; the diff cannot show whether anything ran or connected at install."
+    }
+  ]
+}

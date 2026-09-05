@@ -1,0 +1,23 @@
+{
+  "seed": "real-146",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "9215c2fd71220340a61904b5a1f343af88c1e195",
+  "block_receipt_id": "01a027d9-d800-7bc6-9120-9c7c7e88172f",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js ^1.400.1 → 1.401.0 catalog bump with lockfile refresh",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 9215c2f, previous recorded head → head): 0 workload destinations added or removed; the only movement is runner-background infrastructure. The dependency install made no new outbound connection and started no new execution chain."
+    }
+  ]
+}

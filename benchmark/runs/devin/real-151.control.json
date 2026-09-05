@@ -1,0 +1,17 @@
+{
+  "seed": "real-151",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "ee9480eb208fb3479a69852aaa93dfcf9e8bcfe3",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js ^1.404.0 → 1.404.1 catalog bump with lockfile refresh",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Patch/minor bump in pnpm-workspace.yaml catalog; lockfile also pulls unlayer-types 1.453.0. Nothing in the diff says what the install does; changelog check is the only available signal."
+    }
+  ]
+}

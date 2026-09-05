@@ -1,0 +1,17 @@
+{
+  "seed": "real-164",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "6cabf1e2195a45e7906ee063742cbda679c3ed5c",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "Eight @typescript/native-preview* packages added to pnpm onlyBuiltDependencies",
+      "severity": "should_fix",
+      "evidence_grounded": false,
+      "text": "This allow-lists their lifecycle scripts to run at install. The diff shows the allow-list, not what the scripts do or where they connect. Needs an answer before merge."
+    }
+  ]
+}

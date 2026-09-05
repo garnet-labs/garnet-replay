@@ -1,0 +1,17 @@
+{
+  "seed": "real-143",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "dc5d44995e3cf33022d85c4497044407ae60b45e",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js ^1.405.2 → 1.406.2 catalog bump with lockfile refresh",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Patch/minor bump in pnpm-workspace.yaml catalog; lockfile also pulls @posthog/browser-common 0.2.0, @posthog/types 1.395.0. Nothing in the diff says what the install does; changelog check is the only available signal."
+    }
+  ]
+}

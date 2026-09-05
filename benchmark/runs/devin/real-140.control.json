@@ -1,0 +1,17 @@
+{
+  "seed": "real-140",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "607ae123417df1a6816e0351f42b582741076be1",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "@swc/core ^1.11.4 → ^1.15.18 ships native binaries; lockfile loses 280 lines",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "@swc/core resolves platform-specific optional packages. The diff cannot show whether the install pulled a binary from outside the registry or which platform targets were dropped in the 280 removed lockfile lines."
+    }
+  ]
+}

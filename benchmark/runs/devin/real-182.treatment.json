@@ -1,0 +1,17 @@
+{
+  "seed": "real-182",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "fe0eab38106836974979fd8abdd0c81b0b61e383",
+  "block_receipt_id": "01a027eb-c43e-70c7-b358-c4d1ba5e5882",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Five new root devDependencies (postcss, cssnano, autoprefixer, postcss-preset-env, @tailwindcss/postcss)",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head fe0eab3): 0 workload destinations added versus the previous recorded head. The new packages installed without any new outbound connection."
+    }
+  ]
+}

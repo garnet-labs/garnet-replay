@@ -1,0 +1,17 @@
+{
+  "seed": "real-141",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "684bbd11dbf4b7b2aada2cb64f33c29f9318e959",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js ^1.406.2 → 1.407.1 catalog bump with lockfile refresh",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Patch/minor bump in pnpm-workspace.yaml catalog; lockfile also pulls jest 30.0.5 peer re-resolution. Nothing in the diff says what the install does; changelog check is the only available signal."
+    }
+  ]
+}

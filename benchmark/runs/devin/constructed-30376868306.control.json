@@ -1,0 +1,17 @@
+{
+  "seed": "constructed-30376868306",
+  "label": "constructed",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "84940b2399a620559979dda042c979a54b5f0cf2",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "Adds chart-helpers from a vendored tarball without a lockfile update",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "package.json is the only file changed. The tarball's contents, dependencies and any install scripts are invisible in this diff; a lockfile would at least list them."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "seed": "real-165",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "b8a15359a7d615f5b2d8e8e13ed269c172600872",
+  "block_receipt_id": "01a027eb-b102-7a3a-ac79-c48d8fd3203f",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "uWebSockets.js resolved from a codeload.github.com tarball, moved into nodejs/package.json",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head b8a1535): 0 workload destinations added versus the previous recorded head; the tarball fetch used destinations the baseline already reached and no new execution chain appeared."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "seed": "constructed-30304258281",
+  "label": "constructed",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+  "block_receipt_id": "019fa558-63f3-7d3f-b208-8258d1755c50",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Add ms@2.1.3 to npm-testbed/app",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "First recording for this repository; no comparison base",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head b678bdb, no previous recorded head): the install reached registry.npmjs.org, github.com, api.github.com, release-assets.githubusercontent.com and localhost from Runner.Worker → node chains. This is the whole install, not a delta."
+    }
+  ]
+}

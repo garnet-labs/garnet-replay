@@ -1,0 +1,17 @@
+{
+  "seed": "real-reference-31",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+  "block_receipt_id": "01a06f47-ebed-7501-8095-7176ce66c3df",
+  "judgment": "request_changes",
+  "issues": [
+    {
+      "title": "Installing the vendored chart-helpers tarball connects to api.ipify.org, ip-api.com and httpbin.org",
+      "severity": "must_fix",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head b639b38, immediate parent 8703692 → head): workload destinations +4 −0. registry.npmjs.org (bash → bash → node) is the install itself; api.ipify.org, ip-api.com and httpbin.org all come from a new chain node → dash → node, i.e. a lifecycle script spawned by npm. Two of the three are public-IP lookup services. The one-line diff gives no reason for any of this traffic; the record is the only source for the finding. Do not merge as is."
+    }
+  ]
+}

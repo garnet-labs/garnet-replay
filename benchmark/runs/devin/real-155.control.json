@@ -1,0 +1,17 @@
+{
+  "seed": "real-155",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "54327a9adb4e85088ae5cd9a8f3d1325a3f70a88",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Declare @posthog/quill-charts as workspace:*",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Workspace link only; nothing new is fetched."
+    }
+  ]
+}

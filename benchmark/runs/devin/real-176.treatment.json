@@ -1,0 +1,23 @@
+{
+  "seed": "real-176",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "1b8a00c309e70a49406fcad4a8739b85d80e019a",
+  "block_receipt_id": "01a027eb-b4ca-7cbc-ae96-465f3ed3fcc5",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js '*' → 'catalog:' in products/posthog_ai",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 1b8a00c, previous recorded head → head): 0 workload destinations added or removed; the only movement is runner-background infrastructure. The dependency install made no new outbound connection and started no new execution chain."
+    }
+  ]
+}

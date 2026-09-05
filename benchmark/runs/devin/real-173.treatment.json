@@ -1,0 +1,23 @@
+{
+  "seed": "real-173",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+  "block_receipt_id": "01a027ec-6084-7254-843a-75c9838a6f6c",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "@posthog/mcp alias 0.4.0 → 0.5.0 (pulls @posthog/core 1.38.0)",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head bef2df4, previous recorded head → head): 0 workload destinations added or removed; the only movement is runner-background infrastructure. The dependency install made no new outbound connection and started no new execution chain."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "seed": "real-148",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "0c723113ed2c1592d1f6b0200491e29a13a26817",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js ^1.403.0 → 1.404.0 catalog bump with lockfile refresh",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Patch/minor bump in pnpm-workspace.yaml catalog; lockfile also pulls @posthog/core 1.43.1, @posthog/types 1.397.0. Nothing in the diff says what the install does; changelog check is the only available signal."
+    }
+  ]
+}

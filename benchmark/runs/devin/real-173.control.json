@@ -1,0 +1,17 @@
+{
+  "seed": "real-173",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "@posthog/mcp alias 0.4.0 → 0.5.0 (pulls @posthog/core 1.38.0)",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Minor bump of an aliased package; changelog is the only signal."
+    }
+  ]
+}

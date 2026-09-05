@@ -13,11 +13,18 @@ if [[ "${DRY_RUN:-0}" == "1" ]]; then
     echo "|---|---|---|---|---|---|"
     node -e 'const s=require("./seeds/seeds.json"); for (const seed of s) for (const arm of ["control","treatment"]) console.log(`| ${seed.id} | ${seed.label} | ${arm} | not run | not run | not run |`)'
   } > benchmark/results.md
-  echo "wrote benchmark/results.md (dry run; model call not run)"
+  echo "wrote benchmark/results.md (dry run; no reviews scored)"
   exit 0
 fi
 
-: "${ANTHROPIC_API_KEY:?ANTHROPIC_API_KEY is required unless DRY_RUN=1}"
+# Default reviewer is Devin: both arms are authored in benchmark/devin-reviews.mjs and scored locally.
+if [[ "${REVIEWER:-devin}" == "devin" ]]; then
+  node benchmark/devin-reviews.mjs
+  node benchmark/results-from-devin.mjs
+  exit 0
+fi
+
+: "${ANTHROPIC_API_KEY:?ANTHROPIC_API_KEY is required for REVIEWER=claude}"
 prs="$(node -e 'const s=require("./seeds/seeds.json"); console.log(s.filter(x=>x.label==="real").map(x=>x.id.replace(/^real-/,"")).join(","))')"
 python3 /home/ubuntu/repos/posthog/products/review_hog/eval/experiments/2026-09-garnet-evidence-injection/harness/run_arms.py \
   --corpus test/fixtures/posthog-corpus.json \

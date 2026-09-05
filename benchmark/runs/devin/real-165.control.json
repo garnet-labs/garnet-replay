@@ -1,0 +1,17 @@
+{
+  "seed": "real-165",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "b8a15359a7d615f5b2d8e8e13ed269c172600872",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "uWebSockets.js resolved from a codeload.github.com tarball, moved into nodejs/package.json",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Commit-pinned tarball outside the registry. The diff cannot show whether install still fetched it, from where, or whether anything ran after fetch."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "seed": "constructed-30304293294",
+  "label": "constructed",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "64283ea0edf76eb17d41be0a6c49776cd85ee4fe",
+  "block_receipt_id": "019fa558-f02d-7744-bae2-27af1389ab34",
+  "judgment": "request_changes",
+  "issues": [
+    {
+      "title": "New postinstall script curls https://httpbin.org/get on every install",
+      "severity": "must_fix",
+      "evidence_grounded": true,
+      "text": "Same as source-only read. Runtime evidence (Garnet, head 64283ea, compared with the clean constructed install b678bdb): workload destinations +1, chain node → dash → curl → httpbin.org. The record confirms the script ran and connected."
+    }
+  ]
+}

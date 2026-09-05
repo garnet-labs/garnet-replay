@@ -1,0 +1,17 @@
+{
+  "seed": "real-164",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "6cabf1e2195a45e7906ee063742cbda679c3ed5c",
+  "block_receipt_id": "01a027e9-639b-7296-9ee4-fdb255b81b80",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Eight @typescript/native-preview* packages added to pnpm onlyBuiltDependencies",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 6cabf1e): with the scripts allowed, the recorded install added 0 workload destinations and 0 new execution chains versus the previous recorded head. The allow-listed scripts ran without reaching anywhere new; the should-fix question is settled by the record."
+    }
+  ]
+}

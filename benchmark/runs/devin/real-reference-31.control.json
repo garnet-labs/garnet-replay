@@ -1,0 +1,17 @@
+{
+  "seed": "real-reference-31",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+  "block_receipt_id": null,
+  "judgment": "comment",
+  "issues": [
+    {
+      "title": "Adds chart-helpers from a vendored tarball (file:../vendor/chart-helpers-1.0.0.tgz); no lockfile in the diff",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "The update commit changes one file: npm-testbed/app/package.json gains a file: dependency on a tarball already in the repo. The tarball's contents, its bundled dependencies and any lifecycle scripts are not visible in this diff. Ask what the package does at install; nothing here says it does anything."
+    }
+  ]
+}

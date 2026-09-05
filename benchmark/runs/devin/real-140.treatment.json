@@ -1,0 +1,23 @@
+{
+  "seed": "real-140",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "607ae123417df1a6816e0351f42b582741076be1",
+  "block_receipt_id": "01a027c9-b711-76f5-894e-c4daa442dcc9",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "@swc/core ^1.11.4 → ^1.15.18 ships native binaries; lockfile loses 280 lines",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 607ae12): 0 workload destinations added; the binary fetch stayed on the destinations the baseline install already used. The open question from the diff read is answered by the record."
+    }
+  ]
+}

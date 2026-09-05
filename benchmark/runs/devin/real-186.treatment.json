@@ -1,0 +1,23 @@
+{
+  "seed": "real-186",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "9627308ba206b3eeb1018ee280f170620a0a3d11",
+  "block_receipt_id": "01a027ec-2a00-72b9-bbac-e9ebb73f582c",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "One lockfile line: ai_gateway posthog-js entry aligned to 1.391.7",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 9627308, previous recorded head → head): 0 workload destinations added or removed; the only movement is runner-background infrastructure. The dependency install made no new outbound connection and started no new execution chain."
+    }
+  ]
+}

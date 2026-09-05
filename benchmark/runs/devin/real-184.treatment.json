@@ -1,0 +1,23 @@
+{
+  "seed": "real-184",
+  "label": "real",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "701d58a537c442b03ffb29449f1563a5f2fe6445",
+  "block_receipt_id": "01a027ec-7bef-7c2d-83d9-5b6ec9ba0f8a",
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Remove @types/uuid stub from two manifests",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Same as source-only read."
+    },
+    {
+      "title": "Recorded install shows no workload change",
+      "severity": "consider",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head 701d58a, previous recorded head → head): 0 workload destinations added or removed; the only movement is runner-background infrastructure. The dependency install made no new outbound connection and started no new execution chain."
+    }
+  ]
+}

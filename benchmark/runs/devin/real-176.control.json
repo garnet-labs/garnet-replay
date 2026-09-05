@@ -1,0 +1,17 @@
+{
+  "seed": "real-176",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "1b8a00c309e70a49406fcad4a8739b85d80e019a",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "posthog-js '*' → 'catalog:' in products/posthog_ai",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Tightens an open range to the catalog pin; lockfile shrinks."
+    }
+  ]
+}

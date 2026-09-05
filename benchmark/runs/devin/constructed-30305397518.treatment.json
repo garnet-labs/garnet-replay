@@ -1,0 +1,17 @@
+{
+  "seed": "constructed-30305397518",
+  "label": "constructed",
+  "arm": "treatment",
+  "reviewer": "devin",
+  "head_sha": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
+  "block_receipt_id": "019fa566-e5f7-7f9c-a8ed-4f19b855c17f",
+  "judgment": "request_changes",
+  "issues": [
+    {
+      "title": "Bundled metrics-beacon install script connects to api.ipify.org, ip-api.com and httpbin.org during npm install",
+      "severity": "must_fix",
+      "evidence_grounded": true,
+      "text": "Runtime evidence (Garnet, head a4f3a42, compared with the clean constructed install b678bdb): workload destinations +3, all from the chain node → dash → node: api.ipify.org, ip-api.com, httpbin.org. Two of the three are public-IP lookup services. The diff only shows that an install script exists; the record shows where it connected. Do not merge as is."
+    }
+  ]
+}

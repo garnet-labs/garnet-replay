@@ -1,0 +1,17 @@
+{
+  "seed": "constructed-30304258281",
+  "label": "constructed",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Add ms@2.1.3 to npm-testbed/app",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Well-known package, exact pin, lockfile added. Nothing in the diff runs at install."
+    }
+  ]
+}

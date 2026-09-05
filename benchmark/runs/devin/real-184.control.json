@@ -1,0 +1,17 @@
+{
+  "seed": "real-184",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "701d58a537c442b03ffb29449f1563a5f2fe6445",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Remove @types/uuid stub from two manifests",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Removal only."
+    }
+  ]
+}

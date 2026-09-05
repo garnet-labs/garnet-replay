@@ -1,0 +1,17 @@
+{
+  "seed": "real-186",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "9627308ba206b3eeb1018ee280f170620a0a3d11",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "One lockfile line: ai_gateway posthog-js entry aligned to 1.391.7",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Lockfile-only."
+    }
+  ]
+}

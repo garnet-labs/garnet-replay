@@ -1,0 +1,17 @@
+{
+  "seed": "real-142",
+  "label": "real",
+  "arm": "control",
+  "reviewer": "devin",
+  "head_sha": "60e3e792e21618431bf2e168a16238a1d3d4aee8",
+  "block_receipt_id": null,
+  "judgment": "approve",
+  "issues": [
+    {
+      "title": "Lockfile-only repair for streamlit_apps entries",
+      "severity": "consider",
+      "evidence_grounded": false,
+      "text": "Five resolved-version lines change; no manifest change."
+    }
+  ]
+}
