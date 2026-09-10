@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, detectEcosystem, executePlan, planReplay, reconcileState, renderPlan, upsertReplay } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, detectEcosystem, executePlan, planReplay, publicationState, reconcileState, renderPlan, upsertReplay } from "../lib/replay-pr.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
@@ -64,9 +64,11 @@ test("verdict: partial, variance, and missing counts never read as unchanged", (
   assert.equal(decideVerdict({ capture: complete, comparisonAvailable: true, workloadAdded: null, workloadRemoved: null }).verdict, VERDICTS.UNDETERMINABLE)
   assert.equal(decideVerdict({ capture: none, comparisonAvailable: true, workloadAdded: 0, workloadRemoved: 0 }).verdict, VERDICTS.UNDETERMINABLE)
 
+  // Additions under a partial capture are an observation, not a verdict on the change.
   const partialNew = decideVerdict({ capture: partial, comparisonAvailable: true, workloadAdded: 1, workloadRemoved: 0 })
-  assert.equal(partialNew.verdict, VERDICTS.NEW_BEHAVIOR)
+  assert.equal(partialNew.verdict, VERDICTS.UNDETERMINABLE)
   assert.ok(partialNew.reasons.some((r) => r.includes("capture is partial")))
+  assert.ok(partialNew.reasons.some((r) => r.includes("1 outbound connection recorded only after the change")))
 })
 
 test("supersession: head or base movement supersedes the record; unbound is superseded", () => {
@@ -198,9 +200,9 @@ test("replay --pr: ecosystem detection covers every install command and degrades
 
 function fakeExec(responses) {
   const calls = []
-  const exec = (cmd, args) => {
+  const exec = (cmd, args, options = {}) => {
     calls.push([cmd, ...args].join(" "))
-    for (const [pattern, out] of responses) if (pattern.test(calls.at(-1))) return typeof out === "function" ? out() : out
+    for (const [pattern, out] of responses) if (pattern.test(calls.at(-1))) return typeof out === "function" ? out(options) : out
     return ""
   }
   return { exec, calls }
@@ -243,12 +245,127 @@ test("replay --pr: commit 1 is pushed alone, recorded, then commit 2 follows; an
   assert.ok(first >= 0 && first < create && create < waited && waited < change, calls.join("\n"))
   assert.ok(calls.every((c) => !/git -C \S+ push/.test(c) || c.includes(" origin ")))
 
-  const reuse = fakeExec([[/gh pr list/, JSON.stringify([{ number: 70, state: "OPEN", isDraft: true, url: `https://github.com/${FORK}/pull/70` }])], ...replayResponses])
-  const again = await executePlan(plan, { exec: reuse.exec, io, log: () => {}, wait: noWait })
-  assert.equal(again.forkPr, 70)
-  assert.equal(again.reconciled, true)
-  assert.ok(!reuse.calls.some((c) => c.includes("gh pr create")))
-  assert.ok(!reuse.calls.some((c) => c.includes("git -C /tmp/work push")))
+})
+
+const TREE_FIRST = "1".repeat(40)
+const TREE_HEAD = "2".repeat(40)
+const REMOTE_FIRST = "d".repeat(40)
+const REBUILT = "e".repeat(40)
+const existingPr70 = [/gh pr list/, JSON.stringify([{ number: 70, state: "OPEN", isDraft: true, url: `https://github.com/${FORK}/pull/70` }])]
+function resumeResponses(remoteHead, remoteTree, extra = []) {
+  return [
+    existingPr70,
+    ...extra,
+    [/rev-parse --verify -q refs\/remotes\/origin\/deps\/puppeteer-25\.9\.0\^\{commit\}/, remoteHead === null ? "" : `${remoteHead}\n`],
+    [new RegExp(`rev-parse ${remoteHead}\\^\\{tree\\}`), `${remoteTree}\n`],
+    [/rev-parse HEAD~1\^\{tree\}/, `${TREE_FIRST}\n`],
+    [/rev-parse HEAD\^\{tree\}/, `${TREE_HEAD}\n`],
+    [new RegExp(`rev-parse ${remoteHead}~1`), `${SHA_C}\n`],
+    [/commit-tree/, `${REBUILT}\n`],
+    [/gh api repos\/\S+\/issues\/70\/comments/, () => JSON.stringify([{ user: { login: "garnet-ai[bot]" }, body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${remoteHead} -->\n<!-- garnet:summary {"status":"finalized"} -->` }])],
+    ...replayResponses,
+  ]
+}
+
+test("replay --pr: a rerun with commit 1 already on the fork waits for its record, then pushes commit 2 rebuilt on it", async () => {
+  assert.equal(publicationState({ remoteTree: null, firstTree: TREE_FIRST, headTree: TREE_HEAD }), "none")
+  assert.equal(publicationState({ remoteTree: TREE_FIRST, firstTree: TREE_FIRST, headTree: TREE_HEAD }), "first")
+  assert.equal(publicationState({ remoteTree: TREE_HEAD, firstTree: TREE_FIRST, headTree: TREE_HEAD }), "both")
+  assert.equal(publicationState({ remoteTree: "9".repeat(40), firstTree: TREE_FIRST, headTree: TREE_HEAD }), "mismatch")
+
+  const plan = replayPlan()
+  const { io } = memoryIo()
+  const resume = fakeExec(resumeResponses(REMOTE_FIRST, TREE_FIRST))
+  const captured = await executePlan(plan, { exec: resume.exec, io, log: () => {}, wait: noWait })
+  assert.equal(captured.forkPr, 70)
+  assert.equal(captured.reconciled, true)
+  assert.equal(captured.firstSha, REMOTE_FIRST, "the wait binds to the commit 1 that is on the fork, not the rebuilt local one")
+  assert.equal(captured.forkHeadSha, REBUILT)
+  assert.equal(captured.firstRecord.state, "recorded")
+  assert.ok(!resume.calls.some((c) => c.includes("gh pr create")))
+  assert.ok(!resume.calls.some((c) => c.includes("push --set-upstream")))
+  assert.ok(resume.calls.includes(`git -C /tmp/work commit-tree ${TREE_HEAD} -p ${REMOTE_FIRST} -m ${plan.messages.change}`))
+  assert.ok(resume.calls.includes(`git -C /tmp/work update-ref refs/heads/deps/puppeteer-25.9.0 ${REBUILT}`))
+  const waited = resume.calls.findIndex((c) => /issues\/70\/comments/.test(c))
+  const change = resume.calls.indexOf("git -C /tmp/work push origin HEAD:refs/heads/deps/puppeteer-25.9.0")
+  assert.ok(waited >= 0 && waited < change, resume.calls.join("\n"))
+
+  // Commit 1 on the fork but its record still pending: no push, clear rerun instruction.
+  const pendingComment = JSON.stringify([{ user: { login: "garnet-ai[bot]" }, body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${REMOTE_FIRST} -->` }])
+  const pending = fakeExec(resumeResponses(REMOTE_FIRST, TREE_FIRST, [[/issues\/70\/comments/, pendingComment]]))
+  await assert.rejects(executePlan(plan, { exec: pending.exec, io, log: () => {}, wait: { ...noWait, timeoutMs: 0 } }), /rerun the same command once it is recorded/)
+  assert.ok(!pending.calls.some((c) => c.includes("push origin HEAD:")))
+
+  // --no-wait on a rerun still pushes commit 2 without a comparison.
+  const skipped = fakeExec(resumeResponses(REMOTE_FIRST, TREE_FIRST))
+  const noWaitRun = await executePlan(plan, { exec: skipped.exec, io, log: () => {}, wait: { enabled: false } })
+  assert.equal(noWaitRun.firstRecord.state, "not-waited")
+  assert.ok(skipped.calls.includes("git -C /tmp/work push origin HEAD:refs/heads/deps/puppeteer-25.9.0"))
+})
+
+test("replay --pr: a rerun with both commits on the fork pushes nothing; a foreign head is refused", async () => {
+  const plan = replayPlan()
+  const { io } = memoryIo()
+  const REMOTE_HEAD = "f".repeat(40)
+  const done = fakeExec(resumeResponses(REMOTE_HEAD, TREE_HEAD))
+  const captured = await executePlan(plan, { exec: done.exec, io, log: () => {}, wait: noWait })
+  assert.equal(captured.forkPr, 70)
+  assert.equal(captured.forkHeadSha, REMOTE_HEAD)
+  assert.equal(captured.firstSha, SHA_C)
+  assert.equal(captured.firstRecord, undefined)
+  assert.ok(!done.calls.some((c) => /git -C \/tmp\/work push/.test(c)))
+  assert.ok(!done.calls.some((c) => c.includes("gh pr create")))
+  assert.ok(!done.calls.some((c) => c.includes("commit-tree")))
+
+  const foreign = fakeExec(resumeResponses("9".repeat(40), "8".repeat(40)))
+  await assert.rejects(executePlan(plan, { exec: foreign.exec, io, log: () => {}, wait: noWait }), /matches neither commit 1 nor commit 2/)
+  assert.ok(!foreign.calls.some((c) => /git -C \/tmp\/work push/.test(c)))
+
+  const gone = fakeExec(resumeResponses(null, ""))
+  await assert.rejects(executePlan(plan, { exec: gone.exec, io, log: () => {}, wait: noWait }), /is gone/)
+})
+
+test("replay --pr: when the default branch moved, the fork branch is matched by patch and commit 2 is cherry-picked onto the fork's commit 1", async () => {
+  const plan = replayPlan()
+  const { io } = memoryIo()
+  const LOCAL_HEAD = "a".repeat(40)
+  const PICKED = "b".repeat(40)
+  // Trees differ (master moved); the diffs are the same, so patch ids agree.
+  const patchFor = (diff) => `${diff.trim().replace(/\W/g, "").padEnd(40, "0").slice(0, 40)} ${"c".repeat(40)}\n`
+  const patched = (remoteHead, remoteTree, remoteDiff) => [
+    [new RegExp(`git -C /tmp/work diff ${remoteHead}~1 ${remoteHead}$`), remoteDiff],
+    [/git -C \/tmp\/work diff HEAD~2 HEAD~1$/, "first-diff\n"],
+    [/git -C \/tmp\/work diff HEAD~1 HEAD$/, "change-diff\n"],
+    [/patch-id --stable/, (options) => patchFor(String(options.input ?? ""))],
+    [/rev-parse HEAD$/, `${LOCAL_HEAD}\n`],
+    [/checkout -q -B deps\/puppeteer-25\.9\.0/, ""],
+    [new RegExp(`cherry-pick ${LOCAL_HEAD}`), ""],
+    ...resumeResponses(remoteHead, remoteTree),
+  ]
+
+  const moved = fakeExec(patched(REMOTE_FIRST, "7".repeat(40), "first-diff\n"))
+  // After the cherry-pick, HEAD is the rebuilt commit.
+  let picked = false
+  const exec = (cmd, args, options) => {
+    const line = [cmd, ...args].join(" ")
+    if (/cherry-pick/.test(line)) picked = true
+    if (picked && /rev-parse HEAD$/.test(line)) { moved.calls.push(line); return `${PICKED}\n` }
+    return moved.exec(cmd, args, options)
+  }
+  const captured = await executePlan(plan, { exec, io, log: () => {}, wait: noWait })
+  assert.equal(captured.firstSha, REMOTE_FIRST)
+  assert.equal(captured.forkHeadSha, PICKED)
+  assert.ok(moved.calls.includes(`git -C /tmp/work checkout -q -B deps/puppeteer-25.9.0 ${REMOTE_FIRST}`))
+  assert.ok(moved.calls.includes(`git -C /tmp/work cherry-pick ${LOCAL_HEAD}`))
+  assert.ok(!moved.calls.some((c) => c.includes("commit-tree")))
+  const waited = moved.calls.findIndex((c) => /issues\/70\/comments/.test(c))
+  const change = moved.calls.indexOf("git -C /tmp/work push origin HEAD:refs/heads/deps/puppeteer-25.9.0")
+  assert.ok(waited >= 0 && waited < change, moved.calls.join("\n"))
+
+  // A different diff on the fork head is still a foreign head.
+  const foreign = fakeExec(patched("9".repeat(40), "8".repeat(40), "something-else\n"))
+  await assert.rejects(executePlan(plan, { exec: foreign.exec, io, log: () => {}, wait: noWait }), /by tree or by patch/)
+  assert.ok(!foreign.calls.some((c) => /git -C \/tmp\/work push|cherry-pick|checkout -q -B/.test(c)))
 })
 
 test("replay --pr: commit 2 is not pushed while commit 1 is unrecorded or its check failed; --no-wait pushes it", async () => {
@@ -273,6 +390,15 @@ test("replay --pr: commit 2 is not pushed while commit 1 is unrecorded or its ch
     "pending",
   )
   assert.equal(recordState({ comments: [{ body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${SHA_B} -->` }], checks: [], sha: SHA_C }).state, "pending")
+
+  // The App's placeholder (posthog fork PR 198, 2026-09-10): head-bound, no summary, not a record.
+  const placeholder = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n**Execution Profiles recording for jobs triggered by \`${SHA_C.slice(0, 7)}\`**\n\n⏳ Execution Profiles for this commit are still being recorded — this comment updates in place as jobs finish.`
+  const placeholderState = recordState({ comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: placeholder }], checks: [], sha: SHA_C })
+  assert.equal(placeholderState.state, "pending")
+  assert.match(placeholderState.detail, /still being written/)
+  assert.equal(recordState({ comments: [{ body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${SHA_C} -->` }], checks: [], sha: SHA_C }).state, "pending")
+  const finalized = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n<!-- garnet:summary {"contract":"6.10.0","commit":"${SHA_C}","jobs":1,"changed":0} -->`
+  assert.equal(recordState({ comments: [{ body: finalized }], checks: [], sha: SHA_C }).state, "recorded")
 })
 
 test("replay --pr: guards stop execution on wrong origin, empty commit, or wrong commit count", async () => {

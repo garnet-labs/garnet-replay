@@ -101,14 +101,23 @@ See [docs/contract.md](docs/contract.md).
 
 ## Supported ecosystems
 
-npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go. The install command for each is in
-`lib/replay-pr.mjs` (`INSTALL_COMMANDS`). Anything else is reported as unsupported
-and the run stops before writing. Transitions (`--dependency … --to …` and
-`--allow-build …`) are pnpm only, because pnpm 10 blocks build scripts until they
-are allowed, which is what makes the two commits two real states. `--allow-build`
-works on a dependency already in the lockfile and leaves the lockfile as it is, so
-it also fits repositories whose trust policy or release-age rule blocks a bump.
-See [docs/stage1.md](docs/stage1.md).
+Three layers, and only one of them is tied to a package manager:
+
+| Layer | Scope | Where |
+|---|---|---|
+| Harness (`find`, `live --pr`, `card`, `verify`, `consume`, `status`, guards, evidence contract) | any language; reads commits, comments, and check runs | `lib/` |
+| Injected recording workflow | npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go; one install command each | `INSTALL_COMMANDS` in `lib/replay-pr.mjs`, `live/templates/garnet-record.yml` |
+| Constructed transitions (`--dependency … --to …`, `--allow-build …`) | pnpm only | `lib/replay-transition.mjs` |
+
+The transitions are pnpm only because they encode pnpm 10's build-script trust
+decision (`ignoredBuiltDependencies` → `onlyBuiltDependencies`), which is what
+makes the two commits two real states; other package managers have no equivalent
+switch. `--allow-build` works on a dependency already in the lockfile and leaves
+the lockfile as it is, so it also fits repositories whose trust policy or
+release-age rule blocks a bump. When a fork already has its own recording
+workflow, `live` uses it and records whatever that workflow runs; that workflow
+belongs to the target, not to the harness. Anything outside the table is reported
+as unsupported and the run stops before writing. See [docs/stage1.md](docs/stage1.md).
 
 ## Stage 2: the target's own workflow
 
@@ -149,6 +158,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
+- [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
 - [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
 
 ## Status
