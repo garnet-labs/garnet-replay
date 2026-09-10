@@ -43,14 +43,24 @@ The plan, always printed before anything is written:
 1. Verify `origin` is the fork; add `upstream` read-only with push disabled.
 2. Fetch the upstream base and `refs/pull/N/head`; check the exact API head SHA
    exists with `git cat-file`. A nearby commit is never substituted.
-3. Branch `deps/<name>-<to>` (or `change/<slug>-<n>`) from the fork default branch.
-4. Commit 1: the touched paths as the upstream base had them, plus the recording
-   workflow if the fork has none (`--record inject`).
-5. Commit 2: the upstream diff applied on top, with routine wording.
-6. Verify `git rev-list --count` is exactly 2 and both commits are non-empty.
-7. Push commit 1 alone to `origin`; open one draft pull request or reuse the
+3. Refuse a checkout with uncommitted changes; the harness never discards work.
+4. Count how far the fork default branch is behind the change's base. Paths the
+   change does not touch stay as the fork has them, so a change that depends on
+   files or workspace members newer than the fork can fail to install. The count
+   is printed as a warning; `--sync-fork` fast-forwards the fork default branch
+   to the base first (`git push origin <base>:refs/heads/<default>`, which git
+   refuses unless it is a fast-forward). With the fork at the base, commit 1
+   carries only the recording workflow, and its message says so.
+5. Branch `deps/<name>-<to>` (or `change/<slug>-<n>`) from the fork default branch.
+6. Commit 1: the touched paths as the upstream base had them, plus the recording
+   workflow if the fork has none (`--record inject`). Only paths that exist in
+   that state are staged; paths the change adds appear first in commit 2, paths
+   it removes disappear there.
+7. Commit 2: the upstream diff applied on top, with routine wording.
+8. Verify `git rev-list --count` is exactly 2 and both commits are non-empty.
+9. Push commit 1 alone to `origin`; open one draft pull request or reuse the
    existing one.
-8. Wait until commit 1 is recorded (`--wait-minutes N`, default 45), then push
+10. Wait until commit 1 is recorded (`--wait-minutes N`, default 45), then push
    commit 2. Pushed together, only the head is recorded and the comparison never
    exists. `--no-wait` skips the wait and forfeits the comparison; a failed
    Garnet check on commit 1 stops the run with commit 1 still on the fork.

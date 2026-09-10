@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, detectEcosystem, executePlan, planReplay, publicationState, reconcileState, renderPlan, upsertReplay } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, detectEcosystem, executePlan, planReplay, publicationState, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay } from "../lib/replay-pr.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
@@ -198,6 +198,33 @@ test("replay --pr: staging never names a path that is absent from the index and 
   assert.ok(!changeAdd.args.includes("docs/old.md"))
   assert.ok(changeAdd.args.includes("docs/new.md") && changeAdd.args.includes("docs/renamed.md"))
   assert.ok(changeRemove.args.includes("frontend/src/legacy.test.ts") && changeRemove.args.includes("docs/old.md"))
+})
+
+test("replay --pr: the plan measures how far the fork is behind the base and only fast-forwards on request", () => {
+  const plan = replayPlan()
+  const distance = plan.steps.find((s) => s.id === "base-distance")
+  assert.deepEqual(distance.args.slice(-3), ["--count", SHA_A, "^origin/master"])
+  assert.equal(plan.steps.some((s) => s.id === "sync-fork"), false)
+  const ids = plan.steps.map((s) => s.id)
+  assert.ok(ids.indexOf("base-distance") < ids.indexOf("branch"), "the distance is read before the replay branch is cut")
+
+  const synced = replayPlan({ syncFork: true })
+  const sync = synced.steps.find((s) => s.id === "sync-fork")
+  assert.equal(sync.kind, "write-remote")
+  assert.equal(sync.target, FORK)
+  assert.deepEqual(sync.args.slice(-3), ["push", "origin", `${SHA_A}:refs/heads/master`])
+  const syncedIds = synced.steps.map((s) => s.id)
+  assert.ok(syncedIds.indexOf("verify-clean") < syncedIds.indexOf("sync-fork"))
+  assert.ok(syncedIds.indexOf("sync-fork") < syncedIds.indexOf("base-distance"))
+  assert.ok(syncedIds.indexOf("base-distance") < syncedIds.indexOf("branch"))
+})
+
+test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
+  const planned = "chore(deps): sync dependency manifests before update\n\n- Cargo.lock"
+  assert.equal(resolvedFirstMessage(["Cargo.lock", RECORD_WORKFLOW_PATH], planned), planned)
+  const only = resolvedFirstMessage([RECORD_WORKFLOW_PATH], planned)
+  assert.match(only, /^ci: record dependency installs on pull requests\n\n- \.github\/workflows\/garnet-record\.yml$/)
+  assert.equal(replayPlan({ record: "inject", ecosystem: "cargo" }).steps.find((s) => s.id === "first-commit").messageFrom, "firstDiff")
 })
 
 test("replay --pr: ecosystem detection covers every install command and degrades honestly", () => {
