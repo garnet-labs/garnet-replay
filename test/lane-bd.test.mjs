@@ -276,6 +276,35 @@ test("compare comments prefer recorded replay SHAs over profile stamps", () => {
   assert.doesNotMatch(body, new RegExp(stampedSha))
 })
 
+test("compare comment fold titles link commits with HTML, not markdown", () => {
+  const baselineSha = "a".repeat(40)
+  const headSha = "b".repeat(40)
+  const profile = (sha) => ({
+    github: { sha, repository: "owner/repo", workflow: "workflow", job: "record" },
+    egress: [],
+  })
+  const body = renderComparison({
+    baseline: profile(baselineSha),
+    update: profile(headSha),
+    replay: {},
+    cfg: {
+      baselineSha,
+      headSha,
+      repository: "owner/repo",
+      githubServerUrl: "https://github.com",
+      githubApiUrl: "https://api.github.com",
+      publicReportUrl: "https://app.garnet.ai",
+    },
+  })
+  const summaries = body.split("\n").filter((line) => line.includes("full Execution Profile"))
+  assert.equal(summaries.length, 2)
+  assert.equal(
+    summaries[0],
+    `<details><summary>update <a href="https://github.com/owner/repo/commit/${headSha}"><code>bbbbbbb</code></a> · full Execution Profile</summary>`,
+  )
+  for (const line of summaries) assert.doesNotMatch(line, /\]\(/)
+})
+
 test("constructed profile diffs preserve workload and runner background sections", async () => {
   const base = JSON.parse(await readFile("test/fixtures/demo-profiles/30304258281.json", "utf8"))
   const profile = JSON.parse(await readFile("test/fixtures/demo-profiles/30304293294.json", "utf8"))

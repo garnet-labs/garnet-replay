@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
+import { existsSync } from "node:fs"
 import { mkdtemp, readFile, rm } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join, dirname } from "node:path"
@@ -80,10 +81,13 @@ test("validator rejects a document with a bad required field and extra property"
   assert.ok(errors.includes("$.extra"))
 })
 
-test("vendored renderer demo is byte-identical to its source SHA", () => {
+const GARNET_UI = process.env.GARNET_UI_CHECKOUT ?? "/home/ubuntu/repos/garnet-ui"
+
+test("vendored renderer demo is byte-identical to its source SHA", (t) => {
+  if (!existsSync(GARNET_UI)) return t.skip(`no garnet-ui checkout at ${GARNET_UI}`)
   const sha = execFileSync("sed", ["-n", "1p", "renderer/VENDORED_FROM"], { cwd: ROOT, encoding: "utf8" }).trim()
   const upstream = execFileSync("git", [
-    "-C", "/home/ubuntu/repos/garnet-ui", "show", `${sha}:cmd/garnet-runtime-review/demo.mjs`,
+    "-C", GARNET_UI, "show", `${sha}:cmd/garnet-runtime-review/demo.mjs`,
   ])
   const local = execFileSync("cat", ["renderer/demo.mjs"], { cwd: ROOT })
   assert.deepEqual(local, upstream, "demo.mjs")

@@ -75,6 +75,10 @@ function escapeCode(value) {
   return String(value ?? "").replace(/`/g, "ʼ").replace(/[\r\n]+/g, " ").trim()
 }
 
+function htmlAttributeUrl(value) {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;")
+}
+
 function defang(value) {
   const text = escapeCode(value)
   if (!text.includes(".") || /^\d{1,3}(?:\.\d{1,3}){3}$/.test(text)) return text
@@ -147,12 +151,18 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     ? diffDestinations(baseRec, headRec)
     : { added: [], removed: [], shared: [], before: new Map(), after: new Map() }
 
+  const repository = headRec?.github?.repository || cfg.repository
+  const commitUrl = (sha) => (repository !== "" && sha !== "" ? `${cfg.githubServerUrl}/${repository}/commit/${sha}` : "")
   const commitLink = (sha) => {
-    const short = sha.slice(0, 7) || "unknown"
-    const repository = headRec?.github?.repository || cfg.repository
-    return repository !== "" && sha !== ""
-      ? `[\`${escapeCode(short)}\`](${cfg.githubServerUrl}/${repository}/commit/${sha})`
-      : `\`${escapeCode(short)}\``
+    const short = escapeCode(sha.slice(0, 7) || "unknown")
+    const url = commitUrl(sha)
+    return url !== "" ? `[\`${short}\`](${url})` : `\`${short}\``
+  }
+  // Markdown does not render inside <summary>; fold titles need the HTML form.
+  const commitAnchor = (sha) => {
+    const short = escapeCode(sha.slice(0, 7) || "unknown")
+    const url = commitUrl(sha)
+    return url !== "" ? `<a href="${htmlAttributeUrl(url)}"><code>${short}</code></a>` : `<code>${short}</code>`
   }
 
   const transition = replay.dependency
@@ -208,7 +218,7 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     ["baseline", baseRec, baselineSha],
   ]
   for (const [label, rec, sha] of sides) {
-    lines.push(`<details><summary>${label} ${commitLink(sha)} · full Execution Profile</summary>`, "")
+    lines.push(`<details><summary>${label} ${commitAnchor(sha)} · full Execution Profile</summary>`, "")
     if (rec === null) {
       lines.push("<sub>no execution record found for this commit.</sub>", "")
     } else {
@@ -300,6 +310,7 @@ async function main() {
       dependency: replay?.dependency,
       from: replay?.from,
       to: replay?.to,
+      label: replay?.label,
       prUrl: cfg.repository && cfg.prNumber
         ? `${cfg.githubServerUrl}/${cfg.repository}/pull/${cfg.prNumber}`
         : "",
