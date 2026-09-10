@@ -8,7 +8,7 @@ import test from "node:test"
 import { assessLiveReplaySupport } from "../lib/gate.mjs"
 import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
 import { createReplayBranch } from "../live/replay-branch.mjs"
-import { renderComparison } from "../renderer/compare.mjs"
+import { renderComparison, repostPrComment } from "../renderer/compare.mjs"
 import { validate } from "../lib/validate.mjs"
 
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
@@ -96,7 +96,12 @@ test("live replay supports package subdirectories and dependency adds", async ()
 test("live replay workflow uses GitHub OIDC by default", async () => {
   const workflow = await readFile("live/templates/garnet-dependency-replay.yml", "utf8")
   assert.match(workflow, /garnet-org\/action@e546567a72e4fede11ec39d6e9f75b539adef22c/)
-  assert.match(workflow, /^\s+id-token: write$/m)
+  assert.match(workflow, /^concurrency:\n  group: garnet-dependency-replay-\$\{\{ github\.event\.pull_request\.number \}\}\n  cancel-in-progress: true$/m)
+  assert.match(workflow, /^permissions: \{\}$/m)
+  assert.match(workflow, /^  record:[\s\S]*?^      id-token: write$/m)
+  assert.doesNotMatch(workflow, /^permissions:\n(?:  .*\n)*  id-token: write$/m)
+  const compareSection = workflow.slice(workflow.indexOf("\n  compare:"))
+  assert.doesNotMatch(compareSection, /id-token:/)
   assert.match(workflow, /^\s+#\s+api_token: \$\{\{ secrets\.GARNET_API_TOKEN \}\}$/m)
   assert.doesNotMatch(workflow, /^\s+api_token:/m)
   assert.doesNotMatch(workflow, /GARNET_API_TOKEN is not set/)
@@ -107,6 +112,64 @@ test("live replay workflow uses GitHub OIDC by default", async () => {
   assert.match(workflow, /echo "\$\{\{ github\.run_id \}\}" > "\$RUNNER_TEMP\/profile\/run_id"/)
   assert.ok(workflow.includes('export BASELINE_SHA="$(cat profiles/garnet-profile-baseline/sha 2>/dev/null || git rev-parse HEAD~1)"'))
   assert.ok(workflow.includes('export HEAD_SHA="$(cat profiles/garnet-profile-update/sha 2>/dev/null || echo "$HEAD_SHA")"'))
+  assert.match(workflow, /uses: actions\/download-artifact@v4\n\s+continue-on-error: true/)
+  assert.match(workflow, /- name: Render comparison and post PR comment\n\s+if: always\(\)/)
+})
+
+test("compare publication only removes marked bot comments", async () => {
+  const originalFetch = globalThis.fetch
+  const requests = []
+  globalThis.fetch = async (url, options = {}) => {
+    requests.push({ url, options })
+    if (String(url).includes("/pulls/")) return new Response(JSON.stringify({ head: { sha: "h".repeat(40) } }), { status: 200 })
+    if (options.method === "DELETE") return new Response(null, { status: 204 })
+    if (options.method === "POST") return new Response("{}", { status: 201 })
+    return new Response(JSON.stringify([
+      { id: 1, user: { login: "github-actions[bot]" }, body: "<!-- garnet-dependency-replay -->" },
+      { id: 2, user: { login: "human" }, body: "<!-- garnet-dependency-replay -->" },
+    ]), { status: 200 })
+  }
+  try {
+    await repostPrComment({
+      githubToken: "token",
+      repository: "owner/repo",
+      prNumber: "1",
+      githubApiUrl: "https://api.github.com",
+      headSha: "h".repeat(40),
+    }, "body")
+    assert.deepEqual(requests.filter(({ options }) => options.method === "DELETE").map(({ url }) => url), [
+      "https://api.github.com/repos/owner/repo/issues/comments/1",
+    ])
+    assert.equal(requests.filter(({ options }) => options.method === "POST").length, 1)
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test("compare publication skips deletion and posting when the PR head moved", async () => {
+  const originalFetch = globalThis.fetch
+  const requests = []
+  const warnings = []
+  const originalWarn = console.warn
+  console.warn = (message) => warnings.push(message)
+  globalThis.fetch = async (url, options = {}) => {
+    requests.push({ url, options })
+    return new Response(JSON.stringify({ head: { sha: "m".repeat(40) } }), { status: 200 })
+  }
+  try {
+    await repostPrComment({
+      githubToken: "token",
+      repository: "owner/repo",
+      prNumber: "1",
+      githubApiUrl: "https://api.github.com",
+      headSha: "h".repeat(40),
+    }, "body")
+    assert.equal(requests.length, 1)
+    assert.match(warnings.join("\n"), /PR head moved to m{40}; not publishing comparison for h{40}/)
+  } finally {
+    console.warn = originalWarn
+    globalThis.fetch = originalFetch
+  }
 })
 
 test("missing replay profiles produce an unavailable diff and explicit comment line", async () => {
@@ -136,6 +199,55 @@ test("missing replay profiles produce an unavailable diff and explicit comment l
     cfg: { baselineSha, headSha, repository: raw.run.repository, prNumber: "1", githubServerUrl: "https://github.com", githubApiUrl: "https://api.github.com", publicReportUrl: "https://app.garnet.ai" },
   })
   assert.match(updateMissingBody, new RegExp(`no update execution record for \\\`${headSha}\\\``))
+})
+
+test("profiles from a different workflow run render as unavailable", () => {
+  const profile = (runId) => ({
+    timestamp: "2026-01-01T00:00:00Z",
+    scenarios: { github: { sha: "x".repeat(40), run_id: runId, repository: "owner/repo" } },
+    network: { egress: { peers: [] } },
+  })
+  const body = renderComparison({
+    baseline: profile("run-1"),
+    update: profile("run-2"),
+    replay: {},
+    cfg: {
+      baselineSha: "a".repeat(40),
+      headSha: "b".repeat(40),
+      runId: "run-expected",
+      repository: "owner/repo",
+      githubServerUrl: "https://github.com",
+    },
+  })
+  assert.match(body, /no baseline execution record for `a{40}`: the record found belongs to run run-1\./)
+  assert.match(body, /no update execution record for `b{40}`: the record found belongs to run run-2\./)
+  assert.match(body, /comparison unavailable/)
+})
+
+test("empty profiles are unavailable and missing heads have nullable destination totals", () => {
+  const diff = executionDiffFromProfiles({
+    baseline: {},
+    update: {},
+    meta: { baselineSha: "a".repeat(40), headSha: "b".repeat(40) },
+  })
+  assert.equal(diff.comparison.available, false)
+  assert.equal(diff.execution_diff.totals.destinations, null)
+})
+
+test("full ancestry distinguishes process paths before their last three entries", () => {
+  const profile = (root) => ({
+    egress: [{
+      name: `${root}.example`,
+      ancestry: [root, "shared-a", "shared-b", "shared-c", "node1234"],
+      step: "Install dependencies",
+    }],
+    github: { sha: root.repeat(40).slice(0, 40) },
+  })
+  const diff = executionDiffFromProfiles({ baseline: profile("base"), update: profile("head") })
+  const added = diff.execution_diff.processes_added.map((entry) => entry.ancestry.join(" → "))
+  const removed = diff.execution_diff.processes_removed.map((entry) => entry.ancestry.join(" → "))
+  assert.deepEqual(added, ["head → shared-a → shared-b → shared-c → node"])
+  assert.deepEqual(removed, ["base → shared-a → shared-b → shared-c → node"])
 })
 
 test("compare comments prefer recorded replay SHAs over profile stamps", () => {

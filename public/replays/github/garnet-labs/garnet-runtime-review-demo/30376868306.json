@@ -7,6 +7,7 @@
     "name": "garnet-runtime-review-demo",
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo"
   },
+  "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
   "pull_request": {
     "number": 30376868306,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30376868306",
@@ -30,6 +31,11 @@
     "processes_added": [
       {
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -52,6 +58,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -62,6 +73,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -72,6 +88,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"

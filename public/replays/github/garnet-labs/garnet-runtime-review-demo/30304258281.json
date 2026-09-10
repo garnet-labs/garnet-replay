@@ -7,6 +7,7 @@
     "name": "garnet-runtime-review-demo",
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo"
   },
+  "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR",
   "pull_request": {
     "number": 30304258281,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304258281",
@@ -27,150 +28,27 @@
     "scope": "unavailable"
   },
   "execution_diff": {
-    "processes_added": [
-      {
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ],
-        "section": "runner background"
-      },
-      {
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
-        ],
-        "section": "runner background"
-      },
-      {
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ],
-        "section": "workload"
-      }
-    ],
+    "processes_added": [],
     "processes_removed": [],
-    "network_added": [
-      {
-        "destination": "140.82.112.3",
-        "section": "runner background",
-        "process": "hosted-compute-agent",
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
-        ]
-      },
-      {
-        "destination": "api.github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "runner background",
-        "process": "provjobd",
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "release-assets.githubusercontent.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      }
-    ],
+    "network_added": [],
     "network_removed": [],
     "files_added": [],
     "files_removed": [],
     "kinds_recorded": [
-      "network",
-      "process"
+      "network"
     ],
     "totals": {
       "execution_chains": 9,
       "destinations": 6,
       "jobs_recorded": 1,
-      "jobs_changed": 1,
-      "jobs_unchanged": 0,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
       "workload": {
-        "added": 7,
+        "added": 0,
         "removed": 0
       },
       "runner_background": {
-        "added": 2,
+        "added": 0,
         "removed": 0
       }
     }

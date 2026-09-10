@@ -34,6 +34,7 @@
  */
 
 import { readFile, appendFile } from "node:fs/promises"
+import { resolve } from "node:path"
 import { argv } from "node:process"
 import { fileURLToPath } from "node:url"
 
@@ -101,6 +102,15 @@ async function readFileSafe(path) {
  * @param {unknown} value
  */
 const escapeCode = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/`/g, "ʼ")
+    .replace(/[\r\n]+/g, " ")
+    .trim()
+
+const escapeCodeSpan = (value) =>
   String(value ?? "")
     .replace(/`/g, "ʼ")
     .replace(/[\r\n]+/g, " ")
@@ -590,7 +600,7 @@ export function renderRunProfile(rp) {
   const destinationSet = new Set(associations.map((e) => e.name || e.address).filter(Boolean))
   const chainCount = associations.length
   const headlineUrl = safeLinkUrl(rp.commit_url)
-  const shaLink = headlineUrl ? `[\`${escapeCode(rp.sha)}\`](${headlineUrl})` : `\`${escapeCode(rp.sha)}\``
+  const shaLink = headlineUrl ? `[\`${escapeCodeSpan(rp.sha)}\`](${headlineUrl})` : `\`${escapeCodeSpan(rp.sha)}\``
   const lines = [COMMENT_MARKER, `<!-- garnet-run-profile -->`]
   if (rp.full_sha) lines.push(`<!-- garnet:commit ${escapeCode(rp.full_sha)} -->`)
   lines.push(
@@ -758,7 +768,7 @@ async function main() {
   console.log(`Execution Profiles complete (${rp.egress.length} execution chain(s) surfaced).`)
 }
 
-const isDirectRun = argv[1] && fileURLToPath(import.meta.url) === argv[1]
+const isDirectRun = argv[1] && fileURLToPath(import.meta.url) === resolve(argv[1])
 
 if (isDirectRun) {
   main().catch((err) => {

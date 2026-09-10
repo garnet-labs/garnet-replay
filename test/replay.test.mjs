@@ -80,15 +80,41 @@ test("validator rejects a document with a bad required field and extra property"
   assert.ok(errors.includes("$.extra"))
 })
 
-test("vendored renderer files are byte-identical to their source SHA", () => {
-  const sha = execFileSync("cat", ["renderer/VENDORED_FROM"], { cwd: ROOT, encoding: "utf8" }).trim()
-  for (const name of ["review.mjs", "demo.mjs"]) {
-    const upstream = execFileSync("git", [
-      "-C", "/home/ubuntu/repos/garnet-ui", "show", `${sha}:cmd/garnet-runtime-review/${name}`,
-    ])
-    const local = execFileSync("cat", [`renderer/${name}`], { cwd: ROOT })
-    assert.deepEqual(local, upstream, name)
-  }
+test("vendored renderer demo is byte-identical to its source SHA", () => {
+  const sha = execFileSync("sed", ["-n", "1p", "renderer/VENDORED_FROM"], { cwd: ROOT, encoding: "utf8" }).trim()
+  const upstream = execFileSync("git", [
+    "-C", "/home/ubuntu/repos/garnet-ui", "show", `${sha}:cmd/garnet-runtime-review/demo.mjs`,
+  ])
+  const local = execFileSync("cat", ["renderer/demo.mjs"], { cwd: ROOT })
+  assert.deepEqual(local, upstream, "demo.mjs")
+})
+
+test("vendored renderer escapes HTML code and uses a resolved direct-run guard", async () => {
+  const source = await readFile(join(ROOT, "renderer/review.mjs"), "utf8")
+  assert.match(source, /import \{ resolve \} from "node:path"/)
+  assert.match(source, /const isDirectRun = argv\[1\] && fileURLToPath\(import\.meta\.url\) === resolve\(argv\[1\]\)/)
+  const { renderRunProfile } = await import("../renderer/review.mjs")
+  const body = renderRunProfile({
+    sha: "abc1234",
+    full_sha: "abc1234",
+    n_jobs: 1,
+    commit_url: "",
+    permalink: "",
+    job: "<job>",
+    workflow: "<workflow>",
+    run_id: "",
+    profile_id: "",
+    timestamp: "",
+    egress: [{
+      name: "<script>&",
+      address: "",
+      ancestry: ["<root>"],
+      step: "<step>",
+    }],
+  })
+  assert.match(body, /&lt;script&gt;&amp;/)
+  assert.match(body, /&lt;workflow&gt;/)
+  assert.doesNotMatch(body, /<script>/)
 })
 
 test("renderer demo self-check passes", () => {
