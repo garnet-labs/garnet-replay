@@ -7,6 +7,7 @@
     "name": "garnet-runtime-review-demo",
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo"
   },
+  "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; comparison base is a clean constructed install from the same demo repository, not the PR's own parent",
   "pull_request": {
     "number": 30305397518,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30305397518",
@@ -130,5 +131,48 @@
     "at": "2026-07-27T21:06:51.954141994Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
-  }
+  },
+  "pair": {
+    "base_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "head_sha": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
+    "scope": "constructed-pair",
+    "label": "constructed",
+    "transition": null,
+    "line": "base b678bdb → head a4f3a42 · scope constructed-pair · constructed"
+  },
+  "capture": {
+    "status": "complete",
+    "expected_cells": 2,
+    "recorded_cells": 2,
+    "executed_sha_verified": 2,
+    "lineage_missing": 0,
+    "final_record": true,
+    "reasons": []
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "3 outbound connections recorded in every repetition after the change and in none before it"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
+    "current_head": "a4f3a42f851b27359950e8c477bfbcaf2296fa8b",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head a4f3a42 across 1 job: workload outbound connections +3 −0, runner background +2 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between b678bdb and a4f3a42 (constructed-pair): 3 outbound connections recorded in every repetition after the change and in none before it."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

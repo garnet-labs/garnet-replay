@@ -174,5 +174,48 @@
     "at": "2026-09-05T01:56:19.404113135Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
-  }
+  },
+  "pair": {
+    "base_sha": "8703692eae2f094a41390b8af6c72d3f327afa46",
+    "head_sha": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+    "scope": "immediate-parent-to-head",
+    "label": "real",
+    "transition": "chart-helpers none → 1.0.0",
+    "line": "base 8703692 → head b639b38 · scope immediate-parent-to-head · chart-helpers none → 1.0.0 · real"
+  },
+  "capture": {
+    "status": "complete",
+    "expected_cells": 2,
+    "recorded_cells": 2,
+    "executed_sha_verified": 2,
+    "lineage_missing": 0,
+    "final_record": true,
+    "reasons": []
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "4 outbound connections recorded in every repetition after the change and in none before it"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+    "current_head": "b639b38a8562e6bc39e65d5754652494e9d30faf",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head b639b38 across 1 job: workload outbound connections +4 −0, runner background +2 −2."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 8703692 and b639b38 (immediate-parent-to-head): 4 outbound connections recorded in every repetition after the change and in none before it."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

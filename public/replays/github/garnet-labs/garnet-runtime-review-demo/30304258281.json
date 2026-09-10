@@ -7,6 +7,7 @@
     "name": "garnet-runtime-review-demo",
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo"
   },
+  "note": "constructed test case authored in garnet-labs/garnet-runtime-review-demo to exercise this shape; not a real upstream PR",
   "pull_request": {
     "number": 30304258281,
     "url": "https://github.com/garnet-labs/garnet-runtime-review-demo/pull/30304258281",
@@ -27,150 +28,27 @@
     "scope": "unavailable"
   },
   "execution_diff": {
-    "processes_added": [
-      {
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ],
-        "section": "runner background"
-      },
-      {
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
-        ],
-        "section": "runner background"
-      },
-      {
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ],
-        "section": "workload"
-      },
-      {
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ],
-        "section": "workload"
-      }
-    ],
+    "processes_added": [],
     "processes_removed": [],
-    "network_added": [
-      {
-        "destination": "140.82.112.3",
-        "section": "runner background",
-        "process": "hosted-compute-agent",
-        "ancestry": [
-          "systemd",
-          "hosted-compute-agent"
-        ]
-      },
-      {
-        "destination": "api.github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "github.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "runner background",
-        "process": "provjobd",
-        "ancestry": [
-          "hosted-compute-agent",
-          "sudo",
-          "provjobd"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "localhost",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "registry.npmjs.org",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Worker",
-          "bash",
-          "node"
-        ]
-      },
-      {
-        "destination": "release-assets.githubusercontent.com",
-        "section": "workload",
-        "process": "node",
-        "ancestry": [
-          "Runner.Listener",
-          "Runner.Worker",
-          "node"
-        ]
-      }
-    ],
+    "network_added": [],
     "network_removed": [],
     "files_added": [],
     "files_removed": [],
     "kinds_recorded": [
-      "network",
-      "process"
+      "network"
     ],
     "totals": {
       "execution_chains": 9,
-      "destinations": 6,
+      "destinations": 0,
       "jobs_recorded": 1,
-      "jobs_changed": 1,
-      "jobs_unchanged": 0,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
       "workload": {
-        "added": 7,
+        "added": 0,
         "removed": 0
       },
       "runner_background": {
-        "added": 2,
+        "added": 0,
         "removed": 0
       }
     }
@@ -183,5 +61,53 @@
     "at": "2026-07-27T20:51:01.179991156Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
-  }
+  },
+  "pair": {
+    "base_sha": null,
+    "head_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "scope": "unavailable",
+    "label": "constructed",
+    "transition": null,
+    "line": "head b678bdb · no base · scope unavailable · constructed"
+  },
+  "capture": {
+    "status": "partial",
+    "expected_cells": 2,
+    "recorded_cells": 1,
+    "executed_sha_verified": 1,
+    "lineage_missing": 0,
+    "final_record": false,
+    "reasons": [
+      "execution records: 1/2",
+      "baseline rep 1: expected SHA not recorded"
+    ]
+  },
+  "verdict": {
+    "value": "undeterminable",
+    "reasons": [
+      "no comparison pair",
+      "execution records: 1/2",
+      "baseline rep 1: expected SHA not recorded"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "current_head": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head b678bdb across 1 job: workload outbound connections +0 −0, runner background +0 −0."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Undeterminable: no comparison pair; execution records: 1/2; baseline rep 1: expected SHA not recorded."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

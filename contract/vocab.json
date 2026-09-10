@@ -1,0 +1,40 @@
+{
+  "source": "garnet-org/runtime-review-testbed contract/vocab.json (v6.10.0, bannedVocabulary vendored byte-identically)",
+  "bannedVocabulary": [
+    "every process",
+    "flagged",
+    "detected",
+    "baseline",
+    "safe",
+    "verdict",
+    "score",
+    "Assertions · beta",
+    "monitoring",
+    "clean",
+    "secure",
+    "threat",
+    "malicious",
+    "as of",
+    "garnet sensor upload",
+    "expected plumbing",
+    "garnet.ai/what-garnet-records",
+    "Run Profile",
+    "process lineage",
+    "process chain",
+    "lineage tree",
+    "Runtime Summary",
+    "Runtime Review",
+    "Reading this review",
+    "gone"
+  ],
+  "residue": [
+    "app.devin.ai",
+    "devin",
+    "cognition",
+    "harness",
+    "replay scaffold",
+    "garnet-replay-scaffold",
+    "DEPENDENCY_REPLAY.md",
+    "execution diff"
+  ]
+}

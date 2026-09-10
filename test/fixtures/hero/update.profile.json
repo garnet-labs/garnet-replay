@@ -1,0 +1,467 @@
+{
+  "uuid": "86c7ac45-a417-5def-bf3e-c151bd9b4236",
+  "timestamp": "2026-09-05T01:56:19.404113135Z",
+  "metadata": {
+    "kind": "profile",
+    "name": "profile",
+    "format": "profile",
+    "version": "0.2.0",
+    "description": "Informational profile event",
+    "documentation": "https://jibril.garnet.ai/"
+  },
+  "scenarios": {
+    "github": {
+      "scenario_type": "github",
+      "action": "99. Runner Processes",
+      "id": "",
+      "actor": "devin-ai-integration[bot]",
+      "actor_id": "158243242",
+      "event_name": "pull_request",
+      "job": "record",
+      "ref": "refs/pull/31/merge",
+      "ref_name": "31/merge",
+      "ref_protected": "false",
+      "ref_type": "branch",
+      "repository": "garnet-labs/garnet-runtime-review-reference",
+      "repository_id": "1314261397",
+      "repository_owner": "garnet-labs",
+      "repository_owner_id": "68412253",
+      "run_attempt": "1",
+      "run_id": "33937541982",
+      "run_number": "5",
+      "runner_arch": "X64",
+      "runner_os": "Linux",
+      "server_url": "https://github.com",
+      "sha": "c64c913069705808c6a4288ad329337ea9e3070e",
+      "triggering_actor": "devin-ai-integration[bot]",
+      "workflow": "garnet-dependency-replay",
+      "workflow_ref": "garnet-labs/garnet-runtime-review-reference/.github/workflows/garnet-dependency-replay.yml@refs/pull/31/merge",
+      "workflow_sha": "c64c913069705808c6a4288ad329337ea9e3070e",
+      "workspace": "/home/runner/work/garnet-runtime-review-reference/garnet-runtime-review-reference",
+      "created_at": "0001-01-01T00:00:00Z",
+      "updated_at": "0001-01-01T00:00:00Z"
+    }
+  },
+  "network": {
+    "egress": {
+      "peers": [
+        {
+          "result": "attention",
+          "detections": [
+            "exec_from_unusual_dir",
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "104.16.2.34",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "registry.npmjs.org"
+          ],
+          "remote_ports": [
+            "443 (https)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2520,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "fail",
+          "detections": [
+            "dropip",
+            "exec_from_unusual_dir",
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "104.26.13.205",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "api.ipify.org"
+          ],
+          "remote_ports": [
+            "443 (https)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2533,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node",
+                "dash",
+                "node"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "attention",
+          "detections": [
+            "exec_from_unusual_dir",
+            "flow"
+          ],
+          "protocol": "UDP",
+          "local_address": "127.0.0.1",
+          "remote_address": "127.0.0.53",
+          "local_names": [
+            "localhost"
+          ],
+          "remote_names": [
+            "localhost"
+          ],
+          "remote_ports": [
+            "53 (dns)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2520,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node"
+              ]
+            },
+            {
+              "pid": 2533,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node",
+                "dash",
+                "node"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "pass",
+          "detections": [
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "140.82.114.24",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "140.82.114.24"
+          ],
+          "remote_ports": [
+            "443 (https)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2049,
+              "process": "provjobd568428599",
+              "executable": "/tmp/provjobd568428599",
+              "github_step": "99. Runner Processes",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "sudo",
+                "provjobd568428599"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "pass",
+          "detections": [
+            "flow"
+          ],
+          "protocol": "UDP",
+          "local_address": "10.1.0.86",
+          "remote_address": "168.63.129.16",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "168.63.129.16"
+          ],
+          "remote_ports": [
+            "53 (dns)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 530,
+              "process": "systemd-resolved",
+              "executable": "/usr/lib/systemd/systemd-resolved",
+              "github_step": "99. Runner Processes",
+              "ancestry": [
+                "systemd",
+                "systemd-resolved"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "pass",
+          "detections": [
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "168.63.129.16",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "168.63.129.16"
+          ],
+          "remote_ports": [
+            "32526",
+            "80 (http)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 1368,
+              "process": "python3.12",
+              "executable": "/usr/bin/python3.12",
+              "github_step": "99. Runner Processes",
+              "ancestry": [
+                "systemd",
+                "python3.12",
+                "python3.12"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "pass",
+          "detections": [
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "169.254.169.254",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "169.254.169.254"
+          ],
+          "remote_ports": [
+            "80 (http)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 1368,
+              "process": "python3.12",
+              "executable": "/usr/bin/python3.12",
+              "github_step": "99. Runner Processes",
+              "ancestry": [
+                "systemd",
+                "python3.12",
+                "python3.12"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "attention",
+          "detections": [
+            "exec_from_unusual_dir",
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "208.95.112.1",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "ip-api.com"
+          ],
+          "remote_ports": [
+            "443 (https)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2533,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node",
+                "dash",
+                "node"
+              ]
+            }
+          ]
+        },
+        {
+          "result": "attention",
+          "detections": [
+            "exec_from_unusual_dir",
+            "flow"
+          ],
+          "protocol": "TCP",
+          "local_address": "10.1.0.86",
+          "remote_address": "54.163.169.7",
+          "local_names": [
+            "runnervmejwal",
+            "runnervmejwal.tlak4pom5pbudklwnuq3z0zq0h.ex.internal.cloudapp.net"
+          ],
+          "remote_names": [
+            "httpbin.org"
+          ],
+          "remote_ports": [
+            "443 (https)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 2533,
+              "process": "node",
+              "executable": "/usr/local/bin/node",
+              "github_step": "0. Select ${{ matrix.side }} commit",
+              "ancestry": [
+                "systemd",
+                "hosted-compute-agent",
+                "Runner.Listener",
+                "Runner.Worker",
+                "bash",
+                "bash",
+                "node",
+                "dash",
+                "node"
+              ]
+            }
+          ]
+        }
+      ],
+      "domains": [
+        "api.ipify.org",
+        "httpbin.org",
+        "ip-api.com",
+        "localhost",
+        "registry.npmjs.org"
+      ]
+    },
+    "ingress": {
+      "peers": [
+        {
+          "result": "pass",
+          "detections": [
+            "flow"
+          ],
+          "protocol": "UDP",
+          "local_address": "127.0.0.53",
+          "remote_address": "127.0.0.1",
+          "local_names": [
+            "localhost"
+          ],
+          "remote_names": [
+            "localhost"
+          ],
+          "remote_ports": [
+            "53 (dns)"
+          ],
+          "proc_trees": [
+            {
+              "pid": 530,
+              "process": "systemd-resolved",
+              "executable": "/usr/lib/systemd/systemd-resolved",
+              "github_step": "99. Runner Processes",
+              "ancestry": [
+                "systemd",
+                "systemd-resolved"
+              ]
+            }
+          ]
+        }
+      ],
+      "domains": [
+        "localhost"
+      ]
+    }
+  },
+  "telemetry": {
+    "network": {
+      "egress": {
+        "total_domains": 5,
+        "total_connections": 9
+      },
+      "ingress": {
+        "total_domains": 1,
+        "total_connections": 1
+      }
+    }
+  },
+  "assertions": [
+    {
+      "class_id": "Network Egress",
+      "assertion_id": "no_bad_egress_domain",
+      "result": "fail",
+      "description": "A process contacted a bad network domain.",
+      "id": ""
+    },
+    {
+      "class_id": "Stealth",
+      "assertion_id": "no_binary_execution_and_deletion",
+      "result": "pass",
+      "description": "A program was executed, and then its file was deleted.",
+      "id": ""
+    },
+    {
+      "class_id": "Privilege Escalation",
+      "assertion_id": "no_code_injection_via_proc_memory",
+      "result": "pass",
+      "description": "A process initiated code injection via /proc/{pid}/mem access.",
+      "id": ""
+    }
+  ]
+}

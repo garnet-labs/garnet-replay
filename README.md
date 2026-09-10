@@ -1,118 +1,157 @@
-Static reviewers read the diff. Garnet Replay shows you the run.
-
 # Garnet Replay
 
-Garnet Replay packages recorded execution evidence beside a source diff.
+Static reviewers read the diff. Garnet Replay shows what the change ran.
 
-## What you get
+One command line takes a real repository from "is there a review gap here?" to a
+fork pull request whose Garnet comment shows the new behavior, an evidence card a
+reviewer reads in thirty seconds, and the rates over a cohort. Every artifact is
+bound to an exact head commit, names its comparison pair, and fails closed when the
+record is missing, partial, or stale.
 
-```json
-{
-  "schema_version": "execution-diff/v1",
-  "mode": "known-evidence | live-replay",
-  "label": "real | constructed",
-  "repo": { "owner": "...", "name": "...", "url": "..." },
-  "pull_request": { "number": 123, "url": "...", "title": "..." },
-  "base": { "sha": "...", "profile_id": "...", "run_id": "..." },
-  "head": { "sha": "...", "profile_id": "...", "run_id": "..." },
-  "comparison": { "available": true, "scope": "..." },
-  "execution_diff": {
-    "network_added": [{ "destination": "...", "section": "workload" }],
-    "network_removed": [],
-    "processes_added": [{ "ancestry": ["...", "..."], "section": "workload" }],
-    "processes_removed": [],
-    "files_added": [],
-    "files_removed": [],
-    "totals": { "workload": { "added": 1, "removed": 0 }, "runner_background": { "added": 0, "removed": 0 } }
-  },
-  "receipt_urls": { "base": "...", "head": "...", "head_json": "...", "pr_comment": "..." }
-}
-```
-Network and process observations identify workload versus runner background.
-
-## Known Evidence
-
-Resolve an exact-head App record:
+Requirements: Node 20+, `gh` logged in (`gh auth status`), Linux for live runs.
+No dependencies to install.
 
 ```sh
-node bin/replay.mjs known https://github.com/owner/repo/pull/123
+git clone https://github.com/garnet-labs/garnet-replay && cd garnet-replay
+npm test                      # 46 tests, no network
+node bin/replay.mjs --help
 ```
 
-Serve replay JSON and static artifacts locally:
+## The ladder
+
+Each stage answers one question and leaves one artifact in the target ledger
+(`targets/<slug>.json`). A stage is done only when its own artifact exists.
+
+| # | Stage | Command | Exit question |
+|---|---|---|---|
+| 0 | find | `replay find <owner/repo>` | Is there a review gap worth recording on a real change? |
+| 1 | replay | `replay live <slug> …` | Does the record show new behavior on the fork? |
+| 2 | card | `replay card <fork-pr-url>` | Would this have helped the review? |
+| 3 | cohort | `replay cohort <slug> …` | What are the rates over 10–50 pull requests? |
+| 4 | pilot | `replay consume <fork-pr-url>` | Did a reviewer or agent cite the head-bound record? |
+| 5 | integration | `replay stage2 <slug>` | Does approve/escalate behavior change with the record present? |
+| 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
+
+`replay verify <pr-url>` is the share gate at any stage. `replay status` shows the
+board and the next command.
+
+## Runbook
 
 ```sh
-node bin/replay.mjs serve --port 8787 --root public
+export GH_TOKEN=$(gh auth token)
+R="node bin/replay.mjs"
+
+# 0. rank real pull requests on the upstream; candidate evidence only
+$R find PostHog/posthog --slug posthog --fork garnet-labs/posthog --author 'app/dependabot' --limit 40
+
+# 1a. replay a real upstream pull request onto the fork (default)
+$R live posthog --pr 56732 --work ~/repos/posthog --dry-run     # read the plan first
+$R live posthog --pr 56732 --work ~/repos/posthog
+
+# 1b. or author a transition on the fork when no real pull request carries it (pnpm)
+$R live posthog --dependency puppeteer --to 25.9.0 --package-dir nodejs --work ~/repos/posthog
+
+# wait for the fork's workflow, then:
+$R verify https://github.com/garnet-labs/posthog/pull/<N>       # share gate; run before anyone sees it
+$R card   https://github.com/garnet-labs/posthog/pull/<N>       # out/posthog/pr-<N>-card.md
+$R cohort posthog --from-observations --limit 20                # out/posthog/cohort-<k>.md
+$R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, check state
+$R stage2 posthog --dry-run                                     # evidence mirror + garnet/evidence gate
+$R status posthog
 ```
 
-## Live Replay
+Every replay is two commits on the fork, in routine wording:
 
-Live Replay creates a two-commit branch for a dependency transition:
+- commit 1 sets up the state the change is judged against (manifest and lockfile as
+  the change found them, or the bump with install scripts still blocked);
+- commit 2 is the change the pull request is about (the upstream diff, or the
+  allowlist decision that lets the new install script run).
 
-```sh
-node bin/replay.mjs live https://github.com/owner/repo \
-  --dependency example --from 1.0.0 --to 1.1.0
+The Garnet comment on commit 2 compares it with commit 1, so "what changed" in the
+record mirrors what the pull request itself changed. To make that comparison
+exist, `live` pushes commit 1 alone, opens the pull request, waits until commit 1
+is recorded (45 min by default, `--wait-minutes N`), and only then pushes commit 2.
+The harness never posts comments; the fork's own recording workflow does.
+
+## Rules the code enforces
+
+- Writes go to the fork only. The upstream is a read-only remote with push disabled.
+- No upstream URL, `owner/repo#N`, or bare `#N` in branch names, commits, titles,
+  bodies, or rendered artifacts. No session or tool residue either.
+- Exactly two new commits, both non-empty, counted with `git rev-list --count`.
+- The exact upstream head is fetched by `refs/pull/N/head` and checked with
+  `git cat-file`; a nearby commit is never substituted.
+- One draft pull request per branch; an existing one is reused, never duplicated.
+- Every artifact names its pair: head SHA, compared SHA, version transition, and
+  scope (`pr-base-to-head`, `immediate-parent-to-head`, `previous-recorded-head-to-head`).
+- Missing, partial, stale, unbound, or varying evidence is `undeterminable`. It is
+  never rendered as "unchanged".
+- Finder output is candidate evidence. Only a recorded run says what ran.
+
+## Evidence contract
+
+Every replay JSON carries `capture` (expected and recorded cells, executed SHA
+verification, lineage gaps, final-record flag), `verdict` with reasons
+(`new-behavior | unchanged | recorded | undeterminable`), `pair` (base, head, scope,
+label, one printable line), `supersession` (head/base movement since the record),
+and `claims`, each tagged `observed-runtime-behavior`, `comparison-result`,
+`required-check-state`, `reviewer-consumption-evidence`, or `unsupported-claim`.
+See [docs/contract.md](docs/contract.md).
+
+## Supported ecosystems
+
+npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go. The install command for each is in
+`lib/replay-pr.mjs` (`INSTALL_COMMANDS`). Anything else is reported as unsupported
+and the run stops before writing. Transitions (`--dependency … --to …`) are pnpm
+only, because pnpm 10 blocks build scripts until they are allowed, which is what
+makes the two commits two real states. See [docs/stage1.md](docs/stage1.md).
+
+## Stage 2: the target's own workflow
+
+`replay stage2 <slug>` opens one pull request on the fork with an evidence mirror
+(`workflow_run`, resident on the default branch, never runs pull request code),
+an acceptance gate `garnet/evidence` that requires a record bound to the exact head,
+and `REVIEW.md` grounding instructions for reviewers and review agents.
+`replay consume` then reports whether anyone cited the head-bound record.
+See [docs/stage2.md](docs/stage2.md).
+
+## Layout
+
+```
+bin/replay.mjs            command line
+lib/commands.mjs          ladder commands: find, live, card, cohort, verify, consume, status, stage2
+lib/observe.mjs           gap scoring for real pull requests (every point prints its reason)
+lib/find.mjs              history-based transition finder
+lib/replay-pr.mjs         real-PR replay planner and executor
+lib/replay-transition.mjs pnpm transition planner (bump, then allow build scripts)
+lib/evidence.mjs          capture, verdict, pair, supersession, claims
+lib/guards.mjs            fork-only, no-leak, vocabulary, residue, two-commit guards
+lib/card.mjs · cohort.mjs · status.mjs · consume.mjs · verify.mjs · stage2.mjs
+live/templates/           recording workflow and Stage 2 workflows
+contract/vocab.json       banned vocabulary and residue terms (vendored from the testbed)
+schema/                   execution-diff JSON schema
+targets/                  one ledger per upstream repository
+out/<slug>/               cards, cohort reports, bodies (generated, not committed)
 ```
 
-Use `--dir sub/app` for a package subdirectory and `--from none` when adding a dependency absent from the baseline.
+Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
+`pair` builds a diff from two profiles, `serve` hosts the result pages,
+`seed-from-corpus` and `seed-constructed` maintain `seeds/`.
 
-The v0 gate requires a public repository, a package.json, and a dependency pull request shape.
-An npm, pnpm, or yarn lockfile selects the package manager; without one, npm is used.
-Linux is the execution constraint.
-Recording authenticates through GitHub OIDC with `id-token: write`; the hero run used no `GARNET_API_TOKEN`.
-The generated workflow is pinned to `e546567a72e4fede11ec39d6e9f75b539adef22c`, unreleased before v2.3.0. Repin it at the v2.3.0 tag.
-`GITHUB_TOKEN` is sufficient for the comment and JSON path, which then has no
-execution record to compare.
+## Docs
 
-Use `--dry-run` to print the branch plan without creating commits.
+- [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
+- [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
+- [docs/contract.md](docs/contract.md) — evidence fields and their semantics
+- [docs/examples.md](docs/examples.md) — worked examples with real output
+- [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
+- [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
 
-## Honesty and labels
+## Status
 
-Real corpus entries show `0` workload change. Their recorded differences are
-runner background observations. Constructed cases are labelled separately and
-exist to exercise specific profile shapes.
-
-## Seeds
-
-`seeds/seeds.json` lists the real corpus entries and constructed cases.
-Replay JSON files live below `public/replays`.
-The three constructed diffs compare against a clean constructed install from the same demo repository (`comparison.scope: constructed-pair`), not against the PR's own parent.
-Regenerate constructed replay JSON with `node bin/replay.mjs seed-constructed seeds/seeds.json --out public/replays`.
-
-## Hero pair
-
-The hero is `garnet-labs/garnet-runtime-review-reference#31`.
-
-It compares baseline `8703692eae2f094a41390b8af6c72d3f327afa46` with head
-`b639b38a8562e6bc39e65d5754652494e9d30faf` in a single OIDC replay run,
-`33937541982`. The scope is `immediate-parent-to-head`.
-
-The workload delta is +4 −0 destinations:
-
-- `api.ipify.org`, `httpbin.org`, and `ip-api.com` via `node → dash → node`
-- `registry.npmjs.org` via `bash → bash → node`
-
-Runner background is shown separately: +2 −2. This is a deliberately authored
-demo beacon package in a garnet-labs demo repository. It is a real pull request
-with a real kernel record, not a third-party incident.
-
-## Benchmark
-
-The no-publish benchmark compares source-only review with source plus the
-Execution Diff block:
-
-```sh
-DRY_RUN=1 bash benchmark/run.sh
-```
-
-The default reviewer is Devin and the current run covers 25 seeds. The review
-judgment changed on 7/25 seeds. Evidence-grounded findings changed from 0 to
-25, with 3 source-only blind spots. See `benchmark/README.md` for the scoring
-definitions and the legacy Claude path.
-
-Profile Evidence Catalogue: https://garnet.ai/profiles
-
-An execution chain means a root-to-action path. A destination is the recorded
-location of an outbound connection.
-
-Status: MVP in a public repository. Visibility is unchanged pending Farrukh's
-decision. Nothing has been published.
+The recording workflow template pins `garnet-org/action` to commit
+`e546567a72e4fede11ec39d6e9f75b539adef22c` (main, 2026-09-04). No stable tag
+covers it yet; repin when one does. Pull requests from other repositories receive
+neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,
+best-effort record; the harness reports that as not recorded, not as unchanged.
+Repository visibility and external publishing are decisions outside this code.
