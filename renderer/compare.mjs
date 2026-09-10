@@ -75,6 +75,10 @@ function escapeCode(value) {
   return String(value ?? "").replace(/`/g, "ʼ").replace(/[\r\n]+/g, " ").trim()
 }
 
+function htmlAttributeUrl(value) {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;")
+}
+
 function defang(value) {
   const text = escapeCode(value)
   if (!text.includes(".") || /^\d{1,3}(?:\.\d{1,3}){3}$/.test(text)) return text
@@ -126,8 +130,20 @@ function machineMarker({ replay, baselineSha, headSha, diff }) {
  * @param {{baseline: any, update: any, replay: Record<string, string>, cfg: ReturnType<typeof readConfig>}} input
  */
 export function renderComparison({ baseline, update, replay, cfg }) {
-  const baseRec = summarizeProfile(baseline)
-  const headRec = summarizeProfile(update)
+  const runId = String(cfg.runId ?? "")
+  const summarizeSide = (profile) => {
+    const record = summarizeProfile(profile)
+    if (record === null) return { record: null, mismatchedRunId: null }
+    const recordRunId = String(record.github?.run_id ?? "")
+    if (runId !== "" && recordRunId !== "" && recordRunId !== runId) {
+      return { record: null, mismatchedRunId: recordRunId }
+    }
+    return { record, mismatchedRunId: null }
+  }
+  const baseSide = summarizeSide(baseline)
+  const headSide = summarizeSide(update)
+  const baseRec = baseSide.record
+  const headRec = headSide.record
   const baselineSha = String(cfg.baselineSha || baseRec?.github?.sha || "")
   const headSha = String(cfg.headSha || headRec?.github?.sha || "")
   const comparisonAvailable = baseRec !== null && headRec !== null
@@ -135,12 +151,18 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     ? diffDestinations(baseRec, headRec)
     : { added: [], removed: [], shared: [], before: new Map(), after: new Map() }
 
+  const repository = headRec?.github?.repository || cfg.repository
+  const commitUrl = (sha) => (repository !== "" && sha !== "" ? `${cfg.githubServerUrl}/${repository}/commit/${sha}` : "")
   const commitLink = (sha) => {
-    const short = sha.slice(0, 7) || "unknown"
-    const repository = headRec?.github?.repository || cfg.repository
-    return repository !== "" && sha !== ""
-      ? `[\`${escapeCode(short)}\`](${cfg.githubServerUrl}/${repository}/commit/${sha})`
-      : `\`${escapeCode(short)}\``
+    const short = escapeCode(sha.slice(0, 7) || "unknown")
+    const url = commitUrl(sha)
+    return url !== "" ? `[\`${short}\`](${url})` : `\`${short}\``
+  }
+  // Markdown does not render inside <summary>; fold titles need the HTML form.
+  const commitAnchor = (sha) => {
+    const short = escapeCode(sha.slice(0, 7) || "unknown")
+    const url = commitUrl(sha)
+    return url !== "" ? `<a href="${htmlAttributeUrl(url)}"><code>${short}</code></a>` : `<code>${short}</code>`
   }
 
   const transition = replay.dependency
@@ -174,10 +196,19 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     lines.push("<pre>", ...destinationLines(diff.shared, diff.after), "</pre>", "", "</details>", "")
   }
   if (!comparisonAvailable) {
-    const missing = baseRec === null ? "baseline" : "update"
-    const missingSha = baseRec === null ? baselineSha : headSha
-    const sha = missingSha === "" ? "unknown SHA" : `\`${escapeCode(missingSha)}\``
-    lines.push(`<sub>no ${missing} execution record for ${sha}.</sub>`, "")
+    for (const [side, record, sha, mismatchedRunId] of [
+      ["baseline", baseRec, baselineSha, baseSide.mismatchedRunId],
+      ["update", headRec, headSha, headSide.mismatchedRunId],
+    ]) {
+      if (record !== null) continue
+      const displaySha = sha === "" ? "unknown SHA" : `\`${escapeCode(sha)}\``
+      lines.push(
+        mismatchedRunId
+          ? `<sub>no ${side} execution record for ${displaySha}: the record found belongs to run ${mismatchedRunId}.</sub>`
+          : `<sub>no ${side} execution record for ${displaySha}.</sub>`,
+        "",
+      )
+    }
   } else if (diff.added.length + diff.removed.length + diff.shared.length === 0) {
     lines.push("<sub>no outbound destinations recorded on either commit.</sub>", "")
   }
@@ -187,7 +218,7 @@ export function renderComparison({ baseline, update, replay, cfg }) {
     ["baseline", baseRec, baselineSha],
   ]
   for (const [label, rec, sha] of sides) {
-    lines.push(`<details><summary>${label} ${commitLink(sha)} · full Execution Profile</summary>`, "")
+    lines.push(`<details><summary>${label} ${commitAnchor(sha)} · full Execution Profile</summary>`, "")
     if (rec === null) {
       lines.push("<sub>no execution record found for this commit.</sub>", "")
     } else {
@@ -202,7 +233,7 @@ export function renderComparison({ baseline, update, replay, cfg }) {
   return lines.join("\n")
 }
 
-async function repostPrComment(cfg, body) {
+export async function repostPrComment(cfg, body) {
   if (cfg.githubToken === "" || cfg.repository === "" || cfg.prNumber === "") {
     console.warn("Skipping PR comment: missing GITHUB_TOKEN, GITHUB_REPOSITORY, or PR_NUMBER.")
     return
@@ -214,6 +245,24 @@ async function repostPrComment(cfg, body) {
     "content-type": "application/json",
     "x-github-api-version": "2022-11-28",
   }
+  const pullUrl = `${cfg.githubApiUrl}/repos/${cfg.repository}/pulls/${cfg.prNumber}`
+  let pullRequest
+  try {
+    const pullRes = await fetch(pullUrl, { headers })
+    if (!pullRes.ok) {
+      console.warn(`Could not probe PR head (${pullRes.status}); skipping comparison publication.`)
+      return
+    }
+    pullRequest = await pullRes.json()
+  } catch (error) {
+    console.warn(`Could not probe PR head; skipping comparison publication: ${error.message}`)
+    return
+  }
+  const expectedHead = String(cfg.headSha ?? "")
+  if (expectedHead !== "" && pullRequest?.head?.sha !== expectedHead) {
+    console.warn(`PR head moved to ${pullRequest?.head?.sha}; not publishing comparison for ${expectedHead}`)
+    return
+  }
   const staleIds = []
   for (let page = 1; page <= 10; page += 1) {
     const listRes = await fetch(`${base}?per_page=100&page=${page}`, { headers })
@@ -221,7 +270,11 @@ async function repostPrComment(cfg, body) {
     const comments = await listRes.json()
     if (!Array.isArray(comments) || comments.length === 0) break
     for (const c of comments) {
-      if (typeof c?.body === "string" && c.body.includes(REPLAY_MARKER)) staleIds.push(c.id)
+      if (c.user?.login === "github-actions[bot]"
+        && typeof c?.body === "string"
+        && c.body.includes(REPLAY_MARKER)) {
+        staleIds.push(c.id)
+      }
     }
     if (comments.length < 100) break
   }
@@ -257,6 +310,7 @@ async function main() {
       dependency: replay?.dependency,
       from: replay?.from,
       to: replay?.to,
+      label: replay?.label,
       prUrl: cfg.repository && cfg.prNumber
         ? `${cfg.githubServerUrl}/${cfg.repository}/pull/${cfg.prNumber}`
         : "",

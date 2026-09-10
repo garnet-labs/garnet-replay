@@ -31,6 +31,11 @@
     "processes_added": [
       {
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -53,6 +58,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -63,6 +73,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"
@@ -73,6 +88,11 @@
         "section": "workload",
         "process": "node",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "node"

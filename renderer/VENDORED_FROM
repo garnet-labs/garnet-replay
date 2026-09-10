@@ -1,1 +1,5 @@
 acf882dced3c7735f0a744dc881dea4c480181df
+
+local patches:
+- direct-run guard using resolve(argv[1]) to prevent CLI execution when imported
+- HTML entity escaping for code rendered in HTML/pre contexts

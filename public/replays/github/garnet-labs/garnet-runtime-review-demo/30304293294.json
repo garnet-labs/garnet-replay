@@ -31,6 +31,11 @@
     "processes_added": [
       {
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "curl"
@@ -54,6 +59,7 @@
         "section": "runner background",
         "process": "provjobd",
         "ancestry": [
+          "systemd",
           "hosted-compute-agent",
           "sudo",
           "provjobd"
@@ -64,6 +70,11 @@
         "section": "workload",
         "process": "curl",
         "ancestry": [
+          "systemd",
+          "hosted-compute-agent",
+          "Runner.Listener",
+          "Runner.Worker",
+          "bash",
           "node",
           "dash",
           "curl"
