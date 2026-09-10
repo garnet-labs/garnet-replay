@@ -1,0 +1,4774 @@
+{
+  "slug": "posthog",
+  "upstream": "PostHog/posthog",
+  "fork": "garnet-labs/posthog",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97786,
+      "title": "chore(ci): probe cache variables on fork runners",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:16:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/depot-fork-env-probe.yml",
+        "docs/internal/depot-fork-env-probe.md"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97764,
+      "title": "feat(aio): show MCP model share",
+      "author": "lucasheriques",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:38:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "bin/patch-schema-property-filter-discriminator.py",
+        "frontend/src/queries/schema.json",
+        "frontend/src/queries/schema/schema-general.ts",
+        "frontend/src/scenes/saved-insights/insightTypesMetadata.tsx",
+        "posthog/clickhouse/query_tagging.py",
+        "posthog/clickhouse/test/test_query_tagging.py",
+        "posthog/hogql_queries/query_runner.py",
+        "posthog/schema.py",
+        "posthog/schema_enums.py",
+        "posthog/test/test_property_filter_discriminator.py",
+        "products/mcp_analytics/backend/facade/queries.py",
+        "products/mcp_analytics/backend/hogql_queries/model_breakdown.py",
+        "products/mcp_analytics/backend/tests/test_model_breakdown.py",
+        "products/mcp_analytics/frontend/MCPAnalyticsDashboardOverview.tsx",
+        "products/mcp_analytics/frontend/dashboard/DashboardCards.stories.tsx",
+        "products/mcp_analytics/frontend/dashboard/ModelDonut.tsx",
+        "products/mcp_analytics/frontend/mcpDashboardOverviewLogic.test.ts",
+        "products/mcp_analytics/frontend/mcpDashboardOverviewLogic.ts",
+        "services/mcp/src/api/generated.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97761,
+      "title": "feat(clickhouse): add cost planner alias columns to query_log_archive",
+      "author": "georgemunyoro",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:37:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 68,
+      "paths": [
+        "posthog/clickhouse/hcl/golden/dev/ai_events.hcl",
+        "posthog/clickhouse/hcl/golden/dev/auxiliary.hcl",
+        "posthog/clickhouse/hcl/golden/dev/batch_exports.hcl",
+        "posthog/clickhouse/hcl/golden/dev/data.hcl",
+        "posthog/clickhouse/hcl/golden/dev/logs.hcl",
+        "posthog/clickhouse/hcl/golden/dev/ops.hcl",
+        "posthog/clickhouse/hcl/golden/dev/sessions.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/ai_events.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/auxiliary.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/data.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/ingestion_events.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/ingestion_medium.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/ingestion_small.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/logs.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/ops.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/sessions.hcl",
+        "posthog/clickhouse/hcl/golden/local-single/all.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/ai_events.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/auxiliary.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/batch_exports.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/data.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/logs.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/ops.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/sessions.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/ai_events.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/auxiliary.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/batch_exports.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/data.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/logs.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/ops.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/sessions.hcl",
+        "posthog/clickhouse/hcl/roles/ops/shared/core.hcl",
+        "posthog/clickhouse/hcl/roles/shared/qla.hcl",
+        "posthog/clickhouse/hcl/sql/dev/ai_events.sql",
+        "posthog/clickhouse/hcl/sql/dev/auxiliary.sql",
+        "posthog/clickhouse/hcl/sql/dev/batch_exports.sql",
+        "posthog/clickhouse/hcl/sql/dev/data.sql",
+        "posthog/clickhouse/hcl/sql/dev/logs.sql",
+        "posthog/clickhouse/hcl/sql/dev/ops.sql",
+        "posthog/clickhouse/hcl/sql/dev/sessions.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/ai_events.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/auxiliary.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/data.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/ingestion_events.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/ingestion_medium.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/ingestion_small.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/logs.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/ops.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/sessions.sql",
+        "posthog/clickhouse/hcl/sql/local-single/all.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/ai_events.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/auxiliary.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/batch_exports.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/data.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/logs.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/ops.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/sessions.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/ai_events.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/auxiliary.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/batch_exports.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/data.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/logs.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/ops.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/sessions.sql",
+        "posthog/clickhouse/migrations/0317_query_log_archive_cost_planner_aliases.py",
+        "posthog/clickhouse/migrations/max_migration.txt",
+        "posthog/clickhouse/query_log_archive.py",
+        "posthog/clickhouse/test/__snapshots__/test_schema.ambr"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97798,
+      "title": "chore(product_analytics): split trends actors date window into helpers",
+      "author": "pauldambra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:23:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "products/product_analytics/backend/hogql_queries/trends/trends_actors_query_builder.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97797,
+      "title": "fix(ingestion): keep a second login off an anonymous person another login owns",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:22:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "nodejs/src/ingestion/common/persons/person-merge-postgres.test.ts",
+        "nodejs/src/ingestion/common/persons/person-merge-postgres.ts",
+        "nodejs/src/ingestion/common/persons/person-merge-types.ts",
+        "nodejs/tests/ingestion/ingestion-e2e.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97795,
+      "title": "perf(tests): drop database setup from the scope tests",
+      "author": "pauldambra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:19:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "posthog/test/test_scopes.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97794,
+      "title": "chore(warehouse_sources): split buildbetter pagination into helpers",
+      "author": "pauldambra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:19:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/buildbetter/buildbetter.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97787,
+      "title": "fix(flags): stamp cache verification completions where a rollout cannot reset them",
+      "author": "JamesPatrickGill",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:16:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "docs/internal/feature-flags/hypercache-system.md",
+        "posthog/celery.py",
+        "posthog/tasks/hypercache_verification.py",
+        "posthog/tasks/test/test_hypercache_verification.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97781,
+      "title": "fix(desktop): keep the app mounted while consent rechecks",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:15:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/desktop/packages/ui/src/shell/App.test.tsx",
+        "products/desktop/packages/ui/src/shell/App.tsx",
+        "products/desktop/packages/ui/src/shell/consentGate.test.ts",
+        "products/desktop/packages/ui/src/shell/consentGate.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97776,
+      "title": "fix(error-tracking): parse untagged stacktraces from old python SDKs",
+      "author": "jzhu13",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:05:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "rust/cymbal/src/modes/processing/normalization.rs",
+        "rust/cymbal/src/modes/processing/types/exception_event.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97775,
+      "title": "chore(dashboards): remove inline tile insertion",
+      "author": "MattPua",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:03:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "frontend/src/lib/components/Cards/InsightCard/EditModeEdgeOverlay.tsx",
+        "frontend/src/lib/utils/eventUsageLogic.ts",
+        "frontend/src/scenes/dashboard/DashboardHeaderActions.tsx",
+        "frontend/src/scenes/dashboard/DashboardItems.tsx",
+        "frontend/src/scenes/dashboard/InsertTileOverlay.tsx",
+        "frontend/src/scenes/dashboard/dashboardLogic.tsx",
+        "frontend/src/scenes/dashboard/insertTileGeometry.test.ts",
+        "frontend/src/scenes/dashboard/insertTileGeometry.ts",
+        "products/dashboards/frontend/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97774,
+      "title": "feat(hogbox-preview): give each preview box an OAuth signing key",
+      "author": "puemos",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:01:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "tools/hogbox-preview/hogbox_preview/stack.py",
+        "tools/hogbox-preview/tests/test_stack_secret_key.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97771,
+      "title": "feat(surveys): simplify results and retire the view rollout flag",
+      "author": "lucasheriques",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:51:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "docs/published/docs/surveys/performance.md",
+        "frontend/src/lib/constants.tsx",
+        "frontend/src/scenes/notebooks/Nodes/NotebookNodeSurvey.tsx",
+        "frontend/src/scenes/surveys/FeedbackTabContent.tsx",
+        "frontend/src/scenes/surveys/Survey.tsx",
+        "frontend/src/scenes/surveys/SurveyStatsSummary.tsx",
+        "frontend/src/scenes/surveys/SurveyView.tsx",
+        "frontend/src/scenes/surveys/SurveyViewRedesign/SurveyFilters.tsx",
+        "frontend/src/scenes/surveys/SurveyViewRedesign/SurveyViewRedesign.tsx",
+        "frontend/src/scenes/surveys/Surveys.stories.tsx",
+        "frontend/src/scenes/surveys/components/StackedBar.tsx",
+        "frontend/src/scenes/surveys/surveyLogic.test.ts",
+        "frontend/src/scenes/surveys/surveyLogic.tsx",
+        "frontend/src/scenes/surveys/surveyNotebookWidgetViews.tsx",
+        "products/surveys/frontend/SurveyResult.tsx",
+        "products/surveys/frontend/SurveyStatsSummary.stories.tsx",
+        "products/surveys/frontend/components/SurveyResponseBreakdown.stories.tsx",
+        "products/surveys/frontend/components/SurveyResponseBreakdown.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97768,
+      "title": "fix(signals): name the project timezone on inbox scout cadences",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:44:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "products/replay_vision/frontend/replay_scanners/components/ScannerScoutRow.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutCadenceLabel.test.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutCadenceLabel.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutDetailHeader.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutRosterCard.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutSummaryRow.tsx",
+        "products/signals/frontend/inbox/components/config/scouts/ScoutsRosterTable.tsx",
+        "products/signals/frontend/inbox/utils/scoutGroups.test.ts",
+        "products/signals/frontend/inbox/utils/scoutGroups.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97766,
+      "title": "feat(billing): warn on a usage spike when no limit is set",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:38:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "frontend/src/lib/constants.tsx",
+        "frontend/src/scenes/billing/billing-utils.spec.ts",
+        "frontend/src/scenes/billing/billing-utils.ts",
+        "frontend/src/scenes/billing/billingLogic.test.ts",
+        "frontend/src/scenes/billing/billingLogic.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97765,
+      "title": "fix(mcp_store): validate every redirect hop in OAuth discovery",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:38:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "posthog/security/pinned_requests.py",
+        "posthog/security/test/test_pinned_requests.py",
+        "products/mcp_store/backend/oauth.py",
+        "products/mcp_store/backend/test/test_oauth.py",
+        "products/mcp_store/backend/test/test_probe.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97762,
+      "title": "feat(hogql): tag every query with a structural plan fingerprint",
+      "author": "georgemunyoro",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:37:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "posthog/clickhouse/query_tagging.py",
+        "posthog/clickhouse/test/test_query_tagging.py",
+        "posthog/hogql/cost/accuracy.py",
+        "posthog/hogql/cost/fingerprint.py",
+        "posthog/hogql/cost/test/test_fingerprint.py",
+        "posthog/hogql/database/schema/query_log_archive.py",
+        "posthog/hogql/database/schema/test/test_table_query_log.py",
+        "posthog/hogql/query.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97760,
+      "title": "fix(replay): neutralize content-visibility in the replay iframe",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:34:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "common/replay-shared/src/rrweb-plugins/common-replayer-config.test.ts",
+        "common/replay-shared/src/rrweb-plugins/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52660,
+      "title": "chore(deps): bump nodemailer from 7.0.5 to 8.0.4",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-28T18:20:31Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nodemailer",
+        "from": "7.0.5",
+        "to": "8.0.4"
+      },
+      "files": 2,
+      "paths": [
+        "nodejs/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 13,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          },
+          {
+            "id": "major",
+            "points": 2,
+            "reason": "major version transition"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 57613,
+      "title": "chore(deps): bump dompurify from 3.2.6 to 3.4.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-05-05T09:27:18Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dompurify",
+        "from": "3.2.6",
+        "to": "3.4.0"
+      },
+      "files": 2,
+      "paths": [
+        "frontend/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 56722,
+      "title": "chore(deps): bump the uv group across 3 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-28T13:51:50Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock",
+        "services/stripe-mock/pyproject.toml",
+        "services/stripe-mock/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55848,
+      "title": "chore(deps): bump the cargo group across 2 directories with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-22T22:21:12Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "cli/Cargo.lock",
+        "rust/Cargo.lock",
+        "rust/Cargo.toml",
+        "rust/capture-logs/Cargo.toml",
+        "rust/common/geoip/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55171,
+      "title": "chore(deps): bump the uv group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-04-18T01:13:48Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55016,
+      "title": "chore(deps): bump the uv group across 3 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-17T02:36:33Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock",
+        "services/stripe-mock/pyproject.toml",
+        "services/stripe-mock/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55015,
+      "title": "chore(deps): bump the uv group across 2 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-17T02:35:28Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55014,
+      "title": "chore(deps): bump the uv group across 2 directories with 5 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-17T02:34:57Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54563,
+      "title": "chore(deps): bump the uv group across 3 directories with 8 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-14T19:18:29Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock",
+        "services/stripe-mock/pyproject.toml",
+        "services/stripe-mock/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54393,
+      "title": "chore(deps): bump the cargo group across 2 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-14T03:35:19Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "cli/Cargo.lock",
+        "rust/Cargo.lock",
+        "rust/Cargo.toml",
+        "rust/capture-logs/Cargo.toml",
+        "rust/common/geoip/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54391,
+      "title": "chore(deps): bump the cargo group across 2 directories with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-14T02:40:39Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "cli/Cargo.lock",
+        "rust/Cargo.lock",
+        "rust/Cargo.toml",
+        "rust/capture-logs/Cargo.toml",
+        "rust/common/geoip/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54300,
+      "title": "chore(deps): bump the uv group across 2 directories with 8 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-13T17:44:49Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53845,
+      "title": "chore(deps): bump the uv group across 1 directory with 3 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-04-09T11:30:53Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53805,
+      "title": "chore(deps): bump the npm_and_yarn group across 1 directory with 3 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-08T22:39:17Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/package.json",
+        "nodejs/package.json",
+        "pnpm-lock.yaml",
+        "services/mcp/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53771,
+      "title": "chore(deps): bump the uv group across 1 directory with 4 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-08T17:37:10Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53642,
+      "title": "chore(deps): bump the uv group across 2 directories with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-08T01:36:11Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53097,
+      "title": "chore(deps): bump the uv group across 1 directory with 9 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-01T20:05:57Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52982,
+      "title": "chore(deps): bump the npm_and_yarn group across 1 directory with 4 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-01T08:35:28Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/package.json",
+        "nodejs/package.json",
+        "pnpm-lock.yaml",
+        "services/mcp/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52970,
+      "title": "chore(deps): bump the npm_and_yarn group across 1 directory with 5 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-01T00:33:30Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/package.json",
+        "nodejs/package.json",
+        "pnpm-lock.yaml",
+        "services/mcp/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52645,
+      "title": "chore(deps): bump cryptography from 46.0.5 to 46.0.6",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-27T22:13:55Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "cryptography",
+        "from": "46.0.5",
+        "to": "46.0.6"
+      },
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52517,
+      "title": "chore(deps): bump the npm_and_yarn group across 2 directories with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-27T07:32:49Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "nodejs/package.json",
+        "tools/hedgebox-dummy/pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52327,
+      "title": "chore(deps): bump the cargo group across 2 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T20:30:36Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "cli/Cargo.lock",
+        "rust/Cargo.lock",
+        "rust/capture-logs/Cargo.toml",
+        "rust/common/geoip/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52326,
+      "title": "chore(deps): bump yaml from 2.8.2 to 2.8.3",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T20:29:35Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "yaml",
+        "from": "2.8.2",
+        "to": "2.8.3"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "services/mcp/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52310,
+      "title": "chore(deps): bump requests from 2.32.5 to 2.33.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T18:40:11Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "requests",
+        "from": "2.32.5",
+        "to": "2.33.0"
+      },
+      "files": 2,
+      "paths": [
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53120,
+      "title": "chore(deps): bump the uv group across 1 directory with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-04-01T21:59:39Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 35,
+      "paths": [
+        "ee/clickhouse/models/test/__snapshots__/test_cohort.ambr",
+        "ee/clickhouse/models/test/__snapshots__/test_property.ambr",
+        "ee/clickhouse/queries/funnels/test/__snapshots__/test_funnel.ambr",
+        "ee/clickhouse/queries/funnels/test/__snapshots__/test_funnel_correlation.ambr",
+        "ee/clickhouse/queries/funnels/test/__snapshots__/test_funnel_correlations_persons.ambr",
+        "ee/clickhouse/queries/test/__snapshots__/test_breakdown_props.ambr",
+        "ee/clickhouse/queries/test/__snapshots__/test_cohort_query.ambr",
+        "ee/clickhouse/queries/test/__snapshots__/test_event_query.ambr",
+        "ee/clickhouse/queries/test/__snapshots__/test_related_actors_query.ambr",
+        "ee/clickhouse/views/test/__snapshots__/test_clickhouse_groups.ambr",
+        "ee/clickhouse/views/test/__snapshots__/test_clickhouse_stickiness.ambr",
+        "ee/clickhouse/views/test/funnel/__snapshots__/test_clickhouse_funnel_person.ambr",
+        "posthog/api/test/__snapshots__/test_person.ambr",
+        "posthog/api/test/__snapshots__/test_persons_trends.ambr",
+        "posthog/api/test/__snapshots__/test_properties_timeline.ambr",
+        "posthog/hogql/database/schema/test/__snapshots__/test_persons_revenue_analytics.ambr",
+        "posthog/hogql_queries/insights/test/__snapshots__/test_paths_query_runner_ee.ambr",
+        "posthog/hogql_queries/web_analytics/test/__snapshots__/test_notable_changes.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_breakdowns_by_current_url.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_persons.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_strict.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_strict_persons.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_time_to_convert.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_trends.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_trends_persons.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_unordered.ambr",
+        "posthog/queries/funnels/test/__snapshots__/test_funnel_unordered_persons.ambr",
+        "posthog/queries/test/__snapshots__/test_trends.ambr",
+        "posthog/queries/trends/test/__snapshots__/test_person.ambr",
+        "posthog/session_recordings/queries/test/listing_recordings/__snapshots__/test_session_recording_list_from_query.ambr",
+        "products/revenue_analytics/backend/hogql_queries/test/__snapshots__/test_revenue_analytics_metrics_query_runner.ambr",
+        "products/revenue_analytics/backend/hogql_queries/test/__snapshots__/test_revenue_analytics_mrr_query_runner.ambr",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54543,
+      "title": "chore(deps): bump the pip group across 4 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-14T17:25:30Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "posthog/test/base.py",
+        "pyproject.toml",
+        "services/llm-gateway/pyproject.toml",
+        "services/stripe-mock/pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54301,
+      "title": "chore(deps): bump the pip group across 4 directories with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-13T17:45:14Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "pyproject.toml",
+        "services/llm-gateway/pyproject.toml",
+        "services/stripe-mock/pyproject.toml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52312,
+      "title": "chore(deps): bump the pip group across 2 directories with 4 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T18:40:56Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "pyproject.toml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53420,
+      "title": "chore(deps): bump the uv group across 2 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-06T08:14:11Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53096,
+      "title": "chore(deps): bump the uv group across 2 directories with 5 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-01T20:03:46Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52311,
+      "title": "chore(deps): bump the uv group across 2 directories with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T18:40:33Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "services/llm-gateway/uv.lock"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 56199,
+      "title": "chore(deps): bump the uv group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-24T14:44:46Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 55543,
+      "title": "chore(deps): bump python-dotenv from 1.1.0 to 1.2.2 in the uv group across 1 directory",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-04-21T15:27:52Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "python-dotenv",
+        "from": "1.1.0",
+        "to": "1.2.2"
+      },
+      "files": 1,
+      "paths": [
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 54561,
+      "title": "chore(deps): bump the uv group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-04-14T19:10:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/workflows/call-flags-project-board.yml",
+        ".github/workflows/pr-resolve-outdated-bot-comments.yml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52774,
+      "title": "chore(deps): bump onnx from 1.20.1 to 1.21.0rc1",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-30T17:42:13Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "onnx",
+        "from": "1.20.1",
+        "to": "1.21.0rc1"
+      },
+      "files": 1,
+      "paths": [
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52516,
+      "title": "chore(deps): bump minimatch from 3.1.2 to 3.1.5 in /tools/hedgebox-dummy in the npm_and_yarn group across 1 directory",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-27T07:29:37Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "minimatch",
+        "from": "3.1.2",
+        "to": "3.1.5"
+      },
+      "files": 1,
+      "paths": [
+        "tools/hedgebox-dummy/pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52267,
+      "title": "chore(deps): bump pnpm/action-setup from 5.0.0 to 6.0.8",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-03-25T14:28:30Z",
+      "kind": "workflow",
+      "transition": {
+        "name": "pnpm/action-setup",
+        "from": "5.0.0",
+        "to": "6.0.8"
+      },
+      "files": 16,
+      "paths": [
+        ".github/workflows/browserslist.yml",
+        ".github/workflows/build-hogql-parser-npm.yml",
+        ".github/workflows/ci-backend.yml",
+        ".github/workflows/ci-docs-check.yml",
+        ".github/workflows/ci-e2e-playwright.yml",
+        ".github/workflows/ci-frontend.yml",
+        ".github/workflows/ci-hog.yml",
+        ".github/workflows/ci-mcp-ui-apps.yml",
+        ".github/workflows/ci-mcp.yml",
+        ".github/workflows/ci-nodejs.yml",
+        ".github/workflows/ci-oauth-proxy.yml",
+        ".github/workflows/ci-openapi-codegen.yml",
+        ".github/workflows/ci-storybook.yml",
+        ".github/workflows/ci-turbo.yml",
+        ".github/workflows/publish-quill-npm.yml",
+        ".github/workflows/update-ai-costs.yml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "major",
+            "points": 2,
+            "reason": "major version transition"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52266,
+      "title": "chore(deps): bump docker/build-push-action from 6.18.0 to 7.0.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T14:26:09Z",
+      "kind": "workflow",
+      "transition": {
+        "name": "docker/build-push-action",
+        "from": "6.18.0",
+        "to": "7.0.0"
+      },
+      "files": 1,
+      "paths": [
+        ".github/workflows/codespaces.yml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "major",
+            "points": 2,
+            "reason": "major version transition"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52001,
+      "title": "chore(deps): bump cbor2 from 5.8.0 to 5.9.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-23T20:27:37Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "cbor2",
+        "from": "5.8.0",
+        "to": "5.9.0"
+      },
+      "files": 1,
+      "paths": [
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 52265,
+      "title": "chore(deps): bump cargo-bins/cargo-binstall from 1.12.5 to 1.17.8",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-03-25T14:26:05Z",
+      "kind": "workflow",
+      "transition": {
+        "name": "cargo-bins/cargo-binstall",
+        "from": "1.12.5",
+        "to": "1.17.8"
+      },
+      "files": 1,
+      "paths": [
+        ".github/workflows/ci-rust.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:28:00.234Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97709,
+      "title": "chore(product-analytics): move funnels UI into the product folder",
+      "author": "thmsobrmlr",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:15:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "common/storybook/storybook-timings.json",
+        "frontend/src/lib/components/TaxonomicFilter/menu/DwhFlow.tsx",
+        "frontend/src/queries/nodes/InsightQuery/utils/filtersToQueryNode.ts",
+        "frontend/src/queries/nodes/InsightViz/EditorFilters.test.tsx",
+        "frontend/src/queries/nodes/InsightViz/EditorFilters.tsx",
+        "frontend/src/queries/nodes/InsightViz/InsightDisplayConfig.tsx",
+        "frontend/src/queries/nodes/InsightViz/InsightVizDisplay.tsx",
+        "frontend/src/queries/nodes/InsightViz/insightDisplayOptions.tsx",
+        "frontend/src/queries/nodes/InsightViz/resultCustomizationsModalLogic.ts",
+        "frontend/src/scenes/experiments/ExperimentMetricConversionWindowFilter.tsx",
+        "frontend/src/scenes/experiments/Metrics/Selectors.tsx",
+        "frontend/src/scenes/experiments/experimentLogic.tsx",
+        "frontend/src/scenes/insights/EditorFilters/AttributionFilter.tsx",
+        "frontend/src/scenes/insights/EditorFilters/FunnelStepConfiguration.tsx",
+        "frontend/src/scenes/insights/EditorFilters/FunnelsAdvanced.tsx",
+        "frontend/src/scenes/insights/EditorFilters/ShowTrendLinesFilter.tsx",
+        "frontend/src/scenes/insights/EditorFilters/funnelDataWarehouseStepDefinitionPopoverLogic.ts",
+        "frontend/src/scenes/insights/EmptyStates/EmptyStates.tsx",
+        "frontend/src/scenes/insights/filters/ActionFilter/ActionFilterRow/ActionFilterRow.tsx",
+        "frontend/src/scenes/insights/filters/FunnelExclusionsFilter/ExclusionRowSuffix.tsx",
+        "frontend/src/scenes/insights/filters/FunnelExclusionsFilter/FunnelExclusionsFilter.tsx",
+        "frontend/src/scenes/insights/filters/FunnelStepReferencePicker.tsx",
+        "frontend/src/scenes/insights/insightVizDataLogic.test.ts",
+        "frontend/src/scenes/insights/insightVizDataLogic.ts",
+        "frontend/src/scenes/insights/utils/queryUtils.ts",
+        "frontend/src/scenes/notebooks/Nodes/NotebookNodeCustomerJourney/NotebookNodeCustomerJourney.stories.tsx",
+        "pnpm-lock.yaml",
+        "products/customer_analytics/frontend/components/CustomerJourneys/CustomerJourneys.stories.tsx",
+        "products/customer_analytics/frontend/components/CustomerJourneys/journeyBuilderLogic.ts",
+        "products/customer_analytics/frontend/components/CustomerJourneys/journeyEditorLogic.ts",
+        "products/customer_analytics/frontend/scenes/CustomerJourneyBuilderScene/CustomerJourneyBuilderScene.stories.tsx",
+        "products/customer_analytics/frontend/scenes/CustomerJourneyTemplatesScene/CustomerJourneyTemplatesScene.stories.tsx",
+        "products/experiments/frontend/legacy/components/LegacyFunnelConversionWindowFilter.tsx",
+        "products/product_analytics/backend/hogql_queries/funnels/utils.py",
+        "products/product_analytics/frontend/insights/funnels/Funnel.scss",
+        "products/product_analytics/frontend/insights/funnels/Funnel.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/DuplicateStepIndicator.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/FunnelBarHorizontalChart.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/FunnelBarHorizontalTooltip.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/StepFooter.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/StepHeader.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelBarHorizontalChart/funnelBarHorizontalTransforms.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCanvasLabel.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/CorrelationActionsCell.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/CorrelationMatrix.scss",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/CorrelationMatrix.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelation.scss",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelation.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelationSkewWarning.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelationTable.scss",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelationTable.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelCorrelationTable.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelPropertyCorrelationTable.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/FunnelPropertyCorrelationTable.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelCorrelationDetailsLogic.test.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelCorrelationDetailsLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelCorrelationLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelCorrelationUsageLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelPropertyCorrelationLogic.test.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelCorrelation/funnelPropertyCorrelationLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/BuilderPathFlowNode.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/BuilderPathFlowNode.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/BuilderStepNode.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/BuilderStepNode.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/FunnelFlowEdge.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/FunnelFlowGraph.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/FunnelFlowGraph.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/FunnelFlowNode.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/FunnelStepMoreFlow.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/JourneyFlowNode.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/PathFlowEdge.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/PathFlowNode.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/PathFlowNode.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/ProfileFlowNode.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/StepNodeShell.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/__mocks__/journeyMocks.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/__mocks__/nodeStoryUtils.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/funnelFlowGraphLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/funnelPathsExpansionLogic.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/pathFlowUtils.test.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/pathFlowUtils.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelFlowGraph/usePathNodeAddability.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelHistogramChart/FunnelHistogramChart.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelLineChart/FunnelLineChart.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelLineChart/handleFunnelLineChartClick.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/FunnelBarVertical.scss",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/FunnelStepsBarChart.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/FunnelStepsBarTooltip.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/StepBarLabels.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/StepLegend.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsBarChart/funnelStepsBarTransforms.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelStepsTable/FunnelStepsTable.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelTimeToConvertTable/FunnelTimeToConvertTable.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelTimeToConvertTable/FunnelTimeToConvertTable.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelTimeToConvertTable/funnelTimeToConvertTableUtils.test.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelTimeToConvertTable/funnelTimeToConvertTableUtils.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelTrendsTable/FunnelTrendsTable.stories.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelTrendsTable/FunnelTrendsTable.tsx",
+        "products/product_analytics/frontend/insights/funnels/FunnelTrendsTable/funnelTrendsTableUtils.test.ts",
+        "products/product_analytics/frontend/insights/funnels/FunnelTrendsTable/funnelTrendsTableUtils.ts"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97724,
+      "title": "chore(hogql): run language service tests in CI",
+      "author": "orian",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:41:12Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/ci-hogql-language-service.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97717,
+      "title": "chore(ci): sparse-checkout the hogbox preview teardown",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:30:16Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/pr-closed.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97672,
+      "title": "feat(insights): add horizontal bar charts to SQL insights",
+      "author": "sampennington",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T16:24:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        ".github/workflows/ci-e2e-playwright.yml",
+        "frontend/src/lib/components/Cards/InsightCard/sqlVisualizationSupport.test.ts",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/SqlBarGraph.stories.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/SqlBarGraph.test.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/SqlBarGraph.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/SqlChart.test.ts",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/SqlChart.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/sqlLineGraphAdapter.test.ts",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/sqlLineGraphAdapter.ts",
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/useSqlChartModel.ts",
+        "frontend/src/queries/nodes/DataVisualization/Components/DisplayTab.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/SeriesTab.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/TableDisplay.test.tsx",
+        "frontend/src/queries/nodes/DataVisualization/Components/TableDisplay.tsx",
+        "frontend/src/queries/nodes/DataVisualization/DataVisualization.tsx",
+        "frontend/src/queries/nodes/DataVisualization/sqlVisualizationSupport.ts",
+        "frontend/src/scenes/data-warehouse/editor/OutputPane.tsx"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97805,
+      "title": "feat(activity-log): show the actor's email on hover",
+      "author": "JamesPatrickGill",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:34:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 40,
+      "paths": [
+        "frontend/src/lib/components/ActivityLog/ActivityLog.tsx",
+        "frontend/src/lib/components/ActivityLog/activityDescriptions/instanceSettingActivityDescriber.tsx",
+        "frontend/src/lib/components/ActivityLog/activityDescriptions/tagActivityDescriber.tsx",
+        "frontend/src/lib/components/ActivityLog/humanizeActivity.tsx",
+        "frontend/src/scenes/actions/actionActivityDescriber.tsx",
+        "frontend/src/scenes/annotations/activityDescriptions.tsx",
+        "frontend/src/scenes/authentication/shared/activityDescriptions.tsx",
+        "frontend/src/scenes/billing/activityDescriptions.tsx",
+        "frontend/src/scenes/cohorts/activityDescriptions.tsx",
+        "frontend/src/scenes/dashboard/dashboardActivityDescriber.tsx",
+        "frontend/src/scenes/data-management/dataManagementDescribers.tsx",
+        "frontend/src/scenes/data-pipelines/batch-exports/activityDescriptions.tsx",
+        "frontend/src/scenes/data-pipelines/batch-imports/activityDescriptions.tsx",
+        "frontend/src/scenes/data-warehouse/saved_queries/activityDescriptions.tsx",
+        "frontend/src/scenes/experiments/experimentActivityDescriber.tsx",
+        "frontend/src/scenes/exports/activityDescriptions.tsx",
+        "frontend/src/scenes/feature-flags/activityDescriptions.tsx",
+        "frontend/src/scenes/groups/activityDescriptions.tsx",
+        "frontend/src/scenes/hog-functions/misc/activityDescriptions.tsx",
+        "frontend/src/scenes/notebooks/Notebook/NotebookHistory.tsx",
+        "frontend/src/scenes/notebooks/Notebook/notebookActivityDescriber.tsx",
+        "frontend/src/scenes/persons/activityDescriptions.tsx",
+        "frontend/src/scenes/product-tours/activityDescriptions.tsx",
+        "frontend/src/scenes/saved-insights/activityDescriptions.tsx",
+        "frontend/src/scenes/session-recordings/activityDescription.tsx",
+        "frontend/src/scenes/settings/organization/activityDescriptions.tsx",
+        "frontend/src/scenes/settings/project/activityDescriptions.tsx",
+        "frontend/src/scenes/settings/user/activityDescriptions.tsx",
+        "frontend/src/scenes/surveys/surveyActivityDescriber.tsx",
+        "frontend/src/scenes/team-activity/teamActivityDescriber.tsx",
+        "products/ai_observability/frontend/prompts/promptActivityDescriber.tsx",
+        "products/ai_observability/frontend/prompts/promptLabelActivityDescriber.tsx",
+        "products/alerts/frontend/components/activityDescriptions.tsx",
+        "products/canvas/frontend/activityDescriber.tsx",
+        "products/conversations/frontend/activityDescriber.tsx",
+        "products/data_warehouse/frontend/shared/components/activityDescriptions.tsx",
+        "products/endpoints/frontend/activityDescriber.tsx",
+        "products/error_tracking/frontend/components/ActivityDescriber.tsx",
+        "products/stamphog/frontend/activityDescriber.tsx",
+        "products/workflows/frontend/Workflows/misc/workflowActivityDescriber.tsx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97753,
+      "title": "feat(workflows): create customer analytics tasks",
+      "author": "arthurdedeus",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:28:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 34,
+      "paths": [
+        "docs/internal/customer-analytics-tasks-workflows.md",
+        "frontend/snapshots.yml",
+        "nodejs/src/cdp/async-functions/create-customer-task.ts",
+        "nodejs/src/cdp/async-functions/index.ts",
+        "nodejs/src/cdp/config.ts",
+        "nodejs/src/cdp/templates/_destinations/posthog_customer_analytics/posthog-create-customer-task.template.test.ts",
+        "nodejs/src/cdp/templates/_destinations/posthog_customer_analytics/posthog-create-customer-task.template.ts",
+        "nodejs/src/cdp/templates/index.ts",
+        "nodejs/src/cdp/templates/test/test-helpers.ts",
+        "nodejs/src/cdp/utils/jwt-utils.ts",
+        "nodejs/tests/fixtures/hog-bytecode/06708e0c91851bc589bdeb8f324bddf446e23aa3a8483d6d1a2ebb770705e6ec.json",
+        "nodejs/tests/fixtures/hog-bytecode/7f57d7afe90a9862f00dc39669297321123c459ff12c50ddc096e90892125e0d.json",
+        "nodejs/tests/fixtures/hog-bytecode/8ba01609b892dbe9bc40b8b99911ac0efc344621740f0247f75cbd150603fd3e.json",
+        "nodejs/tests/fixtures/hog-bytecode/b44e727065d2ee09bed198693e1d42b5a094b0c45634b06b52ef0b4c82096407.json",
+        "nodejs/tests/fixtures/hog-bytecode/b6977d3da9487680b07e214f5dd9bdd4841423a7484ef97e679309f36c8c9e66.json",
+        "nodejs/tests/fixtures/hog-bytecode/eacf4397fed38b5152d27a6c4fb9ecac7b8f3e12c98982bd14ae168a1fe23980.json",
+        "nodejs/tests/fixtures/hog-bytecode/f03e9303d67b69613853d1823c9227e8c572e8bcaf527a6b3c81d2948c449382.json",
+        "nodejs/tests/fixtures/hog-bytecode/f4c8f74da2e7371e8bea969219c20e99df4f59647009b19811c306a689bafa04.json",
+        "posthog/jwt.py",
+        "posthog/settings/data_stores.py",
+        "products/customer_analytics/backend/facade/workflow_customer_tasks.py",
+        "products/customer_analytics/backend/logic/customer_tasks.py",
+        "products/workflows/backend/api/workflow_customer_tasks.py",
+        "products/workflows/backend/routes.py",
+        "products/workflows/backend/test/test_workflow_customer_tasks.py",
+        "products/workflows/frontend/Workflows/hogflows/panel/HogFlowEditorPanelBuild.tsx",
+        "products/workflows/frontend/Workflows/hogflows/registry/actions/actionNodeRegistry.ts",
+        "products/workflows/frontend/Workflows/hogflows/registry/actions/customer_analytics.test.ts",
+        "products/workflows/frontend/Workflows/hogflows/registry/actions/customer_analytics.ts",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/CustomerTaskWorkflowReferenceInput.stories.tsx",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/CustomerTaskWorkflowReferenceInput.test.tsx",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/CustomerTaskWorkflowReferenceInput.tsx",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/HogFlowFunctionConfiguration.tsx",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/customerTaskWorkflowAccountLogic.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97806,
+      "title": "feat(charts): infer date axis intervals",
+      "author": "sampennington",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:34:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        "frontend/src/queries/nodes/DataVisualization/Components/Charts/sqlLineGraphAdapter.ts",
+        "frontend/src/scenes/data-warehouse/scene/MonitoringTab.tsx",
+        "frontend/src/scenes/hog-functions/invocations/InvocationsSparkline.tsx",
+        "packages/quill/packages/charts/src/charts/TimeSeriesBarChart/TimeSeriesBarChart.tsx",
+        "packages/quill/packages/charts/src/charts/TimeSeriesComboChart/TimeSeriesComboChart.tsx",
+        "packages/quill/packages/charts/src/charts/TimeSeriesLineChart/TimeSeriesLineChart.stories.tsx",
+        "packages/quill/packages/charts/src/charts/TimeSeriesLineChart/TimeSeriesLineChart.test.tsx",
+        "packages/quill/packages/charts/src/charts/TimeSeriesLineChart/TimeSeriesLineChart.tsx",
+        "packages/quill/packages/charts/src/docs/axes.md",
+        "packages/quill/packages/charts/src/utils/dates.test.ts",
+        "packages/quill/packages/charts/src/utils/dates.ts",
+        "packages/quill/packages/charts/src/utils/use-axis-formatters.ts",
+        "products/error_tracking/frontend/components/IssueReleases/IssueReleasesStackedChart.tsx",
+        "products/error_tracking/frontend/components/VolumeSparkline/VolumeSparkline.tsx",
+        "products/metrics/frontend/components/MetricsSeriesChart.test.tsx",
+        "products/metrics/frontend/components/MetricsSeriesChart.tsx",
+        "products/tracing/frontend/TracingSparkline.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97804,
+      "title": "fix(replay): ignore the blank first load of the player frame",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:33:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/src/scenes/session-recordings/player/PlayerFrame.test.tsx",
+        "frontend/src/scenes/session-recordings/player/PlayerFrame.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97803,
+      "title": "fix(warehouse-sources): parallelize stripe invoice line fetches",
+      "author": "danielcarletti",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:32:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/external_data_job.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/stripe/custom.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/stripe/stripe.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/stripe/tests/test_stripe_source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/tests/e2e/test_end_to_end.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97802,
+      "title": "chore(ci): lint secrets a reusable workflow reads against its callers",
+      "author": "gantoine",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:30:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".agents/skills/authoring-ci-workflows/SKILL.md",
+        "tools/hogli-commands/hogli_commands/tests/test_workflow_lint.py",
+        "tools/hogli-commands/hogli_commands/workflow_lint/checks/__init__.py",
+        "tools/hogli-commands/hogli_commands/workflow_lint/checks/reusable_secret_passthrough.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97801,
+      "title": "chore(signals): correct scout docs on the name prefix",
+      "author": "andrewm4894",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:30:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/signals/skills/AGENTS.md",
+        "products/signals/skills/authoring-scouts/SKILL.md",
+        "products/signals/skills/authoring-scouts/references/lifecycle-and-testing.md",
+        "products/signals/skills/authoring-scouts/references/scout-anatomy.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97800,
+      "title": "chore(max): split the agent tool loop into focused methods",
+      "author": "pauldambra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:28:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ee/hogai/core/agent_modes/executables.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97754,
+      "title": "fix(clickhouse): quarantine incompatible feature flag maps",
+      "author": "rorylshanks",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:29:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "clickhouse-udfs/util/cmd/json_clean_posthog_event_properties_udf/main.go",
+        "clickhouse-udfs/util/cmd/json_clean_posthog_event_properties_udf/main_test.go",
+        "docs/internal/clickhouse-utility-udfs.md",
+        "posthog/user_scripts/json_clean_posthog_event_properties_udf_aarch64",
+        "posthog/user_scripts/json_clean_posthog_event_properties_udf_x86_64"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97747,
+      "title": "fix(aio): stop \"Trace not found\" on traces that do exist",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:25:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "products/ai_observability/frontend/AIObservabilityScene.tsx",
+        "products/ai_observability/frontend/aiObservabilityTraceDataLogic.test.ts",
+        "products/ai_observability/frontend/aiObservabilityTraceDataLogic.ts",
+        "products/ai_observability/frontend/aiObservabilityTraceLogic.test.ts",
+        "products/ai_observability/frontend/aiObservabilityTraceLogic.ts",
+        "products/ai_observability/frontend/evaluations/components/EvaluationReportViewer.test.tsx",
+        "products/ai_observability/frontend/evaluations/components/EvaluationReportViewer.tsx",
+        "products/ai_observability/frontend/tabs/AIObservabilitySentiment.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97743,
+      "title": "fix(aio): stop the AI event detection poll filing an issue per tick",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:14:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "docs/published/handbook/engineering/conventions/frontend-coding.md",
+        "frontend/src/lib/components/ProductEmptyState/setupDetectionLogic.test.ts",
+        "frontend/src/lib/components/ProductEmptyState/setupDetectionLogic.ts",
+        "products/ai_observability/frontend/aiObservabilitySharedLogic.test.ts",
+        "products/ai_observability/frontend/aiObservabilitySharedLogic.ts",
+        "products/ai_observability/frontend/emptyState/clustersSetupLogic.test.ts",
+        "products/ai_observability/frontend/emptyState/clustersSetupLogic.ts",
+        "products/ai_observability/frontend/utils/aiEvents.test.ts",
+        "products/ai_observability/frontend/utils/aiEvents.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97742,
+      "title": "feat(toolbar): gate heatmaps behind a plan entitlement",
+      "author": "jordanm-posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:12:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        "frontend/src/lib/constants.tsx",
+        "frontend/src/toolbar/Toolbar.stories.tsx",
+        "frontend/src/toolbar/bar/Toolbar.tsx",
+        "frontend/src/toolbar/bar/ToolbarLockedFeature.tsx",
+        "frontend/src/toolbar/bar/toolbarLockedFeatureLogic.ts",
+        "frontend/src/toolbar/toolbarEntitlementsLogic.test.ts",
+        "frontend/src/toolbar/toolbarEntitlementsLogic.ts",
+        "frontend/src/toolbar/urls.test.ts",
+        "frontend/src/toolbar/urls.ts",
+        "frontend/src/types.ts",
+        "posthog/api/test/test_user.py",
+        "posthog/api/user.py",
+        "posthog/constants.py",
+        "posthog/urls.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97741,
+      "title": "fix(wizard): use a searchable repository dropdown",
+      "author": "fercgomes",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:11:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/src/lib/integrations/GitHubRepositoryCombobox.test.tsx",
+        "frontend/src/lib/integrations/GitHubRepositoryCombobox.tsx",
+        "products/wizard/frontend/library/WizardRepositoryPicker.test.ts",
+        "products/wizard/frontend/library/WizardRepositoryPicker.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97740,
+      "title": "feat(aio): accept project secret api keys on prompt fetches",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:10:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "frontend/src/lib/scopes.tsx",
+        "posthog/api/llm_prompt.py",
+        "posthog/api/services/llm_prompt.py",
+        "posthog/api/test/test_llm_prompt.py",
+        "posthog/rate_limit.py",
+        "posthog/scopes.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97739,
+      "title": "feat(customer-analytics): manage tasks through mcp",
+      "author": "arthurdedeus",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:09:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "docs/internal/customer-analytics-tasks-mcp.md",
+        "frontend/src/lib/agentScopes.generated.ts",
+        "posthog/hogql/database/schema/system.py",
+        "products/customer_analytics/backend/facade/customer_tasks_hogql.py",
+        "products/customer_analytics/backend/test/test_customer_tasks_hogql.py",
+        "products/customer_analytics/mcp/tools.yaml",
+        "products/posthog_ai/skills/querying-posthog-data/SKILL.md",
+        "products/posthog_ai/skills/querying-posthog-data/references/models-customer-tasks.md",
+        "services/mcp/schema/generated-tool-definitions.json",
+        "services/mcp/schema/tool-definitions-all.json",
+        "services/mcp/src/generated/customer_analytics/api.ts",
+        "services/mcp/src/tools/generated/customer_analytics.ts",
+        "services/mcp/tests/unit/customer-task-update.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97737,
+      "title": "chore(tasks): provide task context to sandbox workflow tests",
+      "author": "JakeRuth",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:06:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/published/handbook/engineering/ai/sandboxed-agents.md",
+        "products/tasks/backend/temporal/process_task/tests/test_workflow.py",
+        "products/tasks/backend/temporal/process_task/tests/workflow_api.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97736,
+      "title": "fix(logs): align session error badge with related errors tab",
+      "author": "jzhu13",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:05:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/logs/frontend/components/LogsViewer/LogDetailsModal/Tabs/RelatedErrors/RelatedErrorsTab.tsx",
+        "products/logs/frontend/components/LogsViewer/logsSessionErrorsLogic.test.ts",
+        "products/logs/frontend/components/LogsViewer/logsSessionErrorsLogic.ts",
+        "products/logs/frontend/components/VirtualizedLogsList/cells/SessionErrorsBadge.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97735,
+      "title": "feat(desktop): let reviewers opt in to GitHub assignment",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:00:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "products/desktop/packages/api-client/src/posthog-client.ts",
+        "products/desktop/packages/shared/src/domain-types.ts",
+        "products/desktop/packages/ui/src/features/inbox/components/ConfigureAgentsSection.tsx",
+        "products/desktop/packages/ui/src/features/inbox/hooks/useSignalUserAutonomyMutations.test.tsx",
+        "products/desktop/packages/ui/src/features/inbox/hooks/useSignalUserAutonomyMutations.ts",
+        "products/desktop/packages/ui/src/features/settings/sections/SignalGithubAssignmentSettings.stories.tsx",
+        "products/desktop/packages/ui/src/features/settings/sections/SignalGithubAssignmentSettings.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97734,
+      "title": "fix(mcp): make read-data-schema failures diagnosable and retryable",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:56:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "ee/hogai/tools/read_taxonomy/core.py",
+        "ee/hogai/tools/read_taxonomy/mcp_tool.py",
+        "ee/hogai/tools/read_taxonomy/test/test_mcp_tool.py",
+        "products/posthog_ai/backend/api/mcp_tools.py",
+        "products/posthog_ai/backend/api/test_mcp_tools.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97731,
+      "title": "fix(warehouse-sources): keep rejected source hosts out of error tracking",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:47:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/external_data_job.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/mixins.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/test_mixins.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97725,
+      "title": "fix(surveys): bring back column choice on the responses table",
+      "author": "phillram",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:44:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "docs/internal/survey-responses.md",
+        "frontend/src/scenes/surveys/SurveyView.tsx",
+        "frontend/src/scenes/surveys/SurveyViewRedesign/SurveyViewRedesign.tsx",
+        "frontend/src/scenes/surveys/Surveys.stories.tsx",
+        "frontend/src/scenes/surveys/hooks/useSurveyResponseColumns.tsx",
+        "frontend/src/scenes/surveys/surveyLogic.test.ts",
+        "frontend/src/scenes/surveys/surveyLogic.tsx",
+        "frontend/src/scenes/surveys/utils.ts",
+        "products/surveys/frontend/components/SurveyResponseColumnsMenu.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97723,
+      "title": "fix(notebooks): keep a reader's scroll position during a collaborator save",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:40:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/src/lib/components/MarkdownNotebook/MarkdownNotebook.test.ts",
+        "frontend/src/lib/components/MarkdownNotebook/MarkdownNotebook.tsx",
+        "frontend/src/lib/components/MarkdownNotebook/domSelection.ts",
+        "frontend/src/lib/components/MarkdownNotebook/editorTypes.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97722,
+      "title": "fix(auth): name a linked provider after a failed password login",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:39:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/src/scenes/authentication/login/Login.stories.tsx",
+        "frontend/src/scenes/authentication/login/LoginForm.test.tsx",
+        "frontend/src/scenes/authentication/login/LoginForm.tsx",
+        "frontend/src/scenes/authentication/login/loginLogic.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97721,
+      "title": "fix(surveys): stop saving the default open text placeholder",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:38:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "frontend/src/scenes/surveys/constants.tsx",
+        "frontend/src/scenes/surveys/survey-appearance/SurveyAppearanceSections.test.tsx",
+        "frontend/src/scenes/surveys/survey-appearance/SurveyAppearanceSections.tsx",
+        "frontend/src/scenes/surveys/surveyLogic.test.ts",
+        "frontend/src/toolbar/surveys/surveysToolbarLogic.ts",
+        "posthog/constants.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97719,
+      "title": "fix(signals): accept a repeat dismiss and keep the open report current",
+      "author": "sortafreel",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:34:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "products/signals/backend/test/test_dismissal_scout_notes.py",
+        "products/signals/backend/test/test_signal_report_api.py",
+        "products/signals/backend/views.py",
+        "products/signals/frontend/generated/api.schemas.ts",
+        "products/signals/frontend/generated/api.ts",
+        "products/signals/frontend/generated/api.zod.ts",
+        "products/signals/frontend/inbox/components/cards/useReportDismiss.ts",
+        "products/signals/frontend/inbox/inboxSceneLogic.test.ts",
+        "products/signals/frontend/inbox/inboxSceneLogic.ts",
+        "services/mcp/src/api/generated.ts",
+        "services/mcp/src/generated/signals/api.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97715,
+      "title": "fix(warehouse-sources): recognize cross-source non-retryable errors in schema discovery",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:26:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/workflow_activities/sync_new_schemas.py",
+        "products/warehouse_sources/backend/temporal/data_imports/workflow_activities/tests/test_sync_new_schemas.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97711,
+      "title": "fix(desktop): keep startup phase statuses out of the transcript",
+      "author": "puemos",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:16:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/desktop/packages/core/src/sessions/sessionStartup.ts",
+        "products/desktop/packages/ui/src/features/sessions/components/buildConversationItems.test.ts",
+        "products/desktop/packages/ui/src/features/sessions/components/buildConversationItems.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97705,
+      "title": "feat(cdp): reserve retry slots for tier-cap-denied emails",
+      "author": "meikelmosby",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:07:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "nodejs/src/cdp/services/messaging/email.service.test.ts",
+        "nodejs/src/cdp/services/messaging/email.service.ts",
+        "nodejs/src/cdp/services/rate-limiter/rate-limiter.service.test.ts",
+        "nodejs/src/cdp/services/rate-limiter/rate-limiter.service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97702,
+      "title": "fix(alerts): skip missed alert intervals",
+      "author": "MattPua",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T16:57:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/alerts/backend/scheduling.py",
+        "products/alerts/backend/test/test_scheduling.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97671,
+      "title": "fix(logs): cap volume/pattern bucket TTL to the team's own retention",
+      "author": "frankh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T16:21:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "posthog/clickhouse/hcl/golden/dev/logs.hcl",
+        "posthog/clickhouse/hcl/golden/local-multi/logs.hcl",
+        "posthog/clickhouse/hcl/golden/local-single/all.hcl",
+        "posthog/clickhouse/hcl/golden/prod-eu/logs.hcl",
+        "posthog/clickhouse/hcl/golden/prod-us/logs.hcl",
+        "posthog/clickhouse/hcl/roles/logs/base/tables.hcl",
+        "posthog/clickhouse/hcl/sql/dev/logs.sql",
+        "posthog/clickhouse/hcl/sql/local-multi/logs.sql",
+        "posthog/clickhouse/hcl/sql/local-single/all.sql",
+        "posthog/clickhouse/hcl/sql/prod-eu/logs.sql",
+        "posthog/clickhouse/hcl/sql/prod-us/logs.sql",
+        "posthog/clickhouse/migrations/0317_volume_and_pattern_buckets_retention_ttl.py",
+        "posthog/clickhouse/migrations/max_migration.txt"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97670,
+      "title": "fix(endpoints): stop scheduling an endpoint view no version points at",
+      "author": "sakce",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T16:19:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "posthog/temporal/data_modeling/activities/materialize_view.py",
+        "products/endpoints/backend/facade/contracts.py",
+        "products/endpoints/backend/facade/temporal.py",
+        "products/endpoints/backend/logic/materialization.py",
+        "products/endpoints/backend/management/__init__.py",
+        "products/endpoints/backend/management/commands/__init__.py",
+        "products/endpoints/backend/management/commands/retire_orphaned_endpoint_saved_queries.py",
+        "products/endpoints/backend/tests/test_endpoint_materialization.py",
+        "products/endpoints/backend/tests/test_retire_orphaned_endpoint_saved_queries.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97669,
+      "title": "perf(mcp): prune the insight metadata from insight-query results",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T16:16:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "services/mcp/src/tools/insights/query.ts",
+        "services/mcp/tests/unit/insight-query-payload.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:00.787Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 97533,
+      "title": "chore(deps): Update posthog-js to 1.428.11",
+      "author": "app/posthog-js-upgrader",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T14:25:50Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "posthog-js",
+        "from": null,
+        "to": "1.428.11"
+      },
+      "files": 5,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "products/desktop/packages/ui/package.json",
+        "products/desktop/pnpm-lock.yaml",
+        "products/desktop/tools/announcements-admin/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 95272,
+      "title": "chore(deps): update posthoganalytics to 7.46.0",
+      "author": "app/posthog-js-upgrader",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-04T14:53:15Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "posthoganalytics",
+        "from": null,
+        "to": "7.46.0"
+      },
+      "files": 6,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "pyproject.toml",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock",
+        "tools/infra-scripts/clitools/requirements.txt",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 94893,
+      "title": "chore(deps): update posthoganalytics to 7.45.4",
+      "author": "app/posthog-js-upgrader",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-04T07:16:23Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "posthoganalytics",
+        "from": null,
+        "to": "7.45.4"
+      },
+      "files": 6,
+      "paths": [
+        "common/ingestion/acceptance_tests/requirements.txt",
+        "pyproject.toml",
+        "services/llm-gateway/pyproject.toml",
+        "services/llm-gateway/uv.lock",
+        "tools/infra-scripts/clitools/requirements.txt",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 95170,
+      "title": "chore(deps): bump uv to 0.12.5",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-04T12:57:56Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "uv",
+        "from": null,
+        "to": "0.12.5"
+      },
+      "files": 54,
+      "paths": [
+        ".depot/workflows/ci-backend-update-test-timing.yml",
+        ".depot/workflows/ci-backend.yml",
+        ".flox/env/manifest.lock",
+        ".flox/env/manifest.toml",
+        ".github/workflows/build-deltalite.yml",
+        ".github/workflows/build-hogql-parser-npm.yml",
+        ".github/workflows/build-hogql-parser-rs.yml",
+        ".github/workflows/build-hogql-parser.yml",
+        ".github/workflows/cd-sandbox-base-image.yml",
+        ".github/workflows/cd-tasks-golden-snapshot.yml",
+        ".github/workflows/ci-agent-skills.yml",
+        ".github/workflows/ci-ai.yml",
+        ".github/workflows/ci-backend-update-test-timing.yml",
+        ".github/workflows/ci-backend.yml",
+        ".github/workflows/ci-clickhouse-multinode-migrations.yml",
+        ".github/workflows/ci-dagster.yml",
+        ".github/workflows/ci-deltalite-python.yml",
+        ".github/workflows/ci-e2e-playwright.yml",
+        ".github/workflows/ci-frontend.yml",
+        ".github/workflows/ci-hobby.yml",
+        ".github/workflows/ci-hog.yml",
+        ".github/workflows/ci-lint-workflows.yml",
+        ".github/workflows/ci-llm-gateway.yml",
+        ".github/workflows/ci-master-run-traces.yml",
+        ".github/workflows/ci-mcp-ui-apps.yml",
+        ".github/workflows/ci-mcp.yml",
+        ".github/workflows/ci-nodejs.yml",
+        ".github/workflows/ci-owners-live-lint.yml",
+        ".github/workflows/ci-python.yml",
+        ".github/workflows/ci-replay-vision-evals.yml",
+        ".github/workflows/ci-rust-flags-integration.yml",
+        ".github/workflows/ci-rust.yml",
+        ".github/workflows/ci-scripts.yml",
+        ".github/workflows/container-images-cd.yml",
+        ".github/workflows/hogbox-preview-cleanup.yml",
+        ".github/workflows/hogbox-preview-env.yml",
+        ".github/workflows/pr-autoresolve-conflicts.yml",
+        ".github/workflows/pr-cleanup.yml",
+        ".github/workflows/pr-closed.yml",
+        ".github/workflows/publish-hogli.yml",
+        ".github/workflows/test-quarantine.yml",
+        ".github/workflows/trunk-impacted-targets.yml",
+        "Dockerfile",
+        "Dockerfile.llm-analytics",
+        "Dockerfile.sandbox",
+        "bin/check_uv_python_compatibility.py",
+        "bin/test/test_check_uv_python_compatibility.py",
+        "docs/published/handbook/engineering/developing-locally.md",
+        "posthog/api/test/rust_integration/conftest.py",
+        "products/tasks/backend/logic/services/modal_sandbox.py",
+        "products/tasks/backend/sandbox/images/Dockerfile.sandbox-base",
+        "products/tasks/backend/sandbox/images/Dockerfile.sandbox-slim",
+        "products/tasks/backend/sandbox/images/hogland/setup-golden.sh",
+        "services/llm-gateway/Dockerfile"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 91917,
+      "title": "fix(deps): drop pkg_resources from startup via infi.clickhouse_orm",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-31T19:05:04Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "posthog/test/repo_invariants/setup_import_baseline.txt",
+        "posthog/test/repo_invariants/test_startup_import_budget.py",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 73857,
+      "title": "chore(deps): weekly safe pypi updates · 10 packages",
+      "author": "app/mendral-app",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-07-27T09:11:43Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/scripts/check-idor-model-coverage.py",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-09T19:37:09.170Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 96726,
+      "title": "feat(capture-apm-metrics): split metrics capture into its own binary",
+      "author": "frankh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-08T14:52:16Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        ".github/rust-images.yml",
+        ".github/workflows/ci-rust.yml",
+        ".github/workflows/rust-docker-build.yml",
+        "bin/mprocs.yaml",
+        "bin/send-dev-metrics.sh",
+        "bin/start-rust-service",
+        "devenv/intent-map.yaml",
+        "docker-compose.dev.yml",
+        "otel-collector-config.dev.yaml",
+        "rust/Cargo.lock",
+        "rust/Cargo.toml",
+        "rust/affected-services/tests/integration.rs",
+        "rust/capture-apm-metrics/Cargo.toml",
+        "rust/capture-apm-metrics/README.md",
+        "rust/capture-apm-metrics/src/main.rs"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 80801,
+      "title": "feat(desktop): brand the window in macOS Mission Control",
+      "author": "raquelmsmith",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-10T19:00:54Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 33,
+      "paths": [
+        "products/desktop/apps/code/package.json",
+        "products/desktop/apps/code/runtime-dependencies.test.ts",
+        "products/desktop/apps/code/runtime-dependencies.ts",
+        "products/desktop/apps/code/scripts/before-pack.ts",
+        "products/desktop/apps/code/src/main/di/bindings.ts",
+        "products/desktop/apps/code/src/main/di/container.ts",
+        "products/desktop/apps/code/src/main/di/tokens.ts",
+        "products/desktop/apps/code/src/main/platform-adapters/electron-mission-control.test.ts",
+        "products/desktop/apps/code/src/main/platform-adapters/electron-mission-control.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/cg-window-list.test.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/cg-window-list.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/heuristic.test.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/heuristic.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/schemas.ts",
+        "products/desktop/apps/code/src/main/services/mission-control/window-list.ts",
+        "products/desktop/apps/code/src/main/trpc/router.ts",
+        "products/desktop/apps/code/src/main/trpc/routers/dev.ts",
+        "products/desktop/apps/code/src/main/trpc/routers/mission-control.ts",
+        "products/desktop/apps/code/src/main/window.ts",
+        "products/desktop/apps/code/src/renderer/desktop-contributions.ts",
+        "products/desktop/apps/code/src/renderer/di/bindings.ts",
+        "products/desktop/apps/code/src/renderer/di/container.ts",
+        "products/desktop/apps/code/src/renderer/features/dev-toolbar/components/DevToolbar.tsx",
+        "products/desktop/apps/code/src/renderer/main.tsx",
+        "products/desktop/packages/ui/src/features/mission-control/MissionControlOverlay.stories.tsx",
+        "products/desktop/packages/ui/src/features/mission-control/MissionControlOverlay.test.tsx",
+        "products/desktop/packages/ui/src/features/mission-control/MissionControlOverlay.tsx",
+        "products/desktop/packages/ui/src/features/mission-control/identifiers.ts",
+        "products/desktop/packages/ui/src/features/mission-control/missionControl.contribution.ts",
+        "products/desktop/packages/ui/src/features/mission-control/missionControl.module.ts",
+        "products/desktop/packages/ui/src/features/mission-control/missionControlStore.ts",
+        "products/desktop/pnpm-lock.yaml",
+        "products/desktop/pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 80857,
+      "title": "chore(deps): move pnpm settings to workspace config",
+      "author": "MattPua",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-10T20:13:21Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "package.json",
+        "pnpm-workspace.yaml",
+        "tools/pr-approval-agent/gates.py",
+        "tools/pr-approval-agent/manifest_risk.py",
+        "tools/pr-approval-agent/test_gates.py",
+        "tools/pr-approval-agent/test_manifest_risk.py"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 96028,
+      "title": "feat(devex): add an opt-in devenv environment next to flox",
+      "author": "webjunkie",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T12:13:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 47,
+      "paths": [
+        ".cursor/rules/django-python.mdc",
+        ".cursorrules",
+        ".envrc",
+        ".flox/env/on-activate.sh",
+        ".github/scripts/trunk-impacted-targets.js",
+        ".github/scripts/trunk-impacted-targets.test.js",
+        ".github/workflows/ci-dev-setup.yml",
+        ".github/workflows/ci-python.yml",
+        ".gitignore",
+        ".husky/post-checkout",
+        ".husky/pre-commit",
+        ".watchmanconfig",
+        "AGENTS.md",
+        "bin/check_uv_python_compatibility.py",
+        "bin/check_video_deps",
+        "bin/dev-sandbox-selftest",
+        "bin/dev-sandbox-shims",
+        "bin/dev-sandbox.sb",
+        "bin/devenv-tasks.sh",
+        "bin/helpers/dev-env.sh",
+        "bin/helpers/dev-setup-steps.sh",
+        "bin/helpers/worktree-borrow.sh",
+        "bin/hogli",
+        "bin/phw",
+        "bin/posthog-worktree",
+        "bin/ruff.sh",
+        "bin/sandbox",
+        "bin/start",
+        "bin/test/test_check_uv_python_compatibility.py",
+        "bin/upgrade-objectstorage",
+        "devenv.lock",
+        "devenv.nix",
+        "devenv.yaml",
+        "docs/internal/dev-env-vars.md",
+        "docs/published/handbook/engineering/developing-locally.md",
+        "docs/published/handbook/engineering/flox-multi-instance-workflow.md",
+        "funnel-udf/build.sh",
+        "hogli.yaml",
+        "posthog/settings/utils.py",
+        "products/tasks/backend/logic/services/sandbox.py",
+        "tools/hogli-commands/hogli_commands/dev_env.py",
+        "tools/hogli-commands/hogli_commands/devbox/mutagen_defaults.yml",
+        "tools/hogli-commands/hogli_commands/doctor.py",
+        "tools/hogli-commands/hogli_commands/telemetry_props.py",
+        "tools/hogli-commands/hogli_commands/worktrees.py",
+        "tools/infra-scripts/clitools/test_toolbox.py",
+        "tools/infra-scripts/clitools/toolbox.py"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 94686,
+      "title": "perf(docker): slim the runtime base image",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-03T22:08:48Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "Dockerfile"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 92008,
+      "title": "perf(ci): stop rust changes busting the node image install cache",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-31T21:18:24Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "Dockerfile.node"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98675,
+      "title": "chore(clickhouse): bump local compatibility to 26.6",
+      "author": "rorylshanks",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T18:54:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docker/clickhouse/users-dev.xml",
+        "docker/clickhouse/users.xml"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98491,
+      "title": "chore(desktop): stop tracking the downloaded ripgrep binary",
+      "author": "dajiaohuang",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T15:00:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/desktop/.gitignore",
+        "products/desktop/apps/code/resources/ripgrep/rg-darwin-arm64"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 96055,
+      "title": "fix(ee): keep the DRF test client off the django.setup() path",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T12:46:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "ee/vercel/integration.py",
+        "posthog/test/repo_invariants/test_startup_import_budget.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 96045,
+      "title": "perf(tasks): overlap agent-server launch and context mount with the clone",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T12:33:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "products/tasks/backend/logic/services/agent_server_launcher.py",
+        "products/tasks/backend/logic/services/docker_sandbox.py",
+        "products/tasks/backend/logic/services/sandbox.py",
+        "products/tasks/backend/logic/services/tests/test_docker_sandbox.py",
+        "products/tasks/backend/logic/services/tests/test_modal_sandbox.py",
+        "products/tasks/backend/temporal/process_task/tests/test_workflow.py",
+        "products/tasks/backend/temporal/process_task/workflow.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 93380,
+      "title": "fix(tasks): fail fast when a sandbox boots without agent-server",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-02T13:19:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/tasks/backend/exceptions.py",
+        "products/tasks/backend/logic/services/agent_server_launcher.py",
+        "products/tasks/backend/logic/services/sandbox.py",
+        "products/tasks/backend/logic/services/tests/test_modal_sandbox.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 92774,
+      "title": "perf(personhog): cover the distinct id resolve with an index",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-01T17:29:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".agents/skills/adding-personhog-rpc/references/database-indexes.md",
+        "posthog/management/commands/apply_persons_migrations.py",
+        "posthog/management/commands/test/test_apply_persons_migrations.py",
+        "rust/persons_migrations/20260901000003_add_persondistinctid_covering_index.sql",
+        "rust/persons_migrations/20260901000004_add_persondistinctid_tmp_covering_index.sql"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 91926,
+      "title": "fix(funnels): match steps that fire near-simultaneously",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-31T19:21:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "funnel-udf/src/steps.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 91545,
+      "title": "fix(tasks): keep the failing step in dev-stack bake errors",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-31T10:30:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/tasks/backend/logic/services/dev_stack_image.py",
+        "products/tasks/backend/sandbox/images/bake-posthog-dev-stack.sh",
+        "products/tasks/backend/tests/test_dev_stack_image.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 87021,
+      "title": "fix(dev): deny writes to git config and pin the wrapper's PATH",
+      "author": "haacked",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-21T10:42:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".flox/env/on-activate.sh",
+        "bin/dev-sandbox",
+        "bin/dev-sandbox-selftest",
+        "bin/dev-sandbox.sb"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:04:24.967Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

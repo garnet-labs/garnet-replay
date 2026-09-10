@@ -1,0 +1,1057 @@
+{
+  "slug": "deepsec",
+  "upstream": "vercel-labs/deepsec",
+  "fork": "garnet-labs/deepsec",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 173,
+      "title": "Upgrade codex and claude dependencies",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-04T14:46:33Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/deepsec/package.json",
+        "packages/processor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 174,
+      "title": "feat(prompt): scope promptAppend entries to declared paths",
+      "author": "bytaesu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T14:17:49Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "docs/configuration.md",
+        "docs/data-layout.md",
+        "packages/core/src/config.ts",
+        "packages/deepsec/src/config.ts",
+        "packages/processor/package.json",
+        "packages/processor/src/__tests__/prompt-assemble.test.ts",
+        "packages/processor/src/index.ts",
+        "packages/processor/src/prompt/assemble.ts",
+        "packages/processor/src/prompt/index.ts",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 172,
+      "title": "Bump deepsec to 2.3.8",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-26T21:28:45Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "deepsec",
+        "from": null,
+        "to": "2.3.8"
+      },
+      "files": 1,
+      "paths": [
+        "packages/deepsec/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 143,
+      "title": "Again bump beyond canary",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-06T01:19:40Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/deepsec/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 141,
+      "title": "Bump version since 2.3.1 was published as canary",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-05T23:16:15Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/deepsec/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 162,
+      "title": "Honor local subscription routes with workspace OIDC",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-23T20:56:50Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "packages/deepsec/package.json",
+        "packages/deepsec/src/__tests__/preflight.test.ts",
+        "packages/deepsec/src/__tests__/setup-coordinator.test.ts",
+        "packages/deepsec/src/commands/sandbox-all.ts",
+        "packages/deepsec/src/commands/sandbox-process.ts",
+        "packages/deepsec/src/preflight.ts",
+        "packages/deepsec/src/setup/coordinator.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 161,
+      "title": "fix(deps): bump tar to patch CVE-2026-73566",
+      "author": "aeonframework",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-22T15:41:26Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 158,
+      "title": "fix onboarding recovery for empty scans",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-18T13:52:01Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "docs/data-layout.md",
+        "docs/getting-started.md",
+        "docs/writing-matchers.md",
+        "e2e/bundle.test.ts",
+        "packages/deepsec/package.json",
+        "packages/deepsec/src/__tests__/setup-coordinator.test.ts",
+        "packages/deepsec/src/__tests__/setup-coverage.test.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/setup/coordinator.ts",
+        "packages/deepsec/src/setup/coverage.ts",
+        "packages/deepsec/src/setup/state.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 154,
+      "title": "Add \"local subscriptions\" model route + document --scaffold-only",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-13T00:41:41Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        "docs/faq.md",
+        "docs/getting-started.md",
+        "docs/models.md",
+        "packages/core/src/config.ts",
+        "packages/deepsec/package.json",
+        "packages/deepsec/src/__tests__/ensure-connected-workspace.test.ts",
+        "packages/deepsec/src/__tests__/model-route.test.ts",
+        "packages/deepsec/src/__tests__/preflight.test.ts",
+        "packages/deepsec/src/__tests__/setup-options.test.ts",
+        "packages/deepsec/src/auth/ensure-connected-workspace.ts",
+        "packages/deepsec/src/auth/model-route-prompt.ts",
+        "packages/deepsec/src/auth/model-route.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/init.ts",
+        "packages/deepsec/src/preflight.ts",
+        "packages/deepsec/src/setup/options.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 142,
+      "title": "Better readme",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-05T23:25:06Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "README.md",
+        "docs/getting-started.md",
+        "packages/deepsec/package.json"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 171,
+      "title": "Try again to bump version",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-26T21:26:13Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/bump-version.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 170,
+      "title": "Sign versioning signature",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-26T20:39:13Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/bump-version.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 169,
+      "title": "Script to generate a version bump PR",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-26T18:22:56Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/bump-version.yml",
+        ".github/workflows/ci.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 168,
+      "title": "[website] Redirect DeepSec homepage to the OSS lander",
+      "author": "jamesvclements",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-26T14:39:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/website/next.config.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 167,
+      "title": "Report max turns exhaustion for Claude setup task",
+      "author": "penberg",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-25T09:12:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/processor/src/agents/claude-agent-sdk.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 166,
+      "title": "Validate severity flag values instead of silently changing what runs",
+      "author": "gesposito",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-24T18:54:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "e2e/bundle.test.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/export.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 165,
+      "title": "Record truncated revalidations as incomplete runs",
+      "author": "gesposito",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-24T18:34:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/core/src/schemas.ts",
+        "packages/core/src/types.ts",
+        "packages/processor/src/__tests__/process-revalidate.test.ts",
+        "packages/processor/src/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 163,
+      "title": "Ensure local agent configuration is respected on #157",
+      "author": "ezufelt",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-23T21:51:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "packages/deepsec/src/__tests__/ensure-connected-workspace.test.ts",
+        "packages/deepsec/src/__tests__/setup-persisted-route.test.ts",
+        "packages/deepsec/src/auth/ensure-connected-workspace.ts",
+        "packages/deepsec/src/commands/init.ts",
+        "packages/deepsec/src/setup/persisted-route.ts",
+        "packages/deepsec/src/setup/workspace-config.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 160,
+      "title": "Tolerate host mounts where a create is not immediately visible to lookup",
+      "author": "ezufelt",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-22T09:17:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "packages/core/src/__tests__/fs-settle.test.ts",
+        "packages/core/src/__tests__/run.test.ts",
+        "packages/core/src/fs-settle.ts",
+        "packages/core/src/index.ts",
+        "packages/core/src/run.ts",
+        "packages/deepsec/src/__tests__/setup-install.test.ts",
+        "packages/deepsec/src/commands/init-project.ts",
+        "packages/deepsec/src/commands/init.ts",
+        "packages/deepsec/src/setup/coordinator.ts",
+        "packages/deepsec/src/setup/install.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 157,
+      "title": "Don't let workspace OIDC override a local-subscription model route",
+      "author": "youpv",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-18T08:57:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/deepsec/src/__tests__/preflight.test.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/preflight.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 155,
+      "title": "Fix broad crypto and handler matcher candidates",
+      "author": "andrew-gromyko",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-13T19:30:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/scanner/src/__tests__/matchers.test.ts",
+        "packages/scanner/src/matchers/insecure-crypto.ts",
+        "packages/scanner/src/matchers/missing-auth.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 152,
+      "title": "Add Grok Build CLI agent backend",
+      "author": "ayush-that",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-12T06:06:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "docs/models.md",
+        "packages/deepsec/src/__tests__/agent-defaults.test.ts",
+        "packages/deepsec/src/__tests__/model-picker.test.ts",
+        "packages/deepsec/src/__tests__/model-route.test.ts",
+        "packages/deepsec/src/agent-defaults.ts",
+        "packages/deepsec/src/auth/ensure-connected-workspace.ts",
+        "packages/deepsec/src/auth/model-picker.ts",
+        "packages/deepsec/src/auth/model-route.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/sandbox-process.ts",
+        "packages/deepsec/src/preflight.ts",
+        "packages/deepsec/src/resolve-agent-type.ts",
+        "packages/deepsec/src/setup/options.ts",
+        "packages/processor/src/__tests__/grok-build.test.ts",
+        "packages/processor/src/__tests__/registry.test.ts",
+        "packages/processor/src/agents/grok-build.ts",
+        "packages/processor/src/index.ts",
+        "packages/processor/src/setup-agent.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 150,
+      "title": "docs: explain scaffold-only setup",
+      "author": "timhaines",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-12T02:05:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 149,
+      "title": "fix(cli): round token metrics to prevent table layout breakage",
+      "author": "Youcef3939",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-10T20:22:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/deepsec/src/__tests__/metrics.test.ts",
+        "packages/deepsec/src/commands/metrics.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 148,
+      "title": "Add tls-verification-disabled matcher",
+      "author": "Steel-tech",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-10T04:48:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/scanner/src/__tests__/tls-verification-disabled.test.ts",
+        "packages/scanner/src/matchers/index.ts",
+        "packages/scanner/src/matchers/tls-verification-disabled.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 147,
+      "title": "A skill for deepsec",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-09T21:44:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "SKILL.md",
+        "packages/deepsec/SKILL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 146,
+      "title": "Add optional vulnerability report fields",
+      "author": "andrew-gromyko",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-09T08:50:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "packages/core/src/__tests__/schemas.test.ts",
+        "packages/core/src/schemas.ts",
+        "packages/core/src/types.ts",
+        "packages/processor/src/__tests__/shared.test.ts",
+        "packages/processor/src/agents/shared.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 145,
+      "title": "docs: reduce AI-writing tells in getting-started, models, vercel-setup",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-07T21:50:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/getting-started.md",
+        "docs/models.md",
+        "docs/vercel-setup.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 144,
+      "title": "Remove .md extensions on inline docs links",
+      "author": "molebox",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-06T11:41:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "docs/architecture.md",
+        "docs/configuration.md",
+        "docs/data-layout.md",
+        "docs/faq.md",
+        "docs/getting-started.md",
+        "docs/models.md",
+        "docs/plugins.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 140,
+      "title": "Broaden SSRF matcher",
+      "author": "caleb-vercel",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-05T00:21:57Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/scanner/src/matchers/ssrf.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T20:09:36.035Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

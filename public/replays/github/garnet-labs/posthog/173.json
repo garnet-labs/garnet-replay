@@ -88,11 +88,57 @@
     "base": null,
     "head": "https://app.garnet.ai/public/runs/32554017766?profile=01a027ec-6084-7254-843a-75c9838a6f6c",
     "head_json": "https://app.garnet.ai/api/public/runs/32554017766?profile=01a027ec-6084-7254-843a-75c9838a6f6c",
-    "pr_comment": null
+    "pr_comment": "https://github.com/garnet-labs/posthog/pull/173#issuecomment-5378138503"
   },
   "recorded": {
     "at": "2026-08-22 05:23:03 UTC",
     "contract": "6.10.0",
     "source": "github-app-comment"
-  }
+  },
+  "pair": {
+    "base_sha": "2f44958190dfe0fcd12db5b1dc8d3f33599f8177",
+    "head_sha": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 2f44958 → head bef2df4 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+    "current_head": "bef2df47fb3d955b1360233cd370a8afdedf7939",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head bef2df4 across 1 job: workload outbound connections +0 −0, runner background +4 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 2f44958 and bef2df4 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

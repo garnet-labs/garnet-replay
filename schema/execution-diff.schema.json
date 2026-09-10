@@ -5,7 +5,7 @@
   "description": "Base execution vs head execution for one pull request, derived from kernel-recorded Execution Profiles. A rename of the posthog evidence-injection block (build_block.py); every field is machine-derived from the record, never hand-written.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "mode", "repo", "pull_request", "base", "head", "comparison", "execution_diff", "receipt_urls", "recorded"],
+  "required": ["schema_version", "mode", "repo", "pull_request", "base", "head", "comparison", "execution_diff", "receipt_urls", "recorded", "pair", "capture", "verdict", "supersession", "claims"],
   "properties": {
     "schema_version": { "const": "execution-diff/v1" },
     "mode": {
@@ -59,8 +59,8 @@
         "available": { "type": "boolean" },
         "scope": {
           "type": "string",
-          "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "constructed-pair", "unavailable"],
-          "description": "Exactly which pair is compared. known-evidence compares the previous recorded head of the PR ref with the head; live-replay compares the baseline commit (immediate parent) with the update commit; constructed-pair compares two authored demo runs from the same demo repository (base is a clean install, not the PR's own parent) and is only valid with label=constructed."
+          "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "pr-base-to-head", "constructed-pair", "unavailable"],
+          "description": "Exactly which pair is compared. known-evidence compares the previous recorded head of the PR ref with the head; live-replay compares the baseline commit (immediate parent) with the update commit; pr-base-to-head compares the PR base SHA with the head; constructed-pair compares two authored demo runs from the same demo repository (base is a clean install, not the PR's own parent) and is only valid with label=constructed."
         }
       }
     },
@@ -116,6 +116,101 @@
         "contract": { "type": ["string", "null"], "description": "Runtime Review contract version stamped on the record." },
         "source": { "type": "string", "description": "Where the record was read from, e.g. github-app-comment, jibril-profile-json." }
       }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_sha", "head_sha", "scope", "label", "transition", "line"],
+      "description": "The exact comparison pair, rendered identically on every surface as `line`.",
+      "properties": {
+        "base_sha": { "$ref": "#/$defs/sha" },
+        "head_sha": { "$ref": "#/$defs/sha" },
+        "scope": { "type": "string", "enum": ["previous-recorded-head-to-head", "immediate-parent-to-head", "pr-base-to-head", "constructed-pair", "unavailable"] },
+        "label": { "type": "string", "enum": ["real", "constructed"] },
+        "transition": { "type": ["string", "null"] },
+        "line": { "type": "string" }
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "expected_cells", "recorded_cells", "executed_sha_verified", "lineage_missing", "final_record", "reasons"],
+      "description": "Capture completeness. partial or none never reads as stable absence or variance; not-declared means the source record carries no capture accounting.",
+      "properties": {
+        "status": { "type": "string", "enum": ["complete", "partial", "none", "not-declared"] },
+        "expected_cells": { "type": ["integer", "null"], "minimum": 0 },
+        "recorded_cells": { "type": ["integer", "null"], "minimum": 0 },
+        "executed_sha_verified": { "type": ["integer", "null"], "minimum": 0 },
+        "lineage_missing": { "type": ["integer", "null"], "minimum": 0 },
+        "final_record": { "type": ["boolean", "null"] },
+        "reasons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "reasons"],
+      "properties": {
+        "value": { "type": "string", "enum": ["new-behavior", "unchanged", "recorded", "undeterminable"] },
+        "reasons": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["superseded", "record_head", "current_head", "reasons"],
+      "description": "A record is bound to one head; when the PR head or base moves the record is superseded.",
+      "properties": {
+        "superseded": { "type": "boolean" },
+        "record_head": { "$ref": "#/$defs/sha" },
+        "current_head": { "$ref": "#/$defs/sha" },
+        "reasons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["class", "text"],
+        "properties": {
+          "class": { "type": "string", "enum": ["observed-runtime-behavior", "comparison-result", "required-check-state", "reviewer-consumption-evidence", "unsupported-claim"] },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "repetitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["per_side", "variance", "cells"],
+      "description": "Live replays run each side more than once; a destination counts only when every repetition of a side recorded it.",
+      "properties": {
+        "per_side": { "type": "integer", "minimum": 1 },
+        "variance": { "type": "integer", "minimum": 0 },
+        "cells": { "type": "array", "items": { "$ref": "#/$defs/cell" } }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "state"],
+      "properties": {
+        "name": { "type": "string" },
+        "state": { "type": "string" }
+      }
+    },
+    "consumption": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["consumer", "evidence_url"],
+        "properties": {
+          "consumer": { "type": "string" },
+          "evidence_url": { "type": "string", "format": "uri" }
+        }
+      }
     }
   },
   "$defs": {
@@ -131,6 +226,21 @@
       }
     },
     "section": { "type": "string", "enum": ["workload", "runner background"] },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["side", "rep", "expected_sha", "executed_sha", "profile_present"],
+      "properties": {
+        "side": { "type": "string", "enum": ["baseline", "update"] },
+        "rep": { "type": "integer", "minimum": 1 },
+        "expected_sha": { "$ref": "#/$defs/sha" },
+        "executed_sha": { "$ref": "#/$defs/sha" },
+        "profile_present": { "type": "boolean" },
+        "lineage_missing": { "type": ["integer", "null"], "minimum": 0 },
+        "runner": { "type": ["string", "null"] },
+        "image": { "type": ["string", "null"] }
+      }
+    },
     "addedRemoved": {
       "type": "object",
       "additionalProperties": false,

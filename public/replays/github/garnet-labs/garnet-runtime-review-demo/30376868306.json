@@ -140,5 +140,48 @@
     "at": "2026-07-28T16:10:11.9426858Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
-  }
+  },
+  "pair": {
+    "base_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "head_sha": "84940b2399a620559979dda042c979a54b5f0cf2",
+    "scope": "constructed-pair",
+    "label": "constructed",
+    "transition": null,
+    "line": "base b678bdb → head 84940b2 · scope constructed-pair · constructed"
+  },
+  "capture": {
+    "status": "complete",
+    "expected_cells": 2,
+    "recorded_cells": 2,
+    "executed_sha_verified": 2,
+    "lineage_missing": 0,
+    "final_record": true,
+    "reasons": []
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "3 outbound connections recorded in every repetition after the change and in none before it"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "84940b2399a620559979dda042c979a54b5f0cf2",
+    "current_head": "84940b2399a620559979dda042c979a54b5f0cf2",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 84940b2 across 1 job: workload outbound connections +3 −0, runner background +0 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between b678bdb and 84940b2 (constructed-pair): 3 outbound connections recorded in every repetition after the change and in none before it."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

@@ -1,0 +1,37 @@
+# Records the dependency install under the Garnet sensor on every pull request
+# that touches a manifest. Garnet posts one Runtime Review comment per head
+# commit and compares it with the previous recorded commit.
+name: Garnet Runtime Visibility
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: garnet-record-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  dep-install:
+    name: Dependency install (recorded)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # OIDC exchange; pull requests from other repositories receive no token
+      # and the action falls back to a local, best-effort record.
+      - uses: garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c # main 2026-09-04
+
+      - name: Install dependencies (lifecycle scripts execute here)
+        run: {{INSTALL_COMMAND}}
+
+      - name: Let sensor settle
+        if: always()
+        run: sleep 30

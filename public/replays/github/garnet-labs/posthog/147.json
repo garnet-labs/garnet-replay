@@ -61,11 +61,57 @@
     "base": null,
     "head": "https://app.garnet.ai/public/runs/32552960691?profile=01a027d7-fc1a-7087-8b30-ca00008ffab1",
     "head_json": "https://app.garnet.ai/api/public/runs/32552960691?profile=01a027d7-fc1a-7087-8b30-ca00008ffab1",
-    "pr_comment": null
+    "pr_comment": "https://github.com/garnet-labs/posthog/pull/147#issuecomment-5377966614"
   },
   "recorded": {
     "at": "2026-08-22 05:00:58 UTC",
     "contract": "6.10.0",
     "source": "github-app-comment"
-  }
+  },
+  "pair": {
+    "base_sha": "b4ddc3686c6b87aa6650eeb80e2c86e4c47201a2",
+    "head_sha": "0241ae7600764585ec74479bd6b7ce7e591ed2f5",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": "posthog-js none → 1.402.2",
+    "line": "base b4ddc36 → head 0241ae7 · scope previous-recorded-head-to-head · posthog-js none → 1.402.2 · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "0241ae7600764585ec74479bd6b7ce7e591ed2f5",
+    "current_head": "0241ae7600764585ec74479bd6b7ce7e591ed2f5",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 0241ae7 across 1 job: workload outbound connections +0 −0, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between b4ddc36 and 0241ae7 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

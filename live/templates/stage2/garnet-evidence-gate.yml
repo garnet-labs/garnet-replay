@@ -1,0 +1,50 @@
+# Acceptance gate: passes only when a Garnet Runtime Review comment bound to
+# the exact pull request head exists. Missing, pending or stale evidence fails.
+# Runs from the default branch after the recording workflow completes and never
+# checks out or executes pull request code. Mark this job required in branch
+# protection to make evidence a merge condition.
+name: Garnet evidence gate
+
+on: # zizmor: ignore[dangerous-triggers] default branch only, no pull request code runs here
+  workflow_run:
+    workflows: ["{{RECORD_WORKFLOW_NAME}}"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  evidence:
+    name: garnet/evidence
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Wait for the Runtime Review comment to settle
+        run: sleep 45
+      - name: Require a head-bound record
+        shell: bash
+        run: |
+          set -euo pipefail
+          prs=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${HEAD_SHA}/pulls" --jq ".[] | select(.state == \"open\" and .head.sha == \"${HEAD_SHA}\") | .number")
+          if [ -z "${prs}" ]; then
+            echo "No open pull request points at ${HEAD_SHA}; nothing to gate."
+            exit 0
+          fi
+          status=0
+          while IFS= read -r pr_number; do
+            bound=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${pr_number}/comments" --paginate \
+              --jq "[.[] | select((.user.login | test(\"^garnet\")) and (.body | contains(\"<!-- garnet-runtime-review -->\")) and (.body | contains(\"<!-- garnet:commit ${HEAD_SHA} -->\")))] | length")
+            if [ "${bound}" = "0" ]; then
+              echo "::error::pull request ${pr_number}: no Runtime Review comment bound to head ${HEAD_SHA:0:7}. Missing evidence is no record, not a clean run."
+              status=1
+            else
+              echo "pull request ${pr_number}: record bound to head ${HEAD_SHA:0:7}"
+            fi
+          done <<< "${prs}"
+          exit "${status}"

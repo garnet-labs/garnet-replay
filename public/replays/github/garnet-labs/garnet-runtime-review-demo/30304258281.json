@@ -39,7 +39,7 @@
     ],
     "totals": {
       "execution_chains": 9,
-      "destinations": 6,
+      "destinations": 0,
       "jobs_recorded": 1,
       "jobs_changed": 0,
       "jobs_unchanged": 1,
@@ -61,5 +61,53 @@
     "at": "2026-07-27T20:51:01.179991156Z",
     "contract": "6.9.8",
     "source": "live-replay-profile"
-  }
+  },
+  "pair": {
+    "base_sha": null,
+    "head_sha": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "scope": "unavailable",
+    "label": "constructed",
+    "transition": null,
+    "line": "head b678bdb · no base · scope unavailable · constructed"
+  },
+  "capture": {
+    "status": "partial",
+    "expected_cells": 2,
+    "recorded_cells": 1,
+    "executed_sha_verified": 1,
+    "lineage_missing": 0,
+    "final_record": false,
+    "reasons": [
+      "execution records: 1/2",
+      "baseline rep 1: expected SHA not recorded"
+    ]
+  },
+  "verdict": {
+    "value": "undeterminable",
+    "reasons": [
+      "no comparison pair",
+      "execution records: 1/2",
+      "baseline rep 1: expected SHA not recorded"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "current_head": "b678bdbf26a31fa0ed812fa72bdb8856f0fff3e1",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head b678bdb across 1 job: workload outbound connections +0 −0, runner background +0 −0."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Undeterminable: no comparison pair; execution records: 1/2; baseline rep 1: expected SHA not recorded."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
 }

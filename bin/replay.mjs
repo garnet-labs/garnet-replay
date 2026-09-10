@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { createReadStream } from "node:fs"
+import { createReadStream, existsSync } from "node:fs"
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises"
 import { execFileSync } from "node:child_process"
 import { createServer } from "node:http"
@@ -9,8 +9,10 @@ import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, executionDiffFromProfiles, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
+import { listTargets } from "../lib/ledger.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
+import * as ladder from "../lib/commands.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -209,6 +211,8 @@ async function pair(args) {
   const to = option(args, "--to", null)
   const comparisonScope = option(args, "--scope", "immediate-parent-to-head")
   const note = option(args, "--note", null)
+  const baseExecutedSha = option(args, "--base-executed-sha", null)
+  const headExecutedSha = option(args, "--head-executed-sha", null)
   if ([basePath, headPath, repository, baseSha, headSha, baseReceiptUrl, headReceiptUrl, baseRunId, headRunId, dependency, from, to, note]
     .some((value) => value === null)) {
     throw new Error("pair requires base/head profiles, repository, commit/run/receipt metadata, dependency transition, and --note")
@@ -242,6 +246,10 @@ async function pair(args) {
       headReceiptUrl,
       prCommentUrl: `https://github.com/${repository}/pull/${prNumber}`,
       comparisonScope,
+      attestedShas: {
+        ...(baseExecutedSha === null ? {} : { baseline: baseExecutedSha }),
+        ...(headExecutedSha === null ? {} : { update: headExecutedSha }),
+      },
     },
   })
   const schema = JSON.parse(await readFile(join(ROOT, "schema", "execution-diff.schema.json"), "utf8"))
@@ -335,7 +343,8 @@ async function cloneForReplay(source, cacheRoot) {
 
 async function live(args) {
   const target = args[0]
-  if (typeof target !== "string") throw new Error("live requires a repository URL or path")
+  if (typeof target !== "string") throw new Error("live requires <slug> --pr N, or a repository URL/path with --dependency/--from/--to")
+  if (args.includes("--pr") || (listTargets().includes(target) && !existsSync(target))) return ladder.livePr(args)
   const token = option(args, "--token", process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN)
   const packageDir = option(args, "--dir", ".")
   const repoUrl = repoParts(target)
@@ -396,8 +405,46 @@ async function live(args) {
   console.log(result.ghCommand)
 }
 
+const USAGE = `usage: replay <command> [options]
+
+ladder (one target ledger per upstream repository, one fork as the only write target)
+  find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
+  find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
+  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--wait-minutes N|--no-wait] [--dry-run]
+                                                                    two-commit replay of an upstream pull request on the fork
+  live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
+                                                                    two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
+  live <slug> --allow-build x [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
+                                                                    two-commit transition on a dependency already in the lockfile: record its build
+                                                                    script as skipped, then allow it; the lockfile stays as it is (pnpm)
+  card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
+  cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
+  verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue
+  consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record?
+  status [<slug>]                                                   ladder board and the next command
+  stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
+
+records and pages
+  known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
+  live <repo-url|path> --dependency x --from a --to b               constructed transition when no real pull request exists
+  pair --base ... --head ...                                        build a replay JSON from two profile files
+  serve [--root public] [--port 8787]                               local result pages
+  seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
+`
+
 async function main(args) {
   const command = args[0]
+  if (command === undefined || command === "--help" || command === "-h") {
+    console.log(USAGE)
+    return undefined
+  }
+  if (command === "find") return ladder.find(args.slice(1))
+  if (command === "card") return ladder.card(args.slice(1))
+  if (command === "cohort") return ladder.cohort(args.slice(1))
+  if (command === "verify") return ladder.verify(args.slice(1))
+  if (command === "consume") return ladder.consume(args.slice(1))
+  if (command === "status") return ladder.status(args.slice(1))
+  if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))
   if (command === "seed-constructed") return seedConstructed(args.slice(1))
@@ -408,7 +455,7 @@ async function main(args) {
     const port = Number(option(args.slice(1), "--port", "8787"))
     return serve(root, port)
   }
-  throw new Error("usage: replay.mjs known|serve|seed-from-corpus|seed-constructed|pair")
+  throw new Error(`unknown command '${command}'\n${USAGE}`)
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
