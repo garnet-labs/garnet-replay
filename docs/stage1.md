@@ -46,28 +46,40 @@ The plan, always printed before anything is written:
 3. Refuse a checkout with uncommitted changes; the harness never discards work.
 4. Count how far the fork default branch is behind the change's base. Paths the
    change does not touch stay as the fork has them, so a change that depends on
-   files or workspace members newer than the fork can fail to install. The count
-   is printed as a warning; `--sync-fork` fast-forwards the fork default branch
-   to the base first (`git push origin <base>:refs/heads/<default>`, which git
-   refuses unless it is a fast-forward). With the fork at the base, commit 1
-   carries only the recording workflow, and its message says so.
-   When the fork default branch must stay where it is, `--base-branch <name>`
-   sets a fork-only branch to the exact base instead and opens the pull request
-   against it; commit 1 then carries the fork's recording workflow from the
-   default branch. A fork with several recording workflows needs
-   `--record-workflow <path>` to name the one carried.
+   files or workspace members newer than the fork can fail to install. A count
+   above zero stops the run before any write. `--sync-fork` fast-forwards the
+   fork default branch to the base first (`git push origin
+   <base>:refs/heads/<default>`, which git refuses unless it is a fast-forward).
+   With the fork at the base, commit 1 carries only the recording workflow, and
+   its message says so. When the fork default branch must stay where it is,
+   `--base-branch <name>` sets a fork-only branch to the exact base instead and
+   opens the pull request against it; commit 1 then carries the fork's
+   recording workflow from the default branch, unless the base already runs a
+   recording workflow of its own, in which case commit 1 carries nothing. A
+   fork with several recording workflows needs `--record-workflow <path>` to
+   name the one carried. `--allow-behind` turns the stop into a warning when
+   the distance is known to be harmless.
+   A recording workflow is any `pull_request` workflow that runs
+   `garnet-org/action` itself or through a local reusable workflow
+   (`uses: ./.github/workflows/…` or `$/.github/workflows/…`).
 5. Branch `deps/<name>-<to>` (or `change/<slug>-<n>`) from the fork default branch.
 6. Commit 1: the touched paths as the upstream base had them, plus the recording
-   workflow if the fork has none (`--record inject`). Only paths that exist in
-   that state are staged; paths the change adds appear first in commit 2, paths
-   it removes disappear there. When the fork's recording workflow runs only on
+   workflow if the fork has none (`--record inject`). The injected workflow runs
+   on every pull request of the fork, Dependabot's included, so each dependency
+   pull request Dependabot opens there is recorded like any other; when the
+   fork has no `.github/dependabot.yml`, commit 1 adds a weekly one for the
+   detected ecosystem and for GitHub Actions. Only paths that exist in that
+   state are staged; paths the change adds appear first in commit 2, paths it
+   removes disappear there. When the fork's recording workflow runs only on
    certain paths (`on.pull_request.paths`), commit 2 must touch at least one of
    them; otherwise the plan stops before any write, because the pull request
    would record nothing.
 7. Commit 2: the upstream diff applied on top, with routine wording.
 8. Verify `git rev-list --count` is exactly 2 and both commits are non-empty.
 9. Push commit 1 alone to `origin`; open one draft pull request or reuse the
-   existing one.
+   existing open one (closed ones are left alone). `--label <name>` adds a
+   label of the fork to the pull request, for forks whose workflows or reviewers
+   key on one.
 10. Wait until commit 1 is recorded (`--wait-minutes N`, default 45), then push
    commit 2. Pushed together, only the head is recorded and the comparison never
    exists. `--no-wait` skips the wait and forfeits the comparison; a failed
@@ -148,8 +160,12 @@ means do not share.
 What "recorded" needs: the fork workflow must have a token. Pull requests from
 another repository get neither secrets nor OIDC, so a fork-origin run degrades to
 a local, best-effort record. A branch pushed to the fork itself is not
-fork-origin; its workflow runs with the fork's own token. If the comment says
-the capture is partial or the record is a placeholder, the verdict is
+fork-origin; its workflow runs with the fork's own token. Dependabot's pull
+requests run with Dependabot's secret store, not the repository's Actions
+secrets: a workflow that passes `api_token` records nothing on them unless the
+same token is also set as a Dependabot secret (organisation-wide or per fork),
+while the injected OIDC workflow needs no secret. If the comment says the
+capture is partial or the record is a placeholder, the verdict is
 `undeterminable`, not `unchanged`.
 
 ## 3. Card

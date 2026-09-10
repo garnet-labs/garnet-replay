@@ -1,0 +1,1739 @@
+{
+  "slug": "uv",
+  "upstream": "astral-sh/uv",
+  "fork": "garnet-labs/uv",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21594,
+      "title": "Bump version to 0.12.13",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T18:20:00Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "version",
+        "from": null,
+        "to": "0.12.13"
+      },
+      "files": 100,
+      "paths": [
+        "CHANGELOG.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "crates/uv-audit/Cargo.toml",
+        "crates/uv-audit/README.md",
+        "crates/uv-auth/Cargo.toml",
+        "crates/uv-auth/README.md",
+        "crates/uv-bench/Cargo.toml",
+        "crates/uv-bench/README.md",
+        "crates/uv-bin-install/Cargo.toml",
+        "crates/uv-bin-install/README.md",
+        "crates/uv-build-backend/Cargo.toml",
+        "crates/uv-build-backend/README.md",
+        "crates/uv-build-frontend/Cargo.toml",
+        "crates/uv-build-frontend/README.md",
+        "crates/uv-build/Cargo.toml",
+        "crates/uv-build/pyproject.toml",
+        "crates/uv-cache-info/Cargo.toml",
+        "crates/uv-cache-info/README.md",
+        "crates/uv-cache-key/Cargo.toml",
+        "crates/uv-cache-key/README.md",
+        "crates/uv-cache/Cargo.toml",
+        "crates/uv-cache/README.md",
+        "crates/uv-cli/Cargo.toml",
+        "crates/uv-cli/README.md",
+        "crates/uv-client/Cargo.toml",
+        "crates/uv-client/README.md",
+        "crates/uv-configuration/Cargo.toml",
+        "crates/uv-configuration/README.md",
+        "crates/uv-console/Cargo.toml",
+        "crates/uv-console/README.md",
+        "crates/uv-dev/Cargo.toml",
+        "crates/uv-dev/README.md",
+        "crates/uv-dirs/Cargo.toml",
+        "crates/uv-dirs/README.md",
+        "crates/uv-dispatch/Cargo.toml",
+        "crates/uv-dispatch/README.md",
+        "crates/uv-distribution-filename/Cargo.toml",
+        "crates/uv-distribution-filename/README.md",
+        "crates/uv-distribution-types/Cargo.toml",
+        "crates/uv-distribution-types/README.md",
+        "crates/uv-distribution/Cargo.toml",
+        "crates/uv-distribution/README.md",
+        "crates/uv-errors/Cargo.toml",
+        "crates/uv-errors/README.md",
+        "crates/uv-extract/Cargo.toml",
+        "crates/uv-extract/README.md",
+        "crates/uv-fastid/Cargo.toml",
+        "crates/uv-fastid/README.md",
+        "crates/uv-flags/Cargo.toml",
+        "crates/uv-flags/README.md",
+        "crates/uv-fs/Cargo.toml",
+        "crates/uv-fs/README.md",
+        "crates/uv-git-types/Cargo.toml",
+        "crates/uv-git-types/README.md",
+        "crates/uv-git/Cargo.toml",
+        "crates/uv-git/README.md",
+        "crates/uv-globfilter/Cargo.toml",
+        "crates/uv-install-wheel/Cargo.toml",
+        "crates/uv-install-wheel/README.md",
+        "crates/uv-installer/Cargo.toml",
+        "crates/uv-installer/README.md",
+        "crates/uv-keyring/Cargo.toml",
+        "crates/uv-logging/Cargo.toml",
+        "crates/uv-logging/README.md",
+        "crates/uv-macros/Cargo.toml",
+        "crates/uv-macros/README.md",
+        "crates/uv-metadata/Cargo.toml",
+        "crates/uv-metadata/README.md",
+        "crates/uv-netrc/Cargo.toml",
+        "crates/uv-normalize/Cargo.toml",
+        "crates/uv-normalize/README.md",
+        "crates/uv-once-map/Cargo.toml",
+        "crates/uv-once-map/README.md",
+        "crates/uv-options-metadata/Cargo.toml",
+        "crates/uv-options-metadata/README.md",
+        "crates/uv-pep440/Cargo.toml",
+        "crates/uv-pep440/README.md",
+        "crates/uv-pep508/Cargo.toml",
+        "crates/uv-pep508/README.md",
+        "crates/uv-performance-memory-allocator/Cargo.toml",
+        "crates/uv-performance-memory-allocator/README.md",
+        "crates/uv-platform-tags/Cargo.toml",
+        "crates/uv-platform-tags/README.md",
+        "crates/uv-platform/Cargo.toml",
+        "crates/uv-platform/README.md",
+        "crates/uv-preview/Cargo.toml",
+        "crates/uv-preview/README.md",
+        "crates/uv-publish/Cargo.toml",
+        "crates/uv-publish/README.md",
+        "crates/uv-pypi-types/Cargo.toml",
+        "crates/uv-pypi-types/README.md",
+        "crates/uv-python/Cargo.toml",
+        "crates/uv-python/README.md",
+        "crates/uv-redacted/Cargo.toml",
+        "crates/uv-redacted/README.md",
+        "crates/uv-requirements-txt/Cargo.toml",
+        "crates/uv-requirements-txt/README.md",
+        "crates/uv-requirements/Cargo.toml",
+        "crates/uv-requirements/README.md"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21558,
+      "title": "Bump version to 0.12.12",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T15:25:51Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "version",
+        "from": null,
+        "to": "0.12.12"
+      },
+      "files": 100,
+      "paths": [
+        "CHANGELOG.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "crates/uv-audit/Cargo.toml",
+        "crates/uv-audit/README.md",
+        "crates/uv-auth/Cargo.toml",
+        "crates/uv-auth/README.md",
+        "crates/uv-bench/Cargo.toml",
+        "crates/uv-bench/README.md",
+        "crates/uv-bin-install/Cargo.toml",
+        "crates/uv-bin-install/README.md",
+        "crates/uv-build-backend/Cargo.toml",
+        "crates/uv-build-backend/README.md",
+        "crates/uv-build-frontend/Cargo.toml",
+        "crates/uv-build-frontend/README.md",
+        "crates/uv-build/Cargo.toml",
+        "crates/uv-build/pyproject.toml",
+        "crates/uv-cache-info/Cargo.toml",
+        "crates/uv-cache-info/README.md",
+        "crates/uv-cache-key/Cargo.toml",
+        "crates/uv-cache-key/README.md",
+        "crates/uv-cache/Cargo.toml",
+        "crates/uv-cache/README.md",
+        "crates/uv-cli/Cargo.toml",
+        "crates/uv-cli/README.md",
+        "crates/uv-client/Cargo.toml",
+        "crates/uv-client/README.md",
+        "crates/uv-configuration/Cargo.toml",
+        "crates/uv-configuration/README.md",
+        "crates/uv-console/Cargo.toml",
+        "crates/uv-console/README.md",
+        "crates/uv-dev/Cargo.toml",
+        "crates/uv-dev/README.md",
+        "crates/uv-dirs/Cargo.toml",
+        "crates/uv-dirs/README.md",
+        "crates/uv-dispatch/Cargo.toml",
+        "crates/uv-dispatch/README.md",
+        "crates/uv-distribution-filename/Cargo.toml",
+        "crates/uv-distribution-filename/README.md",
+        "crates/uv-distribution-types/Cargo.toml",
+        "crates/uv-distribution-types/README.md",
+        "crates/uv-distribution/Cargo.toml",
+        "crates/uv-distribution/README.md",
+        "crates/uv-errors/Cargo.toml",
+        "crates/uv-errors/README.md",
+        "crates/uv-extract/Cargo.toml",
+        "crates/uv-extract/README.md",
+        "crates/uv-fastid/Cargo.toml",
+        "crates/uv-fastid/README.md",
+        "crates/uv-flags/Cargo.toml",
+        "crates/uv-flags/README.md",
+        "crates/uv-fs/Cargo.toml",
+        "crates/uv-fs/README.md",
+        "crates/uv-git-types/Cargo.toml",
+        "crates/uv-git-types/README.md",
+        "crates/uv-git/Cargo.toml",
+        "crates/uv-git/README.md",
+        "crates/uv-globfilter/Cargo.toml",
+        "crates/uv-install-wheel/Cargo.toml",
+        "crates/uv-install-wheel/README.md",
+        "crates/uv-installer/Cargo.toml",
+        "crates/uv-installer/README.md",
+        "crates/uv-keyring/Cargo.toml",
+        "crates/uv-logging/Cargo.toml",
+        "crates/uv-logging/README.md",
+        "crates/uv-macros/Cargo.toml",
+        "crates/uv-macros/README.md",
+        "crates/uv-metadata/Cargo.toml",
+        "crates/uv-metadata/README.md",
+        "crates/uv-netrc/Cargo.toml",
+        "crates/uv-normalize/Cargo.toml",
+        "crates/uv-normalize/README.md",
+        "crates/uv-once-map/Cargo.toml",
+        "crates/uv-once-map/README.md",
+        "crates/uv-options-metadata/Cargo.toml",
+        "crates/uv-options-metadata/README.md",
+        "crates/uv-pep440/Cargo.toml",
+        "crates/uv-pep440/README.md",
+        "crates/uv-pep508/Cargo.toml",
+        "crates/uv-pep508/README.md",
+        "crates/uv-performance-memory-allocator/Cargo.toml",
+        "crates/uv-performance-memory-allocator/README.md",
+        "crates/uv-platform-tags/Cargo.toml",
+        "crates/uv-platform-tags/README.md",
+        "crates/uv-platform/Cargo.toml",
+        "crates/uv-platform/README.md",
+        "crates/uv-preview/Cargo.toml",
+        "crates/uv-preview/README.md",
+        "crates/uv-publish/Cargo.toml",
+        "crates/uv-publish/README.md",
+        "crates/uv-pypi-types/Cargo.toml",
+        "crates/uv-pypi-types/README.md",
+        "crates/uv-python/Cargo.toml",
+        "crates/uv-python/README.md",
+        "crates/uv-redacted/Cargo.toml",
+        "crates/uv-redacted/README.md",
+        "crates/uv-requirements-txt/Cargo.toml",
+        "crates/uv-requirements-txt/README.md",
+        "crates/uv-requirements/Cargo.toml",
+        "crates/uv-requirements/README.md"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21582,
+      "title": "Update repository label consumers",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T14:10:43Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".github/allowed-pull-request-labels.json",
+        ".github/workflows/diagnose-workflow-failure.yml",
+        "agents/prompts/diagnose-workflow-failure.md",
+        "agents/prompts/pull-request-labels.md",
+        "agents/schemas/workflow-failure.json",
+        "pyproject.toml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21570,
+      "title": "Retry failed partial downloads with HTTP Range header when supported",
+      "author": "woodruffw",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T20:02:03Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "crates/uv-distribution/Cargo.toml",
+        "crates/uv-distribution/src/distribution_database.rs",
+        "crates/uv-distribution/src/error.rs",
+        "crates/uv/tests/it/network.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21563,
+      "title": "Verify sidecar hashes",
+      "author": "EliteTK",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T17:43:34Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "Cargo.lock",
+        "crates/uv-cache/src/lib.rs",
+        "crates/uv-client/Cargo.toml",
+        "crates/uv-client/src/error.rs",
+        "crates/uv-client/src/flat_index.rs",
+        "crates/uv-client/src/registry_client.rs",
+        "crates/uv-distribution-types/src/file.rs",
+        "crates/uv-pypi-types/src/simple_json.rs",
+        "crates/uv-resolver/src/lock/export/pylock_toml.rs",
+        "crates/uv-resolver/src/lock/mod.rs",
+        "crates/uv-resolver/src/resolver/batch_prefetch.rs",
+        "crates/uv/tests/build/cache_clean.rs",
+        "crates/uv/tests/lock/lock.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21589,
+      "title": "Omit unused `exclude-newer-package` entries from script locks",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T15:59:28Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 27,
+      "paths": [
+        "agents/hooks/post-edit-format.py.lock",
+        "agents/scripts/agent-review-to-github-comments.py.lock",
+        "crates/uv-extract/test_vectors/dirhash.py.lock",
+        "crates/uv-python/fetch-download-metadata.py.lock",
+        "pyproject.toml",
+        "scripts/build_uv_pgo.py.lock",
+        "scripts/bump-workspace-crate-versions.py.lock",
+        "scripts/check-trampoline-version-consistency.py.lock",
+        "scripts/create-python-mirror.py.lock",
+        "scripts/extract-github-release-binaries.py.lock",
+        "scripts/extract-wheel-binaries.py.lock",
+        "scripts/generate-crate-readmes.py.lock",
+        "scripts/generate-known-stdlib.py.lock",
+        "scripts/inject-signed-github-release-binaries.py.lock",
+        "scripts/inject-signed-wheel-binaries.py.lock",
+        "scripts/notarize-release-macos.py.lock",
+        "scripts/plan-release-signing.py.lock",
+        "scripts/publish/test_publish.py.lock",
+        "scripts/registries-test.py.lock",
+        "scripts/sign-release-macos.py.lock",
+        "scripts/sync-python-version-constants.py.lock",
+        "scripts/update-latest-changelog-section.py.lock",
+        "scripts/uv-run-remote-script-test.py.lock",
+        "scripts/vendor-packaging.py.lock",
+        "scripts/verify-github-release-macos.py.lock",
+        "scripts/verify-release-binaries-macos.py.lock",
+        "scripts/verify-release-wheels-macos.py.lock"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21557,
+      "title": "Prefer post-quantum X25519MLKEM768 key exchange",
+      "author": "tiran",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T13:35:47Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "Cargo.toml",
+        "crates/uv-client/tests/it/http_util.rs",
+        "crates/uv-client/tests/it/ssl_certs.rs"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21572,
+      "title": "Use paid GitHub-hosted runners for Linux",
+      "author": "zanieb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T22:06:46Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        ".github/workflows/build-dev-binaries.yml",
+        ".github/workflows/build-docker.yml",
+        ".github/workflows/build-release-binaries.yml",
+        ".github/workflows/check-docs.yml",
+        ".github/workflows/check-fmt.yml",
+        ".github/workflows/check-generated-files.yml",
+        ".github/workflows/check-lint.yml",
+        ".github/workflows/check-lock.yml",
+        ".github/workflows/check-release.yml",
+        ".github/workflows/check-zizmor.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/diagnose-workflow-failure.yml",
+        ".github/workflows/fix-bug.yml",
+        ".github/workflows/issue-triage.yml",
+        ".github/workflows/promote-pull-request.yml",
+        ".github/workflows/publish-crates.yml",
+        ".github/workflows/publish-docs.yml",
+        ".github/workflows/publish-mirror.yml",
+        ".github/workflows/publish-pypi.yml",
+        ".github/workflows/publish-versions.yml",
+        ".github/workflows/pull-request-conflicts.yml",
+        ".github/workflows/pull-request-labels.yml",
+        ".github/workflows/pull-request-security-review.yml",
+        ".github/workflows/rebase-conflicted-pull-request.yml",
+        ".github/workflows/release-prepare.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/reproduce-bug.yml",
+        ".github/workflows/sign-release-binaries.yml",
+        ".github/workflows/sync-python-releases.yml",
+        ".github/workflows/sync-uv-dev.yml",
+        ".github/workflows/sync-uv-security.yml",
+        ".github/workflows/test-ecosystem.yml",
+        ".github/workflows/test-integration.yml",
+        ".github/workflows/test-smoke.yml",
+        ".github/workflows/test-system.yml",
+        ".github/workflows/test-windows-trampolines.yml",
+        ".github/workflows/update-issue-context.yml",
+        ".github/workflows/update-pull-request-parent.yml"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21598,
+      "title": "Include the Docker image name in publish jobs",
+      "author": "zanieb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T19:27:57Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/publish-docker-image.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21597,
+      "title": "Use shared Depot Docker actions",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T19:07:30Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/build-docker.yml",
+        ".github/workflows/publish-docker-image.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21595,
+      "title": "Publish documentation with STS credentials",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T18:26:31Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/publish-docs.yml",
+        ".github/workflows/release.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21592,
+      "title": "Use the workflow revision for PR security review configuration",
+      "author": "zsol",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T16:48:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/workflows/pull-request-security-review.yml",
+        "agents/prompts/pull-request-security-review.md",
+        "agents/scripts/install-codex-security.sh"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21591,
+      "title": "Use separate Depot projects for Docker development builds",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T16:20:34Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/build-docker.yml",
+        ".github/workflows/publish-docker-image.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21586,
+      "title": "Separate Docker release builds from publishing",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T15:09:55Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".github/workflows/build-docker.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/plan.yml",
+        ".github/workflows/publish-docker-image.yml",
+        ".github/workflows/publish-docker.yml",
+        ".github/workflows/release.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21575,
+      "title": "Reuse upstream CodSpeed profiles in uv-dev",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T03:45:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".github/automations-dispatch.json",
+        ".github/secure-token-service.json",
+        ".github/workflows/bench.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/import-codspeed-profiles.yml",
+        ".github/workflows/plan.yml",
+        ".github/workflows/sync-codspeed-profiles.yml",
+        "scripts/codspeed-profiles.py",
+        "scripts/codspeed-profiles.py.lock"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21573,
+      "title": "Build macOS x86_64 dev binaries on Namespace",
+      "author": "zanieb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T22:13:01Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/build-dev-binaries.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21571,
+      "title": "Filter triage labels during pull request promotion",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T21:38:50Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/promote-pull-request.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21561,
+      "title": "Clarify release pipeline job names",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T16:45:59Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21556,
+      "title": "Refactor release artifact handling",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T13:22:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".github/workflows/build-release-binaries.yml",
+        ".github/workflows/plan.yml",
+        ".github/workflows/publish-mirror.yml",
+        ".github/workflows/publish-pypi.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/sign-release-binaries.yml",
+        "scripts/assemble-release-artifacts.py",
+        "scripts/assemble-release-artifacts.py.lock",
+        "scripts/check-release-artifact-sboms.sh",
+        "scripts/dist-manifest-to-files.sh",
+        "scripts/manual-github-release.sh",
+        "scripts/plan-release-signing.py"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21599,
+      "title": "Render source chains with compact tree connectors",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:22:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 46,
+      "paths": [
+        "crates/uv-errors/src/lib.rs",
+        "crates/uv-publish/src/lib.rs",
+        "crates/uv-test/src/lib.rs",
+        "crates/uv-warnings/src/lib.rs",
+        "crates/uv/tests/build/audit.rs",
+        "crates/uv/tests/build/build.rs",
+        "crates/uv/tests/build/build_backend.rs",
+        "crates/uv/tests/build/cache.rs",
+        "crates/uv/tests/build/cache_prune.rs",
+        "crates/uv/tests/it/auth.rs",
+        "crates/uv/tests/it/branching_urls.rs",
+        "crates/uv/tests/it/network.rs",
+        "crates/uv/tests/it/publish.rs",
+        "crates/uv/tests/it/resource_limits.rs",
+        "crates/uv/tests/it/upgrade.rs",
+        "crates/uv/tests/it/version.rs",
+        "crates/uv/tests/lock/lock.rs",
+        "crates/uv/tests/lock_scenarios/lock_conflict.rs",
+        "crates/uv/tests/lock_scenarios/lock_exclude_newer_relative.rs",
+        "crates/uv/tests/lock_scenarios/lock_scenarios.rs",
+        "crates/uv/tests/pip/pip_compile_scenarios.rs",
+        "crates/uv/tests/pip/pip_freeze.rs",
+        "crates/uv/tests/pip/pip_install_scenarios.rs",
+        "crates/uv/tests/pip/pip_list.rs",
+        "crates/uv/tests/pip/pip_sync.rs",
+        "crates/uv/tests/pip/pip_uninstall.rs",
+        "crates/uv/tests/pip_compile/pip_compile.rs",
+        "crates/uv/tests/pip_install/direct_url_hashes.rs",
+        "crates/uv/tests/pip_install/pip_install.rs",
+        "crates/uv/tests/project/check.rs",
+        "crates/uv/tests/project/edit.rs",
+        "crates/uv/tests/project/export.rs",
+        "crates/uv/tests/project/format.rs",
+        "crates/uv/tests/project/init.rs",
+        "crates/uv/tests/project/run.rs",
+        "crates/uv/tests/python/python_find.rs",
+        "crates/uv/tests/python/python_install.rs",
+        "crates/uv/tests/python/python_list.rs",
+        "crates/uv/tests/python/venv.rs",
+        "crates/uv/tests/sync/show_settings.rs",
+        "crates/uv/tests/sync/sync.rs",
+        "crates/uv/tests/tool/tool_install.rs",
+        "crates/uv/tests/tool/tool_run.rs",
+        "crates/uv/tests/tool/tool_upgrade.rs",
+        "crates/uv/tests/workspace/workspace.rs",
+        "crates/uv/tests/workspace/workspace_metadata.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21584,
+      "title": "Rename the hint-producing trait to Hinted",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T15:02:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 34,
+      "paths": [
+        "crates/uv-build-backend/src/lib.rs",
+        "crates/uv-build-frontend/src/error.rs",
+        "crates/uv-client/src/error.rs",
+        "crates/uv-client/tests/it/ssl_certs.rs",
+        "crates/uv-dispatch/src/lib.rs",
+        "crates/uv-distribution-types/src/dist_error.rs",
+        "crates/uv-distribution/src/error.rs",
+        "crates/uv-distribution/src/metadata/lowering.rs",
+        "crates/uv-distribution/src/metadata/mod.rs",
+        "crates/uv-errors/src/lib.rs",
+        "crates/uv-globfilter/src/portable_glob.rs",
+        "crates/uv-installer/src/plan.rs",
+        "crates/uv-python/src/discovery.rs",
+        "crates/uv-python/src/interpreter.rs",
+        "crates/uv-python/src/lib.rs",
+        "crates/uv-requirements-txt/src/requirement.rs",
+        "crates/uv-resolver/src/error.rs",
+        "crates/uv-resolver/src/lock/export/pylock_toml.rs",
+        "crates/uv-resolver/src/lock/mod.rs",
+        "crates/uv-types/src/traits.rs",
+        "crates/uv-virtualenv/src/lib.rs",
+        "crates/uv-workspace/src/pyproject.rs",
+        "crates/uv/src/commands/build_frontend.rs",
+        "crates/uv/src/commands/diagnostics.rs",
+        "crates/uv/src/commands/pip/install.rs",
+        "crates/uv/src/commands/pip/operations.rs",
+        "crates/uv/src/commands/project/mod.rs",
+        "crates/uv/src/commands/project/remove.rs",
+        "crates/uv/src/commands/project/run.rs",
+        "crates/uv/src/commands/project/version.rs",
+        "crates/uv/src/commands/python/find.rs",
+        "crates/uv/src/commands/tool/common.rs",
+        "crates/uv/src/commands/tool/run.rs",
+        "crates/uv/src/lib.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21596,
+      "title": "Clarify changelog entry granularity and focus",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T18:55:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "agents/prompts/editorialize-changelog.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21593,
+      "title": "Offload large Simple API responses to bounded parsing workers",
+      "author": "charliermarsh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T17:36:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "crates/uv-client/src/registry_client.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21590,
+      "title": "Reuse direct URL wheels across hash fragments",
+      "author": "charliermarsh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T16:09:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "crates/uv-client/src/cached_client.rs",
+        "crates/uv-client/src/httpcache/mod.rs",
+        "crates/uv-distribution-types/src/lib.rs",
+        "crates/uv-distribution/src/archive.rs",
+        "crates/uv-distribution/src/distribution_database.rs",
+        "crates/uv-distribution/src/hash.rs",
+        "crates/uv-installer/src/plan.rs",
+        "crates/uv-resolver/src/lock/export/pylock_toml.rs",
+        "crates/uv/tests/lock/lock.rs",
+        "crates/uv/tests/pip/pip_sync.rs",
+        "crates/uv/tests/pip_install/pip_install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21587,
+      "title": "Separate operation context from exit-status classification",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T15:33:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "crates/uv/src/commands/mod.rs",
+        "crates/uv/src/commands/pip/operations.rs",
+        "crates/uv/src/commands/project/run.rs",
+        "crates/uv/src/commands/tool/run.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21583,
+      "title": "Quote the whole assignment in the Command Prompt PATH hint",
+      "author": "kevin9327",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-10T14:12:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "crates/uv-shell/src/lib.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21581,
+      "title": "Append the executable extension without a leading dot on Windows",
+      "author": "kevin9327",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-10T13:51:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "crates/uv-python/src/discovery.rs",
+        "crates/uv/tests/python/python_find.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21580,
+      "title": "remove deprecated sts policy file",
+      "author": "ewdurbin",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T13:36:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/ost-simple-sts.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21579,
+      "title": "Read Python version files with BOM sniffing",
+      "author": "kevin9327",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-10T13:27:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "crates/uv-python/src/version_files.rs",
+        "crates/uv/tests/python/python_find.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21577,
+      "title": "Add explicit ordering to diagnostic hints",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T13:16:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "crates/uv-client/tests/it/ssl_certs.rs",
+        "crates/uv-dev/src/main.rs",
+        "crates/uv-errors/src/lib.rs",
+        "crates/uv-publish/src/lib.rs",
+        "crates/uv-python/src/discovery.rs",
+        "crates/uv-warnings/src/lib.rs",
+        "crates/uv/src/commands/build_frontend.rs",
+        "crates/uv/src/commands/diagnostics.rs",
+        "crates/uv/src/commands/publish.rs",
+        "crates/uv/src/commands/python/install.rs",
+        "crates/uv/src/commands/tool/run.rs",
+        "crates/uv/src/commands/tool/upgrade.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21574,
+      "title": "used fixed sized buffers",
+      "author": "KGrewal1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T00:09:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "crates/uv-extract/src/dirhash.rs",
+        "crates/uv-extract/src/stream.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21569,
+      "title": "Reject symlinked wheel installation destinations",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:34:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "crates/uv-install-wheel/src/install.rs",
+        "crates/uv-install-wheel/src/linker.rs",
+        "crates/uv-install-wheel/src/wheel.rs",
+        "crates/uv/tests/pip_install/pip_install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21568,
+      "title": "Route Python upgrade request errors through UvError",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:12:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "crates/uv/src/commands/diagnostics.rs",
+        "crates/uv/src/commands/python/install.rs",
+        "crates/uv/tests/python/python_install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21566,
+      "title": "Preserve hints in tool upgrade failures",
+      "author": "zanieb",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T19:02:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "crates/uv/src/commands/tool/upgrade.rs",
+        "crates/uv/tests/tool/tool_upgrade.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21565,
+      "title": "Show source chains in user warnings",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T18:40:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "crates/uv-auth/src/keyring.rs",
+        "crates/uv-client/src/base_client.rs",
+        "crates/uv-python/src/discovery.rs",
+        "crates/uv-warnings/src/lib.rs",
+        "crates/uv/src/commands/project/lock.rs",
+        "crates/uv/src/commands/python/find.rs",
+        "crates/uv/src/commands/python/pin.rs",
+        "crates/uv/src/commands/tool/install.rs",
+        "crates/uv/tests/lock/lock.rs",
+        "crates/uv/tests/pip_compile/pip_compile.rs",
+        "crates/uv/tests/python/python_find.rs",
+        "crates/uv/tests/python/python_pin.rs",
+        "crates/uv/tests/tool/tool_install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21564,
+      "title": "Keep agent comments focused on current behavior",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T18:22:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "AGENTS.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21562,
+      "title": "Verify distribution hashes",
+      "author": "EliteTK",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T17:34:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "crates/uv-distribution-types/src/hash.rs",
+        "crates/uv-distribution/src/distribution_database.rs",
+        "crates/uv-distribution/src/source/validated_archive.rs",
+        "crates/uv/tests/build/cache.rs",
+        "crates/uv/tests/it/network.rs",
+        "crates/uv/tests/pip/pip_sync.rs",
+        "crates/uv/tests/pip_compile/pip_compile.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21560,
+      "title": "Prepare STS policy filename migration",
+      "author": "zaniebot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T16:44:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/secure-token-service.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21559,
+      "title": "Prefer `python` over `python3` in Unix environments",
+      "author": "app/astral-automations-bot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T15:44:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "crates/uv-python/src/virtualenv.rs",
+        "crates/uv/tests/pip_compile/pip_compile.rs",
+        "crates/uv/tests/pip_install/pip_install.rs",
+        "crates/uv/tests/python/python_find.rs",
+        "crates/uv/tests/sync/sync.rs",
+        "crates/uv/tests/tool/tool_install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 21555,
+      "title": "Respect ty exclusions in `uv check`",
+      "author": "zsol",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T13:21:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "crates/uv/src/commands/project/check.rs",
+        "crates/uv/src/commands/project/check/ty.rs",
+        "crates/uv/tests/project/check.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:27.616Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 21570,
+      "forkPr": 4,
+      "branch": "chore/range-retry",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "0ebbd9274a55a8a53a13970be3b97e4209598e17",
+      "headSha": "5dfaef57107facd8a1d6ef84616b5ef3d4f11ced",
+      "forkHeadSha": "2ef25221633f68fd67add73e757b73e0d9533e14",
+      "firstSha": "976ae594edcb68fb2d46d0ce096befa2c41d2973",
+      "transition": null,
+      "record": "inject",
+      "ecosystem": "cargo",
+      "state": "recorded",
+      "openedAt": "2026-09-10T21:47:05.822Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 4,
+      "card": "out/uv/pr-4-card.md",
+      "verdict": "unchanged",
+      "reason": null,
+      "headSha": "2ef25221633f68fd67add73e757b73e0d9533e14",
+      "previousSha": "976ae594edcb68fb2d46d0ce096befa2c41d2973",
+      "scope": "pr-base-to-head",
+      "renderedAt": "2026-09-10T22:01:21.358Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 2
+}

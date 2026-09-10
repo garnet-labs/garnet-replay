@@ -13,7 +13,7 @@ No dependencies to install.
 
 ```sh
 git clone https://github.com/garnet-labs/garnet-replay && cd garnet-replay
-npm test                      # 57 tests, no network
+npm test                      # 72 tests, no network
 node bin/replay.mjs --help
 ```
 
@@ -73,6 +73,11 @@ record mirrors what the pull request itself changed. To make that comparison
 exist, `live` pushes commit 1 alone, opens the pull request, waits until commit 1
 is recorded (45 min by default, `--wait-minutes N`), and only then pushes commit 2.
 The harness never posts comments; the fork's own recording workflow does.
+
+A fork that has no recording workflow gets one in commit 1. It runs on every pull
+request of the fork, Dependabot's included, and needs no secret (OIDC). A fork
+without `.github/dependabot.yml` gets a weekly one in the same commit, so the
+fork's own dependency pull requests are recorded from then on.
 
 ## Rules the code enforces
 

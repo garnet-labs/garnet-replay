@@ -3,14 +3,14 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, detectEcosystem, executePlan, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, combinedPathFilter, contextCommitMessage, dependabotConfig, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
 import { evaluateConsumption, renderConsumeReport } from "../lib/consume.mjs"
-import { evaluateExhibit } from "../lib/verify.mjs"
+import { evaluateExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { planStage2, renderStage2Plan } from "../lib/stage2.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
 
@@ -186,6 +186,33 @@ test("replay --pr: two commits, exact head fetch, fork-only writes, no upstream 
   assert.throws(() => replayPlan({ record: "inject", ecosystem: "bazel" }), /no install command/)
 })
 
+test("replay --pr: commit 1 and the body name manifests only when every touched path is one", () => {
+  const manifests = ["Cargo.toml", "Cargo.lock", "crates/uv/Cargo.toml", "nodejs/package.json", "pnpm-lock.yaml", "pyproject.toml", "uv.lock", "go.mod", "Gemfile.lock"]
+  assert.equal(allManifests(manifests), true)
+  assert.equal(allManifests([...manifests, "crates/uv/src/lib.rs"]), false)
+  assert.equal(allManifests([]), false)
+  assert.match(contextCommitMessage(["Cargo.toml", "Cargo.lock"]), /^chore\(deps\): sync dependency manifests before update\n\n- Cargo\.toml\n- Cargo\.lock$/)
+  assert.match(contextCommitMessage(["Cargo.toml", "crates/uv/src/lib.rs"]), /^chore: sync touched files before update\n\n- Cargo\.toml\n- crates\/uv\/src\/lib\.rs$/)
+  assert.equal(
+    prBodyText({ paths: ["Cargo.toml", "crates/uv/src/lib.rs"] }),
+    "Two commits: the first prepares the branch, the second is the change itself.\n\n2 files:\n\n- Cargo.toml\n- crates/uv/src/lib.rs\n",
+  )
+  assert.match(prBodyText({ paths: ["pnpm-lock.yaml"] }), /\n\nOne dependency manifest:\n\n- pnpm-lock\.yaml\n$/)
+  assert.match(prBodyText({ paths: manifests }), /\n\n9 dependency manifests:\n\n(- .*\n){6}- and 3 more\n$/)
+  const plan = replayPlan({ upstreamTitle: "Retry failed partial downloads", changes: [{ path: "crates/uv/src/lib.rs", status: "modified", previous: null }, { path: "Cargo.lock", status: "modified", previous: null }], firstPaths: [] })
+  assert.match(plan.messages.first, /^chore: sync touched files before update/)
+  assert.equal(plan.branch, "chore/update-dx")
+  assert.equal(replayPlan({ upstreamTitle: "Refresh lockfile", changes: [{ path: "pnpm-lock.yaml", status: "modified", previous: null }] }).branch, "chore/manifests-dx")
+  assert.match(plan.body, /^Two commits: the first prepares the branch, the second is the change itself\.\n\n2 files:/)
+  for (const text of [plan.body, plan.messages.first]) assertVocabClean(text)
+})
+
+test("verify: only PASS exits 0", () => {
+  assert.equal(verifyExitCode({ status: "PASS" }), 0)
+  assert.equal(verifyExitCode({ status: "FAIL" }), 1)
+  assert.equal(verifyExitCode({ status: "anything else" }), 1)
+})
+
 test("replay --pr: staging never names a path that is absent from the index and the worktree", () => {
   const plan = replayPlan({ changes: [...changes, { path: "frontend/src/legacy.test.ts", status: "removed", previous: null }] })
   const firstAdd = plan.steps.find((s) => s.id === "first-add")
@@ -252,6 +279,64 @@ test("replay --pr: --base-branch opens against a fork branch set to the base and
   assert.equal(resolvedFirstMessage([recorder], "chore(deps): sync dependency manifests before update\n\n- x"), `ci: record dependency installs on pull requests\n\n- ${recorder}`)
 })
 
+test("replay --pr: when the change's base already records, --base-branch carries nothing and says so", () => {
+  const plan = replayPlan({ baseBranch: "base/x", recordWorkflows: [".github/workflows/a.yml", ".github/workflows/b.yml"], baseRecords: [".github/workflows/ci.yml"] })
+  assert.equal(plan.steps.some((s) => s.id === "first-fork-record"), false)
+  assert.deepEqual(plan.recordWorkflows, [])
+  assert.deepEqual(plan.baseRecords, [".github/workflows/ci.yml"])
+  assert.match(renderPlan(plan), /record: the change's base already runs its own recording workflow \(\.github\/workflows\/ci\.yml\)/)
+  assert.deepEqual(replayPlan({ baseBranch: "base/x", recordWorkflows: [".github/workflows/a.yml"] }).baseRecords, [])
+  assert.match(renderPlan(replayPlan({ baseBranch: "base/x", recordWorkflows: [".github/workflows/a.yml"] })), /record: fork's recording workflow carried into commit 1 \(\.github\/workflows\/a\.yml\)/)
+})
+
+test("replay --pr: --label puts the fork's label on the pull request after it opens, never on the upstream", () => {
+  const plan = replayPlan({ label: "release-testing" })
+  const ids = plan.steps.map((s) => s.id)
+  const step = plan.steps.find((s) => s.id === "pr-label")
+  assert.equal(step.kind, "write-remote")
+  assert.equal(step.target, FORK)
+  assert.deepEqual(step.args, ["pr", "edit", plan.branch, "--repo", FORK, "--add-label", "release-testing"])
+  assert.ok(ids.indexOf("pr-create") < ids.indexOf("pr-label") && ids.indexOf("pr-label") < ids.indexOf("wait-first-record"))
+  assert.match(renderPlan(plan), /^label: release-testing$/m)
+  assert.equal(replayPlan().steps.some((s) => s.id === "pr-label"), false)
+  assert.throws(() => replayPlan({ label: " " }), /--label needs a label name/)
+})
+
+test("replay --pr: an injected recorder also covers Dependabot; a fork without dependabot.yml gets one in commit 1", () => {
+  const plan = replayPlan({ record: "inject", ecosystem: "npm", dependabotConfigured: false })
+  const ids = plan.steps.map((s) => s.id)
+  const write = plan.steps.find((s) => s.id === "first-dependabot")
+  assert.equal(write.kind, "write-local")
+  assert.equal(write.writeFileContent.file, "/tmp/work/.github/dependabot.yml")
+  assert.match(write.writeFileContent.content, /^version: 2\nupdates:\n  - package-ecosystem: npm\n    directory: \/\n    schedule:\n      interval: weekly\n/)
+  assert.match(write.writeFileContent.content, /package-ecosystem: github-actions/)
+  assert.ok(ids.indexOf("first-record-add") < ids.indexOf("first-dependabot") && ids.indexOf("first-dependabot-add") < ids.indexOf("first-commit"), ids.join(" "))
+  assert.equal(plan.dependabotAdded, true)
+  assert.match(renderPlan(plan), /^record: recording workflow added in commit 1 \(npm\); Dependabot pull requests on the fork run it too$/m)
+  assert.match(renderPlan(plan), /^dependabot: \.github\/dependabot\.yml added in commit 1 \(npm, weekly\)$/m)
+  assert.equal(replayPlan({ record: "inject", ecosystem: "npm" }).steps.some((s) => s.id === "first-dependabot"), false)
+  assert.equal(replayPlan({ dependabotConfigured: false }).steps.some((s) => s.id === "first-dependabot"), false, "the fork's own recorder: nothing is added")
+  assert.equal(dependabotConfig("pnpm").includes("package-ecosystem: npm"), true)
+  assert.equal(dependabotConfig("uv").includes("package-ecosystem: uv"), true)
+  assert.equal(dependabotConfig("go").includes("package-ecosystem: gomod"), true)
+  assert.equal(dependabotConfig("ruby").includes("package-ecosystem: bundler"), true)
+  assert.throws(() => dependabotConfig("bazel"), /no Dependabot ecosystem/)
+  assert.match(recordWorkflow("npm"), /Dependabot's included/)
+  assert.equal(resolvedFirstMessage([".github/dependabot.yml", ".github/workflows/garnet-record.yml"], "chore(deps): sync"), "ci: record dependency installs on pull requests\n\n- .github/dependabot.yml\n- .github/workflows/garnet-record.yml")
+})
+
+test("recording workflows: a pull_request workflow that calls a local reusable workflow running the action counts; the reusable file alone does not", () => {
+  const bodies = {
+    "ci.yml": "name: CI\non:\n  pull_request:\n  push:\njobs:\n  test:\n    uses: $/.github/workflows/test.yml\n    with:\n      garnet: true\n",
+    "test.yml": "name: Test\non:\n  workflow_call:\njobs:\n  test:\n    steps:\n      - uses: garnet-org/action@3d47f4a9004f7356c980a0e8d420ef5984750e3c\n",
+    "release.yml": "name: Release\non:\n  push:\n    tags: ['v*']\njobs:\n  release:\n    steps:\n      - uses: garnet-org/action@v2\n",
+    "record.yml": "name: Record\non: [push, pull_request]\njobs:\n  record:\n    steps:\n      - uses: garnet-org/action@v2\n",
+    "lint.yml": "name: Lint\non:\n  pull_request:\njobs:\n  lint:\n    uses: ./.github/workflows/lint-impl.yml\n",
+    "lint-impl.yml": "on:\n  workflow_call:\njobs:\n  lint:\n    steps:\n      - run: echo ok\n",
+  }
+  assert.deepEqual(recordingWorkflowFiles(bodies), ["ci.yml", "record.yml"])
+})
+
 test("replay --pr: the fork recorder's path filter must be reached by commit 2, or nothing records", () => {
   const recorder = `name: Garnet Runtime Visibility
 on:
@@ -268,8 +353,17 @@ permissions:
     contents: read
 `
   assert.deepEqual(pullRequestPathFilter(recorder), ["package.json", "pnpm-lock.yaml", ".github/workflows/garnet-ci.yml"])
+  assert.deepEqual(pullRequestPathFilter("on:\n  pull_request:\n    paths: [package.json, 'pnpm-lock.yaml', \"**/Cargo.lock\"] # flow form\njobs: {}\n"), ["package.json", "pnpm-lock.yaml", "**/Cargo.lock"])
+  assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    paths: []\njobs: {}\n"), null)
   assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    branches: [main]\njobs: {}\n"), null)
   assert.equal(pullRequestPathFilter("on: [push]\n"), null)
+
+  // Several recorders: commit 2 has to reach at least one, so their filters are joined; one unfiltered recorder means no filter.
+  const paths = { ".github/workflows/a.yml": ["package.json"], ".github/workflows/b.yml": ["Cargo.lock", "package.json"], ".github/workflows/all.yml": null }
+  assert.deepEqual(combinedPathFilter(paths, [".github/workflows/a.yml", ".github/workflows/b.yml"]), ["package.json", "Cargo.lock"])
+  assert.equal(combinedPathFilter(paths, [".github/workflows/a.yml", ".github/workflows/all.yml"]), null)
+  assert.deepEqual(combinedPathFilter(paths, [".github/workflows/a.yml"]), ["package.json"])
+  assert.equal(combinedPathFilter(paths, [".github/workflows/unknown.yml"]), null)
   assert.equal(matchesPathFilter("pnpm-lock.yaml", ["package.json", "pnpm-lock.yaml"]), true)
   assert.equal(matchesPathFilter("frontend/package.json", ["package.json"]), false)
   assert.equal(matchesPathFilter("frontend/package.json", ["**/package.json"]), true)
@@ -280,7 +374,7 @@ permissions:
   // The lockfile is in commit 1 here, so commit 2 touches only frontend sources: the recorder would never run on it.
   assert.throws(
     () => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"] }),
-    /recording workflow runs only when package\.json, pnpm-lock\.yaml change; commit 2 touches none of them, so it would record nothing/,
+    /recording workflows run only when package\.json, pnpm-lock\.yaml change; commit 2 touches none of them, so it would record nothing/,
   )
   assert.doesNotThrow(() => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"], firstPaths: [] }))
   assert.doesNotThrow(() => replayPlan({ recordPaths: null }))
@@ -293,6 +387,62 @@ test("replay --pr: commit 1's message describes what it stages, not what the pla
   const only = resolvedFirstMessage([RECORD_WORKFLOW_PATH], planned)
   assert.match(only, /^ci: record dependency installs on pull requests\n\n- \.github\/workflows\/garnet-record\.yml$/)
   assert.equal(replayPlan({ record: "inject", ecosystem: "cargo" }).steps.find((s) => s.id === "first-commit").messageFrom, "firstDiff")
+
+  // The dry run says so too: the plan names the workflow-only message commit 1 gets when nothing else is staged.
+  const injected = replayPlan({ record: "inject", ecosystem: "cargo", dependabotConfigured: false })
+  assert.deepEqual(workflowOnlyFirstPaths(injected), [RECORD_WORKFLOW_PATH, ".github/dependabot.yml"])
+  const rendered = renderPlan(injected)
+  assert.ok(rendered.includes(`commit 1\n  ${injected.messages.first.split("\n")[0]}`))
+  assert.match(rendered, /or, if the fork already holds the touched paths as the change found them and commit 1 stages only these:\n  ci: record dependency installs on pull requests\n\n  - \.github\/workflows\/garnet-record\.yml\n  - \.github\/dependabot\.yml/)
+  assert.deepEqual(workflowOnlyFirstPaths(replayPlan()), [])
+  assert.ok(!renderPlan(replayPlan()).includes("stages only these"))
+  assert.equal(injected.firstStages, "unknown")
+  assert.match(rendered, /commit 1 stages: decided at the checkout/)
+
+  // Compared ahead of time, the dry run names one message and one reason.
+  const held = replayPlan({ record: "inject", ecosystem: "cargo", dependabotConfigured: false, firstPaths: [], forkHoldsBase: true })
+  assert.equal(held.firstStages, "context")
+  assert.match(held.messages.first, /^ci: record dependency installs on pull requests\n\n- \.github\/workflows\/garnet-record\.yml\n- \.github\/dependabot\.yml$/)
+  const heldRendered = renderPlan(held)
+  assert.match(heldRendered, /commit 1 stages: only what the plan adds \(the touched paths on master match the change's base\)/)
+  assert.ok(!heldRendered.includes("or, if the fork"))
+  const differs = replayPlan({ record: "inject", ecosystem: "cargo", dependabotConfigured: false, firstPaths: [], forkHoldsBase: false })
+  assert.equal(differs.firstStages, "touched")
+  assert.match(differs.messages.first, /^chore: sync touched files before update/)
+  assert.ok(!renderPlan(differs).includes("or, if the fork"))
+  assert.match(renderPlan(differs), /commit 1 stages: the touched paths as the change found them \(master on the fork differs on at least one\)/)
+  // --sync-fork and --base-branch start from the change's base, so the answer is known without a probe.
+  assert.equal(replayPlan({ syncFork: true }).firstStages, "context")
+  assert.equal(replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-ci.yml"], firstPaths: [] }).firstStages, "context")
+  // Nothing to stage in commit 1 is refused at plan time, not at the checkout.
+  assert.throws(() => replayPlan({ firstPaths: [], forkHoldsBase: true }), /already holds the touched paths .* pass --first <path>/)
+  assert.throws(() => replayPlan({ syncFork: true, firstPaths: [] }), /pass --first <path>/)
+  assert.doesNotThrow(() => replayPlan({ firstPaths: [], forkHoldsBase: false }))
+})
+
+test("replay --pr: forkHoldsBase compares blobs at the change's base and the fork's branch, 404 is absence, other errors are unknown", () => {
+  const blobs = {
+    "PostHog/posthog@aaaaaaa": { "package.json": "p1", "pnpm-lock.yaml": "l1" },
+    "garnet-labs/posthog@master": { "package.json": "p1", "pnpm-lock.yaml": "l1" },
+  }
+  const exec = (cmd, args) => {
+    const [, endpoint] = args
+    const match = /^repos\/([^/]+\/[^/]+)\/contents\/(.+)\?ref=(.+)$/.exec(endpoint)
+    const at = blobs[`${match[1]}@${match[3].slice(0, 7)}`] ?? {}
+    if (!(match[2] in at)) throw new Error("gh: Not Found (HTTP 404)")
+    return JSON.stringify({ sha: at[match[2]], type: "file" })
+  }
+  const input = { upstream: UPSTREAM, baseSha: SHA_A, fork: FORK, ref: "master", changes }
+  assert.equal(forkHoldsBase(input, { exec }), true)
+  blobs["garnet-labs/posthog@master"]["pnpm-lock.yaml"] = "l2"
+  assert.equal(forkHoldsBase(input, { exec }), false)
+  delete blobs["garnet-labs/posthog@master"]["pnpm-lock.yaml"]
+  assert.equal(forkHoldsBase(input, { exec }), false, "absent on the fork, present at the base")
+  delete blobs["PostHog/posthog@aaaaaaa"]["pnpm-lock.yaml"]
+  assert.equal(forkHoldsBase(input, { exec }), true, "absent in both")
+  assert.equal(forkHoldsBase(input, { exec: () => { throw new Error("HTTP 502") } }), null)
+  assert.equal(forkHoldsBase({ ...input, changes: Array.from({ length: 41 }, (_, i) => ({ path: `f${i}`, status: "modified", previous: null })) }, { exec }), null)
+  assert.equal(forkHoldsBase({ ...input, changes: [] }, { exec }), null)
 })
 
 test("replay --pr: ecosystem detection covers every install command and degrades honestly", () => {
@@ -321,6 +471,7 @@ const recordedFirst = JSON.stringify([{ user: { login: "garnet-ai[bot]" }, body:
 const replayResponses = [
   [/remote get-url origin/, `https://github.com/${FORK}.git\n`],
   [/diff --cached --name-only/, "pnpm-lock.yaml\n"],
+  [/rev-list --count \S+ \^origin/, "0\n"],
   [/rev-list --count/, "2\n"],
   [/rev-parse HEAD~1/, `${SHA_C}\n`],
   [/rev-parse HEAD$/, `${SHA_B}\n`],
@@ -370,6 +521,8 @@ function resumeResponses(remoteHead, remoteTree, extra = []) {
     [/rev-parse HEAD~1\^\{tree\}/, `${TREE_FIRST}\n`],
     [/rev-parse HEAD\^\{tree\}/, `${TREE_HEAD}\n`],
     [new RegExp(`rev-parse ${remoteHead}~1`), `${SHA_C}\n`],
+    [/rev-parse HEAD~2$/, `${SHA_C}\n`],
+    [new RegExp(`rev-list --count origin/master\\.\\.${remoteHead}`), remoteTree === TREE_HEAD ? "2\n" : "1\n"],
     [/commit-tree/, `${REBUILT}\n`],
     [/gh api repos\/\S+\/issues\/70\/comments/, () => JSON.stringify([{ user: { login: "garnet-ai[bot]" }, body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${remoteHead} -->\n<!-- garnet:summary {"status":"finalized"} -->` }])],
     ...replayResponses,
@@ -433,6 +586,22 @@ test("replay --pr: a rerun with both commits on the fork pushes nothing; a forei
   const gone = fakeExec(resumeResponses(null, ""))
   await assert.rejects(executePlan(plan, { exec: gone.exec, io, log: () => {}, wait: noWait }), /is gone/)
 
+  // Commit 1's tree on the fork head, but with an extra commit under it: the two-commit shape is gone, nothing is pushed onto it.
+  const padded = fakeExec([[new RegExp(`rev-list --count origin/master\\.\\.${REMOTE_FIRST}`), "2\n"], ...resumeResponses(REMOTE_FIRST, TREE_FIRST)])
+  await assert.rejects(executePlan(plan, { exec: padded.exec, io, log: () => {}, wait: noWait }), /carries 2 commit\(s\) past master where commit 1 alone would be 1.*--branch/)
+  assert.ok(!padded.calls.some((c) => /git -C \/tmp\/work push|commit-tree|update-ref/.test(c)))
+  const overfull = fakeExec([[new RegExp(`rev-list --count origin/master\\.\\.${REMOTE_HEAD}`), "3\n"], ...resumeResponses(REMOTE_HEAD, TREE_HEAD)])
+  await assert.rejects(executePlan(plan, { exec: overfull.exec, io, log: () => {}, wait: noWait }), /carries 3 commit\(s\) past master where commit 1 and 2 alone would be 2/)
+
+  // Commit 1 on the fork sits on an older base than the branch would start from today: commit 2 on top of it would carry the drift, so nothing is pushed.
+  const OLD_BASE = "7".repeat(40)
+  const drifted = fakeExec([[new RegExp(`rev-parse ${REMOTE_FIRST}~1`), `${OLD_BASE}\n`], ...resumeResponses(REMOTE_FIRST, TREE_FIRST)])
+  await assert.rejects(executePlan(plan, { exec: drifted.exec, io, log: () => {}, wait: noWait }), /starts from 7777777 but master on the fork is now at ccccccc.*--branch <name>/)
+  assert.ok(!drifted.calls.some((c) => /git -C \/tmp\/work push|commit-tree|update-ref|cherry-pick/.test(c)))
+  // With both commits already on the fork, base drift changes nothing: there is nothing left to push.
+  const settled = fakeExec([[new RegExp(`rev-parse ${REMOTE_HEAD}~1`), `${SHA_C}\n`], [/rev-parse HEAD~2$/, `${OLD_BASE}\n`], ...resumeResponses(REMOTE_HEAD, TREE_HEAD)])
+  assert.equal((await executePlan(plan, { exec: settled.exec, io, log: () => {}, wait: noWait })).forkHeadSha, REMOTE_HEAD)
+
   // A closed pull request on the branch is not reused: the replay starts fresh.
   const logs = []
   const closedList = [/gh pr list/, JSON.stringify([{ number: 70, state: "CLOSED", isDraft: true, url: `https://github.com/${FORK}/pull/70` }])]
@@ -442,6 +611,11 @@ test("replay --pr: a rerun with both commits on the fork pushes nothing; a forei
   assert.ok(fresh.calls.includes("git -C /tmp/work push --set-upstream origin HEAD~1:refs/heads/deps/puppeteer-25.9.0"), fresh.calls.join("\n"))
   assert.ok(fresh.calls.some((c) => c.includes("gh pr create")))
   assert.ok(logs.some((line) => /pull request 70 \(closed\) on deps\/puppeteer-25\.9\.0 is not reused/.test(line)), logs.join("\n"))
+
+  // ...unless the closed pull request's branch is still on the fork: a plain push would fail, so stop with the way out.
+  const occupied = fakeExec([closedList, [/rev-parse --verify -q refs\/remotes\/origin\/deps\/puppeteer-25\.9\.0\^\{commit\}/, `${REMOTE_FIRST}\n`], ...replayResponses])
+  await assert.rejects(executePlan(plan, { exec: occupied.exec, io, log: () => {}, wait: noWait }), /still at ddddddd from closed fork pull request 70.*--branch <name>/)
+  assert.ok(!occupied.calls.some((c) => /git -C \/tmp\/work push|gh pr create/.test(c)))
 })
 
 test("replay --pr: when the default branch moved, the fork branch is matched by patch and commit 2 is cherry-picked onto the fork's commit 1", async () => {
@@ -525,7 +699,12 @@ test("replay --pr: guards stop execution on wrong origin, empty commit, or wrong
   const { io } = memoryIo()
   await assert.rejects(executePlan(plan, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${UPSTREAM}.git`]]).exec, io, log: () => {} }), /fork/i)
   await assert.rejects(executePlan(plan, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${FORK}.git`], [/diff --cached/, ""]]).exec, io, log: () => {} }), /would be empty/)
-  await assert.rejects(executePlan(plan, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${FORK}.git`], [/diff --cached/, "x"], [/rev-list --count/, "3"]]).exec, io, log: () => {} }), /two/)
+  await assert.rejects(executePlan(plan, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${FORK}.git`], [/diff --cached/, "x"], [/rev-list --count \S+ \^origin/, "0"], [/rev-list --count/, "3"]]).exec, io, log: () => {} }), /two/)
+  await assert.rejects(executePlan(plan, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${FORK}.git`], [/diff --cached/, "x"], [/rev-list --count \S+ \^origin/, "3"]]).exec, io, log: () => {} }), /3 commit\(s\) behind the change's base.*--allow-behind/)
+  const lenient = replayPlan({ allowBehind: true })
+  const warnings = []
+  await assert.rejects(executePlan(lenient, { exec: fakeExec([[/remote get-url origin/, `https://github.com/${FORK}.git`], [/diff --cached/, "x"], [/rev-list --count \S+ \^origin/, "3"], [/rev-list --count/, "3"]]).exec, io, log: (line) => warnings.push(line) }), /two/)
+  assert.ok(warnings.some((line) => /^warning: .*3 commit\(s\) behind/.test(line)))
 })
 
 test("replay --pr: reconcileState reads the fork head binding from the newest Runtime Review comment", () => {
@@ -920,6 +1099,9 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.doesNotMatch(mirror, /actions\/checkout@[^\n]*\n[^\n]*head\.sha|ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/)
   const gate = Object.entries(plan.files).find(([f]) => f.endsWith("garnet-evidence-gate.yml"))[1]
   assert.match(gate, /head_sha|headRefOid|head\.sha/)
+  assert.match(gate, /--paginate --slurp \\\n\s+--jq "\[\.\[\]\[\] \|/, "paged comments are flattened into one array")
+  assert.match(gate, /garnet-control-plane-pending-pr-comment"\) \| not/)
+  assert.match(gate, /\$s\.status == null or \$s\.status == "finalized"/, "final means the summary parses and is finalized, as lib/receipt.mjs reads it")
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
   assert.match(renderStage2Plan(plan), /garnet\/evidence/)
   assert.throws(() => planStage2({ slug: "x", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", recording: { present: false, workflows: [] } }), /--ecosystem/)

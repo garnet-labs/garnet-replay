@@ -41,14 +41,14 @@ jobs:
           status=0
           while IFS= read -r pr_number; do
             trusted=$(printf '%s' "${TRUSTED_AUTHORS}" | jq -R 'split(" ")')
-            bound=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${pr_number}/comments" --paginate \
-              --jq "[.[] | select((.user.type == \"Bot\") and ((.user.login) as \$l | ${trusted} | index(\$l) != null) and (.body | contains(\"<!-- garnet-runtime-review -->\")) and (.body | contains(\"<!-- garnet:commit ${HEAD_SHA} -->\")))]")
+            bound=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${pr_number}/comments" --paginate --slurp \
+              --jq "[.[][] | select((.user.type == \"Bot\") and ((.user.login) as \$l | ${trusted} | index(\$l) != null) and (.body | contains(\"<!-- garnet-runtime-review -->\")) and (.body | contains(\"<!-- garnet:commit ${HEAD_SHA} -->\")))]")
             if [ "$(printf '%s' "${bound}" | jq 'length')" = "0" ]; then
               echo "::error::pull request ${pr_number}: no Runtime Review comment from the Garnet App bound to head ${HEAD_SHA:0:7}. Missing evidence is no record, not a clean run."
               status=1
               continue
             fi
-            final=$(printf '%s' "${bound}" | jq '[.[] | select((.body | contains("garnet-control-plane-pending-pr-comment") | not) and (.body | test("<!-- garnet:summary \\{")))] | length')
+            final=$(printf '%s' "${bound}" | jq '[.[] | select((.body | contains("garnet-control-plane-pending-pr-comment") | not) and ((.body | capture("<!-- garnet:summary (?<json>\\{.*?\\}) -->").json | try fromjson catch null) as $s | $s != null and ($s.status == null or $s.status == "finalized")))] | length')
             if [ "${final}" = "0" ]; then
               echo "::error::pull request ${pr_number}: the record for head ${HEAD_SHA:0:7} is still being written. Pending evidence is no record."
               status=1

@@ -1,0 +1,1981 @@
+{
+  "slug": "pnpm",
+  "upstream": "pnpm/pnpm",
+  "fork": "garnet-labs/pnpm",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14806,
+      "title": "chore: update dependencies, Node.js, pnpm, and GitHub Actions",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T17:09:40Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        ".github/actions/binstall/action.yml",
+        ".github/actions/rust-release-target/action.yml",
+        ".github/workflows/pacquet-cargo-unused.yml",
+        ".github/workflows/pacquet-ci.yml",
+        ".github/workflows/pacquet-codecov.yml",
+        ".github/workflows/pacquet-integrated-benchmark.yml",
+        ".github/workflows/pacquet-micro-benchmark.yml",
+        ".github/workflows/release.yml",
+        "package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14821,
+      "title": "refactor: extract python installation crate",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:58:56Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 23,
+      "paths": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "pnpm/crates/cli/Cargo.toml",
+        "pnpm/crates/cli/src/cargo_deps/lockfile.rs",
+        "pnpm/crates/cli/src/cli_args/exec.rs",
+        "pnpm/crates/cli/src/cli_args/run/execution.rs",
+        "pnpm/crates/cli/src/ecosystem_add.rs",
+        "pnpm/crates/cli/src/ecosystem_install.rs",
+        "pnpm/crates/cli/src/lib.rs",
+        "pnpm/crates/pnpr-client/Cargo.toml",
+        "pnpm/crates/pnpr-client/src/ecosystem_cache.rs",
+        "pnpm/crates/pnpr-client/src/ecosystem_cache/tests.rs",
+        "pnpm/crates/pnpr-client/src/lib.rs",
+        "pnpm/crates/python-installer/Cargo.toml",
+        "pnpm/crates/python-installer/src/add.rs",
+        "pnpm/crates/python-installer/src/environment.rs",
+        "pnpm/crates/python-installer/src/host.py",
+        "pnpm/crates/python-installer/src/host.rs",
+        "pnpm/crates/python-installer/src/lib.rs",
+        "pnpm/crates/python-installer/src/manifest.rs",
+        "pnpm/crates/python-installer/src/registry.rs",
+        "pnpm/crates/python-installer/src/resolver.rs",
+        "pnpm/crates/python-installer/src/tests.rs"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14816,
+      "title": "refactor: extract package name validation",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T20:01:02Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 42,
+      "paths": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "pnpm/crates/cli/Cargo.toml",
+        "pnpm/crates/cli/src/cli_args/global.rs",
+        "pnpm/crates/cli/src/cli_args/shim.rs",
+        "pnpm/crates/cli/src/cli_args/stage/approve.rs",
+        "pnpm/crates/cli/src/cli_args/stage/summarize_tarball.rs",
+        "pnpm/crates/cli/src/shim_dispatch/native_shim.rs",
+        "pnpm/crates/deps-restorer/Cargo.toml",
+        "pnpm/crates/deps-restorer/src/safe_join_modules_dir.rs",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs",
+        "pnpm/crates/env-installer/Cargo.toml",
+        "pnpm/crates/env-installer/src/verify_env_lockfile.rs",
+        "pnpm/crates/global/Cargo.toml",
+        "pnpm/crates/global/src/scan.rs",
+        "pnpm/crates/lockfile-verification/Cargo.toml",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs",
+        "pnpm/crates/pack/Cargo.toml",
+        "pnpm/crates/pack/src/lib.rs",
+        "pnpm/crates/package-manager/Cargo.toml",
+        "pnpm/crates/package-manager/src/add/aliasless.rs",
+        "pnpm/crates/package-manager/src/add/specifier.rs",
+        "pnpm/crates/package-name/Cargo.toml",
+        "pnpm/crates/package-name/src/alias_tests.rs",
+        "pnpm/crates/package-name/src/lib.rs",
+        "pnpm/crates/package-name/src/tests.rs",
+        "pnpm/crates/publish/Cargo.toml",
+        "pnpm/crates/publish/src/publish_packed_pkg.rs",
+        "pnpm/crates/resolving-deps-resolver/Cargo.toml",
+        "pnpm/crates/resolving-deps-resolver/src/lib.rs",
+        "pnpm/crates/resolving-deps-resolver/src/validate_dependency_alias.rs",
+        "pnpm/crates/resolving-jsr-specifier-parser/Cargo.toml",
+        "pnpm/crates/resolving-jsr-specifier-parser/src/lib.rs",
+        "pnpm/crates/resolving-local-resolver/Cargo.toml",
+        "pnpm/crates/resolving-local-resolver/src/local_resolver.rs",
+        "pnpm/crates/resolving-npm-resolver/Cargo.toml",
+        "pnpm/crates/resolving-npm-resolver/src/parse_bare_specifier.rs",
+        "pnpm/crates/resolving-parse-wanted-dependency/Cargo.toml",
+        "pnpm/crates/resolving-parse-wanted-dependency/src/lib.rs",
+        "pnpm/crates/resolving-parse-wanted-dependency/src/tests.rs",
+        "pnpm/crates/store-dir/Cargo.toml",
+        "pnpm/crates/store-dir/src/pkg_content_check.rs"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14807,
+      "title": "refactor: share wildcard matching and harden github actions updates",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T17:47:33Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 54,
+      "paths": [
+        ".changeset/github-actions-safe-updates.md",
+        "Cargo.lock",
+        "Cargo.toml",
+        "pnpm/crates/cli/Cargo.toml",
+        "pnpm/crates/cli/src/cli_args/outdated.rs",
+        "pnpm/crates/cli/src/cli_args/update.rs",
+        "pnpm/crates/cli/src/cli_args/update_changeset.rs",
+        "pnpm/crates/cli/src/cli_args/update_interactive.rs",
+        "pnpm/crates/cli/src/github_actions.rs",
+        "pnpm/crates/cli/src/github_actions/tests.rs",
+        "pnpm/crates/config/Cargo.toml",
+        "pnpm/crates/config/src/lib.rs",
+        "pnpm/crates/config/src/version_policy.rs",
+        "pnpm/crates/default-reporter/Cargo.toml",
+        "pnpm/crates/default-reporter/src/state.rs",
+        "pnpm/crates/deps-inspection-peers/Cargo.toml",
+        "pnpm/crates/deps-inspection-peers/src/filter.rs",
+        "pnpm/crates/deps-inspection/Cargo.toml",
+        "pnpm/crates/deps-inspection/src/search.rs",
+        "pnpm/crates/deps-restorer/Cargo.toml",
+        "pnpm/crates/deps-restorer/src/hoist.rs",
+        "pnpm/crates/deps-restorer/src/hoist/tests.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile.rs",
+        "pnpm/crates/github-actions/Cargo.toml",
+        "pnpm/crates/github-actions/src/edits.rs",
+        "pnpm/crates/github-actions/src/lib.rs",
+        "pnpm/crates/github-actions/src/tests.rs",
+        "pnpm/crates/github-actions/src/tests/concurrent_edits.rs",
+        "pnpm/crates/github-actions/src/tests/server_urls.rs",
+        "pnpm/crates/github-actions/src/workflow.rs",
+        "pnpm/crates/global/Cargo.toml",
+        "pnpm/crates/global/src/list.rs",
+        "pnpm/crates/global/src/list/tests.rs",
+        "pnpm/crates/matcher/Cargo.toml",
+        "pnpm/crates/matcher/src/lib.rs",
+        "pnpm/crates/matcher/src/tests.rs",
+        "pnpm/crates/napi/Cargo.toml",
+        "pnpm/crates/napi/src/dependents.rs",
+        "pnpm/crates/package-manager/Cargo.toml",
+        "pnpm/crates/package-manager/src/fast_update_ignored_optional_dependencies.rs",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness.rs",
+        "pnpm/crates/package-manager/src/install/lockfile_freshness/manifest.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/manifest_transforms.rs",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/manifest_agreement.rs",
+        "pnpm/crates/package-manager/src/update/seed_policy.rs",
+        "pnpm/crates/package-manager/src/update/selectors.rs",
+        "pnpm/crates/package-manager/src/update/workspace.rs",
+        "pnpm/crates/versioning/Cargo.toml",
+        "pnpm/crates/versioning/src/plan/configuration.rs",
+        "pnpm/crates/versioning/src/plan/tests/dependencies.rs",
+        "pnpm/crates/workspace-projects-filter/Cargo.toml",
+        "pnpm/crates/workspace-projects-filter/src/filter.rs",
+        "pnpm11/deps/github-actions/src/index.ts",
+        "pnpm11/deps/github-actions/test/index.test.ts"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14802,
+      "title": "chore(release): pacquet 12.4.1, pnpr 0.1.0-alpha.11",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T15:33:50Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 53,
+      "paths": [
+        ".agents/skills/release-notes/SKILL.md",
+        ".changeset/add-android-builds.md",
+        ".changeset/add-freebsd-ppc64-s390x-builds.md",
+        ".changeset/add-linux-riscv64-build.md",
+        ".changeset/add-workspace-flag.md",
+        ".changeset/atomic-napi-config-cache.md",
+        ".changeset/boolean-flags-take-a-value.md",
+        ".changeset/cargo-lock-install.md",
+        ".changeset/changelogs/@pnpm!napi@12.4.0.md",
+        ".changeset/changelogs/@pnpm!napi@12.4.1.md",
+        ".changeset/changelogs/@pnpm!pnpr@0.1.0-alpha.11.md",
+        ".changeset/changelogs/pacquet@12.4.0.md",
+        ".changeset/changelogs/pacquet@12.4.1.md",
+        ".changeset/deploy-ignores-the-deployed-pnpmfile.md",
+        ".changeset/deploy-project-index.md",
+        ".changeset/engine-install-pins-isolated-linker.md",
+        ".changeset/extraction-permit-lifetime.md",
+        ".changeset/fix-workspace-path-normalization.md",
+        ".changeset/frozen-local-overrides.md",
+        ".changeset/gvs-concurrent-import-not-found.md",
+        ".changeset/ignore-unreadable-ca-certificates.md",
+        ".changeset/install-package-offline-flags.md",
+        ".changeset/install-symlinked-file-dependencies.md",
+        ".changeset/jsr-scope-routing-in-verification.md",
+        ".changeset/ledger.yaml",
+        ".changeset/local-prefix-resolution.md",
+        ".changeset/npm-ecosystem-prefix.md",
+        ".changeset/outdated-recursive-dependents-column-wraps.md",
+        ".changeset/package-configs-apply-per-project.md",
+        ".changeset/pacquet-pack-json-output.md",
+        ".changeset/partial-upper-bound-ranges.md",
+        ".changeset/patch-commit-deleted-file-paths.md",
+        ".changeset/pipeline-cargo-state.md",
+        ".changeset/pipeline-command-poc.md",
+        ".changeset/pipeline-input-hashing.md",
+        ".changeset/pn-completion-alias.md",
+        ".changeset/protocol-prefixed-add-selectors.md",
+        ".changeset/python-ecosystem-integration.md",
+        ".changeset/quiet-patches-crlf.md",
+        ".changeset/record-the-pin-in-one-place.md",
+        ".changeset/record-the-pin-when-switching-is-off.md",
+        ".changeset/retry-locked-bin-files.md",
+        ".changeset/verify-deps-separate-lockfiles.md",
+        ".changeset/version-message-short-flag.md",
+        ".changeset/warm-restore-bin-links.md",
+        ".changeset/windows-native-path-separators.md",
+        ".changeset/yarn-releases-github-token.md",
+        "Cargo.lock",
+        "pnpm/crates/config/src/defaults.rs",
+        "pnpm/npm/napi/package.json",
+        "pnpm/npm/pnpm/package.json",
+        "pnpr/crates/pnpr/Cargo.toml",
+        "pnpr/npm/pnpr/package.json"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14792,
+      "title": "refactor: enforce 40-line production Rust functions",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T13:41:00Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "Cargo.lock",
+        "dylint.toml",
+        "pnpm/CODE_STYLE_GUIDE.md",
+        "pnpm/crates/auth-commands/src/logout.rs",
+        "pnpm/crates/cargo-resolver/src/metadata.rs",
+        "pnpm/crates/cli/Cargo.toml",
+        "pnpm/crates/cli/src/cargo_deps.rs",
+        "pnpm/crates/cli/src/cargo_deps/git.rs",
+        "pnpm/crates/cli/src/checkbox_prompt.rs",
+        "pnpm/crates/cli/src/cli_args/access.rs",
+        "pnpm/crates/cli/src/cli_args/add.rs",
+        "pnpm/crates/cli/src/cli_args/audit.rs",
+        "pnpm/crates/cli/src/cli_args/audit/fix.rs",
+        "pnpm/crates/cli/src/cli_args/audit/render.rs",
+        "pnpm/crates/cli/src/cli_args/change.rs",
+        "pnpm/crates/cli/src/cli_args/clean.rs",
+        "pnpm/crates/cli/src/cli_args/cli_command.rs",
+        "pnpm/crates/cli/src/cli_args/config.rs",
+        "pnpm/crates/cli/src/cli_args/dedupe.rs",
+        "pnpm/crates/cli/src/cli_args/deploy.rs",
+        "pnpm/crates/cli/src/cli_args/deprecate.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install.rs",
+        "pnpm/crates/cli/src/cli_args/dlx.rs",
+        "pnpm/crates/cli/src/cli_args/exec.rs",
+        "pnpm/crates/cli/src/cli_args/exec/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/fetch.rs",
+        "pnpm/crates/cli/src/cli_args/global.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation.rs",
+        "pnpm/crates/cli/src/cli_args/import.rs",
+        "pnpm/crates/cli/src/cli_args/install.rs",
+        "pnpm/crates/cli/src/cli_args/link.rs",
+        "pnpm/crates/cli/src/cli_args/list.rs",
+        "pnpm/crates/cli/src/cli_args/outdated.rs",
+        "pnpm/crates/cli/src/cli_args/pack.rs",
+        "pnpm/crates/cli/src/cli_args/pack_app.rs",
+        "pnpm/crates/cli/src/cli_args/patch.rs",
+        "pnpm/crates/cli/src/cli_args/patch_commit.rs",
+        "pnpm/crates/cli/src/cli_args/patch_remove.rs",
+        "pnpm/crates/cli/src/cli_args/pipeline.rs",
+        "pnpm/crates/cli/src/cli_args/pipeline/cache.rs",
+        "pnpm/crates/cli/src/cli_args/pipelines.rs",
+        "pnpm/crates/cli/src/cli_args/pre_command.rs",
+        "pnpm/crates/cli/src/cli_args/prune.rs",
+        "pnpm/crates/cli/src/cli_args/publish/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/rebuild.rs",
+        "pnpm/crates/cli/src/cli_args/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/repo.rs",
+        "pnpm/crates/cli/src/cli_args/run/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/sbom.rs",
+        "pnpm/crates/cli/src/cli_args/self_update.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/verify_engine.rs",
+        "pnpm/crates/cli/src/cli_args/star.rs",
+        "pnpm/crates/cli/src/cli_args/store/add.rs",
+        "pnpm/crates/cli/src/cli_args/task_run_state.rs",
+        "pnpm/crates/cli/src/cli_args/unpublish.rs",
+        "pnpm/crates/cli/src/cli_args/update.rs",
+        "pnpm/crates/cli/src/cli_args/update_changeset.rs",
+        "pnpm/crates/cli/src/cli_args/update_interactive.rs",
+        "pnpm/crates/cli/src/cli_args/verify_deps.rs",
+        "pnpm/crates/cli/src/cli_args/version.rs",
+        "pnpm/crates/cli/src/cli_args/view.rs",
+        "pnpm/crates/cli/src/cli_args/why.rs",
+        "pnpm/crates/cli/src/config_deps.rs",
+        "pnpm/crates/cli/src/config_overrides.rs",
+        "pnpm/crates/cli/src/ecosystem_add.rs",
+        "pnpm/crates/cli/src/engine_pm/install.rs",
+        "pnpm/crates/cli/src/lib.rs",
+        "pnpm/crates/cli/src/python/registry.rs",
+        "pnpm/crates/cli/src/shim_dispatch/runtime_env.rs",
+        "pnpm/crates/cli/src/state.rs",
+        "pnpm/crates/cmd-shim/src/shim.rs",
+        "pnpm/crates/config/src/env_overlay.rs",
+        "pnpm/crates/config/src/lib.rs",
+        "pnpm/crates/config/src/npmrc_auth.rs",
+        "pnpm/crates/config/src/workspace_yaml.rs",
+        "pnpm/crates/default-reporter/src/lib.rs",
+        "pnpm/crates/default-reporter/src/state.rs",
+        "pnpm/crates/deps-inspection-peers/src/lib.rs",
+        "pnpm/crates/deps-inspection/src/build.rs",
+        "pnpm/crates/deps-inspection/src/get_tree.rs",
+        "pnpm/crates/deps-inspection/src/pkg_info.rs",
+        "pnpm/crates/deps-restorer/src/build_modules.rs",
+        "pnpm/crates/deps-restorer/src/build_modules/build_one_snapshot.rs",
+        "pnpm/crates/deps-restorer/src/create_virtual_store.rs",
+        "pnpm/crates/deps-restorer/src/current_lockfile.rs",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph.rs",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/build_phase.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/hoisted.rs",
+        "pnpm/crates/deps-restorer/src/install_package_by_snapshot.rs",
+        "pnpm/crates/deps-restorer/src/install_package_from_registry.rs",
+        "pnpm/crates/deps-restorer/src/link_hoisted_modules.rs",
+        "pnpm/crates/deps-restorer/src/linking.rs",
+        "pnpm/crates/deps-restorer/src/shared_side_effects.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies.rs",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs",
+        "pnpm/crates/engine-pm-yarn-resolver/src/read_yarn_releases.rs"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14819,
+      "title": "chore(ci): cache the TypeScript and Rust CI checks through the pipeline",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:22:38Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/accept-pnpm12-task-settings.md",
+        ".github/actions/pipeline-cache/action.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/pacquet-ci.yml",
+        "pnpm-workspace.yaml",
+        "pnpm11/config/reader/src/getOptionsFromRootManifest.ts",
+        "pnpm11/config/reader/test/getOptionsFromRootManifest.test.ts",
+        "pnpm11/core/types/src/package.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14808,
+      "title": "fix(pacquet): resolve Windows-only Clippy warnings and updateConfig hook values",
+      "author": "Ayush442842q",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T18:43:05Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        ".changeset/cli-options-precedence-over-pnpmfile.md",
+        ".changeset/rust-ci-clippy-windows.md",
+        ".github/workflows/pacquet-ci.yml",
+        "Cargo.toml",
+        "pnpm/crates/cli/src/cli_args/outdated/tests.rs",
+        "pnpm/crates/cli/src/shim_dispatch/identity.rs",
+        "pnpm/crates/cli/tests/suite/_utils/mod.rs",
+        "pnpm/crates/cli/tests/suite/config_dependencies.rs",
+        "pnpm/crates/cli/tests/suite/create.rs",
+        "pnpm/crates/cli/tests/suite/global.rs",
+        "pnpm/crates/cli/tests/suite/global/shims.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/executable.rs",
+        "pnpm/crates/deps-restorer/src/build_modules/tests.rs",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir/tests.rs",
+        "pnpm/crates/git-fetcher/src/fetcher/tests.rs",
+        "pnpm/crates/git-fetcher/src/fetcher/tests/behavior.rs",
+        "pnpm11/pnpm/src/getConfig.ts",
+        "pnpm11/pnpm/test/hooks.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14795,
+      "title": "fix(sbom): normalize the repository URL published in SBOMs",
+      "author": "yankydoo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T13:53:19Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".changeset/fix-sbom-repository-url.md",
+        "cspell.json",
+        "pnpm/crates/cli/src/cli_args/sbom.rs",
+        "pnpm/crates/cli/src/cli_args/sbom/tests.rs",
+        "pnpm/crates/cli/tests/suite/sbom.rs",
+        "pnpm11/deps/compliance/commands/src/sbom/sbom.ts",
+        "pnpm11/deps/compliance/commands/test/sbom/fixtures/sbom-component-repository/package.json",
+        "pnpm11/deps/compliance/commands/test/sbom/fixtures/sbom-repository/package.json",
+        "pnpm11/deps/compliance/commands/test/sbom/fixtures/sbom-repository/pnpm-lock.yaml",
+        "pnpm11/deps/compliance/commands/test/sbom/index.ts",
+        "pnpm11/deps/compliance/sbom/src/getPkgMetadata.ts",
+        "pnpm11/deps/compliance/sbom/src/index.ts",
+        "pnpm11/deps/compliance/sbom/test/getPkgMetadata.test.ts",
+        "pnpr/.fixtures/packages/@pnpm.e2e/sbom-shorthand-repo/1.0.0/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14788,
+      "title": "fix(deps-restorer): stop the copy tier writing through a symlinked target",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T12:47:44Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/copy-does-not-follow-a-symlinked-target.md",
+        "Cargo.lock",
+        "pnpm/crates/deps-restorer/src/link_file.rs",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs",
+        "pnpm/crates/fs/Cargo.toml",
+        "pnpm/crates/fs/src/file_mode.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14783,
+      "title": "fix(network): use bundled roots on android",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T11:39:27Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".changeset/fix-android-tls.md",
+        "Cargo.lock",
+        "pnpm/crates/cli/tests/suite/ping.rs",
+        "pnpm/crates/network/Cargo.toml",
+        "pnpm/crates/network/src/lib.rs",
+        "pnpm/crates/network/src/tests.rs",
+        "pnpm/crates/network/src/tls.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14776,
+      "title": "fix(fs): shorten windows permission-error retries",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T10:02:17Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        ".changeset/short-windows-permission-retries.md",
+        "Cargo.lock",
+        "pnpm-lock.yaml",
+        "pnpm/crates/cmd-shim/src/link_bins/tests.rs",
+        "pnpm/crates/fs/Cargo.toml",
+        "pnpm/crates/fs/src/copy_dirent.rs",
+        "pnpm/crates/fs/src/retry.rs",
+        "pnpm/crates/fs/src/retry/tests.rs",
+        "pnpm/crates/fs/src/retry/tests/windows.rs",
+        "pnpm11/fs/graceful-fs/package.json",
+        "pnpm11/fs/graceful-fs/src/index.ts",
+        "pnpm11/fs/graceful-fs/test/processPrivileges.ps1",
+        "pnpm11/fs/graceful-fs/test/renameFileWithRetry.test.ts",
+        "pnpm11/fs/graceful-fs/test/tsconfig.json",
+        "pnpm11/installing/commands/test/fetch.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14768,
+      "title": "fix(deps-restorer): copy a nested node_modules the filesystem won't rename",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T07:37:47Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        ".changeset/fix-cross-device-node-modules-move.md",
+        "Cargo.lock",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir.rs",
+        "pnpm/crates/deps-restorer/src/link_file.rs",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs",
+        "pnpm/crates/fs/Cargo.toml",
+        "pnpm/crates/fs/src/capabilities.rs",
+        "pnpm/crates/fs/src/copy_dirent.rs",
+        "pnpm/crates/fs/src/copy_dirent/tests.rs",
+        "pnpm/crates/fs/src/cross_device.rs",
+        "pnpm/crates/fs/src/cross_device/tests.rs",
+        "pnpm/crates/fs/src/lib.rs",
+        "pnpm/crates/fs/src/rename_even_across_devices.rs",
+        "pnpm/crates/fs/src/rename_even_across_devices/tests.rs",
+        "pnpm/crates/git-fetcher/src/fetcher.rs",
+        "pnpm/crates/git-fetcher/src/source_cache.rs",
+        "pnpm/crates/git-fetcher/src/source_cache/tests.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14818,
+      "title": "style: stop aligning TOML entries and comments",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T20:11:45Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".taplo.toml",
+        "Cargo.toml",
+        "pnpm/crates/auth-commands/Cargo.toml",
+        "pnpm/crates/cargo-resolver/Cargo.toml",
+        "pnpm/crates/catalogs-config/Cargo.toml",
+        "pnpm/crates/catalogs-protocol-parser/Cargo.toml",
+        "pnpm/crates/catalogs-resolver/Cargo.toml",
+        "pnpm/crates/catalogs-types/Cargo.toml",
+        "pnpm/crates/cli/Cargo.toml",
+        "pnpm/crates/cmd-shim/Cargo.toml",
+        "pnpm/crates/config-dir/Cargo.toml",
+        "pnpm/crates/config-parse-overrides/Cargo.toml",
+        "pnpm/crates/config/Cargo.toml",
+        "pnpm/crates/crypto-hash/Cargo.toml",
+        "pnpm/crates/crypto-shasums-file/Cargo.toml",
+        "pnpm/crates/default-reporter/Cargo.toml",
+        "pnpm/crates/deps-inspection-peers/Cargo.toml",
+        "pnpm/crates/deps-inspection/Cargo.toml",
+        "pnpm/crates/deps-path/Cargo.toml",
+        "pnpm/crates/deps-restorer/Cargo.toml",
+        "pnpm/crates/detect-libc/Cargo.toml",
+        "pnpm/crates/diagnostics/Cargo.toml",
+        "pnpm/crates/directory-fetcher/Cargo.toml",
+        "pnpm/crates/engine-pm-yarn-resolver/Cargo.toml",
+        "pnpm/crates/engine-runtime-bun-resolver/Cargo.toml",
+        "pnpm/crates/engine-runtime-deno-resolver/Cargo.toml",
+        "pnpm/crates/engine-runtime-node-resolver/Cargo.toml",
+        "pnpm/crates/env-installer/Cargo.toml",
+        "pnpm/crates/env-replace/Cargo.toml",
+        "pnpm/crates/executor/Cargo.toml",
+        "pnpm/crates/exportable-manifest/Cargo.toml",
+        "pnpm/crates/fs-packlist/Cargo.toml",
+        "pnpm/crates/fs/Cargo.toml",
+        "pnpm/crates/git-fetcher/Cargo.toml",
+        "pnpm/crates/git-utils/Cargo.toml",
+        "pnpm/crates/github-actions/Cargo.toml",
+        "pnpm/crates/global/Cargo.toml",
+        "pnpm/crates/graph-hasher/Cargo.toml",
+        "pnpm/crates/hooks/Cargo.toml",
+        "pnpm/crates/injected-deps-syncer/Cargo.toml",
+        "pnpm/crates/install-coordinator/Cargo.toml",
+        "pnpm/crates/lockfile-import/Cargo.toml",
+        "pnpm/crates/lockfile-preferred-versions/Cargo.toml",
+        "pnpm/crates/lockfile-verification/Cargo.toml",
+        "pnpm/crates/lockfile/Cargo.toml",
+        "pnpm/crates/matcher/Cargo.toml",
+        "pnpm/crates/modules-yaml/Cargo.toml",
+        "pnpm/crates/napi/Cargo.toml",
+        "pnpm/crates/network-web-auth-testing/Cargo.toml",
+        "pnpm/crates/network-web-auth/Cargo.toml",
+        "pnpm/crates/network/Cargo.toml",
+        "pnpm/crates/pack/Cargo.toml",
+        "pnpm/crates/package-is-installable/Cargo.toml",
+        "pnpm/crates/package-manager/Cargo.toml",
+        "pnpm/crates/package-manifest/Cargo.toml",
+        "pnpm/crates/package-name/Cargo.toml",
+        "pnpm/crates/patching/Cargo.toml",
+        "pnpm/crates/pnpr-client/Cargo.toml",
+        "pnpm/crates/publish/Cargo.toml",
+        "pnpm/crates/python-resolver/Cargo.toml",
+        "pnpm/crates/real-hoist/Cargo.toml",
+        "pnpm/crates/registry/Cargo.toml",
+        "pnpm/crates/reporter/Cargo.toml",
+        "pnpm/crates/resolving-default-resolver/Cargo.toml",
+        "pnpm/crates/resolving-deps-resolver/Cargo.toml",
+        "pnpm/crates/resolving-git-resolver/Cargo.toml",
+        "pnpm/crates/resolving-jsr-specifier-parser/Cargo.toml",
+        "pnpm/crates/resolving-local-resolver/Cargo.toml",
+        "pnpm/crates/resolving-npm-resolver/Cargo.toml",
+        "pnpm/crates/resolving-parse-wanted-dependency/Cargo.toml",
+        "pnpm/crates/resolving-resolver-base/Cargo.toml",
+        "pnpm/crates/resolving-tarball-resolver/Cargo.toml",
+        "pnpm/crates/semver-include-prerelease/Cargo.toml",
+        "pnpm/crates/shared-artifact-protocol/Cargo.toml",
+        "pnpm/crates/store-dir/Cargo.toml",
+        "pnpm/crates/tarball/Cargo.toml",
+        "pnpm/crates/testing-utils/Cargo.toml",
+        "pnpm/crates/text-sanitize/Cargo.toml",
+        "pnpm/crates/versioning/Cargo.toml",
+        "pnpm/crates/workspace-manifest-writer/Cargo.toml",
+        "pnpm/crates/workspace-projects-filter/Cargo.toml",
+        "pnpm/crates/workspace-projects-graph/Cargo.toml",
+        "pnpm/crates/workspace-range-resolver/Cargo.toml",
+        "pnpm/crates/workspace-spec/Cargo.toml",
+        "pnpm/crates/workspace-state/Cargo.toml",
+        "pnpm/crates/workspace-task-scheduler/Cargo.toml",
+        "pnpm/crates/workspace/Cargo.toml",
+        "pnpm/tasks/ecosystem-e2e/Cargo.toml",
+        "pnpm/tasks/integrated-benchmark/Cargo.toml",
+        "pnpm/tasks/micro-benchmark/Cargo.toml",
+        "pnpm/tasks/registry-mock/Cargo.toml",
+        "pnpr/crates/auth/Cargo.toml",
+        "pnpr/crates/cargo/Cargo.toml",
+        "pnpr/crates/config/Cargo.toml",
+        "pnpr/crates/error/Cargo.toml",
+        "pnpr/crates/oci/Cargo.toml",
+        "pnpr/crates/osv/Cargo.toml",
+        "pnpr/crates/package-name/Cargo.toml",
+        "pnpr/crates/pipeline-runs/Cargo.toml",
+        "pnpr/crates/pnpr-fixtures/Cargo.toml"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14812,
+      "title": "fix(ci): switch to the release branch before installing",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T19:19:52Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/create-release-pr.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14810,
+      "title": "fix(resolving-deps-resolver): deduplicate packages whose child dependencies carry peer suffixes",
+      "author": "Ayush442842q",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T19:09:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/fix-peer-dependent-child-dedupe.md",
+        ".github/workflows/pacquet-integrated-benchmark.yml",
+        "pnpm/crates/resolving-deps-resolver/src/dedupe_peer_dependents/tests.rs",
+        "pnpm/crates/resolving-deps-resolver/src/dep_path_compatibility.rs",
+        "pnpm11/installing/deps-resolver/src/depPathCompatibility.ts",
+        "pnpm11/installing/deps-resolver/test/dedupeDepPaths.test.ts"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14799,
+      "title": "ci: parallelize integrated benchmark builds and scenarios",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T14:24:03Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/pacquet-integrated-benchmark.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14804,
+      "title": "refactor: limit Rust source files to 400 lines and tests to 800",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T16:40:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".typos.toml",
+        "pnpm/CODE_STYLE_GUIDE.md",
+        "pnpm/crates/cli/src/cargo_deps.rs",
+        "pnpm/crates/cli/src/cargo_deps/add.rs",
+        "pnpm/crates/cli/src/cargo_deps/git.rs",
+        "pnpm/crates/cli/src/cargo_deps/git/manifest.rs",
+        "pnpm/crates/cli/src/cargo_deps/git/tests.rs",
+        "pnpm/crates/cli/src/cargo_deps/lockfile.rs",
+        "pnpm/crates/cli/src/cargo_deps/materialize.rs",
+        "pnpm/crates/cli/src/cargo_deps/sparse_registry.rs",
+        "pnpm/crates/cli/src/cargo_deps/tests.rs",
+        "pnpm/crates/cli/src/cargo_deps/workspace_directory.rs",
+        "pnpm/crates/cli/src/cargo_deps/workspace_directory/windows.rs",
+        "pnpm/crates/cli/src/cli_args.rs",
+        "pnpm/crates/cli/src/cli_args/access.rs",
+        "pnpm/crates/cli/src/cli_args/access/permissions.rs",
+        "pnpm/crates/cli/src/cli_args/access/registry.rs",
+        "pnpm/crates/cli/src/cli_args/add.rs",
+        "pnpm/crates/cli/src/cli_args/add/execution.rs",
+        "pnpm/crates/cli/src/cli_args/approve_builds.rs",
+        "pnpm/crates/cli/src/cli_args/approve_builds/tests.rs",
+        "pnpm/crates/cli/src/cli_args/audit.rs",
+        "pnpm/crates/cli/src/cli_args/audit/advisories.rs",
+        "pnpm/crates/cli/src/cli_args/audit/fix.rs",
+        "pnpm/crates/cli/src/cli_args/audit/fix/update.rs",
+        "pnpm/crates/cli/src/cli_args/audit/remediation.rs",
+        "pnpm/crates/cli/src/cli_args/audit/signatures.rs",
+        "pnpm/crates/cli/src/cli_args/audit/signatures/registry.rs",
+        "pnpm/crates/cli/src/cli_args/audit/tests.rs",
+        "pnpm/crates/cli/src/cli_args/audit/tests/dependency_paths.rs",
+        "pnpm/crates/cli/src/cli_args/audit/tests/remediation.rs",
+        "pnpm/crates/cli/src/cli_args/bin.rs",
+        "pnpm/crates/cli/src/cli_args/bugs.rs",
+        "pnpm/crates/cli/src/cli_args/bugs/tests.rs",
+        "pnpm/crates/cli/src/cli_args/cat_index/tests.rs",
+        "pnpm/crates/cli/src/cli_args/change.rs",
+        "pnpm/crates/cli/src/cli_args/change/report.rs",
+        "pnpm/crates/cli/src/cli_args/changelog.rs",
+        "pnpm/crates/cli/src/cli_args/cli_command.rs",
+        "pnpm/crates/cli/src/cli_args/cli_command/commands.rs",
+        "pnpm/crates/cli/src/cli_args/cli_command/options.rs",
+        "pnpm/crates/cli/src/cli_args/completion/tests.rs",
+        "pnpm/crates/cli/src/cli_args/config.rs",
+        "pnpm/crates/cli/src/cli_args/config/values.rs",
+        "pnpm/crates/cli/src/cli_args/dedupe.rs",
+        "pnpm/crates/cli/src/cli_args/dedupe/tests.rs",
+        "pnpm/crates/cli/src/cli_args/deploy.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/install.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/lockfile.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/peers.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/resolution.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/target.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/tests.rs",
+        "pnpm/crates/cli/src/cli_args/deprecate.rs",
+        "pnpm/crates/cli/src/cli_args/deprecate/registry.rs",
+        "pnpm/crates/cli/src/cli_args/deps_tree_finders.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch/configuration.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch/routing.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch/tests.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install/maintenance.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install/patches.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install/pipeline.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_query.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_query/maintenance.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_query/registry.rs",
+        "pnpm/crates/cli/src/cli_args/dist_tag.rs",
+        "pnpm/crates/cli/src/cli_args/dist_tag/registry.rs",
+        "pnpm/crates/cli/src/cli_args/dlx.rs",
+        "pnpm/crates/cli/src/cli_args/dlx/cache.rs",
+        "pnpm/crates/cli/src/cli_args/dlx/provision.rs",
+        "pnpm/crates/cli/src/cli_args/dlx/tests.rs",
+        "pnpm/crates/cli/src/cli_args/docs/tests.rs",
+        "pnpm/crates/cli/src/cli_args/exec.rs",
+        "pnpm/crates/cli/src/cli_args/exec/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/exec/recursive/tasks.rs",
+        "pnpm/crates/cli/src/cli_args/global.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation/filesystem.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation/slots.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation/tests.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation/tests/cleanup.rs",
+        "pnpm/crates/cli/src/cli_args/global/activation/tests/rollback.rs",
+        "pnpm/crates/cli/src/cli_args/global/builds.rs",
+        "pnpm/crates/cli/src/cli_args/global/cleanup.rs",
+        "pnpm/crates/cli/src/cli_args/global/groups.rs",
+        "pnpm/crates/cli/src/cli_args/global/install.rs",
+        "pnpm/crates/cli/src/cli_args/global/remove.rs",
+        "pnpm/crates/cli/src/cli_args/global/selectors.rs",
+        "pnpm/crates/cli/src/cli_args/global/shims.rs",
+        "pnpm/crates/cli/src/cli_args/global/tests.rs",
+        "pnpm/crates/cli/src/cli_args/install.rs",
+        "pnpm/crates/cli/src/cli_args/install/fast_path.rs",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_lockfile.rs",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_request.rs",
+        "pnpm/crates/cli/src/cli_args/install/pnpr_resolution.rs",
+        "pnpm/crates/cli/src/cli_args/install/tests.rs",
+        "pnpm/crates/cli/src/cli_args/lane.rs",
+        "pnpm/crates/cli/src/cli_args/licenses.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14820,
+      "title": "refactor(task-scheduler): separate requested projects from graph scope",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:46:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".changeset/task-graph-requested-projects.md",
+        "pnpm/crates/cli/src/cli_args/run/recursive/selection.rs",
+        "pnpm/crates/cli/tests/suite/run_recursive/task_graph.rs",
+        "pnpm/crates/workspace-task-scheduler/src/build.rs",
+        "pnpm/crates/workspace-task-scheduler/src/lib.rs",
+        "pnpm/crates/workspace-task-scheduler/src/tests.rs",
+        "pnpm/crates/workspace-task-scheduler/src/tests/requested_projects.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14815,
+      "title": "fix(resolving-deps-resolver): validate peerDependencies specifiers in pnpm v12",
+      "author": "Ayush442842q",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T19:52:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/validate-peer-dependencies-spec.md",
+        "pnpm/crates/cli/tests/suite/peers.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree.rs",
+        "pnpm/crates/resolving-deps-resolver/src/tests/importer_wanted_specs.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14805,
+      "title": "docs(skills): keep the Yarn example off the start of a line",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T16:45:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".agents/skills/release-notes/SKILL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14798,
+      "title": "fix(package-manager): purge directory links on windows",
+      "author": "shbernal",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T14:04:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/purge-windows-directory-links.md",
+        "pnpm/crates/package-manager/src/install/prepare_modules_state.rs",
+        "pnpm/crates/package-manager/src/install/prepare_modules_state/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14797,
+      "title": "fix(bins): resolve pnpm next to the pn/pnpx/pnx aliases, not on PATH",
+      "author": "TrevorBurnham",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T13:56:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".changeset/alias-bins-resolve-sibling-pnpm.md",
+        "pnpm/crates/cli/src/cli_args/setup.rs",
+        "pnpm/crates/cli/src/cli_args/setup/tests.rs",
+        "pnpm/npm/pnpm/pn",
+        "pnpm/npm/pnpm/pnpx",
+        "pnpm/npm/pnpm/pnx",
+        "pnpm/npm/pnpm/test/alias-bins.test.mjs",
+        "pnpm11/engine/pm/commands/src/setup/setup.ts",
+        "pnpm11/engine/pm/commands/test/setup/setup.test.ts",
+        "pnpm11/pnpm/artifacts/exe/pn",
+        "pnpm11/pnpm/artifacts/exe/pnpx",
+        "pnpm11/pnpm/artifacts/exe/pnx",
+        "pnpm11/pnpm/artifacts/exe/prepare.js",
+        "pnpm11/pnpm/artifacts/exe/test/setup.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14796,
+      "title": "docs(deps-restorer): state what bounds the layout cache's residual",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T13:54:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14794,
+      "title": "feat: expand brace alternatives in Rust directory filters",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T13:47:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/filter-brace-alternatives.md",
+        "pnpm/crates/cli/tests/suite/exec_recursive.rs",
+        "pnpm/crates/workspace-projects-filter/src/filter/tests.rs",
+        "pnpm/crates/workspace-projects-filter/src/glob.rs",
+        "pnpm/crates/workspace-projects-filter/src/glob/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14793,
+      "title": "docs(deps-restorer): correct where the hoisted resolution comparison applies",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T13:41:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "pnpm/crates/cli/tests/suite/hoisted_node_linker.rs",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/hoisted.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14789,
+      "title": "fix(sbom): normalize an npm shorthand repository field to a valid vcs URL",
+      "author": "BaconMan1168",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T12:49:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".changeset/sbom-repository-shorthand-url.md",
+        "pnpm/crates/cli/src/cli_args/sbom.rs",
+        "pnpm/crates/cli/src/cli_args/sbom/tests.rs",
+        "pnpm/crates/cli/tests/suite/sbom.rs",
+        "pnpm11/deps/compliance/commands/src/sbom/sbom.ts",
+        "pnpm11/deps/compliance/commands/test/sbom/index.ts",
+        "pnpm11/deps/compliance/sbom/src/getPkgMetadata.ts",
+        "pnpm11/deps/compliance/sbom/src/index.ts",
+        "pnpm11/deps/compliance/sbom/test/getPkgMetadata.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14787,
+      "title": "fix(install): reject a global-virtual-store slot suffix that is a route",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T12:46:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "pnpm/crates/deps-restorer/src/build_modules/allow_build_policy.rs",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout.rs",
+        "pnpm/crates/deps-restorer/src/virtual_store_layout/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14785,
+      "title": "fix(resolver): respect workspace linking depth",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T11:57:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        ".changeset/fix-workspace-linking-depth.md",
+        "pnpm/crates/cli/tests/suite/multiple_importers.rs",
+        "pnpm/crates/config/src/lib.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/resolve.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/tree_ctx.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_workspace/tests.rs",
+        "pnpm/crates/resolving-npm-resolver/src/npm_resolver.rs",
+        "pnpm/crates/resolving-npm-resolver/src/npm_resolver/tests.rs",
+        "pnpm/crates/resolving-resolver-base/src/lib.rs",
+        "pnpm/crates/resolving-resolver-base/src/resolve.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14784,
+      "title": "fix(deps-restorer): fall back to copying on EACCES",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T11:55:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/fix-termux-package-import.md",
+        "pnpm/crates/deps-restorer/src/link_file.rs",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14779,
+      "title": "perf(cmd-shim): skip the shim read in a bin directory this run created",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T11:23:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/shim-creation-syscalls.md",
+        "pnpm/crates/cmd-shim/src/capabilities.rs",
+        "pnpm/crates/cmd-shim/src/link_bins.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14778,
+      "title": "fix(deps-restorer): copy a source that has run out of hard links",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T11:02:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/copy-a-source-out-of-hard-links.md",
+        "pnpm/crates/deps-restorer/src/link_file.rs",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14775,
+      "title": "fix(resolver): keep peer hoisting range-compatible",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T09:56:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/dedupe-auto-installed-peer-range.md",
+        "pnpm/crates/cli/tests/suite/dedupe.rs",
+        "pnpm/crates/cli/tests/suite/update.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/tree_ctx.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14774,
+      "title": "fix(peers): resolve workspace: shorthand peer ranges to *",
+      "author": "mdorda",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T09:47:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/fix-bare-workspace-peer-range.md",
+        "pnpm/crates/cli/tests/suite/peers.rs",
+        "pnpm/crates/resolving-resolver-base/src/peer_range.rs",
+        "pnpm/crates/resolving-resolver-base/src/peer_range/tests.rs",
+        "pnpm11/deps/peer-range/src/index.ts",
+        "pnpm11/installing/deps-resolver/test/getPeerVersionRange.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14772,
+      "title": "fix(deps-restorer): leave hoisted packages that are already in place alone",
+      "author": "ejc3",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T09:01:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        ".changeset/hoisted-repeat-install-skips-present-packages.md",
+        "pnpm/crates/cli/tests/suite/hoisted_node_linker.rs",
+        "pnpm/crates/deps-restorer/src/create_virtual_store.rs",
+        "pnpm/crates/deps-restorer/src/hoist.rs",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph.rs",
+        "pnpm/crates/deps-restorer/src/hoisted_dep_graph/tests.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/hoisted.rs",
+        "pnpm/crates/deps-restorer/src/link_hoisted_modules.rs",
+        "pnpm/crates/deps-restorer/src/link_hoisted_modules/tests.rs",
+        "pnpm/crates/deps-restorer/src/linking.rs",
+        "pnpm/crates/deps-restorer/src/package_map/tests.rs",
+        "pnpm/crates/package-manager/src/install.rs",
+        "pnpm/crates/package-manager/src/install/materialize.rs",
+        "pnpm/crates/package-manager/src/install/prepare_modules_state.rs",
+        "pnpm/crates/package-manager/src/install/run.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14771,
+      "title": "fix(deps-restorer): fall back on EPERM from a hardlink or reflink",
+      "author": "ejc3",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T09:01:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/import-eperm-falls-back.md",
+        "pnpm/crates/deps-restorer/src/link_file.rs",
+        "pnpm/crates/deps-restorer/src/link_file/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14769,
+      "title": "perf(deps-restorer): verify store files only for the snapshots a frozen install materializes",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T07:46:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/lazy-store-verification.md",
+        "pnpm/crates/deps-restorer/src/create_virtual_store.rs",
+        "pnpm/crates/deps-restorer/src/create_virtual_store/tests.rs",
+        "pnpm/crates/resolving-tarball-resolver/src/tarball_resolver.rs",
+        "pnpm/crates/store-dir/src/check_pkg_files_integrity.rs",
+        "pnpm/crates/store-dir/src/check_pkg_files_integrity/tests.rs",
+        "pnpm/crates/tarball/src/prefetch.rs",
+        "pnpm/crates/tarball/src/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14767,
+      "title": "fix(fs): normalize relative symlink paths",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T07:30:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/fix-parent-workspace-links.md",
+        "pnpm/crates/cli/tests/suite/workspace_install.rs",
+        "pnpm/crates/fs/src/lexical_normalize.rs",
+        "pnpm/crates/fs/src/lexical_normalize/tests.rs",
+        "pnpm/crates/fs/src/relative_path.rs",
+        "pnpm/crates/fs/src/symlink_dir/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14765,
+      "title": "fix(cli): suggest negated frozen lockfile flag",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T07:07:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/frozen-lockfile-error-hint.md",
+        "pnpm/crates/cli/src/install_as_add.rs",
+        "pnpm/crates/cli/src/lib.rs",
+        "pnpm/crates/cli/tests/suite/install.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14763,
+      "title": "refactor(deps-restorer): keep the frozen install's git source cache in its plan",
+      "author": "zkochan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T06:25:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:26.107Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
