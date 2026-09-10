@@ -50,6 +50,7 @@ $R live posthog --pr 56732 --work ~/repos/posthog
 
 # 1b. or author a transition on the fork when no real pull request carries it (pnpm)
 $R live posthog --dependency puppeteer --to 25.9.0 --package-dir nodejs --work ~/repos/posthog
+$R live posthog --allow-build puppeteer --work ~/repos/posthog   # lockfile untouched: skip recorded, then allowed
 
 # wait for the fork's workflow, then:
 $R verify https://github.com/garnet-labs/posthog/pull/<N>       # share gate; run before anyone sees it
@@ -102,9 +103,12 @@ See [docs/contract.md](docs/contract.md).
 
 npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go. The install command for each is in
 `lib/replay-pr.mjs` (`INSTALL_COMMANDS`). Anything else is reported as unsupported
-and the run stops before writing. Transitions (`--dependency … --to …`) are pnpm
-only, because pnpm 10 blocks build scripts until they are allowed, which is what
-makes the two commits two real states. See [docs/stage1.md](docs/stage1.md).
+and the run stops before writing. Transitions (`--dependency … --to …` and
+`--allow-build …`) are pnpm only, because pnpm 10 blocks build scripts until they
+are allowed, which is what makes the two commits two real states. `--allow-build`
+works on a dependency already in the lockfile and leaves the lockfile as it is, so
+it also fits repositories whose trust policy or release-age rule blocks a bump.
+See [docs/stage1.md](docs/stage1.md).
 
 ## Stage 2: the target's own workflow
 

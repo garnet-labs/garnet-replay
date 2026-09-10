@@ -87,6 +87,27 @@ The fork must already have a `pull_request` workflow that uses
 does not; it never injects a workflow into a transition branch because that
 would make commit 1 a setup commit instead of a state.
 
+### Allow a build script the lockfile already skips
+
+When the lockfile cannot be regenerated (trust policy, minimum release age, a
+broken workspace), or when the dependency is already installed and only its
+build script is blocked:
+
+```sh
+node bin/replay.mjs live posthog --allow-build puppeteer --work ~/repos/posthog [--dry-run]
+```
+
+- The dependency must already be in the fork's lockfile and not yet listed
+  under `onlyBuiltDependencies` or `ignoredBuiltDependencies`. The command
+  reads every locked version and checks with `corepack pnpm view` that at least
+  one declares an install script; otherwise there is nothing to allow.
+- Commit 1 lists it under `ignoredBuiltDependencies`, pnpm's list of build
+  scripts you have decided not to run. The install is identical to the default
+  branch; the skip is now explicit.
+- Commit 2 moves it to `onlyBuiltDependencies`. The install script runs.
+- Neither commit touches `pnpm-lock.yaml`; a guard fails the run if it changed.
+- Wording is the routine decision (`chore(deps): allow <dep> build script`).
+
 Other ecosystems do not have an equivalent "blocked, then allowed" state, so
 transitions are pnpm only. Use 1a for them.
 

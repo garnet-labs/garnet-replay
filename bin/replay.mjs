@@ -414,6 +414,9 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     two-commit replay of an upstream pull request on the fork
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
+  live <slug> --allow-build x [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
+                                                                    two-commit transition on a dependency already in the lockfile: record its build
+                                                                    script as skipped, then allow it; the lockfile stays as it is (pnpm)
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
   verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue

@@ -26,7 +26,8 @@ checked live; "implemented" is not done.
 | 6 | Claim class on every statement | `claims`, `CLAIM_CLASSES`, card and comment render them | done |
 | 7 | Specimen finder over real pull requests and history | `replay find`, `lib/observe.mjs`, `lib/find.mjs` | done |
 | 8 | Real-PR replay: two commits, exact head, fork-only, no leaks | `lib/replay-pr.mjs`, `lib/guards.mjs` | done; dry-run on PostHog, no live run yet |
-| 9 | Constructed pnpm transition: bump, then allow build scripts | `lib/replay-transition.mjs` | done; dry-run on PostHog `puppeteer 24.40.0 → 25.9.0` |
+| 9 | Constructed pnpm transition: bump, then allow build scripts | `lib/replay-transition.mjs` | done; dry-run on PostHog `puppeteer 24.40.0 → 25.9.0`; a live bump is blocked there by `trustPolicy: no-downgrade` on `semver@6.3.1` (reproduced on upstream master too) |
+| 9b | Constructed pnpm transition without a lockfile change: skip recorded, then build script allowed | `planAllowBuild`, `replay live --allow-build` | done; dry-run on PostHog `puppeteer 19.0.0, 24.40.0`; lockfile-diff guard |
 | 10 | Ecosystems npm, pnpm, Yarn, Cargo, Ruby, uv, Go; honest unsupported fallback | `INSTALL_COMMANDS`, `detectEcosystem` | done |
 | 11 | Evidence card, fail-closed on pending, stale, unbound | `replay card` | done |
 | 12 | Cohort rates with count reconciliation | `replay cohort` | done |
@@ -34,7 +35,7 @@ checked live; "implemented" is not done.
 | 14 | Stage 2 mirror, gate, REVIEW.md, no fork code in privileged path | `live/templates/stage2/`, `replay stage2` | done; not merged on any fork |
 | 15 | Reviewer/agent consumption evidence | `replay consume` | done; no live citation yet |
 | 16 | Docs for team and agents | `README.md`, `AGENTS.md`, `SKILL.md`, `docs/` | done |
-| 17 | Tests | `npm test`: 46 | done |
+| 17 | Tests | `npm test`: 57 | done |
 | 18 | Live proof on `garnet-labs/posthog` with cold read | `docs/examples.md` | in flight |
 
 ## Priors carried, not code
@@ -55,7 +56,8 @@ checked live; "implemented" is not done.
   `garnet-org/action`, not a release.
 - Pull requests from other repositories receive neither secrets nor OIDC; a
   fork-origin run is a local record and reads as not recorded.
-- Transitions are pnpm only.
+- Transitions are pnpm only. `--allow-build` needs a dependency already in the
+  lockfile and not yet on either build-script list.
 - `replay find` uses the GitHub search and list APIs; broad scans time out, so
   use `--author`, `--search`, `--limit`.
 - The benchmark (`benchmark/`) is a single Devin-reviewer pass over 25 seeds.

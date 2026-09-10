@@ -5,7 +5,7 @@ import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClea
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
 import { INSTALL_COMMANDS, detectEcosystem, executePlan, planReplay, reconcileState, renderPlan, upsertReplay } from "../lib/replay-pr.mjs"
 import { recordState } from "../lib/wait.mjs"
-import { allowBuildScripts, bumpManifest, planTransition, resolvedVersion } from "../lib/replay-transition.mjs"
+import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
@@ -343,13 +343,103 @@ test("transition helpers: lockfile resolution, text-preserving bump, allowlist e
   const json = `{\n  "pnpm": {\n    "onlyBuiltDependencies": [\n      "esbuild",\n      "sharp"\n    ]\n  }\n}\n`
   const allowedJson = allowBuildScripts(json, "puppeteer", { file: "package.json" })
   assert.ok(allowedJson.includes(`      "sharp",\n      "puppeteer"\n    ]`), allowedJson)
-  assert.throws(() => allowBuildScripts(allowedJson, "puppeteer", { file: "package.json" }), /already allowed/)
+  assert.throws(() => allowBuildScripts(allowedJson, "puppeteer", { file: "package.json" }), /already listed under onlyBuiltDependencies/)
   assert.throws(() => allowBuildScripts(`{"pnpm":{}}`, "puppeteer", { file: "package.json" }), /no onlyBuiltDependencies/)
 
   const yaml = `packages:\n  - 'a/*'\nonlyBuiltDependencies:\n  - esbuild\n  - sharp\nminimumReleaseAge: 10080\n`
   const allowedYaml = allowBuildScripts(yaml, "@scope/pkg", { file: "pnpm-workspace.yaml" })
   assert.ok(allowedYaml.includes(`  - sharp\n  - '@scope/pkg'\nminimumReleaseAge`), allowedYaml)
-  assert.throws(() => allowBuildScripts(allowedYaml, "@scope/pkg", { file: "pnpm-workspace.yaml" }), /already allowed/)
+  assert.throws(() => allowBuildScripts(allowedYaml, "@scope/pkg", { file: "pnpm-workspace.yaml" }), /already listed under onlyBuiltDependencies/)
+})
+
+test("build-script lists: ignored list is created beside the allowlist, moved entries leave no empty key, JSON stays valid", () => {
+  const json = `{\n  "pnpm": {\n    "onlyBuiltDependencies": [\n      "esbuild",\n      "sharp"\n    ]\n  }\n}\n`
+  const skipped = allowBuildScripts(json, "puppeteer", { file: "package.json", key: "ignoredBuiltDependencies" })
+  assert.deepEqual(JSON.parse(skipped).pnpm, { ignoredBuiltDependencies: ["puppeteer"], onlyBuiltDependencies: ["esbuild", "sharp"] })
+  assert.ok(skipped.includes(`    "ignoredBuiltDependencies": [\n      "puppeteer"\n    ],\n    "onlyBuiltDependencies": [`), skipped)
+  assert.deepEqual(buildScriptList(skipped, { file: "package.json", key: "ignoredBuiltDependencies" }), ["puppeteer"])
+  assert.throws(() => allowBuildScripts(skipped, "puppeteer", { file: "package.json", key: "ignoredBuiltDependencies" }), /already listed under ignoredBuiltDependencies/)
+  const second = allowBuildScripts(skipped, "lmdb", { file: "package.json", key: "ignoredBuiltDependencies" })
+  assert.deepEqual(JSON.parse(second).pnpm.ignoredBuiltDependencies, ["puppeteer", "lmdb"])
+  const oneLeft = removeBuildScript(second, "puppeteer", { file: "package.json", key: "ignoredBuiltDependencies" })
+  assert.deepEqual(JSON.parse(oneLeft).pnpm.ignoredBuiltDependencies, ["lmdb"])
+  const moved = allowBuildScripts(removeBuildScript(skipped, "puppeteer", { file: "package.json", key: "ignoredBuiltDependencies" }), "puppeteer", { file: "package.json" })
+  assert.equal(moved, `{\n  "pnpm": {\n    "onlyBuiltDependencies": [\n      "esbuild",\n      "sharp",\n      "puppeteer"\n    ]\n  }\n}\n`)
+  assert.throws(() => removeBuildScript(json, "puppeteer", { file: "package.json", key: "ignoredBuiltDependencies" }), /not listed under ignoredBuiltDependencies/)
+
+  const yaml = `packages:\n  - 'a/*'\nonlyBuiltDependencies:\n  - esbuild\nminimumReleaseAge: 10080\n`
+  const skippedYaml = allowBuildScripts(yaml, "@scope/pkg", { file: "pnpm-workspace.yaml", key: "ignoredBuiltDependencies" })
+  assert.equal(skippedYaml, `packages:\n  - 'a/*'\nignoredBuiltDependencies:\n  - '@scope/pkg'\n\nonlyBuiltDependencies:\n  - esbuild\nminimumReleaseAge: 10080\n`)
+  assert.deepEqual(buildScriptList(skippedYaml, { file: "pnpm-workspace.yaml", key: "ignoredBuiltDependencies" }), ["@scope/pkg"])
+  const movedYaml = allowBuildScripts(removeBuildScript(skippedYaml, "@scope/pkg", { file: "pnpm-workspace.yaml", key: "ignoredBuiltDependencies" }), "@scope/pkg", { file: "pnpm-workspace.yaml" })
+  assert.equal(movedYaml, `packages:\n  - 'a/*'\nonlyBuiltDependencies:\n  - esbuild\n  - '@scope/pkg'\nminimumReleaseAge: 10080\n`)
+  assert.deepEqual(buildScriptList(yaml, { file: "pnpm-workspace.yaml", key: "ignoredBuiltDependencies" }), [])
+
+  const lock = `packages:\n\n  puppeteer@19.0.0:\n    resolution: {integrity: sha512-x}\n\n  puppeteer@24.40.0(typescript@5.9.3):\n    resolution: {integrity: sha512-y}\n\n  '@scope/pkg@1.2.3':\n    resolution: {integrity: sha512-z}\n\n  puppeteer-core@24.40.0:\n    resolution: {integrity: sha512-w}\n`
+  assert.deepEqual(lockedVersions(lock, "puppeteer"), ["19.0.0", "24.40.0"])
+  assert.deepEqual(lockedVersions(lock, "@scope/pkg"), ["1.2.3"])
+  assert.deepEqual(lockedVersions(lock, "missing"), [])
+})
+
+function allowBuildPlan(overrides = {}) {
+  return planAllowBuild({
+    slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", dependency: "puppeteer", versions: ["19.0.0", "24.40.0"],
+    allowlistFile: "package.json", work: "/tmp/work", workExists: true, ...overrides,
+  })
+}
+
+test("allow-build plan: skip recorded then allowed, one file, lockfile guarded untouched, two commits, routine wording", () => {
+  const plan = allowBuildPlan()
+  assert.equal(plan.mode, "transition")
+  assert.equal(plan.shape, "allow-build")
+  assert.equal(plan.scope, "immediate-parent-to-head")
+  assert.deepEqual(plan.paths, ["package.json"])
+  assert.deepEqual(plan.firstPaths, ["package.json"])
+  assert.equal(plan.branch, "deps/puppeteer-build-script")
+  assert.deepEqual(plan.transition, { name: "puppeteer", from: "19.0.0 and 24.40.0, build script skipped", to: "19.0.0 and 24.40.0, build script allowed", versions: ["19.0.0", "24.40.0"] })
+  const ids = plan.steps.map((s) => s.id)
+  const order = ["verify-origin", "branch", "verify-locked-19.0.0", "verify-locked-24.40.0", "record-skip", "first-commit", "allow-scripts", "change-commit", "verify-lockfile-untouched", "verify-commits", "find-pr", "push-first", "pr-create", "wait-first-record", "push-change"]
+  assert.deepEqual(order.map((id) => ids.indexOf(id)), [...order.map((id) => ids.indexOf(id))].sort((a, b) => a - b))
+  assert.ok(!ids.includes("resolve-lockfile"))
+  assert.equal(plan.title, "chore(deps): allow puppeteer build script")
+  assert.match(plan.messages.first, /^chore\(deps\): record puppeteer build script as skipped\n/)
+  assert.match(plan.messages.first, /ignoredBuiltDependencies/)
+  assert.match(plan.messages.change, /ignoredBuiltDependencies to onlyBuiltDependencies/)
+  assert.match(plan.body, /19\.0\.0 and 24\.40\.0 ship an install script/)
+  for (const text of [plan.branch, plan.title, plan.body, plan.messages.first, plan.messages.change]) assert.doesNotMatch(text, /PostHog\/posthog|github\.com|#\d|garnet|demo|test/i)
+  for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
+  assert.match(renderPlan(plan), /transition plan · posthog · puppeteer 19\.0\.0 and 24\.40\.0, build script skipped → 19\.0\.0 and 24\.40\.0, build script allowed/)
+  assert.match(allowBuildPlan({ versions: ["24.40.0"] }).body, /24\.40\.0 ships an install script/)
+  assert.throws(() => allowBuildPlan({ versions: [] }), /lockfile versions/)
+  assert.throws(() => allowBuildPlan({ allowlistFile: ".npmrc" }), /allowlist must live/)
+  assert.throws(() => allowBuildPlan({ fork: UPSTREAM }), /fork must not be the upstream/)
+})
+
+test("allow-build execution: commit 1 adds the skip, commit 2 moves it to the allowlist, a changed lockfile fails closed", async () => {
+  const plan = allowBuildPlan()
+  const settings = `{\n  "pnpm": {\n    "onlyBuiltDependencies": [\n      "esbuild"\n    ]\n  }\n}\n`
+  const { io, store } = memoryIo({
+    "/tmp/work/pnpm-lock.yaml": "  puppeteer@19.0.0:\n  puppeteer@24.40.0:\n",
+    "/tmp/work/package.json": settings,
+  })
+  const seen = []
+  const { exec, calls } = fakeExec([
+    [/^git -C \/tmp\/work commit -q -m /, () => { seen.push(store["/tmp/work/package.json"]); return "" }],
+    [/^git -C \/tmp\/work diff --name-only origin\/master\.\.HEAD -- pnpm-lock\.yaml$/, () => ""],
+    ...replayResponses,
+  ])
+  const captured = await executePlan(plan, { exec, io, log: () => {}, wait: noWait })
+  assert.equal(captured.forkPr, 77)
+  assert.deepEqual(captured.lockfileDiff, [])
+  assert.equal(seen.length, 2)
+  assert.deepEqual(JSON.parse(seen[0]).pnpm, { ignoredBuiltDependencies: ["puppeteer"], onlyBuiltDependencies: ["esbuild"] })
+  assert.deepEqual(JSON.parse(seen[1]).pnpm, { onlyBuiltDependencies: ["esbuild", "puppeteer"] })
+  assert.ok(calls.indexOf("git -C /tmp/work push --set-upstream origin HEAD~1:refs/heads/deps/puppeteer-build-script") < calls.indexOf("git -C /tmp/work push origin HEAD:refs/heads/deps/puppeteer-build-script"))
+  assert.ok(!calls.some((c) => c.includes("pnpm install")))
+
+  const drifted = fakeExec([[/^git -C \/tmp\/work diff --name-only origin\/master\.\.HEAD -- pnpm-lock\.yaml$/, () => "pnpm-lock.yaml"], ...replayResponses])
+  await assert.rejects(executePlan(plan, { exec: drifted.exec, io: memoryIo({ "/tmp/work/pnpm-lock.yaml": "  puppeteer@19.0.0:\n  puppeteer@24.40.0:\n", "/tmp/work/package.json": settings }).io, log: () => {} }), /lockfile changed/)
+  await assert.rejects(executePlan(plan, { exec: fakeExec(replayResponses).exec, io: memoryIo({ "/tmp/work/pnpm-lock.yaml": "  puppeteer@19.0.0:\n", "/tmp/work/package.json": settings }).io, log: () => {} }), /verify-locked-24\.40\.0 failed/)
 })
 
 function transitionPlan(overrides = {}) {
