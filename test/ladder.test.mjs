@@ -186,6 +186,20 @@ test("replay --pr: two commits, exact head fetch, fork-only writes, no upstream 
   assert.throws(() => replayPlan({ record: "inject", ecosystem: "bazel" }), /no install command/)
 })
 
+test("replay --pr: staging never names a path that is absent from the index and the worktree", () => {
+  const plan = replayPlan({ changes: [...changes, { path: "frontend/src/legacy.test.ts", status: "removed", previous: null }] })
+  const firstAdd = plan.steps.find((s) => s.id === "first-add")
+  const changeAdd = plan.steps.find((s) => s.id === "change-add")
+  const changeRemove = plan.steps.find((s) => s.id === "change-remove")
+  assert.ok(!firstAdd.args.includes("docs/new.md"), "commit 1 stages nothing the change adds")
+  assert.ok(!firstAdd.args.includes("docs/renamed.md"))
+  assert.ok(firstAdd.args.includes("frontend/src/legacy.test.ts") && firstAdd.args.includes("docs/old.md"))
+  assert.ok(!changeAdd.args.includes("frontend/src/legacy.test.ts"), "commit 2 stages nothing the change removes")
+  assert.ok(!changeAdd.args.includes("docs/old.md"))
+  assert.ok(changeAdd.args.includes("docs/new.md") && changeAdd.args.includes("docs/renamed.md"))
+  assert.ok(changeRemove.args.includes("frontend/src/legacy.test.ts") && changeRemove.args.includes("docs/old.md"))
+})
+
 test("replay --pr: ecosystem detection covers every install command and degrades honestly", () => {
   assert.equal(detectEcosystem(["pnpm-lock.yaml"]), "pnpm")
   assert.equal(detectEcosystem(["Cargo.lock"]), "cargo")
