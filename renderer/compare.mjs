@@ -267,6 +267,7 @@ async function main() {
       dependency: replay?.dependency,
       from: replay?.from,
       to: replay?.to,
+      label: replay?.label,
       prUrl: cfg.repository && cfg.prNumber
         ? `${cfg.githubServerUrl}/${cfg.repository}/pull/${cfg.prNumber}`
         : "",
