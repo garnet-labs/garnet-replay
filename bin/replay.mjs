@@ -410,7 +410,7 @@ const USAGE = `usage: replay <command> [options]
 ladder (one target ledger per upstream repository, one fork as the only write target)
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
-  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--wait-minutes N|--no-wait] [--dry-run]
+  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--sync-fork | --base-branch b [--record-workflow p]] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit replay of an upstream pull request on the fork
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
