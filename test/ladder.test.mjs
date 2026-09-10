@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, detectEcosystem, executePlan, planReplay, publicationState, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, detectEcosystem, executePlan, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay } from "../lib/replay-pr.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
@@ -219,6 +219,74 @@ test("replay --pr: the plan measures how far the fork is behind the base and onl
   assert.ok(syncedIds.indexOf("base-distance") < syncedIds.indexOf("branch"))
 })
 
+test("replay --pr: --base-branch opens against a fork branch set to the base and carries the fork's recorder into commit 1", () => {
+  const recorder = ".github/workflows/garnet-ci.yml"
+  const plan = replayPlan({ baseBranch: "sync/abc1234", recordWorkflows: [recorder] })
+  const ids = plan.steps.map((s) => s.id)
+  const set = plan.steps.find((s) => s.id === "base-branch")
+  assert.equal(set.kind, "write-remote")
+  assert.equal(set.target, FORK)
+  assert.deepEqual(set.args.slice(-3), ["push", "origin", `${SHA_A}:refs/heads/sync/abc1234`])
+  assert.deepEqual(plan.steps.find((s) => s.id === "branch").args.slice(-2), [plan.branch, "origin/sync/abc1234"])
+  const carried = plan.steps.find((s) => s.id === "first-fork-record")
+  assert.deepEqual(carried.args.slice(-3), ["origin/master", "--", recorder])
+  assert.ok(ids.indexOf("first-fork-record") < ids.indexOf("first-check"))
+  assert.deepEqual(plan.steps.find((s) => s.id === "verify-commits").args.slice(-1), ["origin/sync/abc1234..HEAD"])
+  const create = plan.steps.find((s) => s.id === "pr-create")
+  assert.equal(create.args[create.args.indexOf("--base") + 1], "sync/abc1234")
+  assert.equal(plan.steps.some((s) => s.id === "sync-fork"), false)
+  assert.match(renderPlan(plan), /base: sync\/abc1234 \(set to the change's base\)/)
+
+  assert.equal(replayPlan({ baseBranch: "sync/x", record: "inject", ecosystem: "npm" }).steps.some((s) => s.id === "first-fork-record"), false)
+  assert.throws(() => replayPlan({ baseBranch: "sync/x" }), /pass --record inject/)
+  assert.throws(
+    () => replayPlan({ baseBranch: "sync/x", recordWorkflows: [recorder, ".github/workflows/garnet-replay-headless.yml"] }),
+    /carries 2 recording workflows; commit 1 carries one, so pass --record-workflow <path> with one of: \.github\/workflows\/garnet-ci\.yml, \.github\/workflows\/garnet-replay-headless\.yml/,
+  )
+  assert.throws(
+    () => replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-harness.yml"] }),
+    /session residue 'harness'/,
+  )
+  assert.throws(() => replayPlan({ baseBranch: "master", recordWorkflows: [recorder] }), /other than master/)
+  assert.throws(() => replayPlan({ baseBranch: "sync/x", recordWorkflows: [recorder], syncFork: true }), /alternatives/)
+  assert.equal(resolvedFirstMessage([recorder], "chore(deps): sync dependency manifests before update\n\n- x"), `ci: record dependency installs on pull requests\n\n- ${recorder}`)
+})
+
+test("replay --pr: the fork recorder's path filter must be reached by commit 2, or nothing records", () => {
+  const recorder = `name: Garnet Runtime Visibility
+on:
+    pull_request:
+        paths:
+            - package.json
+            - pnpm-lock.yaml
+            - .github/workflows/garnet-ci.yml # the recorder itself
+    workflow_dispatch:
+        inputs:
+            checkout_ref:
+                required: false
+permissions:
+    contents: read
+`
+  assert.deepEqual(pullRequestPathFilter(recorder), ["package.json", "pnpm-lock.yaml", ".github/workflows/garnet-ci.yml"])
+  assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    branches: [main]\njobs: {}\n"), null)
+  assert.equal(pullRequestPathFilter("on: [push]\n"), null)
+  assert.equal(matchesPathFilter("pnpm-lock.yaml", ["package.json", "pnpm-lock.yaml"]), true)
+  assert.equal(matchesPathFilter("frontend/package.json", ["package.json"]), false)
+  assert.equal(matchesPathFilter("frontend/package.json", ["**/package.json"]), true)
+  assert.equal(matchesPathFilter("src/a/b.rs", ["src/**"]), true)
+  assert.equal(matchesPathFilter("src/a/b.rs", ["src/*"]), false)
+  assert.equal(matchesPathFilter("docs/x.md", ["**", "!docs/**"]), false)
+
+  // The lockfile is in commit 1 here, so commit 2 touches only frontend sources: the recorder would never run on it.
+  assert.throws(
+    () => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"] }),
+    /recording workflow runs only when package\.json, pnpm-lock\.yaml change; commit 2 touches none of them, so it would record nothing/,
+  )
+  assert.doesNotThrow(() => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"], firstPaths: [] }))
+  assert.doesNotThrow(() => replayPlan({ recordPaths: null }))
+  assert.doesNotThrow(() => replayPlan({ recordPaths: ["Cargo.lock"], record: "inject", ecosystem: "npm" }), "an injected recorder has no fork path filter")
+})
+
 test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
   const planned = "chore(deps): sync dependency manifests before update\n\n- Cargo.lock"
   assert.equal(resolvedFirstMessage(["Cargo.lock", RECORD_WORKFLOW_PATH], planned), planned)
@@ -364,6 +432,16 @@ test("replay --pr: a rerun with both commits on the fork pushes nothing; a forei
 
   const gone = fakeExec(resumeResponses(null, ""))
   await assert.rejects(executePlan(plan, { exec: gone.exec, io, log: () => {}, wait: noWait }), /is gone/)
+
+  // A closed pull request on the branch is not reused: the replay starts fresh.
+  const logs = []
+  const closedList = [/gh pr list/, JSON.stringify([{ number: 70, state: "CLOSED", isDraft: true, url: `https://github.com/${FORK}/pull/70` }])]
+  const fresh = fakeExec([closedList, ...replayResponses])
+  const started = await executePlan(plan, { exec: fresh.exec, io, log: (line) => logs.push(line), wait: noWait })
+  assert.notEqual(started.reconciled, true)
+  assert.ok(fresh.calls.includes("git -C /tmp/work push --set-upstream origin HEAD~1:refs/heads/deps/puppeteer-25.9.0"), fresh.calls.join("\n"))
+  assert.ok(fresh.calls.some((c) => c.includes("gh pr create")))
+  assert.ok(logs.some((line) => /pull request 70 \(closed\) on deps\/puppeteer-25\.9\.0 is not reused/.test(line)), logs.join("\n"))
 })
 
 test("replay --pr: when the default branch moved, the fork branch is matched by patch and commit 2 is cherry-picked onto the fork's commit 1", async () => {
@@ -793,6 +871,39 @@ test("verify: the share gate fails on pending checks, stale heads, residue; pass
   const residue = evaluateExhibit({ pr: { ...pr, body: "opened by the replay harness in a devin session" }, comments, checks: [], permalinkStatus: 200 })
   assert.match(residue.reasons.join("\n"), /residue/)
   assert.equal(evaluateExhibit({ pr, comments: [], checks: [], permalinkStatus: null }).status, "FAIL")
+})
+
+test("verify: an App comment (v6.10 contract) passes on its summary pair and the recording run's own check", () => {
+  const pr = { head_sha: SHA_B, base_sha: SHA_A, state: "open", body: "Retry ranged downloads." }
+  const appBody = `<!-- garnet-runtime-review -->
+<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->
+<!-- garnet:commit ${SHA_B} -->
+<!-- garnet:summary {"contract":"6.10.0","commit":"${SHA_B}","previous":"${SHA_C}","jobs":1,"changed":0,"unchanged":1,"chains":17,"destinations":8} -->
+**Execution Profiles recorded for 1 job, triggered by [\`${SHA_B.slice(0, 7)}\`](https://github.com/${FORK}/commit/${SHA_B})**
+
+> *1&nbsp;job unchanged · compared with [\`${SHA_C.slice(0, 7)}\`](https://github.com/${FORK}/commit/${SHA_C})*
+
+<a href="https://app.garnet.ai/public/runs/34534049128?profile=01a08d4e-d651-741b-9c0a-3666ff4ee271">View this job's Execution Profile in Garnet →</a>
+`
+  const comments = [{ user: "garnet-runtime-review[bot]", body: appBody }]
+  const recorded = { name: "Dependency install (recorded)", status: "completed", conclusion: "success", details_url: `https://github.com/${FORK}/actions/runs/34534049128/job/1` }
+  const unrelatedQueued = { name: "plan / plan", status: "queued", conclusion: null, details_url: `https://github.com/${FORK}/actions/runs/34534049758/job/2` }
+  const good = evaluateExhibit({ pr, comments, checks: [unrelatedQueued, recorded], permalinkStatus: 200, expectedLabel: "real" })
+  assert.equal(good.status, "PASS", good.reasons.join("; "))
+  const legs = Object.fromEntries(good.legs.map((entry) => [entry.name, entry.detail]))
+  assert.equal(legs["comment finalized"], "record is final; its contract does not declare capture completeness")
+  assert.equal(legs["pair line"], `pair ${SHA_C.slice(0, 7)} (previous) → ${SHA_B.slice(0, 7)} (this commit) from the record summary`)
+  assert.equal(legs["check settled"], "Dependency install (recorded) completed")
+
+  const noRun = evaluateExhibit({ pr, comments, checks: [unrelatedQueued], permalinkStatus: 200 })
+  assert.match(noRun.reasons.join("\n"), /no check on the head commit belongs to run 34534049128/)
+  const stillRecording = evaluateExhibit({ pr, comments, checks: [{ ...recorded, status: "in_progress", conclusion: null }], permalinkStatus: 200 })
+  assert.match(stillRecording.reasons.join("\n"), /check settled: Dependency install \(recorded\) in_progress/)
+  const movedHead = evaluateExhibit({ pr: { ...pr, head_sha: SHA_A }, comments, checks: [recorded], permalinkStatus: 200 })
+  assert.match(movedHead.reasons.join("\n"), /head-bound/)
+  const pendingBody = appBody.replace("garnet-control-plane-pr-comment:v1", "garnet-control-plane-pending-pr-comment:v1").replace(/<!-- garnet:summary .*-->\n/, "")
+  const pending = evaluateExhibit({ pr, comments: [{ user: "garnet-runtime-review[bot]", body: pendingBody }], checks: [recorded], permalinkStatus: 200 })
+  assert.match(pending.reasons.join("\n"), /comment finalized: placeholder text present/)
 })
 
 // ---------------------------------------------------------------- stage 2

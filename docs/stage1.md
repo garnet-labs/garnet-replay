@@ -51,11 +51,19 @@ The plan, always printed before anything is written:
    to the base first (`git push origin <base>:refs/heads/<default>`, which git
    refuses unless it is a fast-forward). With the fork at the base, commit 1
    carries only the recording workflow, and its message says so.
+   When the fork default branch must stay where it is, `--base-branch <name>`
+   sets a fork-only branch to the exact base instead and opens the pull request
+   against it; commit 1 then carries the fork's recording workflow from the
+   default branch. A fork with several recording workflows needs
+   `--record-workflow <path>` to name the one carried.
 5. Branch `deps/<name>-<to>` (or `change/<slug>-<n>`) from the fork default branch.
 6. Commit 1: the touched paths as the upstream base had them, plus the recording
    workflow if the fork has none (`--record inject`). Only paths that exist in
    that state are staged; paths the change adds appear first in commit 2, paths
-   it removes disappear there.
+   it removes disappear there. When the fork's recording workflow runs only on
+   certain paths (`on.pull_request.paths`), commit 2 must touch at least one of
+   them; otherwise the plan stops before any write, because the pull request
+   would record nothing.
 7. Commit 2: the upstream diff applied on top, with routine wording.
 8. Verify `git rev-list --count` is exactly 2 and both commits are non-empty.
 9. Push commit 1 alone to `origin`; open one draft pull request or reuse the
