@@ -13,7 +13,7 @@ No dependencies to install.
 
 ```sh
 git clone https://github.com/garnet-labs/garnet-replay && cd garnet-replay
-npm test                      # 46 tests, no network
+npm test                      # 57 tests, no network
 node bin/replay.mjs --help
 ```
 
