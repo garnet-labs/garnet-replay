@@ -23,6 +23,14 @@ a local checkout of the fork (`--work`). Read `AGENTS.md` for the rules.
 
 ## Reporting
 
+For a released-version comparison with a controlled workload, use
+`live <slug> --prepared <json> --work <checkout> --dry-run`, then the same command
+without `--dry-run`. See `docs/prepared.md` for the input. Do not use
+`--dependency` for a version-only comparison: that mode changes build-script
+permission. Prepared mode retains the recording workflow across both commits
+and refuses `--no-wait`. After a publication interruption, use the same input
+and branch with `--resume`; it checks the two committed states before resuming.
+
 Report with the pair line, the verdict and its first reason, the capture status,
 and the pull request URL. Label every statement with its claim class from
 `docs/contract.md`. If the run is pending, say pending; if evidence is partial,
