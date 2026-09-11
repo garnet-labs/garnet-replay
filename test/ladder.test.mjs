@@ -11,7 +11,7 @@ import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
 import { evaluateConsumption, renderConsumeReport } from "../lib/consume.mjs"
-import { evaluateExhibit, verifyExitCode } from "../lib/verify.mjs"
+import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { planStage2, renderStage2Plan } from "../lib/stage2.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
 
@@ -1208,6 +1208,48 @@ test("verify: an App comment (v6.10 contract) passes on its summary pair and the
   const pendingBody = appBody.replace("garnet-control-plane-pr-comment:v1", "garnet-control-plane-pending-pr-comment:v1").replace(/<!-- garnet:summary .*-->\n/, "")
   const pending = evaluateExhibit({ pr, comments: [{ user: "garnet-runtime-review[bot]", body: pendingBody }], checks: [recorded], permalinkStatus: 200 })
   assert.match(pending.reasons.join("\n"), /comment finalized: placeholder text present/)
+})
+
+test("verify: paginates comments and check runs before evaluating the recording check", async () => {
+  const head = SHA_A
+  const base = SHA_B
+  const recordRunId = "34571400222"
+  const permalink = `https://app.garnet.ai/public/runs/${recordRunId}?profile=00000000-0000-4000-8000-000000000000`
+  const body = `<!-- garnet-runtime-review -->
+<!-- garnet:commit ${head} -->
+<!-- garnet:summary {"status":"finalized","commit":"${head}","previous":"${base}","capture_quality":"complete"} -->
+[View this run in Garnet →](${permalink})`
+  const calls = []
+  const fetchImpl = async (url) => {
+    calls.push(url)
+    if (url.includes("/pulls/77")) {
+      return { ok: true, status: 200, json: async () => ({ head: { sha: head }, base: { sha: base }, state: "open", body: "", labels: [] }) }
+    }
+    if (url.includes("/issues/77/comments")) {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => /[?&]page=1(?:&|$)/.test(url)
+          ? [{ user: { login: "garnet-runtime-review[bot]" }, body }]
+          : [],
+      }
+    }
+    if (url.includes("/check-runs")) {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => /[?&]page=1(?:&|$)/.test(url)
+          ? { total_count: 101, check_runs: Array.from({ length: 100 }, () => ({ name: "other", status: "completed", conclusion: "success", details_url: "https://github.com/o/r/actions/runs/1/job/1" })) }
+          : { total_count: 101, check_runs: [{ name: "Dependency install (recorded)", status: "completed", conclusion: "success", details_url: `https://github.com/o/r/actions/runs/${recordRunId}/job/1` }] },
+      }
+    }
+    if (url === permalink) return { ok: true, status: 200 }
+    throw new Error(`unexpected fetch: ${url}`)
+  }
+
+  const result = await verifyExhibit("https://github.com/o/r/pull/77", { fetchImpl })
+  assert.equal(result.legs.find((entry) => entry.name === "check settled")?.ok, true)
+  assert.ok(calls.some((url) => url.includes("/check-runs?per_page=100&page=2")))
 })
 
 // ---------------------------------------------------------------- stage 2
