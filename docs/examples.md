@@ -251,6 +251,42 @@ Without `--dry-run` the same command stops with exit 1 before any write. The
 plan itself is sound; the fork's recorder is not finalizing comments, so a pull
 request opened now would wait for a record that is not arriving.
 
+## 6. Local replay workspace
+
+```sh
+node bin/replay.mjs serve --port 8787
+```
+
+The workspace was cold-read in Chrome at desktop and 390px widths on
+2026-09-11. With the checked-in artifact
+`public/replays/github/garnet-labs/garnet-runtime-review-reference/31.json`,
+its comparison showed:
+
+```text
+Dependency replay: chart-helpers #31
+saved evidence · real pair · capture complete
+base 8703692 → head b639b38 · immediate-parent-to-head
+
+Workload
+  Outbound connections: removed −0 | added +4
+    api.ipify.org
+    httpbin.org
+    ip-api.com
+    registry.npmjs.org
+  Process observations: removed −0 | added +2
+  File observations: not recorded
+
+Runner background
+  Outbound connections: removed −2 | added +2
+  Process observations: removed −1 | added +0
+  File observations: not recorded
+```
+
+The saved artifact supplies the label and verdict. This local rendering does not
+establish a current share-gate result. Every observation and its available
+ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
+See [workspace.md](workspace.md) for the planner and HTTP interface.
+
 ## What is not in this file
 
 No example shows a `new-behavior` card yet. Every recorded fork replay to date

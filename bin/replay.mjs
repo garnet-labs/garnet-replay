@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-import { createReadStream, existsSync } from "node:fs"
+import { existsSync } from "node:fs"
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises"
 import { execFileSync } from "node:child_process"
-import { createServer } from "node:http"
-import { dirname, extname, join, normalize, relative, resolve } from "node:path"
+import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, executionDiffFromProfiles, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
@@ -13,6 +12,8 @@ import { listTargets } from "../lib/ledger.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
 import { verifyExitCode } from "../lib/verify.mjs"
+import { run } from "../lib/gh.mjs"
+import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -31,62 +32,6 @@ async function writeDiff(out, pr, diff) {
   await mkdir(dirname(path), { recursive: true })
   await writeFile(path, `${JSON.stringify(diff, null, 2)}\n`)
   return path
-}
-
-function safeFilePath(root, requestPath) {
-  const decoded = decodeURIComponent(requestPath.split("?")[0])
-  const candidate = resolve(root, `.${normalize(decoded)}`)
-  const relativePath = relative(root, candidate)
-  return relativePath === "" || (!relativePath.startsWith("..") && !relativePath.includes(`..${"/"}`))
-    ? candidate
-    : null
-}
-
-function contentType(path) {
-  const extension = extname(path)
-  return extension === ".json" ? "application/json; charset=utf-8"
-    : extension === ".html" ? "text/html; charset=utf-8"
-      : "application/octet-stream"
-}
-
-async function serve(root, port) {
-  const server = createServer(async (request, response) => {
-    if (request.method !== "GET") {
-      response.writeHead(405, { allow: "GET" })
-      response.end("Method Not Allowed\n")
-      return
-    }
-    let requestPath
-    try {
-      requestPath = decodeURIComponent(new URL(request.url ?? "/", "http://localhost").pathname)
-    } catch {
-      response.writeHead(400)
-      response.end("Bad Request\n")
-      return
-    }
-    if (/^\/replays\/github\/[^/]+\/[^/]+\/\d+$/.test(requestPath)) {
-      requestPath = `${requestPath}.json`
-    } else if (requestPath.endsWith("/")) {
-      requestPath += "index.html"
-    }
-    const path = safeFilePath(root, requestPath)
-    if (path === null) {
-      response.writeHead(403)
-      response.end("Forbidden\n")
-      return
-    }
-    try {
-      const fileStat = await stat(path)
-      if (!fileStat.isFile()) throw new Error("not a file")
-      response.writeHead(200, { "content-type": contentType(path) })
-      createReadStream(path).pipe(response)
-    } catch {
-      response.writeHead(404)
-      response.end("Not Found\n")
-    }
-  })
-  await new Promise((resolveServer) => server.listen(port, resolveServer))
-  console.log(`serving ${root} at http://localhost:${port}`)
 }
 
 async function known(args) {
@@ -431,7 +376,7 @@ records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
   live <repo-url|path> --dependency x --from a --to b               constructed transition when no real pull request exists
   pair --base ... --head ...                                        build a replay JSON from two profile files
-  serve [--root public] [--port 8787]                               local result pages
+  serve [--root public] [--port 8787]                               replay workspace and saved result pages
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `
 
@@ -460,7 +405,12 @@ async function main(args) {
   if (command === "serve") {
     const root = resolve(option(args.slice(1), "--root", join(ROOT, "public")))
     const port = Number(option(args.slice(1), "--port", "8787"))
-    return serve(root, port)
+    if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("port must be between 1 and 65535")
+    let revision = "unknown"
+    try {
+      revision = run("git", ["rev-parse", "HEAD"], { cwd: ROOT }).trim()
+    } catch {}
+    return serveWorkspace(root, port, revision)
   }
   throw new Error(`unknown command '${command}'\n${USAGE}`)
 }

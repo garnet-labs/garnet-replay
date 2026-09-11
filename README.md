@@ -104,6 +104,14 @@ and `claims`, each tagged `observed-runtime-behavior`, `comparison-result`,
 `required-check-state`, `reviewer-consumption-evidence`, or `unsupported-claim`.
 See [docs/contract.md](docs/contract.md).
 
+## Replay workspace
+
+Run `node bin/replay.mjs serve` and open `http://localhost:8787` to browse saved
+replays, inspect base/head observations, and follow target ladder progress.
+The workspace includes a dry-run command composer; execution stays in the CLI.
+See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
+and the read-only HTTP interface.
+
 ## Supported ecosystems
 
 Three layers, and only one of them is tied to a package manager:

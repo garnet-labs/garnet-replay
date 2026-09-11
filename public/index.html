@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Garnet Replay</title>
+    <link rel="icon" href="/replay.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/workspace.css" />
+    <script type="module" src="/workspace.mjs"></script>
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to evidence</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Garnet Replay home"
+        ><img src="/replay.svg" alt="" width="26" height="26" /><span
+          >garnet<span class="brand-divider">/</span
+          ><strong>replay</strong></span
+        ></a
+      >
+      <form id="search-form" role="search">
+        <span aria-hidden="true">⌕</span
+        ><input
+          id="search"
+          type="search"
+          aria-label="Search saved replays or paste a PR URL"
+          placeholder="Search replays or paste a PR URL…"
+          autocomplete="off"
+        /><kbd>/</kbd>
+      </form>
+      <div class="top-actions">
+        <button
+          id="theme"
+          aria-label="Switch color theme"
+          title="Switch color theme"
+        >
+          ◐</button
+        ><button id="plan" class="primary">
+          Plan replay <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </header>
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Workspace navigation">
+        <div class="sidebar-heading">
+          <span>WORKSPACE</span
+          ><button
+            id="refresh"
+            aria-label="Refresh saved artifacts"
+            title="Refresh saved artifacts"
+          >
+            ↻
+          </button>
+        </div>
+        <nav class="mode-nav" aria-label="Workspace views">
+          <button data-view="replays" aria-current="page">
+            <span aria-hidden="true">⇄</span> Saved replays</button
+          ><button data-view="targets">
+            <span aria-hidden="true">▦</span> Target ledgers
+          </button>
+        </nav>
+        <div id="navigation"></div>
+        <div class="sidebar-bottom">
+          <span class="local-dot"></span> Local artifacts
+          <span class="muted">· read only</span><small id="revision"></small>
+        </div>
+      </aside>
+      <main id="content" tabindex="-1">
+        <div class="empty">
+          <span class="eyebrow">GARNET REPLAY</span>
+          <h1>Opening your workspace</h1>
+          <p>Reading saved records and target ledgers.</p>
+        </div>
+      </main>
+    </div>
+    <dialog id="planner" aria-labelledby="planner-title">
+      <div class="dialog-heading">
+        <div>
+          <span class="eyebrow">NEXT REPLAY</span>
+          <h2 id="planner-title">Start with a plan.</h2>
+        </div>
+        <button id="close-plan" aria-label="Close replay planner">×</button>
+      </div>
+      <p class="muted">
+        Compose the canonical harness command. Review its dry run in your
+        terminal before creating a replay.
+      </p>
+      <form id="plan-form">
+        <div class="form-grid">
+          <label
+            >Target<select name="slug" id="plan-target" required></select
+          ></label>
+          <label
+            >Comparison<select name="mode" id="plan-mode">
+              <option value="pr">Real pull request</option>
+              <option value="prepared">Prepared two-state input</option>
+              <option value="dependency">pnpm dependency transition</option>
+              <option value="allow-build">
+                pnpm build-script allow decision
+              </option>
+            </select></label
+          >
+          <label class="full"
+            >Clean fork checkout<input
+              name="work"
+              placeholder="/path/to/fork-checkout"
+              required
+          /></label>
+          <label data-mode="pr"
+            >Upstream PR number<input
+              name="pr"
+              inputmode="numeric"
+              placeholder="123"
+          /></label>
+          <label data-mode="prepared" hidden
+            >Prepared JSON path<input
+              name="prepared"
+              placeholder="/path/to/input.json"
+          /></label>
+          <label data-mode="prepared" hidden
+            >New branch<input name="branch" placeholder="version-update"
+          /></label>
+          <label data-mode="dependency allow-build" hidden
+            >Dependency<input name="dependency" placeholder="package-name"
+          /></label>
+          <label data-mode="dependency" hidden
+            >Target version<input name="to" placeholder="1.2.3"
+          /></label>
+          <label data-mode="dependency" hidden
+            >Package directory (optional)<input
+              name="packageDir"
+              placeholder="."
+          /></label>
+          <label
+            >Recording label (optional)<input
+              name="label"
+              placeholder="Label required by the fork workflow"
+          /></label>
+        </div>
+        <p id="plan-hint" class="muted"></p>
+        <div class="command">
+          <span>DRY RUN · POSIX SHELL</span>
+          <pre id="command-output">
+Fill in the fields to compose a command.</pre
+          >
+        </div>
+        <div class="dialog-footer">
+          <span id="plan-error" role="status"></span
+          ><button id="copy-command" type="submit" class="primary" disabled>
+            Copy command
+          </button>
+        </div>
+      </form>
+      <p class="fine-print">
+        Run from the harness checkout. After capture finishes, run
+        <code>replay verify &lt;fork-pr-url&gt;</code> before sharing evidence.
+      </p>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <noscript
+      ><p class="notice">
+        Enable JavaScript to browse the workspace. Saved result pages and JSON
+        remain available under /replays/.
+      </p></noscript
+    >
+  </body>
+</html>
