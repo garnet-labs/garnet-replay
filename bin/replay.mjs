@@ -360,6 +360,10 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
   live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit replay of an upstream pull request on the fork
+  live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
+                                                                    record inside the project's own pull request workflow
+  fork <owner/repo> [--org garnet-labs]                             create the matching garnet-labs fork
+  refresh <slug> [--work dir] [--dry-run]                            refresh a stale fork default branch from upstream
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
   live <slug> --allow-build x [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
@@ -387,6 +391,8 @@ async function main(args) {
     return undefined
   }
   if (command === "find") return ladder.find(args.slice(1))
+  if (command === "fork") return ladder.fork(args.slice(1))
+  if (command === "refresh") return ladder.refresh(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
   if (command === "verify") {
