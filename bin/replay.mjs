@@ -345,7 +345,7 @@ async function cloneForReplay(source, cacheRoot) {
 async function live(args) {
   const target = args[0]
   if (typeof target !== "string") throw new Error("live requires <slug> --pr N, or a repository URL/path with --dependency/--from/--to")
-  if (args.includes("--pr") || (listTargets().includes(target) && !existsSync(target))) return ladder.livePr(args)
+  if (args.includes("--pr") || args.includes("--prepared") || (listTargets().includes(target) && !existsSync(target))) return ladder.livePr(args)
   const token = option(args, "--token", process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN)
   const packageDir = option(args, "--dir", ".")
   const repoUrl = repoParts(target)
@@ -409,6 +409,8 @@ async function live(args) {
 const USAGE = `usage: replay <command> [options]
 
 ladder (one target ledger per upstream repository, one fork as the only write target)
+  live <slug> --prepared <json> --work <checkout> [--branch b] [--resume] [--label l] [--dry-run]
+                                                                    author explicit before/after files; record commit 1 before publishing commit 2
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
   live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
