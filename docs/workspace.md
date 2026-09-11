@@ -60,6 +60,28 @@ header. There is no public/multi-user authentication layer. Keep this service
 local or behind an authenticated private preview. A hosted service also needs
 per-user authorization and isolated durable workers.
 
+## Host the public evidence viewer
+
+`node server.mjs` starts the deployment entrypoint on port 3000 (`PORT` overrides
+it). Vercel detects this Node HTTP server; `vercel.json` includes the saved
+evidence, target ledgers, and validation schema in the function. No build or
+dependency installation is required.
+
+This entrypoint supports saved evidence, direct PR URLs, and anonymous public
+GitHub receipt lookups. It ignores ambient GitHub credentials. GitHub rate limits,
+private PRs, and unavailable receipts remain explicit lookup failures. The page
+directs preparation to the local harness; all mutations return HTTP 405.
+
+There is no worker or writable job store in this entrypoint. Recording and durable
+artifact updates still use the local harness. New checked-in evidence reaches the
+viewer through a deployment. A team recording service requires authenticated
+authorization, isolated workers and durable job/artifact storage.
+
+Deploy to a separate Vercel project, verify its generated URL first, then attach a
+free subdomain such as `replay.ci.run`. Inspect existing domain assignments before
+changing them. Keep the project preview protected until its public-read behavior,
+direct routes, evidence provenance and static assets have been verified.
+
 ## Inspect saved evidence
 
 Open `/workspace` to search by repository, title, PR number, or SHA. Select a
