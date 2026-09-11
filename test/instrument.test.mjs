@@ -218,7 +218,7 @@ test("planRefresh guards reused worktrees and upstream URL", async () => {
   await assert.rejects(
     executePlan(plan, {
       exec(command, args) {
-        if (args.includes("get-url") && args.includes("upstream")) return "https://github.com/owner/demo.git"
+        if (args.includes("get-url") && args.includes("upstream")) return "https://git-manager.devin.ai/proxy/github.com/owner/demo.git"
         if (args.includes("get-url") && args.includes("origin")) return "https://github.com/garnet-labs/demo.git"
         if (args.includes("rev-list")) return "1 0"
         if (args.includes("status")) return " M README.md"
