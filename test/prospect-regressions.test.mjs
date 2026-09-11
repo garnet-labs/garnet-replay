@@ -142,6 +142,20 @@ test("partial and absent captures remain undeterminable while retaining recorded
   assert.equal(classify({ comment: { body }, headSha: HEAD }).verdict, "undeterminable")
 })
 
+test("cards exclude open and multiline teaching folds without removing recorded jobs", () => {
+  for (const heading of [
+    "<details open><summary><sub>💡 How to read this</sub></summary>",
+    '<details class="guide" open>\n<summary>\nReading this\n</summary>',
+  ]) {
+    const body = record().replace("<details><summary>How to read this</summary>", heading)
+    const card = renderCard(buildModel({ slug: "example", forkPr: 1, headSha: HEAD, comment: { body } }))
+    assert.equal(extractChains(body).length, 9)
+    assert.equal((card.match(/○ registry/g) ?? []).length, 9)
+    assert.equal((card.match(/View this job's Execution Profile in Garnet/g) ?? []).length, 1)
+    assert.doesNotMatch(card, /teaching\.example|How to read this|Reading this/)
+  }
+})
+
 test("mixed ecosystem paths require an explicit selection and generated bodies include setup files", () => {
   assert.equal(detectEcosystem(["package-lock.json", "uv.lock"]), null)
   assert.equal(detectEcosystem(["package-lock.json", "nested/pnpm-lock.yaml"]), "npm")

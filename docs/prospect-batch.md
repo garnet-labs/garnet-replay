@@ -141,6 +141,7 @@ head label would not prove it either.
 | HTTP 200 accepted a different commit identity | Harness: validate public repository/run/profile/head | Regression-covered in this change |
 | Undeclared capture accepted as comparison evidence | Harness: separate complete-capture gate, undeterminable cards | Regression-covered in this change |
 | Unchanged/workload rows lost from cards | Harness: preserve recorded job sections and all rows | Regression-covered; rendered validation required |
+| An open teaching fold mixed a synthetic action into the PostHog card | Harness: exclude teaching folds with attributes or multiline summaries | Regression-covered; all recorded job rows retained |
 | Empty reviewer section / wrong comparison scope | Harness: explicit unrecorded reviewer outcome and recorded pair scope | Regression-covered |
 | Setup files absent from generated PR body | Harness: full change list plus additional commit-1 files | Regression-covered for new plans; existing target PRs preserved |
 | Existing Dependabot policy overwritten on a source-base replay | Harness: inspect the exact upstream base SHA for `--base-branch` / `--sync-fork`; fork default otherwise | Regression-covered; checking the named fork branch would fail before its creation |
@@ -151,6 +152,40 @@ head label would not prove it either.
 | Generic installs do not answer product hypotheses | Candidate selector / cold reader | Rank by actual measured decision; preserve unchanged controls without promoting them |
 | Version transition unavailable in real-PR cards | Harness: retain exact source pair; human-derived transitions above | Automatic multi-manifest/lockfile derivation remains open; do not invent one from destination differences |
 | Base-ref publication failed in a producer checkout | Harness/operator: checkout-state handling and git error detail | Producer workaround retained; general fix remains open pending reproduction |
+
+## Ship-train reconciliation
+
+Read-only probes on September 11 at 20:33 UTC checked the
+[owning session](https://app.devin.ai/sessions/524da23a00084fb2b6f5f252119f73b1),
+current control-plane source, linked PRs, and
+[`/ready`](https://api.garnet.ai/ready). The running API reports `v1.35.2`,
+commit `7f5d5885bdf4330dde956deb7104673b87424406`.
+
+- **Capture:** merged [control-plane #679](https://github.com/garnet-org/control-plane/pull/679)
+  accounts for agents still recording or stopped without a profile. Its
+  completed-workflow webhook can terminate those states. This improves missing
+  job accounting; it does not declare complete event capture in the five batch
+  records. [Control-plane #657](https://github.com/garnet-org/control-plane/pull/657)
+  proposes a machine register with capture state, but remains open.
+- **Head identity:** deployed commits
+  [`17e8863`](https://github.com/garnet-org/control-plane/commit/17e88632112bf96b708ddccb0c314b23def17867)
+  and [`7f5d588`](https://github.com/garnet-org/control-plane/commit/7f5d5885bdf4330dde956deb7104673b87424406)
+  repair agent/profile lookup across head and merge SHAs, attaching a profile
+  through its actual agent relationship. That fixes an internal association
+  failure. The public report must still expose trustworthy executed-source
+  linkage before a merge SHA can support an exact replay-head claim.
+- **Reviewer value:** [testbed #135](https://github.com/garnet-org/runtime-review-testbed/pull/135)
+  addresses chain-level workload attribution and representative selection. It
+  remains open; #137 and #138 merged into its feature branch, not `main`.
+  Attribution improvements do not make an install exercise application
+  compatibility. The ship-train session also reports no demonstrated
+  true-positive reviewer-consumption result in its measured pilot.
+
+These changes partially address the causes of the first two gaps. They do not
+retroactively accept this batch. The harness keeps its strict gates; candidate
+selection must specify the measured command, native outcome and review decision.
+Producer declarations, public provenance and consumer evidence remain with the
+existing product lanes. No protected repository was modified by this work.
 
 ## Reusable batch entrypoint and automation decision
 
