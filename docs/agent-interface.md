@@ -11,9 +11,9 @@ procedure; this page is the contract and the gap list.
 | Non-interactive | every command runs to completion or throws; no prompts | `bin/replay.mjs` |
 | Plan before write | `live … --dry-run` and `stage2 … --dry-run` print the full plan and write nothing | `lib/commands.mjs` |
 | Fork-only writes | asserted in code before the first push; upstream is never a write target | `lib/guards.mjs` |
-| Resumable | rerunning `live` on an existing fork branch matches the fork head against commit 1 and commit 2 by tree and continues from there; a foreign head stops the run | `publicationState` in `lib/replay-pr.mjs` |
+| Resumable | rerunning `live` on an existing fork branch matches the fork head against commit 1 and commit 2 by tree, then by patch, and continues from there; a foreign head, extra commits past the base, a commit 1 rooted on an older base, or a closed pull request's leftover branch stops the run with `--branch <name>` as the way out | `publicationState` and the `reconcile` step in `lib/replay-pr.mjs` |
 | Fail closed | pending, partial, stale, or unbound evidence is `undeterminable`; the wait step never treats a placeholder comment as a record | `lib/evidence.mjs`, `lib/wait.mjs`, `lib/receipt.mjs` |
-| Exit code | `0` on success, `1` on any error, message on stderr | `bin/replay.mjs` |
+| Exit code | `0` on success, `1` on any error (message on stderr) and on `verify` FAIL | `bin/replay.mjs` |
 | Machine-readable state | one ledger per target, `targets/<slug>.json`, written by the commands; `status <slug>` prints the next command | `lib/ledger.mjs`, `lib/status.mjs` |
 | Machine-readable artifacts | `out/<slug>/` holds the card, verify report, and consumption report as JSON beside the Markdown | `lib/commands.mjs` |
 | Vocabulary gate | rendered artifacts are checked against `contract/vocab.json` before they are written | `assertVocabClean` |

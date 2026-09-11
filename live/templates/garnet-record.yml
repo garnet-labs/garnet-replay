@@ -1,5 +1,5 @@
-# Records the dependency install under the Garnet sensor on every pull request
-# that touches a manifest. Garnet posts one Runtime Review comment per head
+# Records the dependency install under the Garnet sensor on every pull request,
+# Dependabot's included. Garnet posts one Runtime Review comment per head
 # commit and compares it with the previous recorded commit.
 name: Garnet Runtime Visibility
 

@@ -4750,9 +4750,907 @@
         ]
       },
       "observedAt": "2026-09-10T20:04:24.967Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98771,
+      "title": "chore(ruff): pin target-version to py313",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:22:55Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "pyproject.toml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98764,
+      "title": "chore(frontend): use the kea-disposables package",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:15:55Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".agents/skills/using-kea-disposables/SKILL.md",
+        "frontend/package.json",
+        "frontend/src/initKea.ts",
+        "frontend/src/kea-disposables.test.ts",
+        "frontend/src/kea-disposables.ts",
+        "frontend/src/scenes/web-analytics/LiveMetricsDashboard/liveWebAnalyticsMetricsLogic.tsx",
+        "frontend/src/scenes/web-analytics/LiveMetricsDashboard/liveWorldMapLogic.tsx",
+        "frontend/src/toolbar/index.tsx",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "products/posthog_ai/frontend/utils/warmRunSubmission.test.ts",
+        "products/posthog_ai/frontend/utils/warmRunSubmission.ts",
+        "products/posthog_ai/package.json",
+        "tsconfig.kea-typegen.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98778,
+      "title": "fix(taxonomic-filter): debounce and page the rebuilt menu, hide restricted properties, show capped counts",
+      "author": "eli-r-ph",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:24:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 34,
+      "paths": [
+        "docs/internal/taxonomic-filter-search.md",
+        "frontend/src/lib/components/TaxonomicFilter/InfiniteList.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/InfiniteSelectResults.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/TaxonomicFilter.stories.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/TaxonomicFilter.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/headless/Categories.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/hooks/useGroupList.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/hooks/useGroupList.ts",
+        "frontend/src/lib/components/TaxonomicFilter/hooks/useTaxonomicFilter.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/hooks/useTaxonomicGroupsContext.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/menu/Combobox.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/menu/Combobox.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/menu/TaxonomicFilterMenu.stories.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/taxonomicFilterLogic.test.ts",
+        "frontend/src/lib/components/TaxonomicFilter/taxonomicFilterLogic.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/utils/buildGroupAnalyticsGroups.test.ts",
+        "frontend/src/lib/components/TaxonomicFilter/utils/buildGroupAnalyticsGroups.ts",
+        "frontend/src/lib/components/TaxonomicFilter/utils/buildTaxonomicGroups.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/utils/invalidateDefinitionLists.test.ts",
+        "frontend/src/lib/components/TaxonomicFilter/utils/invalidateDefinitionLists.ts",
+        "frontend/src/lib/lemon-ui/PaginationControl/PaginationControl.test.tsx",
+        "frontend/src/lib/lemon-ui/PaginationControl/PaginationControl.tsx",
+        "frontend/src/lib/lemon-ui/PaginationControl/types.ts",
+        "frontend/src/lib/lemon-ui/PaginationControl/usePagination.test.ts",
+        "frontend/src/lib/lemon-ui/PaginationControl/usePagination.ts",
+        "frontend/src/lib/utils/definitionCount.test.ts",
+        "frontend/src/lib/utils/definitionCount.ts",
+        "frontend/src/scenes/data-management/definition/definitionEditLogic.ts",
+        "frontend/src/scenes/data-management/definition/definitionLogic.ts",
+        "frontend/src/scenes/data-management/events/EventDefinitionsTable.tsx",
+        "frontend/src/scenes/data-management/events/eventDefinitionsTableLogic.test.ts",
+        "frontend/src/scenes/data-management/events/eventDefinitionsTableLogic.ts",
+        "frontend/src/scenes/data-management/properties/PropertyDefinitionsTable.tsx",
+        "frontend/src/scenes/data-management/properties/propertyDefinitionEditModalLogic.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98761,
+      "title": "feat(mcp-analytics): clarify and expand model coverage",
+      "author": "lucasheriques",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:05:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 21,
+      "paths": [
+        "docs/internal/mcp-model-identification.md",
+        "frontend/src/queries/schema.json",
+        "frontend/src/queries/schema/schema-general.ts",
+        "frontend/src/taxonomy/core-filter-definitions-by-group.json",
+        "posthog/schema.py",
+        "posthog/taxonomy/taxonomy.py",
+        "products/mcp_analytics/backend/hogql_queries/model_breakdown.py",
+        "products/mcp_analytics/backend/tests/test_model_breakdown.py",
+        "products/mcp_analytics/frontend/MCPAnalyticsDashboardOverview.tsx",
+        "products/mcp_analytics/frontend/dashboard/DashboardCards.stories.tsx",
+        "products/mcp_analytics/frontend/dashboard/ModelBarChart.tsx",
+        "products/mcp_analytics/frontend/dashboard/ModelBreakdownTable.tsx",
+        "products/mcp_analytics/frontend/dashboard/modelBreakdown.test.ts",
+        "products/mcp_analytics/frontend/dashboard/modelBreakdown.ts",
+        "products/mcp_analytics/frontend/dashboard/modelBreakdownLogic.test.ts",
+        "products/mcp_analytics/frontend/dashboard/modelBreakdownLogic.ts",
+        "services/mcp/src/api/generated.ts",
+        "services/mcp/src/hono/analytics.ts",
+        "services/mcp/src/hono/tool-executor.ts",
+        "services/mcp/tests/hono/analytics.test.ts",
+        "services/mcp/tests/hono/tool-executor-intent.test.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98799,
+      "title": "fix(desktop): keep sandbox restarts silent",
+      "author": "dmarticus",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T21:19:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/desktop/docs/TROUBLESHOOTING.md",
+        "products/desktop/packages/core/src/pi-runtime/piSessionController.test.ts",
+        "products/desktop/packages/core/src/pi-runtime/piSessionController.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98796,
+      "title": "fix(persons): anchor \"View events\" to the event it was opened from",
+      "author": "fivestarspicy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T21:15:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "frontend/src/lib/components/NotFound/index.tsx",
+        "frontend/src/queries/nodes/DataTable/renderColumn.tsx",
+        "frontend/src/scenes/activity/explore/defaults.test.ts",
+        "frontend/src/scenes/activity/explore/defaults.ts",
+        "frontend/src/scenes/persons/PersonDisplay.tsx",
+        "frontend/src/scenes/persons/PersonPreview.tsx",
+        "frontend/src/scenes/surveys/components/question-visualizations/VirtualizedResponseList.tsx",
+        "frontend/src/scenes/surveys/hooks/useSurveyResponseColumns.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98795,
+      "title": "fix(max): clear the delayed homepage AI send after unmount",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T21:15:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/src/scenes/project-homepage/ai-first/HomepageThread.test.tsx",
+        "frontend/src/scenes/project-homepage/ai-first/HomepageThread.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98794,
+      "title": "fix(warehouse-sources): stop retrying postgres syncs that need SNI routing",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T21:09:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/test_postgres.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98793,
+      "title": "chore(signals): give the product analytics scout a stable dedupe key",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T21:07:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/signals/skills/authoring-scouts/references/dedupe-and-memory.md",
+        "products/signals/skills/signals-scout-product-analytics/SKILL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98789,
+      "title": "feat(mcp-registry): offer install into PostHog's MCP servers gateway",
+      "author": "DanielVisca",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:52:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/mcp_registry/backend/connect.py",
+        "products/mcp_registry/backend/tests/test_connect.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98788,
+      "title": "fix(marketing): generate varied demo traffic sessions",
+      "author": "jabahamondes",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:50:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/internal/marketing-analytics-demo-data.md",
+        "products/marketing_analytics/backend/demo/events.py",
+        "products/marketing_analytics/backend/demo/test_events.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98787,
+      "title": "chore(docs): document react native replay screenshot settings",
+      "author": "dustinbyrne",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:49:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/onboarding/session-replay/react-native.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98786,
+      "title": "fix(taxonomic-filter): reduce typing work and debounce searches",
+      "author": "MattPua",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:47:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "docs/internal/taxonomic-filter-search.md",
+        "frontend/src/lib/components/TaxonomicFilter/InfiniteSelectResults.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/TaxonomicFilter.stories.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/TaxonomicFilter.test.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/TaxonomicFilter.tsx",
+        "frontend/src/lib/components/TaxonomicFilter/infiniteListLogic.test.ts",
+        "frontend/src/lib/components/TaxonomicFilter/infiniteListLogic.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98785,
+      "title": "fix(desktop): avoid session restarts on oversized requests",
+      "author": "k11kirky",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:46:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/desktop/docs/TROUBLESHOOTING.md",
+        "products/desktop/packages/core/src/sessions/sessionServicePromptRecovery.test.ts",
+        "products/desktop/packages/shared/src/errors.test.ts",
+        "products/desktop/packages/shared/src/errors.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98783,
+      "title": "fix(workflows): say when a draft workflow is not live",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:41:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "products/workflows/frontend/Workflows/WorkflowDraftBanner.test.tsx",
+        "products/workflows/frontend/Workflows/WorkflowDraftBanner.tsx",
+        "products/workflows/frontend/Workflows/WorkflowInvocations.tsx",
+        "products/workflows/frontend/Workflows/WorkflowSceneHeader.tsx",
+        "products/workflows/frontend/Workflows/hogflows/panel/HogFlowEditorPanel.stories.tsx",
+        "products/workflows/frontend/Workflows/hogflows/panel/HogFlowEditorPanelLogs.tsx",
+        "products/workflows/frontend/Workflows/hogflows/panel/testing/HogFlowEditorNotificationPanelTest.tsx",
+        "products/workflows/frontend/Workflows/hogflows/panel/testing/HogFlowEditorPanelTest.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98782,
+      "title": "fix(desktop): show full pull request references",
+      "author": "pauldambra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:38:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "products/desktop/packages/ui/src/features/editor/components/GithubRefChip.stories.tsx",
+        "products/desktop/packages/ui/src/features/editor/components/GithubRefChip.test.tsx",
+        "products/desktop/packages/ui/src/features/editor/components/GithubRefChip.tsx",
+        "products/desktop/packages/ui/src/features/editor/components/PrRefChip.test.tsx",
+        "products/desktop/packages/ui/src/features/editor/components/PrRefChip.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98781,
+      "title": "fix(warehouse-sources): bound the source row lock on schema refresh",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:37:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/presentation/views/external_data_source.py",
+        "products/warehouse_sources/backend/tests/api/test_external_data_source_locking.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98780,
+      "title": "fix(warehouse-sources): order postgres schema updates to avoid deadlocks",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:33:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/data_warehouse/backend/postgres_helpers.py",
+        "products/data_warehouse/backend/test/test_postgres_helpers.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98777,
+      "title": "chore(flox): drop intel mac support",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:24:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".flox/env/manifest.lock",
+        ".flox/env/manifest.toml",
+        "docs/published/handbook/engineering/developing-locally.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98775,
+      "title": "feat(oauth): accept logo_uri when a client registers itself",
+      "author": "rafaeelaudibert",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:23:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "docs/published/handbook/engineering/oauth-development-guide.md",
+        "posthog/api/oauth/cimd.py",
+        "posthog/api/oauth/dcr.py",
+        "posthog/api/oauth/logo_uri.py",
+        "posthog/api/oauth/test_dcr.py",
+        "posthog/api/oauth/test_logo_uri.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98767,
+      "title": "fix(auth): say why a password reset link stopped working",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:20:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "frontend/src/scenes/authentication/password-reset/PasswordResetComplete.stories.tsx",
+        "frontend/src/scenes/authentication/password-reset/PasswordResetComplete.tsx",
+        "frontend/src/scenes/authentication/password-reset/passwordResetLogic.test.ts",
+        "frontend/src/scenes/authentication/password-reset/passwordResetLogic.ts",
+        "playwright/e2e/auth-password-reset.spec.ts",
+        "posthog/api/authentication.py",
+        "posthog/api/test/test_authentication.py",
+        "posthog/tasks/email.py",
+        "posthog/tasks/test/test_email.py",
+        "posthog/templates/email/password_reset.html"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98765,
+      "title": "fix(warehouse-sources): recover a sync when a source column is dropped",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:17:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/sql/__init__.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/sql/errors_psycopg.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/sql/projection.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/sql/tests/test_errors_psycopg.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/sql/tests/test_projection.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mssql/mssql.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mssql/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mssql/tests/test_mssql.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mysql/mysql.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mysql/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/mysql/tests/test_mysql.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/postgres.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/test_postgres.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/redshift/redshift.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/redshift/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/redshift/tests/test_redshift.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98763,
+      "title": "fix(mcp-registry): settle open review threads from #85710 and #95309",
+      "author": "DanielVisca",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:10:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "products/mcp_registry/backend/connect.py",
+        "products/mcp_registry/backend/presentation/views.py",
+        "products/mcp_registry/backend/tasks/tasks.py",
+        "products/mcp_registry/backend/tests/test_api.py",
+        "products/mcp_registry/backend/tests/test_connect.py",
+        "products/mcp_registry/backend/tests/test_tasks.py",
+        "products/mcp_registry/frontend/Candidate.tsx",
+        "products/mcp_registry/frontend/MCPRegistryScene.tsx",
+        "products/mcp_registry/frontend/MeasuredTag.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98762,
+      "title": "fix(warehouse-sources): persist the resume cursor only after its rows are written",
+      "author": "danielcarletti",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:07:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/core/batcher.py",
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/pipeline_v2/pipeline.py",
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/pipeline_v2/test/test_pipeline.py",
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/pipeline_v3/pipeline.py",
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/pipeline_v3/test_pipeline.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/bing_ads/tests/test_bing_ads_source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/resumable.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/common/test/test_resumable.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/stripe/stripe.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/stripe/tests/test_stripe_source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/tests/e2e/stripe/test_stripe_source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/tests/e2e/test_google_ads_source.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98760,
+      "title": "fix(replay-vision): retry a provider-side video processing failure",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T20:04:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/replay_vision/backend/temporal/activities/upload_video_to_gemini.py",
+        "products/replay_vision/backend/temporal/gemini.py",
+        "products/replay_vision/backend/tests/test_temporal.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 98759,
+      "title": "chore(llma): Update LLM costs",
+      "author": "app/scheduled-actions-posthog",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T20:02:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "nodejs/src/ingestion/pipelines/ai/costs/providers/canonical-providers.ts",
+        "nodejs/src/ingestion/pipelines/ai/costs/providers/llm-costs.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-10T21:19:24.176Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 198,
+      "branch": "deps/puppeteer-build-script",
+      "scope": "immediate-parent-to-head",
+      "mode": "transition",
+      "baseSha": "9cba733f7cef9332091c9819d202b8232d500312",
+      "headSha": "acd3f38a57d16232d09dcea1243107448d727b96",
+      "forkHeadSha": "acd3f38a57d16232d09dcea1243107448d727b96",
+      "firstSha": "9cba733f7cef9332091c9819d202b8232d500312",
+      "transition": {
+        "name": "puppeteer",
+        "from": "19.0.0 and 24.40.0, build script skipped",
+        "to": "19.0.0 and 24.40.0, build script allowed",
+        "versions": [
+          "19.0.0",
+          "24.40.0"
+        ]
+      },
+      "record": "fork-workflow",
+      "ecosystem": "pnpm",
+      "state": "undeterminable",
+      "openedAt": "2026-09-10T21:18:12.160Z"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],

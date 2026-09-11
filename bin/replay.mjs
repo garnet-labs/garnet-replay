@@ -12,6 +12,7 @@ import { knownEvidence } from "../lib/known-evidence.mjs"
 import { listTargets } from "../lib/ledger.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
+import { verifyExitCode } from "../lib/verify.mjs"
 import * as ladder from "../lib/commands.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
@@ -410,7 +411,7 @@ const USAGE = `usage: replay <command> [options]
 ladder (one target ledger per upstream repository, one fork as the only write target)
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
-  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--sync-fork | --base-branch b [--record-workflow p]] [--wait-minutes N|--no-wait] [--dry-run]
+  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit replay of an upstream pull request on the fork
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
@@ -419,7 +420,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     script as skipped, then allow it; the lockfile stays as it is (pnpm)
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
-  verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue
+  verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record?
   status [<slug>]                                                   ladder board and the next command
   stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
@@ -441,7 +442,11 @@ async function main(args) {
   if (command === "find") return ladder.find(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
-  if (command === "verify") return ladder.verify(args.slice(1))
+  if (command === "verify") {
+    const result = await ladder.verify(args.slice(1))
+    process.exitCode = verifyExitCode(result)
+    return result
+  }
   if (command === "consume") return ladder.consume(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
