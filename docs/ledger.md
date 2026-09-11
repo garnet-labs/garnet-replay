@@ -3,6 +3,20 @@
 One row per requirement. A row is done only when its artifact exists and was
 checked live; "implemented" is not done.
 
+## September 11 batch checkpoint
+
+The earlier table below is historical. The current evidence and remaining
+obligations are in [the five-prospect batch report](prospect-batch.md):
+five new two-commit fork PRs, ten successful recording jobs, five independent
+cold reads, **zero strict evidence passes**. Undeclared capture and merge-ref
+public identities invalidate the original acceptance results.
+
+Harness corrections require complete capture and exact public identity,
+retain recorded rows in cards, account for setup files, and check Dependabot
+policy at the selected replay base. Recurring publication is inactive.
+Consumer citations, Dependabot token delivery, and the pnpm candidate's
+faithful workload remain open; see the report for ownership and next actions.
+
 ## Lock decisions (2026-09-09)
 
 | Decision | State |

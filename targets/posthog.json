@@ -2,7 +2,9 @@
   "slug": "posthog",
   "upstream": "PostHog/posthog",
   "fork": "garnet-labs/posthog",
-  "notes": [],
+  "notes": [
+    "September 11 batch PR 203: original publication succeeded; strict evidence FAIL. See docs/prospect-batch.md for selectors, cold reads, and the automation decision."
+  ],
   "observations": [
     {
       "evidence_class": "candidate-evidence",
@@ -5623,6 +5625,49 @@
         ]
       },
       "observedAt": "2026-09-10T21:19:24.176Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 99349,
+      "title": "chore(deps): bump for 3.14 wheel coverage",
+      "author": "rnegron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T15:19:28Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "posthog/temporal/dlq_replay/activities.py",
+        "pyproject.toml",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-11T16:48:24.753Z"
     }
   ],
   "replays": [
@@ -5649,9 +5694,46 @@
       "ecosystem": "pnpm",
       "state": "undeterminable",
       "openedAt": "2026-09-10T21:18:12.160Z"
+    },
+    {
+      "upstreamPr": 99349,
+      "forkPr": 203,
+      "branch": "chore/update-24np",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "4eebf7d3716618d59c0dd412bf141159462db97f",
+      "headSha": "05ba0d9934719a3c7c32e27f133f02413edf87c3",
+      "forkHeadSha": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+      "firstSha": "d7edcbd4a227ca8778da0e115c4db1517af5e25e",
+      "transition": null,
+      "record": "fork-workflow",
+      "ecosystem": "uv",
+      "state": "undeterminable",
+      "openedAt": "2026-09-11T16:54:34.948Z",
+      "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
+      "verification": {
+        "status": "FAIL",
+        "head": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+        "observedAt": "2026-09-11T18:00:28.666Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "public profile identity: garnet-labs/posthog / run 34624686640 / profile 01a09166-6050-7307-94aa-cc579877690d; recorded d8cd30760e54cff661f9e31f0acb810d56e97fd3 (refs/pull/203/merge); expected head b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf"
+        ]
+      }
     }
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "forkPr": 203,
+      "card": "out/posthog/pr-203-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+      "previousSha": "d7edcbd4a227ca8778da0e115c4db1517af5e25e",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-11T18:12:41.059Z"
+    }
+  ],
   "cohorts": [],
   "consumption": [],
   "stage2": {

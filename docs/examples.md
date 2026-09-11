@@ -1,5 +1,25 @@
 # Worked examples
 
+## Current verification gate
+
+The [five-prospect report](prospect-batch.md) supersedes older PASS examples as
+evidence of the current gate. At 2026-09-11 18:00 UTC the new verifier reported:
+
+```text
+verify https://github.com/garnet-labs/OpenHands/pull/10 · FAIL
+capture completeness: capture not declared; comparison undeterminable
+public profile identity:
+  repository garnet-labs/OpenHands
+  run 34629397391 / profile 01a09193-d3d4-707f-823a-d137810394b9
+  recorded f96d95f3028a76ff06ffd1e3e13fa6d0881aac84 (refs/pull/10/merge)
+  expected cc0afe66eae24f448b0a3215354cd18eefcc7562
+```
+
+Both recording jobs succeeded. This output evaluates the evidence identity and
+completeness, separately from workload success. A card preserves quoted job
+sections for diagnosis but remains undeterminable until verification succeeds.
+Historical results below describe the verifier used at their observation time.
+
 Real output from the commands in this repository, unedited except for the shell
 prompt. Captured 2026-09-10. Each example names the fork pull request it came
 from so the output can be checked against the live state.
@@ -315,8 +335,34 @@ establish a current share-gate result. Every observation and its available
 ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
 See [workspace.md](workspace.md) for the planner and HTTP interface.
 
-## What is not in this file
+## Preserving the selected base's Dependabot policy
 
-No example shows a `new-behavior` card yet. Every recorded fork replay to date
-has been `unchanged` or pending; the finder ranks candidates, and only a recorded
-run says what ran.
+Read-only CLI probe on 2026-09-11, after the five-prospect corrections:
+
+```sh
+node bin/replay.mjs live openai-node --pr 2684 \
+  --base-branch rb/2684 --record inject --ecosystem pnpm --dry-run
+```
+
+The selected source base already has a Dependabot config. The plan preserves
+it and lists the additional recorder separately from the upstream change:
+
+```text
+commit 1
+  ci: record dependency installs on pull requests
+  - .github/workflows/garnet-record.yml
+
+commit 2
+  chore(deps): bump express and @types/express
+  - examples/package.json
+  - pnpm-lock.yaml
+
+dry run: nothing was executed.
+```
+
+The fresh cards for Vite #5, PostHog #203, Dub #37, OpenHands #10 and
+openai-node #43 all report `undeterminable` with capture `not declared`.
+They retain the recorded job sections and show immediate-parent-to-head
+scope from the ledger's commit 1. The [batch report](prospect-batch.md)
+records the public identity failures and independent reads. These examples
+do not establish an accepted new-behavior showcase.
