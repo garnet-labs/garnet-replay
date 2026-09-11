@@ -7,7 +7,7 @@ import { test } from "node:test"
 import { loadWorkspace, createWorkspaceServer } from "../lib/workspace-server.mjs"
 import { recordSummary, workspaceRecord, workspaceTarget } from "../lib/workspace.mjs"
 import { targetView } from "../lib/status.mjs"
-import { composeCommand, escapeHtml, matchingCandidates, matchingRecords, safeUrl } from "../public/workspace-model.mjs"
+import { composeCommand, escapeHtml, matchingCandidates, matchingRecords, renderCandidate, safeUrl } from "../public/workspace-model.mjs"
 
 const fixture = JSON.parse(await readFile(new URL("../public/replays/github/garnet-labs/posthog/139.json", import.meta.url), "utf8"))
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
@@ -90,6 +90,18 @@ test("all planner modes produce canonical dry runs and preserve shell metacharac
   assert.throws(() => composeCommand({ ...common, mode: "pr", pr: "1", slug: "INVALID_SLUG" }), /slug/)
   assert.match(composeCommand({ ...common, mode: "dependency", dependency: "pkg", to: "1", packageDir: "apps/web", label: "record" }), /--label 'record' --package-dir 'apps\/web'/)
   assert.throws(() => composeCommand({ ...common, mode: "pr", pr: "1", label: "a\nb" }), /single line/)
+})
+
+test("candidate markup preserves the canonical nested gap score, every reason and path", () => {
+  for (const row of target.observations) {
+    const html = renderCandidate(row)
+    assert.ok(html.includes(`title="Candidate score">${row.gap.total}</span>`))
+    for (const reason of row.gap.reasons) assert.ok(html.includes(escapeHtml(reason.reason)))
+    for (const path of row.paths) assert.ok(html.includes(escapeHtml(path)))
+  }
+  const html = renderCandidate({ ...target.observations[0], title: "<script>alert(1)</script>" })
+  assert.ok(html.includes("&lt;script&gt;alert(1)&lt;/script&gt;"))
+  assert.ok(!html.includes("<script>"))
 })
 
 test("read-only server isolates malformed artifacts, loads details, preserves routes, and confines filesystem access", async (t) => {

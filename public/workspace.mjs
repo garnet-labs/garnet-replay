@@ -1,4 +1,4 @@
-import { composeCommand, escapeHtml as h, matchingCandidates, matchingRecords, safeUrl } from "./workspace-model.mjs"
+import { composeCommand, escapeHtml as h, matchingCandidates, matchingRecords, renderCandidate, safeUrl } from "./workspace-model.mjs"
 
 const $ = (selector) => document.querySelector(selector)
 const content = $("#content")
@@ -184,7 +184,7 @@ function targetBoard(push = true) {
 function renderCandidates() {
   const observations = matchingCandidates(currentTarget.observations, $("#candidate-search").value)
   $("#candidates").innerHTML = `<h2 class="group-title">Candidate observations · ${observations.length}</h2>
-    ${observations.map((row) => `<article class="candidate"><span class="score" title="Candidate score">${h(row.score ?? "—")}</span><div><h3>${h(row.title)}</h3><p>Upstream #${h(row.upstreamPr)} · ${h(row.kind)} · ${h(row.state)}</p><details><summary>Candidate reasons and paths</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${h(JSON.stringify({ reasons: row.reasons, transition: row.transition, paths: row.paths }, null, 2))}</pre></details></div><button data-candidate="${h(row.upstreamPr)}">Plan ↗</button></article>`).join("") || '<p class="notice">No matching candidates. Clear the filter or run replay find.</p>'}`
+    ${observations.map(renderCandidate).join("") || '<p class="notice">No matching candidates. Clear the filter or run replay find.</p>'}`
 }
 
 function openTarget(slug, push = true) {

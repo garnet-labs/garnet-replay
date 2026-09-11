@@ -27,6 +27,15 @@ export function matchingCandidates(observations, query) {
   return observations.filter((row) => JSON.stringify(row).toLowerCase().includes(text))
 }
 
+/** Render the ledger's candidate score and evidence without flattening its gap. */
+export function renderCandidate(row) {
+  const details = { gap: row.gap, reasons: row.reasons, transition: row.transition, paths: row.paths }
+  return `<article class="candidate"><span class="score" title="Candidate score">${escapeHtml(row.gap?.total ?? row.score ?? "—")}</span>
+    <div><h3>${escapeHtml(row.title)}</h3><p>Upstream #${escapeHtml(row.upstreamPr)} · ${escapeHtml(row.kind)} · ${escapeHtml(row.state)}</p>
+    <details><summary>Candidate reasons and paths</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${escapeHtml(JSON.stringify(details, null, 2))}</pre></details></div>
+    <button data-candidate="${escapeHtml(row.upstreamPr)}">Plan ↗</button></article>`
+}
+
 function quote(value) {
   return `'${value.replaceAll("'", "'\\''")}'`
 }
