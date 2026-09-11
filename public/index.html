@@ -4,12 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Open a GitHub pull request in Garnet Replay. Inspect the runtime evidence, follow execution chains, and prepare the next replay." />
     <title>Garnet Replay</title>
     <link rel="icon" href="/replay.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/workspace.css" />
+    <link rel="stylesheet" href="/replay-page.css" />
     <script type="module" src="/workspace.mjs"></script>
   </head>
-  <body>
+  <body data-surface="home">
     <a class="skip" href="#content">Skip to evidence</a>
     <header class="topbar">
       <a class="brand" href="/" aria-label="Garnet Replay home"
@@ -29,6 +31,7 @@
         /><kbd>/</kbd>
       </form>
       <div class="top-actions">
+        <a href="/workspace" class="workspace-link">Workspace</a>
         <button
           id="theme"
           aria-label="Switch color theme"
@@ -36,7 +39,7 @@
         >
           ◐</button
         ><button id="plan" class="primary">
-          Plan replay <span aria-hidden="true">↗</span>
+          Advanced plan <span aria-hidden="true">↗</span>
         </button>
       </div>
     </header>
@@ -68,8 +71,8 @@
       <main id="content" tabindex="-1">
         <div class="empty">
           <span class="eyebrow">GARNET REPLAY</span>
-          <h1>Opening your workspace</h1>
-          <p>Reading saved records and target ledgers.</p>
+          <h1>Opening Replay</h1>
+          <p>Loading the harness.</p>
         </div>
       </main>
     </div>

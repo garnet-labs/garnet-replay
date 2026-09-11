@@ -376,7 +376,7 @@ records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
   live <repo-url|path> --dependency x --from a --to b               constructed transition when no real pull request exists
   pair --base ... --head ...                                        build a replay JSON from two profile files
-  serve [--root public] [--port 8787]                               replay workspace and saved result pages
+  serve [--root public] [--port 8787] [--run-replays] [--origin URL]   URL-to-replay interface and local runner
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `
 
@@ -410,7 +410,7 @@ async function main(args) {
     try {
       revision = run("git", ["rev-parse", "HEAD"], { cwd: ROOT }).trim()
     } catch {}
-    return serveWorkspace(root, port, revision)
+    return serveWorkspace(root, port, revision, { runReplays: args.includes("--run-replays"), origin: option(args.slice(1), "--origin", null) })
   }
   throw new Error(`unknown command '${command}'\n${USAGE}`)
 }

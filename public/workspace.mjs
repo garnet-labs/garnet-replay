@@ -1,4 +1,6 @@
 import { composeCommand, escapeHtml as h, matchingCandidates, matchingRecords, renderCandidate, safeUrl } from "./workspace-model.mjs"
+import { parseReplayInput, replayShareStatus } from "./pr-route.mjs"
+import { renderLanding, renderPrLocation, renderReplayPending, renderReplayJob } from "./replay-page.mjs"
 
 const $ = (selector) => document.querySelector(selector)
 const content = $("#content")
@@ -13,6 +15,104 @@ let compact = false
 let requestVersion = 0
 let toastTimer
 let command = ""
+let currentPr = null
+let jobTimer
+
+function surface(name) {
+  clearTimeout(jobTimer)
+  document.body.dataset.surface = name
+  if (name !== "pr") currentPr = null
+}
+
+function home(push = false) {
+  ++requestVersion
+  surface("home")
+  if (push) history.pushState(null, "", "/")
+  document.title = "Garnet Replay · From pull request to runtime evidence"
+  content.innerHTML = renderLanding(catalog, location.origin)
+}
+
+async function openPr(pr, push = true, refresh = false) {
+  const version = ++requestVersion
+  surface("pr")
+  currentRecord = null
+  currentPr = { pr, state: "loading" }
+  currentTab = "diff"
+  if (push) history.pushState(null, "", pr.path)
+  document.title = `${pr.repository} #${pr.number} · Replay`
+  content.innerHTML = renderReplayPending(currentPr)
+  try {
+    const response = await fetch(`/api/replay?url=${encodeURIComponent(pr.url)}${refresh ? "&refresh=1" : ""}`)
+    if (!response.ok) throw new Error("The Replay service could not resolve this URL.")
+    const result = await response.json()
+    let record = result.record ?? null
+    if (record === null && result.recordId !== null && result.state === "record") {
+      const detail = await fetch(`/api/record?id=${encodeURIComponent(result.recordId)}`)
+      if (!detail.ok) throw new Error("The saved record could not be read.")
+      record = await detail.json()
+    }
+    if (version !== requestVersion) return
+    currentPr = result
+    document.title = `${result.title} · Replay`
+    if (record !== null && result.state === "record") {
+      currentRecord = record
+      renderRecord()
+    } else {
+      content.innerHTML = renderReplayPending(result)
+      if (result.job !== undefined && ["preparing", "recording", "verifying"].includes(result.job.state)) {
+        $("#prepare-pr").disabled = true
+        void pollJob(result.job.id, version)
+      }
+    }
+  } catch (error) {
+    if (version !== requestVersion) return
+    currentPr = { pr, state: "unavailable", target: null, canPrepare: false, lookupError: error.message }
+    content.innerHTML = renderReplayPending(currentPr)
+  }
+}
+
+async function replayAction(action, id) {
+  const version = requestVersion
+  const container = $("#replay-job")
+  if (container === null) return
+  container.innerHTML = renderReplayJob({ state: "preparing", message: "Reading the upstream pair and the fork recorder." })
+  $("#prepare-pr").disabled = true
+  try {
+    const response = await fetch(`/api/replay/${action}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Replay-Intent": "same-origin" },
+      body: JSON.stringify(action === "prepare" ? { url: currentPr.pr.url } : { id }),
+    })
+    const result = await response.json()
+    if (!response.ok) throw new Error(result.error ?? "The runner could not accept this replay.")
+    if (version !== requestVersion) return
+    await pollJob(result.id, version)
+  } catch (error) {
+    if (version !== requestVersion) return
+    container.innerHTML = renderReplayJob({ state: "blocked", message: error.message })
+    $("#prepare-pr").disabled = false
+  }
+}
+
+async function pollJob(id, version) {
+  try {
+    const response = await fetch(`/api/replay/job?id=${encodeURIComponent(id)}`)
+    if (!response.ok) throw new Error("The runner is unavailable. Refresh this PR to recover its saved state.")
+    const job = await response.json()
+    if (version !== requestVersion) return
+    $("#replay-job").innerHTML = renderReplayJob(job, currentPr.runnerEnabled)
+    if (job.state === "complete") {
+      await openPr(currentPr.pr, false, true)
+      return
+    }
+    if (["preparing", "recording", "verifying"].includes(job.state)) jobTimer = setTimeout(() => void pollJob(id, version), 1500)
+    else $("#prepare-pr").disabled = false
+  } catch (error) {
+    if (version !== requestVersion) return
+    $("#replay-job").innerHTML = renderReplayJob({ state: "blocked", message: error.message })
+    $("#prepare-pr").disabled = false
+  }
+}
 
 function preference(key, value) {
   try {
@@ -45,7 +145,7 @@ function link(url, text, className = "") {
 }
 
 function badge(record) {
-  return `<span class="pill verdict ${h(record.verdict)}">${h(record.verdict.replaceAll("-", " "))}</span>`
+  return `<span class="pill verdict ${h(record.verdict)}">${h(record.verdict === "unchanged" ? "workload unchanged" : record.verdict.replaceAll("-", " "))}</span>`
 }
 
 function empty(title, text) {
@@ -75,10 +175,11 @@ function navigation() {
 
 function setRoute(type, id = "") {
   const hash = type === "targets" ? "#targets" : `#${type}=${encodeURIComponent(id)}`
-  if (location.hash !== hash) history.pushState(null, "", hash)
+  if (location.pathname !== "/workspace" || location.hash !== hash) history.pushState(null, "", `/workspace${hash}`)
 }
 
 async function openRecord(id, push = true) {
+  surface("workspace")
   const version = ++requestVersion
   currentView = "replays"
   currentTarget = null
@@ -141,14 +242,14 @@ function evidence() {
     ["Status", diff.capture.status], ["Expected cells", diff.capture.expected_cells], ["Recorded cells", diff.capture.recorded_cells], ["Executed SHA verified", diff.capture.executed_sha_verified],
     ["Lineage missing", diff.capture.lineage_missing], ["Final record", diff.capture.final_record],
   ])}<ul class="reason-list">${diff.capture.reasons.map((reason) => `<li>${h(reason)}</li>`).join("")}</ul></section>
-    <section class="evidence-card"><h2>Saved provenance</h2>${facts([
+    <section class="evidence-card"><h2>Record provenance</h2>${facts([
       ["Recorded at", diff.recorded.at], ["Source", diff.recorded.source], ["Contract", diff.recorded.contract],
       ["Base profile", diff.base.profile_id], ["Head profile", diff.head.profile_id], ["Base run", diff.base.run_id], ["Head run", diff.head.run_id],
-      ["Artifact", currentRecord.id], ["Share gate", "Not checked in this workspace"],
+      ["Artifact", currentRecord.id ?? "GitHub receipt"], ["Share gate", replayShareStatus(currentRecord, currentPr?.job)],
     ])}</section><section class="evidence-card"><h2>Verdict and supersession</h2>${facts([
       ["Effective verdict", currentRecord.verdict], ["Verdict in artifact", diff.verdict.value], ["Saved superseded state", diff.supersession.superseded],
       ["Saved record head", diff.supersession.record_head], ["Head when saved", diff.supersession.current_head],
-    ])}<ul class="reason-list">${currentRecord.reasons.map((reason) => `<li>${h(reason)}</li>`).join("")}</ul></section></div>
+    ])}<ul class="reason-list">${currentRecord.reasons.map((reason) => `<li>${h(reason)}</li>`).join("")}</ul><details><summary>Original verdict reasons</summary><ul class="reason-list">${diff.verdict.reasons.map((reason) => `<li>${h(reason)}</li>`).join("")}</ul></details></section></div>
     <section class="evidence-card claims"><h2>Claim classes in the saved artifact</h2><p class="footnote" style="padding:0 14px">Historical source text. Claims below do not override the effective verdict or constitute a fresh verification.</p><ul class="claim-list">${diff.claims.map((claim) => `<li><small>${h(claim.class)}</small>${h(claim.text)}</li>`).join("")}</ul></section>
     <p class="footnote">${link(diff.receipt_urls.pr_comment, "Original evidence comment")} · Run <code>replay verify &lt;fork-pr-url&gt;</code> before sharing this exhibit.</p>`
 }
@@ -157,17 +258,22 @@ function renderRecord() {
   const record = currentRecord
   const diff = record.artifact
   document.title = `${record.repository} #${record.number} · Garnet Replay`
-  content.innerHTML = `<div class="page-head"><div class="breadcrumb"><span>Saved replays</span><span>/</span><strong>${h(record.repository)}</strong><span>/</span><span>#${record.number}</span></div>
-    <div class="title-row"><h1>${h(record.title)} <span class="pr-number">#${record.number}</span></h1><div class="header-links">${link(record.url, "Pull request")}<a href="/${h(record.id)}" target="_blank">JSON ↗</a></div></div>
-    <div class="meta-row">${badge(record)}<span class="pill">${h(record.label)} pair</span><span>Saved ${h(record.recordedAt ?? "at an unknown time")}</span><span>·</span><span>${h(diff.recorded.source)}</span></div>
-    <div class="review-state"><span class="state-icon" aria-hidden="true">◎</span><div><strong>${h(record.reasons[0] ?? "Inspect the saved runtime evidence.")}</strong><p>Scope: ${h(diff.comparison.scope)} · Capture: ${h(record.capture)} · Live verification not checked</p></div><span class="pill ${record.verdict === "undeterminable" ? "undeterminable" : ""}">SAVED EVIDENCE</span></div>
+  content.innerHTML = `${currentPr === null ? "" : renderPrLocation(currentPr.pr)}
+    <div class="page-head"><div class="breadcrumb"><span>${currentPr === null ? "Saved replays" : "Replay"}</span><span>/</span><strong>${h(currentPr?.pr.repository ?? record.repository)}</strong><span>/</span><span>#${currentPr?.pr.number ?? record.number}</span></div>
+    <div class="title-row"><h1>${h(record.title)}</h1><div class="header-links">${link(record.url, currentPr?.pr.url !== record.url && currentPr !== null ? "Fork PR" : "Pull request")}${record.id === null ? "" : `<a href="/${h(record.id)}" target="_blank">JSON ↗</a>`}</div></div>
+    <div class="meta-row">${badge(record)}<span class="pill">${h(record.label)} pair</span><span>Recorded ${h(record.recordedAt ?? "at an unknown time")}</span><span>·</span><span>${h(diff.recorded.source)}</span></div>
+    ${currentPr === null ? "" : `<div class="provenance-strip"><span>${currentPr.source === "github" ? `Receipt fetched from GitHub at ${h(currentPr.checkedAt)}` : "Historical record · current GitHub head not checked"}</span><button id="refresh-pr">Refresh from GitHub ↻</button></div>`}
+    ${currentPr?.lookupError === undefined ? "" : `<p class="notice">${h(currentPr.lookupError)}</p>`}
+    ${record.capture === "not-declared" ? '<p class="notice">Scope: recorded jobs only. The receipt does not declare capture completeness.</p>' : ""}
+    <div class="review-state"><span class="state-icon" aria-hidden="true">◎</span><div><strong>${h(record.reasons[0] ?? "Inspect the runtime evidence.")}</strong><p>Scope: ${h(diff.comparison.scope)} · Capture: ${h(record.capture)} · ${h(replayShareStatus(record, currentPr?.job))}</p></div><span class="pill ${record.verdict === "undeterminable" ? "undeterminable" : ""}">${currentPr?.source === "github" ? "GITHUB RECEIPT" : "SAVED EVIDENCE"}</span></div>
     <div class="pair"><div><span>BASE</span><code title="${h(record.base)}">${short(record.base)}</code>${link(diff.receipt_urls.base, "Profile")}</div><span class="pair-arrow">→</span><div><span>HEAD</span><code title="${h(record.head)}">${short(record.head)}</code>${link(diff.receipt_urls.head, "Profile")}</div></div>
     <nav class="tabs" aria-label="Replay details"><button data-tab="diff" aria-pressed="${currentTab === "diff"}">Execution diff</button><button data-tab="evidence" aria-pressed="${currentTab === "evidence"}">Evidence & provenance</button><button data-tab="raw" aria-pressed="${currentTab === "raw"}">Raw JSON</button></nav></div>
-    <div class="view-content">${currentTab === "diff" ? renderDiff() : currentTab === "evidence" ? evidence() : `<div class="toolbar"><p>Original saved artifact · ${h(record.id)}</p><button id="copy-json">Copy JSON</button></div><pre class="raw">${h(JSON.stringify(diff, null, 2))}</pre>`}</div>`
+    <div class="view-content">${currentTab === "diff" ? renderDiff() : currentTab === "evidence" ? evidence() : `<div class="toolbar"><p>${record.id === null ? "Execution diff from GitHub receipt" : `Original saved artifact · ${h(record.id)}`}</p><button id="copy-json">Copy JSON</button></div><pre class="raw">${h(JSON.stringify(diff, null, 2))}</pre>`}</div>`
   if ($("#attribution") !== null) $("#attribution").value = attribution
 }
 
 function targetBoard(push = true) {
+  surface("workspace")
   ++requestVersion
   currentView = "targets"
   currentTarget = null
@@ -188,6 +294,7 @@ function renderCandidates() {
 }
 
 function openTarget(slug, push = true) {
+  surface("workspace")
   ++requestVersion
   currentTarget = catalog.targets.find((target) => target.slug === slug)
   currentRecord = null
@@ -218,8 +325,11 @@ function route() {
   try {
     if (hash.startsWith("record=")) return openRecord(decodeURIComponent(hash.slice(7)), false)
     if (hash.startsWith("target=")) return openTarget(decodeURIComponent(hash.slice(7)), false)
-    if (hash === "targets" || catalog.records.length === 0) return targetBoard(false)
-    return openRecord(catalog.records[0].id, false)
+    if (hash === "targets") return targetBoard(false)
+    const pr = parseReplayInput(location.href, location.origin)
+    if (pr !== null) return openPr(pr, false)
+    if (location.pathname === "/workspace") return catalog.records.length === 0 ? targetBoard(false) : openRecord(catalog.records[0].id, false)
+    return home()
   } catch {
     empty("Invalid workspace link", "Choose a saved record or target from the navigation.")
   }
@@ -288,9 +398,22 @@ async function copy(text) {
 }
 
 document.addEventListener("click", (event) => {
+  const anchor = event.target.closest("[data-pr-link], [data-home]")
+  if (anchor !== null && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    event.preventDefault()
+    if (anchor.hasAttribute("data-home")) home(true)
+    else void openPr(parseReplayInput(anchor.href, location.origin))
+    return
+  }
   const button = event.target.closest("button")
   if (button === null) return
-  if (button.dataset.record !== undefined) void openRecord(button.dataset.record)
+  if (button.hasAttribute("data-copy-host")) void copy(button.dataset.copyHost)
+  else if (button.id === "copy-pr-link") void copy(`${location.origin}${currentPr.pr.path}`)
+  else if (button.id === "refresh-pr") void openPr(currentPr.pr, false, true)
+  else if (button.id === "open-historical") void openRecord(currentPr.recordId)
+  else if (button.id === "prepare-pr") void replayAction("prepare")
+  else if (button.id === "start-pr") void replayAction("start", button.dataset.job)
+  else if (button.dataset.record !== undefined) void openRecord(button.dataset.record)
   else if (button.dataset.target !== undefined) openTarget(button.dataset.target)
   else if (button.dataset.view === "targets") targetBoard()
   else if (button.dataset.view === "replays") {
@@ -338,6 +461,8 @@ document.addEventListener("input", (event) => {
 })
 $("#search-form").addEventListener("submit", (event) => {
   event.preventDefault()
+  const pr = parseReplayInput($("#search").value, location.origin)
+  if (pr !== null) return void openPr(pr)
   if (currentView === "targets") {
     const query = $("#search").value.toLowerCase()
     const target = catalog.targets.find((entry) => `${entry.slug} ${entry.upstream} ${entry.fork}`.toLowerCase().includes(query))
@@ -353,6 +478,19 @@ $("#search-form").addEventListener("submit", (event) => {
     empty("No saved replay matches", "Search a repository, title, SHA, PR number, or exact PR URL. URLs resolve only against saved evidence. Plan and verify a replay to add another record.")
   }
 })
+document.addEventListener("submit", (event) => {
+  if (!event.target.hasAttribute("data-pr-form")) return
+  event.preventDefault()
+  const input = event.target.elements.url
+  const pr = parseReplayInput(input.value, location.origin)
+  if (pr === null) {
+    $("#url-error").textContent = "Use a GitHub pull request, such as github.com/owner/repo/pull/123."
+    input.setAttribute("aria-invalid", "true")
+    input.focus()
+    return
+  }
+  void openPr(pr)
+})
 $("#plan-form").addEventListener("input", updatePlan)
 $("#plan-form").addEventListener("change", updatePlan)
 $("#plan-form").addEventListener("submit", (event) => {
@@ -362,7 +500,8 @@ $("#plan-form").addEventListener("submit", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName) && !$("#planner").open) {
     event.preventDefault()
-    $("#search").focus()
+    const input = $("#pr-url") ?? $("#search")
+    input.focus()
   }
 })
 window.addEventListener("popstate", route)
