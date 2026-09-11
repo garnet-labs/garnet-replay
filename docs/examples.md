@@ -1,5 +1,25 @@
 # Worked examples
 
+## Current verification gate
+
+The [five-prospect report](prospect-batch.md) supersedes older PASS examples as
+evidence of the current gate. At 2026-09-11 18:00 UTC the new verifier reported:
+
+```text
+verify https://github.com/garnet-labs/OpenHands/pull/10 · FAIL
+capture completeness: capture not declared; comparison undeterminable
+public profile identity:
+  repository garnet-labs/OpenHands
+  run 34629397391 / profile 01a09193-d3d4-707f-823a-d137810394b9
+  recorded f96d95f3028a76ff06ffd1e3e13fa6d0881aac84 (refs/pull/10/merge)
+  expected cc0afe66eae24f448b0a3215354cd18eefcc7562
+```
+
+Both recording jobs succeeded. This output evaluates the evidence identity and
+completeness, separately from workload success. A card preserves quoted job
+sections for diagnosis but remains undeterminable until verification succeeds.
+Historical results below describe the verifier used at their observation time.
+
 Real output from the commands in this repository, unedited except for the shell
 prompt. Captured 2026-09-10. Each example names the fork pull request it came
 from so the output can be checked against the live state.

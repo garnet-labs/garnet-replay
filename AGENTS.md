@@ -18,6 +18,13 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - Every artifact names its pair (head, compared commit, transition, scope).
 - Missing, partial, stale, or unbound evidence is `undeterminable`. Never write
   "unchanged", "no change", or "clean" over incomplete evidence.
+- Require declared complete capture and exact public repository/run/profile/head
+  identity. A merge-ref SHA cannot stand in for the replay head without verified
+  executed-source linkage. Keep workload success, capture, hypothesis, reviewer
+  value, agent consumption, and attribution separate in batch reports.
+- Cards preserve every recorded job, workload row, background row, and job link.
+  State the measured command and omitted workloads in the evidence manifest.
+  Destination equality does not prove execution-chain or application equivalence.
 - Finder output is candidate evidence. Only a recorded run says what ran.
 - Run `replay verify <pr-url>` before any pull request or card is shown to anyone.
   FAIL means not shareable.

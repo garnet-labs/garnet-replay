@@ -29,13 +29,14 @@ accounting at all is `not-declared`, and no completeness is claimed.
 
 | Verdict | Phrase on rendered surfaces | When |
 |---|---|---|
-| `new-behavior` | new behavior recorded | workload connections added; partial capture adds a caveat, never removes the finding |
+| `new-behavior` | new behavior recorded | complete capture, workload connections added, no variance |
 | `unchanged` | no new behavior recorded | complete capture, comparison available, nothing added, no variance |
 | `recorded` | first record, no comparison | complete capture, no previous commit to compare against |
-| `undeterminable` | undeterminable | capture `none` or `partial` without additions, missing delta counts, or variance between repetitions |
+| `undeterminable` | undeterminable | capture `none`, `partial`, or `not-declared`; stale or unbound evidence; missing delta counts; variance between repetitions |
 
-Partial, stale, or incomplete evidence never renders as unchanged or as a
-stable absence. Every verdict carries `reasons`, and the first reason is the
+Partial, stale, or incomplete evidence never establishes a comparison verdict.
+Recorded observations remain visible while the result is undeterminable.
+Every verdict carries `reasons`, and the first reason is the
 one the card and the comment print.
 
 ## `pair` — which two commits, at what scope
@@ -86,7 +87,23 @@ class is not a claim the harness makes.
 `repetitions.variance` counts destinations seen in some repetitions of a side
 but not all. `stableAcrossRepetitions()` separates stable from varying
 destinations; varying ones are excluded from the comparison and reported. With
-any variance and no additions, the verdict is `undeterminable`.
+any variance, the verdict is `undeterminable`.
+
+## Public report and card gates
+
+Live `verify` reads the anonymous API for each job's public run/profile link and
+requires the exact repository, run ID, profile ID, and current PR head SHA.
+Malformed selectors, missing identity, HTTP errors, and merge-ref identities
+fail the gate. This proves identity, not completeness or causality; declared
+complete capture is a separate required leg.
+
+Cards quote all recorded job sections, including unchanged workload trees and
+runner background. They expose capture and the actual previous-recorded/head
+pair. If the ledger identifies that previous SHA as commit 1, scope is immediate
+parent → head; a source-PR scope does not override a different recorded pair.
+An undeterminable card can retain quoted observations for diagnosis, but is not
+a shareable exhibit. Reviewer outcomes and workload scope require a cold read;
+they cannot be inferred from a green recording job or destination counts.
 
 ## Vocabulary
 

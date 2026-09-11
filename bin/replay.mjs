@@ -413,7 +413,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     author explicit before/after files; record commit 1 before publishing commit 2
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
-  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
+  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit replay of an upstream pull request on the fork
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)

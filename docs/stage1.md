@@ -72,18 +72,17 @@ The plan, always printed before anything is written:
    finalized comment; `unknown` when one pending placeholder sits on top of a
    finalized record; `stalled` when two or more of the newest are pending
    placeholders, or nothing has ever finalized; `none` when no pull request
-   carries a comment. A run that relies on the fork's own recorder stops on
+   carries a comment. Every live mode checks the fork's health and stops on
    `stalled` or `none` before any write, because it would wait for a record
    that is not arriving. `--allow-pending-recorder` opens the pull request
    anyway; the pull request still fails `verify` until its comment finalizes.
-   An injected recorder (`--record inject`) is new to the fork, so its health
-   is not read.
+   Injected and prepared recorders use the same health gate.
 6. Branch `deps/<name>-<to>` (or `change/<slug>-<n>`) from the fork default branch.
 7. Commit 1: the touched paths as the upstream base had them, plus the recording
    workflow if the fork has none (`--record inject`). The injected workflow runs
    on every pull request of the fork, Dependabot's included, so each dependency
    pull request Dependabot opens there is recorded like any other; when the
-   fork has no `.github/dependabot.yml`, commit 1 adds a weekly one for the
+   replay base has no `.github/dependabot.yml`, commit 1 adds a weekly one for the
    detected ecosystem, one entry per directory holding a manifest the change
    touches (`/`, `/frontend`, …), and one for GitHub Actions. Only paths that
    exist in that state are staged; paths the change adds appear first in
