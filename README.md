@@ -108,6 +108,24 @@ and `claims`, each tagged `observed-runtime-behavior`, `comparison-result`,
 `required-check-state`, `reviewer-consumption-evidence`, or `unsupported-claim`.
 See [docs/contract.md](docs/contract.md).
 
+## Open a pull request in Replay
+
+Run `node bin/replay.mjs serve` and open `http://localhost:8787`. Paste a GitHub
+pull request URL, or replace `github.com` in its URL with `localhost:8787`
+(using `http://` locally). The PR opens at `/owner/repo/pull/number`.
+
+Replay resolves saved evidence, reads current GitHub receipts on demand, and
+offers a canonical dry-run preparation when a configured upstream PR has no
+record. Use `serve --run-replays` to enable the explicit **Start replay on fork**
+action after reviewing that plan. The local runner records both commits and runs
+the canonical share gate before saving a completed result.
+
+Saved-artifact browsing, target ledgers, and the advanced command composer live
+under `/workspace`. This is a single-user local service; a hosted service needs
+authentication and isolated workers.
+See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
+and the HTTP interface.
+
 ## Supported ecosystems
 
 Three layers, and only one of them is tied to a package manager:
