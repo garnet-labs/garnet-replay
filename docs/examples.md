@@ -221,6 +221,36 @@ exit 1
 A pending placeholder is not a record. `card` on this pull request renders
 `undeterminable`, and `verify` exits 1 so a script or agent stops here.
 
+## 5. A plan that stops before the write because the fork's recorder is stalled
+
+`garnet-labs/pnpm` has four `pull_request` workflows that run `garnet-org/action`.
+One of them runs only on labelled pull requests, and the fork's two newest
+recorded pull requests still carry the pending placeholder. Real output, dry run:
+
+```sh
+node bin/replay.mjs live pnpm --pr 14819 --work /home/ubuntu/pnpm-fork --dry-run
+```
+
+```text
+not counted as a recorder: .github/workflows/garnet-jibril-release-gate.yml runs only on pull requests labelled garnet-release-testing
+recorder health: stalled · last finalized record on pull request 50 (2026-09-09); pending placeholder on 52 (since 2026-09-10), 51 (since 2026-09-10) · 8 recent pull requests read
+replay plan · pnpm · upstream change 14819 (number stays local)
+fork (only write target): garnet-labs/pnpm
+branch: chore/update-bfn · base: main · scope: pr-base-to-head
+compares: cfd4a73 → 14a66d6
+record: fork's own recording workflow (every pull request)
+paths (8): .changeset/accept-pnpm12-task-settings.md, .github/actions/pipeline-cache/action.yml, .github/workflows/ci.yml, .github/workflows/pacquet-ci.yml, pnpm-workspace.yaml, pnpm11/config/reader/src/getOptionsFromRootManifest.ts, pnpm11/config/reader/test/getOptionsFromRootManifest.test.ts, pnpm11/core/types/src/package.ts
+commit 1 stages: the touched paths as the change found them (main on the fork differs on at least one)
+…
+dry run: nothing was executed.
+
+note: without --allow-pending-recorder, the run stops here: the fork's recorder is stalled
+```
+
+Without `--dry-run` the same command stops with exit 1 before any write. The
+plan itself is sound; the fork's recorder is not finalizing comments, so a pull
+request opened now would wait for a record that is not arriving.
+
 ## What is not in this file
 
 No example shows a `new-behavior` card yet. Every recorded fork replay to date

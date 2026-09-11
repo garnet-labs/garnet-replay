@@ -3,7 +3,8 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, combinedPathFilter, contextCommitMessage, dependabotConfig, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, renderPlan, resolvedFirstMessage, upsertReplay, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
+import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
@@ -313,9 +314,28 @@ test("replay --pr: an injected recorder also covers Dependabot; a fork without d
   assert.ok(ids.indexOf("first-record-add") < ids.indexOf("first-dependabot") && ids.indexOf("first-dependabot-add") < ids.indexOf("first-commit"), ids.join(" "))
   assert.equal(plan.dependabotAdded, true)
   assert.match(renderPlan(plan), /^record: recording workflow added in commit 1 \(npm\); Dependabot pull requests on the fork run it too$/m)
-  assert.match(renderPlan(plan), /^dependabot: \.github\/dependabot\.yml added in commit 1 \(npm, weekly\)$/m)
+  assert.deepEqual(plan.dependabotDirectories, ["/", "/nodejs"], "root lockfile and nodejs/package.json")
+  assert.match(write.writeFileContent.content, /package-ecosystem: npm\n    directory: \/nodejs\n/)
+  assert.match(renderPlan(plan), /^dependabot: \.github\/dependabot\.yml added in commit 1 \(npm, weekly, \/, \/nodejs\)$/m)
   assert.equal(replayPlan({ record: "inject", ecosystem: "npm" }).steps.some((s) => s.id === "first-dependabot"), false)
   assert.equal(replayPlan({ dependabotConfigured: false }).steps.some((s) => s.id === "first-dependabot"), false, "the fork's own recorder: nothing is added")
+
+  // Manifests under a directory: Dependabot watches that directory, not the root.
+  const nested = replayPlan({
+    record: "inject", ecosystem: "npm", dependabotConfigured: false,
+    changes: [{ path: "frontend/package.json", status: "M" }, { path: "frontend/pnpm-lock.yaml", status: "M" }, { path: "frontend/src/a.ts", status: "M" }],
+    firstPaths: [],
+  })
+  assert.deepEqual(nested.dependabotDirectories, ["/frontend"])
+  const nestedConfig = nested.steps.find((s) => s.id === "first-dependabot").writeFileContent.content
+  assert.match(nestedConfig, /package-ecosystem: npm\n    directory: \/frontend\n/)
+  assert.ok(!/package-ecosystem: npm\n    directory: \/\n/.test(nestedConfig))
+  assert.match(renderPlan(nested), /^dependabot: .* \(npm, weekly, \/frontend\)$/m)
+  assert.deepEqual(manifestDirectories(["package.json", "frontend/package.json", "frontend/pnpm-lock.yaml", "src/a.ts"]), ["/", "/frontend"])
+  assert.deepEqual(manifestDirectories(["src/a.ts"]), ["/"])
+  assert.deepEqual(manifestDirectories(["tools/x/Cargo.toml"]), ["/tools/x"])
+  assert.match(dependabotConfig("npm", ["/", "/frontend"]), /directory: \/\n[\s\S]*directory: \/frontend\n/)
+  assert.throws(() => dependabotConfig("npm", ["frontend"]), /absolute/)
   assert.equal(dependabotConfig("pnpm").includes("package-ecosystem: npm"), true)
   assert.equal(dependabotConfig("uv").includes("package-ecosystem: uv"), true)
   assert.equal(dependabotConfig("go").includes("package-ecosystem: gomod"), true)
@@ -358,12 +378,17 @@ permissions:
   assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    branches: [main]\njobs: {}\n"), null)
   assert.equal(pullRequestPathFilter("on: [push]\n"), null)
 
-  // Several recorders: commit 2 has to reach at least one, so their filters are joined; one unfiltered recorder means no filter.
-  const paths = { ".github/workflows/a.yml": ["package.json"], ".github/workflows/b.yml": ["Cargo.lock", "package.json"], ".github/workflows/all.yml": null }
-  assert.deepEqual(combinedPathFilter(paths, [".github/workflows/a.yml", ".github/workflows/b.yml"]), ["package.json", "Cargo.lock"])
-  assert.equal(combinedPathFilter(paths, [".github/workflows/a.yml", ".github/workflows/all.yml"]), null)
-  assert.deepEqual(combinedPathFilter(paths, [".github/workflows/a.yml"]), ["package.json"])
-  assert.equal(combinedPathFilter(paths, [".github/workflows/unknown.yml"]), null)
+  // Several recorders: commit 2 has to reach at least one; each filter is kept whole so its negations mean what they mean. One unfiltered recorder means no filter.
+  const paths = { ".github/workflows/a.yml": ["package.json"], ".github/workflows/b.yml": ["Cargo.lock", "package.json"], ".github/workflows/all.yml": null, ".github/workflows/src.yml": ["**", "!docs/**"] }
+  assert.deepEqual(selectedPathFilters(paths, [".github/workflows/a.yml", ".github/workflows/b.yml"]), { ".github/workflows/a.yml": ["package.json"], ".github/workflows/b.yml": ["Cargo.lock", "package.json"] })
+  assert.equal(selectedPathFilters(paths, [".github/workflows/a.yml", ".github/workflows/all.yml"]), null)
+  assert.equal(selectedPathFilters(paths, [".github/workflows/unknown.yml"]), null)
+  assert.equal(recordsAnyPath(selectedPathFilters(paths, [".github/workflows/a.yml", ".github/workflows/b.yml"]), ["Cargo.lock"]), true)
+  assert.equal(recordsAnyPath(selectedPathFilters(paths, [".github/workflows/a.yml"]), ["Cargo.lock"]), false)
+  assert.equal(recordsAnyPath(selectedPathFilters(paths, [".github/workflows/src.yml", ".github/workflows/a.yml"]), ["docs/x.md"]), false, "a negation in one filter is not cancelled by another workflow's list")
+  assert.equal(recordsAnyPath(selectedPathFilters(paths, [".github/workflows/src.yml"]), ["src/x.rs"]), true)
+  assert.match(describeRecorders({ ".github/workflows/a.yml": ["package.json"] }), /^fork's own recording workflow: \.github\/workflows\/a\.yml \(paths: package\.json\)$/)
+  assert.equal(describeRecorders(null), "fork's own recording workflow (every pull request)")
   assert.equal(matchesPathFilter("pnpm-lock.yaml", ["package.json", "pnpm-lock.yaml"]), true)
   assert.equal(matchesPathFilter("frontend/package.json", ["package.json"]), false)
   assert.equal(matchesPathFilter("frontend/package.json", ["**/package.json"]), true)
@@ -372,13 +397,113 @@ permissions:
   assert.equal(matchesPathFilter("docs/x.md", ["**", "!docs/**"]), false)
 
   // The lockfile is in commit 1 here, so commit 2 touches only frontend sources: the recorder would never run on it.
+  const filters = { ".github/workflows/garnet-ci.yml": ["package.json", "pnpm-lock.yaml"] }
   assert.throws(
-    () => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"] }),
+    () => replayPlan({ recordFilters: filters }),
     /recording workflows run only when package\.json, pnpm-lock\.yaml change; commit 2 touches none of them, so it would record nothing/,
   )
-  assert.doesNotThrow(() => replayPlan({ recordPaths: ["package.json", "pnpm-lock.yaml"], firstPaths: [] }))
-  assert.doesNotThrow(() => replayPlan({ recordPaths: null }))
-  assert.doesNotThrow(() => replayPlan({ recordPaths: ["Cargo.lock"], record: "inject", ecosystem: "npm" }), "an injected recorder has no fork path filter")
+  assert.doesNotThrow(() => replayPlan({ recordFilters: filters, firstPaths: [] }))
+  assert.doesNotThrow(() => replayPlan({ recordFilters: null }))
+  assert.doesNotThrow(() => replayPlan({ recordFilters: { ".github/workflows/x.yml": ["Cargo.lock"] }, record: "inject", ecosystem: "npm" }), "an injected recorder has no fork path filter")
+  assert.match(renderPlan(replayPlan({ recordFilters: filters, firstPaths: [] })), /^record: fork's own recording workflow: \.github\/workflows\/garnet-ci\.yml \(paths: package\.json, pnpm-lock\.yaml\)$/m)
+})
+
+test("recording workflows: a workflow whose every job needs a pull request label counts only when the run applies that label", () => {
+  const gate = `name: Release gate
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+jobs:
+  gate:
+    if: contains(github.event.pull_request.labels.*.name, 'garnet-release-testing')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: garnet-org/action@9696f3cae14437203c56dac7d78d9449b9ba3764
+  report:
+    needs: gate
+    if: \${{ contains(github.event.pull_request.labels.*.name, "garnet-release-testing") }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo done
+`
+  assert.equal(requiredLabel(gate), "garnet-release-testing")
+  // The pnpm fork's release gate: one job checks the label (alongside the schedule trigger), the rest need it.
+  const chained = `on:\n  schedule:\n    - cron: '*/30 * * * *'\n  pull_request:\n    types: [opened, labeled]\njobs:\n  detect:\n    if: github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'garnet-release-testing')\n    runs-on: ubuntu-24.04\n    outputs:\n      tag: \${{ steps.pick.outputs.tag }}\n  reproduce:\n    needs: detect\n    if: needs.detect.outputs.run_gate == 'true'\n    uses: $/.github/workflows/garnet-jibril-release-gate-job.yml\n  report:\n    needs:\n      - detect\n      - reproduce\n    runs-on: ubuntu-24.04\n  summary:\n    needs: [detect, reproduce]\n    steps: []\n`
+  assert.equal(requiredLabel(chained), "garnet-release-testing")
+  assert.deepEqual(workflowJobs(chained).report.needs, ["detect", "reproduce"])
+  assert.deepEqual(workflowJobs(chained).summary.needs, ["detect", "reproduce"])
+  assert.equal(requiredLabel(chained.replace("needs: [detect, reproduce]\n", "")), null, "a job that needs nothing and checks nothing runs unlabelled")
+  assert.equal(requiredLabel("on: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@v2\n"), null)
+  assert.equal(requiredLabel("on: [pull_request]\njobs:\n  gated:\n    if: contains(github.event.pull_request.labels.*.name, 'x')\n    steps: []\n  open:\n    steps: []\n"), null, "one unlabelled job means the workflow runs")
+  assert.equal(requiredLabel("on: [pull_request]\njobs:\n  test:\n    if: github.event_name == 'pull_request'\n    steps: []\n"), null, "a condition that is not a label gate")
+  assert.equal(requiredLabel("on: [pull_request]\n"), null)
+
+  const recording = {
+    present: true,
+    workflows: [".github/workflows/ci.yml", ".github/workflows/garnet-jibril-release-gate.yml"],
+    labels: { ".github/workflows/ci.yml": null, ".github/workflows/garnet-jibril-release-gate.yml": "garnet-release-testing" },
+    paths: {},
+    name: "CI",
+  }
+  assert.deepEqual(eligibleRecorders(recording, null), { eligible: [".github/workflows/ci.yml"], gated: { ".github/workflows/garnet-jibril-release-gate.yml": "garnet-release-testing" } })
+  assert.deepEqual(eligibleRecorders(recording, "garnet-release-testing").eligible, recording.workflows)
+  assert.deepEqual(eligibleRecorders(recording, "other").eligible, [".github/workflows/ci.yml"])
+  assert.deepEqual(eligibleRecorders({ ...recording, workflows: recording.workflows.slice(1) }, null).eligible, [])
+})
+
+test("replay --pr: a context plan may stage only the paths it adds and its --first paths", () => {
+  const plan = { firstStages: "context", firstPaths: ["pnpm-lock.yaml"], contextPaths: [RECORD_WORKFLOW_PATH, ".github/dependabot.yml"] }
+  assert.deepEqual(firstStagesMismatch(plan, ["pnpm-lock.yaml", RECORD_WORKFLOW_PATH, ".github/dependabot.yml"]), [])
+  assert.deepEqual(firstStagesMismatch(plan, [RECORD_WORKFLOW_PATH, ".github/workflows/ci.yml"]), [".github/workflows/ci.yml"], "another workflow under .github/ is a mismatch")
+  assert.deepEqual(firstStagesMismatch(plan, ["package.json"]), ["package.json"])
+  assert.deepEqual(firstStagesMismatch({ firstStages: "touched", firstPaths: [] }, ["anything"]), [])
+  assert.deepEqual(replayPlan({ record: "inject", ecosystem: "npm", dependabotConfigured: false, forkHoldsBase: true }).contextPaths, [RECORD_WORKFLOW_PATH, ".github/dependabot.yml"])
+})
+
+test("dependabot config lookup: only a 404 means absent; any other API failure stops the run", () => {
+  const absent = () => { throw new Error("gh: Not Found (HTTP 404)") }
+  assert.equal(hasDependabotConfig(FORK, "main", { exec: absent }), false)
+  const forbidden = () => { throw new Error("gh: Resource not accessible by integration (HTTP 403)") }
+  assert.throws(() => hasDependabotConfig(FORK, "main", { exec: forbidden }), /could not read \.github\/dependabot\.yml on garnet-labs\/posthog@main: gh: Resource not accessible/)
+  const present = () => JSON.stringify({ type: "file", path: ".github/dependabot.yml" })
+  assert.equal(hasDependabotConfig(FORK, "main", { exec: present }), true)
+})
+
+test("recorder health: the fork's newest pull requests say whether Runtime Review is finalizing comments", () => {
+  const bot = { login: "garnet-runtime-review[bot]" }
+  const final = (sha) => ({ user: bot, updated_at: "2026-09-08T10:00:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${sha} -->\n<!-- garnet:summary {"status":"finalized","changed":0} -->\nRuntime Review` })
+  const pending = (sha) => ({ user: bot, updated_at: "2026-09-10T21:18:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment: ${sha} -->\n<!-- garnet:commit ${sha} -->\n⏳ recording` })
+  const human = { user: { login: "someone" }, updated_at: "2026-09-10T21:00:00Z", body: "lgtm" }
+
+  assert.deepEqual(observeRecord(52, [human, pending(SHA_A)]), { pr: 52, state: "pending", updatedAt: "2026-09-10T21:18:00Z" })
+  assert.deepEqual(observeRecord(43, [final(SHA_A), human]), { pr: 43, state: "final", updatedAt: "2026-09-08T10:00:00Z" })
+  assert.equal(observeRecord(7, [human]), null)
+
+  const row = (pr, state) => ({ pr, state, updatedAt: state === "final" ? "2026-09-08T10:00:00Z" : "2026-09-10T21:18:00Z" })
+  assert.equal(recorderVerdict([row(52, "pending"), row(51, "pending"), row(50, "final")]).verdict, "stalled")
+  assert.equal(recorderVerdict([row(52, "pending"), row(50, "final")]).verdict, "unknown", "one fresh placeholder over a finalized record may just be fresh")
+  assert.equal(recorderVerdict([row(52, "pending")]).verdict, "stalled", "nothing has ever finalized")
+  assert.equal(recorderVerdict([row(52, "final"), row(51, "pending")]).verdict, "ok")
+  assert.equal(recorderVerdict([null, null]).verdict, "none")
+  assert.equal(recorderVerdict([]).verdict, "none")
+  assert.match(describeHealth(recorderVerdict([row(52, "pending"), row(51, "pending"), row(50, "final")]), 8), /^recorder health: stalled · last finalized record on pull request 50 \(2026-09-08\); pending placeholder on 52 \(since 2026-09-10\), 51 \(since 2026-09-10\) · 8 recent pull requests read$/)
+
+  // Through gh: the newest pull requests are read, newest first, one comment list each.
+  const calls = []
+  const exec = (cmd, args) => {
+    calls.push(args.join(" "))
+    if (args[0] === "pr" && args[1] === "list") return JSON.stringify([{ number: 50 }, { number: 52 }, { number: 51 }])
+    if (args[1] === `repos/${FORK}/issues/52/comments`) return JSON.stringify([pending(SHA_A)])
+    if (args[1] === `repos/${FORK}/issues/51/comments`) return JSON.stringify([pending(SHA_B)])
+    if (args[1] === `repos/${FORK}/issues/50/comments`) return JSON.stringify([final(SHA_A)])
+    throw new Error(`unexpected ${args.join(" ")}`)
+  }
+  const health = recorderHealth(FORK, { exec, limit: 3 })
+  assert.equal(health.verdict, "stalled")
+  assert.equal(health.scanned, 3)
+  assert.deepEqual(health.pending.map((r) => r.pr), [52, 51])
+  assert.equal(health.lastFinal.pr, 50)
+  assert.ok(calls.some((c) => c.startsWith("pr list") && c.includes(FORK)), calls.join("\n"))
 })
 
 test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
