@@ -335,8 +335,34 @@ establish a current share-gate result. Every observation and its available
 ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
 See [workspace.md](workspace.md) for the planner and HTTP interface.
 
-## What is not in this file
+## Preserving the selected base's Dependabot policy
 
-No example shows a `new-behavior` card yet. Every recorded fork replay to date
-has been `unchanged` or pending; the finder ranks candidates, and only a recorded
-run says what ran.
+Read-only CLI probe on 2026-09-11, after the five-prospect corrections:
+
+```sh
+node bin/replay.mjs live openai-node --pr 2684 \
+  --base-branch rb/2684 --record inject --ecosystem pnpm --dry-run
+```
+
+The selected source base already has a Dependabot config. The plan preserves
+it and lists the additional recorder separately from the upstream change:
+
+```text
+commit 1
+  ci: record dependency installs on pull requests
+  - .github/workflows/garnet-record.yml
+
+commit 2
+  chore(deps): bump express and @types/express
+  - examples/package.json
+  - pnpm-lock.yaml
+
+dry run: nothing was executed.
+```
+
+The fresh cards for Vite #5, PostHog #203, Dub #37, OpenHands #10 and
+openai-node #43 all report `undeterminable` with capture `not declared`.
+They retain the recorded job sections and show immediate-parent-to-head
+scope from the ledger's commit 1. The [batch report](prospect-batch.md)
+records the public identity failures and independent reads. These examples
+do not establish an accepted new-behavior showcase.

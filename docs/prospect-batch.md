@@ -42,6 +42,13 @@ command can answer. OpenHands' lockfile routing is the strongest lead here;
 Express compatibility needs an application workload. A popular repository
 or a major version change alone is insufficient.
 
+The five rows are retained in `targets/{vite,posthog,dub,openhands,openai-node}.json`.
+They were imported through the ledger helpers from producer artifacts (Vite's
+row from its manifest), checked against the exact pairs above, and refreshed
+with `replay card`. Each row retains the strict verification time and failure
+reasons; its state and card verdict are `undeterminable`. Generated cards remain
+under `out/`. Existing PostHog rows are preserved.
+
 ## Exact source and replay pairs
 
 Source base → source head is the upstream patch provenance. The fork PR base

@@ -1,0 +1,66 @@
+{
+  "slug": "vite",
+  "upstream": "vitejs/vite",
+  "fork": "garnet-labs/vitejs-vite",
+  "notes": [
+    "September 11 batch PR 5: original publication succeeded; strict evidence FAIL. See docs/prospect-batch.md for selectors, cold reads, and the automation decision."
+  ],
+  "observations": [],
+  "replays": [
+    {
+      "upstreamPr": 23445,
+      "forkPr": 5,
+      "branch": "chore/update-i39",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "68aeb8a3b5a5a2ccd505288999bae1a5e6942ee1",
+      "headSha": "982a5b4b6b599ce2c7217077e283235aad3dc4a2",
+      "forkHeadSha": "0712550b791322e7b019e22ae0e0be8512368ff6",
+      "firstSha": "d49352d0d5dbd5434fbd1e361f93cf87a6a08638",
+      "transition": null,
+      "record": "inject",
+      "ecosystem": "pnpm",
+      "openedAt": "2026-09-11T16:51:54Z",
+      "state": "undeterminable",
+      "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
+      "verification": {
+        "status": "FAIL",
+        "head": "0712550b791322e7b019e22ae0e0be8512368ff6",
+        "observedAt": "2026-09-11T18:00:27.468Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "public profile identity: garnet-labs/vitejs-vite / run 34624634687 / profile 01a09165-9dfe-7f24-af9a-652d6c3d6948; recorded 432510f4220460267bd8c26c71095729781a1fa2 (refs/pull/5/merge); expected head 0712550b791322e7b019e22ae0e0be8512368ff6"
+        ]
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 5,
+      "card": "out/vite/pr-5-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "0712550b791322e7b019e22ae0e0be8512368ff6",
+      "previousSha": "d49352d0d5dbd5434fbd1e361f93cf87a6a08638",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-11T18:12:37.942Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": -1
+}
