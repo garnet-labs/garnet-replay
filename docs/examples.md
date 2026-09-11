@@ -251,6 +251,70 @@ Without `--dry-run` the same command stops with exit 1 before any write. The
 plan itself is sound; the fork's recorder is not finalizing comments, so a pull
 request opened now would wait for a record that is not arriving.
 
+## 6. Local replay workspace
+
+```sh
+node bin/replay.mjs serve --port 8787
+```
+
+The URL-first entry accepts
+`https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31`
+and opens `/garnet-labs/garnet-runtime-review-reference/pull/31`. Reloading
+that route keeps the same comparison. The landing page renders the running
+host as a URL replacement:
+
+```diff
+- github.com/garnet-labs/garnet-runtime-review-reference/pull/31
++ localhost:8787/garnet-labs/garnet-runtime-review-reference/pull/31
+```
+
+Use `http://` for the local server. The focused result labels this saved
+artifact **Historical record · current GitHub head not checked** and keeps
+the comparison's scope, base and head beside its observations.
+
+The upstream route `/astral-sh/uv/pull/21570` resolves its ledger-mapped fork
+[PR #4](https://github.com/garnet-labs/uv/pull/4). Its focused finding reads:
+
+```text
+Recorded observations · workload: +0 / −0 · runner background: +3 / −1
+Scope: recorded jobs only. The receipt does not declare capture completeness.
+```
+
+Browser verification on 2026-09-11 covered direct PR navigation, history,
+canonical dry-run preparation with recording disabled, and an isolated synthetic
+recording/verification lifecycle. GitHub-rendered documentation and the
+interface were read at desktop and 390px. No real replay was executed.
+
+The workspace was cold-read in Chrome at desktop and 390px widths on
+2026-09-11. With the checked-in artifact
+`public/replays/github/garnet-labs/garnet-runtime-review-reference/31.json`,
+its comparison showed:
+
+```text
+Dependency replay: chart-helpers #31
+saved evidence · real pair · capture complete
+base 8703692 → head b639b38 · immediate-parent-to-head
+
+Workload
+  Outbound connections: removed −0 | added +4
+    api.ipify.org
+    httpbin.org
+    ip-api.com
+    registry.npmjs.org
+  Process observations: removed −0 | added +2
+  File observations: not recorded
+
+Runner background
+  Outbound connections: removed −2 | added +2
+  Process observations: removed −1 | added +0
+  File observations: not recorded
+```
+
+The saved artifact supplies the label and verdict. This local rendering does not
+establish a current share-gate result. Every observation and its available
+ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
+See [workspace.md](workspace.md) for the planner and HTTP interface.
+
 ## What is not in this file
 
 No example shows a `new-behavior` card yet. Every recorded fork replay to date
