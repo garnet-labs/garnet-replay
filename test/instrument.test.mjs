@@ -67,8 +67,119 @@ test("planReplay instrument mode writes the selected workflow and uses its path 
   })
   assert.deepEqual(plan.contextPaths, [instrument.path])
   assert.ok(plan.steps.some((step) => step.writeFileContent?.file.endsWith(instrument.path)))
-  assert.deepEqual(plan.recordFilters, ["src/**"])
+  assert.deepEqual(plan.recordFilters, { [instrument.path]: ["src/**"] })
   assert.match(renderPlan(plan), /record: \.github\/workflows\/ci\.yml job test runs under the Garnet sensor from commit 1/)
+  assert.throws(
+    () => planReplay({
+      slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
+      baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: "docs/x.md", previous: null }],
+      work: "/tmp/demo", record: "instrument", ecosystem: null, instrument, dependabotConfigured: true,
+    }),
+    /the fork's recording workflows run only when src\/\*\* change; commit 2 touches none of them/,
+  )
+  assert.throws(
+    () => planReplay({
+      slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
+      baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: ".github/workflows/ci.yml", previous: null }],
+      work: "/tmp/demo", record: "instrument", ecosystem: null, instrument, dependabotConfigured: true,
+    }),
+    /the change edits \.github\/workflows\/ci\.yml; pick another workflow\/job or another change/,
+  )
+})
+
+test("instrumentWorkflow handles scalar and flow permissions", () => {
+  const scalar = instrumentWorkflow(
+    "on:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    permissions: read-all\n    steps:\n      - run: echo test\n",
+    { job: "test" },
+  )
+  assert.match(scalar.content, /permissions:\n      contents: read\n      id-token: write/)
+  assert.doesNotMatch(scalar.content, /permissions: read-all/)
+
+  const flow = instrumentWorkflow(
+    "on:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    permissions: { contents: read, packages: write }\n    steps:\n      - run: echo test\n",
+    { job: "test" },
+  )
+  assert.match(flow.content, /permissions:\n      contents: read\n      packages: write\n      id-token: write/)
+})
+
+test("instrumentWorkflow rejects reusable workflow callers", () => {
+  const body = "on:\n  pull_request:\njobs:\n  test:\n    uses: ./.github/workflows/reusable.yml\n"
+  assert.throws(
+    () => instrumentWorkflow(body, { job: "test" }),
+    /job test has no steps \(reusable workflow caller\); instrument the called workflow instead/,
+  )
+})
+
+test("instrumentWorkflow rewrites quoted and commented needs", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  drop:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo drop",
+    "  keep:",
+    "    needs: [\"drop\", test] # gate",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo keep",
+    "  scalar:",
+    "    needs: 'drop' # scalar gate",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo scalar",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo test",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test", dropJobs: ["drop"] })
+  assert.match(result.content, /needs: \[test\]/)
+  assert.doesNotMatch(result.content, /needs:.*drop/)
+})
+
+test("instrumentWorkflow fails closed on an unrecognised dropped-job needs line", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  drop:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo drop",
+    "  keep:",
+    "    needs: [drop",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo keep",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo test",
+    "",
+  ].join("\n")
+  assert.throws(() => instrumentWorkflow(body, { job: "test", dropJobs: ["drop"] }), /cannot rewrite needs referencing dropped job drop/)
+})
+
+test("instrumentWorkflow inserts after the last checkout step", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - run: echo before",
+    "      - name: Checkout",
+    "        uses: actions/checkout@v4",
+    "      - run: echo after",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test" })
+  assert.ok(result.content.indexOf("actions/checkout@v4") < result.content.indexOf("garnet-org/action@"))
+  assert.ok(result.content.indexOf("garnet-org/action@") < result.content.indexOf("echo after"))
 })
 
 test("planReplay instrument mode skips unsupported Dependabot ecosystems", () => {
@@ -85,10 +196,37 @@ test("planReplay instrument mode skips unsupported Dependabot ecosystems", () =>
 
 test("planRefresh creates guarded fetch, merge, push, and distance steps", () => {
   const plan = planRefresh({ upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", work: "/tmp/demo" })
-  assert.deepEqual(plan.steps.map((step) => step.id), ["clone-fork", "verify-origin", "remote-upstream", "remote-upstream-nopush", "fetch-upstream", "refresh-before", "refresh-branch", "refresh-merge", "refresh-push", "refresh-after"])
+  assert.deepEqual(plan.steps.map((step) => step.id), ["clone-fork", "verify-origin", "remote-upstream", "remote-upstream-url", "verify-upstream-url", "remote-upstream-nopush", "fetch-upstream", "refresh-before", "refresh-branch", "refresh-merge", "refresh-push", "refresh-after"])
   assert.deepEqual(plan.steps.find((step) => step.id === "refresh-merge").args.slice(4, 6), ["-m", "Merge upstream main"])
   assert.equal(plan.steps.find((step) => step.id === "refresh-push").target, "garnet-labs/demo")
   assert.match(renderRefreshPlan(plan), /git clone https:\/\/github\.com\/garnet-labs\/demo\.git/)
+})
+
+test("planRefresh guards reused worktrees and upstream URL", async () => {
+  const plan = planRefresh({ upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", work: "/tmp/demo", workExists: true })
+  assert.ok(plan.steps.some((step) => step.id === "verify-worktree"))
+  await assert.rejects(
+    executePlan(plan, {
+      exec(command, args) {
+        if (args.includes("get-url") && args.includes("upstream")) return "https://github.com/owner/other.git"
+        if (args.includes("get-url") && args.includes("origin")) return "https://github.com/garnet-labs/demo.git"
+        return ""
+      },
+    }),
+    /upstream URL .* does not match/,
+  )
+  await assert.rejects(
+    executePlan(plan, {
+      exec(command, args) {
+        if (args.includes("get-url") && args.includes("upstream")) return "https://github.com/owner/demo.git"
+        if (args.includes("get-url") && args.includes("origin")) return "https://github.com/garnet-labs/demo.git"
+        if (args.includes("rev-list")) return "1 0"
+        if (args.includes("status")) return " M README.md"
+        return ""
+      },
+    }),
+    /checkout at \/tmp\/demo has uncommitted changes/,
+  )
 })
 
 test("fork command refuses existing targets and polls the new fork", async () => {
