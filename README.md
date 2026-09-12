@@ -198,3 +198,9 @@ covers it yet; repin when one does. Pull requests from other repositories receiv
 neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,
 best-effort record; the harness reports that as not recorded, not as unchanged.
 Repository visibility and external publishing are decisions outside this code.
+
+Use `replay fork owner/repo` when starting a new target; use `replay refresh slug`
+when its fork has fallen behind upstream. Choose `--record instrument --job
+workflow.yml/job` when the project already has a pull-request workflow and its
+own install steps should be recorded; choose injected recording when a separate
+recording workflow is clearer or the project has no suitable job.

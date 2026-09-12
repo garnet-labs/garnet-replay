@@ -206,3 +206,8 @@ visible rows, the pair header names commit 1 and commit 2, and nothing hints at
 a demo or a tool. Render the card and the comment through GitHub Markdown at
 desktop and phone width. If the finding is buried, contradicted, or attributed to
 runner background, the exhibit is not ready.
+
+Use `replay fork owner/repo` when starting a new target and `replay refresh slug`
+when its fork is stale. Use `--record instrument --job workflow.yml/job` when
+recording should happen inside the project's existing CI job; use injected
+recording when a separate workflow is clearer or no suitable job exists.

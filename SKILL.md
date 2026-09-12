@@ -36,3 +36,8 @@ and the pull request URL. Label every statement with its claim class from
 `docs/contract.md`. If the run is pending, say pending; if evidence is partial,
 say undeterminable. Do not say "unchanged", "clean", or "no issues" over
 incomplete evidence.
+
+Use `replay fork owner/repo` when starting a new target and `replay refresh slug`
+when its fork is stale. Use `--record instrument --job workflow.yml/job` to
+record inside an existing project CI job; use injected recording when a separate
+workflow is safer or the project has no suitable pull-request job.

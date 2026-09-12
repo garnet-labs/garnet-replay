@@ -366,3 +366,94 @@ They retain the recorded job sections and show immediate-parent-to-head
 scope from the ledger's commit 1. The [batch report](prospect-batch.md)
 records the public identity failures and independent reads. These examples
 do not establish an accepted new-behavior showcase.
+
+## Instrumented recording (dry run)
+
+```text
+recorder health: ok · last finalized record on pull request 10 (2026-09-11) · 8 recent pull requests read
+replay plan · openhands · upstream change 17270 (number stays local)
+fork (only write target): garnet-labs/OpenHands
+branch: chore/update-dbq · base: main · scope: pr-base-to-head
+compares: 0a5a65c → 3b68461
+record: .github/workflows/ci.yml job test-and-build runs under the Garnet sensor from commit 1 (dropped job live-e2e; test-and-build: permissions contents: read, id-token: write; test-and-build: garnet-org/action step after checkout)
+paths (5): __tests__/components/features/markdown/markdown-renderer.test.tsx, .github/pr-assets/pr-17270-latex-rendering.png, package-lock.json, package.json, src/components/features/markdown/markdown-renderer.tsx
+commit 1 stages: the touched paths as the change found them (main on the fork differs on at least one)
+
+commands
+  git clone https://github.com/garnet-labs/OpenHands.git /home/ubuntu/ctx/work/openhands   # clone the fork (never the upstream)
+  git -C /home/ubuntu/ctx/work/openhands remote add upstream https://github.com/OpenHands/OpenHands.git   # add a read-only upstream remote
+  git -C /home/ubuntu/ctx/work/openhands remote set-url --push upstream DISABLED-no-push   # disable pushing to upstream
+  git -C /home/ubuntu/ctx/work/openhands fetch --no-tags upstream 0a5a65c5a18a5054cdfaeed1d87c5d6924b44db1 refs/pull/17270/head   # fetch the upstream base commit and the pull request head ref
+  git -C /home/ubuntu/ctx/work/openhands cat-file -e 3b684610006f94958daccbb738f543215c89a1a3^{commit}   # guard: the recorded head sha must be the fetched pull request head
+  git -C /home/ubuntu/ctx/work/openhands remote get-url origin   # guard: origin must be the fork
+  git -C /home/ubuntu/ctx/work/openhands status --porcelain --untracked-files=no   # guard: the checkout must have no uncommitted changes
+  git -C /home/ubuntu/ctx/work/openhands rev-list --count 0a5a65c5a18a5054cdfaeed1d87c5d6924b44db1 ^origin/main   # guard: how far main on the fork is behind the change's base
+  git -C /home/ubuntu/ctx/work/openhands checkout -B chore/update-dbq origin/main   # create chore/update-dbq from main
+  git -C /home/ubuntu/ctx/work/openhands rm -q --ignore-unmatch -- __tests__/components/features/markdown/markdown-renderer.test.tsx .github/pr-assets/pr-17270-latex-rendering.png package-lock.json package.json src/components/features/markdown/markdown-renderer.tsx   # commit 1: drop paths the change removes or renames
+  git -C /home/ubuntu/ctx/work/openhands checkout 0a5a65c5a18a5054cdfaeed1d87c5d6924b44db1 -- __tests__/components/features/markdown/markdown-renderer.test.tsx package-lock.json package.json src/components/features/markdown/markdown-renderer.tsx   # commit 1: touched paths as the change found them
+  write /home/ubuntu/ctx/work/openhands/.github/workflows/ci.yml   # commit 1: update .github/workflows/ci.yml
+  git -C /home/ubuntu/ctx/work/openhands add -- .github/workflows/ci.yml
+  git -C /home/ubuntu/ctx/work/openhands add -A -- __tests__/components/features/markdown/markdown-renderer.test.tsx package-lock.json package.json src/components/features/markdown/markdown-renderer.tsx   # commit 1: stage the paths present after the reset
+  git -C /home/ubuntu/ctx/work/openhands diff --cached --name-only   # guard: commit 1 must change something
+  git -C /home/ubuntu/ctx/work/openhands commit -q -m <message below>   # commit 1
+  git -C /home/ubuntu/ctx/work/openhands checkout 3b684610006f94958daccbb738f543215c89a1a3 -- __tests__/components/features/markdown/markdown-renderer.test.tsx .github/pr-assets/pr-17270-latex-rendering.png package-lock.json package.json src/components/features/markdown/markdown-renderer.tsx   # commit 2: the change itself
+  git -C /home/ubuntu/ctx/work/openhands add -A -- __tests__/components/features/markdown/markdown-renderer.test.tsx .github/pr-assets/pr-17270-latex-rendering.png package-lock.json package.json src/components/features/markdown/markdown-renderer.tsx   # commit 2: stage the paths present at the head
+  git -C /home/ubuntu/ctx/work/openhands diff --cached --name-only   # guard: commit 2 must change something
+  git -C /home/ubuntu/ctx/work/openhands commit -q -m <message below>   # commit 2
+  git -C /home/ubuntu/ctx/work/openhands rev-list --count origin/main..HEAD   # guard: exactly two new commits
+  git -C /home/ubuntu/ctx/work/openhands rev-parse HEAD~1
+  git -C /home/ubuntu/ctx/work/openhands rev-parse HEAD
+  gh pr list --repo garnet-labs/OpenHands --head chore/update-dbq --state all --json number,state,isDraft,url   # reuse an existing fork pull request on this branch
+  if a pull request exists: compare origin/chore/update-dbq with HEAD~1 and HEAD by tree, then by patch   # match the fork branch against commit 1 and commit 2 by tree, then by patch; a closed pull request's branch is not reused
+  git -C /home/ubuntu/ctx/work/openhands push --set-upstream origin HEAD~1:refs/heads/chore/update-dbq   # push commit 1 alone to chore/update-dbq on the fork
+  write /home/ubuntu/repos/garnet-replay/out/openhands/replay-17270-body.md   # write the pull request body
+  gh pr create --repo garnet-labs/OpenHands --draft --base main --head chore/update-dbq --title "feat(markdown): render LaTeX math with KaTeX" --body-file /home/ubuntu/repos/garnet-replay/out/openhands/replay-17270-body.md   # open a draft pull request on the fork (base main)
+  wait for the record of commit 1 on garnet-labs/OpenHands   # wait until commit 1 is recorded; the comparison on commit 2 needs it
+  git -C /home/ubuntu/ctx/work/openhands push origin HEAD:refs/heads/chore/update-dbq   # push commit 2 to chore/update-dbq on the fork
+
+commit 1
+  chore: sync touched files before update
+
+  - __tests__/components/features/markdown/markdown-renderer.test.tsx
+  - .github/pr-assets/pr-17270-latex-rendering.png
+  - package-lock.json
+  - package.json
+  - src/components/features/markdown/markdown-renderer.tsx
+
+commit 2
+  feat(markdown): render LaTeX math with KaTeX
+
+  - __tests__/components/features/markdown/markdown-renderer.test.tsx
+  - .github/pr-assets/pr-17270-latex-rendering.png
+  - package-lock.json
+  - package.json
+  - src/components/features/markdown/markdown-renderer.tsx
+
+pull request (draft)
+  title: feat(markdown): render LaTeX math with KaTeX
+  Two commits: the first prepares the branch, the second is the change itself.
+
+  5 files:
+
+  - __tests__/components/features/markdown/markdown-renderer.test.tsx
+  - .github/pr-assets/pr-17270-latex-rendering.png
+  - package-lock.json
+  - package.json
+  - src/components/features/markdown/markdown-renderer.tsx
+
+  Commit 1 also prepares 1 additional file:
+
+  - .github/workflows/ci.yml
+
+dry run: nothing was executed.
+
+note: garnet-labs/OpenHands@main has no pull_request workflow running garnet-org/action; the selected project workflow is instrumented in commit 1
+```
+
+## Refreshing a fork (dry run)
+
+```text
+refresh before: 189 behind, 8 ahead
+refresh after: 0 behind, 9 ahead
+dry run: nothing was executed.
+```
