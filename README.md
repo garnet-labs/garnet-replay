@@ -13,7 +13,7 @@ No dependencies to install.
 
 ```sh
 git clone https://github.com/garnet-labs/garnet-replay && cd garnet-replay
-npm test                      # offline test suite
+npm test                      # offline regression suite
 node bin/replay.mjs --help
 ```
 
@@ -32,8 +32,12 @@ Each stage answers one question and leaves one artifact in the target ledger
 | 5 | integration | `replay stage2 <slug>` | Does approve/escalate behavior change with the record present? |
 | 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
 
-`replay verify <pr-url>` is the share gate at any stage. `replay status` shows the
-board and the next command.
+`replay verify <pr-url>` is the evidence gate at any stage. It requires declared
+complete capture and an anonymous public report naming the exact repository,
+run, profile, and PR head. A final comment or HTTP 200 alone is insufficient.
+After the gate accepts the evidence, an independent cold read establishes whether the result helps a
+reviewer. `replay status` shows local artifacts and the next command; it does
+not certify either gate.
 
 ## Runbook
 
@@ -187,6 +191,8 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
+- [docs/prospect-batch.md](docs/prospect-batch.md) — five-fork validation, exact evidence, limitations, and remaining work
+- [.devin/skills/prospect-replays/SKILL.md](.devin/skills/prospect-replays/SKILL.md) — bounded batch orchestration
 - [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
 
 ## Status
@@ -197,3 +203,9 @@ covers it yet; repin when one does. Pull requests from other repositories receiv
 neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,
 best-effort record; the harness reports that as not recorded, not as unchanged.
 Repository visibility and external publishing are decisions outside this code.
+
+Use `replay fork owner/repo` when starting a new target; use `replay refresh slug`
+when its fork has fallen behind upstream. Choose `--record instrument --job
+workflow.yml/job` when the project already has a pull-request workflow and its
+own install steps should be recorded; choose injected recording when a separate
+recording workflow is clearer or the project has no suitable job.

@@ -1,0 +1,112 @@
+{
+  "slug": "openhands",
+  "upstream": "OpenHands/OpenHands",
+  "fork": "garnet-labs/OpenHands",
+  "notes": [
+    "September 11 batch PR 10: original publication succeeded; strict evidence FAIL. See docs/prospect-batch.md for selectors, cold reads, and the automation decision."
+  ],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17270,
+      "title": "feat(markdown): render LaTeX math with KaTeX",
+      "author": "CHZarles",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T02:17:57Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".github/pr-assets/pr-17270-latex-rendering.png",
+        "__tests__/components/features/markdown/markdown-renderer.test.tsx",
+        "package-lock.json",
+        "package.json",
+        "src/components/features/markdown/markdown-renderer.tsx"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-11T17:03:08.006Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 17270,
+      "forkPr": 10,
+      "branch": "chore/update-dbq",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "0a5a65c5a18a5054cdfaeed1d87c5d6924b44db1",
+      "headSha": "3b684610006f94958daccbb738f543215c89a1a3",
+      "forkHeadSha": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
+      "firstSha": "4c1a44a5fb38ffa5f3d8bdc8315d5fe3bd865d41",
+      "transition": null,
+      "record": "inject",
+      "ecosystem": "npm",
+      "state": "undeterminable",
+      "openedAt": "2026-09-11T17:44:32.194Z",
+      "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
+      "verification": {
+        "status": "FAIL",
+        "head": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
+        "observedAt": "2026-09-11T18:00:27.308Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "public profile identity: garnet-labs/OpenHands / run 34629397391 / profile 01a09193-d3d4-707f-823a-d137810394b9; recorded f96d95f3028a76ff06ffd1e3e13fa6d0881aac84 (refs/pull/10/merge); expected head cc0afe66eae24f448b0a3215354cd18eefcc7562"
+        ]
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 10,
+      "card": "out/openhands/pr-10-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
+      "previousSha": "4c1a44a5fb38ffa5f3d8bdc8315d5fe3bd865d41",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-11T18:12:40.172Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

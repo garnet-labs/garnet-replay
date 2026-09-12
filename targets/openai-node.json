@@ -1,0 +1,114 @@
+{
+  "slug": "openai-node",
+  "upstream": "openai/openai-node",
+  "fork": "garnet-labs/openai-node",
+  "notes": [
+    "September 11 batch PR 43: original publication succeeded; strict evidence FAIL. See docs/prospect-batch.md for selectors, cold reads, and the automation decision."
+  ],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2684,
+      "title": "chore(deps): bump express and @types/express",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-07T15:17:47Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "examples/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-11T17:12:09.438Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 2684,
+      "forkPr": 43,
+      "branch": "chore/manifests-22k",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "fdb038e21509264bcdf81741a40988dd694188b1",
+      "headSha": "b71263b05e5543f6e3dad509001d4027b085c49a",
+      "forkHeadSha": "74a34f98b93159867579d34b448926e5fc94712e",
+      "firstSha": "c5dddb15638866f2eb902b54d0975c62b9ca96b4",
+      "transition": null,
+      "record": "inject",
+      "ecosystem": "pnpm",
+      "state": "undeterminable",
+      "openedAt": "2026-09-11T17:15:10.961Z",
+      "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
+      "verification": {
+        "status": "FAIL",
+        "head": "74a34f98b93159867579d34b448926e5fc94712e",
+        "observedAt": "2026-09-11T18:00:27.973Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "public profile identity: garnet-labs/openai-node / run 34626638779 / profile 01a09178-936c-7b2c-8de7-bcb789f0e574; recorded b32e9bc68345fb422de535e105d80fd87660bbec (refs/pull/43/merge); expected head 74a34f98b93159867579d34b448926e5fc94712e"
+        ]
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 43,
+      "card": "out/openai-node/pr-43-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "74a34f98b93159867579d34b448926e5fc94712e",
+      "previousSha": "c5dddb15638866f2eb902b54d0975c62b9ca96b4",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-11T18:12:39.456Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
