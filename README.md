@@ -187,6 +187,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
 - [docs/prospect-batch.md](docs/prospect-batch.md) — five-fork validation, exact evidence, limitations, and remaining work
+- [docs/batch-2026-09-18.md](docs/batch-2026-09-18.md) — six ordinary changes, a three-change Dependabot sample, and thirteen harness gaps with code sites
 - [.devin/skills/prospect-replays/SKILL.md](.devin/skills/prospect-replays/SKILL.md) — bounded batch orchestration
 - [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
 

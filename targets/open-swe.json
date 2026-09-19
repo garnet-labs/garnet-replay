@@ -1,0 +1,1371 @@
+{
+  "slug": "open-swe",
+  "upstream": "langchain-ai/open-swe",
+  "fork": "garnet-labs/open-swe",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2964,
+      "title": "feat(reviews): gate merge on required reviews and drop list paging",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T07:38:39Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        "agent/github/pull_request_status.py",
+        "pnpm-lock.yaml",
+        "tests/dashboard/test_my_pull_requests.py",
+        "tests/e2e/tests/dashboard_my_pull_requests.spec.ts",
+        "ui/package.json",
+        "ui/src/features/reviews/MyPullRequests.test.tsx",
+        "ui/src/features/reviews/MyPullRequests.tsx",
+        "ui/src/features/reviews/components/PullRequestCard.tsx",
+        "ui/src/features/reviews/components/PullRequestList.tsx",
+        "ui/src/features/reviews/lib/cache.ts",
+        "ui/src/features/reviews/lib/status.ts",
+        "ui/src/features/reviews/lib/useOpenPullRequests.ts",
+        "ui/src/lib/api.ts",
+        "ui/src/routes/agents/reviews/index.tsx"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2972,
+      "title": "ci: comment the preview link on included PRs and wait for the backend to go live",
+      "author": "langchain-infra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:39:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/workflows/build_preview_branch.yml",
+        "docs/DEVELOPMENT.md",
+        "scripts/build_preview_branch.sh"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2971,
+      "title": "ci: let the preview workflow drop the preview label after a PR update",
+      "author": "langchain-infra",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T14:15:54Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/build_preview_branch.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2969,
+      "title": "fix(tests): accept any PostgreSQL scheme in TEST_ANALYTICS_POSTGRES_URI",
+      "author": "anvigo12",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T12:00:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".github/workflows/ci.yml",
+        "agent/database/postgres.py",
+        "tests/analytics/conftest.py",
+        "tests/analytics/test_database.py"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2968,
+      "title": "refactor: typed profiles and private preference tools",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T11:16:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 28,
+      "paths": [
+        "agent/dashboard/agent_overrides.py",
+        "agent/dashboard/profiles.py",
+        "agent/resources/prompts/tools/read_user_preferences.md",
+        "agent/resources/prompts/tools/update_user_preferences.md",
+        "agent/schedules/store.py",
+        "agent/server.py",
+        "agent/slack/dm.py",
+        "agent/threads/runs.py",
+        "agent/tools/__init__.py",
+        "agent/tools/read_user_preferences.py",
+        "agent/tools/read_user_settings.py",
+        "agent/tools/update_user_preferences.py",
+        "agent/webhooks/common.py",
+        "tests/agent/test_agent_assembly_context.py",
+        "tests/agent/test_agent_schedules.py",
+        "tests/agent/test_factory_tool_loading.py",
+        "tests/agent/test_plan_mode.py",
+        "tests/agent/test_read_user_preferences.py",
+        "tests/agent/test_read_user_settings.py",
+        "tests/agent/test_update_user_preferences.py",
+        "tests/dashboard/test_agent_overrides.py",
+        "tests/dashboard/test_dashboard_repo_optional.py",
+        "tests/dashboard/test_dashboard_thread_api.py",
+        "tests/dashboard/test_dashboard_web_handoff.py",
+        "tests/dashboard/test_profile_draft_preference.py",
+        "tests/github/test_github_comment_prompts.py",
+        "tests/models/test_agent_subagent_models.py",
+        "tests/reviewer/test_pr_ready_auto_review.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2952,
+      "title": "feat: allow admins to hide model identity",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:30:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 27,
+      "paths": [
+        "agent/completion.py",
+        "agent/dashboard/workspace_settings.py",
+        "agent/server.py",
+        "agent/session_cost.py",
+        "agent/slack/client.py",
+        "agent/slack/tools/thread_reply.py",
+        "agent/threads/access.py",
+        "agent/threads/proxy.py",
+        "agent/tools/__init__.py",
+        "agent/tools/workspace_settings.py",
+        "tests/agent/test_session_cost.py",
+        "tests/dashboard/test_model_identity_api.py",
+        "tests/dashboard/test_workspace_settings_tiers.py",
+        "tests/slack/test_slack_context.py",
+        "tests/tools/test_workspace_settings_tool.py",
+        "ui/src/features/agents/components/AgentThreadView.tsx",
+        "ui/src/features/agents/components/AgentsHome.tsx",
+        "ui/src/features/agents/components/ModelPicker.test.tsx",
+        "ui/src/features/agents/components/ModelPicker.tsx",
+        "ui/src/features/agents/components/composer/ChatComposer.tsx",
+        "ui/src/features/agents/lib/provider/useModelOptions.ts",
+        "ui/src/features/agents/lib/types.ts",
+        "ui/src/features/settings/components/WorkspacesSection.test.tsx",
+        "ui/src/features/settings/components/WorkspacesSection.tsx",
+        "ui/src/lib/api.ts",
+        "ui/src/lib/modelIdentity.ts",
+        "ui/src/routes/admin.tsx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2979,
+      "title": "fix(analytics): retain PR revision evidence before comparison",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T15:40:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "agent/analytics/revisions.py",
+        "agent/analytics/usage.py",
+        "agent/database/migrations/versions/0022_pr_revision_evidence.py",
+        "agent/github/routes.py",
+        "agent/tools/open_pull_request.py",
+        "tests/analytics/test_pr_measurements.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2978,
+      "title": "perf(ui): avoid rerendering settled transcript turns",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-18T15:27:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "ui/src/features/agents/components/messages/UserMessage.tsx",
+        "ui/src/features/agents/components/messages/timeline/AgentTurn.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2977,
+      "title": "fix(ci): admit preview PRs by where their branch lives, not author association",
+      "author": "langchain-infra",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T15:05:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/DEVELOPMENT.md",
+        "scripts/build_preview_branch.sh"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2976,
+      "title": "fix(analytics): preserve PR distance measurements across replay",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T15:04:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "agent/analytics/emitter.py",
+        "agent/analytics/events.py",
+        "agent/analytics/ingestion.py",
+        "agent/analytics/measurements.py",
+        "agent/analytics/usage.py",
+        "agent/database/migrations/versions/0021_pr_distance_measurements.py",
+        "tests/analytics/test_pr_measurements.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2975,
+      "title": "fix(agent): record adaptive route on current run",
+      "author": "app/langsmith-engine",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T15:02:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "agent/middleware/record_run_usage.py",
+        "agent/server.py",
+        "tests/agent/test_agent_assembly_context.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2974,
+      "title": "fix(slack): make request changes collect plan feedback",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:53:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        "agent/resources/prompts/slack/plan-feedback-accepted.md",
+        "agent/resources/prompts/slack/plan-feedback-failed.md",
+        "agent/resources/prompts/slack/plan-feedback-label.md",
+        "agent/resources/prompts/slack/plan-feedback-open-failed.md",
+        "agent/resources/prompts/slack/plan-feedback-required.md",
+        "agent/resources/prompts/slack/plan-feedback-stale.md",
+        "agent/resources/prompts/slack/plan-feedback-submit.md",
+        "agent/resources/prompts/slack/plan-feedback-title.md",
+        "agent/resources/prompts/slack/plan-revision.md",
+        "agent/slack/payloads.py",
+        "agent/slack/plan_feedback.py",
+        "agent/slack/routes.py",
+        "agent/slack/tools/thread_reply.py",
+        "agent/threads/plan_api.py",
+        "agent/threads/plan_store.py",
+        "tests/slack/test_slack_plan_feedback.py",
+        "tests/slack/test_slack_thread_reply_tool.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2973,
+      "title": "fix(slack): require a mention for every channel message",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:46:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "agent/resources/prompts/runs/slack-untagged-reply.md",
+        "agent/slack/request.py",
+        "agent/slack/routes.py",
+        "agent/slack/webhook.py",
+        "tests/e2e/tests/slack_debounce.spec.ts",
+        "tests/e2e/tests/slack_untagged_reply.spec.ts",
+        "tests/github/test_github_issue_webhook.py",
+        "tests/slack/test_slack_untagged_flag.py",
+        "tests/slack/test_slack_webhook_errors.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2970,
+      "title": "feat(analytics): add detailed PR opened feedback",
+      "author": "eyurtsev",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:03:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "agent/tools/open_pull_request.py",
+        "tests/github/test_open_pull_request.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2967,
+      "title": "feat: add a per-user setting to disable subagents",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-18T08:30:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        "agent/credential_scope.py",
+        "agent/dashboard/profiles.py",
+        "agent/middleware/no_subagents.py",
+        "agent/resources/prompts/tools/update_user_preferences.md",
+        "agent/server.py",
+        "agent/tools/read_user_settings.py",
+        "swagger.json",
+        "tests/agent/test_agent_assembly_context.py",
+        "tests/agent/test_disabled_subagent_calls.py",
+        "tests/agent/test_read_user_settings.py",
+        "tests/agent/test_set_subagents_enabled.py",
+        "tests/dashboard/test_profile_draft_preference.py",
+        "ui/src/lib/api.ts",
+        "ui/src/lib/profile.test.ts",
+        "ui/src/lib/profile.ts",
+        "ui/src/routes/cloud-agents.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2966,
+      "title": "refactor(reviews): one chat thread per PR",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T08:13:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "agent/review/chat.py",
+        "agent/review/routes.py",
+        "agent/thread_ids.py",
+        "tests/reviewer/test_review_chat.py",
+        "ui/src/features/reviews/components/ReviewChat.tsx",
+        "ui/src/lib/api.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2965,
+      "title": "feat(middleware): guard delegated subagent PR creation",
+      "author": "vladislav-nechakhin",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T08:12:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "agent/server.py",
+        "tests/agent/test_agent_assembly_context.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2962,
+      "title": "feat(reviews): render PR diffs from patches, hydrate on demand",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T07:01:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "agent/config.py",
+        "agent/dashboard/auth_routes.py",
+        "agent/github/app.py",
+        "agent/github/pull_request_diff.py",
+        "agent/review/reviews.py",
+        "agent/review/routes.py",
+        "docs/DEVELOPMENT.md",
+        "scripts/dev_login.py",
+        "ui/src/features/reviews/components/ReviewMainBody.tsx",
+        "ui/src/features/reviews/lib/fileContents.ts",
+        "ui/src/lib/api.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2961,
+      "title": "fix(slack): restore the bot client in channel join",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T06:29:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "agent/slack/channels.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2960,
+      "title": "feat(slack): add DM concierge mode as its own surface",
+      "author": "ramon-langchain",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T06:24:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "agent/input_messages.py",
+        "agent/middleware/__init__.py",
+        "agent/middleware/concierge.py",
+        "agent/prompt.py",
+        "agent/resources/prompts/runs/slack-dm.md",
+        "agent/resources/prompts/system/source-concierge.md",
+        "agent/server.py",
+        "agent/slack/webhook.py",
+        "tests/middleware/test_concierge.py",
+        "tests/slack/test_slack_context.py",
+        "ui/src/features/agents/components/messages/UserMessage.tsx",
+        "ui/src/routes/cloud-agents.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2959,
+      "title": "fix: keep usage pagination outside horizontal scroll",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T04:29:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2958,
+      "title": "feat: let subagent model inherit main default",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T04:27:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "ui/src/lib/profile.ts",
+        "ui/src/routes/cloud-agents.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2957,
+      "title": "fix: toggle PR effort details from the entire row",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T04:19:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2956,
+      "title": "feat: inject recent-thread working context into the system prompt",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T04:15:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "agent/config.py",
+        "agent/prompt.py",
+        "agent/resources/prompts/system/main.md",
+        "agent/server.py",
+        "agent/threads/recent_context.py",
+        "tests/threads/test_recent_context.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2955,
+      "title": "fix(ui): dedup last-processed timestamp on usage analytics banner",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T03:57:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2953,
+      "title": "feat(analytics): make small-sample visibility a display preference",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:32:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "agent/analytics/queries.py",
+        "agent/config.py",
+        "tests/analytics/test_reporting.py",
+        "tests/dashboard/test_analytics_routes.py",
+        "ui/src/lib/api.ts",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2951,
+      "title": "feat(usage): show merged PRs per thread",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T03:22:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "agent/analytics/queries.py",
+        "tests/analytics/test_usage_queries.py",
+        "ui/src/lib/api.ts",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2949,
+      "title": "feat(usage): copy an allowlisted analytics diagnostics snapshot",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:17:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "ui/src/lib/usage-diagnostics.test.ts",
+        "ui/src/lib/usage-diagnostics.ts",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2948,
+      "title": "feat(usage): surface analytics coverage and build identity diagnostics",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:16:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "ui/src/lib/api.ts",
+        "ui/src/lib/query.ts",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2947,
+      "title": "feat(analytics): report trustworthy backend and dashboard build identity",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:14:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "agent/analytics/queries.py",
+        "agent/config.py",
+        "agent/dashboard/auth_routes.py",
+        "agent/utils/build_info.py",
+        "langgraph.json",
+        "scripts/stamp_build_info.py",
+        "tests/utils/test_build_info.py",
+        "turbo.json",
+        "ui/src/client.tsx",
+        "ui/src/desktop.d.ts",
+        "ui/vite.config.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2946,
+      "title": "feat: show average invocations per thread in usage leaderboard",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T03:02:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "agent/analytics/queries.py",
+        "tests/analytics/test_usage_queries.py",
+        "ui/src/lib/api.ts",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2945,
+      "title": "fix(middleware): remove orphaned tool results",
+      "author": "app/langsmith-engine",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:00:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "agent/middleware/repair_orphaned_tool_calls.py",
+        "tests/middleware/test_repair_orphaned_tool_calls.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2944,
+      "title": "fix(analytics): anonymize the usage leaderboard for non-admins behind an instance toggle",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T02:55:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "agent/analytics/queries.py",
+        "agent/analytics/routes.py",
+        "agent/dashboard/workspace_settings.py",
+        "agent/dashboard/workspace_settings_cache.py",
+        "agent/resources/prompts/system/admin-workspace.md",
+        "agent/server.py",
+        "agent/tools/__init__.py",
+        "agent/tools/leaderboard_privacy.py",
+        "tests/agent/test_admin_workspaces.py",
+        "tests/analytics/test_usage_queries.py",
+        "tests/dashboard/test_analytics_routes.py",
+        "tests/dashboard/test_dashboard_admin.py",
+        "tests/dashboard/test_workspace_settings_tiers.py",
+        "ui/src/features/settings/components/LeaderboardPrivacySection.tsx",
+        "ui/src/lib/api.ts",
+        "ui/src/routes/-admin.test.tsx",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/admin.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2943,
+      "title": "fix(ui): clarify shared usage date range scope",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T02:18:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "ui/src/components/AppShell.tsx",
+        "ui/src/routes/-usage.test.tsx",
+        "ui/src/routes/usage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2942,
+      "title": "fix: keep Slack reference in PR footer",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T01:56:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "agent/tools/open_pull_request.py",
+        "agent/utils/authorship.py",
+        "tests/auth/test_authorship.py",
+        "tests/github/test_github_comment_prompts.py",
+        "tests/github/test_open_pull_request.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2941,
+      "title": "fix: separate PR thread and repository attribution links",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T01:54:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "agent/utils/authorship.py",
+        "tests/auth/test_authorship.py",
+        "tests/github/test_github_comment_prompts.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2940,
+      "title": "fix(analytics): resolve names for public Slack runs",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T01:44:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "agent/analytics/directory.py",
+        "agent/analytics/identity.py",
+        "agent/analytics/retention.py",
+        "agent/analytics/usage.py",
+        "agent/database/migrations/versions/0020_display_name_provenance.py",
+        "agent/server.py",
+        "agent/utils/authorship.py",
+        "tests/agent/test_server_prepare_analytics.py",
+        "tests/analytics/test_database.py",
+        "tests/analytics/test_usage_capture.py",
+        "tests/auth/test_authorship.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2939,
+      "title": "fix: make artifact download validation recoverable",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T01:44:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "agent/tools/create_sandbox_file_download_url.py",
+        "tests/tools/test_create_sandbox_file_download_url.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2938,
+      "title": "fix(ui): open Slack thread menu link in a new tab",
+      "author": "mdrxy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T01:34:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ui/src/features/agents/components/ThreadMenuItems.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2937,
+      "title": "fix: enable admin capabilities in ordinary Slack DMs",
+      "author": "langchain-infra",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T01:25:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "agent/prompt.py",
+        "agent/resources/prompts/system/workspace-admin-required.md",
+        "agent/slack/webhook.py",
+        "agent/tools/admin_gate.py",
+        "tests/agent/test_admin_workspaces.py",
+        "tests/agent/test_agent_assembly_context.py",
+        "tests/slack/test_slack_context.py",
+        "tests/tools/test_read_only_sql.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:49.090Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 2979,
+      "forkPr": 24,
+      "branch": "chore/update-2ar",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "94a06de9ad263301d12ae1bcca9c919fd2c10bf0",
+      "headSha": "6740570f66bf3a65eac3b102d5536c4106dd5e41",
+      "forkHeadSha": "54891ad1d86c0c351fc8a65ed2bb4ad5276459b5",
+      "firstSha": "3f25ab5cbfd5832651ad5cd587a23c74cf64ec8a",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "pending",
+      "openedAt": "2026-09-18T17:03:30.080Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 24,
+      "card": "out/open-swe/pr-24-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "54891ad1d86c0c351fc8a65ed2bb4ad5276459b5",
+      "previousSha": "3f25ab5cbfd5832651ad5cd587a23c74cf64ec8a",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:46.088Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
