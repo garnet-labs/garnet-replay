@@ -38,6 +38,23 @@ The generated workflow uses `id-token: write`, no `GARNET_API_TOKEN`, and pins
 `garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c`. That pin is
 unreleased before v2.3.0 and should be repinned at the tag.
 
+## Comparison target
+
+`verify` compares the recorded head against the repository's expectations file
+and the accepted profile, never against the base SHA. Install-time change on
+real dependency pull requests is close to zero (Aug 27 rrkit cohorts, Sep 11
+five, Sep 19 nine), so a base-vs-head delta renders noise or nothing. A
+same-registry bump with no new host or install-time process renders nothing new;
+a new host or a new install-time process renders new behavior. The two-commit
+branch shape stays a recording device only; no send leans on its delta.
+
+The positive control is a constructed class-A commit run as `pair`, labelled
+constructed, never on a maintainer's thread. Until it exists, a null result
+cannot separate the recorder from the sample.
+
+The gate for any "nothing new" sentence is capture completeness with
+executed-source linkage on the public page (control-plane #657, product-side).
+
 ## Benchmark
 
 The Devin reviewer path is the default. It runs one pass per seed, not a human
@@ -88,6 +105,8 @@ test/*.test.mjs                node:test; renderer --assert; schema validation; 
 - Do not present the authored hero beacon as a third-party incident.
 - Runtime evidence is unavailable or stale unless it is bound to the reviewed
   head.
+- The terminal state is never "install surface unchanged" on any surface. With
+  capture declared complete it is "no new behavior against your expectations".
 - Keep launch copy unpublished until the remaining checks and decisions are
   complete.
 
