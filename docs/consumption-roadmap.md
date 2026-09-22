@@ -23,8 +23,9 @@ garnet-labs/posthog) and the 120-repository sweep of the same day.
 
 ## 2. Why one config file per tool is not enough
 
-Every tool researched reads the **PR description** (Qodo, CodeRabbit, Greptile,
-Bugbot documented; Copilot and Codex by inference). Almost none read **issue
+The **PR description** is documented review input for Qodo, CodeRabbit, Greptile
+and Bugbot, inferred for Copilot, undocumented for Devin's automatic review and
+unknown for Codex (section 4). Almost none read **issue
 comments** as review input (Bugbot: top-level comments yes; CodeRabbit: discussion
 yes; Devin automatic review, Greptile, Copilot, Qodo, Codex: no or undocumented).
 Only CodeRabbit and Qodo read **check runs**, and only failing ones matter to Qodo.
@@ -32,10 +33,8 @@ Nobody reads artifacts. Nobody offers a deterministic output template; every too
 emits LLM prose that *may* follow an instruction.
 
 So the Garnet PR comment, on its own, is invisible to most reviewers. The mirror in
-the description is the widest shared channel: documented input for Qodo,
-CodeRabbit, Greptile and Bugbot, inferred for Copilot, undocumented for Devin's
-automatic review and unknown for Codex (section 4). For those last three the
-mirror is a best guess until a fork proof shows a post-mirror citation; the
+the description is the widest shared channel, but for Copilot, Devin's automatic
+review and Codex it is a best guess until a fork proof shows a post-mirror citation; the
 deterministic paths in Stage C exist for that reason. The grounding line is a
 best-effort observation, never an enforcement point.
 
@@ -112,7 +111,8 @@ Canonical, one copy each, in the runtime-review reference and templated by
 1. `REVIEW.md` — the contract: where the record is, marker semantics, the exact
    grounding line, the `undeterminable` rule, "never approve on evidence".
 2. Mirror block format — `<!-- garnet:evidence:begin -->` … `<!-- garnet:commit <sha> -->`
-   … `<!-- garnet:evidence:end -->`; the only channel every reviewer reads.
+   … `<!-- garnet:evidence:end -->`; the widest shared channel (section 2), not a
+   proven input for every reviewer.
 3. `garnet/evidence` check semantics — the enforcement contract and its failure text
    (Qodo and CodeRabbit surface failing-check text to the reviewer).
 4. Re-trigger workflow step — post-evidence review request per tool, deduplicated per
