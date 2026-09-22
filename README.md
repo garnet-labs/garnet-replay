@@ -155,7 +155,11 @@ an acceptance gate `garnet/evidence` that requires a record bound to the exact h
 `REVIEW.md` grounding instructions for reviewers and review agents, thin per-tool
 adapter files, and a re-review step that asks the configured review tools
 (`--reviewers`, default `devin,coderabbit,greptile`) to look again once per head,
-only after `garnet/evidence` has passed for that exact head.
+only after `garnet/evidence` has succeeded for that exact head. The mirror and
+gate listen to every recording workflow that can run on a dependency change
+(`--record-workflow <path>` narrows to one); existing mirror files stop the plan
+without `--replace-mirror`, and a fork workflow that already listens to
+the same recorder stops it outright.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
 

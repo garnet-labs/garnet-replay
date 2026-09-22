@@ -8,8 +8,38 @@ request on the fork's default branch.
 node bin/replay.mjs stage2 posthog --dry-run                      # print the plan and the files
 node bin/replay.mjs stage2 posthog                                # branch ci/garnet-evidence, draft PR on the fork
 node bin/replay.mjs stage2 posthog --reviewers devin,greptile     # choose the review tools to re-request
-node bin/replay.mjs stage2 posthog --replace-adapters             # overwrite adapter files the fork already has
+node bin/replay.mjs stage2 posthog --replace-adapters             # overwrite adapter files (and REVIEW.md) the fork already has
+node bin/replay.mjs stage2 dub --record-workflow .github/workflows/garnet.yml   # listen to one recorder only
+node bin/replay.mjs stage2 browser-use --add-record --ecosystem uv  # add the harness recorder next to the fork's own
+node bin/replay.mjs stage2 pnpm --replace-mirror                  # overwrite mirror/gate files the fork already carries
 ```
+
+### Which recording workflows the mirror listens to
+
+The plan reads every workflow on the fork's default branch. A recorder is a
+`pull_request` workflow that runs `garnet-org/action` (directly or through a
+called workflow). The mirror and gate list every recorder whose
+`pull_request.paths` filter can match a dependency change; one whose filter
+covers only `.github/workflows/**` never runs on a replay and is left out, with
+the reason printed in the plan. Both workflows read the same head-bound comment,
+so an extra recorder that ran and did not record is harmless: the block says
+"no runtime evidence yet" until a trusted record for the head exists.
+
+The plan stops, and says why, when:
+
+- no recorder can run on a dependency change (pass `--record-workflow <path>`
+  to listen to one anyway, or `--add-record --ecosystem <x>` to add the
+  harness recorder, which the replay's `--record inject` also uses);
+- the fork already carries `garnet-evidence-mirror.yml`,
+  `garnet-evidence-mirror.mjs`, `garnet-rereview.mjs` or
+  `garnet-evidence-gate.yml` (pass `--replace-mirror` to overwrite them);
+- another fork workflow already has a `workflow_run` trigger on one of the
+  listened recorders. Two mirrors on one recorder edit the same description
+  block and request reviews twice, so that one is reconciled on the fork first;
+  there is no flag.
+
+Adapter files and `REVIEW.md` the fork already has are kept unless
+`--replace-adapters` is passed; the plan lists them.
 
 ## What the pull request adds
 
@@ -40,8 +70,12 @@ is the only gate.
 
 - The mirror and the gate run from the default branch. They read the pull
   request head SHA from the event and never check out or execute it.
-- The mirror accepts a comment as evidence only from the Garnet App login and
-  only when its marker equals the current head. Author and SHA are both checked.
+- The mirror, the re-review step and the gate accept a comment as evidence only
+  from the Garnet App logins (`garnet-runtime-review[bot]`,
+  `garnet-runtime-review-dev[bot]`, `garnet-ai[bot]`), never
+  `github-actions[bot]`, only with a finalized (non-pending) Garnet marker, and
+  only when its `garnet:commit` equals the current head. A pending placeholder
+  for the head renders the "no runtime evidence yet" block, not the record.
 - Pull requests from other repositories receive neither secrets nor OIDC
   tokens. Their recording job degrades to a local record and the gate fails,
   which is the intended reading: no record is not a clean run.

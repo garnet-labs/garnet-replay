@@ -17,12 +17,12 @@ const END_LINE_RE = /^<!-- garnet:evidence:end -->[ \t]*\r?$/m
 const COMMIT_RE = /<!--\s*garnet:commit\s+([0-9a-f]{40})\s*-->/
 const BODY_LIMIT = 65536
 const TRUSTED_AUTHORS = new Set([
-  "github-actions[bot]",
   "garnet-runtime-review[bot]",
   "garnet-runtime-review-dev[bot]",
+  "garnet-ai[bot]",
 ])
 const GARNET_OWNED_MARKER_RE =
-  /<!--\s*garnet-(?:control-plane|action)(?:-pending)?-pr-comment:v1(?::[a-z0-9.-]+)?\s*-->/
+  /<!--\s*garnet-(?:control-plane|action)-pr-comment:v1(?::[a-z0-9.-]+)?\s*-->/
 
 const api = process.env.GITHUB_API_URL || "https://api.github.com"
 const repo = process.env.GITHUB_REPOSITORY

@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
@@ -12,7 +12,8 @@ import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mj
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
 import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
-import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, parseReviewers, planStage2, renderStage2Plan } from "../lib/stage2.mjs"
+import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
+import { isTrustedEvidenceComment } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
 import { keepUat, uat } from "../lib/commands.mjs"
@@ -1515,16 +1516,70 @@ test("stage 2: reviewer selection is explicit and adapters already in the fork a
   assert.deepEqual(kept.keptAdapters, [".coderabbit.yaml"])
   assert.equal(kept.files[".coderabbit.yaml"], undefined)
   assert.match(kept.body, /kept as they are: `\.coderabbit\.yaml`/)
-  assert.match(renderStage2Plan(kept), /adapters kept \(already in the fork\): \.coderabbit\.yaml/)
+  assert.match(renderStage2Plan(kept), /kept as they are \(already in the fork\): \.coderabbit\.yaml/)
   const replaced = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit", existing: [".coderabbit.yaml"], replaceAdapters: true })
   assert.deepEqual(replaced.adapters, [".coderabbit.yaml"])
   assert.deepEqual(replaced.keptAdapters, [])
   assert.match(kept.files[".github/workflows/garnet-evidence-mirror.yml"], /GARNET_REVIEWERS: "coderabbit,greptile"/)
 })
 
+test("stage 2: every recorder that can run on a dependency change is listened to; workflow-only recorders, existing mirrors and competing listeners stop the plan", () => {
+  const recording = {
+    present: true,
+    workflows: [".github/workflows/vendored.yml", ".github/workflows/garnet-sentiment.yml", ".github/workflows/garnet-self.yml"],
+    name: "Vendored packages",
+    names: { ".github/workflows/vendored.yml": "Vendored packages", ".github/workflows/garnet-sentiment.yml": "Garnet sentiment dependency visibility", ".github/workflows/garnet-self.yml": "Garnet Browser Use CI" },
+    paths: { ".github/workflows/vendored.yml": ["vendor/cache-util/**"], ".github/workflows/garnet-sentiment.yml": null, ".github/workflows/garnet-self.yml": [".github/workflows/garnet-self.yml"] },
+    listeners: {},
+  }
+  const { names, skipped } = recorderNames(recording)
+  assert.deepEqual(names, ["Vendored packages", "Garnet sentiment dependency visibility"])
+  assert.deepEqual(Object.keys(skipped), [".github/workflows/garnet-self.yml"])
+  const plan = planStage2({ ...STAGE2_INPUT, recording })
+  assert.deepEqual(plan.recordNames, names)
+  assert.match(plan.files[".github/workflows/garnet-evidence-mirror.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
+  assert.match(plan.files[".github/workflows/garnet-evidence-gate.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
+  assert.match(renderStage2Plan(plan), /not listened to: \.github\/workflows\/garnet-self\.yml · pull_request\.paths covers only \.github\/workflows\/garnet-self\.yml/)
+  assert.match(plan.body, /Both workflows listen to every recording workflow/)
+
+  const one = planStage2({ ...STAGE2_INPUT, recording, recordWorkflow: ".github/workflows/garnet-self.yml" })
+  assert.deepEqual(one.recordNames, ["Garnet Browser Use CI"], "--record-workflow overrides the path-filter reading")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, recordWorkflow: ".github/workflows/nope.yml" }), /not a recording workflow on the fork/)
+
+  const selfOnly = { ...recording, workflows: [".github/workflows/garnet-self.yml"] }
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: selfOnly }), /would never fire[\s\S]*--record-workflow[\s\S]*--add-record/)
+  const added = planStage2({ ...STAGE2_INPUT, recording: selfOnly, addRecord: true, ecosystem: "uv" })
+  assert.deepEqual(added.recordNames, ["Garnet Runtime Visibility"])
+  assert.equal(typeof added.files[RECORD_WORKFLOW_PATH], "string")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, addRecord: true }), /--add-record needs --ecosystem/)
+
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"] }), /already carries mirror files: \.github\/scripts\/garnet-evidence-mirror\.mjs;.*--replace-mirror/)
+  const replaced = planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"], replaceMirror: true })
+  assert.deepEqual(replaced.replacedMirror, [".github/scripts/garnet-evidence-mirror.mjs"])
+  assert.equal(replaced.files["REVIEW.md"], undefined, "an existing REVIEW.md is kept like an adapter")
+  assert.ok(replaced.keptAdapters.includes("REVIEW.md"))
+  assert.equal(typeof planStage2({ ...STAGE2_INPUT, recording, existing: ["REVIEW.md"], replaceAdapters: true }).files["REVIEW.md"], "string")
+
+  const competing = { ...recording, listeners: { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages", "TS CI"], ".github/workflows/garnet-evidence-mirror.yml": ["Vendored packages"], ".github/workflows/deploy.yml": ["Release"] } }
+  assert.deepEqual(competingListeners(competing.listeners, names), { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages"] }, "our own mirror path and unrelated listeners are not conflicts")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: competing }), /workflow_run workflows listening to the recorder[\s\S]*garnet-evidence-mirror-forks\.yml → "Vendored packages"/)
+})
+
+test("recorder inventory: names, workflow_run listeners and workflow-only path filters are read from workflow bodies", () => {
+  assert.equal(workflowName('name: "Garnet Runtime Visibility"\non: pull_request\n'), "Garnet Runtime Visibility")
+  assert.equal(workflowName("on: pull_request\n"), null)
+  assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    workflows: [\"TS CI\", 'Vendored packages']\n    types: [completed]\n"), ["TS CI", "Vendored packages"])
+  assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    types: [completed]\n    workflows:\n      - Garnet Runtime Visibility\n      - \"DeepSec review\" # comment\njobs: {}\n"), ["Garnet Runtime Visibility", "DeepSec review"])
+  assert.deepEqual(workflowRunWorkflows("on:\n  pull_request:\n    paths: [x]\n"), [])
+  assert.equal(workflowOnlyPathFilter([".github/workflows/garnet-browser-use-ci.yml"]), true)
+  assert.equal(workflowOnlyPathFilter([".garnet-demo/runtime-review/**", ".github/workflows/deepsec.yml"]), false)
+  assert.equal(workflowOnlyPathFilter(null), false)
+  assert.equal(workflowOnlyPathFilter([]), false)
+})
+
 const HEAD40 = "a".repeat(40)
 const OTHER40 = "b".repeat(40)
-function recordComment(body, login = "github-actions[bot]") {
+function recordComment(body, login = "garnet-runtime-review[bot]") {
   return { user: { login }, body }
 }
 const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
@@ -1533,6 +1588,10 @@ test("re-review script: requests only for a finalized, trusted, exact-head recor
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), HEAD40), true)
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), OTHER40), false, "a record for another head is not evidence for this one")
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD, "someone"), HEAD40), false, "untrusted author")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD, "github-actions[bot]"), HEAD40), false, "the workflow token is not the Garnet App")
+  assert.equal(isTrustedEvidenceComment(recordComment(FINAL_RECORD.replace("<!-- garnet:summary", "<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:summary"))), true)
+  assert.equal(isTrustedEvidenceComment(recordComment(`<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${HEAD40} -->`)), false, "the mirror never mirrors a pending placeholder")
+  assert.equal(isTrustedEvidenceComment(recordComment(`<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1 -->`, "github-actions[bot]")), false)
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace("finalized", "pending")), HEAD40), false)
   assert.equal(isFinalizedRecordFor(recordComment(`${FINAL_RECORD}\n<!-- garnet-control-plane-pending-pr-comment -->`), HEAD40), false, "placeholder")
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace(/<!-- garnet:summary.*-->\n/, "")), HEAD40), false, "no machine register")

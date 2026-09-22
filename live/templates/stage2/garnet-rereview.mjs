@@ -20,9 +20,9 @@ const PENDING_MARKER = "garnet-control-plane-pending-pr-comment"
 const COMMIT_RE = /<!--\s*garnet:commit\s+([0-9a-f]{40})\s*-->/
 const SUMMARY_RE = /<!-- garnet:summary (\{.*?\}) -->/
 const TRUSTED_AUTHORS = new Set([
-  "github-actions[bot]",
   "garnet-runtime-review[bot]",
   "garnet-runtime-review-dev[bot]",
+  "garnet-ai[bot]",
 ])
 export const EVIDENCE_CHECK = "garnet/evidence"
 const CHECK_WAIT_MS = 30_000

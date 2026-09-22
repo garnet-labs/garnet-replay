@@ -379,6 +379,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   status [<slug>]                                                   ladder board and the next command
   stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, garnet/evidence gate, REVIEW.md, re-review + adapters
                                                                     reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
+                                                                    --record-workflow <path> listens to one recorder; --add-record adds the harness recorder; --replace-mirror overwrites mirror files
 
 records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
