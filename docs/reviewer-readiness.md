@@ -22,11 +22,11 @@ vendor claims:
 | Rank | Reviewer | R1 channel | R2 trigger | R3 adapter | R4 observed on forks | R5 value | Readiness |
 |---|---|---|---|---|---|---|---|
 | 1 | Devin | undocumented for automatic review; reads skills and `AGENTS.md` | `/devin review` from a human comment; REST API with `DEVIN_API_TOKEN` | `.agents/skills/garnet-runtime-review/SKILL.md` | 12 exact contract utterances (pnpm, posthog, runtime-review-reference); 7 head-bound consumers on pnpm, 3 on posthog | no data | ready to prove: only tool with repeated exact utterances |
-| 2 | Greptile | documented | `@greptileai` mention; programmatic review trigger | `.greptile/config.json`, `.greptile/rules.md` | head-bound citations on posthog 107 and 115, both after a session told it to read the record; otherwise mentions without binding | no data | conditionally ready: binds when steered, not by default |
+| 2 | Greptile | documented | `@greptileai` mention; programmatic review trigger | `.greptile/config.json`, `.greptile/rules.md` | head-bound citations on posthog 107 and 115, both after a session told it to read the record; answered the round-3 re-request on posthog 207 in ~7 min with no runtime detail | no data | responds to the re-request; does not ground by default |
 | 3 | CodeRabbit | documented | incremental review on push; `@coderabbitai review` | `.coderabbit.yaml` | hundreds of mentions on pnpm, zero head-bound receipts even with the fork's `.coderabbit.yaml` asking for a prefix | no data | delivery ready, grounding unproven |
 | 4 | GitHub Copilot | inferred | re-request the `copilot-pull-request-reviewer` via the requested-reviewers API | `.github/copilot-instructions.md`, `.github/skills/garnet-runtime-review/SKILL.md` | none in the inventory (not installed on the proof forks) | no data | untested |
 | 5 | Cursor Bugbot | documented | comment or API re-trigger depending on configuration | `.cursor/BUGBOT.md` | none in the inventory | no data | untested |
-| 6 | Codex | unknown | `@codex review` mention; no check-completion subscription found | none (mention path only) | `chatgpt-codex-connector` present on the codex fork; no receipt with runtime detail | no data | untested, no adapter |
+| 6 | Codex | unknown | `@codex review` mention (human-authored only: the bot-authored mention in round 3 started no review); no check-completion subscription found | none (mention path only) | `chatgpt-codex-connector` present on the codex fork; no response to the round-3 re-request | no data | not reachable from a workflow, no adapter |
 | 7 | Qodo | documented | no documented re-trigger after a successful check; bot-authored mentions may be filtered | `.pr_agent.toml` | generic "review updated until commit" stamps; no evidence-specific wording | no data | not a target: output is boilerplate |
 
 Sources: inventory sweep of 120 garnet-labs repositories / 958 fork PRs
@@ -94,6 +94,43 @@ generated files, each observed on the replay PRs and fixed in the harness:
 
 Reviewer value (`R5`) remains unmeasured: zero receipts of any tier on the
 three replay PRs, because no re-review request was ever sent.
+
+## What the third proof round taught (2026-09-22, harness 7b6249c)
+
+Stage 2 with `--replace-mirror` landed on posthog (replay
+garnet-labs/posthog#207, head `91cc700`), codex and dub (garnet-labs/dub#41,
+head `0542aa4`). The mechanics worked for the first time: `garnet/evidence`
+succeeded on each replay head, the mirror was visible, and one re-review lock
+per head was written; repeated recorder and comment events were idempotent.
+Reviewer value is still unproven:
+
+- posthog: Greptile answered about seven minutes after the lock, without a
+  runtime citation or any detail that exists only in the record (`attention`
+  yes, `grounded` no). Independent cold read 3 of 5.
+- codex: no reviewer answered in the observation window. The bot-authored
+  `@codex review` mention did not start a review; a human-authored mention is
+  the only observed Codex path. Cold read 1 of 5: the record headline read
+  "unchanged" over rows that changed, which contradicts the fail-closed rule
+  and is a renderer defect upstream of this harness.
+- dub: no reviewer answered in 20 minutes (CodeRabbit and Greptile are not
+  installed on that fork). Cold read 3 of 5.
+- Devin was never requested on any of the three: `DEVIN_API_TOKEN` is not set
+  on the forks, and the lock comment wrongly said it had been. The lock now
+  names only API requests that were sent.
+- `replay verify` counted the fork's own lock comment as session residue
+  because it named `devin`; the lock comment is now exempt, everything else
+  is still scanned.
+- `attention` was read from classified receipts only, so Greptile's ungrounded
+  answer showed `attention: no`. Any reviewer or agent response after the
+  record is now attention; grounding stays separate.
+- One finalized record made the check green while other recorders were still
+  running. The gate now stays `in_progress` until every listened recorder run
+  on the head has finished.
+
+Readiness after round 3: Devin unchanged (never requested; needs the secret on
+each fork), Greptile moves from "conditionally ready" to "responds to the
+re-request, does not ground by default", Codex drops to "bot mention does not
+trigger". `R5` stays empty for every tool.
 
 ## Rules for editing this file
 
