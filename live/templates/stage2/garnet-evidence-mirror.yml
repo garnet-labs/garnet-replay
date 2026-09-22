@@ -44,7 +44,6 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GITHUB_TOKEN: ${{ github.token }}
-      RECORD_WORKFLOWS: '{{RECORD_WORKFLOWS}}'
       EVENT_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
       EVENT_PR_NUMBER: ${{ github.event.issue.number }}
       GARNET_REVIEWERS: "{{REVIEWERS}}"
