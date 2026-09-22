@@ -31,8 +31,12 @@ Only CodeRabbit and Qodo read **check runs**, and only failing ones matter to Qo
 Nobody reads artifacts. Nobody offers a deterministic output template; every tool
 emits LLM prose that *may* follow an instruction.
 
-So the Garnet PR comment, on its own, is invisible to most reviewers; the mirror in
-the description is the only channel they all share, and the grounding line is a
+So the Garnet PR comment, on its own, is invisible to most reviewers. The mirror in
+the description is the widest shared channel: documented input for Qodo,
+CodeRabbit, Greptile and Bugbot, inferred for Copilot, undocumented for Devin's
+automatic review and unknown for Codex (section 4). For those last three the
+mirror is a best guess until a fork proof shows a post-mirror citation; the
+deterministic paths in Stage C exist for that reason. The grounding line is a
 best-effort observation, never an enforcement point.
 
 Second timing problem: every tool reviews on `opened`/`synchronize`, which is before
@@ -131,9 +135,13 @@ Canonical, one copy each, in the runtime-review reference and templated by
 
 ## 7. What this does not claim
 
-A grounding line proves the record was read at the right head, not that the
-reviewer's judgment changed. Decision-impact and attribution rows stay `unknown`
-until the Stage B columns exist.
+A head-bound grounding line shows the reviewer emitted the prescribed prefix with
+the current head after the record existed. It does not by itself prove the record
+was read: the prefix and SHA can be copied from the mirror or the instruction
+file. Reading is only evidenced by an `observation` receipt (a destination or
+chain repeated from the record that appears nowhere in the diff or
+instructions); judgment impact is only evidenced by a decision-impact row. Both
+stay `unknown` until the Stage B columns exist.
 
 ## Sources
 
