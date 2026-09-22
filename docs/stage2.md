@@ -30,13 +30,18 @@ The plan stops, and says why, when:
 - no recorder can run on a dependency change (pass `--record-workflow <path>`
   to listen to one anyway, or `--add-record --ecosystem <x>` to add the
   harness recorder, which the replay's `--record inject` also uses);
-- the fork already carries `garnet-evidence-mirror.yml`,
-  `garnet-evidence-mirror.mjs`, `garnet-rereview.mjs` or
-  `garnet-evidence-gate.yml` (pass `--replace-mirror` to overwrite them);
-- another fork workflow already has a `workflow_run` trigger on one of the
-  listened recorders. Two mirrors on one recorder edit the same description
-  block and request reviews twice, so that one is reconciled on the fork first;
-  there is no flag.
+- the fork already carries a file at one of the stage 2 paths
+  (`garnet-evidence-mirror.yml`, `garnet-evidence-mirror.mjs`,
+  `garnet-rereview.mjs`, `garnet-evidence-gate.yml`,
+  `garnet-evidence-gate.mjs`). Read it first: it may be an earlier copy of
+  this mirror, or an unrelated workflow that happens to use the same name (the
+  browser-use fork had a `workflow_dispatch` gate there). Either is overwritten
+  only with `--replace-mirror`;
+- another fork workflow with `pull-requests: write` already has a
+  `workflow_run` trigger on one of the listened recorders. Two mirrors on one
+  recorder edit the same description block and request reviews twice, so that
+  one is reconciled on the fork first; there is no flag. Read-only listeners
+  (benchmark uploads, receipts) are not conflicts.
 
 Adapter files and `REVIEW.md` the fork already has are kept unless
 `--replace-adapters` is passed; the plan lists them.
@@ -45,11 +50,11 @@ Adapter files and `REVIEW.md` the fork already has are kept unless
 
 | File | Role |
 |---|---|
-| `.github/workflows/garnet-evidence-mirror.yml` | `workflow_run` after the recording workflow. Runs default-branch code with `pull-requests: write` and `checks: read`, never the pull request's code. Copies the head-bound Garnet comment into the pull request description between `<!-- garnet:evidence:begin -->` and `<!-- garnet:evidence:end -->`, then runs the re-review step for the tools listed in `GARNET_REVIEWERS`. |
-| `.github/scripts/garnet-evidence-mirror.mjs` | The mirror. Accepts only comments from the Garnet App, only with a `garnet:commit` marker equal to the pull request head. Anything else writes a "pending" section, never an empty one. |
+| `.github/workflows/garnet-evidence-mirror.yml` | Runs when a recording workflow completes and again on every `issue_comment` the Garnet App creates or edits (other authors are filtered out before any step runs). Runs default-branch code with `pull-requests: write` and `checks: write`, never the pull request's code. Copies the head-bound Garnet comment into the pull request description between `<!-- garnet:evidence:begin -->` and `<!-- garnet:evidence:end -->`, publishes `garnet/evidence` on the head from that same reading (so the re-review step never waits on a second workflow), then runs the re-review step for the tools listed in `GARNET_REVIEWERS`. |
+| `.github/scripts/garnet-evidence-mirror.mjs` | The mirror. Accepts only comments from the Garnet App, only with a `garnet:commit` marker equal to the pull request head. The App appends jobs to one comment as they finish, so the copy names the recorded time and job count it holds and is refreshed on each edit; `replay consume` reports a copy whose register differs from the live comment as stale, not visible. Anything else writes a "pending" section, never an empty one. |
 | `.github/scripts/garnet-rereview.mjs` | The re-review step. Requests each configured review tool again once per head, only after a finalized record bound to the exact head exists and `garnet/evidence` has passed for that head (it waits up to eight minutes for the check). Comment-triggered tools get one comment carrying every mention plus a `<!-- garnet:rereview <sha40> -->` lock; API-triggered tools (Copilot via requested reviewers, Devin via its review API and a repository secret) are called first so a failed call leaves no lock. A moved head, an absent or failed check, or a pending record request nothing. |
 | Reviewer adapters | Thin per-tool files that point the tool at `REVIEW.md`: `.agents/skills/garnet-runtime-review/SKILL.md` (Devin), `.coderabbit.yaml`, `.greptile/config.json` + `.greptile/rules.md`, `.cursor/BUGBOT.md`, `.github/copilot-instructions.md` + `.github/skills/garnet-runtime-review/SKILL.md`, `.pr_agent.toml` (Qodo). Codex has no file adapter; it is mention-only. Files the fork already has are kept unless `--replace-adapters` is passed. |
-| `.github/workflows/garnet-evidence-gate.yml` | Check `garnet/evidence`. Passes only when a Garnet comment is bound to the exact head SHA. Missing or stale evidence fails. Mark it required in branch protection after this pull request merges. |
+| `.github/workflows/garnet-evidence-gate.yml` + `.github/scripts/garnet-evidence-gate.mjs` | Publishes the check run `garnet/evidence` on the pull request head with `checks: write` (a `workflow_run` job's own check lands on the default-branch commit, where the pull request never shows it). Success only with a finalized Garnet App comment whose `garnet:commit` equals the head; `in_progress` while the App's pending placeholder is up; failure otherwise. Runs on the same events as the mirror. Mark `garnet/evidence` required in branch protection after this pull request merges. |
 | `REVIEW.md` | Grounding rules for reviewers and review agents: use the record only when its `garnet:commit` equals the head, prefix runtime-grounded statements with `Runtime evidence (Garnet, head <sha7>):`, never repeat Garnet's own judgments. |
 | `.github/workflows/garnet-record.yml` | Only when the fork has no recording workflow. Pass `--ecosystem <npm|pnpm|yarn|cargo|ruby|uv|go>`. OIDC shape: `contents: read`, `id-token: write`, no `api_token`. |
 

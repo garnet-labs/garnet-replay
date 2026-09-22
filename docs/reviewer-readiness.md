@@ -60,7 +60,40 @@ seven reviewer research reports summarised in `docs/consumption-roadmap.md`.
   correction is proposed for `agent-install-kit`.
 - Landing stage2 needs a merge into the fork default branch, which the
   automation account cannot perform; that is a permissions decision, not a
-  harness defect.
+  harness defect. Resolved 2026-09-22: fork-only fast-forward pushes of the
+  stage2 branch to each fork default branch are authorized.
+
+## What the second proof round taught (2026-09-22, harness dc640f5)
+
+Stage 2 landed on posthog (garnet-labs/posthog#204 → replay #205), codex
+(#26 → #27) and dub (#38 → #39); pnpm stopped on four `workflow_run` listeners
+on "TS CI" and browser-use on an unrelated `workflow_dispatch` gate at the
+template path. Still no reviewer reached, this time for reasons inside the
+generated files, each observed on the replay PRs and fixed in the harness:
+
+- `gh api --paginate --slurp --jq` is rejected on the runner, so the gate job
+  failed before reading a comment. The gate is now a script with explicit
+  pagination.
+- A `workflow_run` job's own check lands on the default-branch commit, not the
+  pull request head, so `garnet/evidence` never appeared on the replay and the
+  re-review step waited for a check that could not arrive. The gate now
+  publishes a `garnet/evidence` check run on the head with `checks: write`.
+- The App appends jobs to one comment as recorders finish; a mirror taken after
+  the first recorder (codex: 3 of 4 jobs; dub: 1 of 2) carried the right head
+  and an older record. The mirror now re-runs on every App comment edit and
+  names the recorded time and job count it copied; `replay consume` reports a
+  copy behind the live comment as stale.
+- `<Execution Profile URL>` outside code was dropped by GitHub Markdown, so the
+  rendered citation example read `— ` with nothing after it. Now in backticks.
+- Independent cold reads of the three replay PRs rated 2 of 5: the record was
+  present but the description block, the missing check and the malformed
+  citation example made the pull request harder to read than one without it.
+- Read-only `workflow_run` listeners (pnpm's benchmark upload, receipt and
+  workload views) no longer stop the plan; listeners with `pull-requests:
+  write` still do.
+
+Reviewer value (`R5`) remains unmeasured: zero receipts of any tier on the
+three replay PRs, because no re-review request was ever sent.
 
 ## Rules for editing this file
 

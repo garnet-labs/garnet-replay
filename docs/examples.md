@@ -521,3 +521,36 @@ pnpm · pull request 66 · head ae2920f · delivered yes · visible yes · rerev
 | 58 | `5d80a00` | head-bound | yes | no | no receipts |
 | 57 | — | no | — | — | skipped: no record comment |
 | … | | | | | |
+
+## The evidence mirror block written into a pull request description
+
+Rendered by `.github/scripts/garnet-evidence-mirror.mjs` (stage2 template, 2026-09-22) for a finalized four-job record. The preamble names the head by its short SHA so it wraps at phone width; the full SHA binding is the `garnet:commit` marker inside the copied comment. The register in parentheses (jobs, recorded time) is what `replay consume` compares against the live comment to call a copy stale. Placeholders in the citation line are code-formatted so GitHub Markdown does not drop them as unknown HTML tags.
+
+```markdown
+<!-- garnet:evidence:begin -->
+## Runtime evidence (Garnet)
+
+Kernel-recorded execution record for head `a7f477e` (4 jobs, recorded 2026-09-22 21:04:11 UTC), copied from the sticky Garnet Runtime Review comment on this PR so reviewers that read only the description ground in the same bytes. The comment is the source: it gains jobs as they finish and this block follows it. Facts only. Judgment stays with the reviewer. Cite grounded findings as:
+
+> Runtime evidence (Garnet, head `a7f477e`): `<execution chain>` → `<destination>` (`<workflow>/<job>`) — `<Execution Profile URL>`
+
+<details><summary>Execution record, copied from the comment (4 jobs, recorded 2026-09-22 21:04:11 UTC)</summary>
+
+<!-- garnet-runtime-review -->
+<!-- garnet:commit a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5 -->
+<!-- garnet:summary {"status":"finalized","jobs":4,"recorded":"2026-09-22 21:04:11 UTC"} -->
+## Runtime Review
+
+| Job | Destinations |
+|---|---|
+| ci / build | 3 |
+
+
+</details>
+<!-- garnet:evidence:end -->```
+
+When the copy lags the comment (a later recorder job finished after the mirror ran), `replay consume` reports the mirror row as:
+
+```text
+| mirror | no | evidence mirror in the body is stale: 3 job(s) copied, the comment now has 4 | reviewer-consumption-evidence |
+```

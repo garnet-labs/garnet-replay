@@ -3,17 +3,18 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
-import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
+import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
-import { isTrustedEvidenceComment } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
+import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
+import { alreadyPublished, checkRunPayload, evidenceStateFor } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
 import { keepUat, uat } from "../lib/commands.mjs"
@@ -1466,9 +1467,14 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.doesNotMatch(mirror, /actions\/checkout@[^\n]*\n[^\n]*head\.sha|ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/)
   const gate = Object.entries(plan.files).find(([f]) => f.endsWith("garnet-evidence-gate.yml"))[1]
   assert.match(gate, /head_sha|headRefOid|head\.sha/)
-  assert.match(gate, /--paginate --slurp \\\n\s+--jq "\[\.\[\]\[\] \|/, "paged comments are flattened into one array")
-  assert.match(gate, /garnet-control-plane-pending-pr-comment"\) \| not/)
-  assert.match(gate, /\$s\.status == null or \$s\.status == "finalized"/, "final means the summary parses and is finalized, as lib/receipt.mjs reads it")
+  assert.doesNotMatch(gate, /--slurp/, "gh api rejects --slurp together with --jq on the runner")
+  assert.match(gate, /checks: write/, "the check run is published on the pull request head, not left to the workflow_run job")
+  assert.match(gate, /issue_comment:\n\s+types: \[created, edited\]/, "re-reads the record each time the App edits its comment")
+  assert.match(gate, /garnet-evidence-gate\.mjs/)
+  assert.doesNotMatch(gate, /name: garnet\/evidence/, "the job is not named after the check; the job's own check lands on the default-branch commit")
+  assert.equal(typeof plan.files[".github/scripts/garnet-evidence-gate.mjs"], "string")
+  assert.match(mirror, /issue_comment:\n\s+types: \[created, edited\]/)
+  assert.doesNotMatch(mirror, /--slurp/)
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
   assert.match(renderStage2Plan(plan), /garnet\/evidence/)
   assert.throws(() => planStage2({ slug: "x", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", recording: { present: false, workflows: [] } }), /--ecosystem/)
@@ -1553,7 +1559,8 @@ test("stage 2: every recorder that can run on a dependency change is listened to
   assert.equal(typeof added.files[RECORD_WORKFLOW_PATH], "string")
   assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, addRecord: true }), /--add-record needs --ecosystem/)
 
-  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"] }), /already carries mirror files: \.github\/scripts\/garnet-evidence-mirror\.mjs;.*--replace-mirror/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"] }), /files at the mirror paths: \.github\/scripts\/garnet-evidence-mirror\.mjs;[\s\S]*unrelated workflow[\s\S]*--replace-mirror/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/workflows/garnet-evidence-gate.yml"] }), /--replace-mirror/, "a foreign workflow at the gate path stops the plan too")
   const replaced = planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"], replaceMirror: true })
   assert.deepEqual(replaced.replacedMirror, [".github/scripts/garnet-evidence-mirror.mjs"])
   assert.equal(replaced.files["REVIEW.md"], undefined, "an existing REVIEW.md is kept like an adapter")
@@ -1562,7 +1569,63 @@ test("stage 2: every recorder that can run on a dependency change is listened to
 
   const competing = { ...recording, listeners: { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages", "TS CI"], ".github/workflows/garnet-evidence-mirror.yml": ["Vendored packages"], ".github/workflows/deploy.yml": ["Release"] } }
   assert.deepEqual(competingListeners(competing.listeners, names), { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages"] }, "our own mirror path and unrelated listeners are not conflicts")
-  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: competing }), /workflow_run workflows listening to the recorder[\s\S]*garnet-evidence-mirror-forks\.yml → "Vendored packages"/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: competing }), /workflow_run workflows with pull-requests: write listening to the recorder[\s\S]*garnet-evidence-mirror-forks\.yml → "Vendored packages"/)
+  const writes = { ".github/workflows/garnet-evidence-mirror-forks.yml": false, ".github/workflows/deploy.yml": true }
+  assert.deepEqual(competingListeners(competing.listeners, names, writes), {}, "a listener without pull-requests: write cannot edit the block or request reviews")
+  assert.deepEqual(competingListeners(competing.listeners, names, { ".github/workflows/garnet-evidence-mirror-forks.yml": true }), { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages"] })
+  assert.deepEqual(planStage2({ ...STAGE2_INPUT, recording: { ...competing, listenerWrites: writes } }).recordNames, names, "read-only listeners do not stop the plan")
+})
+
+test("stage 2: the gate reads the App's comments fail-closed and publishes garnet/evidence on the exact head", () => {
+  const app = { login: "garnet-runtime-review[bot]" }
+  const record = (body, user = app) => ({ user, body })
+  const final = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":2,"recorded":"2026-09-22 20:51:04 UTC"} -->\nRuntime Review`
+  assert.equal(evidenceStateFor([], HEAD40).state, "failure")
+  assert.equal(evidenceStateFor([record(final, { login: "github-actions[bot]" })], HEAD40).state, "failure", "the workflow token is not the Garnet App")
+  assert.equal(evidenceStateFor([record(final.replace(HEAD40, "b".repeat(40)))], HEAD40).state, "failure", "a record for another head is not evidence for this one")
+  assert.equal(evidenceStateFor([record(`<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet-control-plane-pending-pr-comment -->`)], HEAD40).state, "pending")
+  assert.equal(evidenceStateFor([record(final.replace("finalized", "pending"))], HEAD40).state, "pending")
+  const ok = evidenceStateFor([record(final)], HEAD40)
+  assert.equal(ok.state, "success")
+  assert.equal(ok.jobs, 2)
+  assert.match(ok.summary, /2 jobs · recorded 2026-09-22 20:51:04 UTC/)
+  const payload = checkRunPayload(ok, HEAD40, "https://github.com/o/r/actions/runs/1")
+  assert.equal(payload.name, EVIDENCE_CHECK)
+  assert.equal(payload.head_sha, HEAD40)
+  assert.equal(payload.conclusion, "success")
+  assert.equal(checkRunPayload(evidenceStateFor([], HEAD40), HEAD40, null).conclusion, "failure")
+  const pending = checkRunPayload({ state: "pending", summary: "s" }, HEAD40, null)
+  assert.equal(pending.status, "in_progress")
+  assert.equal(pending.conclusion, undefined)
+  assert.equal(alreadyPublished([], payload), false)
+  assert.equal(alreadyPublished([{ id: 1, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), true)
+  assert.equal(alreadyPublished([{ id: 2, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }, { id: 3, name: EVIDENCE_CHECK, status: "completed", conclusion: "failure", output: { summary: "x" } }], payload), false, "the newest run is what the pull request shows")
+  assert.equal(alreadyPublished([{ id: 1, name: "other", status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), false)
+})
+
+test("stage 2: the mirror names what it copied and renders the citation placeholder as code", () => {
+  const body = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":3,"recorded":"2026-09-22 20:49:55 UTC"} -->\nRuntime Review`
+  assert.deepEqual(recordStamp(body), { recorded: "2026-09-22 20:49:55 UTC", jobs: 3 })
+  assert.deepEqual(recordStamp("no register"), { recorded: null, jobs: null })
+  const section = renderEvidenceSection({ body, html_url: "https://github.com/o/r/pull/1#issuecomment-1" }, HEAD40, 65536)
+  assert.match(section, /3 jobs, recorded 2026-09-22 20:49:55 UTC/, "the copy says which state of the comment it holds")
+  assert.match(section, /`<Execution Profile URL>`/, "an angle-bracket placeholder outside code is dropped by GitHub Markdown")
+  assert.doesNotMatch(section, /verbatim/, "the copy is not the comment; the comment keeps changing as jobs finish")
+  assert.match(section, /<details><summary>Execution record, copied from the comment \(3 jobs, recorded/)
+})
+
+test("consume: a mirror that names the head but copied an earlier register is stale, not visible", () => {
+  const live = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":4,"recorded":"2026-09-22 20:51:04 UTC"} -->`
+  const copied = `<!-- garnet:evidence:begin -->\nhead ${HEAD40}\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":3,"recorded":"2026-09-22 20:49:55 UTC"} -->\n<!-- garnet:evidence:end -->`
+  assert.match(mirrorStaleness(copied, live), /copied the record of 2026-09-22 20:49:55 UTC, the comment now says 2026-09-22 20:51:04 UTC; 3 job\(s\) copied, the comment now has 4/)
+  assert.equal(mirrorStaleness(copied.replace("jobs\":3", "jobs\":4").replace("20:49:55", "20:51:04"), live), null)
+  assert.equal(mirrorStaleness("head only", live), null, "no register to compare")
+  assert.equal(mirrorStaleness(copied, null), null)
+  const pr = { headRefOid: HEAD40, author: { login: "dependabot[bot]" }, body: `x\n${copied}` }
+  const result = evaluateConsumption({ pr, comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: live, created_at: "2026-09-20T12:00:00Z" }] })
+  assert.equal(result.mirror, false)
+  assert.equal(result.funnel.visible, false)
+  assert.match(result.findings.find((row) => row.kind === "mirror").detail, /stale/)
 })
 
 test("recorder inventory: names, workflow_run listeners and workflow-only path filters are read from workflow bodies", () => {
@@ -1571,6 +1634,10 @@ test("recorder inventory: names, workflow_run listeners and workflow-only path f
   assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    workflows: [\"TS CI\", 'Vendored packages']\n    types: [completed]\n"), ["TS CI", "Vendored packages"])
   assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    types: [completed]\n    workflows:\n      - Garnet Runtime Visibility\n      - \"DeepSec review\" # comment\njobs: {}\n"), ["Garnet Runtime Visibility", "DeepSec review"])
   assert.deepEqual(workflowRunWorkflows("on:\n  pull_request:\n    paths: [x]\n"), [])
+  assert.equal(writesPullRequests("permissions:\n  contents: read\n  pull-requests: write\n"), true)
+  assert.equal(writesPullRequests("jobs:\n  a:\n    permissions:\n      pull-requests: 'write' # edits\n"), true)
+  assert.equal(writesPullRequests("permissions:\n  pull-requests: read\n"), false)
+  assert.equal(writesPullRequests("permissions: {}\n"), false)
   assert.equal(workflowOnlyPathFilter([".github/workflows/garnet-browser-use-ci.yml"]), true)
   assert.equal(workflowOnlyPathFilter([".garnet-demo/runtime-review/**", ".github/workflows/deepsec.yml"]), false)
   assert.equal(workflowOnlyPathFilter(null), false)
