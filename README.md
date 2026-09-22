@@ -203,6 +203,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
 - [docs/consumption-roadmap.md](docs/consumption-roadmap.md) — reviewer consumption across review agents: mechanism, roadmap, artifacts to maintain
+- [docs/reviewer-readiness.md](docs/reviewer-readiness.md) — reviewer readiness ranking and golden path, updated after each fork proof round
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
