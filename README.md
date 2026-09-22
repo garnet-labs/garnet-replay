@@ -28,7 +28,7 @@ Each stage answers one question and leaves one artifact in the target ledger
 | 1 | replay | `replay live <slug> …` | Does the record show new behavior on the fork? |
 | 2 | card | `replay card <fork-pr-url>` | Would this have helped the review? |
 | 3 | cohort | `replay cohort <slug> …` | What are the rates over 10–50 pull requests? |
-| 4 | pilot | `replay consume <fork-pr-url>` | Did a reviewer or agent cite the head-bound record? |
+| 4 | pilot | `replay consume <fork-pr-url>` · `replay harvest <slug>` | Did a reviewer or agent cite the head-bound record? What else did they say about it? |
 | 5 | integration | `replay stage2 <slug>` | Does approve/escalate behavior change with the record present? |
 | 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
 
@@ -60,7 +60,8 @@ $R live posthog --allow-build puppeteer --work ~/repos/posthog   # lockfile unto
 $R verify https://github.com/garnet-labs/posthog/pull/<N>       # share gate; run before anyone sees it
 $R card   https://github.com/garnet-labs/posthog/pull/<N>       # out/posthog/pr-<N>-card.md
 $R cohort posthog --from-observations --limit 20                # out/posthog/cohort-<k>.md
-$R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, check state
+$R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, receipts, check state
+$R harvest posthog --limit 40                                   # consume every recorded fork pull request
 $R stage2 posthog --dry-run                                     # evidence mirror + garnet/evidence gate
 $R status posthog
 ```
@@ -154,6 +155,15 @@ an acceptance gate `garnet/evidence` that requires a record bound to the exact h
 and `REVIEW.md` grounding instructions for reviewers and review agents.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
+
+`consume` keeps every weaker signal as a receipt, tiered `utterance` (the contract
+sentence `Runtime evidence (Garnet, head <sha7>):`), `citation` (head commit or
+profile link in prose), `observation` (a destination from the record repeated by the
+reviewer) and `mention` (runtime wording, nothing bound). Only head-bound `utterance`
+and `citation` rows count as consumed; the rest are written to the ledger and to
+`out/<slug>/pr-<N>-consume.json` with the full source comments so nothing is lost.
+`replay harvest <slug>` runs `consume` over every fork pull request that carries a
+record and writes `out/<slug>/consumption-harvest.md`.
 
 ## Layout
 
