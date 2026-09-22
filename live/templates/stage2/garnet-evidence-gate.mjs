@@ -63,9 +63,10 @@ async function listComments() {
  * How the Garnet App's comments read for one head.
  * @param {{user?: {login?: string}, body?: string}[]} comments
  * @param {string} head 40-hex head sha
- * @returns {{state: "success"|"pending"|"failure", summary: string, recorded: string|null, jobs: number|null}}
+ * @param {{state?: "ready"|"pending"|"unknown", pending?: string[]}} [listeners]
+ * @returns {{state: "success"|"pending"|"failure", summary: string, recorded: string|null, jobs: number|null, capture: string|null}}
  */
-export function evidenceStateFor(comments, head) {
+export function evidenceStateFor(comments, head, listeners = { state: "ready", pending: [] }) {
   const sha7 = head.slice(0, 7)
   const bound = (Array.isArray(comments) ? comments : []).filter((comment) => {
     if (!TRUSTED_AUTHORS.has(comment?.user?.login)) return false
@@ -74,8 +75,9 @@ export function evidenceStateFor(comments, head) {
     return commit !== null && commit[1] === head
   })
   if (bound.length === 0) {
-    return { state: "failure", summary: `No Runtime Review comment from the Garnet App is bound to head ${sha7}. Missing evidence is no record, not a clean run.`, recorded: null, jobs: null }
+    return { state: "failure", summary: `No Runtime Review comment from the Garnet App is bound to head ${sha7}. Missing evidence is no record, not a clean run.`, recorded: null, jobs: null, capture: null }
   }
+  let incompleteCapture = null
   for (const comment of bound) {
     if (comment.body.includes(PENDING_MARKER)) continue
     const summary = SUMMARY_RE.exec(comment.body)
@@ -90,10 +92,69 @@ export function evidenceStateFor(comments, head) {
     if (parsed.status !== undefined && parsed.status !== "finalized") continue
     const recorded = typeof parsed.recorded === "string" ? parsed.recorded : null
     const jobs = typeof parsed.jobs === "number" ? parsed.jobs : null
+    const capture = typeof parsed.capture_quality === "string"
+      ? parsed.capture_quality
+      : typeof parsed.capture === "string" ? parsed.capture : null
+    if (capture !== "complete") {
+      incompleteCapture = capture
+      continue
+    }
+    if (listeners.state === "unknown") {
+      return {
+        state: "pending",
+        summary: `The Runtime Review record for head ${sha7} is complete, but recorder listener state is unavailable. Pending evidence is no record.`,
+        recorded: null,
+        jobs: null,
+        capture,
+      }
+    }
+    if (listeners.state === "pending") {
+      const pending = Array.isArray(listeners.pending) && listeners.pending.length > 0
+        ? listeners.pending.join(", ")
+        : "a recorder listener"
+      return {
+        state: "pending",
+        summary: `The Runtime Review record for head ${sha7} is complete, but ${pending} is still running. Pending evidence is no record.`,
+        recorded: null,
+        jobs: null,
+        capture,
+      }
+    }
     const facts = [jobs !== null ? `${jobs} job${jobs === 1 ? "" : "s"}` : null, recorded !== null ? `recorded ${recorded}` : null].filter((item) => item !== null).join(" · ")
-    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}. The record is evidence, not a judgment.`, recorded, jobs }
+    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}. The record is evidence, not a judgment.`, recorded, jobs, capture }
   }
-  return { state: "pending", summary: `The Runtime Review record for head ${sha7} is still being written. Pending evidence is no record.`, recorded: null, jobs: null }
+  if (incompleteCapture !== null) {
+    return {
+      state: "failure",
+      summary: `The Runtime Review record for head ${sha7} does not declare complete capture (reported ${incompleteCapture}). Partial evidence is not success.`,
+      recorded: null,
+      jobs: null,
+      capture: incompleteCapture,
+    }
+  }
+  const undeclared = bound.some((comment) => {
+    const summary = SUMMARY_RE.exec(comment.body)
+    if (summary === null) return false
+    try {
+      const parsed = JSON.parse(summary[1])
+      return parsed !== null && typeof parsed === "object"
+        && (parsed.status === undefined || parsed.status === "finalized")
+        && parsed.capture_quality === undefined
+        && parsed.capture === undefined
+    } catch {
+      return false
+    }
+  })
+  if (undeclared) {
+    return {
+      state: "failure",
+      summary: `The Runtime Review record for head ${sha7} does not declare complete capture. Missing capture accounting is not success.`,
+      recorded: null,
+      jobs: null,
+      capture: null,
+    }
+  }
+  return { state: "pending", summary: `The Runtime Review record for head ${sha7} is still being written. Pending evidence is no record.`, recorded: null, jobs: null, capture: null }
 }
 
 /**

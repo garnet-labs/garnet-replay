@@ -1,7 +1,7 @@
 import test from "node:test"
 import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
-import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
+import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
 import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
@@ -17,7 +17,7 @@ import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "..
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
-import { keepUat, uat } from "../lib/commands.mjs"
+import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -1602,7 +1602,7 @@ test("stage 2: every recorder that can run on a dependency change is listened to
 test("stage 2: the gate reads the App's comments fail-closed and publishes garnet/evidence on the exact head", () => {
   const app = { login: "garnet-runtime-review[bot]" }
   const record = (body, user = app) => ({ user, body })
-  const final = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":2,"recorded":"2026-09-22 20:51:04 UTC"} -->\nRuntime Review`
+  const final = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":2,"recorded":"2026-09-22 20:51:04 UTC","capture_quality":"complete"} -->\nRuntime Review`
   assert.equal(evidenceStateFor([], HEAD40).state, "failure")
   assert.equal(evidenceStateFor([record(final, { login: "github-actions[bot]" })], HEAD40).state, "failure", "the workflow token is not the Garnet App")
   assert.equal(evidenceStateFor([record(final.replace(HEAD40, "b".repeat(40)))], HEAD40).state, "failure", "a record for another head is not evidence for this one")
@@ -1612,6 +1612,11 @@ test("stage 2: the gate reads the App's comments fail-closed and publishes garne
   assert.equal(ok.state, "success")
   assert.equal(ok.jobs, 2)
   assert.match(ok.summary, /2 jobs · recorded 2026-09-22 20:51:04 UTC/)
+  assert.equal(withRecorderCompleteness(ok, [], HEAD40).state, "success", "complete capture with settled recorders succeeds")
+  const queued = withRecorderCompleteness(ok, ["Install"], HEAD40)
+  assert.equal(queued.state, "pending", "a queued recorder keeps the gate from succeeding")
+  assert.equal(evidenceStateFor([record(final.replace('"complete"', '"partial"'))], HEAD40).state, "failure")
+  assert.equal(evidenceStateFor([record(final.replace(',"capture_quality":"complete"', ""))], HEAD40).state, "failure")
   const payload = checkRunPayload(ok, HEAD40, "https://github.com/o/r/actions/runs/1")
   assert.equal(payload.name, EVIDENCE_CHECK)
   assert.equal(payload.head_sha, HEAD40)
@@ -1706,27 +1711,33 @@ test("re-review script: the garnet/evidence check must have passed; absent, pend
   assert.equal(evidenceCheckState([run("completed", "failure"), run("queued", null)]), "pending")
 })
 
-test("re-review script: one comment carries every mention and the per-head lock; API reviewers are named in it", () => {
+test("re-review script: one comment carries every mention and the per-head lock without API reviewer residue", () => {
   assert.deepEqual(parseWorkflowReviewers("devin, coderabbit,greptile,devin"), ["devin", "coderabbit", "greptile"])
   assert.deepEqual(parseWorkflowReviewers(""), [])
   assert.throws(() => parseWorkflowReviewers("sonar"), /unknown reviewer 'sonar'/)
   for (const name of REVIEWERS) assert.ok(name in MENTIONS || API_REVIEWERS.includes(name), `${name} has a request path in the workflow script`)
-  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40, ["devin"])
+  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40)
   assert.ok(body.startsWith(rereviewMarker(HEAD40)))
   assert.match(body, /^@coderabbitai review$/m)
   assert.match(body, /^@greptileai review$/m)
-  assert.match(body, /Review requested through the API: devin\./)
-  assert.doesNotMatch(body, /Not requested/)
+  assert.doesNotMatch(body, /Review requested through the API|devin|copilot/)
   assert.match(body, /head `aaaaaaa`/)
   assert.match(body, /Runtime evidence \(Garnet, head aaaaaaa\):/, "the comment carries the grounding ask inline")
   assert.match(body, /garnet:evidence:begin/)
   assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
-  const skipped = renderRequestComment(["devin", "greptile"], HEAD40, [])
-  assert.doesNotMatch(skipped, /requested through the API/, "a request that was not sent is never reported as sent")
-  assert.match(skipped, /Not requested \(repository secret absent\): devin\./)
-  const apiOnly = renderRequestComment(["copilot"], HEAD40, ["copilot"])
+  const apiOnly = renderRequestComment(["copilot"], HEAD40)
   assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
   assert.doesNotMatch(apiOnly, /^@/m)
+  for (const reviewers of [[], ["devin"], ["copilot"], ["coderabbit"], ["devin", "copilot"], ["devin", "coderabbit", "greptile", "bugbot", "codex", "qodo"]]) {
+    assert.doesNotThrow(() => assertNoResidue(renderRequestComment(reviewers, HEAD40)))
+  }
+})
+
+test("consume: a URL without a matching target requires an explicit slug", () => {
+  const targets = [{ slug: "widgets", fork: "garnet-labs/widgets" }]
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/widgets/pull/7", targets), { target: targets[0], reason: "matched" })
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/codex/pull/7", targets), { target: null, reason: "missing" })
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/widgets/pull/7", [...targets, { slug: "widgets-copy", fork: "garnet-labs/widgets" }]), { target: null, reason: "ambiguous" })
 })
 
 test("stage2 gate: a finalized record stays pending while any listened recorder run on the head is unfinished", () => {

@@ -152,24 +152,17 @@ export function alreadyRequestedFor(comments, head) {
 
 /**
  * The single comment that re-triggers every mention-driven reviewer and holds
- * the per-head lock for API-driven ones. It states only what happened: the
- * mentions it carries and the API requests that were actually sent; a request
- * skipped for a missing secret is named as skipped, never as requested.
+ * the per-head lock for API-driven ones.
  * @param {string[]} reviewers configured reviewers
  * @param {string} head
- * @param {string[]} requested API reviewers whose request was sent
  * @returns {string}
  */
-export function renderRequestComment(reviewers, head, requested) {
+export function renderRequestComment(reviewers, head) {
   const sha7 = head.slice(0, 7)
   const lines = reviewers.filter((name) => name in MENTIONS).map((name) => MENTIONS[name])
-  const sent = reviewers.filter((name) => API_REVIEWERS.includes(name) && requested.includes(name))
-  const skipped = reviewers.filter((name) => API_REVIEWERS.includes(name) && !requested.includes(name))
   return [
     rereviewMarker(head),
     ...lines,
-    ...(sent.length > 0 ? [`Review requested through the API: ${sent.join(", ")}.`] : []),
-    ...(skipped.length > 0 ? [`Not requested (repository secret absent): ${skipped.join(", ")}.`] : []),
     "",
     `Runtime evidence for head \`${sha7}\` is bound to this pull request; requesting review again so it is read with the record present.`,
     `The record is in the description between \`<!-- garnet:evidence:begin -->\` and \`<!-- garnet:evidence:end -->\`. When its \`garnet:commit\` equals \`${sha7}\`, prefix each runtime-grounded statement with \`Runtime evidence (Garnet, head ${sha7}):\` and name the job and destination it shows; otherwise say the runtime evidence is undeterminable. Judgment stays with you; the record is evidence, not a verdict. See REVIEW.md.`,

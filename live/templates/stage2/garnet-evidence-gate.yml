@@ -31,12 +31,14 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
+      actions: read
       pull-requests: read
       actions: read
       checks: write
     env:
       GH_TOKEN: ${{ github.token }}
       GITHUB_TOKEN: ${{ github.token }}
+      RECORD_WORKFLOWS: '{{RECORD_WORKFLOWS}}'
       EVENT_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
       EVENT_PR_NUMBER: ${{ github.event.issue.number }}
       GARNET_RECORD_WORKFLOWS: '{{RECORD_WORKFLOWS_JSON}}'
