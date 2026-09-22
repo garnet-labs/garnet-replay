@@ -374,8 +374,11 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt
   harvest <slug> [--limit 50] [--state all] [--fork owner/repo]      consume every recorded fork pull request; backfills the consumption ledger
+  uat <slug> --pr N [--cold-read 0..5] [--decision-impact r] ...     score one checked pull request by hand: cold read, decision impact,
+                                                                    attribution, value hypothesis (supported|not-supported|unknown) + --note
   status [<slug>]                                                   ladder board and the next command
-  stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
+  stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, garnet/evidence gate, REVIEW.md, re-review + adapters
+                                                                    reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
 
 records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
@@ -403,6 +406,7 @@ async function main(args) {
   }
   if (command === "consume") return ladder.consume(args.slice(1))
   if (command === "harvest") return ladder.harvest(args.slice(1))
+  if (command === "uat") return ladder.uat(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))

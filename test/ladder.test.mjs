@@ -3,17 +3,19 @@ import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
-import { RECEIPT_TIERS, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
+import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
-import { planStage2, renderStage2Plan } from "../lib/stage2.mjs"
+import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, parseReviewers, planStage2, renderStage2Plan } from "../lib/stage2.mjs"
+import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
+import { keepUat, uat } from "../lib/commands.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -467,6 +469,22 @@ test("dependabot config lookup: only a 404 means absent; any other API failure s
   assert.throws(() => hasDependabotConfig(FORK, "main", { exec: forbidden }), /could not read \.github\/dependabot\.yml on garnet-labs\/posthog@main: gh: Resource not accessible/)
   const present = () => JSON.stringify({ type: "file", path: ".github/dependabot.yml" })
   assert.equal(hasDependabotConfig(FORK, "main", { exec: present }), true)
+})
+
+test("existing adapter lookup: 404 means absent, a file means present, a directory or other failure never counts as an adapter", () => {
+  const seen = []
+  const exec = (_cmd, args) => {
+    const path = String(args[1]).replace(/^repos\/[^/]+\/[^/]+\/contents\//, "").replace(/\?ref=.*$/, "")
+    seen.push(path)
+    if (path === ".coderabbit.yaml") return JSON.stringify({ type: "file", path })
+    if (path === ".greptile") return JSON.stringify([{ type: "file", path: ".greptile/config.json" }])
+    throw new Error("gh: Not Found (HTTP 404)")
+  }
+  assert.deepEqual(existingPaths(FORK, "main", [".coderabbit.yaml", ".greptile/config.json", ".greptile"], { exec }), [".coderabbit.yaml"])
+  assert.deepEqual(seen, [".coderabbit.yaml", ".greptile/config.json", ".greptile"])
+  const forbidden = () => { throw new Error("gh: Resource not accessible by integration (HTTP 403)") }
+  assert.throws(() => existingPaths(FORK, "main", [".coderabbit.yaml"], { exec: forbidden }), /could not read \.coderabbit\.yaml on garnet-labs\/posthog@main/)
+  assert.deepEqual(existingPaths(FORK, "main", [], { exec: forbidden }), [])
 })
 
 test("recorder health: the fork's newest pull requests say whether Runtime Review is finalizing comments", () => {
@@ -1215,6 +1233,85 @@ test("consume: weaker receipts are kept per tier without becoming consumption", 
   assert.match(harvest, /\| 4 \| — \| no \|/)
 })
 
+test("consume: the funnel records delivery, visibility, re-request, attention, grounding and observation separately; UAT fields start empty", () => {
+  const sha7 = SHA_B.slice(0, 7)
+  const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: `x\n<!-- garnet:evidence:begin -->\nhead \`${sha7}\`\n<!-- garnet:evidence:end -->` }
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z" }
+  const rereview = { user: { login: "github-actions[bot]" }, created_at: "2026-09-20T12:10:00Z", body: `<!-- garnet:rereview ${SHA_B} -->\nRuntime evidence for head ${sha7} is final.` }
+
+  const nothing = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, comments: [] })
+  assert.deepEqual(nothing.funnel, { delivered: false, visible: false, rereviewRequested: false, attention: false, grounded: false, observation: false, consumedHow: [], coldRead: null, decisionImpact: "unknown", attribution: "unknown", valueHypothesis: "unknown" })
+
+  const grounded = evaluateConsumption({
+    pr, comments: [
+      record, rereview,
+      { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "No Garnet runtime record yet; reviewing the diff only." },
+      { id: 2, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:20:00Z", body: `Runtime evidence (Garnet, head ${sha7}): the installer reached storage.googleapis.com, as the record shows.` },
+    ],
+    reviews: [{ user: { login: "greptile[bot]" }, state: "COMMENTED", commit_id: SHA_B, submitted_at: "2026-09-20T12:05:00Z", body: `**Runtime grounding** (head \`${sha7}\`): one new outbound connection.` }],
+  })
+  assert.equal(grounded.consumed, true)
+  const funnel = grounded.funnel
+  assert.equal(funnel.delivered, true)
+  assert.equal(funnel.visible, true)
+  assert.equal(funnel.rereviewRequested, true)
+  assert.equal(funnel.attention, true)
+  assert.equal(funnel.grounded, true)
+  assert.equal(funnel.observation, true, "a strong receipt that repeats a record destination is an observation too")
+  assert.deepEqual(funnel.consumedHow.map((row) => [row.who, row.tier, row.path]), [
+    ["greptile[bot]", RECEIPT_TIERS.UTTERANCE, "after-record"],
+    ["devin-ai-integration[bot]", RECEIPT_TIERS.UTTERANCE, "after-rereview"],
+  ])
+  assert.equal(funnel.coldRead, null)
+  assert.equal(funnel.valueHypothesis, "unknown")
+  const line = describeFunnel(funnel)
+  assert.match(line, /delivered yes · visible yes · rereviewRequested yes · attention yes · grounded yes · observation yes/)
+  assert.match(line, /consumed-how: greptile\[bot\] \(utterance, review, after-record\); devin-ai-integration\[bot\] \(utterance, comment, after-rereview\)/)
+  assert.match(line, /cold-read not yet rated · decision-impact unknown · attribution unknown · value-hypothesis unknown/)
+  assert.match(renderConsumeReport(grounded, { prUrl: `https://github.com/${FORK}/pull/77` }), /^funnel: delivered yes/m)
+
+  const preRecordOnly = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, comments: [record, { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): looks fine.` }] })
+  assert.equal(preRecordOnly.consumed, false)
+  assert.equal(preRecordOnly.funnel.delivered, true)
+  assert.equal(preRecordOnly.funnel.attention, false, "a receipt written before the record is not attention to it")
+  assert.equal(preRecordOnly.funnel.grounded, false)
+})
+
+test("uat: manual fields are written by `replay uat` only, survive a re-check of the same head, and reset on a new head", () => {
+  const base = { forkPr: 7, headSha: SHA_B, consumed: true, funnel: { delivered: true, visible: true, rereviewRequested: false, attention: true, grounded: true, observation: false, consumedHow: [], coldRead: null, decisionImpact: "unknown", attribution: "unknown", valueHypothesis: "unknown" } }
+  const target = { slug: "uat-test", consumption: [structuredClone(base)] }
+  const saved = []
+  const logged = []
+  const io = { load: () => target, save: (t) => saved.push(t), log: (line) => logged.push(line) }
+
+  assert.throws(() => uat(["uat-test", "--pr", "7"], io), /nothing to record/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--cold-read", "9"], io), /0\.\.5/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--decision-impact", "yes"], io), /supported, not-supported, unknown/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--value-hypothesis", "supported"], io), /needs --note/)
+  assert.throws(() => uat(["uat-test", "--pr", "8"], io), /no consumption row/)
+  assert.equal(saved.length, 0)
+
+  const row = uat(["uat-test", "--pr", "7", "--cold-read", "4", "--value-hypothesis", "supported", "--note", "named the new destination the diff hides"], io)
+  assert.equal(row.funnel.coldRead, 4)
+  assert.equal(row.funnel.valueHypothesis, "supported")
+  assert.equal(row.funnel.decisionImpact, "unknown")
+  assert.equal(row.funnel.uat.note, "named the new destination the diff hides")
+  assert.equal(row.funnel.uat.headSha, SHA_B)
+  assert.equal(saved.length, 1)
+  assert.match(logged[0], /cold-read 4 of 5 · decision-impact unknown · attribution unknown · value-hypothesis supported/)
+
+  const recheck = keepUat(target.consumption, { ...structuredClone(base), consumed: false, funnel: { ...structuredClone(base.funnel), grounded: false } })
+  assert.equal(recheck.funnel.grounded, false, "observed stages come from the new check")
+  assert.equal(recheck.funnel.coldRead, 4, "manual fields come from the earlier row")
+  assert.equal(recheck.funnel.valueHypothesis, "supported")
+  assert.equal(recheck.funnel.uat.note, "named the new destination the diff hides")
+
+  const newHead = keepUat(target.consumption, { ...structuredClone(base), headSha: SHA_C })
+  assert.equal(newHead.funnel.coldRead, null, "a new head starts unrated")
+  assert.equal(newHead.funnel.uat, undefined)
+  assert.deepEqual(keepUat(undefined, structuredClone(base)), base)
+})
+
 test("consume: negative, pre-record and repository-link utterances never advance the pilot", () => {
   const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
   const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z" }
@@ -1379,4 +1476,100 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.match(record, /id-token: write/)
   assert.doesNotMatch(record, /api_token/)
   assert.match(record, /cargo fetch --locked/)
+})
+
+const STAGE2_INPUT = { slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", recording: { present: true, workflows: [".github/workflows/garnet.yml"], name: "Garnet Runtime Visibility" }, workExists: true }
+
+test("stage 2: the mirror re-requests the targeted reviewers once per head, after the record, and ships one thin adapter per reviewer", () => {
+  const plan = planStage2(STAGE2_INPUT)
+  assert.deepEqual(plan.reviewers, [...DEFAULT_REVIEWERS])
+  assert.deepEqual(DEFAULT_REVIEWERS, ["devin", "coderabbit", "greptile"])
+  const mirror = plan.files[".github/workflows/garnet-evidence-mirror.yml"]
+  assert.match(mirror, /GARNET_REVIEWERS: "devin,coderabbit,greptile"/)
+  assert.match(mirror, /garnet-evidence-mirror\.mjs[\s\S]*garnet-rereview\.mjs/, "re-review runs after the mirror step")
+  assert.doesNotMatch(mirror, /\{\{[A-Z_]+\}\}/, "no unfilled template placeholders")
+  assert.equal(typeof plan.files[".github/scripts/garnet-rereview.mjs"], "string")
+  assert.deepEqual(plan.adapters, [".agents/skills/garnet-runtime-review/SKILL.md", ".coderabbit.yaml", ".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(plan.keptAdapters, [])
+  for (const path of plan.adapters) assert.match(plan.files[path], /REVIEW\.md/, `${path} points at REVIEW.md`)
+  JSON.parse(plan.files[".greptile/config.json"])
+  assert.match(plan.body, /re-review|requests the configured reviewers/)
+  assert.match(plan.body, /repository secret named in the mirror workflow/)
+  assert.doesNotMatch(plan.body.toLowerCase(), /devin/, "outbound text carries no reviewer vendor names (residue guard)")
+  assert.match(renderStage2Plan(plan), /reviewers re-requested after the record binds: devin, coderabbit, greptile/)
+  for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
+  const all = planStage2({ ...STAGE2_INPUT, reviewers: REVIEWERS })
+  const every = [...new Set(REVIEWERS.flatMap((r) => Object.values(REVIEWER_ADAPTERS[r])))]
+  assert.deepEqual(all.adapters, every)
+  assert.ok(every.includes(".cursor/BUGBOT.md") && every.includes(".github/copilot-instructions.md") && every.includes(".pr_agent.toml"))
+  assert.deepEqual(Object.keys(REVIEWER_ADAPTERS.codex), [], "codex reads AGENTS.md; no file of its own")
+})
+
+test("stage 2: reviewer selection is explicit and adapters already in the fork are kept unless asked to replace", () => {
+  assert.deepEqual(parseReviewers("Greptile, devin,greptile"), ["greptile", "devin"])
+  assert.deepEqual(parseReviewers(["copilot"]), ["copilot"])
+  assert.throws(() => parseReviewers("sonar"), /unknown reviewer 'sonar'/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, reviewers: "" }), /at least one reviewer/)
+  const kept = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit,greptile", existing: [".coderabbit.yaml"] })
+  assert.deepEqual(kept.adapters, [".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(kept.keptAdapters, [".coderabbit.yaml"])
+  assert.equal(kept.files[".coderabbit.yaml"], undefined)
+  assert.match(kept.body, /kept as they are: `\.coderabbit\.yaml`/)
+  assert.match(renderStage2Plan(kept), /adapters kept \(already in the fork\): \.coderabbit\.yaml/)
+  const replaced = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit", existing: [".coderabbit.yaml"], replaceAdapters: true })
+  assert.deepEqual(replaced.adapters, [".coderabbit.yaml"])
+  assert.deepEqual(replaced.keptAdapters, [])
+  assert.match(kept.files[".github/workflows/garnet-evidence-mirror.yml"], /GARNET_REVIEWERS: "coderabbit,greptile"/)
+})
+
+const HEAD40 = "a".repeat(40)
+const OTHER40 = "b".repeat(40)
+function recordComment(body, login = "github-actions[bot]") {
+  return { user: { login }, body }
+}
+const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
+
+test("re-review script: requests only for a finalized, trusted, exact-head record and only once per head", () => {
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), HEAD40), true)
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), OTHER40), false, "a record for another head is not evidence for this one")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD, "someone"), HEAD40), false, "untrusted author")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace("finalized", "pending")), HEAD40), false)
+  assert.equal(isFinalizedRecordFor(recordComment(`${FINAL_RECORD}\n<!-- garnet-control-plane-pending-pr-comment -->`), HEAD40), false, "placeholder")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace(/<!-- garnet:summary.*-->\n/, "")), HEAD40), false, "no machine register")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace("{\"status\"", "{status")), HEAD40), false, "unparseable register")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace(`<!-- garnet:commit ${HEAD40} -->`, `<!-- garnet:commit ${HEAD40.slice(0, 7)} -->`)), HEAD40), false, "short sha is not a binding")
+  assert.equal(isFinalizedRecordFor({ user: { login: "github-actions[bot]" }, body: null }, HEAD40), false)
+  const marker = rereviewMarker(HEAD40)
+  assert.equal(alreadyRequestedFor([recordComment(FINAL_RECORD), { user: { login: "github-actions[bot]" }, body: `${marker}\n@coderabbitai review` }], HEAD40), true)
+  assert.equal(alreadyRequestedFor([{ user: { login: "github-actions[bot]" }, body: `${rereviewMarker(OTHER40)}\n@coderabbitai review` }], HEAD40), false, "a new head gets one new request")
+  assert.equal(alreadyRequestedFor([{ body: 7 }], HEAD40), false)
+})
+
+test("re-review script: the garnet/evidence check must have passed; absent, pending and failed checks request nothing", () => {
+  assert.equal(EVIDENCE_CHECK, "garnet/evidence")
+  const run = (status, conclusion, name = EVIDENCE_CHECK) => ({ name, status, conclusion })
+  assert.equal(evidenceCheckState([]), "absent")
+  assert.equal(evidenceCheckState(undefined), "absent")
+  assert.equal(evidenceCheckState([run("completed", "success", "ci/other")]), "absent", "another check's success is not evidence")
+  assert.equal(evidenceCheckState([run("in_progress", null)]), "pending")
+  assert.equal(evidenceCheckState([run("completed", "failure")]), "failed")
+  assert.equal(evidenceCheckState([run("completed", "failure"), run("completed", "success")]), "success", "a rerun that passed counts")
+  assert.equal(evidenceCheckState([run("completed", "failure"), run("queued", null)]), "pending")
+})
+
+test("re-review script: one comment carries every mention and the per-head lock; API reviewers are named in it", () => {
+  assert.deepEqual(parseWorkflowReviewers("devin, coderabbit,greptile,devin"), ["devin", "coderabbit", "greptile"])
+  assert.deepEqual(parseWorkflowReviewers(""), [])
+  assert.throws(() => parseWorkflowReviewers("sonar"), /unknown reviewer 'sonar'/)
+  for (const name of REVIEWERS) assert.ok(name in MENTIONS || API_REVIEWERS.includes(name), `${name} has a request path in the workflow script`)
+  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40)
+  assert.ok(body.startsWith(rereviewMarker(HEAD40)))
+  assert.match(body, /^@coderabbitai review$/m)
+  assert.match(body, /^@greptileai review$/m)
+  assert.match(body, /Review requested through the API: devin\./)
+  assert.match(body, /head `aaaaaaa`/)
+  assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
+  const apiOnly = renderRequestComment(["copilot"], HEAD40)
+  assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
+  assert.doesNotMatch(apiOnly, /^@/m)
 })

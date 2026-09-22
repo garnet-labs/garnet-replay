@@ -2025,7 +2025,33 @@
         }
       ],
       "raw": "out/pnpm/pr-66-consume.json",
-      "checkedAt": "2026-09-22T17:29:44.993Z"
+      "checkedAt": "2026-09-22T18:27:57.084Z",
+      "funnel": {
+        "delivered": true,
+        "visible": true,
+        "rereviewRequested": false,
+        "attention": true,
+        "grounded": true,
+        "observation": false,
+        "consumedHow": [
+          {
+            "who": "devin-ai-integration[bot]",
+            "where": "review-comment",
+            "tier": "citation",
+            "path": "after-record",
+            "at": "2026-09-22T16:55:48Z"
+          }
+        ],
+        "coldRead": 3,
+        "decisionImpact": "unknown",
+        "attribution": "unknown",
+        "valueHypothesis": "unknown",
+        "uat": {
+          "scoredAt": "2026-09-22T18:29:03.304Z",
+          "headSha": "ae2920fc99dbaa9069d8c258225b1c6a8df56904",
+          "note": "cold read 2026-09-22: the Devin line names the head and the action download, not what the install reached; decision impact and value hypothesis unread"
+        }
+      }
     },
     {
       "forkPr": 65,

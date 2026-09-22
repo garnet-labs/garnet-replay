@@ -152,7 +152,10 @@ as unsupported and the run stops before writing. See [docs/stage1.md](docs/stage
 `replay stage2 <slug>` opens one pull request on the fork with an evidence mirror
 (`workflow_run`, resident on the default branch, never runs pull request code),
 an acceptance gate `garnet/evidence` that requires a record bound to the exact head,
-and `REVIEW.md` grounding instructions for reviewers and review agents.
+`REVIEW.md` grounding instructions for reviewers and review agents, thin per-tool
+adapter files, and a re-review step that asks the configured review tools
+(`--reviewers`, default `devin,coderabbit,greptile`) to look again once per head,
+only after `garnet/evidence` has passed for that exact head.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
 
@@ -163,7 +166,10 @@ reviewer) and `mention` (runtime wording, nothing bound). Only head-bound `utter
 and `citation` rows count as consumed; the rest are written to the ledger and to
 `out/<slug>/pr-<N>-consume.json` with the full source comments so nothing is lost.
 `replay harvest <slug>` runs `consume` over every fork pull request that carries a
-record and writes `out/<slug>/consumption-harvest.md`.
+record and writes `out/<slug>/consumption-harvest.md`. Each row carries a funnel
+(delivered, visible, re-review requested, attention, grounded, observation, and how
+each strong receipt arrived); `replay uat <slug> --pr N` adds the hand-read fields:
+cold-read 0..5, decision impact, attribution, value hypothesis.
 
 ## Layout
 
