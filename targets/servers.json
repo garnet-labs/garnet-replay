@@ -1,0 +1,1193 @@
+{
+  "slug": "servers",
+  "upstream": "modelcontextprotocol/servers",
+  "fork": "garnet-labs/servers",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4787,
+      "title": "fix(docker): work around npm 10.x's arborist crash in the TS builders",
+      "author": "AmirF194",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T21:36:56Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "src/everything/Dockerfile",
+        "src/filesystem/Dockerfile",
+        "src/memory/Dockerfile",
+        "src/sequentialthinking/Dockerfile"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4783,
+      "title": "fix(docker): actually run all seven servers as their non-root user",
+      "author": "Ashfaqbs",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T04:28:00Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "src/everything/Dockerfile",
+        "src/fetch/Dockerfile",
+        "src/filesystem/Dockerfile",
+        "src/git/Dockerfile",
+        "src/memory/Dockerfile",
+        "src/sequentialthinking/Dockerfile",
+        "src/time/Dockerfile"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4817,
+      "title": "fix(ci): restrict Claude workflow mentions",
+      "author": "FanouZeng-TT",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T04:22:26Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/claude.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4807,
+      "title": "fix(ci): restrict README gate confirmations",
+      "author": "FanouZeng-TT",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T07:33:09Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/readme-pr-check.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4794,
+      "title": "commit",
+      "author": "FanzCEO",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T18:54:31Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/supply-chain.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4825,
+      "title": "fix(everything): drop a session's cached roots list on cleanup",
+      "author": "chrikrah",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T06:59:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/everything/__tests__/server.test.ts",
+        "src/everything/server/index.ts",
+        "src/everything/server/roots.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4824,
+      "title": "fix(git): decode percent-encoded root URIs, and survive a root that is gone",
+      "author": "dheerajjha",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T06:21:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4823,
+      "title": "fix(filesystem): indent a flush-left replacement line to match the block",
+      "author": "chrikrah",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T06:18:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/filesystem/__tests__/lib.test.ts",
+        "src/filesystem/lib.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4822,
+      "title": "fix(git): name /dev/null for files a commit added or deleted",
+      "author": "chrikrah",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T05:20:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4821,
+      "title": "Add NEXUS-AI Marketplace to community servers",
+      "author": "klikmarkettt-dotcom",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-17T18:15:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4820,
+      "title": "fix(time): stop discarding McpError in the call_tool handler",
+      "author": "tounsils",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T17:17:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/time/src/mcp_server_time/server.py",
+        "src/time/test/time_server_test.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4819,
+      "title": "fix(memory): skip duplicate observations within a single batch",
+      "author": "tounsils",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T17:13:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/memory/__tests__/knowledge-graph.test.ts",
+        "src/memory/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4818,
+      "title": "feat: add LOCUS and GAMA deterministic engine MCP servers",
+      "author": "ahmadshady747-create",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T08:41:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ADDITIONAL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4816,
+      "title": "fix(everything): correct the tiny image's iCCP chunk checksums",
+      "author": "BlueX888",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T04:14:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/everything/__tests__/get-tiny-image.test.ts",
+        "src/everything/tools/get-tiny-image.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4815,
+      "title": "fix(git): accept revision ranges in git_diff",
+      "author": "BlueX888",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T18:45:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/git/README.md",
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4814,
+      "title": "fix(sequentialthinking): track branches whose IDs match Object.prototype keys",
+      "author": "BlueX888",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T15:32:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/sequentialthinking/__tests__/lib.test.ts",
+        "src/sequentialthinking/lib.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4811,
+      "title": "fix(everything): honor terminal task status reached on the final poll",
+      "author": "BlueX888",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T14:42:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/everything/__tests__/tools.test.ts",
+        "src/everything/tools/trigger-elicitation-request-async.ts",
+        "src/everything/tools/trigger-sampling-request-async.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4810,
+      "title": "fix(everything): scope session resources to their server",
+      "author": "Tiancheng-Xu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T14:34:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/everything/__tests__/resources.test.ts",
+        "src/everything/resources/session.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4809,
+      "title": "fix(everything): scope the session resource registry to the owning server",
+      "author": "ycwlzx",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T11:29:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/everything/__tests__/resources.test.ts",
+        "src/everything/resources/session.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4805,
+      "title": "fix(git): report a detached HEAD from git_checkout",
+      "author": "CryoThrust",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T01:17:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4803,
+      "title": "Harden fetch SSRF protection and git repo_path restriction",
+      "author": "sachajw",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T18:21:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".gitattributes",
+        "SECURITY.md",
+        "src/fetch/src/mcp_server_fetch/__init__.py",
+        "src/fetch/src/mcp_server_fetch/server.py",
+        "src/fetch/tests/test_server.py",
+        "src/git/src/mcp_server_git/__init__.py",
+        "src/git/src/mcp_server_git/server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4802,
+      "title": "docs: add mcp-witness security testing toolkit to ADDITIONAL.md Resources",
+      "author": "desledishant10",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T06:16:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ADDITIONAL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4801,
+      "title": "Add Aries project description to README",
+      "author": "vvemulk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T03:24:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4799,
+      "title": "fix(git): route git_add(\".\") through the validated git CLI path",
+      "author": "Yash121l",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-12T18:33:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4798,
+      "title": "fix(everything): drop a disconnected session from the subscriptions map",
+      "author": "voidstackloop",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-12T13:26:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/everything/__tests__/resources.test.ts",
+        "src/everything/resources/subscriptions.ts",
+        "src/everything/server/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4793,
+      "title": "docs(everything): state that sampling/elicitation tools are absent from the catalog without the capability",
+      "author": "sasan1200",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T17:33:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "src/everything/docs/instructions.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4791,
+      "title": "feat(git): add git worktree tools (list, add, remove)",
+      "author": "karawitan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T15:42:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/git/README.md",
+        "src/git/src/mcp_server_git/server.py",
+        "src/git/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4789,
+      "title": "fix(filesystem): add stable fail-closed path validation reason codes",
+      "author": "tiagovilasboas",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T22:39:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/filesystem/__tests__/lib.test.ts",
+        "src/filesystem/__tests__/nested-parents.test.ts",
+        "src/filesystem/lib.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4788,
+      "title": "docs: warn about archived reference servers (#4785)",
+      "author": "FOWEPJF255",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-10T14:44:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "README.md",
+        "SECURITY.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4786,
+      "title": "Add uk-legislation-changes — UK legislation amendment history",
+      "author": "busybusybussiness",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-09T19:02:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4784,
+      "title": "fix(sequentialthinking): correct readOnlyHint/idempotentHint tool annotations",
+      "author": "Ashfaqbs",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-09T05:34:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/sequentialthinking/__tests__/tool-annotations.test.ts",
+        "src/sequentialthinking/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4781,
+      "title": "fix(time): flag ambiguous DST fall-back times in convert_time",
+      "author": "Nimra3261",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T19:34:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/time/src/mcp_server_time/server.py",
+        "src/time/test/time_server_test.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4779,
+      "title": "Add Calera ICX Epistemic Memory Remote MCP Server to Resources",
+      "author": "CaseyYahbara",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T17:07:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ADDITIONAL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4778,
+      "title": "Add Calera FinanceSec Remote MCP Server to Resources",
+      "author": "CaseyYahbara",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T17:06:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ADDITIONAL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4776,
+      "title": "fix(fetch): add timeout to robots.txt request in autonomous fetch check",
+      "author": "DawnofGenX",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T04:22:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/fetch/src/mcp_server_fetch/server.py",
+        "src/fetch/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4775,
+      "title": "fix(filesystem): emit object input schemas",
+      "author": "Tiancheng-Xu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T17:14:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/filesystem/__tests__/tools-list-schema.test.ts",
+        "src/filesystem/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4774,
+      "title": "docs(everything): rename the phantom 'options' JSDoc param to 'constraints'",
+      "author": "simpleqt",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T16:43:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "src/everything/tools/gzip-file-as-resource.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4773,
+      "title": "fix(fetch): harden URL fetching against SSRF",
+      "author": "Ethanz11-creat",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T16:18:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/fetch/src/mcp_server_fetch/server.py",
+        "src/fetch/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4771,
+      "title": "fix(filesystem): document glob pattern syntax for search_files and directory_tree",
+      "author": "Pranav-Nexus",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T11:09:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "src/filesystem/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4770,
+      "title": "feat(fetch): add opt-in host allowlisting (--allowed-hosts)",
+      "author": "g-yixuan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T18:47:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "src/fetch/README.md",
+        "src/fetch/src/mcp_server_fetch/__init__.py",
+        "src/fetch/src/mcp_server_fetch/server.py",
+        "src/fetch/tests/test_server.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:47.139Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 4565,
+      "forkPr": 2,
+      "branch": "chore/update-3it",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "d73f99efbfd40c3aa1b61e88728b3d49fb52608f",
+      "headSha": "5b2bad9d14e6731bab235a04636b62c4ba914576",
+      "forkHeadSha": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+      "firstSha": "9d9f9b61e82aeb63fc903526af05847d34936f39",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": "uv",
+      "state": "pending",
+      "openedAt": "2026-09-18T16:57:48.221Z"
+    },
+    {
+      "upstreamPr": 4615,
+      "forkPr": 5,
+      "branch": "chore/manifests-3k7",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "76d64c822f5125032f89eb71dbdb94e42b434821",
+      "headSha": "050cfe3f25266735f2da42ab0b779f7869a0d5a4",
+      "forkHeadSha": "7c9ff0517f469e98b95933e289b41d0507527d5c",
+      "firstSha": "453466d5e1ca2e5f58d344a99d501832414b9788",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": "uv",
+      "state": "pending",
+      "openedAt": "2026-09-19T06:01:49.984Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 2,
+      "card": "out/servers/pr-2-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+      "previousSha": "9d9f9b61e82aeb63fc903526af05847d34936f39",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:45.177Z"
+    },
+    {
+      "forkPr": 5,
+      "card": "out/servers/pr-5-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "7c9ff0517f469e98b95933e289b41d0507527d5c",
+      "previousSha": "453466d5e1ca2e5f58d344a99d501832414b9788",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-19T06:11:41.677Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

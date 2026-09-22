@@ -1,0 +1,1545 @@
+{
+  "slug": "codex",
+  "upstream": "openai/codex",
+  "fork": "garnet-labs/codex",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46334,
+      "title": "Share platform identity across path, network, and sandbox configuration",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:51:38Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 31,
+      "paths": [
+        "codex-rs/Cargo.lock",
+        "codex-rs/config/src/config_toml.rs",
+        "codex-rs/config/src/lib.rs",
+        "codex-rs/core/src/config/network_config.rs",
+        "codex-rs/core/src/config/network_config_tests.rs",
+        "codex-rs/core/src/config/network_proxy_spec.rs",
+        "codex-rs/core/src/config/network_proxy_spec_tests.rs",
+        "codex-rs/core/src/shell_snapshot_tests.rs",
+        "codex-rs/core/src/tools/network_approval.rs",
+        "codex-rs/core/src/tools/runtimes/mod_tests.rs",
+        "codex-rs/exec-server/src/local_process.rs",
+        "codex-rs/exec-server/src/process_sandbox.rs",
+        "codex-rs/linux-sandbox/tests/suite/managed_proxy_unix_sockets_tests.rs",
+        "codex-rs/network-proxy/Cargo.toml",
+        "codex-rs/network-proxy/src/brokered_tunnel_tests.rs",
+        "codex-rs/network-proxy/src/config.rs",
+        "codex-rs/network-proxy/src/executor_os.rs",
+        "codex-rs/network-proxy/src/lib.rs",
+        "codex-rs/network-proxy/src/network_policy.rs",
+        "codex-rs/network-proxy/src/proxy.rs",
+        "codex-rs/network-proxy/src/remote_config_tests.rs",
+        "codex-rs/network-proxy/src/runtime.rs",
+        "codex-rs/network-proxy/src/socket_path.rs",
+        "codex-rs/network-proxy/src/socks5.rs",
+        "codex-rs/network-proxy/src/state.rs",
+        "codex-rs/network-proxy/tests/windows_stable_ingress.rs",
+        "codex-rs/sandboxing/src/manager_tests.rs",
+        "codex-rs/sandboxing/src/seatbelt_tests.rs",
+        "codex-rs/utils/path-uri/src/lib.rs",
+        "codex-rs/utils/path-uri/src/platform.rs",
+        "codex-rs/utils/path-uri/src/platform_tests.rs"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46330,
+      "title": "Move retry backoff into `codex-async-utils`",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:25:41Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "codex-rs/Cargo.lock",
+        "codex-rs/async-utils/Cargo.toml",
+        "codex-rs/async-utils/src/backoff.rs",
+        "codex-rs/async-utils/src/lib.rs",
+        "codex-rs/cloud-config/Cargo.toml",
+        "codex-rs/cloud-config/src/service.rs",
+        "codex-rs/core/src/util.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46303,
+      "title": "Serialize release asset uploads to avoid secondary rate limits",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T21:15:40Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/rust-release.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46278,
+      "title": "Reduce R2 release upload concurrency and enable standard retries",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T18:49:52Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/r2-release.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46302,
+      "title": "Validate network socket policies using the executor OS",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T20:59:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 23,
+      "paths": [
+        "codex-rs/core/src/config/network_config.rs",
+        "codex-rs/core/src/config/network_config_tests.rs",
+        "codex-rs/core/src/config/network_proxy_spec.rs",
+        "codex-rs/core/src/config/network_proxy_spec_tests.rs",
+        "codex-rs/core/src/shell_snapshot_tests.rs",
+        "codex-rs/core/src/tools/network_approval.rs",
+        "codex-rs/core/src/tools/runtimes/mod_tests.rs",
+        "codex-rs/exec-server/src/local_process.rs",
+        "codex-rs/exec-server/src/process_sandbox.rs",
+        "codex-rs/linux-sandbox/tests/suite/managed_proxy_unix_sockets_tests.rs",
+        "codex-rs/network-proxy/src/brokered_tunnel_tests.rs",
+        "codex-rs/network-proxy/src/config.rs",
+        "codex-rs/network-proxy/src/executor_os.rs",
+        "codex-rs/network-proxy/src/lib.rs",
+        "codex-rs/network-proxy/src/network_policy.rs",
+        "codex-rs/network-proxy/src/proxy.rs",
+        "codex-rs/network-proxy/src/remote_config_tests.rs",
+        "codex-rs/network-proxy/src/runtime.rs",
+        "codex-rs/network-proxy/src/socks5.rs",
+        "codex-rs/network-proxy/src/state.rs",
+        "codex-rs/network-proxy/tests/windows_stable_ingress.rs",
+        "codex-rs/sandboxing/src/manager_tests.rs",
+        "codex-rs/sandboxing/src/seatbelt_tests.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46281,
+      "title": "Connect app-server workspace discovery to model request routing",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:12:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 21,
+      "paths": [
+        "codex-rs/app-server/README.md",
+        "codex-rs/app-server/src/config_manager.rs",
+        "codex-rs/app-server/src/config_manager_provider_tests.rs",
+        "codex-rs/app-server/src/message_processor.rs",
+        "codex-rs/app-server/src/request_processors/account_processor.rs",
+        "codex-rs/app-server/src/request_processors/account_processor/workspace_routing.rs",
+        "codex-rs/app-server/src/request_processors/account_processor/workspace_routing_tests.rs",
+        "codex-rs/app-server/tests/common/auth_fixtures.rs",
+        "codex-rs/app-server/tests/suite/v2/account.rs",
+        "codex-rs/app-server/tests/suite/v2/analytics.rs",
+        "codex-rs/app-server/tests/suite/v2/history_notes_extension.rs",
+        "codex-rs/core/src/config/config_tests.rs",
+        "codex-rs/core/src/config/mod.rs",
+        "codex-rs/core/tests/suite/model_provider_requirements_tests.rs",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_async_question_and_answer.snap",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_disabled_executor_skills.snap",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_kickoff_remote_compaction_windows.snap",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_plugin_refresh.snap",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_settings_release_check_tool_shapes.snap",
+        "codex-rs/login/src/auth/manager/workspace_routing.rs",
+        "codex-rs/tui/src/app/tests/daybreak_tests.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46271,
+      "title": "Enable MXC selection through Windows sandbox configuration",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T18:20:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 72,
+      "paths": [
+        "codex-rs/app-server/README.md",
+        "codex-rs/app-server/src/request_processors/command_exec_processor.rs",
+        "codex-rs/app-server/src/request_processors/config_processor.rs",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs",
+        "codex-rs/app-server/src/request_processors/windows_sandbox_processor.rs",
+        "codex-rs/cli/src/doctor/sandbox.rs",
+        "codex-rs/config/src/config_requirements.rs",
+        "codex-rs/config/src/lib.rs",
+        "codex-rs/config/src/types.rs",
+        "codex-rs/core/config.schema.json",
+        "codex-rs/core/src/agents_md_tests.rs",
+        "codex-rs/core/src/config/mod.rs",
+        "codex-rs/core/src/config/windows_sandbox_config.rs",
+        "codex-rs/core/src/config/windows_sandbox_config_tests.rs",
+        "codex-rs/core/src/environment_selection.rs",
+        "codex-rs/core/src/exec.rs",
+        "codex-rs/core/src/exec_tests.rs",
+        "codex-rs/core/src/mcp_tool_call_tests.rs",
+        "codex-rs/core/src/sandbox_tags.rs",
+        "codex-rs/core/src/session/review.rs",
+        "codex-rs/core/src/session/session.rs",
+        "codex-rs/core/src/session/turn_context.rs",
+        "codex-rs/core/src/shell_snapshot_sandbox_tests.rs",
+        "codex-rs/core/src/shell_snapshot_tests.rs",
+        "codex-rs/core/src/thread_manager_tests.rs",
+        "codex-rs/core/src/tools/handlers/apply_patch.rs",
+        "codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs",
+        "codex-rs/core/src/tools/orchestrator.rs",
+        "codex-rs/core/src/tools/runtimes/apply_patch.rs",
+        "codex-rs/core/src/tools/runtimes/apply_patch_tests.rs",
+        "codex-rs/core/src/tools/runtimes/mod_tests.rs",
+        "codex-rs/core/src/tools/runtimes/unified_exec.rs",
+        "codex-rs/core/src/tools/runtimes/zsh_fork/unix_escalation.rs",
+        "codex-rs/core/src/tools/sandboxing.rs",
+        "codex-rs/core/src/tools/sandboxing_tests.rs",
+        "codex-rs/core/src/tools/spec_plan_tests.rs",
+        "codex-rs/core/src/turn_metadata.rs",
+        "codex-rs/core/src/turn_metadata_tests.rs",
+        "codex-rs/core/src/unified_exec/process_manager.rs",
+        "codex-rs/core/src/unified_exec/shell_snapshot.rs",
+        "codex-rs/core/src/unified_exec/stdin_approval.rs",
+        "codex-rs/core/src/unified_exec/stdin_approval_tests.rs",
+        "codex-rs/core/src/windows_sandbox.rs",
+        "codex-rs/core/tests/suite/agent_execution.rs",
+        "codex-rs/core/tests/suite/apply_patch_cli.rs",
+        "codex-rs/core/tests/suite/exec_policy.rs",
+        "codex-rs/core/tests/suite/guardian_review.rs",
+        "codex-rs/core/tests/suite/hooks_executor.rs",
+        "codex-rs/core/tests/suite/mcp_startup_refresh_http_proxy.rs",
+        "codex-rs/core/tests/suite/mcp_tool_exposure.rs",
+        "codex-rs/core/tests/suite/network_approval.rs",
+        "codex-rs/core/tests/suite/remote_env.rs",
+        "codex-rs/core/tests/suite/rmcp_client.rs",
+        "codex-rs/core/tests/suite/shell_snapshot.rs",
+        "codex-rs/core/tests/suite/unified_exec.rs",
+        "codex-rs/core/tests/suite/workspace_roots.rs",
+        "codex-rs/exec-server/src/sandbox_selection.rs",
+        "codex-rs/exec/tests/suite/sandbox.rs",
+        "codex-rs/protocol/src/environment.rs",
+        "codex-rs/protocol/src/lib.rs",
+        "codex-rs/protocol/src/sandbox.rs",
+        "codex-rs/sandboxing/src/manager.rs",
+        "codex-rs/sandboxing/src/manager_tests.rs",
+        "codex-rs/tui/src/app/platform_actions.rs",
+        "codex-rs/tui/src/app/tests/startup.rs",
+        "codex-rs/tui/src/chatwidget/permission_popups.rs",
+        "codex-rs/tui/src/chatwidget/permission_shortcuts.rs",
+        "codex-rs/tui/src/chatwidget/windows_sandbox_prompts.rs",
+        "codex-rs/tui/src/onboarding/onboarding_screen.rs",
+        "codex-rs/tui/src/windows_sandbox.rs",
+        "codex-rs/tui/src/windows_sandbox_tests.rs",
+        "codex-rs/windows-sandbox-service/src/machine_policy.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46179,
+      "title": "Include sender user messages in Guardian delegation reviews",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T10:02:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 22,
+      "paths": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst",
+        "codex-rs/core/src/agent/control.rs",
+        "codex-rs/core/src/agent/control/sender_context.rs",
+        "codex-rs/core/src/agent/control/spawn.rs",
+        "codex-rs/core/src/agent/control_tests.rs",
+        "codex-rs/core/src/context/guardian_sender_messages.rs",
+        "codex-rs/core/src/context/mod.rs",
+        "codex-rs/core/src/context_manager/history.rs",
+        "codex-rs/core/src/hook_runtime.rs",
+        "codex-rs/core/src/session/input_queue.rs",
+        "codex-rs/core/src/session/rollout_reconstruction_tests.rs",
+        "codex-rs/core/src/session/turn_input.rs",
+        "codex-rs/core/tests/suite/guardian_sender_messages_tests.rs",
+        "codex-rs/core/tests/suite/mod.rs",
+        "codex-rs/guardian-context/src/composition.rs",
+        "codex-rs/guardian-context/src/composition_tests.rs",
+        "codex-rs/guardian-context/src/lib.rs",
+        "codex-rs/guardian-context/src/section.rs",
+        "codex-rs/guardian-context/src/sender_user_messages.rs",
+        "codex-rs/history/src/lib.rs",
+        "codex-rs/history/src/retained_context.rs",
+        "codex-rs/history/src/sender_user_messages.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46335,
+      "title": "Keep MCP policy evaluation consistent with turn environments",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:59:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "codex-rs/codex-mcp/src/runtime.rs",
+        "codex-rs/core/src/environment_selection.rs",
+        "codex-rs/core/src/mcp.rs",
+        "codex-rs/core/src/session/environment.rs",
+        "codex-rs/core/src/session/mcp.rs",
+        "codex-rs/core/src/session/mcp_runtime.rs",
+        "codex-rs/core/src/session/mod.rs",
+        "codex-rs/core/src/session/session.rs",
+        "codex-rs/core/src/thread_manager_tests.rs",
+        "codex-rs/core/tests/suite/rmcp_client.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46333,
+      "title": "Handle disabled Windows sandbox accounts during cleanup",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:36:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "codex-rs/windows-sandbox-rs/src/runtime_ownership.rs",
+        "codex-rs/windows-sandbox-rs/src/runtime_ownership_tests.rs",
+        "codex-rs/windows-sandbox-rs/src/uninstall_windows/processes.rs",
+        "codex-rs/windows-sandbox-service/src/package_lifecycle/registered.rs",
+        "codex-rs/windows-sandbox-service/src/registered_runtime.rs",
+        "codex-rs/windows-sandbox-service/src/registered_runtime/removal.rs",
+        "codex-rs/windows-sandbox-service/src/service/runtime_lifecycle.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46332,
+      "title": "Dim conversation recaps in the TUI",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:35:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "codex-rs/tui/src/app/recap_tests.rs",
+        "codex-rs/tui/src/app/snapshots/codex_tui__app__recap__tests__recap_dimmed.snap",
+        "codex-rs/tui/src/history_cell/notices.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46331,
+      "title": "Defer environment network policy validation until after composition",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:27:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "codex-rs/core/src/config/network_config.rs",
+        "codex-rs/core/src/config/network_config_tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46328,
+      "title": "Avoid persisting project trust for projectless directories",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:16:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "codex-rs/app-server/README.md",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs",
+        "codex-rs/app-server/tests/suite/v2/thread_start.rs",
+        "codex-rs/config/src/loader/mod.rs",
+        "codex-rs/config/src/loader/projectless_directory_tests.rs",
+        "codex-rs/config/src/state.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46324,
+      "title": "Broaden compaction fallback to the current model",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:54:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "codex-rs/core/src/compact_model_fallback.rs",
+        "codex-rs/core/tests/suite/compact.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46323,
+      "title": "Record active plugin inventory in turn analytics",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:47:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "codex-rs/analytics/src/analytics_client_tests.rs",
+        "codex-rs/analytics/src/events.rs",
+        "codex-rs/analytics/src/facts.rs",
+        "codex-rs/analytics/src/reducer.rs",
+        "codex-rs/app-server/tests/suite/v2/analytics.rs",
+        "codex-rs/app-server/tests/suite/v2/plugin_reconcile.rs",
+        "codex-rs/app-server/tests/suite/v2/selected_capability_stack.rs",
+        "codex-rs/core/src/session/active_plugin_inventory_tests.rs",
+        "codex-rs/core/src/session/mod.rs",
+        "codex-rs/core/src/session/review.rs",
+        "codex-rs/core/src/session/turn.rs",
+        "codex-rs/core/src/session/turn_context.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46322,
+      "title": "Set the Windows sandbox type in the pending environment test",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:42:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "codex-rs/core/tests/suite/remote_env.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46319,
+      "title": "Preserve web search actions and results in exec JSON output",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:35:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "codex-rs/exec/src/event_processor_with_jsonl_output.rs",
+        "codex-rs/exec/src/exec_events.rs",
+        "codex-rs/exec/tests/event_processor_with_json_output.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46318,
+      "title": "Add OAuth credential management for model provider gateways",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:35:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "codex-rs/login/src/auth/storage_tests.rs",
+        "codex-rs/login/src/gateway_auth.rs",
+        "codex-rs/login/src/gateway_auth_callback.rs",
+        "codex-rs/login/src/gateway_auth_storage.rs",
+        "codex-rs/login/src/gateway_auth_tests.rs",
+        "codex-rs/login/src/gateway_auth_token.rs",
+        "codex-rs/login/src/lib.rs",
+        "codex-rs/login/src/oauth/error.rs",
+        "codex-rs/rmcp-client/src/oauth.rs",
+        "codex-rs/secrets/src/lib.rs",
+        "codex-rs/secrets/src/local.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46310,
+      "title": "Defer environment selection changes until the next turn",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T21:47:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "codex-rs/core/src/agent/control/spawn.rs",
+        "codex-rs/core/src/agent/control_tests.rs",
+        "codex-rs/core/src/codex_thread.rs",
+        "codex-rs/core/src/environment_selection.rs",
+        "codex-rs/core/src/session/environment.rs",
+        "codex-rs/core/src/session/handlers.rs",
+        "codex-rs/core/src/session/mcp_runtime.rs",
+        "codex-rs/core/src/session/mod.rs",
+        "codex-rs/core/src/session/session.rs",
+        "codex-rs/core/src/session/tests.rs",
+        "codex-rs/core/src/session/turn_context.rs",
+        "codex-rs/core/src/session/turn_input_tests.rs",
+        "codex-rs/core/tests/suite/hooks_executor.rs",
+        "codex-rs/core/tests/suite/remote_env.rs",
+        "codex-rs/core/tests/suite/rmcp_client.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46309,
+      "title": "Preserve plugin caches across display metadata refreshes",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T21:35:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "codex-rs/app-server/tests/suite/v2/mcp_resource.rs",
+        "codex-rs/app-server/tests/suite/v2/mcp_resource/plugin_metadata_refresh.rs",
+        "codex-rs/core-plugins/src/lib.rs",
+        "codex-rs/core-plugins/src/manager.rs",
+        "codex-rs/core-plugins/src/manager_tests.rs",
+        "codex-rs/core-plugins/src/remote_metadata.rs",
+        "codex-rs/core-plugins/src/remote_metadata_cache_tests.rs",
+        "codex-rs/core-plugins/src/remote_metadata_tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46306,
+      "title": "Preserve bio policy errors as a distinct non-retryable error",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T21:25:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        "codex-rs/app-server-protocol/schema/precomputed/app-server-exports-stable.json.zst",
+        "codex-rs/app-server-protocol/src/protocol/v2/shared.rs",
+        "codex-rs/app-server-protocol/src/protocol/v2/tests.rs",
+        "codex-rs/cli/src/doctor.rs",
+        "codex-rs/codex-api/src/api_bridge.rs",
+        "codex-rs/codex-api/src/api_bridge_tests.rs",
+        "codex-rs/codex-api/src/error.rs",
+        "codex-rs/codex-api/src/sse/responses.rs",
+        "codex-rs/core/tests/suite/safety_check_downgrade.rs",
+        "codex-rs/ext/guardian-reviewer/src/retry.rs",
+        "codex-rs/ext/guardian-reviewer/src/retry_tests.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/metrics.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/sampler/execution.rs",
+        "codex-rs/protocol/src/error.rs",
+        "codex-rs/protocol/src/protocol.rs",
+        "codex-rs/response-debug-context/src/lib.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46305,
+      "title": "Avoid cloning turn items for app-server active turn lookups",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T21:25:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "codex-rs/app-server/src/bespoke_event_handling.rs",
+        "codex-rs/app-server/src/request_processors/turn_processor.rs",
+        "codex-rs/app-server/src/thread_state.rs",
+        "codex-rs/app-server/tests/suite/v2/turn_interrupt.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46300,
+      "title": "Centralize OAuth login and refresh handling with safer diagnostics",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T20:17:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "codex-rs/login/src/auth/account_user_id_tests.rs",
+        "codex-rs/login/src/auth/manager.rs",
+        "codex-rs/login/src/callback_params.rs",
+        "codex-rs/login/src/callback_params_tests.rs",
+        "codex-rs/login/src/lib.rs",
+        "codex-rs/login/src/oauth/authorization.rs",
+        "codex-rs/login/src/oauth/authorization_tests.rs",
+        "codex-rs/login/src/oauth/client.rs",
+        "codex-rs/login/src/oauth/client_tests.rs",
+        "codex-rs/login/src/oauth/diagnostics.rs",
+        "codex-rs/login/src/oauth/diagnostics_tests.rs",
+        "codex-rs/login/src/oauth/error.rs",
+        "codex-rs/login/src/oauth/error_tests.rs",
+        "codex-rs/login/src/oauth/mod.rs",
+        "codex-rs/login/src/oauth/pkce.rs",
+        "codex-rs/login/src/pkce.rs",
+        "codex-rs/login/src/server.rs",
+        "codex-rs/login/tests/suite/auth_refresh.rs",
+        "codex-rs/login/tests/suite/login_server_e2e.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46297,
+      "title": "Support catalog descriptions for all multi-agent V2 tools",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T20:05:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "codex-rs/core/src/tools/mod.rs",
+        "codex-rs/core/src/tools/multi_agent_tool.rs",
+        "codex-rs/core/src/tools/spec_plan.rs",
+        "codex-rs/core/tests/suite/mod.rs",
+        "codex-rs/core/tests/suite/multi_agent_tool_descriptions.rs",
+        "codex-rs/core/tests/suite/spawn_agent_tool_descriptions.rs",
+        "codex-rs/core/tests/suite/step_settings.rs",
+        "codex-rs/models-manager/src/model_info_tests.rs",
+        "codex-rs/prompts/src/model_messages.rs",
+        "codex-rs/protocol/src/openai_models.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46294,
+      "title": "Separate thread startup metadata from replay history",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:55:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "codex-rs/app-server/src/request_processors/thread_lifecycle.rs",
+        "codex-rs/app-server/src/request_processors/thread_processor.rs",
+        "codex-rs/app-server/src/request_processors/turn_processor.rs",
+        "codex-rs/core/src/codex_thread.rs",
+        "codex-rs/core/src/lib.rs",
+        "codex-rs/core/src/thread_manager.rs",
+        "codex-rs/core/src/thread_startup_metadata.rs",
+        "codex-rs/core/tests/suite/guardian_checkpoint_migration_tests.rs",
+        "codex-rs/core/tests/suite/guardian_retained_context.rs",
+        "codex-rs/core/tests/suite/resume.rs",
+        "codex-rs/ext/queue/src/service.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46293,
+      "title": "Route skill discovery and loading through `EnvironmentAccess`",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:52:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "codex-rs/ext/skills/src/loader/discovery.rs",
+        "codex-rs/ext/skills/src/loader/discovery_tests.rs",
+        "codex-rs/ext/skills/src/loader/environment.rs",
+        "codex-rs/ext/skills/src/loader/environment_io_tests.rs",
+        "codex-rs/ext/skills/src/loader/environment_tests.rs",
+        "codex-rs/ext/skills/src/loader/host.rs",
+        "codex-rs/ext/skills/src/loader/namespace.rs",
+        "codex-rs/ext/skills/src/loader/namespace_tests.rs",
+        "codex-rs/ext/skills/src/provider/executor.rs",
+        "codex-rs/utils/plugins/src/plugin_namespace.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46292,
+      "title": "Preserve selected reasoning effort for synchronous Guardian reviews",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:44:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "codex-rs/core/src/client.rs",
+        "codex-rs/core/src/session/reasoning_effort.rs",
+        "codex-rs/core/src/session/reasoning_effort_tests.rs",
+        "codex-rs/core/tests/suite/reasoning_effort_override.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46291,
+      "title": "Filter saved reasoning overrides from requests when disabled",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:43:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "codex-rs/core/src/client.rs",
+        "codex-rs/core/src/client_tests.rs",
+        "codex-rs/core/src/session/session.rs",
+        "codex-rs/core/src/session/tests.rs",
+        "codex-rs/core/tests/responses_headers.rs",
+        "codex-rs/core/tests/suite/client.rs",
+        "codex-rs/core/tests/suite/client_websockets.rs",
+        "codex-rs/core/tests/suite/reasoning_effort_override.rs",
+        "codex-rs/memories/write/src/runtime.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46288,
+      "title": "Add opt-in overhead timing to code-mode responses",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:34:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "codex-rs/app-server/tests/suite/v2/code_mode_host.rs",
+        "codex-rs/config/src/merge.rs",
+        "codex-rs/config/src/merge_tests.rs",
+        "codex-rs/core/config.schema.json",
+        "codex-rs/core/src/config/config_tests.rs",
+        "codex-rs/core/src/config/mod.rs",
+        "codex-rs/core/src/tools/code_mode/execute_handler.rs",
+        "codex-rs/core/src/tools/code_mode/mod.rs",
+        "codex-rs/core/src/tools/code_mode/output.rs",
+        "codex-rs/core/src/tools/code_mode/output_tests.rs",
+        "codex-rs/core/src/tools/code_mode/wait_handler.rs",
+        "codex-rs/core/src/tools/parallel.rs",
+        "codex-rs/core/src/tools/registry.rs",
+        "codex-rs/core/tests/common/context_snapshot/context_snapshot_tests.rs",
+        "codex-rs/core/tests/common/context_snapshot/normalize.rs",
+        "codex-rs/core/tests/suite/scenarios.rs",
+        "codex-rs/core/tests/suite/snapshots/all__suite__scenarios__astra_code_mode_call_timing.snap",
+        "codex-rs/features/src/feature_configs.rs",
+        "codex-rs/tools/src/tool_output.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46279,
+      "title": "Preserve Guardian's reusable history prefix across approval requests",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T18:56:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "codex-rs/app-server/tests/suite/v2/guardian_v2.rs",
+        "codex-rs/guardian-context/src/composition.rs",
+        "codex-rs/guardian-context/tests/cache_prefix.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46268,
+      "title": "Add filesystem accessors bound to environment permissions",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T17:59:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "codex-rs/exec-server/src/environment.rs",
+        "codex-rs/exec-server/src/lib.rs",
+        "codex-rs/exec-server/tests/file_system/shared.rs",
+        "codex-rs/file-system/src/environment_accessor.rs",
+        "codex-rs/file-system/src/lib.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46266,
+      "title": "Expand Unicode math rendering with accents, symbols, and delimiters",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T17:49:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "codex-rs/tui/src/markdown_render/math/render.rs",
+        "codex-rs/tui/src/markdown_render/math_display_tests.rs",
+        "codex-rs/tui/src/markdown_render/math_tests.rs",
+        "codex-rs/tui/src/markdown_render/snapshots/codex_tui__markdown_render__math__display_tests__unicode_math_schrodinger_equation_snapshot.snap",
+        "codex-rs/tui/src/markdown_render/snapshots/codex_tui__markdown_render__math__tests__unicode_math_accents_and_symbols_snapshot.snap",
+        "codex-rs/tui/src/markdown_render/snapshots/codex_tui__markdown_render__math__tests__unicode_math_named_delimiters_snapshot.snap"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46264,
+      "title": "Relax delegation guidance in the v2 `spawn_agent` description",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T17:36:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "codex-rs/core/src/tools/handlers/multi_agents_spec.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46258,
+      "title": "Preserve uploaded image file IDs in user message display history",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T17:17:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "codex-rs/core/src/session/inject.rs",
+        "codex-rs/core/src/session/mod.rs",
+        "codex-rs/core/tests/suite/image_rollout.rs",
+        "codex-rs/protocol/src/models.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46245,
+      "title": "Publish Guardian cached scores and coverage atomically",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T16:06:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "codex-rs/core/tests/common/test_codex.rs",
+        "codex-rs/core/tests/suite/guardian_cached_score_tests.rs",
+        "codex-rs/core/tests/suite/mod.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/approval.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/budget_tests.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/classification.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/extension.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/extension_tests.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/observation.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/score.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/score_tests.rs",
+        "codex-rs/ext/guardian-v2/src/async_scorer/wrapper_lag.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46241,
+      "title": "Repair Windows sandbox access to existing runtime children",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T15:44:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "codex-rs/windows-sandbox-rs/src/acl.rs",
+        "codex-rs/windows-sandbox-rs/src/setup_provisioning/setup_runtime_bin.rs",
+        "codex-rs/windows-sandbox-rs/src/setup_provisioning/setup_runtime_bin_tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46239,
+      "title": "Prefer the provisioning service for automatic Windows sandbox setup",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T15:35:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "codex-rs/windows-sandbox-rs/src/identity.rs",
+        "codex-rs/windows-sandbox-rs/src/identity_integration_tests.rs",
+        "codex-rs/windows-sandbox-rs/src/provisioning_client.rs",
+        "codex-rs/windows-sandbox-rs/src/provisioning_client_tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46237,
+      "title": "Improve Windows sandbox error details and registry cleanup",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T15:28:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "codex-rs/windows-sandbox-rs/src/runtime_ownership.rs",
+        "codex-rs/windows-sandbox-service/src/ipc.rs",
+        "codex-rs/windows-sandbox-service/src/ipc_tests.rs",
+        "codex-rs/windows-sandbox-service/src/provisioning/registered.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46230,
+      "title": "Preserve configured Flex tiers without catalog or fast-mode support",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T14:47:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "codex-rs/core/src/client.rs",
+        "codex-rs/core/src/session/mod.rs",
+        "codex-rs/core/src/session/tests.rs",
+        "codex-rs/core/tests/suite/client.rs",
+        "codex-rs/core/tests/suite/model_switching.rs",
+        "codex-rs/core/tests/suite/review.rs",
+        "codex-rs/protocol/src/openai_models.rs",
+        "codex-rs/tui/src/app_server_session.rs",
+        "codex-rs/tui/src/chatwidget/tests/slash_commands.rs",
+        "codex-rs/tui/src/service_tier_resolution.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 46126,
+      "title": "Record daemon startup and update telemetry with consent handling",
+      "author": "app/copyberry",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T05:26:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "codex-rs/app-server-daemon/src/backend/pid_start.rs",
+        "codex-rs/app-server-daemon/src/lib.rs",
+        "codex-rs/app-server-daemon/src/settings.rs",
+        "codex-rs/app-server-daemon/src/settings_tests.rs",
+        "codex-rs/app-server-daemon/src/telemetry.rs",
+        "codex-rs/cli/src/daemon_telemetry.rs",
+        "codex-rs/cli/src/main.rs",
+        "codex-rs/cli/tests/daemon_telemetry.rs",
+        "codex-rs/cli/tests/worktree.rs",
+        "codex-rs/tui/src/daemon_startup_tests.rs",
+        "codex-rs/tui/src/daemon_telemetry.rs",
+        "codex-rs/tui/src/lib.rs",
+        "codex-rs/tui/src/startup_orchestration.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:50.784Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 46330,
+      "forkPr": 25,
+      "branch": "chore/update-zqy",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "608e4cc9a132c2aa7754b10585d88ca34182d741",
+      "headSha": "ff73d63e64e2d4c728cf9d17ce0fc1366f72e865",
+      "forkHeadSha": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+      "firstSha": "9320fbc0f7a164a9776da161f45e9a72678851d1",
+      "transition": null,
+      "record": "fork-workflow",
+      "ecosystem": "cargo",
+      "state": "pending",
+      "openedAt": "2026-09-18T16:57:21.285Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 25,
+      "card": "out/codex/pr-25-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+      "previousSha": "9320fbc0f7a164a9776da161f45e9a72678851d1",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:47.886Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
