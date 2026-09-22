@@ -335,6 +335,32 @@ establish a current share-gate result. Every observation and its available
 ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
 See [workspace.md](workspace.md) for the planner and HTTP interface.
 
+## 7. Public viewer entrypoint
+
+```sh
+node server.mjs
+```
+
+The landing page offers:
+
+```text
+Open a GitHub PR to inspect its recorded runtime evidence.
+Public evidence viewer · recording runs in the local harness.
+```
+
+A configured upstream PR without a record directs the next action to:
+
+```text
+Prepare a replay in the local harness.
+This viewer reads public evidence. Use the local harness to prepare and record a new replay on your fork.
+```
+
+The local HTTP checks return `runnerAvailable: false` and `canPrepare: false`.
+Both preparation and Start POSTs return 405, including with valid local-origin
+and intent headers. A separate test supplies ambient GitHub credentials and
+checks that public lookups omit authorization. These checks verify the entrypoint
+locally; they do not establish a deployed Vercel URL.
+
 ## Preserving the selected base's Dependabot policy
 
 Read-only CLI probe on 2026-09-11, after the five-prospect corrections:

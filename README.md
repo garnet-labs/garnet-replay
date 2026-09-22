@@ -127,6 +127,11 @@ authentication and isolated workers.
 See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
 and the HTTP interface.
 
+For a public evidence viewer, `node server.mjs` starts the Vercel-compatible
+entrypoint. It serves saved evidence and anonymous GitHub receipt lookups;
+preparation and recording stay in the local harness. See
+[hosting](docs/workspace.md#host-the-public-evidence-viewer) for deployment limits.
+
 ## Supported ecosystems
 
 Three layers, and only one of them is tied to a package manager:
