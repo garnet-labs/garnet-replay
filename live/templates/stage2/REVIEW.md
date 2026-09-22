@@ -2,9 +2,11 @@
 
 The PR description contains a `Runtime evidence (Garnet)` section between
 `<!-- garnet:evidence:begin -->` and `<!-- garnet:evidence:end -->`. When it
-contains a head-bound record, the section is a verbatim mirror of the trusted
-Garnet Runtime Review comment. Treat that record as ground truth of what the
-recorded run observed, then cross-check it against what the diff implies.
+contains a head-bound record, the section is a stamped copy of the trusted
+Garnet Runtime Review comment (it names the recorded time and job count it
+copied; the comment stays the source of truth and gains jobs as they finish).
+Treat that record as ground truth of what the recorded run observed, then
+cross-check it against what the diff implies.
 
 ## Grounding rules
 
@@ -33,7 +35,7 @@ recorded run observed, then cross-check it against what the diff implies.
    Execution Profile URL when one is present.
 
 The mirror is delivery, not a summary. Do not paraphrase or dilute the
-verbatim evidence region.
+copied evidence region.
 
 ## Public machine surface
 

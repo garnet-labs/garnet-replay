@@ -14,6 +14,8 @@ import { pathToFileURL } from "node:url";
  * Missing, stale or third-party evidence is failure. Nothing here judges the
  * pull request.
  * Required environment: GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA.
+ * Optional: GARNET_RECORD_WORKFLOWS (JSON array of recorder workflow names; while
+ * any of them is still running on the head the check stays in progress).
  * Optional environment: GITHUB_API_URL, GITHUB_SERVER_URL, GITHUB_RUN_ID.
  */
 const RUNTIME_REVIEW_MARKER = "<!-- garnet-runtime-review -->"
@@ -95,6 +97,46 @@ export function evidenceStateFor(comments, head) {
 }
 
 /**
+ * Recorder workflow runs on this head that are not finished yet. A finalized
+ * record from one recorder says nothing about the others; while any listened
+ * recorder is still running the reading stays pending.
+ * @param {{name?: string, status?: string}[]} runs workflow runs for the head
+ * @param {string[]} recorderNames workflow names the gate listens to
+ * @returns {string[]} names of unfinished recorder runs
+ */
+export function unsettledRecorders(runs, recorderNames) {
+  const names = Array.isArray(recorderNames) ? recorderNames : []
+  return (Array.isArray(runs) ? runs : [])
+    .filter((run) => typeof run?.name === "string" && names.includes(run.name) && run.status !== "completed")
+    .map((run) => run.name)
+}
+
+/**
+ * The reading once recorder completeness is known: success only when every
+ * listened recorder run on the head has finished.
+ * @param {ReturnType<typeof evidenceStateFor>} reading
+ * @param {string[]} unsettled from `unsettledRecorders`
+ * @param {string} head
+ * @returns {ReturnType<typeof evidenceStateFor>}
+ */
+export function withRecorderCompleteness(reading, unsettled, head) {
+  if (reading.state !== "success" || unsettled.length === 0) return reading
+  const sha7 = head.slice(0, 7)
+  return { state: "pending", summary: `A record is bound to head ${sha7} but ${unsettled.length} recorder run${unsettled.length === 1 ? " is" : "s are"} still running (${[...new Set(unsettled)].join(", ")}). Capture is not complete until they finish.`, recorded: reading.recorded, jobs: reading.jobs }
+}
+
+/**
+ * @param {string|undefined} raw GARNET_RECORD_WORKFLOWS, a JSON array of workflow names
+ * @returns {string[]}
+ */
+export function parseRecorderNames(raw) {
+  if (typeof raw !== "string" || raw.trim() === "") return []
+  const parsed = JSON.parse(raw)
+  if (!Array.isArray(parsed) || parsed.some((name) => typeof name !== "string")) throw new Error("GARNET_RECORD_WORKFLOWS must be a JSON array of workflow names")
+  return parsed
+}
+
+/**
  * The check-run body to publish for one reading.
  * @param {{state: "success"|"pending"|"failure", summary: string}} reading
  * @param {string} head
@@ -140,7 +182,9 @@ async function main() {
     console.log(`PR head moved (${pr.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not publishing a check for a stale head.`)
     return
   }
-  const reading = evidenceStateFor(await listComments(), headSha)
+  const recorders = parseRecorderNames(process.env.GARNET_RECORD_WORKFLOWS)
+  const runsPage = recorders.length === 0 ? null : await github(`/repos/${repo}/actions/runs?head_sha=${headSha}&per_page=100`)
+  const reading = withRecorderCompleteness(evidenceStateFor(await listComments(), headSha), unsettledRecorders(runsPage?.workflow_runs, recorders), headSha)
   const server = process.env.GITHUB_SERVER_URL || "https://github.com"
   const detailsUrl = process.env.GITHUB_RUN_ID ? `${server}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}` : null
   const payload = checkRunPayload(reading, headSha, detailsUrl)

@@ -11,10 +11,10 @@ import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
 import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
-import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
+import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
-import { alreadyPublished, checkRunPayload, evidenceStateFor } from "../live/templates/stage2/garnet-evidence-gate.mjs"
+import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
 import { keepUat, uat } from "../lib/commands.mjs"
@@ -1277,6 +1277,29 @@ test("consume: the funnel records delivery, visibility, re-request, attention, g
   assert.equal(preRecordOnly.funnel.delivered, true)
   assert.equal(preRecordOnly.funnel.attention, false, "a receipt written before the record is not attention to it")
   assert.equal(preRecordOnly.funnel.grounded, false)
+
+  const staleReview = evaluateConsumption({
+    pr, comments: [record],
+    reviews: [{ user: { login: "greptile[bot]" }, state: "COMMENTED", commit_id: SHA_A, submitted_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new outbound connection.` }],
+  })
+  assert.equal(staleReview.consumed, false, "a review on an older commit does not consume")
+  assert.equal(staleReview.funnel.grounded, false, "grounded follows the consumer rule: the review commit must be on the head")
+  assert.deepEqual(staleReview.funnel.consumedHow, [])
+  assert.equal(staleReview.funnel.attention, true, "the reviewer did write after the record")
+
+  const diffOnly = evaluateConsumption({
+    pr, comments: [record, { id: 3, user: { login: "greptile[bot]" }, created_at: "2026-09-20T12:30:00Z", body: "Lockfile drift: the `pnpm-lock.yaml` change is unrelated to the manifest bump." }],
+  })
+  assert.equal(diffOnly.receipts.length, 0)
+  assert.equal(diffOnly.funnel.attention, true, "a reviewer response with no runtime receipt is attention without grounding")
+  assert.equal(diffOnly.funnel.grounded, false)
+  assert.equal(diffOnly.funnel.observation, false)
+
+  const priorDestination = evaluateConsumption({
+    pr, comments: [record, { id: 4, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "The installer talks to storage.googleapis.com during postinstall." }],
+  })
+  assert.equal(priorDestination.funnel.observation, false, "a destination named before the record existed is not an observation of it")
+  assert.equal(priorDestination.funnel.attention, false)
 })
 
 test("uat: manual fields are written by `replay uat` only, survive a re-check of the same head, and reset on a new head", () => {
@@ -1688,14 +1711,50 @@ test("re-review script: one comment carries every mention and the per-head lock;
   assert.deepEqual(parseWorkflowReviewers(""), [])
   assert.throws(() => parseWorkflowReviewers("sonar"), /unknown reviewer 'sonar'/)
   for (const name of REVIEWERS) assert.ok(name in MENTIONS || API_REVIEWERS.includes(name), `${name} has a request path in the workflow script`)
-  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40)
+  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40, ["devin"])
   assert.ok(body.startsWith(rereviewMarker(HEAD40)))
   assert.match(body, /^@coderabbitai review$/m)
   assert.match(body, /^@greptileai review$/m)
   assert.match(body, /Review requested through the API: devin\./)
+  assert.doesNotMatch(body, /Not requested/)
   assert.match(body, /head `aaaaaaa`/)
+  assert.match(body, /Runtime evidence \(Garnet, head aaaaaaa\):/, "the comment carries the grounding ask inline")
+  assert.match(body, /garnet:evidence:begin/)
   assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
-  const apiOnly = renderRequestComment(["copilot"], HEAD40)
+  const skipped = renderRequestComment(["devin", "greptile"], HEAD40, [])
+  assert.doesNotMatch(skipped, /requested through the API/, "a request that was not sent is never reported as sent")
+  assert.match(skipped, /Not requested \(repository secret absent\): devin\./)
+  const apiOnly = renderRequestComment(["copilot"], HEAD40, ["copilot"])
   assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
   assert.doesNotMatch(apiOnly, /^@/m)
+})
+
+test("stage2 gate: a finalized record stays pending while any listened recorder run on the head is unfinished", () => {
+  const recorders = ["Install", "Prettier"]
+  const runs = [
+    { name: "Install", status: "completed" },
+    { name: "Prettier", status: "in_progress" },
+    { name: "Lint", status: "queued" },
+  ]
+  assert.deepEqual(unsettledRecorders(runs, recorders), ["Prettier"], "non-recorder workflows do not count")
+  assert.deepEqual(unsettledRecorders(runs, []), [])
+  const success = { state: "success", summary: "ok", recorded: "2026-09-20T12:00:00Z", jobs: 2 }
+  const held = withRecorderCompleteness(success, ["Prettier"], HEAD40)
+  assert.equal(held.state, "pending")
+  assert.match(held.summary, /1 recorder run is still running \(Prettier\)/)
+  assert.equal(held.jobs, 2, "what the record said is kept")
+  assert.equal(checkRunPayload(held, HEAD40, null).status, "in_progress")
+  assert.deepEqual(withRecorderCompleteness(success, [], HEAD40), success)
+  const failure = { state: "failure", summary: "none", recorded: null, jobs: null }
+  assert.deepEqual(withRecorderCompleteness(failure, ["Prettier"], HEAD40), failure, "a missing record is failure regardless of running recorders")
+  assert.deepEqual(parseRecorderNames('["Install","Prettier"]'), recorders)
+  assert.deepEqual(parseRecorderNames(undefined), [])
+  assert.throws(() => parseRecorderNames('{"a":1}'), /JSON array/)
+})
+
+test("verify: the fork's re-review lock comment is not session residue, other comments still are", () => {
+  const lock = `<!-- garnet:rereview ${SHA_B} -->\n@greptileai review\nNot requested (repository secret absent): devin.`
+  assert.equal(findResidue("routine body", [lock]), null)
+  assert.equal(findResidue("routine body", [lock, "Reviewed by Devin"]), "Devin")
+  assert.equal(findResidue("see app.devin.ai/x", [lock]), "app.devin.ai")
 })

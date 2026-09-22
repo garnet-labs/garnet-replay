@@ -18,6 +18,13 @@ on: # zizmor: ignore[dangerous-triggers] default branch only, no pull request co
 
 permissions: {}
 
+# One run at a time: several recorders and several comment edits fire for one
+# head, and the per-head lock is a comment, not an atomic write. Nothing is
+# cancelled once it started.
+concurrency:
+  group: garnet-evidence-mirror
+  cancel-in-progress: false
+
 jobs:
   mirror:
     name: Mirror head-bound record into the description
@@ -31,6 +38,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      actions: read
       checks: write
       pull-requests: write
     env:
@@ -39,6 +47,7 @@ jobs:
       EVENT_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
       EVENT_PR_NUMBER: ${{ github.event.issue.number }}
       GARNET_REVIEWERS: "{{REVIEWERS}}"
+      GARNET_RECORD_WORKFLOWS: '{{RECORD_WORKFLOWS_JSON}}'
       DEVIN_API_TOKEN: ${{ secrets.DEVIN_API_TOKEN }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

@@ -152,20 +152,27 @@ export function alreadyRequestedFor(comments, head) {
 
 /**
  * The single comment that re-triggers every mention-driven reviewer and holds
- * the per-head lock for API-driven ones.
- * @param {string[]} reviewers
+ * the per-head lock for API-driven ones. It states only what happened: the
+ * mentions it carries and the API requests that were actually sent; a request
+ * skipped for a missing secret is named as skipped, never as requested.
+ * @param {string[]} reviewers configured reviewers
  * @param {string} head
+ * @param {string[]} requested API reviewers whose request was sent
  * @returns {string}
  */
-export function renderRequestComment(reviewers, head) {
+export function renderRequestComment(reviewers, head, requested) {
+  const sha7 = head.slice(0, 7)
   const lines = reviewers.filter((name) => name in MENTIONS).map((name) => MENTIONS[name])
-  const requested = reviewers.filter((name) => API_REVIEWERS.includes(name))
+  const sent = reviewers.filter((name) => API_REVIEWERS.includes(name) && requested.includes(name))
+  const skipped = reviewers.filter((name) => API_REVIEWERS.includes(name) && !requested.includes(name))
   return [
     rereviewMarker(head),
     ...lines,
-    ...(requested.length > 0 ? [`Review requested through the API: ${requested.join(", ")}.`] : []),
+    ...(sent.length > 0 ? [`Review requested through the API: ${sent.join(", ")}.`] : []),
+    ...(skipped.length > 0 ? [`Not requested (repository secret absent): ${skipped.join(", ")}.`] : []),
     "",
-    `Runtime evidence for head \`${head.slice(0, 7)}\` is bound to this pull request; requesting review again so it is read with the record present. See REVIEW.md.`,
+    `Runtime evidence for head \`${sha7}\` is bound to this pull request; requesting review again so it is read with the record present.`,
+    `The record is in the description between \`<!-- garnet:evidence:begin -->\` and \`<!-- garnet:evidence:end -->\`. When its \`garnet:commit\` equals \`${sha7}\`, prefix each runtime-grounded statement with \`Runtime evidence (Garnet, head ${sha7}):\` and name the job and destination it shows; otherwise say the runtime evidence is undeterminable. Judgment stays with you; the record is evidence, not a verdict. See REVIEW.md.`,
   ].join("\n")
 }
 
@@ -175,13 +182,14 @@ async function requestCopilot(prUrl) {
     body: JSON.stringify({ reviewers: ["copilot-pull-request-reviewer[bot]"] }),
   })
   console.log(`requested Copilot code review on ${prUrl}`)
+  return true
 }
 
 async function requestDevin(prUrl) {
   const token = process.env.DEVIN_API_TOKEN
   if (typeof token !== "string" || token === "") {
     console.log("devin: DEVIN_API_TOKEN is not set; a Devin review was not requested (repository secret required).")
-    return
+    return false
   }
   // The API reviews the pull request's current head; the caller checked it equals HEAD_SHA just before.
   const base = process.env.DEVIN_API_URL || "https://api.devin.ai"
@@ -192,6 +200,7 @@ async function requestDevin(prUrl) {
   })
   if (!res.ok) throw new Error(`devin: POST /v3/enterprise/pr-reviews: ${res.status}`)
   console.log(`requested Devin review on ${prUrl}`)
+  return true
 }
 
 async function main() {
@@ -227,11 +236,17 @@ async function main() {
     console.log(`PR head moved while waiting (${current.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
     return
   }
-  if (reviewers.includes("copilot")) await requestCopilot(pr.html_url)
-  if (reviewers.includes("devin")) await requestDevin(pr.html_url)
-  const body = renderRequestComment(reviewers, headSha)
+  if (alreadyRequestedFor(await listComments(), headSha)) {
+    console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
+    return
+  }
+  const requested = []
+  if (reviewers.includes("copilot") && await requestCopilot(pr.html_url)) requested.push("copilot")
+  if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
+  const body = renderRequestComment(reviewers, headSha, requested)
   await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
-  console.log(`posted one re-review request for head ${headSha.slice(0, 7)}: ${reviewers.join(", ")}`)
+  const mentioned = reviewers.filter((name) => name in MENTIONS)
+  console.log(`posted one re-review request for head ${headSha.slice(0, 7)}: mentioned ${mentioned.join(", ") || "none"}; API requested ${requested.join(", ") || "none"}`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main()
