@@ -5747,25 +5747,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3991549604,
-          "url": "https://github.com/garnet-labs/posthog/pull/203#discussion_r3991549604",
-          "at": "2026-09-11T17:03:18Z",
-          "commit": "d7edcbd",
-          "onHead": false,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"#\"><img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\"></a> <a href=\"#\"><img alt=\"security\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Security.svg?v=2\" align=\"top\">..."
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-203-consume.json",
-      "checkedAt": "2026-09-22T17:15:35.749Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-203-consume.json",
+      "checkedAt": "2026-09-22T17:29:42.975Z"
     },
     {
       "forkPr": 202,
@@ -5781,16 +5767,14 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-202-consume.json",
-      "checkedAt": "2026-09-22T17:15:43.287Z"
+      "raw": "out/posthog/pr-202-consume.json",
+      "checkedAt": "2026-09-22T17:29:49.731Z"
     },
     {
       "forkPr": 201,
       "headSha": "863b41b95d818ab113fb8874917a17dc8fcbb2d8",
       "consumed": false,
-      "consumers": [
-        "greptile-apps[bot] (comment)"
-      ],
+      "consumers": [],
       "mirror": false,
       "recordBound": false,
       "signals": {
@@ -5822,15 +5806,16 @@
           "commit": "863b41b",
           "onHead": true,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
-            "head 863b41b"
+            "head 863b41b",
+            "reports no evidence"
           ],
           "excerpt": "**[Evidence from the check](https://app.greptile.com/trex/artifacts/2556e975-0fc0-42f9-b886-a70b1a77cb41)**"
         }
       ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-201-consume.json",
-      "checkedAt": "2026-09-22T17:15:50.940Z"
+      "raw": "out/posthog/pr-201-consume.json",
+      "checkedAt": "2026-09-22T17:29:57.447Z"
     },
     {
       "forkPr": 200,
@@ -5843,48 +5828,9 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 4
+        "mention": 1
       },
       "receipts": [
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3983928031,
-          "url": "https://github.com/garnet-labs/posthog/pull/200#discussion_r3983928031",
-          "at": "2026-09-10T22:07:54Z",
-          "commit": "101817f",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "A same-repository pull request can modify this workflow and still pass the repository-name check. That pull-request-controlled job receives `GARNET_API_TOKEN` and checks out pull-request-derived content, so a contributor who can create a..."
-        },
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3983928036,
-          "url": "https://github.com/garnet-labs/posthog/pull/200#discussion_r3983928036",
-          "at": "2026-09-10T22:07:54Z",
-          "commit": "101817f",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "This workflow invokes `control/.github/scripts/garnet-dependabot-record.mjs`, but that file exists in neither this change nor its base revision. The initial `images` command fails with a missing-module error before it can produce the mat..."
-        },
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3983928039,
-          "url": "https://github.com/garnet-labs/posthog/pull/200#discussion_r3983928039",
-          "at": "2026-09-10T22:07:54Z",
-          "commit": "101817f",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "This job runs `actions/checkout@v4` and `actions/setup-go@v5` through mutable major-version tags while also supplying `GARNET_API_TOKEN`. If either tag changes or is compromised, different code can execute in a runner that receives the t..."
-        },
         {
           "kind": "review-comment",
           "login": "greptile-apps[bot]",
@@ -5899,8 +5845,8 @@
           "excerpt": "These comments name an internal approval agent and describe how it consumes security-sensitive runtime evidence. This violates the repository directive not to publish internal-only systems or security-sensitive implementation details. Re..."
         }
       ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-200-consume.json",
-      "checkedAt": "2026-09-22T17:15:55.673Z"
+      "raw": "out/posthog/pr-200-consume.json",
+      "checkedAt": "2026-09-22T17:30:02.183Z"
     },
     {
       "forkPr": 199,
@@ -5916,8 +5862,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-199-consume.json",
-      "checkedAt": "2026-09-22T17:16:00.411Z"
+      "raw": "out/posthog/pr-199-consume.json",
+      "checkedAt": "2026-09-22T17:30:06.374Z"
     },
     {
       "forkPr": 198,
@@ -5933,8 +5879,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-198-consume.json",
-      "checkedAt": "2026-09-22T17:16:10.284Z"
+      "raw": "out/posthog/pr-198-consume.json",
+      "checkedAt": "2026-09-22T17:30:15.985Z"
     },
     {
       "forkPr": 197,
@@ -5950,8 +5896,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-197-consume.json",
-      "checkedAt": "2026-09-22T17:16:15.185Z"
+      "raw": "out/posthog/pr-197-consume.json",
+      "checkedAt": "2026-09-22T17:30:20.454Z"
     },
     {
       "forkPr": 193,
@@ -5964,39 +5910,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 2
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 5037439700,
-          "url": "https://github.com/garnet-labs/posthog/pull/193#pullrequestreview-5037439700",
-          "at": "2026-08-27T05:12:59Z",
-          "commit": "b56a77a",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "Not posted on this PR by your GitHub settings — view it in Devin Review. ([Configure](https://app.devin.ai/org/garnet-labs/settings/review))",
-          "state": "commented"
-        },
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3868913916,
-          "url": "https://github.com/garnet-labs/posthog/pull/193#discussion_r3868913916",
-          "at": "2026-08-27T05:14:59Z",
-          "commit": "b56a77a",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "**File Used:** `AGENTS.md` ([source](https://github.com/garnet-labs/posthog/blob/b56a77a4a4eb4451354954c06a17a3516289d1de/AGENTS.md))"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-193-consume.json",
-      "checkedAt": "2026-09-22T17:16:20.905Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-193-consume.json",
+      "checkedAt": "2026-09-22T17:30:26.483Z"
     },
     {
       "forkPr": 192,
@@ -6009,26 +5927,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 5037396357,
-          "url": "https://github.com/garnet-labs/posthog/pull/192#pullrequestreview-5037396357",
-          "at": "2026-08-27T05:03:31Z",
-          "commit": "b8ca315",
-          "onHead": false,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/192\" target=\"_blank\">",
-          "state": "commented"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-192-consume.json",
-      "checkedAt": "2026-09-22T17:16:26.979Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-192-consume.json",
+      "checkedAt": "2026-09-22T17:30:31.956Z"
     },
     {
       "forkPr": 191,
@@ -6044,8 +5947,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-191-consume.json",
-      "checkedAt": "2026-09-22T17:16:32.729Z"
+      "raw": "out/posthog/pr-191-consume.json",
+      "checkedAt": "2026-09-22T17:30:37.492Z"
     },
     {
       "forkPr": 188,
@@ -6058,26 +5961,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 4999396184,
-          "url": "https://github.com/garnet-labs/posthog/pull/188#pullrequestreview-4999396184",
-          "at": "2026-08-22T06:50:35Z",
-          "commit": "51f035c",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/188\" target=\"_blank\">",
-          "state": "commented"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-188-consume.json",
-      "checkedAt": "2026-09-22T17:16:35.068Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-188-consume.json",
+      "checkedAt": "2026-09-22T17:30:39.595Z"
     },
     {
       "forkPr": 187,
@@ -6090,26 +5978,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 5037504406,
-          "url": "https://github.com/garnet-labs/posthog/pull/187#pullrequestreview-5037504406",
-          "at": "2026-08-27T05:26:09Z",
-          "commit": "0bce48b",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/187\" target=\"_blank\">",
-          "state": "commented"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-187-consume.json",
-      "checkedAt": "2026-09-22T17:16:37.291Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-187-consume.json",
+      "checkedAt": "2026-09-22T17:30:41.729Z"
     },
     {
       "forkPr": 186,
@@ -6122,26 +5995,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 5145538347,
-          "url": "https://github.com/garnet-labs/posthog/pull/186#pullrequestreview-5145538347",
-          "at": "2026-09-08T18:29:12Z",
-          "commit": "9627308",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/186\" target=\"_blank\">",
-          "state": "commented"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-186-consume.json",
-      "checkedAt": "2026-09-22T17:16:39.539Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-186-consume.json",
+      "checkedAt": "2026-09-22T17:30:43.721Z"
     },
     {
       "forkPr": 185,
@@ -6157,8 +6015,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-185-consume.json",
-      "checkedAt": "2026-09-22T17:16:41.437Z"
+      "raw": "out/posthog/pr-185-consume.json",
+      "checkedAt": "2026-09-22T17:30:45.608Z"
     },
     {
       "forkPr": 184,
@@ -6174,8 +6032,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-184-consume.json",
-      "checkedAt": "2026-09-22T17:16:43.507Z"
+      "raw": "out/posthog/pr-184-consume.json",
+      "checkedAt": "2026-09-22T17:30:47.643Z"
     },
     {
       "forkPr": 183,
@@ -6191,8 +6049,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-183-consume.json",
-      "checkedAt": "2026-09-22T17:16:45.798Z"
+      "raw": "out/posthog/pr-183-consume.json",
+      "checkedAt": "2026-09-22T17:30:49.790Z"
     },
     {
       "forkPr": 182,
@@ -6208,8 +6066,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-182-consume.json",
-      "checkedAt": "2026-09-22T17:16:48.258Z"
+      "raw": "out/posthog/pr-182-consume.json",
+      "checkedAt": "2026-09-22T17:30:51.743Z"
     },
     {
       "forkPr": 181,
@@ -6225,8 +6083,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-181-consume.json",
-      "checkedAt": "2026-09-22T17:16:50.744Z"
+      "raw": "out/posthog/pr-181-consume.json",
+      "checkedAt": "2026-09-22T17:30:53.601Z"
     },
     {
       "forkPr": 180,
@@ -6242,8 +6100,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-180-consume.json",
-      "checkedAt": "2026-09-22T17:16:53.005Z"
+      "raw": "out/posthog/pr-180-consume.json",
+      "checkedAt": "2026-09-22T17:30:55.541Z"
     },
     {
       "forkPr": 179,
@@ -6259,8 +6117,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-179-consume.json",
-      "checkedAt": "2026-09-22T17:16:55.276Z"
+      "raw": "out/posthog/pr-179-consume.json",
+      "checkedAt": "2026-09-22T17:30:57.762Z"
     },
     {
       "forkPr": 178,
@@ -6290,8 +6148,8 @@
           "excerpt": "This public repository document names “Garnet Runtime Review” and describes its dependency-review purpose. The repository’s public-content policy prohibits naming internal-only systems in public material, so replace this with repository-..."
         }
       ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-178-consume.json",
-      "checkedAt": "2026-09-22T17:16:57.911Z"
+      "raw": "out/posthog/pr-178-consume.json",
+      "checkedAt": "2026-09-22T17:30:59.595Z"
     },
     {
       "forkPr": 177,
@@ -6307,8 +6165,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-177-consume.json",
-      "checkedAt": "2026-09-22T17:17:00.059Z"
+      "raw": "out/posthog/pr-177-consume.json",
+      "checkedAt": "2026-09-22T17:31:01.664Z"
     },
     {
       "forkPr": 176,
@@ -6324,8 +6182,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-176-consume.json",
-      "checkedAt": "2026-09-22T17:17:02.738Z"
+      "raw": "out/posthog/pr-176-consume.json",
+      "checkedAt": "2026-09-22T17:31:03.629Z"
     },
     {
       "forkPr": 175,
@@ -6341,8 +6199,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-175-consume.json",
-      "checkedAt": "2026-09-22T17:17:04.871Z"
+      "raw": "out/posthog/pr-175-consume.json",
+      "checkedAt": "2026-09-22T17:31:05.401Z"
     },
     {
       "forkPr": 174,
@@ -6358,8 +6216,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-174-consume.json",
-      "checkedAt": "2026-09-22T17:17:07.285Z"
+      "raw": "out/posthog/pr-174-consume.json",
+      "checkedAt": "2026-09-22T17:31:06.966Z"
     },
     {
       "forkPr": 173,
@@ -6375,8 +6233,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-173-consume.json",
-      "checkedAt": "2026-09-22T17:17:09.504Z"
+      "raw": "out/posthog/pr-173-consume.json",
+      "checkedAt": "2026-09-22T17:31:08.691Z"
     },
     {
       "forkPr": 172,
@@ -6392,8 +6250,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-172-consume.json",
-      "checkedAt": "2026-09-22T17:17:11.714Z"
+      "raw": "out/posthog/pr-172-consume.json",
+      "checkedAt": "2026-09-22T17:31:10.488Z"
     },
     {
       "forkPr": 171,
@@ -6409,8 +6267,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-171-consume.json",
-      "checkedAt": "2026-09-22T17:17:13.760Z"
+      "raw": "out/posthog/pr-171-consume.json",
+      "checkedAt": "2026-09-22T17:31:12.309Z"
     },
     {
       "forkPr": 170,
@@ -6426,8 +6284,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-170-consume.json",
-      "checkedAt": "2026-09-22T17:17:15.889Z"
+      "raw": "out/posthog/pr-170-consume.json",
+      "checkedAt": "2026-09-22T17:31:14.188Z"
     },
     {
       "forkPr": 169,
@@ -6443,8 +6301,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-169-consume.json",
-      "checkedAt": "2026-09-22T17:17:18.014Z"
+      "raw": "out/posthog/pr-169-consume.json",
+      "checkedAt": "2026-09-22T17:31:15.721Z"
     },
     {
       "forkPr": 168,
@@ -6457,26 +6315,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 1
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 5037507601,
-          "url": "https://github.com/garnet-labs/posthog/pull/168#pullrequestreview-5037507601",
-          "at": "2026-08-27T05:26:50Z",
-          "commit": "5c7d8ce",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/168\" target=\"_blank\">",
-          "state": "commented"
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-168-consume.json",
-      "checkedAt": "2026-09-22T17:17:20.126Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-168-consume.json",
+      "checkedAt": "2026-09-22T17:31:17.520Z"
     },
     {
       "forkPr": 167,
@@ -6492,8 +6335,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-167-consume.json",
-      "checkedAt": "2026-09-22T17:17:22.338Z"
+      "raw": "out/posthog/pr-167-consume.json",
+      "checkedAt": "2026-09-22T17:31:19.375Z"
     },
     {
       "forkPr": 166,
@@ -6509,8 +6352,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-166-consume.json",
-      "checkedAt": "2026-09-22T17:17:24.383Z"
+      "raw": "out/posthog/pr-166-consume.json",
+      "checkedAt": "2026-09-22T17:31:21.008Z"
     },
     {
       "forkPr": 165,
@@ -6526,8 +6369,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-165-consume.json",
-      "checkedAt": "2026-09-22T17:17:26.798Z"
+      "raw": "out/posthog/pr-165-consume.json",
+      "checkedAt": "2026-09-22T17:31:22.682Z"
     },
     {
       "forkPr": 164,
@@ -6543,8 +6386,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-164-consume.json",
-      "checkedAt": "2026-09-22T17:17:28.698Z"
+      "raw": "out/posthog/pr-164-consume.json",
+      "checkedAt": "2026-09-22T17:31:24.215Z"
     },
     {
       "forkPr": 163,
@@ -6560,8 +6403,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-163-consume.json",
-      "checkedAt": "2026-09-22T17:17:30.810Z"
+      "raw": "out/posthog/pr-163-consume.json",
+      "checkedAt": "2026-09-22T17:31:25.970Z"
     },
     {
       "forkPr": 162,
@@ -6577,8 +6420,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-162-consume.json",
-      "checkedAt": "2026-09-22T17:17:32.934Z"
+      "raw": "out/posthog/pr-162-consume.json",
+      "checkedAt": "2026-09-22T17:31:27.880Z"
     },
     {
       "forkPr": 161,
@@ -6594,8 +6437,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-161-consume.json",
-      "checkedAt": "2026-09-22T17:17:35.454Z"
+      "raw": "out/posthog/pr-161-consume.json",
+      "checkedAt": "2026-09-22T17:31:29.529Z"
     },
     {
       "forkPr": 160,
@@ -6611,8 +6454,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-160-consume.json",
-      "checkedAt": "2026-09-22T17:17:37.403Z"
+      "raw": "out/posthog/pr-160-consume.json",
+      "checkedAt": "2026-09-22T17:31:30.988Z"
     },
     {
       "forkPr": 159,
@@ -6628,8 +6471,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-159-consume.json",
-      "checkedAt": "2026-09-22T17:17:39.790Z"
+      "raw": "out/posthog/pr-159-consume.json",
+      "checkedAt": "2026-09-22T17:31:32.931Z"
     },
     {
       "forkPr": 158,
@@ -6645,8 +6488,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-158-consume.json",
-      "checkedAt": "2026-09-22T17:17:41.677Z"
+      "raw": "out/posthog/pr-158-consume.json",
+      "checkedAt": "2026-09-22T17:31:34.450Z"
     },
     {
       "forkPr": 157,
@@ -6662,8 +6505,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-157-consume.json",
-      "checkedAt": "2026-09-22T17:17:43.828Z"
+      "raw": "out/posthog/pr-157-consume.json",
+      "checkedAt": "2026-09-22T17:31:36.284Z"
     },
     {
       "forkPr": 156,
@@ -6679,8 +6522,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-156-consume.json",
-      "checkedAt": "2026-09-22T17:17:45.769Z"
+      "raw": "out/posthog/pr-156-consume.json",
+      "checkedAt": "2026-09-22T17:31:37.839Z"
     },
     {
       "forkPr": 155,
@@ -6696,8 +6539,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-155-consume.json",
-      "checkedAt": "2026-09-22T17:17:48.135Z"
+      "raw": "out/posthog/pr-155-consume.json",
+      "checkedAt": "2026-09-22T17:31:39.624Z"
     },
     {
       "forkPr": 154,
@@ -6713,8 +6556,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-154-consume.json",
-      "checkedAt": "2026-09-22T17:17:50.248Z"
+      "raw": "out/posthog/pr-154-consume.json",
+      "checkedAt": "2026-09-22T17:31:41.528Z"
     },
     {
       "forkPr": 153,
@@ -6730,8 +6573,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-153-consume.json",
-      "checkedAt": "2026-09-22T17:17:52.519Z"
+      "raw": "out/posthog/pr-153-consume.json",
+      "checkedAt": "2026-09-22T17:31:43.508Z"
     },
     {
       "forkPr": 152,
@@ -6747,8 +6590,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-152-consume.json",
-      "checkedAt": "2026-09-22T17:17:54.407Z"
+      "raw": "out/posthog/pr-152-consume.json",
+      "checkedAt": "2026-09-22T17:31:45.239Z"
     },
     {
       "forkPr": 151,
@@ -6764,8 +6607,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-151-consume.json",
-      "checkedAt": "2026-09-22T17:17:56.361Z"
+      "raw": "out/posthog/pr-151-consume.json",
+      "checkedAt": "2026-09-22T17:31:46.771Z"
     },
     {
       "forkPr": 150,
@@ -6781,8 +6624,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-150-consume.json",
-      "checkedAt": "2026-09-22T17:17:58.278Z"
+      "raw": "out/posthog/pr-150-consume.json",
+      "checkedAt": "2026-09-22T17:31:48.346Z"
     },
     {
       "forkPr": 149,
@@ -6798,8 +6641,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-149-consume.json",
-      "checkedAt": "2026-09-22T17:18:00.306Z"
+      "raw": "out/posthog/pr-149-consume.json",
+      "checkedAt": "2026-09-22T17:31:50.065Z"
     },
     {
       "forkPr": 148,
@@ -6815,8 +6658,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-148-consume.json",
-      "checkedAt": "2026-09-22T17:18:02.261Z"
+      "raw": "out/posthog/pr-148-consume.json",
+      "checkedAt": "2026-09-22T17:31:51.753Z"
     },
     {
       "forkPr": 147,
@@ -6829,11 +6672,25 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 0
+        "mention": 1
       },
-      "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-147-consume.json",
-      "checkedAt": "2026-09-22T17:18:04.680Z"
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3835173579,
+          "url": "https://github.com/garnet-labs/posthog/pull/147#discussion_r3835173579",
+          "at": "2026-08-22T04:54:49Z",
+          "commit": "0241ae7",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The marker says this branch replays a dependency update and that an update commit follows the baseline, but the reviewed range contains only the baseline-recording commit. It has no subsequent dependency manifest or lockfile change, so t..."
+        }
+      ],
+      "raw": "out/posthog/pr-147-consume.json",
+      "checkedAt": "2026-09-22T17:31:53.546Z"
     },
     {
       "forkPr": 146,
@@ -6846,39 +6703,11 @@
         "utterance": 0,
         "citation": 0,
         "observation": 0,
-        "mention": 2
+        "mention": 0
       },
-      "receipts": [
-        {
-          "kind": "review",
-          "login": "devin-ai-integration[bot]",
-          "id": 4999137919,
-          "url": "https://github.com/garnet-labs/posthog/pull/146#pullrequestreview-4999137919",
-          "at": "2026-08-22T05:11:32Z",
-          "commit": "9215c2f",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "<a href=\"https://app.devin.ai/review/garnet-labs/posthog/pull/146\" target=\"_blank\">",
-          "state": "commented"
-        },
-        {
-          "kind": "review-comment",
-          "login": "greptile-apps[bot]",
-          "id": 3835175271,
-          "url": "https://github.com/garnet-labs/posthog/pull/146#discussion_r3835175271",
-          "at": "2026-08-22T04:55:12Z",
-          "commit": "9215c2f",
-          "onHead": true,
-          "tier": "mention",
-          "headBound": false,
-          "matched": [],
-          "excerpt": "This marker says the branch records an install baseline and then applies a dependency update, but the preceding commit only replaces GitHub Actions workflows and changes no manifest or lockfile. Its parent also lacks the `garnet-ci.yml` ..."
-        }
-      ],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-146-consume.json",
-      "checkedAt": "2026-09-22T17:18:07.040Z"
+      "receipts": [],
+      "raw": "out/posthog/pr-146-consume.json",
+      "checkedAt": "2026-09-22T17:31:55.400Z"
     },
     {
       "forkPr": 145,
@@ -6894,8 +6723,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-145-consume.json",
-      "checkedAt": "2026-09-22T17:18:09.468Z"
+      "raw": "out/posthog/pr-145-consume.json",
+      "checkedAt": "2026-09-22T17:31:57.091Z"
     },
     {
       "forkPr": 144,
@@ -6911,8 +6740,8 @@
         "mention": 0
       },
       "receipts": [],
-      "raw": "/home/ubuntu/repos/garnet-replay/out/posthog/pr-144-consume.json",
-      "checkedAt": "2026-09-22T17:18:11.484Z"
+      "raw": "out/posthog/pr-144-consume.json",
+      "checkedAt": "2026-09-22T17:31:58.590Z"
     }
   ],
   "stage2": {
