@@ -372,7 +372,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
   verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
-  consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record?
+  consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt
+  harvest <slug> [--limit 50] [--state all] [--fork owner/repo]      consume every recorded fork pull request; backfills the consumption ledger
   status [<slug>]                                                   ladder board and the next command
   stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
 
@@ -401,6 +402,7 @@ async function main(args) {
     return result
   }
   if (command === "consume") return ladder.consume(args.slice(1))
+  if (command === "harvest") return ladder.harvest(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))

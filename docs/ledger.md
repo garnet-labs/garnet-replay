@@ -47,7 +47,7 @@ faithful workload remain open; see the report for ownership and next actions.
 | 12 | Cohort rates with count reconciliation | `replay cohort` | done |
 | 13 | Status ladder 0–6, stage done only from its own artifact | `replay status` | done |
 | 14 | Stage 2 mirror, gate, REVIEW.md, no fork code in privileged path | `live/templates/stage2/`, `replay stage2` | done; not merged on any fork |
-| 15 | Reviewer/agent consumption evidence | `replay consume` | done; no live citation yet |
+| 15 | Reviewer/agent consumption evidence | `replay consume`, `replay harvest` | done; pnpm harvest 2026-09-22: 9 of 38 recorded pull requests consumed head-bound, 38 with receipts |
 | 16 | Docs for team and agents | `README.md`, `AGENTS.md`, `SKILL.md`, `docs/` | done |
 | 17 | Tests | `npm test`: 57 | done |
 | 18 | Live proof on `garnet-labs/posthog` with cold read | `docs/examples.md` | in flight |
