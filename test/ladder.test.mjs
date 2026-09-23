@@ -654,6 +654,15 @@ function resumeResponses(remoteHead, remoteTree, extra = []) {
   ]
 }
 
+test("replay --pr: an open fork pull request with a different base is not reused", async () => {
+  const plan = replayPlan()
+  const { io } = memoryIo()
+  const wrongBase = [/gh pr list/, JSON.stringify([{ number: 70, state: "OPEN", isDraft: true, url: `https://github.com/${FORK}/pull/70`, baseRefName: "release-base" }])]
+  const run = fakeExec([wrongBase, ...resumeResponses(REMOTE_FIRST, TREE_FIRST).slice(1)])
+  await assert.rejects(executePlan(plan, { exec: run.exec, io, log: () => {}, wait: noWait }), /based on release-base, not master/)
+  assert.ok(!run.calls.some((c) => / push /.test(c)), run.calls.filter((c) => c.includes("push")).join("\n"))
+})
+
 test("replay --pr: a rerun with commit 1 already on the fork waits for its record, then pushes commit 2 rebuilt on it", async () => {
   assert.equal(publicationState({ remoteTree: null, firstTree: TREE_FIRST, headTree: TREE_HEAD }), "none")
   assert.equal(publicationState({ remoteTree: TREE_FIRST, firstTree: TREE_FIRST, headTree: TREE_HEAD }), "first")
