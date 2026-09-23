@@ -197,6 +197,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
+- [docs/fork-ci-hygiene.md](docs/fork-ci-hygiene.md) — which workflows stay on in replay forks and POCs, the 2026-09-23 cleanup, and how to undo it
 - [docs/prospect-batch.md](docs/prospect-batch.md) — five-fork validation, exact evidence, limitations, and remaining work
 - [.devin/skills/prospect-replays/SKILL.md](.devin/skills/prospect-replays/SKILL.md) — bounded batch orchestration
 - [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
