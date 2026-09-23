@@ -395,6 +395,10 @@ async function main(args) {
     console.log(USAGE)
     return undefined
   }
+  if (args[1] === "--help" || args[1] === "-h") {
+    console.log(USAGE)
+    return undefined
+  }
   if (command === "find") return ladder.find(args.slice(1))
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))

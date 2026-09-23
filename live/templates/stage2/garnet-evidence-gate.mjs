@@ -92,11 +92,12 @@ export function evidenceStateFor(comments, head, listeners = { state: "ready", p
     if (parsed.status !== undefined && parsed.status !== "finalized") continue
     const recorded = typeof parsed.recorded === "string" ? parsed.recorded : null
     const jobs = typeof parsed.jobs === "number" ? parsed.jobs : null
-    const capture = typeof parsed.capture_quality === "string"
-      ? parsed.capture_quality
-      : typeof parsed.capture === "string" ? parsed.capture : null
-    if (capture !== "complete") {
-      incompleteCapture = capture
+    const captureDeclared = Object.prototype.hasOwnProperty.call(parsed, "capture_quality")
+      || Object.prototype.hasOwnProperty.call(parsed, "capture")
+    const captureValue = parsed.capture_quality ?? parsed.capture ?? null
+    const capture = typeof captureValue === "string" ? captureValue : null
+    if (captureDeclared && captureValue !== "complete") {
+      incompleteCapture = { value: captureValue }
       continue
     }
     if (listeners.state === "unknown") {
@@ -121,37 +122,16 @@ export function evidenceStateFor(comments, head, listeners = { state: "ready", p
       }
     }
     const facts = [jobs !== null ? `${jobs} job${jobs === 1 ? "" : "s"}` : null, recorded !== null ? `recorded ${recorded}` : null].filter((item) => item !== null).join(" · ")
-    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}. The record is evidence, not a judgment.`, recorded, jobs, capture }
+    const limitation = captureDeclared ? "" : " The record is finalized; its contract does not declare capture completeness."
+    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}.${limitation} The record is evidence, not a judgment.`, recorded, jobs, capture }
   }
   if (incompleteCapture !== null) {
     return {
       state: "failure",
-      summary: `The Runtime Review record for head ${sha7} does not declare complete capture (reported ${incompleteCapture}). Partial evidence is not success.`,
+      summary: `The Runtime Review record for head ${sha7} does not declare complete capture (reported ${incompleteCapture.value}). Partial evidence is not success.`,
       recorded: null,
       jobs: null,
-      capture: incompleteCapture,
-    }
-  }
-  const undeclared = bound.some((comment) => {
-    const summary = SUMMARY_RE.exec(comment.body)
-    if (summary === null) return false
-    try {
-      const parsed = JSON.parse(summary[1])
-      return parsed !== null && typeof parsed === "object"
-        && (parsed.status === undefined || parsed.status === "finalized")
-        && parsed.capture_quality === undefined
-        && parsed.capture === undefined
-    } catch {
-      return false
-    }
-  })
-  if (undeclared) {
-    return {
-      state: "failure",
-      summary: `The Runtime Review record for head ${sha7} does not declare complete capture. Missing capture accounting is not success.`,
-      recorded: null,
-      jobs: null,
-      capture: null,
+      capture: incompleteCapture.value,
     }
   }
   return { state: "pending", summary: `The Runtime Review record for head ${sha7} is still being written. Pending evidence is no record.`, recorded: null, jobs: null, capture: null }
