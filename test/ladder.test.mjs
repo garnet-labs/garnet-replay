@@ -1508,7 +1508,7 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.match(record, /cargo fetch --locked/)
 })
 
-test("stage 2 gate accepts finalized production records whose contract lacks capture accounting", () => {
+test("stage 2 gate fails closed for finalized production records whose contract lacks capture accounting", () => {
   const head = "08429365f5"
   const fullHead = `${head}${"0".repeat(30)}`
   const comments = [{
@@ -1516,9 +1516,9 @@ test("stage 2 gate accepts finalized production records whose contract lacks cap
     body: `<!-- garnet:commit ${fullHead} -->\n<!-- garnet:summary {"contract":"6.10.0","githubMeta":"2026-08-08","commit":"${fullHead}","previous":"035f95b19e0000000000000000000000000000000000","jobs":1,"changed":1,"unchanged":0,"noOutbound":0,"vanished":0,"added":1,"removed":1,"backgroundAdded":0,"backgroundRemoved":0,"vanishedDestinations":0,"chains":10,"destinations":6,"recorded":"2026-09-08 21:00:53 UTC","kinds":["network"]} -->\n<!-- garnet-runtime-review -->`,
   }]
   const result = evidenceStateFor(comments, fullHead, { state: "ready", pending: [] })
-  assert.equal(result.state, "success")
-  assert.match(result.summary, /record is finalized; its contract does not declare capture completeness/)
-  assert.doesNotMatch(result.summary, /capture declared complete/)
+  assert.equal(result.state, "failure")
+  assert.match(result.summary, /is finalized, but its contract does not declare capture completeness, so the evidence is undeterminable/)
+  assert.doesNotMatch(result.summary, /Partial evidence is not success/)
 })
 
 const STAGE2_INPUT = { slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", recording: { present: true, workflows: [".github/workflows/garnet.yml"], name: "Garnet Runtime Visibility" }, workExists: true }
@@ -1630,8 +1630,8 @@ test("stage 2: the gate reads the App's comments fail-closed and publishes garne
   assert.equal(queued.state, "pending", "a queued recorder keeps the gate from succeeding")
   assert.equal(evidenceStateFor([record(final.replace('"complete"', '"partial"'))], HEAD40).state, "failure")
   const legacy = evidenceStateFor([record(final.replace(',"capture_quality":"complete"', ""))], HEAD40)
-  assert.equal(legacy.state, "success")
-  assert.match(legacy.summary, /contract does not declare capture completeness/)
+  assert.equal(legacy.state, "failure")
+  assert.match(legacy.summary, /contract does not declare capture completeness, so the evidence is undeterminable/)
   const payload = checkRunPayload(ok, HEAD40, "https://github.com/o/r/actions/runs/1")
   assert.equal(payload.name, EVIDENCE_CHECK)
   assert.equal(payload.head_sha, HEAD40)

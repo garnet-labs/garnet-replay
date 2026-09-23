@@ -97,7 +97,11 @@ export function evidenceStateFor(comments, head, listeners = { state: "ready", p
     const captureValue = parsed.capture_quality ?? parsed.capture ?? null
     const capture = typeof captureValue === "string" ? captureValue : null
     if (captureDeclared && captureValue !== "complete") {
-      incompleteCapture = { value: captureValue }
+      if (incompleteCapture === null) incompleteCapture = { declared: true, value: captureValue }
+      continue
+    }
+    if (!captureDeclared) {
+      if (incompleteCapture === null) incompleteCapture = { declared: false, value: null }
       continue
     }
     if (listeners.state === "unknown") {
@@ -122,13 +126,15 @@ export function evidenceStateFor(comments, head, listeners = { state: "ready", p
       }
     }
     const facts = [jobs !== null ? `${jobs} job${jobs === 1 ? "" : "s"}` : null, recorded !== null ? `recorded ${recorded}` : null].filter((item) => item !== null).join(" · ")
-    const limitation = captureDeclared ? "" : " The record is finalized; its contract does not declare capture completeness."
-    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}.${limitation} The record is evidence, not a judgment.`, recorded, jobs, capture }
+    return { state: "success", summary: `A finalized Runtime Review record from the Garnet App is bound to head ${sha7}${facts === "" ? "" : ` (${facts})`}. The record is evidence, not a judgment.`, recorded, jobs, capture }
   }
   if (incompleteCapture !== null) {
+    const summary = incompleteCapture.declared
+      ? `The Runtime Review record for head ${sha7} does not declare complete capture (reported ${incompleteCapture.value}). Partial evidence is not success.`
+      : `The Runtime Review record for head ${sha7} is finalized, but its contract does not declare capture completeness, so the evidence is undeterminable.`
     return {
       state: "failure",
-      summary: `The Runtime Review record for head ${sha7} does not declare complete capture (reported ${incompleteCapture.value}). Partial evidence is not success.`,
+      summary,
       recorded: null,
       jobs: null,
       capture: incompleteCapture.value,
