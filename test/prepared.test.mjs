@@ -43,6 +43,14 @@ test("prepared: explicit files, identical recorder, and staged publication", () 
   assert.equal(plan.steps.find((step) => step.id === "branch").args.includes("-B"), false)
 })
 
+test("prepared: can publish against an existing fork-only base branch", () => {
+  const plan = planPrepared({ ...input, baseBranch: "garnet/replay-base" })
+  assert.equal(plan.baseRef, "garnet/replay-base")
+  assert.equal(plan.steps.find((step) => step.id === "branch").args.at(-1), "origin/garnet/replay-base")
+  assert.ok(plan.steps.find((step) => step.id === "verify-commits").args.includes("origin/garnet/replay-base..HEAD"))
+  assert.ok(plan.steps.find((step) => step.id === "pr-create").args.includes("garnet/replay-base"))
+})
+
 test("prepared: rejects ambiguous states, absent recorders, and path escapes", () => {
   assert.throws(() => planPrepared({ ...input, fork: input.upstream }), /upstream/)
   assert.throws(() => planPrepared({ ...input, branch: "main" }), /feature branch/)
