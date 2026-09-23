@@ -477,6 +477,8 @@ head: `ae2920f` · `ae2920fc99dbaa9069d8c258225b1c6a8df56904`
 | receipts | yes | 3 receipt(s): 2 citation, 1 mention · devin-ai-integration[bot], qodo-code-review[bot] | reviewer-consumption-evidence |
 | check | yes | Garnet Jibril Release Gate / reproduce / Verify profile, App comment and permalink: failure · Garnet Jibril Release Gate / reproduce / Same workload without the sensor: success · Garnet Jibril Release Gate / reproduce / Simulation — credential-less run skips cleanly: success · Garnet Jibril Release Gate / reproduce / Reproduce self-repo reference on Blacksmith: success · Mirror Garnet evidence for AI reviewers: success · Garnet Jibril Release Gate / reproduce: skipped | required-check-state |
 
+funnel: delivered yes · visible yes · rereviewRequested no · attention yes · grounded yes · observation no · consumed-how: devin-ai-integration[bot] (citation, review-comment, after-record) · cold-read not yet rated · decision-impact unknown · attribution unknown · value-hypothesis unknown
+
 #### Receipts · 3 receipt(s): 2 citation, 1 mention
 
 Kept so weaker signals are not lost behind the consumed line; only head-bound utterance and citation rows count as consumption.
@@ -487,6 +489,16 @@ Kept so weaker signals are not lost behind the consumed line; only head-bound ut
 | citation (head-bound) | devin-ai-integration[bot] | [review-comment](https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074198082) | `ae2920f` (head) | head ae2920f | Timing: the review ran before the TS CI Node 24 leg finished. Head-bound record for `ae2920f` now exists (job 106845400061): `Download action repository 'garnet-org/action@2609a287b43720d73e26304558b2ead0fafd369b'`, `Jibril Version: v2.1... |
 | mention | qodo-code-review[bot] | [comment](https://github.com/garnet-labs/pnpm/pull/66#issuecomment-5780431967) | — | — | TEST["Test workflow"] --> ACTION{{"Garnet action"}} <-- RELEASE["Release workflow"] |
 
+
+The funnel line places the result: the record was delivered and mirrored, no re-review was requested for this head (the fork predates the re-review step), the citation arrived after the record without a re-request, and nobody has read the review for cold-read, decision impact or value yet.
+
+## Scoring a checked pull request by hand
+
+`replay uat pnpm --pr 66 --cold-read 3 --note "..."` (run 2026-09-22). Only the fields passed change; the observed stages are recomputed by the next `replay consume`, which keeps these manual values while the head stays the same.
+
+```text
+pnpm · pull request 66 · head ae2920f · delivered yes · visible yes · rereviewRequested no · attention yes · grounded yes · observation no · consumed-how: devin-ai-integration[bot] (citation, review-comment, after-record) · cold-read 3 of 5 · decision-impact unknown · attribution unknown · value-hypothesis unknown
+```
 
 ## Consumption harvest across a fork
 
@@ -509,3 +521,36 @@ Kept so weaker signals are not lost behind the consumed line; only head-bound ut
 | 58 | `5d80a00` | head-bound | yes | no | no receipts |
 | 57 | — | no | — | — | skipped: no record comment |
 | … | | | | | |
+
+## The evidence mirror block written into a pull request description
+
+Rendered by `.github/scripts/garnet-evidence-mirror.mjs` (stage2 template, 2026-09-22) for a finalized four-job record. The preamble names the head by its short SHA so it wraps at phone width; the full SHA binding is the `garnet:commit` marker inside the copied comment. The register in parentheses (jobs, recorded time) is what `replay consume` compares against the live comment to call a copy stale. Placeholders in the citation line are code-formatted so GitHub Markdown does not drop them as unknown HTML tags.
+
+```markdown
+<!-- garnet:evidence:begin -->
+## Runtime evidence (Garnet)
+
+Kernel-recorded execution record for head `a7f477e` (4 jobs, recorded 2026-09-22 21:04:11 UTC), copied from the sticky Garnet Runtime Review comment on this PR so reviewers that read only the description ground in the same bytes. The comment is the source: it gains jobs as they finish and this block follows it. Facts only. Judgment stays with the reviewer. Cite grounded findings as:
+
+> Runtime evidence (Garnet, head `a7f477e`): `<execution chain>` → `<destination>` (`<workflow>/<job>`) — `<Execution Profile URL>`
+
+<details><summary>Execution record, copied from the comment (4 jobs, recorded 2026-09-22 21:04:11 UTC)</summary>
+
+<!-- garnet-runtime-review -->
+<!-- garnet:commit a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5 -->
+<!-- garnet:summary {"status":"finalized","jobs":4,"recorded":"2026-09-22 21:04:11 UTC"} -->
+## Runtime Review
+
+| Job | Destinations |
+|---|---|
+| ci / build | 3 |
+
+
+</details>
+<!-- garnet:evidence:end -->```
+
+When the copy lags the comment (a later recorder job finished after the mirror ran), `replay consume` reports the mirror row as:
+
+```text
+| mirror | no | evidence mirror in the body is stale: 3 job(s) copied, the comment now has 4 | reviewer-consumption-evidence |
+```

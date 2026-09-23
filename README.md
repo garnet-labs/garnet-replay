@@ -152,7 +152,14 @@ as unsupported and the run stops before writing. See [docs/stage1.md](docs/stage
 `replay stage2 <slug>` opens one pull request on the fork with an evidence mirror
 (`workflow_run`, resident on the default branch, never runs pull request code),
 an acceptance gate `garnet/evidence` that requires a record bound to the exact head,
-and `REVIEW.md` grounding instructions for reviewers and review agents.
+`REVIEW.md` grounding instructions for reviewers and review agents, thin per-tool
+adapter files, and a re-review step that asks the configured review tools
+(`--reviewers`, default `devin,coderabbit,greptile`) to look again once per head,
+only after `garnet/evidence` has succeeded for that exact head. The mirror and
+gate listen to every recording workflow that can run on a dependency change
+(`--record-workflow <path>` narrows to one); existing mirror files stop the plan
+without `--replace-mirror`, and a fork workflow that already listens to
+the same recorder stops it outright.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
 
@@ -163,7 +170,10 @@ reviewer) and `mention` (runtime wording, nothing bound). Only head-bound `utter
 and `citation` rows count as consumed; the rest are written to the ledger and to
 `out/<slug>/pr-<N>-consume.json` with the full source comments so nothing is lost.
 `replay harvest <slug>` runs `consume` over every fork pull request that carries a
-record and writes `out/<slug>/consumption-harvest.md`.
+record and writes `out/<slug>/consumption-harvest.md`. Each row carries a funnel
+(delivered, visible, re-review requested, attention, grounded, observation, and how
+each strong receipt arrived); `replay uat <slug> --pr N` adds the hand-read fields:
+cold-read 0..5, decision impact, attribution, value hypothesis.
 
 ## Layout
 
@@ -193,6 +203,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
 - [docs/consumption-roadmap.md](docs/consumption-roadmap.md) — reviewer consumption across review agents: mechanism, roadmap, artifacts to maintain
+- [docs/reviewer-readiness.md](docs/reviewer-readiness.md) — reviewer readiness ranking and golden path, updated after each fork proof round
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not

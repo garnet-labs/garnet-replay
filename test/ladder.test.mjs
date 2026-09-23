@@ -1,19 +1,23 @@
 import test from "node:test"
 import assert from "node:assert/strict"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
-import { assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
+import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
-import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowOnlyFirstPaths } from "../lib/replay-pr.mjs"
+import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
-import { RECEIPT_TIERS, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
-import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
-import { planStage2, renderStage2Plan } from "../lib/stage2.mjs"
+import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
+import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
+import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
+import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
+import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
+import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
+import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -467,6 +471,22 @@ test("dependabot config lookup: only a 404 means absent; any other API failure s
   assert.throws(() => hasDependabotConfig(FORK, "main", { exec: forbidden }), /could not read \.github\/dependabot\.yml on garnet-labs\/posthog@main: gh: Resource not accessible/)
   const present = () => JSON.stringify({ type: "file", path: ".github/dependabot.yml" })
   assert.equal(hasDependabotConfig(FORK, "main", { exec: present }), true)
+})
+
+test("existing adapter lookup: 404 means absent, a file means present, a directory or other failure never counts as an adapter", () => {
+  const seen = []
+  const exec = (_cmd, args) => {
+    const path = String(args[1]).replace(/^repos\/[^/]+\/[^/]+\/contents\//, "").replace(/\?ref=.*$/, "")
+    seen.push(path)
+    if (path === ".coderabbit.yaml") return JSON.stringify({ type: "file", path })
+    if (path === ".greptile") return JSON.stringify([{ type: "file", path: ".greptile/config.json" }])
+    throw new Error("gh: Not Found (HTTP 404)")
+  }
+  assert.deepEqual(existingPaths(FORK, "main", [".coderabbit.yaml", ".greptile/config.json", ".greptile"], { exec }), [".coderabbit.yaml"])
+  assert.deepEqual(seen, [".coderabbit.yaml", ".greptile/config.json", ".greptile"])
+  const forbidden = () => { throw new Error("gh: Resource not accessible by integration (HTTP 403)") }
+  assert.throws(() => existingPaths(FORK, "main", [".coderabbit.yaml"], { exec: forbidden }), /could not read \.coderabbit\.yaml on garnet-labs\/posthog@main/)
+  assert.deepEqual(existingPaths(FORK, "main", [], { exec: forbidden }), [])
 })
 
 test("recorder health: the fork's newest pull requests say whether Runtime Review is finalizing comments", () => {
@@ -1215,6 +1235,108 @@ test("consume: weaker receipts are kept per tier without becoming consumption", 
   assert.match(harvest, /\| 4 \| — \| no \|/)
 })
 
+test("consume: the funnel records delivery, visibility, re-request, attention, grounding and observation separately; UAT fields start empty", () => {
+  const sha7 = SHA_B.slice(0, 7)
+  const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: `x\n<!-- garnet:evidence:begin -->\nhead \`${sha7}\`\n<!-- garnet:evidence:end -->` }
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z" }
+  const rereview = { user: { login: "github-actions[bot]" }, created_at: "2026-09-20T12:10:00Z", body: `<!-- garnet:rereview ${SHA_B} -->\nRuntime evidence for head ${sha7} is final.` }
+
+  const nothing = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, comments: [] })
+  assert.deepEqual(nothing.funnel, { delivered: false, visible: false, rereviewRequested: false, attention: false, grounded: false, observation: false, consumedHow: [], coldRead: null, decisionImpact: "unknown", attribution: "unknown", valueHypothesis: "unknown" })
+
+  const grounded = evaluateConsumption({
+    pr, comments: [
+      record, rereview,
+      { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "No Garnet runtime record yet; reviewing the diff only." },
+      { id: 2, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:20:00Z", body: `Runtime evidence (Garnet, head ${sha7}): the installer reached storage.googleapis.com, as the record shows.` },
+    ],
+    reviews: [{ user: { login: "greptile[bot]" }, state: "COMMENTED", commit_id: SHA_B, submitted_at: "2026-09-20T12:05:00Z", body: `**Runtime grounding** (head \`${sha7}\`): one new outbound connection.` }],
+  })
+  assert.equal(grounded.consumed, true)
+  const funnel = grounded.funnel
+  assert.equal(funnel.delivered, true)
+  assert.equal(funnel.visible, true)
+  assert.equal(funnel.rereviewRequested, true)
+  assert.equal(funnel.attention, true)
+  assert.equal(funnel.grounded, true)
+  assert.equal(funnel.observation, true, "a strong receipt that repeats a record destination is an observation too")
+  assert.deepEqual(funnel.consumedHow.map((row) => [row.who, row.tier, row.path]), [
+    ["greptile[bot]", RECEIPT_TIERS.UTTERANCE, "after-record"],
+    ["devin-ai-integration[bot]", RECEIPT_TIERS.UTTERANCE, "after-rereview"],
+  ])
+  assert.equal(funnel.coldRead, null)
+  assert.equal(funnel.valueHypothesis, "unknown")
+  const line = describeFunnel(funnel)
+  assert.match(line, /delivered yes · visible yes · rereviewRequested yes · attention yes · grounded yes · observation yes/)
+  assert.match(line, /consumed-how: greptile\[bot\] \(utterance, review, after-record\); devin-ai-integration\[bot\] \(utterance, comment, after-rereview\)/)
+  assert.match(line, /cold-read not yet rated · decision-impact unknown · attribution unknown · value-hypothesis unknown/)
+  assert.match(renderConsumeReport(grounded, { prUrl: `https://github.com/${FORK}/pull/77` }), /^funnel: delivered yes/m)
+
+  const preRecordOnly = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, comments: [record, { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): looks fine.` }] })
+  assert.equal(preRecordOnly.consumed, false)
+  assert.equal(preRecordOnly.funnel.delivered, true)
+  assert.equal(preRecordOnly.funnel.attention, false, "a receipt written before the record is not attention to it")
+  assert.equal(preRecordOnly.funnel.grounded, false)
+
+  const staleReview = evaluateConsumption({
+    pr, comments: [record],
+    reviews: [{ user: { login: "greptile[bot]" }, state: "COMMENTED", commit_id: SHA_A, submitted_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new outbound connection.` }],
+  })
+  assert.equal(staleReview.consumed, false, "a review on an older commit does not consume")
+  assert.equal(staleReview.funnel.grounded, false, "grounded follows the consumer rule: the review commit must be on the head")
+  assert.deepEqual(staleReview.funnel.consumedHow, [])
+  assert.equal(staleReview.funnel.attention, true, "the reviewer did write after the record")
+
+  const diffOnly = evaluateConsumption({
+    pr, comments: [record, { id: 3, user: { login: "greptile[bot]" }, created_at: "2026-09-20T12:30:00Z", body: "Lockfile drift: the `pnpm-lock.yaml` change is unrelated to the manifest bump." }],
+  })
+  assert.equal(diffOnly.receipts.length, 0)
+  assert.equal(diffOnly.funnel.attention, true, "a reviewer response with no runtime receipt is attention without grounding")
+  assert.equal(diffOnly.funnel.grounded, false)
+  assert.equal(diffOnly.funnel.observation, false)
+
+  const priorDestination = evaluateConsumption({
+    pr, comments: [record, { id: 4, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "The installer talks to storage.googleapis.com during postinstall." }],
+  })
+  assert.equal(priorDestination.funnel.observation, false, "a destination named before the record existed is not an observation of it")
+  assert.equal(priorDestination.funnel.attention, false)
+})
+
+test("uat: manual fields are written by `replay uat` only, survive a re-check of the same head, and reset on a new head", () => {
+  const base = { forkPr: 7, headSha: SHA_B, consumed: true, funnel: { delivered: true, visible: true, rereviewRequested: false, attention: true, grounded: true, observation: false, consumedHow: [], coldRead: null, decisionImpact: "unknown", attribution: "unknown", valueHypothesis: "unknown" } }
+  const target = { slug: "uat-test", consumption: [structuredClone(base)] }
+  const saved = []
+  const logged = []
+  const io = { load: () => target, save: (t) => saved.push(t), log: (line) => logged.push(line) }
+
+  assert.throws(() => uat(["uat-test", "--pr", "7"], io), /nothing to record/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--cold-read", "9"], io), /0\.\.5/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--decision-impact", "yes"], io), /supported, not-supported, unknown/)
+  assert.throws(() => uat(["uat-test", "--pr", "7", "--value-hypothesis", "supported"], io), /needs --note/)
+  assert.throws(() => uat(["uat-test", "--pr", "8"], io), /no consumption row/)
+  assert.equal(saved.length, 0)
+
+  const row = uat(["uat-test", "--pr", "7", "--cold-read", "4", "--value-hypothesis", "supported", "--note", "named the new destination the diff hides"], io)
+  assert.equal(row.funnel.coldRead, 4)
+  assert.equal(row.funnel.valueHypothesis, "supported")
+  assert.equal(row.funnel.decisionImpact, "unknown")
+  assert.equal(row.funnel.uat.note, "named the new destination the diff hides")
+  assert.equal(row.funnel.uat.headSha, SHA_B)
+  assert.equal(saved.length, 1)
+  assert.match(logged[0], /cold-read 4 of 5 · decision-impact unknown · attribution unknown · value-hypothesis supported/)
+
+  const recheck = keepUat(target.consumption, { ...structuredClone(base), consumed: false, funnel: { ...structuredClone(base.funnel), grounded: false } })
+  assert.equal(recheck.funnel.grounded, false, "observed stages come from the new check")
+  assert.equal(recheck.funnel.coldRead, 4, "manual fields come from the earlier row")
+  assert.equal(recheck.funnel.valueHypothesis, "supported")
+  assert.equal(recheck.funnel.uat.note, "named the new destination the diff hides")
+
+  const newHead = keepUat(target.consumption, { ...structuredClone(base), headSha: SHA_C })
+  assert.equal(newHead.funnel.coldRead, null, "a new head starts unrated")
+  assert.equal(newHead.funnel.uat, undefined)
+  assert.deepEqual(keepUat(undefined, structuredClone(base)), base)
+})
+
 test("consume: negative, pre-record and repository-link utterances never advance the pilot", () => {
   const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
   const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z" }
@@ -1368,9 +1490,14 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.doesNotMatch(mirror, /actions\/checkout@[^\n]*\n[^\n]*head\.sha|ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/)
   const gate = Object.entries(plan.files).find(([f]) => f.endsWith("garnet-evidence-gate.yml"))[1]
   assert.match(gate, /head_sha|headRefOid|head\.sha/)
-  assert.match(gate, /--paginate --slurp \\\n\s+--jq "\[\.\[\]\[\] \|/, "paged comments are flattened into one array")
-  assert.match(gate, /garnet-control-plane-pending-pr-comment"\) \| not/)
-  assert.match(gate, /\$s\.status == null or \$s\.status == "finalized"/, "final means the summary parses and is finalized, as lib/receipt.mjs reads it")
+  assert.doesNotMatch(gate, /--slurp/, "gh api rejects --slurp together with --jq on the runner")
+  assert.match(gate, /checks: write/, "the check run is published on the pull request head, not left to the workflow_run job")
+  assert.match(gate, /issue_comment:\n\s+types: \[created, edited\]/, "re-reads the record each time the App edits its comment")
+  assert.match(gate, /garnet-evidence-gate\.mjs/)
+  assert.doesNotMatch(gate, /name: garnet\/evidence/, "the job is not named after the check; the job's own check lands on the default-branch commit")
+  assert.equal(typeof plan.files[".github/scripts/garnet-evidence-gate.mjs"], "string")
+  assert.match(mirror, /issue_comment:\n\s+types: \[created, edited\]/)
+  assert.doesNotMatch(mirror, /--slurp/)
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
   assert.match(renderStage2Plan(plan), /garnet\/evidence/)
   assert.throws(() => planStage2({ slug: "x", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", recording: { present: false, workflows: [] } }), /--ecosystem/)
@@ -1379,4 +1506,281 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.match(record, /id-token: write/)
   assert.doesNotMatch(record, /api_token/)
   assert.match(record, /cargo fetch --locked/)
+})
+
+test("stage 2 gate fails closed for finalized production records whose contract lacks capture accounting", () => {
+  const head = "08429365f5"
+  const fullHead = `${head}${"0".repeat(30)}`
+  const comments = [{
+    user: { login: "garnet-runtime-review[bot]" },
+    body: `<!-- garnet:commit ${fullHead} -->\n<!-- garnet:summary {"contract":"6.10.0","githubMeta":"2026-08-08","commit":"${fullHead}","previous":"035f95b19e0000000000000000000000000000000000","jobs":1,"changed":1,"unchanged":0,"noOutbound":0,"vanished":0,"added":1,"removed":1,"backgroundAdded":0,"backgroundRemoved":0,"vanishedDestinations":0,"chains":10,"destinations":6,"recorded":"2026-09-08 21:00:53 UTC","kinds":["network"]} -->\n<!-- garnet-runtime-review -->`,
+  }]
+  const result = evidenceStateFor(comments, fullHead, { state: "ready", pending: [] })
+  assert.equal(result.state, "failure")
+  assert.match(result.summary, /is finalized, but its contract does not declare capture completeness, so the evidence is undeterminable/)
+  assert.doesNotMatch(result.summary, /Partial evidence is not success/)
+})
+
+const STAGE2_INPUT = { slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", recording: { present: true, workflows: [".github/workflows/garnet.yml"], name: "Garnet Runtime Visibility" }, workExists: true }
+
+test("stage 2: the mirror re-requests the targeted reviewers once per head, after the record, and ships one thin adapter per reviewer", () => {
+  const plan = planStage2(STAGE2_INPUT)
+  assert.deepEqual(plan.reviewers, [...DEFAULT_REVIEWERS])
+  assert.deepEqual(DEFAULT_REVIEWERS, ["devin", "coderabbit", "greptile"])
+  const mirror = plan.files[".github/workflows/garnet-evidence-mirror.yml"]
+  assert.match(mirror, /GARNET_REVIEWERS: "devin,coderabbit,greptile"/)
+  assert.match(mirror, /garnet-evidence-mirror\.mjs[\s\S]*garnet-rereview\.mjs/, "re-review runs after the mirror step")
+  assert.doesNotMatch(mirror, /\{\{[A-Z_]+\}\}/, "no unfilled template placeholders")
+  assert.equal(typeof plan.files[".github/scripts/garnet-rereview.mjs"], "string")
+  assert.deepEqual(plan.adapters, [".agents/skills/garnet-runtime-review/SKILL.md", ".coderabbit.yaml", ".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(plan.keptAdapters, [])
+  for (const path of plan.adapters) assert.match(plan.files[path], /REVIEW\.md/, `${path} points at REVIEW.md`)
+  JSON.parse(plan.files[".greptile/config.json"])
+  assert.match(plan.body, /re-review|requests the configured reviewers/)
+  assert.match(plan.body, /repository secret named in the mirror workflow/)
+  assert.doesNotMatch(plan.body.toLowerCase(), /devin/, "outbound text carries no reviewer vendor names (residue guard)")
+  assert.match(renderStage2Plan(plan), /reviewers re-requested after the record binds: devin, coderabbit, greptile/)
+  for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
+  const all = planStage2({ ...STAGE2_INPUT, reviewers: REVIEWERS })
+  const every = [...new Set(REVIEWERS.flatMap((r) => Object.values(REVIEWER_ADAPTERS[r])))]
+  assert.deepEqual(all.adapters, every)
+  assert.ok(every.includes(".cursor/BUGBOT.md") && every.includes(".github/copilot-instructions.md") && every.includes(".pr_agent.toml"))
+  assert.deepEqual(Object.keys(REVIEWER_ADAPTERS.codex), [], "codex reads AGENTS.md; no file of its own")
+})
+
+test("stage 2: reviewer selection is explicit and adapters already in the fork are kept unless asked to replace", () => {
+  assert.deepEqual(parseReviewers("Greptile, devin,greptile"), ["greptile", "devin"])
+  assert.deepEqual(parseReviewers(["copilot"]), ["copilot"])
+  assert.throws(() => parseReviewers("sonar"), /unknown reviewer 'sonar'/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, reviewers: "" }), /at least one reviewer/)
+  const kept = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit,greptile", existing: [".coderabbit.yaml"] })
+  assert.deepEqual(kept.adapters, [".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(kept.keptAdapters, [".coderabbit.yaml"])
+  assert.equal(kept.files[".coderabbit.yaml"], undefined)
+  assert.match(kept.body, /kept as they are: `\.coderabbit\.yaml`/)
+  assert.match(renderStage2Plan(kept), /kept as they are \(already in the fork\): \.coderabbit\.yaml/)
+  const replaced = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit", existing: [".coderabbit.yaml"], replaceAdapters: true })
+  assert.deepEqual(replaced.adapters, [".coderabbit.yaml"])
+  assert.deepEqual(replaced.keptAdapters, [])
+  assert.match(kept.files[".github/workflows/garnet-evidence-mirror.yml"], /GARNET_REVIEWERS: "coderabbit,greptile"/)
+})
+
+test("stage 2: every recorder that can run on a dependency change is listened to; workflow-only recorders, existing mirrors and competing listeners stop the plan", () => {
+  const recording = {
+    present: true,
+    workflows: [".github/workflows/vendored.yml", ".github/workflows/garnet-sentiment.yml", ".github/workflows/garnet-self.yml"],
+    name: "Vendored packages",
+    names: { ".github/workflows/vendored.yml": "Vendored packages", ".github/workflows/garnet-sentiment.yml": "Garnet sentiment dependency visibility", ".github/workflows/garnet-self.yml": "Garnet Browser Use CI" },
+    paths: { ".github/workflows/vendored.yml": ["vendor/cache-util/**"], ".github/workflows/garnet-sentiment.yml": null, ".github/workflows/garnet-self.yml": [".github/workflows/garnet-self.yml"] },
+    listeners: {},
+  }
+  const { names, skipped } = recorderNames(recording)
+  assert.deepEqual(names, ["Vendored packages", "Garnet sentiment dependency visibility"])
+  assert.deepEqual(Object.keys(skipped), [".github/workflows/garnet-self.yml"])
+  const plan = planStage2({ ...STAGE2_INPUT, recording })
+  assert.deepEqual(plan.recordNames, names)
+  assert.match(plan.files[".github/workflows/garnet-evidence-mirror.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
+  assert.match(plan.files[".github/workflows/garnet-evidence-gate.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
+  assert.match(renderStage2Plan(plan), /not listened to: \.github\/workflows\/garnet-self\.yml · pull_request\.paths covers only \.github\/workflows\/garnet-self\.yml/)
+  assert.match(plan.body, /Both workflows listen to every recording workflow/)
+
+  const one = planStage2({ ...STAGE2_INPUT, recording, recordWorkflow: ".github/workflows/garnet-self.yml" })
+  assert.deepEqual(one.recordNames, ["Garnet Browser Use CI"], "--record-workflow overrides the path-filter reading")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, recordWorkflow: ".github/workflows/nope.yml" }), /not a recording workflow on the fork/)
+
+  const selfOnly = { ...recording, workflows: [".github/workflows/garnet-self.yml"] }
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: selfOnly }), /would never fire[\s\S]*--record-workflow[\s\S]*--add-record/)
+  const added = planStage2({ ...STAGE2_INPUT, recording: selfOnly, addRecord: true, ecosystem: "uv" })
+  assert.deepEqual(added.recordNames, ["Garnet Runtime Visibility"])
+  assert.equal(typeof added.files[RECORD_WORKFLOW_PATH], "string")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, addRecord: true }), /--add-record needs --ecosystem/)
+
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"] }), /files at the mirror paths: \.github\/scripts\/garnet-evidence-mirror\.mjs;[\s\S]*unrelated workflow[\s\S]*--replace-mirror/)
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/workflows/garnet-evidence-gate.yml"] }), /--replace-mirror/, "a foreign workflow at the gate path stops the plan too")
+  const replaced = planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"], replaceMirror: true })
+  assert.deepEqual(replaced.replacedMirror, [".github/scripts/garnet-evidence-mirror.mjs"])
+  assert.equal(replaced.files["REVIEW.md"], undefined, "an existing REVIEW.md is kept like an adapter")
+  assert.ok(replaced.keptAdapters.includes("REVIEW.md"))
+  assert.equal(typeof planStage2({ ...STAGE2_INPUT, recording, existing: ["REVIEW.md"], replaceAdapters: true }).files["REVIEW.md"], "string")
+
+  const competing = { ...recording, listeners: { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages", "TS CI"], ".github/workflows/garnet-evidence-mirror.yml": ["Vendored packages"], ".github/workflows/deploy.yml": ["Release"] } }
+  assert.deepEqual(competingListeners(competing.listeners, names), { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages"] }, "our own mirror path and unrelated listeners are not conflicts")
+  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording: competing }), /workflow_run workflows with pull-requests: write listening to the recorder[\s\S]*garnet-evidence-mirror-forks\.yml → "Vendored packages"/)
+  const writes = { ".github/workflows/garnet-evidence-mirror-forks.yml": false, ".github/workflows/deploy.yml": true }
+  assert.deepEqual(competingListeners(competing.listeners, names, writes), {}, "a listener without pull-requests: write cannot edit the block or request reviews")
+  assert.deepEqual(competingListeners(competing.listeners, names, { ".github/workflows/garnet-evidence-mirror-forks.yml": true }), { ".github/workflows/garnet-evidence-mirror-forks.yml": ["Vendored packages"] })
+  assert.deepEqual(planStage2({ ...STAGE2_INPUT, recording: { ...competing, listenerWrites: writes } }).recordNames, names, "read-only listeners do not stop the plan")
+})
+
+test("stage 2: the gate reads the App's comments fail-closed and publishes garnet/evidence on the exact head", () => {
+  const app = { login: "garnet-runtime-review[bot]" }
+  const record = (body, user = app) => ({ user, body })
+  const final = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":2,"recorded":"2026-09-22 20:51:04 UTC","capture_quality":"complete"} -->\nRuntime Review`
+  assert.equal(evidenceStateFor([], HEAD40).state, "failure")
+  assert.equal(evidenceStateFor([record(final, { login: "github-actions[bot]" })], HEAD40).state, "failure", "the workflow token is not the Garnet App")
+  assert.equal(evidenceStateFor([record(final.replace(HEAD40, "b".repeat(40)))], HEAD40).state, "failure", "a record for another head is not evidence for this one")
+  assert.equal(evidenceStateFor([record(`<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet-control-plane-pending-pr-comment -->`)], HEAD40).state, "pending")
+  assert.equal(evidenceStateFor([record(final.replace("finalized", "pending"))], HEAD40).state, "pending")
+  const ok = evidenceStateFor([record(final)], HEAD40)
+  assert.equal(ok.state, "success")
+  assert.equal(ok.jobs, 2)
+  assert.match(ok.summary, /2 jobs · recorded 2026-09-22 20:51:04 UTC/)
+  assert.equal(withRecorderCompleteness(ok, [], HEAD40).state, "success", "complete capture with settled recorders succeeds")
+  const queued = withRecorderCompleteness(ok, ["Install"], HEAD40)
+  assert.equal(queued.state, "pending", "a queued recorder keeps the gate from succeeding")
+  assert.equal(evidenceStateFor([record(final.replace('"complete"', '"partial"'))], HEAD40).state, "failure")
+  const legacy = evidenceStateFor([record(final.replace(',"capture_quality":"complete"', ""))], HEAD40)
+  assert.equal(legacy.state, "failure")
+  assert.match(legacy.summary, /contract does not declare capture completeness, so the evidence is undeterminable/)
+  const payload = checkRunPayload(ok, HEAD40, "https://github.com/o/r/actions/runs/1")
+  assert.equal(payload.name, EVIDENCE_CHECK)
+  assert.equal(payload.head_sha, HEAD40)
+  assert.equal(payload.conclusion, "success")
+  assert.equal(checkRunPayload(evidenceStateFor([], HEAD40), HEAD40, null).conclusion, "failure")
+  const pending = checkRunPayload({ state: "pending", summary: "s" }, HEAD40, null)
+  assert.equal(pending.status, "in_progress")
+  assert.equal(pending.conclusion, undefined)
+  assert.equal(alreadyPublished([], payload), false)
+  assert.equal(alreadyPublished([{ id: 1, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), true)
+  assert.equal(alreadyPublished([{ id: 2, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }, { id: 3, name: EVIDENCE_CHECK, status: "completed", conclusion: "failure", output: { summary: "x" } }], payload), false, "the newest run is what the pull request shows")
+  assert.equal(alreadyPublished([{ id: 1, name: "other", status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), false)
+})
+
+test("stage 2: the mirror names what it copied and renders the citation placeholder as code", () => {
+  const body = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":3,"recorded":"2026-09-22 20:49:55 UTC"} -->\nRuntime Review`
+  assert.deepEqual(recordStamp(body), { recorded: "2026-09-22 20:49:55 UTC", jobs: 3 })
+  assert.deepEqual(recordStamp("no register"), { recorded: null, jobs: null })
+  const section = renderEvidenceSection({ body, html_url: "https://github.com/o/r/pull/1#issuecomment-1" }, HEAD40, 65536)
+  assert.match(section, /3 jobs, recorded 2026-09-22 20:49:55 UTC/, "the copy says which state of the comment it holds")
+  assert.match(section, /`<Execution Profile URL>`/, "an angle-bracket placeholder outside code is dropped by GitHub Markdown")
+  assert.doesNotMatch(section, /verbatim/, "the copy is not the comment; the comment keeps changing as jobs finish")
+  assert.match(section, /<details><summary>Execution record, copied from the comment \(3 jobs, recorded/)
+})
+
+test("consume: a mirror that names the head but copied an earlier register is stale, not visible", () => {
+  const live = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":4,"recorded":"2026-09-22 20:51:04 UTC"} -->`
+  const copied = `<!-- garnet:evidence:begin -->\nhead ${HEAD40}\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":3,"recorded":"2026-09-22 20:49:55 UTC"} -->\n<!-- garnet:evidence:end -->`
+  assert.match(mirrorStaleness(copied, live), /copied the record of 2026-09-22 20:49:55 UTC, the comment now says 2026-09-22 20:51:04 UTC; 3 job\(s\) copied, the comment now has 4/)
+  assert.equal(mirrorStaleness(copied.replace("jobs\":3", "jobs\":4").replace("20:49:55", "20:51:04"), live), null)
+  assert.equal(mirrorStaleness("head only", live), null, "no register to compare")
+  assert.equal(mirrorStaleness(copied, null), null)
+  const pr = { headRefOid: HEAD40, author: { login: "dependabot[bot]" }, body: `x\n${copied}` }
+  const result = evaluateConsumption({ pr, comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: live, created_at: "2026-09-20T12:00:00Z" }] })
+  assert.equal(result.mirror, false)
+  assert.equal(result.funnel.visible, false)
+  assert.match(result.findings.find((row) => row.kind === "mirror").detail, /stale/)
+})
+
+test("recorder inventory: names, workflow_run listeners and workflow-only path filters are read from workflow bodies", () => {
+  assert.equal(workflowName('name: "Garnet Runtime Visibility"\non: pull_request\n'), "Garnet Runtime Visibility")
+  assert.equal(workflowName("on: pull_request\n"), null)
+  assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    workflows: [\"TS CI\", 'Vendored packages']\n    types: [completed]\n"), ["TS CI", "Vendored packages"])
+  assert.deepEqual(workflowRunWorkflows("on:\n  workflow_run:\n    types: [completed]\n    workflows:\n      - Garnet Runtime Visibility\n      - \"DeepSec review\" # comment\njobs: {}\n"), ["Garnet Runtime Visibility", "DeepSec review"])
+  assert.deepEqual(workflowRunWorkflows("on:\n  pull_request:\n    paths: [x]\n"), [])
+  assert.equal(writesPullRequests("permissions:\n  contents: read\n  pull-requests: write\n"), true)
+  assert.equal(writesPullRequests("jobs:\n  a:\n    permissions:\n      pull-requests: 'write' # edits\n"), true)
+  assert.equal(writesPullRequests("permissions:\n  pull-requests: read\n"), false)
+  assert.equal(writesPullRequests("permissions: {}\n"), false)
+  assert.equal(workflowOnlyPathFilter([".github/workflows/garnet-browser-use-ci.yml"]), true)
+  assert.equal(workflowOnlyPathFilter([".garnet-demo/runtime-review/**", ".github/workflows/deepsec.yml"]), false)
+  assert.equal(workflowOnlyPathFilter(null), false)
+  assert.equal(workflowOnlyPathFilter([]), false)
+})
+
+const HEAD40 = "a".repeat(40)
+const OTHER40 = "b".repeat(40)
+function recordComment(body, login = "garnet-runtime-review[bot]") {
+  return { user: { login }, body }
+}
+const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
+
+test("re-review script: requests only for a finalized, trusted, exact-head record and only once per head", () => {
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), HEAD40), true)
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), OTHER40), false, "a record for another head is not evidence for this one")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD, "someone"), HEAD40), false, "untrusted author")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD, "github-actions[bot]"), HEAD40), false, "the workflow token is not the Garnet App")
+  assert.equal(isTrustedEvidenceComment(recordComment(FINAL_RECORD.replace("<!-- garnet:summary", "<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:summary"))), true)
+  assert.equal(isTrustedEvidenceComment(recordComment(`<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${HEAD40} -->`)), false, "the mirror never mirrors a pending placeholder")
+  assert.equal(isTrustedEvidenceComment(recordComment(`<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1 -->`, "github-actions[bot]")), false)
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace("finalized", "pending")), HEAD40), false)
+  assert.equal(isFinalizedRecordFor(recordComment(`${FINAL_RECORD}\n<!-- garnet-control-plane-pending-pr-comment -->`), HEAD40), false, "placeholder")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace(/<!-- garnet:summary.*-->\n/, "")), HEAD40), false, "no machine register")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace("{\"status\"", "{status")), HEAD40), false, "unparseable register")
+  assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD.replace(`<!-- garnet:commit ${HEAD40} -->`, `<!-- garnet:commit ${HEAD40.slice(0, 7)} -->`)), HEAD40), false, "short sha is not a binding")
+  assert.equal(isFinalizedRecordFor({ user: { login: "github-actions[bot]" }, body: null }, HEAD40), false)
+  const marker = rereviewMarker(HEAD40)
+  assert.equal(alreadyRequestedFor([recordComment(FINAL_RECORD), { user: { login: "github-actions[bot]" }, body: `${marker}\n@coderabbitai review` }], HEAD40), true)
+  assert.equal(alreadyRequestedFor([{ user: { login: "github-actions[bot]" }, body: `${rereviewMarker(OTHER40)}\n@coderabbitai review` }], HEAD40), false, "a new head gets one new request")
+  assert.equal(alreadyRequestedFor([{ body: 7 }], HEAD40), false)
+})
+
+test("re-review script: the garnet/evidence check must have passed; absent, pending and failed checks request nothing", () => {
+  assert.equal(EVIDENCE_CHECK, "garnet/evidence")
+  const run = (status, conclusion, name = EVIDENCE_CHECK) => ({ name, status, conclusion })
+  assert.equal(evidenceCheckState([]), "absent")
+  assert.equal(evidenceCheckState(undefined), "absent")
+  assert.equal(evidenceCheckState([run("completed", "success", "ci/other")]), "absent", "another check's success is not evidence")
+  assert.equal(evidenceCheckState([run("in_progress", null)]), "pending")
+  assert.equal(evidenceCheckState([run("completed", "failure")]), "failed")
+  assert.equal(evidenceCheckState([run("completed", "failure"), run("completed", "success")]), "success", "a rerun that passed counts")
+  assert.equal(evidenceCheckState([run("completed", "failure"), run("queued", null)]), "pending")
+})
+
+test("re-review script: one comment carries every mention and the per-head lock without API reviewer residue", () => {
+  assert.deepEqual(parseWorkflowReviewers("devin, coderabbit,greptile,devin"), ["devin", "coderabbit", "greptile"])
+  assert.deepEqual(parseWorkflowReviewers(""), [])
+  assert.throws(() => parseWorkflowReviewers("sonar"), /unknown reviewer 'sonar'/)
+  for (const name of REVIEWERS) assert.ok(name in MENTIONS || API_REVIEWERS.includes(name), `${name} has a request path in the workflow script`)
+  const body = renderRequestComment(["devin", "coderabbit", "greptile"], HEAD40)
+  assert.ok(body.startsWith(rereviewMarker(HEAD40)))
+  assert.match(body, /^@coderabbitai review$/m)
+  assert.match(body, /^@greptileai review$/m)
+  assert.doesNotMatch(body, /Review requested through the API|devin|copilot/)
+  assert.match(body, /head `aaaaaaa`/)
+  assert.match(body, /Runtime evidence \(Garnet, head aaaaaaa\):/, "the comment carries the grounding ask inline")
+  assert.match(body, /garnet:evidence:begin/)
+  assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
+  const apiOnly = renderRequestComment(["copilot"], HEAD40)
+  assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
+  assert.doesNotMatch(apiOnly, /^@/m)
+  for (const reviewers of [[], ["devin"], ["copilot"], ["coderabbit"], ["devin", "copilot"], ["devin", "coderabbit", "greptile", "bugbot", "codex", "qodo"]]) {
+    assert.doesNotThrow(() => assertNoResidue(renderRequestComment(reviewers, HEAD40)))
+  }
+})
+
+test("consume: a URL without a matching target requires an explicit slug", () => {
+  const targets = [{ slug: "widgets", fork: "garnet-labs/widgets" }]
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/widgets/pull/7", targets), { target: targets[0], reason: "matched" })
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/codex/pull/7", targets), { target: null, reason: "missing" })
+  assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/widgets/pull/7", [...targets, { slug: "widgets-copy", fork: "garnet-labs/widgets" }]), { target: null, reason: "ambiguous" })
+})
+
+test("stage2 gate: a finalized record stays pending while any listened recorder run on the head is unfinished", () => {
+  const recorders = ["Install", "Prettier"]
+  const runs = [
+    { name: "Install", status: "completed" },
+    { name: "Prettier", status: "in_progress" },
+    { name: "Lint", status: "queued" },
+  ]
+  assert.deepEqual(unsettledRecorders(runs, recorders), ["Prettier"], "non-recorder workflows do not count")
+  assert.deepEqual(unsettledRecorders(runs, []), [])
+  const success = { state: "success", summary: "ok", recorded: "2026-09-20T12:00:00Z", jobs: 2 }
+  const held = withRecorderCompleteness(success, ["Prettier"], HEAD40)
+  assert.equal(held.state, "pending")
+  assert.match(held.summary, /1 recorder run is still running \(Prettier\)/)
+  assert.equal(held.jobs, 2, "what the record said is kept")
+  assert.equal(checkRunPayload(held, HEAD40, null).status, "in_progress")
+  assert.deepEqual(withRecorderCompleteness(success, [], HEAD40), success)
+  const failure = { state: "failure", summary: "none", recorded: null, jobs: null }
+  assert.deepEqual(withRecorderCompleteness(failure, ["Prettier"], HEAD40), failure, "a missing record is failure regardless of running recorders")
+  assert.deepEqual(parseRecorderNames('["Install","Prettier"]'), recorders)
+  assert.deepEqual(parseRecorderNames(undefined), [])
+  assert.throws(() => parseRecorderNames('{"a":1}'), /JSON array/)
+})
+
+test("verify: the fork's re-review lock comment is not session residue, other comments still are", () => {
+  const lock = `<!-- garnet:rereview ${SHA_B} -->\n@greptileai review\nNot requested (repository secret absent): devin.`
+  assert.equal(findResidue("routine body", [lock]), null)
+  assert.equal(findResidue("routine body", [lock, "Reviewed by Devin"]), "Devin")
+  assert.equal(findResidue("see app.devin.ai/x", [lock]), "app.devin.ai")
 })

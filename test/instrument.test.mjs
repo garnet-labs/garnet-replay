@@ -77,13 +77,23 @@ test("planReplay instrument mode writes the selected workflow and uses its path 
     }),
     /the fork's recording workflows run only when src\/\*\* change; commit 2 touches none of them/,
   )
+  const selfReferencing = planReplay({
+    slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
+    baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: "docs/x.md", previous: null }],
+    work: "/tmp/demo", record: "instrument", ecosystem: null,
+    instrument: { ...instrument, content: workflow.replace("src/**", ".github/workflows/ci.yml"), workflowInventory: [{ path: ".github/workflows/ci.yml", jobs: ["test"], paths: [".github/workflows/ci.yml"] }] },
+    dependabotConfigured: true,
+  })
+  assert.deepEqual(selfReferencing.recordFilters, { [instrument.path]: [".github/workflows/ci.yml"] })
   assert.throws(
     () => planReplay({
       slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
       baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: ".github/workflows/ci.yml", previous: null }],
-      work: "/tmp/demo", record: "instrument", ecosystem: null, instrument, dependabotConfigured: true,
+      work: "/tmp/demo", record: "instrument", ecosystem: null,
+      instrument: { ...instrument, workflowInventory: [{ path: ".github/workflows/ci.yml", jobs: ["test"], paths: ["src/**"] }] },
+      dependabotConfigured: true,
     }),
-    /the change edits \.github\/workflows\/ci\.yml; pick another workflow\/job or another change/,
+    /the change edits \.github\/workflows\/ci\.yml; pick another workflow\/job or another change[\s\S]*pull_request workflow choices:[\s\S]*test: edits-workflow=yes, path-reachable=no/,
   )
 })
 
