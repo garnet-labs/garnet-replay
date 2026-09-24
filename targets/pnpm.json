@@ -1957,9 +1957,1517 @@
         ]
       },
       "observedAt": "2026-09-10T21:19:26.107Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15475,
+      "title": "fix(filter): detect catalog version changes in filter since selector (pnpm/pnpm#8718)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:57:09Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 21,
+      "paths": [
+        ".changeset/filter-catalog-since.md",
+        "Cargo.lock",
+        "pnpm-lock.yaml",
+        "pnpm/crates/cli/src/cli_args/change.rs",
+        "pnpm/crates/cli/src/cli_args/pipeline/selection.rs",
+        "pnpm/crates/package-manager/src/install/run/time_machine_capture.rs",
+        "pnpm/crates/workspace-projects-filter/Cargo.toml",
+        "pnpm/crates/workspace-projects-filter/src/filter.rs",
+        "pnpm/crates/workspace-projects-filter/src/filter/from_projects.rs",
+        "pnpm/crates/workspace-projects-filter/src/filter/tests.rs",
+        "pnpm/crates/workspace-projects-filter/src/get_changed_projects.rs",
+        "pnpm/crates/workspace-projects-filter/src/get_changed_projects/catalogs.rs",
+        "pnpm/crates/workspace-projects-graph/src/base_project.rs",
+        "pnpm/crates/workspace-projects-graph/src/create_projects_graph/tests.rs",
+        "pnpm/crates/workspace/src/projects_graph_view.rs",
+        "pnpm/tasks/micro-benchmark/src/workspace_sort.rs",
+        "pnpm11/workspace/projects-filter/package.json",
+        "pnpm11/workspace/projects-filter/src/getChangedProjects.ts",
+        "pnpm11/workspace/projects-filter/src/index.ts",
+        "pnpm11/workspace/projects-filter/test/index.ts",
+        "pnpm11/workspace/projects-filter/tsconfig.json"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15451,
+      "title": "perf(ci): cache the vendored Rust dependencies and shorten the Windows Rust job",
+      "author": "EfeDurmaz16",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:21:24Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 34,
+      "paths": [
+        ".github/actions/rustup/action.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/pacquet-ci.yml",
+        ".github/workflows/pacquet-integrated-benchmark.yml",
+        "justfile",
+        "package.json",
+        "pnpm/crates/auth-commands/src/logout/tests.rs",
+        "pnpm/crates/auth-commands/src/logout/tests/redaction.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/verify_engine/tests.rs",
+        "pnpm/crates/cli/tests/suite/audit/signatures.rs",
+        "pnpm/crates/cli/tests/suite/cargo_git_install.rs",
+        "pnpm/crates/cli/tests/suite/change.rs",
+        "pnpm/crates/cli/tests/suite/init.rs",
+        "pnpm/crates/cli/tests/suite/ping.rs",
+        "pnpm/crates/cli/tests/suite/publish_recursive/wait.rs",
+        "pnpm/crates/engine-runtime-node-resolver/src/node_resolver/tests.rs",
+        "pnpm/crates/network/src/retry/tests.rs",
+        "pnpm/crates/package-manager/src/install/tests.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_dispatch.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_freshness.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_optional.rs",
+        "pnpm/crates/package-manager/src/install/tests/lockfile_recovery.rs",
+        "pnpm/crates/package-manager/src/update/tests.rs",
+        "pnpm/crates/publish/src/capabilities/tests.rs",
+        "pnpm/crates/publish/src/publish_packed_pkg/tests.rs",
+        "pnpm/crates/tarball/src/tests.rs",
+        "pnpm/crates/tarball/src/tests/archive_contract.rs",
+        "pnpm/crates/tarball/src/tests/behavior_network_error_display_includes.rs",
+        "pnpm/crates/tarball/src/tests/behavior_retries_other_4xx_codes.rs",
+        "pnpm/crates/tarball/src/tests/files.rs",
+        "pnpm/crates/tarball/src/tests/integrity.rs",
+        "pnpm/crates/tarball/src/tests/reporting.rs",
+        "pnpm/crates/tarball/src/tests/security.rs",
+        "pnpm/crates/testing-utils/src/git_repo.rs"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15486,
+      "title": "fix(lockfile): clean up atomic-write temp files on interrupt",
+      "author": "OctopusWen",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:38:43Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        ".changeset/cleanup-temp-lockfile-on-interrupt.md",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "pnpm/crates/executor/src/interrupt.rs",
+        "pnpm/crates/fs/Cargo.toml",
+        "pnpm/crates/fs/src/lib.rs",
+        "pnpm/crates/fs/src/pending_temp.rs",
+        "pnpm/crates/fs/src/pending_temp/tests.rs",
+        "pnpm/crates/fs/src/write_atomic.rs",
+        "pnpm/crates/lockfile/src/save_lockfile.rs",
+        "pnpm11/lockfile/fs/package.json",
+        "pnpm11/lockfile/fs/src/write.ts",
+        "pnpm11/lockfile/fs/test/write.test.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15478,
+      "title": "fix(workspace): install projects reached through a symlink (pnpm/pnpm#1044)",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:45:00Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".changeset/symlinked-workspace-project-links.md",
+        "pnpm-lock.yaml",
+        "pnpm/crates/cli/tests/suite/workspace_install.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies/task_groups.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies/tests.rs",
+        "pnpm11/installing/commands/package.json",
+        "pnpm11/installing/commands/src/recursive.ts",
+        "pnpm11/installing/commands/test/miscRecursive.ts",
+        "pnpm11/installing/deps-installer/src/install/index.ts",
+        "pnpm11/installing/read-projects-context/src/index.ts",
+        "pnpm11/pnpm/test/monorepo/index.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15469,
+      "title": "fix(licenses): report the paths of hoisted packages",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:56:53Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        ".changeset/licenses-hoisted-paths-pacquet.md",
+        ".changeset/licenses-hoisted-paths.md",
+        "pnpm-lock.yaml",
+        "pnpm/crates/cli/src/cli_args/licenses.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/package_dirs.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/package_dirs/tests.rs",
+        "pnpm/crates/cli/tests/suite/licenses.rs",
+        "pnpm11/deps/compliance/commands/package.json",
+        "pnpm11/deps/compliance/commands/src/licenses/licensesList.ts",
+        "pnpm11/deps/compliance/commands/test/licenses/index.ts",
+        "pnpm11/deps/compliance/commands/tsconfig.json",
+        "pnpm11/deps/compliance/license-scanner/src/getPkgInfo.ts",
+        "pnpm11/deps/compliance/license-scanner/src/licenses.ts",
+        "pnpm11/deps/compliance/license-scanner/src/lockfileToLicenseNodeTree.ts",
+        "pnpm11/deps/compliance/license-scanner/test/hoistedLocations.spec.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15460,
+      "title": "fix(self-update): persist release-age approvals in project",
+      "author": "Dextheking1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:53:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        ".changeset/minimum-release-age-excludes-engine-install.md",
+        "pnpm/crates/cli/src/cli_args/add/execution.rs",
+        "pnpm/crates/cli/src/cli_args/dlx/cache.rs",
+        "pnpm/crates/cli/src/cli_args/global/install.rs",
+        "pnpm/crates/cli/src/cli_args/runtime.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm/tests.rs",
+        "pnpm/crates/cli/src/shim_dispatch/runtime_env.rs",
+        "pnpm/crates/package-manager/src/add.rs",
+        "pnpm/crates/package-manager/src/add/install.rs",
+        "pnpm/crates/package-manager/src/add/tests.rs",
+        "pnpm/crates/package-manager/src/add/tests/installation.rs",
+        "pnpm/crates/package-manager/src/add/tests/reporting.rs",
+        "pnpm/crates/package-manager/src/install.rs",
+        "pnpm/crates/package-manager/src/install/entry_points.rs",
+        "pnpm/crates/package-manager/src/install/materialize.rs",
+        "pnpm/crates/package-manager/src/install/run.rs",
+        "pnpm/crates/package-manager/src/install/run/execution.rs",
+        "pnpm/crates/package-manager/src/install/tests.rs",
+        "pnpm/crates/package-manager/src/install/tests/builds.rs",
+        "pnpm/crates/package-manager/src/install/tests/fresh_outputs.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_dispatch.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_freshness.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_optional.rs",
+        "pnpm/crates/package-manager/src/install/tests/frozen_policy.rs",
+        "pnpm/crates/package-manager/src/install/tests/install_outputs.rs",
+        "pnpm/crates/package-manager/src/install/tests/lockfile_recovery.rs",
+        "pnpm/crates/package-manager/src/install/tests/lockfile_writes.rs",
+        "pnpm/crates/package-manager/src/install/tests/repeat_install.rs",
+        "pnpm/crates/package-manager/src/install/tests/reporting.rs",
+        "pnpm/crates/package-manager/src/install/tests/resolution.rs",
+        "pnpm/crates/package-manager/src/install/tests/runtimes.rs",
+        "pnpm/crates/package-manager/src/install/tests/store.rs",
+        "pnpm/crates/package-manager/src/install/tests/workspace.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/resolution/completion.rs",
+        "pnpm/crates/package-manager/src/remove.rs",
+        "pnpm/crates/package-manager/src/update/install.rs"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15490,
+      "title": "fix: do not crash when the temporary directory is missing",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:59:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/lazy-tempy-missing-tmpdir.md",
+        "pnpm11/fetching/binary-fetcher/src/index.ts",
+        "pnpm11/pnpm/test/cli.ts",
+        "pnpm11/releasing/commands/src/publish/batchPublish.ts",
+        "pnpm11/releasing/commands/src/publish/publish.ts",
+        "pnpm11/releasing/commands/src/tarball/readResponseBodyCapped.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15489,
+      "title": "fix(lockfile.to-pnp): resolve workspace dependencies under Plug'n'Play",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:57:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/pnp-workspace-dependency-locations.md",
+        "pnpm11/lockfile/to-pnp/src/index.ts",
+        "pnpm11/lockfile/to-pnp/test/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15488,
+      "title": "fix(lockfile): preserve config fields in lockfile merger (pnpm/pnpm#8366)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:44:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/preserve-lockfile-config-fields.md",
+        "pnpm/crates/lockfile/src/merge_lockfile_changes.rs",
+        "pnpm/crates/lockfile/src/merge_lockfile_changes/config.rs",
+        "pnpm/crates/lockfile/src/merge_lockfile_changes/env.rs",
+        "pnpm/crates/lockfile/src/merge_lockfile_changes/tests.rs",
+        "pnpm11/lockfile/merger/src/index.ts",
+        "pnpm11/lockfile/merger/test/index.ts",
+        "pnpm11/lockfile/types/src/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15487,
+      "title": "fix(exec): set PWD to the directory the command runs in",
+      "author": "OctopusWen",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:38:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/exec-pwd-logical-path.md",
+        "pnpm/crates/cli/src/cli_args/exec.rs",
+        "pnpm/crates/cli/tests/suite/exec_recursive.rs",
+        "pnpm11/exec/commands/src/exec.ts",
+        "pnpm11/exec/commands/test/exec.e2e.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15485,
+      "title": "fix(lockfile): show versions in the incompatible lockfile error",
+      "author": "OctopusWen",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:38:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/lockfile-incompatible-error-versions.md",
+        "pnpm/crates/lockfile/src/lockfile_version.rs",
+        "pnpm/crates/lockfile/src/lockfile_version/tests.rs",
+        "pnpm11/cli/default-reporter/src/reportError.ts",
+        "pnpm11/cli/default-reporter/test/reportingErrors.ts",
+        "pnpm11/lockfile/fs/src/errors/LockfileBreakingChangeError.ts",
+        "pnpm11/lockfile/fs/src/read.ts",
+        "pnpm11/lockfile/fs/test/read.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15480,
+      "title": "fix(hoisted): restrict installed dependencies under hoisted linker (pnpm/pnpm#8882)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:08:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        ".changeset/hoisted-filter-dependencies.md",
+        "pnpm/crates/cli/tests/suite/hoisted_node_linker.rs",
+        "pnpm/crates/cli/tests/suite/install_filters.rs",
+        "pnpm/crates/package-manager/src/install/apply_materialization.rs",
+        "pnpm/crates/package-manager/src/install/apply_materialization/commit.rs",
+        "pnpm/crates/package-manager/src/install/apply_materialization/selection.rs",
+        "pnpm/crates/package-manager/src/install/materialize/scope.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/plan.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/setup.rs",
+        "pnpm11/installing/deps-installer/src/install/index.ts",
+        "pnpm11/installing/deps-installer/test/install/multipleImporters.ts",
+        "pnpm11/installing/deps-restorer/src/index.ts",
+        "pnpm11/installing/deps-restorer/src/lockfileToHoistedDepGraph.ts",
+        "pnpm11/installing/deps-restorer/test/lockfileToHoistedDepGraph.test.ts",
+        "pnpm11/pnpm/test/install/hoistedLinker.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15479,
+      "title": "feat: support package.yml manifests",
+      "author": "rteobaldo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:56:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        ".changeset/support-package-yml.md",
+        "pnpm/crates/cli/src/cli_args/package_manager.rs",
+        "pnpm/crates/cli/src/cli_args/prefix.rs",
+        "pnpm/crates/cli/src/cli_args/view/tests.rs",
+        "pnpm/crates/cli/src/state.rs",
+        "pnpm/crates/cli/tests/suite/package_yaml.rs",
+        "pnpm/crates/pack/src/manifest_entry.rs",
+        "pnpm/crates/pack/src/tarball.rs",
+        "pnpm/crates/pack/src/tests.rs",
+        "pnpm/crates/package-manifest/src/lib.rs",
+        "pnpm/crates/package-manifest/src/project.rs",
+        "pnpm/crates/package-manifest/src/serialization.rs",
+        "pnpm/crates/package-manifest/src/tests/json5.rs",
+        "pnpm/crates/package-manifest/src/tests/manifests.rs",
+        "pnpm/crates/workspace/src/project_manifest.rs",
+        "pnpm/crates/workspace/src/project_manifest/tests.rs",
+        "pnpm/crates/workspace/src/projects.rs",
+        "pnpm/crates/workspace/src/projects/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15477,
+      "title": "fix(install): re-resolve a local tarball replaced at the same path",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:09:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/reinstall-changed-local-tarball.md",
+        "pnpm/crates/cli/tests/suite/local_tarball_dependency.rs",
+        "pnpm/crates/cli/tests/suite/tarball_url_dependency.rs",
+        "pnpm/crates/package-manager/src/install/run/dispatch.rs",
+        "pnpm/crates/package-manager/src/install/run/frozen_local_tarballs.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15476,
+      "title": "test(dedupe): add regression test for circular peer dependencies during dedupe (pnpm/pnpm#8867)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:03:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pnpm/crates/cli/tests/suite/dedupe.rs",
+        "pnpm11/installing/deps-installer/test/install/dedupeInWorkspace.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15474,
+      "title": "feat(manifest): keep blank lines between package.json entries",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:39:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/keep-manifest-blank-lines.md",
+        "pnpm/crates/package-manifest/src/blank_lines.rs",
+        "pnpm/crates/package-manifest/src/blank_lines/tests.rs",
+        "pnpm/crates/package-manifest/src/lib.rs",
+        "pnpm/crates/package-manifest/src/serialization.rs",
+        "pnpm/crates/package-manifest/src/tests/behavior.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15473,
+      "title": "fix(deps-restorer): file resolve-time custom fetches under the manifest name@version",
+      "author": "Dextheking1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:39:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".changeset/custom-fetcher-session-manifest-identity.md",
+        "pnpm/crates/deps-restorer/src/custom_fetcher/metadata.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15472,
+      "title": "fix: keep version unknown for packages with no readable manifest",
+      "author": "Dextheking1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:28:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".changeset/unknown-version-ranged-selectors.md",
+        "pnpm/crates/package-manager/src/package_extender/tests.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/tests.rs",
+        "pnpm/crates/resolving-deps-resolver/src/resolve_dependency_tree/walk/workspace_resolution.rs",
+        "pnpm/crates/resolving-local-resolver/src/local_resolver.rs",
+        "pnpm/crates/resolving-local-resolver/tests/resolve.rs",
+        "pnpm11/hooks/read-package-hook/test/createPackageExtender.test.ts",
+        "pnpm11/installing/deps-resolver/src/resolveDependencies.ts",
+        "pnpm11/installing/deps-resolver/test/getManifestFromResponse.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15471,
+      "title": "fix(pacquet): reject workspaces patterns that escape the project directory",
+      "author": "xiechimon",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:04:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/workspace-yaml-from-yarn-workspaces.md",
+        "pnpm/crates/cli/src/cli_args/yarn_workspaces_field.rs",
+        "pnpm/crates/cli/src/cli_args/yarn_workspaces_field/tests.rs",
+        "pnpm/crates/cli/tests/suite/yarn_workspaces_field.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15470,
+      "title": "fix(licenses): report hoisted package paths under hoisted node linker",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:59:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        ".changeset/licenses-hoisted-package-paths.md",
+        "pnpm/crates/cli/src/cli_args/licenses.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/hoisting.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/render.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/tests.rs",
+        "pnpm/crates/cli/tests/suite/licenses.rs",
+        "pnpm11/deps/compliance/commands/src/licenses/licensesList.ts",
+        "pnpm11/deps/compliance/commands/test/licenses/index.ts",
+        "pnpm11/deps/compliance/license-scanner/src/getPkgInfo.ts",
+        "pnpm11/deps/compliance/license-scanner/src/licenses.ts",
+        "pnpm11/deps/compliance/license-scanner/src/lockfileToLicenseNodeTree.ts",
+        "pnpm11/deps/compliance/license-scanner/src/readModulesManifest.ts",
+        "pnpm11/deps/compliance/license-scanner/test/getPkgInfo.spec.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15468,
+      "title": "docs: note that lockfileDir outside the project skips the workspace conversion",
+      "author": "xiechimon",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:53:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".changeset/workspace-yaml-from-yarn-workspaces.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15467,
+      "title": "fix(cmd-shim): resolve relative shim targets from the physical basedir",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:50:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        ".changeset/nested-bin-shim-physical-basedir.md",
+        "pnpm/crates/cmd-shim/src/link_bins.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/linking_paths.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/shim_writer.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/tests/behavior.rs",
+        "pnpm/crates/cmd-shim/src/link_bins/tests/runtime_removing_bin_entries_preserves.rs",
+        "pnpm/crates/cmd-shim/src/shim.rs",
+        "pnpm/crates/cmd-shim/src/shim/relocatable.rs",
+        "pnpm/crates/cmd-shim/src/shim/sh.rs",
+        "pnpm/crates/cmd-shim/src/shim/tests.rs",
+        "pnpm/crates/cmd-shim/src/shim/tests/relocatable.rs",
+        "pnpm/crates/deps-restorer/src/link_bins/tests.rs",
+        "pnpm11/bins/cmd-shim/src/index.ts",
+        "pnpm11/bins/cmd-shim/test/e2e.test.js",
+        "pnpm11/bins/cmd-shim/test/e2e.test.js.snapshot",
+        "pnpm11/bins/cmd-shim/test/test.js.snapshot",
+        "pnpm11/bins/linker/src/index.ts",
+        "pnpm11/bins/linker/test/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15466,
+      "title": "fix(licenses): read dedicated lockfiles in workspaces",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:41:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".changeset/licenses-dedicated-lockfiles.md",
+        "pnpm/crates/cli/src/cli_args/licenses.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/lockfiles.rs",
+        "pnpm/crates/cli/src/cli_args/licenses/tests.rs",
+        "pnpm/crates/cli/tests/suite/licenses.rs",
+        "pnpm11/deps/compliance/commands/src/licenses/licensesList.ts",
+        "pnpm11/deps/compliance/commands/test/licenses/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15465,
+      "title": "fix(git-fetcher): skip unapproved builds while preparing a git dependency",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:22:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/git-dep-prepare-ignored-builds.md",
+        "pnpm/crates/cli/tests/suite/git_hosted_install/builds.rs",
+        "pnpm/crates/git-fetcher/src/prepare_package.rs",
+        "pnpm/crates/git-fetcher/src/prepare_package/tests.rs",
+        "pnpm11/exec/prepare-package/src/index.ts",
+        "pnpm11/exec/prepare-package/test/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15464,
+      "title": "fix(workspace): link deps for packages using publishConfig.linkDirectory (pnpm/pnpm#8338)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:18:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        ".changeset/link-deps-publish-config-directory.md",
+        "pnpm/crates/cli/tests/suite/multiple_importers.rs",
+        "pnpm/crates/deps-restorer/src/link_bins/direct.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies.rs",
+        "pnpm/crates/deps-restorer/src/symlink_direct_dependencies/publish.rs",
+        "pnpm/crates/package-manager/src/install/lifecycle.rs",
+        "pnpm/crates/package-manager/src/install/lifecycle/graph.rs",
+        "pnpm/crates/resolving-local-resolver/src/local_resolver.rs",
+        "pnpm11/bins/linker/src/index.ts",
+        "pnpm11/fs/symlink-dependency/src/index.ts",
+        "pnpm11/installing/deps-installer/src/install/index.ts",
+        "pnpm11/installing/deps-installer/src/install/link.ts",
+        "pnpm11/installing/deps-installer/test/install/multipleImporters.ts",
+        "pnpm11/installing/deps-restorer/src/index.ts",
+        "pnpm11/installing/linking/direct-dep-linker/src/linkDirectDeps.ts",
+        "pnpm11/lockfile/filtering/src/filterImporter.ts",
+        "pnpm11/lockfile/filtering/test/filterByImporters.ts",
+        "pnpm11/resolving/local-resolver/src/index.ts",
+        "pnpm11/workspace/project-manifest-reader/src/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15463,
+      "title": "fix(publish): honor publish wait deadline",
+      "author": "barry166",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:16:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        ".changeset/publish-wait-deadline.md",
+        "pnpm/crates/publish/src/publish_wait.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15462,
+      "title": "fix(pnpmfile): run the project pnpmfile after config dependency plugins",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:07:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/project-pnpmfile-after-plugin-pnpmfiles.md",
+        "pnpm11/hooks/pnpmfile/src/requireHooks.ts",
+        "pnpm11/hooks/pnpmfile/test/index.ts",
+        "pnpm11/pnpm/test/getConfig.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15461,
+      "title": "fix(package-manager): record approved release age excludes of a pinned pnpm",
+      "author": "waltuov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:03:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/pinned-pnpm-release-age-exclude.md",
+        "pnpm/crates/cli/src/cli_args/pre_command/execute.rs",
+        "pnpm/crates/cli/src/cli_args/self_update/install_pnpm.rs",
+        "pnpm/crates/cli/src/engine_pm/install.rs",
+        "pnpm/crates/cli/tests/suite/version.rs",
+        "pnpm/crates/cli/tests/suite/with.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15459,
+      "title": "fix(peers): name the project of each peer dependency issue",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:52:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/name-project-in-peer-issues.md",
+        "pnpm/crates/cli/tests/suite/peers.rs",
+        "pnpm/crates/deps-inspection-peers/src/render.rs",
+        "pnpm/crates/deps-inspection-peers/src/tests.rs",
+        "pnpm11/deps/inspection/peers-issues-renderer/src/index.ts",
+        "pnpm11/deps/inspection/peers-issues-renderer/test/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15458,
+      "title": "fix(deploy): keep the source workspace state on legacy deploy",
+      "author": "waltuov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:52:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        ".changeset/legacy-deploy-keeps-workspace-state.md",
+        "pnpm/crates/cli/tests/suite/deploy/legacy.rs",
+        "pnpm/crates/package-manager/src/install.rs",
+        "pnpm/crates/package-manager/src/install/apply_materialization.rs",
+        "pnpm/crates/package-manager/src/install/entry_points.rs",
+        "pnpm/crates/package-manager/src/install/run.rs",
+        "pnpm/crates/package-manager/src/install/run/dispatch.rs",
+        "pnpm/crates/package-manager/src/install/run/execution.rs",
+        "pnpm/crates/package-manager/src/install/state_options.rs",
+        "pnpm11/installing/commands/src/install.ts",
+        "pnpm11/installing/commands/src/installDeps.ts",
+        "pnpm11/releasing/commands/src/deploy/deploy.ts",
+        "pnpm11/releasing/commands/test/deploy/deploy.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15457,
+      "title": "fix(deploy): honour virtualStoreDir",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:51:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/deploy-respects-virtual-store-dir.md",
+        "pnpm/crates/cli/src/cli_args/deploy/install.rs",
+        "pnpm/crates/cli/src/cli_args/deploy/workspace_manifest.rs",
+        "pnpm/crates/cli/tests/suite/deploy.rs",
+        "pnpm/crates/cli/tests/suite/deploy/virtual_store.rs",
+        "pnpm11/releasing/commands/src/deploy/createDeployFiles.ts",
+        "pnpm11/releasing/commands/src/deploy/deploy.ts",
+        "pnpm11/releasing/commands/test/deploy/virtualStoreDir.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15456,
+      "title": "fix(run): treat the script echo and verify-deps install output as info-level",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:47:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        ".changeset/run-loglevel-quiets-command-echo.md",
+        "pnpm/crates/cli/src/cli_args/reporter.rs",
+        "pnpm/crates/cli/src/cli_args/run.rs",
+        "pnpm/crates/cli/src/cli_args/run/recursive.rs",
+        "pnpm/crates/cli/src/cli_args/verify_deps.rs",
+        "pnpm/crates/cli/tests/suite/loglevel.rs",
+        "pnpm/crates/default-reporter/src/lib.rs",
+        "pnpm11/exec/commands/src/exec.ts",
+        "pnpm11/exec/commands/src/run.ts",
+        "pnpm11/exec/commands/src/runDepsStatusCheck.ts",
+        "pnpm11/exec/commands/src/runRecursive.ts",
+        "pnpm11/exec/pnpm-cli-runner/src/index.ts",
+        "pnpm11/pnpm/test/run.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15455,
+      "title": "perf(deps-restorer): link the files of one directory from one worker",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:30:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/link-one-writer-per-directory.md",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir/placement.rs",
+        "pnpm/crates/deps-restorer/src/import_indexed_dir/placement/tests.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15454,
+      "title": "fix(list): print selected projects and skip unsaved deps with --only-projects",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:30:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".changeset/list-only-projects-selected-and-unsaved.md",
+        "pnpm/crates/cli/src/cli_args/list/recursive.rs",
+        "pnpm/crates/cli/tests/suite/list.rs",
+        "pnpm/crates/cli/tests/suite/list/workspace.rs",
+        "pnpm/crates/deps-inspection/src/build.rs",
+        "pnpm11/deps/inspection/commands/src/listing/recursive.ts",
+        "pnpm11/deps/inspection/commands/test/listing/recursive.ts",
+        "pnpm11/deps/inspection/tree-builder/src/buildDependenciesTree.ts",
+        "pnpm11/deps/inspection/tree-builder/test/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15453,
+      "title": "fix(install): take the fast path in a workspace with a custom modulesDir",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:29:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".changeset/fast-path-custom-modules-dir.md",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install.rs",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/settle.rs",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests.rs",
+        "pnpm/crates/package-manager/src/optimistic_repeat_install/tests/modules_dir.rs",
+        "pnpm11/deps/status/src/checkDepsStatus.ts",
+        "pnpm11/deps/status/test/checkDepsStatus.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15452,
+      "title": "fix(deploy): keep the source workspace state on a legacy deploy",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:27:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/deploy-legacy-keeps-workspace-state.md",
+        "pnpm/crates/cli/tests/suite/deploy/legacy.rs",
+        "pnpm/crates/package-manager/src/install/apply_materialization.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15450,
+      "title": "fix(update): move off a locked version the registry no longer serves",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:17:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        ".changeset/update-off-unavailable-version.md",
+        "pnpm/crates/cli/tests/suite/update.rs",
+        "pnpm/crates/deps-restorer/src/install_frozen_lockfile/verification.rs",
+        "pnpm/crates/lockfile-verification/src/lib.rs",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions.rs",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions/tests.rs",
+        "pnpm/crates/lockfile-verification/src/verify_lockfile_resolutions/tests/behavior.rs",
+        "pnpm/crates/package-manager/src/install.rs",
+        "pnpm/crates/package-manager/src/install/materialize.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/seed_policy.rs",
+        "pnpm/crates/package-manager/src/install_with_fresh_lockfile/tests.rs",
+        "pnpm11/installing/deps-installer/src/install/index.ts",
+        "pnpm11/installing/deps-installer/src/install/verifyLockfileResolutions.ts",
+        "pnpm11/installing/deps-installer/test/install/minimumReleaseAge.ts",
+        "pnpm11/installing/deps-installer/test/install/verifyLockfileResolutions.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15449,
+      "title": "fix(import): convert yarn patch: dependencies into patchedDependencies",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:12:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        ".changeset/import-converts-yarn-patches.md",
+        "pnpm/crates/cli/src/cli_args/import.rs",
+        "pnpm/crates/cli/src/cli_args/import/yarn_patches.rs",
+        "pnpm/crates/cli/src/cli_args/import/yarn_patches/tests.rs",
+        "pnpm/crates/cli/tests/suite/import_yarn_patches.rs",
+        "pnpm/crates/cli/tests/suite/main.rs",
+        "pnpm11/installing/commands/src/import/index.ts",
+        "pnpm11/installing/commands/src/import/yarnPatches.ts",
+        "pnpm11/installing/commands/test/importYarnPatches.ts",
+        "pnpm11/installing/commands/test/parseYarnPatchSpecifier.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15448,
+      "title": "fix(peers): resolve workspace package peer dependencies from consuming dependents (pnpm/pnpm#8150)",
+      "author": "zkochan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-23T23:47:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/workspace-package-peer-dependencies.md",
+        "pnpm/crates/cli/tests/suite/peers.rs",
+        "pnpm/crates/deps-inspection-peers/src/linked.rs",
+        "pnpm11/deps/inspection/peers-checker/src/checkPeerDependencies.ts",
+        "pnpm11/deps/inspection/peers-checker/test/checkPeerDependencies.test.ts",
+        "pnpm11/installing/deps-resolver/src/resolveDependencies.ts",
+        "pnpm11/installing/deps-resolver/src/resolvePeers.ts",
+        "pnpm11/installing/deps-resolver/test/resolvePeers.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15447,
+      "title": "fix(patch): find a dedicated project's lockfile in the patch commands",
+      "author": "altaywtf",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-23T23:45:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/patch-in-project-with-own-lockfile.md",
+        "pnpm/crates/cli/src/cli_args/dispatch_install.rs",
+        "pnpm/crates/cli/src/cli_args/dispatch_install/patches.rs",
+        "pnpm/crates/cli/src/cli_args/pipelines.rs",
+        "pnpm/crates/cli/tests/suite/patch.rs",
+        "pnpm/crates/cli/tests/suite/patch/commit.rs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:37.864Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": 15278,
+      "forkPr": 71,
+      "branch": "chore/ci-ignore-scripts-b",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "beb3726772b30ee90e32cfa96dfb89fb371c912c",
+      "headSha": "2d0607982bec1930ef2aea2ae467dc0d9022d27a",
+      "forkHeadSha": "6723627e9f6a401d56b7a52544bbc599679d4863",
+      "firstSha": "0df40d13ce171035339fcb6b2c9c973757e09a1a",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "undeterminable",
+      "openedAt": "2026-09-24T05:32:11.447Z"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [
@@ -4389,6 +5897,57 @@
       "receipts": [],
       "raw": "out/pnpm/pr-7-consume.json",
       "checkedAt": "2026-09-22T17:31:51.188Z"
+    },
+    {
+      "forkPr": 69,
+      "headSha": "49fd8cd482f7851d4f18c236ce6e3a1971484457",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-69-consume.json",
+      "checkedAt": "2026-09-24T05:57:49.286Z"
+    },
+    {
+      "forkPr": 70,
+      "headSha": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-70-consume.json",
+      "checkedAt": "2026-09-24T05:57:59.284Z"
+    },
+    {
+      "forkPr": 71,
+      "headSha": "6723627e9f6a401d56b7a52544bbc599679d4863",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-71-consume.json",
+      "checkedAt": "2026-09-24T05:58:01.717Z"
     }
   ],
   "stage2": {
