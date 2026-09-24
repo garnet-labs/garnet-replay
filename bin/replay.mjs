@@ -362,9 +362,13 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     scope candidates to workload paths and persist the
                                                                     target's record mode for later live runs
   live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
-                                                                    two-commit replay of an upstream pull request on the fork
+                                                                    replay of an upstream pull request on the fork: one commit once the fork is
+                                                                    onboarded (replay setup), two bundled commits with --record inject
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
+  setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
+                                                                    one-time onboarding: recording as a ready pull request on the fork; merge it,
+                                                                    then replays carry only the change
   fork <owner/repo> [--org garnet-labs]                             create the matching garnet-labs fork
   refresh <slug> [--work dir] [--dry-run]                            refresh a stale fork default branch from upstream
   repin <slug> [--work dir] [--dry-run]                              move the fork's recording workflows to the harness action pin (one routine commit on the default branch)
@@ -399,6 +403,7 @@ async function main(args) {
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))
   if (command === "repin") return ladder.repin(args.slice(1))
+  if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
   if (command === "verify") {
