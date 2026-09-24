@@ -35,7 +35,7 @@ faithful workload remain open; see the report for ownership and next actions.
 | 1 | Capture completeness as a field and a gate | `capture` block, `assessCapture`, schema, tests | done |
 | 2 | Comparison pair everywhere, rebase supersession | `pair`, `supersession`, pair line in comments and cards, `verify` pair leg | done |
 | 3 | Exhibit verifier before anything is shared | `replay verify`: comment, head-bound, finalized, determinable, pair, permalink, check, residue, label, open | done; PASS not yet seen on a live exhibit |
-| 4 | Repin to the stable action tag | `live/templates/garnet-record.yml` pins main `e546567a` | open until a stable tag covers it |
+| 4 | Repin to the stable action tag | templates and `GARNET_ACTION_PIN` at `245ad6be` (v2.3.0); `replay repin` moves existing forks | done |
 | 5 | Vocabulary: "new behavior" on rendered surfaces, banned-word gate | `contract/vocab.json`, `assertVocabClean`, `verdictPhrase` | done |
 | 6 | Claim class on every statement | `claims`, `CLAIM_CLASSES`, card and comment render them | done |
 | 7 | Specimen finder over real pull requests and history | `replay find`, `lib/observe.mjs`, `lib/find.mjs` | done |

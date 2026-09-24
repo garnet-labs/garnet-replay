@@ -13,7 +13,7 @@ test("instrumentWorkflow adds the sensor after checkout with matrix gating and p
   const start = result.content.indexOf("  test:")
   const end = result.content.indexOf("\n  lint:", start + 4)
   const job = result.content.slice(start, end < 0 ? undefined : end)
-  assert.match(job, /- name: Checkout code[\s\S]*- uses: garnet-org\/action@e546567a72e4fede11ec39d6e9f75b539adef22c/)
+  assert.match(job, /- name: Checkout code[\s\S]*- uses: garnet-org\/action@245ad6be82de3200c205109c8ca7ac816dc692ea/)
   assert.match(job, /if: runner\.os == 'Linux'/)
   assert.match(job, /runs-on: \$\{\{ matrix\.os \}\}\n    permissions:\n      contents: read\n      id-token: write/)
   assert.equal(result.content.slice(0, start), body.slice(0, start))

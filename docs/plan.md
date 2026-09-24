@@ -35,8 +35,7 @@ demo beacon package in a garnet-labs demo repository. It is a real pull request
 with a real kernel record, not a third-party incident.
 
 The generated workflow uses `id-token: write`, no `GARNET_API_TOKEN`, and pins
-`garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c`. That pin is
-unreleased before v2.3.0 and should be repinned at the tag.
+`garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea` (release v2.3.0).
 
 ## Comparison target
 
