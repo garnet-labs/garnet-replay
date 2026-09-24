@@ -358,6 +358,9 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     author explicit before/after files; record commit 1 before publishing commit 2
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
+  find --paths <glob,..> --workload-name <n> --workload-paths <glob,..> [--record-mode <m> --record-job <w/j>]
+                                                                    scope candidates to workload paths and persist the
+                                                                    target's record mode for later live runs
   live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit replay of an upstream pull request on the fork
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
