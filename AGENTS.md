@@ -11,9 +11,12 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - The fork is the only write target. Never push, comment, label, or open a pull
   request on the upstream repository. Never add a link to the upstream
   repository, its pull requests, or `owner/repo#N` on the fork.
-- Exactly two commits per replay, both non-empty, routine wording. No mention of
-  Garnet, demos, tests, tools, or sessions in branch names, commits, titles,
-  bodies, or cards.
+- Commit shape: a replay on an onboarded fork is exactly one commit — the
+  change itself; onboarding is its own one-commit pull request, never bundled
+  into a replay. Only specialized experiments (e.g. before/after sequencing)
+  use exactly two commits. All commits non-empty, routine wording. No mention
+  of Garnet, demos, tests, tools, or sessions in branch names, commits,
+  titles, bodies, or cards.
 - The harness never posts Garnet comments. The fork's recording workflow does.
 - Every artifact names its pair (head, compared commit, transition, scope).
 - Missing, partial, stale, or unbound evidence is `undeterminable`. Never write
