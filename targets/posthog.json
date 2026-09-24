@@ -5668,6 +5668,1091 @@
         ]
       },
       "observedAt": "2026-09-11T16:48:24.753Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105613,
+      "title": "feat(marketing-analytics): add standalone metric chart",
+      "author": "jabahamondes",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:33:12Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "docs/internal/web-analytics-query-serving.md",
+        "frontend/snapshots.yml",
+        "pnpm-lock.yaml",
+        "products/marketing_analytics/frontend/dashboard/charts/MetricChart.stories.tsx",
+        "products/marketing_analytics/frontend/dashboard/charts/MetricChart.test.tsx",
+        "products/marketing_analytics/frontend/dashboard/charts/MetricChart.tsx",
+        "products/marketing_analytics/frontend/dashboard/charts/MetricChartPreview.tsx",
+        "products/marketing_analytics/frontend/dashboard/charts/seriesFocus.test.ts",
+        "products/marketing_analytics/frontend/dashboard/charts/seriesFocus.ts",
+        "products/marketing_analytics/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105627,
+      "title": "feat(cdp): add a native pinterest conversions destination",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:22:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 22,
+      "paths": [
+        "nodejs/src/cdp/templates/_destinations/pinterest_ads/pinterest.template.test.ts",
+        "nodejs/src/cdp/templates/_destinations/pinterest_ads/pinterest.template.ts",
+        "nodejs/src/cdp/templates/index.ts",
+        "nodejs/tests/fixtures/hog-bytecode/1012a8564b2eaab750a349c934ccfd0872f867bbe4ddf83f945d416f902f7dc1.json",
+        "nodejs/tests/fixtures/hog-bytecode/17992392caa1f5bdd9a81b1b37b0f3b7a0e216c6bdc30fbd8e346d1492c1fe0a.json",
+        "nodejs/tests/fixtures/hog-bytecode/357a1767caa88e54476e966acb0a2115a6dfea508128270f8be311d06a7d73e8.json",
+        "nodejs/tests/fixtures/hog-bytecode/56ed83f6ef36c8b67c512ece0974ba8b942000aca9664a1cf6697458f1ec84a2.json",
+        "nodejs/tests/fixtures/hog-bytecode/58459510bcdff4a0c4d5b7c258a42d06d5a43acb22c0b82f6b3e8d642328c70d.json",
+        "nodejs/tests/fixtures/hog-bytecode/5f5eb2c4e2770b5d41decba1521f3ba6a96bca48e546204e5a2932c7c197d2c8.json",
+        "nodejs/tests/fixtures/hog-bytecode/6983b9d977f199af5fe66c85908040de39a91b0f0b1850fab6246680c7b1b449.json",
+        "nodejs/tests/fixtures/hog-bytecode/6b92e09fabb1b55c4a12c97c907f3c1c7a09171a38d930921c93b6f4c4aa97f9.json",
+        "nodejs/tests/fixtures/hog-bytecode/6beb48ac2721ecd06dc78b002f3a7161b1d7a86396a8e23f698f7c5caab42bd5.json",
+        "nodejs/tests/fixtures/hog-bytecode/76ba7a18e2bb7fae019ef29f0baab9a321ef1b69456d58443e0ac9fbb028d8aa.json",
+        "nodejs/tests/fixtures/hog-bytecode/7d53be5f2394a27ad38c4aad09cd8618c09ae497b8f89aca048ee908bd3704ad.json",
+        "nodejs/tests/fixtures/hog-bytecode/804d2f4c572585ea61fac7e3c0183321d70a8bd49dcdea54df4dadd5b2f1370b.json",
+        "nodejs/tests/fixtures/hog-bytecode/8768e71d66f9edff52067f5facff6b3b602c0771874d32cb750ce5464b1b1f8a.json",
+        "nodejs/tests/fixtures/hog-bytecode/943cd97941684643d52bef0d860535dcc0d0769cf428d281b9b09b379758e658.json",
+        "nodejs/tests/fixtures/hog-bytecode/b35788c15727be2be06b9cc6f1c7490cbf2c2971346921e2285aa9c377eff257.json",
+        "nodejs/tests/fixtures/hog-bytecode/d0b1d24afcc8508ced6509be908061cc5fb7b40a4e9fc9526eae4047b462563c.json",
+        "nodejs/tests/fixtures/hog-bytecode/ee38e8eb2cf2b6a53b0e6fbcebf2c4c91881e6ecd0d7aebab5c90f8c57966aa1.json",
+        "nodejs/tests/fixtures/hog-bytecode/f21932acac2707328b3ea52f8b841df49d33569ba4fc3f0e68fe5358b4958a2c.json",
+        "nodejs/tests/fixtures/hog-bytecode/ff8c997e4b0fa0277b82359dcd6ccfcc1a9fb8064bfa9c3e71b010e1493d2dc8.json"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105624,
+      "title": "feat(workflows): let workflow steps read workflow.id and workflow.name",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:03:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 21,
+      "paths": [
+        "frontend/src/lib/components/CyclotronJob/CyclotronJobInputsValidation.test.ts",
+        "frontend/src/lib/components/CyclotronJob/CyclotronJobInputsValidation.ts",
+        "frontend/src/scenes/hog-functions/email-templater/emailTemplaterLogic.test.ts",
+        "frontend/src/scenes/hog-functions/email-templater/emailTemplaterLogic.tsx",
+        "frontend/src/types.ts",
+        "nodejs/src/cdp/services/hogflows/actions/hog_function.test.ts",
+        "nodejs/src/cdp/services/hogflows/hogflow-functions.service.ts",
+        "nodejs/src/cdp/types.ts",
+        "nodejs/src/cdp/utils/filter-runtime.ts",
+        "posthog/cdp/filter_globals.json",
+        "posthog/cdp/test/test_validation.py",
+        "posthog/cdp/validation.py",
+        "products/cdp/backend/api/test/test_hog_function.py",
+        "products/workflows/backend/api/hog_flow.py",
+        "products/workflows/backend/api/test/test_hog_flow.py",
+        "products/workflows/frontend/TemplateLibrary/messageTemplateTestSendLogic.test.ts",
+        "products/workflows/frontend/TemplateLibrary/messageTemplateTestSendLogic.ts",
+        "products/workflows/frontend/Workflows/hogflows/steps/StepFunction.tsx",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/HogFlowFunctionConfiguration.test.ts",
+        "products/workflows/frontend/Workflows/hogflows/steps/components/HogFlowFunctionConfiguration.tsx",
+        "products/workflows/skills/building-workflows/references/graph-schema.md"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105623,
+      "title": "fix(team): make team extension creation at team creation opt-in",
+      "author": "haacked",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:54:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        "posthog/models/team/README.md",
+        "posthog/models/team/extensions.py",
+        "posthog/models/team/js_snippet_config.py",
+        "posthog/models/team/team.py",
+        "posthog/models/team/team_marketing_analytics_config.py",
+        "posthog/models/team/team_provisioning_config.py",
+        "posthog/models/team/team_revenue_analytics_config.py",
+        "posthog/test/repo_invariants/test_startup_import_budget.py",
+        "products/business_knowledge/backend/models/team_business_knowledge_config.py",
+        "products/conversations/backend/migrations/0027_slack_config_unique_slack_team_id.py",
+        "products/conversations/backend/models/team_conversations_slack_config.py",
+        "products/conversations/backend/models/team_conversations_teams_config.py",
+        "products/customer_analytics/backend/migrations/0057_team_customer_analytics_config_activity_event_default.py",
+        "products/customer_analytics/backend/migrations/max_migration.txt",
+        "products/customer_analytics/backend/models/account_test.py",
+        "products/customer_analytics/backend/models/team_customer_analytics_config.py",
+        "products/customer_analytics/backend/test/test_account_track_rules.py",
+        "products/data_modeling/backend/models/github_sync_config.py",
+        "products/data_quality/backend/models/team_data_quality_config.py",
+        "products/data_warehouse/backend/models/team_data_warehouse_config.py",
+        "products/data_warehouse/backend/tests/api/test_data_warehouse.py",
+        "products/experiments/backend/models/team_experiments_config.py",
+        "products/feature_flags/backend/models/team_feature_flag_defaults_config.py",
+        "products/feature_flags/backend/models/team_feature_flag_policy_config.py",
+        "products/feature_flags/backend/test/test_team_feature_flag_policy_config.py",
+        "products/logs/backend/models.py",
+        "products/marketing_analytics/backend/test_api_apply_setup_ops.py",
+        "products/marketing_analytics/backend/test_api_conversion_goals.py",
+        "products/signals/ARCHITECTURE.md",
+        "products/signals/backend/models.py",
+        "products/signals/backend/test/test_daily_limit.py",
+        "products/signals/backend/test/test_signal_team_config_api.py",
+        "products/signals/backend/test/test_slack_inbox_notifications.py",
+        "products/signals/backend/test/test_summary_settle_autostart.py",
+        "products/tasks/backend/models.py",
+        "products/tasks/backend/tests/test_admin.py",
+        "products/tracing/backend/models.py",
+        "products/workflows/backend/models/team_workflows_config.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105649,
+      "title": "fix(warehouse-sources): stop AWS Cost Explorer server errors from paging error tracking",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:48:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/aws_cost_explorer/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/aws_cost_explorer/tests/test_aws_cost_explorer_source.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105648,
+      "title": "fix(batch-exports): retry bigquery uploads that fail without a typed error",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:37:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/batch_exports/backend/temporal/destinations/bigquery_batch_export.py",
+        "products/batch_exports/backend/tests/temporal/destinations/bigquery/test_client.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105647,
+      "title": "fix(desktop): color work column PR badges by PR state",
+      "author": "puemos",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-24T04:32:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/desktop/packages/ui/src/features/canvas/components/ChannelItemRow.tsx",
+        "products/desktop/packages/ui/src/features/canvas/components/work/WorkColumn.tsx",
+        "products/desktop/packages/workspace-server/src/services/git/task-pr-status.test.ts",
+        "products/desktop/packages/workspace-server/src/services/git/task-pr-status.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105646,
+      "title": "fix(postgres): keep multirange values through the arrow column build",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:30:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/core/arrow_utils.py",
+        "products/warehouse_sources/backend/temporal/data_imports/pipelines/core/test/test_utils.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105645,
+      "title": "fix(desktop): preserve plan mode for warm cloud tasks",
+      "author": "puemos",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:29:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "products/desktop/packages/api-client/src/posthog-client.test.ts",
+        "products/desktop/packages/api-client/src/posthog-client.ts",
+        "products/desktop/packages/core/src/task-detail/taskCreationHost.ts",
+        "products/desktop/packages/core/src/task-detail/taskCreationSaga.test.ts",
+        "products/desktop/packages/core/src/task-detail/taskCreationSaga.ts",
+        "products/desktop/packages/ui/src/features/task-detail/components/TaskInput.tsx",
+        "products/desktop/packages/ui/src/features/task-detail/hooks/useWarmTask.test.tsx",
+        "products/desktop/packages/ui/src/features/task-detail/hooks/useWarmTask.ts",
+        "products/desktop/packages/ui/src/features/task-detail/hooks/warmTaskLease.ts",
+        "products/desktop/packages/ui/src/features/task-detail/taskCreationHostImpl.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105644,
+      "title": "feat(stamphog): hide dismissed approvals as outdated",
+      "author": "webjunkie",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:27:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "products/stamphog/README.md",
+        "products/stamphog/backend/logic/github_client.py",
+        "products/stamphog/backend/tests/fakes.py",
+        "products/stamphog/backend/tests/test_integration.py",
+        "products/stamphog/backend/tests/test_logic.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105643,
+      "title": "fix(logs): guard the filter group shape from deep links",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:10:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "products/logs/frontend/components/LogsViewer/Filters/FilterGroup.tsx",
+        "products/logs/frontend/components/LogsViewer/Filters/LogsFilterBar/LogsFilterBar.tsx",
+        "products/logs/frontend/components/LogsViewer/Filters/logsViewerFiltersLogic.test.ts",
+        "products/logs/frontend/components/LogsViewer/Filters/logsViewerFiltersLogic.ts",
+        "products/logs/frontend/logsSceneLogic.test.ts",
+        "products/logs/frontend/logsSceneLogic.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105642,
+      "title": "fix(postgres): treat exhausted CDC connect timeouts as non-retryable",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T04:03:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/cdc/adapter.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/cdc/errors.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/cdc/tests/test_adapter.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/postgres/cdc/tests/test_errors.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105641,
+      "title": "fix(persons): keep a profile link when a view drops the person column",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:32:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "frontend/src/queries/nodes/DataTable/DataTable.tsx",
+        "frontend/src/queries/nodes/DataTable/TableView/TableViewSelector.tsx",
+        "frontend/src/queries/nodes/DataTable/TableView/tableViewLogic.test.ts",
+        "frontend/src/queries/nodes/DataTable/TableView/tableViewLogic.ts",
+        "frontend/src/queries/nodes/DataTable/renderColumn.test.tsx",
+        "frontend/src/queries/nodes/DataTable/renderColumn.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105640,
+      "title": "feat(persons): resolve the person tombstone queue in the deletion sweep",
+      "author": "nickbest-ph",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T03:26:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "posthog/dags/clickhouse_cleanup.py",
+        "posthog/dags/person_tombstone_queue.py",
+        "posthog/dags/tests/test_clickhouse_cleanup.py",
+        "posthog/dags/tests/test_person_tombstone_queue.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105637,
+      "title": "fix(marketing): align session cache with calendar ranges",
+      "author": "jabahamondes",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-24T02:33:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "docs/internal/marketing-attribution-session-precompute.md",
+        "products/marketing_analytics/backend/hogql_queries/attribution_sessions_read.py",
+        "products/marketing_analytics/backend/hogql_queries/marketing_sessions_precompute.py",
+        "products/marketing_analytics/backend/hogql_queries/test_attribution_sessions_read.py",
+        "products/marketing_analytics/dags/marketing_sessions_precompute.py",
+        "products/marketing_analytics/dags/tests/test_marketing_sessions_precompute.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105636,
+      "title": "fix(marketing-analytics): warm flagged teams and let background warms write",
+      "author": "lricoy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:16:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/marketing_analytics/backend/tasks/lazy_precompute_revalidation.py",
+        "products/marketing_analytics/backend/tasks/test_lazy_precompute_revalidation.py",
+        "products/marketing_analytics/dags/marketing_precompute.py",
+        "products/marketing_analytics/dags/tests/test_marketing_precompute.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105635,
+      "title": "chore(ci): Update bot IPs from GoodBots repository",
+      "author": "app/scheduled-actions-posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:13:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "nodejs/assets/bot-ips.txt"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105634,
+      "title": "fix(data-warehouse): show a catalog placeholder while new source loads",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:10:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "products/data_warehouse/frontend/scenes/NewSourceScene/NewSourceScene.tsx",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/SourceCatalog.tsx",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/SourceCatalogSkeleton.stories.tsx",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/SourceCatalogSkeleton.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105633,
+      "title": "fix(data-warehouse): warn when a bucket URL is not the provider you picked",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:05:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "products/data_warehouse/frontend/scenes/NewSourceScene/components/SelfManagedSourceForm.tsx",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/sourceWizardLogic.tsx",
+        "products/data_warehouse/frontend/shared/components/SourceIcon.tsx",
+        "products/data_warehouse/frontend/shared/storageProvider.test.ts",
+        "products/data_warehouse/frontend/shared/storageProvider.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105632,
+      "title": "fix(workflows): send html-only emails without a text part",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T02:02:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "nodejs/src/cdp/schema/cyclotron.ts",
+        "nodejs/src/cdp/services/messaging/email.service.test.ts",
+        "nodejs/src/cdp/services/messaging/email.service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105631,
+      "title": "fix(heatmaps): keep the toolbar widths that fit when one reflow is too big",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:56:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "frontend/src/toolbar/stats/heatmapCaptureLogic.test.ts",
+        "frontend/src/toolbar/stats/heatmapCaptureLogic.ts",
+        "frontend/src/toolbar/toolbarApi.ts",
+        "products/web_analytics/backend/api/heatmaps_api.py",
+        "products/web_analytics/backend/test/test_heatmap_screenshots.py",
+        "products/web_analytics/frontend/generated/api.ts",
+        "products/web_analytics/frontend/generated/api.zod.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105630,
+      "title": "feat(web-analytics): show web vitals attribution per path",
+      "author": "lricoy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:49:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "frontend/src/queries/nodes/WebVitals/WebVitalsAttributionModal.tsx",
+        "frontend/src/queries/nodes/WebVitals/WebVitalsPathBreakdown.tsx",
+        "frontend/src/queries/nodes/WebVitals/webVitalsAttribution.test.ts",
+        "frontend/src/queries/nodes/WebVitals/webVitalsAttribution.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105629,
+      "title": "fix(web-analytics): name blocked assets host in web vitals check",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:33:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/src/scenes/health/components/WebAnalyticsHealthTable.tsx",
+        "products/web_analytics/backend/temporal/health_checks/web_vitals.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105625,
+      "title": "feat(workflows): let PostHog AI write a broadcast's email on the content step",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T01:13:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/workflows/frontend/Broadcasts/broadcastWizardLogic.ts",
+        "products/workflows/frontend/Broadcasts/steps/BroadcastContentStep.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105622,
+      "title": "fix(error-tracking): reopen and alert when auto-merge lands on a resolved issue",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:53:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "products/error_tracking/backend/logic/assignees.py",
+        "products/error_tracking/backend/logic/issue_mutations.py",
+        "products/error_tracking/backend/logic/lifecycle_events.py",
+        "products/error_tracking/backend/models.py",
+        "products/error_tracking/backend/temporal/fingerprint_embedding_result/activities.py",
+        "products/error_tracking/backend/temporal/fingerprint_embedding_result/test/test_fingerprint_embedding_result.py",
+        "products/error_tracking/backend/temporal/fingerprint_embedding_result/types.py",
+        "products/error_tracking/backend/temporal/lifecycle/issue_created/activities.py",
+        "products/error_tracking/backend/temporal/lifecycle/issue_created/test/test_workflow.py",
+        "products/error_tracking/backend/temporal/lifecycle/issue_created/workflow.py",
+        "products/error_tracking/backend/temporal/lifecycle/issue_reopened/workflow.py",
+        "products/error_tracking/backend/test/test_error_tracking.py",
+        "products/error_tracking/backend/tests/api/test_error_tracking_api.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105620,
+      "title": "feat(workflows): list each broadcast run's recipients inside the run",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:45:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/workflows/frontend/Broadcasts/BroadcastSummary.tsx",
+        "products/workflows/frontend/Broadcasts/broadcastSentLogic.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105619,
+      "title": "feat(cdp): list the tracking pixel source and keep credentials out of its events",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:45:12Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "nodejs/src/cdp/templates/_sources/pixel/pixel.template.test.ts",
+        "nodejs/src/cdp/templates/_sources/pixel/pixel.template.ts",
+        "nodejs/src/cdp/templates/_sources/without-credentials.ts",
+        "nodejs/tests/fixtures/hog-bytecode/a0bba3ede0bb7e510c92ba1c4f0ce099d951336fd9af580599c021657a653fa7.json",
+        "nodejs/tests/fixtures/hog-bytecode/b900296f48c9c534a28bb942b675ca03c19bae83f22fa81c9dae6133a4c3aa4f.json",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/SourceCatalog.tsx",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/sourceCatalogLogic.ts",
+        "products/data_warehouse/frontend/scenes/NewSourceScene/tests/sourceCatalogLogic.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105618,
+      "title": "fix(signup): accept a blank role on social signup",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:43:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "frontend/src/lib/components/SignupRoleSelect.tsx",
+        "frontend/src/scenes/organization/ConfirmOrganization/ConfirmOrganization.test.tsx",
+        "frontend/src/scenes/organization/ConfirmOrganization/ConfirmOrganization.tsx",
+        "posthog/api/signup.py",
+        "posthog/api/test/test_signup.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105617,
+      "title": "fix(integrations): show why the Google Ads account picker is short",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:39:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "frontend/src/lib/api.ts",
+        "frontend/src/lib/integrations/GoogleAdsIntegrationHelpers.test.tsx",
+        "frontend/src/lib/integrations/GoogleAdsIntegrationHelpers.tsx",
+        "frontend/src/lib/integrations/googleAdsIntegrationLogic.ts",
+        "posthog/models/integration/__init__.py",
+        "posthog/models/integration/google_ads.py",
+        "posthog/models/test/integration/test_google_ads.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/google_ads/source.py",
+        "products/warehouse_sources/backend/tests/api/test_external_data_source.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105615,
+      "title": "fix(managed-warehouse): unblock hosted trino shadow requests",
+      "author": "EDsCODE",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:35:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "docs/internal/hogql-trino-compiler.md",
+        "products/managed_warehouse/backend/tests/test_trino_connection.py",
+        "products/managed_warehouse/backend/tests/test_trino_materialization.py",
+        "products/managed_warehouse/backend/tests/test_trino_model_aliases.py",
+        "products/managed_warehouse/backend/trino_materialization.py",
+        "products/managed_warehouse/backend/trino_model_aliases.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/trino/tests/test_trino.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/trino/trino.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105614,
+      "title": "fix(workflows): show the sending allowance while tiers are not enforced",
+      "author": "dmarchuk",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-24T00:35:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "products/workflows/frontend/Workflows/Reputation/WorkflowsReputation.stories.tsx",
+        "products/workflows/frontend/Workflows/Reputation/WorkflowsReputation.tsx",
+        "products/workflows/frontend/Workflows/Reputation/workflowsReputationLogic.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105612,
+      "title": "fix(snowflake): treat TOTP-enforced MFA login as non-retryable",
+      "author": "Gilbert09",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:23:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "products/warehouse_sources/backend/temporal/data_imports/sources/snowflake/source.py",
+        "products/warehouse_sources/backend/temporal/data_imports/sources/snowflake/tests/test_snowflake.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 105610,
+      "title": "perf(error-tracking): thin the team issue list read",
+      "author": "app/posthog",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-24T00:06:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "products/error_tracking/backend/facade/api.py",
+        "products/error_tracking/backend/logic/__init__.py",
+        "products/error_tracking/backend/migrations/0042_add_issue_team_id_desc_index.py",
+        "products/error_tracking/backend/migrations/max_migration.txt",
+        "products/error_tracking/backend/models.py",
+        "products/error_tracking/backend/tests/api/test_error_tracking_api.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:39.267Z"
     }
   ],
   "replays": [
@@ -5720,6 +6805,22 @@
           "public profile identity: garnet-labs/posthog / run 34624686640 / profile 01a09166-6050-7307-94aa-cc579877690d; recorded d8cd30760e54cff661f9e31f0acb810d56e97fd3 (refs/pull/203/merge); expected head b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf"
         ]
       }
+    },
+    {
+      "upstreamPr": 105613,
+      "forkPr": 208,
+      "branch": "chore/update-29hp",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "8fb612ae23e04c35c9882b37b95da36a4805407b",
+      "headSha": "ab5daa408db2fa29fb131c1411612ad92b9b9412",
+      "forkHeadSha": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+      "firstSha": "0dccdf1d8336be1ff7ebb12863ad018b25787038",
+      "transition": null,
+      "record": "fork-workflow",
+      "ecosystem": "pnpm",
+      "state": "undeterminable",
+      "openedAt": "2026-09-24T05:13:41.781Z"
     }
   ],
   "evidence": [
@@ -6742,6 +7843,23 @@
       "receipts": [],
       "raw": "out/posthog/pr-144-consume.json",
       "checkedAt": "2026-09-22T17:31:58.590Z"
+    },
+    {
+      "forkPr": 208,
+      "headSha": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-208-consume.json",
+      "checkedAt": "2026-09-24T05:58:08.720Z"
     }
   ],
   "stage2": {
