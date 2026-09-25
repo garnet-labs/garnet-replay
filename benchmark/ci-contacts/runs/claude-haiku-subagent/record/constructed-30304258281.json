@@ -1,0 +1,13 @@
+{
+  "task": "constructed-30304258281",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The capture is not declared, so we cannot verify whether all outbound connections were recorded during the install job.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The capture is not declared, so we cannot verify whether all outbound connections were recorded during the install job.",
+    "parse_error": null
+  },
+  "error": null
+}

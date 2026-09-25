@@ -1,0 +1,13 @@
+{
+  "task": "real-140",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The capture is not declared, and all outbound destination changes are only to runner infrastructure.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The capture is not declared, and all outbound destination changes are only to runner infrastructure.",
+    "parse_error": null
+  },
+  "error": null
+}

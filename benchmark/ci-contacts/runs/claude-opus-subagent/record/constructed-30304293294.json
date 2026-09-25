@@ -1,0 +1,15 @@
+{
+  "task": "constructed-30304293294",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"httpbin.org\"], \"verdict\": \"new-behavior\", \"reason\": \"The PR adds a postinstall script that curls https://httpbin.org/get, and the complete-capture record confirms a new workload connection to httpbin.org via node → dash → curl; the description omits this and mentions only the ms dependency.\"}\n",
+  "answer": {
+    "new_destinations": [
+      "httpbin.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The PR adds a postinstall script that curls https://httpbin.org/get, and the complete-capture record confirms a new workload connection to httpbin.org via node → dash → curl; the description omits this and mentions only the ms dependency.",
+    "parse_error": null
+  },
+  "error": null
+}

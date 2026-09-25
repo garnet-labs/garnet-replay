@@ -1,0 +1,13 @@
+{
+  "task": "real-147",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The capture is not declared, and all recorded changes are only to runner infrastructure destinations.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The capture is not declared, and all recorded changes are only to runner infrastructure destinations.",
+    "parse_error": null
+  },
+  "error": null
+}

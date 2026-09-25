@@ -1,0 +1,13 @@
+{
+  "task": "real-148",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"This lockfile bump of posthog-js, @posthog/core and @posthog/types swaps in new tarball versions, presumably from the same registry. Nothing shown reveals their install-time scripts or network use, so the material does not settle the question.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "This lockfile bump of posthog-js, @posthog/core and @posthog/types swaps in new tarball versions, presumably from the same registry. Nothing shown reveals their install-time scripts or network use, so the material does not settle the question.",
+    "parse_error": null
+  },
+  "error": null
+}

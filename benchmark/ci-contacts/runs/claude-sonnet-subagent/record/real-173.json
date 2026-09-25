@@ -1,0 +1,13 @@
+{
+  "task": "real-173",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only bumps the @posthog/mcp-analytics (@posthog/mcp) and @posthog/core version pins in the lockfile with no new packages or scripts, and all recorded destination changes are tagged runner background CI infrastructure.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only bumps the @posthog/mcp-analytics (@posthog/mcp) and @posthog/core version pins in the lockfile with no new packages or scripts, and all recorded destination changes are tagged runner background CI infrastructure.",
+    "parse_error": null
+  },
+  "error": null
+}

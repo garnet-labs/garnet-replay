@@ -1,0 +1,15 @@
+{
+  "task": "real-165",
+  "model": "claude-haiku-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [\"codeload.github.com\"], \"verdict\": \"new-behavior\", \"reason\": \"The change adds uWebSockets.js as a direct dependency with a GitHub tarball URL, requiring CI to download from codeload.github.com during install.\"}",
+  "answer": {
+    "new_destinations": [
+      "codeload.github.com"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The change adds uWebSockets.js as a direct dependency with a GitHub tarball URL, requiring CI to download from codeload.github.com during install.",
+    "parse_error": null
+  },
+  "error": null
+}

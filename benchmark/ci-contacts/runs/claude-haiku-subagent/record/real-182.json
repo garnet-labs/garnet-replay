@@ -1,0 +1,18 @@
+{
+  "task": "real-182",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"api.ipify.org\", \"httpbin.org\", \"ip-api.com\", \"registry.npmjs.org\"], \"verdict\": \"new-behavior\", \"reason\": \"The PR introduces new workload network destinations including package registry and external monitoring services.\"}",
+  "answer": {
+    "new_destinations": [
+      "api.ipify.org",
+      "httpbin.org",
+      "ip-api.com",
+      "registry.npmjs.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The PR introduces new workload network destinations including package registry and external monitoring services.",
+    "parse_error": null
+  },
+  "error": null
+}

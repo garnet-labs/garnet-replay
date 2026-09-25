@@ -1,0 +1,13 @@
+{
+  "task": "real-164",
+  "model": "claude-sonnet-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"This only bumps @typescript/native-preview (and its platform binaries) to a newer dev build version already resolved from the same existing npm registry, with no new package or host introduced.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "This only bumps @typescript/native-preview (and its platform binaries) to a newer dev build version already resolved from the same existing npm registry, with no new package or host introduced.",
+    "parse_error": null
+  },
+  "error": null
+}

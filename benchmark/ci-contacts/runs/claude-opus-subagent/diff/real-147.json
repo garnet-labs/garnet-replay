@@ -1,0 +1,13 @@
+{
+  "task": "real-147",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"This patch bump of posthog-js and @posthog/core swaps in new tarballs, presumably from the same registry. The diff does not reveal install scripts or CI steps that would show whether network behavior changes.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "This patch bump of posthog-js and @posthog/core swaps in new tarballs, presumably from the same registry. The diff does not reveal install scripts or CI steps that would show whether network behavior changes.",
+    "parse_error": null
+  },
+  "error": null
+}
