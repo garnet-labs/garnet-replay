@@ -49,4 +49,4 @@ for (const r of perTask.filter((r) => interesting.has(r.id)).sort((a, b) => a.id
   lines.push(`| ${r.id} | ${r.model} | ${r.track} | ${r.verdict} | ${r.outcome} | ${r.named.join(", ") || "—"} |`)
 }
 writeFileSync("benchmark/ci-contacts/results.md", `${lines.join("\n")}\n`)
-console.log(lines.slice(4, 5 + summaries.length).join("\n"))
+console.log(lines.slice(4, 6 + summaries.length).join("\n"))

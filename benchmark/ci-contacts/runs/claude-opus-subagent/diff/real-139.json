@@ -1,0 +1,13 @@
+{
+  "task": "real-139",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"This patch bump of posthog-js and @posthog/browser-common changes the installed tarballs, presumably from the same registry. The diff does not show their install scripts or runtime network use in CI, so it cannot be decided.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "This patch bump of posthog-js and @posthog/browser-common changes the installed tarballs, presumably from the same registry. The diff does not show their install scripts or runtime network use in CI, so it cannot be decided.",
+    "parse_error": null
+  },
+  "error": null
+}

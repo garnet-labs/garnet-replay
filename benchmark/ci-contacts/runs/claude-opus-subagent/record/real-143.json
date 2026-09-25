@@ -1,0 +1,13 @@
+{
+  "task": "real-143",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The only destination changes in the record are runner background infrastructure, but capture is not declared complete, so the absence of new workload destinations cannot be relied on. The lockfile adds @posthog/browser-common, a new package fetched from the registry, but no new workload host is shown.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The only destination changes in the record are runner background infrastructure, but capture is not declared complete, so the absence of new workload destinations cannot be relied on. The lockfile adds @posthog/browser-common, a new package fetched from the registry, but no new workload host is shown.",
+    "parse_error": null
+  },
+  "error": null
+}

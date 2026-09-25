@@ -1,0 +1,13 @@
+{
+  "task": "real-164",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The PR bumps @typescript/native-preview and its platform binary packages to a newer dev build, presumably from the same registry, and exempts them from the minimum-release-age check. What the new binaries run or contact during install and build is not shown, so this cannot be decided.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The PR bumps @typescript/native-preview and its platform binary packages to a newer dev build, presumably from the same registry, and exempts them from the minimum-release-age check. What the new binaries run or contact during install and build is not shown, so this cannot be decided.",
+    "parse_error": null
+  },
+  "error": null
+}

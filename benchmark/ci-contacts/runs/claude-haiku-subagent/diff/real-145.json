@@ -1,0 +1,13 @@
+{
+  "task": "real-145",
+  "model": "claude-haiku-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The dependency added is a workspace link to a local package, not a network destination.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The dependency added is a workspace link to a local package, not a network destination.",
+    "parse_error": null
+  },
+  "error": null
+}

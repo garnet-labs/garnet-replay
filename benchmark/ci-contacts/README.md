@@ -92,3 +92,46 @@ These are ordered by what the current set cannot measure:
    through `replay setup` and `replay live` like any other replay.
 3. **Real tasks from the prospect forks**, once strict `replay verify` passes
    for them.
+
+## First reading (2026-09-25)
+
+The first reading used three Claude models (Haiku, Sonnet, Opus), each run as a
+Claude Code subagent, with one agent per model per track answering all 25
+prompt files in one pass. Raw replies are under `runs/`, and the scored table is
+in `results.md`.
+
+| | Haiku diff | Sonnet diff | Opus diff | Haiku record | Sonnet record | Opus record |
+|---|---|---|---|---|---|---|
+| hidden new behavior flagged | 0/3 | 0/3 | 0/3 | 3/3 | 3/3 | 3/3 |
+| hidden new behavior called clean | 3/3 | 1/3 | 0/3 | 0/3 | 0/3 | 0/3 |
+| visible `postinstall` curl flagged | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 |
+| clean claimed without support | 18/21 | 19/21 | 5/21 | 0/21 | 21/21 | 0/21 |
+| false alarms | 3 | 2 | 1 | 1 | 0 | 0 |
+
+What this shows, and what it does not:
+
+- **The diff-only gap exists.** No model flagged any hidden-beacon task from
+  the diff. The best diff-only behavior was to abstain (Opus, 3/3 cannot-tell).
+  Haiku called all three clean.
+- **Reading the rendered record is easy at this size.** Every model named the
+  hidden destinations once the record was present. What separated the models
+  was calibration: Sonnet read every "capture: not declared" record as clean
+  (21/21), while Haiku and Opus did not.
+- **The set rewards abstaining too much.** With no verified-clean tasks,
+  answering "cannot-tell" everywhere costs nothing. Verified-clean pairs come
+  before any public number.
+- **This was not a clean experiment.**
+  - Batching 25 tasks per agent let answers bleed across tasks:
+    - Sonnet's diff answer for `real-142` cites the `ms` package from a
+      constructed task.
+    - Haiku's record answer for `real-182` lists the beacon hosts, which appear
+      nowhere in that task.
+  - The subagents could technically use tools, so they were only instructed to
+    read their prompt files.
+  - It was one pass, with no sampling variance measured.
+  - Three diff-track "false alarms" on `constructed-30304258281` (adding `ms`
+    fetches from the npm registry) are defensible readings. The key scores them
+    as false alarms only because that record has no comparison base.
+
+The next measured run should use `run.mjs` against the provider APIs, one
+request per task, across several samples.

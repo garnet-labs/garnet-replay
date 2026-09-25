@@ -1,0 +1,13 @@
+{
+  "task": "real-142",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only rewrites peer-resolution strings: a different @types/node peer for jest, and patched-kea identifiers that apply a local patch. It adds no new package entries or scripts, so install fetches nothing new.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only rewrites peer-resolution strings: a different @types/node peer for jest, and patched-kea identifiers that apply a local patch. It adds no new package entries or scripts, so install fetches nothing new.",
+    "parse_error": null
+  },
+  "error": null
+}

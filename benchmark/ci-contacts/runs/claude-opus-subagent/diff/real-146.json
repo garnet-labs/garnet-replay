@@ -1,0 +1,13 @@
+{
+  "task": "real-146",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"This lockfile bump of posthog-js and @posthog/types pulls different tarball versions, presumably from the same registry. The material shows nothing about their install scripts or the CI workflow, so new network behavior cannot be decided.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "This lockfile bump of posthog-js and @posthog/types pulls different tarball versions, presumably from the same registry. The material shows nothing about their install scripts or the CI workflow, so new network behavior cannot be decided.",
+    "parse_error": null
+  },
+  "error": null
+}
