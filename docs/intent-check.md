@@ -78,6 +78,15 @@ Scope label: `immediate-parent-to-head`; the artifact names commit 1 as
 `same-path touch` so nobody reads it as the source base. Commit wording stays
 routine (`chore: tidy comments in …`).
 
+Touch set, by change type: **modified** and **deleted** files are touched in
+commit 1 (a deleted file gets its comment in commit 1 and disappears in commit
+2); an **added** file cannot be touched, so commit 1 touches the nearest
+existing code file in the same directory (walking up to the nearest ancestor
+with one) — job selection in every observed target is per project/path
+prefix, not per file; a **rename** is a deletion plus an addition. The plan
+prints the computed touch set in `--dry-run` and refuses when any added file
+has no existing code sibling under the same top-level project directory.
+
 Rejected: `workflow_dispatch` of the job at the base SHA (job selection differs
 per repo; Sentry's matrix would be empty), recording the base branch on push
 (records only on head changes), and comparing against an arbitrary earlier
@@ -155,7 +164,14 @@ one when proposing.
   "Expected behaviour change is present in the record", "Record contradicts
   the stated change", "Record shows a change the pull request does not
   describe", "Not determinable: <reason>". Vocabulary test extended.
-- Delivery: the same mirror path (PR body) so Copilot/CodeRabbit/Qodo read it.
+- Delivery: the App comment is what the stage-2 mirror copies into the PR body
+  (`live/templates/stage2/garnet-evidence-mirror.mjs`), and the App cannot carry
+  an intent block the harness computed. Lane A therefore only writes
+  `out/<slug>/pr-<N>-card.md` and the JSON; delivering the intent section to
+  reviewers/agents needs a publisher and is a separate lane E: a fork-side
+  workflow step that runs the deterministic check (`pair --intent`) against
+  the two public profiles and writes the section into the PR body between
+  `garnet:intent:begin/end` markers, fail-closed like the mirror. Not in A–D.
 - No gate. `merge-gate` may later consume `intent.outcome`; not in this slice.
 
 ### D5 — Cohort measurement (the PMF test)
@@ -182,7 +198,7 @@ unrecorded jobs; inferring intent without a declared claim; touching
 |---|---|---|---|---|
 | A — check core | `lib/intent.mjs` (pure: `parseClaim`, `evaluateClaims`, `aggregateIntent`), step filter in `profile-diff.mjs`, `intent` schema block, `intent-check-result` claim class, `replay intent` + `pair --steps --intent`, card section, `docs/examples.md`, tests incl. Sentry fixture (base fixture constructed, labelled) | `lib/intent.mjs`, `lib/profile-diff.mjs`, `lib/evidence.mjs`, `lib/card.mjs`, `schema/`, `bin/replay.mjs`, `test/intent.test.mjs`, `docs/contract.md` | `npm test`, `node bin/replay.mjs --help`, vocabulary test, rendered card read at desktop+phone | — |
 | B — base record | `live --base same-path` two-commit sequencing on onboarded forks: touch generator by extension, guards (refuse unknown syntax / non-code-only PRs / already-open sequence), dry-run plan text, `docs/stage1.md` §1c | `lib/replay-pr.mjs`, `lib/guards.mjs`, `lib/commands.mjs`, `test/replay.test.mjs`, `docs/stage1.md` | `npm test`, `live sentry --pr 3 --dry-run` shows both commits | — |
-| C — Sentry proof | run B on a fresh fork PR for #24708 (branch from `replay-base/hydrogen-recorded`, steps `Run E2E test`), then A with the three claims above; `replay verify`; card | fork `garnet-labs/sentry-javascript` only | expected `storefront-removed: supported` if base shows `mock.shop`, else `unobservable` — reported as found | A + B merged |
+| C — Sentry proof | run B on a fresh fork PR for #24708 (branch from `replay-base/hydrogen-recorded`, steps `Run E2E test`), then A with the three claims above; `replay verify`; card | fork `garnet-labs/sentry-javascript` only | expected `storefront-removed: supported` if base shows `mock.shop`, else `unobservable` — reported as found. Known limit: public reports carry the merge-ref SHA, so `verify` will fail on `public-head-mismatch` unless executed-source linkage exists (`pair --base-executed-sha/--head-executed-sha` from a recorder attestation); until the recorder attests the checkout SHA (a `garnet-org/action` change, outside this repo), the proof ships as a card marked `undeterminable / public-head-mismatch` on the identity leg while the intent block stands on the two profiles' own `run.commit_sha` pair | A + B merged |
 | D — cohort | `find --claims`, ledger columns, first 10 candidates listed with the claim sentence quoted | `lib/find.mjs`, `lib/ledger.mjs`, `docs/ledger.md` | `npm test`, finder output labelled candidate evidence | A |
 
 A and B touch disjoint core files; both add a flag to `bin/replay.mjs`/`lib/commands.mjs`
@@ -196,3 +212,5 @@ A and B touch disjoint core files; both add a flag to `bin/replay.mjs`/`lib/comm
    base-record mechanism.
 2. Approve lane C spending two CI runs on `garnet-labs/sentry-javascript`.
 3. Whether `--propose` (one model call) is in v1 or deferred.
+4. Whether to ask `garnet-org/action` for a checkout-SHA attestation so lane C
+   (and every prospect-batch card) can pass the identity leg of `verify`.
