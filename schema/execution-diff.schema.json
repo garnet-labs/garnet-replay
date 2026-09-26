@@ -80,6 +80,20 @@
           "items": { "type": "string", "enum": ["network", "process", "file"] },
           "description": "Observation classes present in the record. A kind absent here was not recorded, not observed-as-empty."
         },
+        "steps": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Declared recorded-step names (ordinal stripped) the workload rows are restricted to."
+        },
+        "steps_missing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "head"],
+          "properties": {
+            "base": { "type": "array", "items": { "type": "string" } },
+            "head": { "type": "array", "items": { "type": "string" } }
+          }
+        },
         "totals": {
           "type": "object",
           "additionalProperties": false,
@@ -175,8 +189,37 @@
         "additionalProperties": false,
         "required": ["class", "text"],
         "properties": {
-          "class": { "type": "string", "enum": ["observed-runtime-behavior", "comparison-result", "required-check-state", "reviewer-consumption-evidence", "unsupported-claim"] },
+          "class": { "type": "string", "enum": ["observed-runtime-behavior", "comparison-result", "required-check-state", "reviewer-consumption-evidence", "intent-check-result", "unsupported-claim"] },
           "text": { "type": "string" }
+        }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "steps", "claims", "uncovered", "stepsMissing"],
+      "description": "Declared runtime claims about the change, evaluated against the scoped base-to-head delta. Present only when claims were declared.",
+      "properties": {
+        "outcome": { "type": "string", "enum": ["supported", "contradicted", "needs-explanation", "undeterminable"] },
+        "steps": { "type": "array", "items": { "type": "string" } },
+        "claims": { "type": "array", "items": { "$ref": "#/$defs/intentClaim" } },
+        "uncovered": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["added", "removed"],
+          "properties": {
+            "added": { "type": "array", "items": { "$ref": "#/$defs/intentRow" } },
+            "removed": { "type": "array", "items": { "$ref": "#/$defs/intentRow" } }
+          }
+        },
+        "stepsMissing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "head"],
+          "properties": {
+            "base": { "type": "array", "items": { "type": "string" } },
+            "head": { "type": "array", "items": { "type": "string" } }
+          }
         }
       }
     },
@@ -258,7 +301,43 @@
         "destination": { "type": "string" },
         "section": { "$ref": "#/$defs/section" },
         "process": { "type": ["string", "null"], "description": "Process that acted (last element of the execution chain) when the record carries it." },
-        "ancestry": { "type": "array", "items": { "type": "string" } }
+        "ancestry": { "type": "array", "items": { "type": "string" } },
+        "step": { "type": ["string", "null"], "description": "Recorded workflow step name with the ordinal prefix stripped; null when the record carries none." }
+      }
+    },
+    "intentClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "match", "expect", "outcome", "before", "after"],
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string", "enum": ["network", "process"] },
+        "match": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "destination": { "type": "string" },
+            "ancestry": { "type": "string" }
+          }
+        },
+        "expect": { "type": "string", "enum": ["present-before-absent-after", "absent-before-present-after", "present-both", "absent-both", "no-added", "no-removed"] },
+        "outcome": { "type": "string", "enum": ["supported", "contradicted", "unobservable", "undeterminable"] },
+        "reason": { "type": "string" },
+        "before": { "type": "array", "items": { "type": "string" } },
+        "after": { "type": "array", "items": { "type": "string" } },
+        "steps": { "type": "array", "items": { "type": "string" } },
+        "source": { "type": "string" }
+      }
+    },
+    "intentRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["side", "step"],
+      "properties": {
+        "side": { "type": "string", "enum": ["added", "removed"] },
+        "destination": { "type": "string" },
+        "ancestry": { "type": "string" },
+        "step": { "type": "string" }
       }
     },
     "processEntry": {
