@@ -171,7 +171,10 @@ node bin/replay.mjs verify https://github.com/garnet-labs/posthog/pull/<N>
 
 `verify` legs: comment present, head-bound, finalized (no placeholder text),
 determinable, pair line names the current head, public permalink loads, Garnet
-check settled, no residue, real/constructed label, pull request open. Any FAIL
+check settled (skipped jobs count as settled; cancelled or failed do not), no
+residue, real/constructed label, pull request open, public profile identity,
+sensor coverage (every job in the recording run that ran `garnet-org/action`
+started the sensor). Any FAIL
 means do not share.
 
 What "recorded" needs: the fork workflow must have a token. Pull requests from

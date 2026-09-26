@@ -20,6 +20,22 @@ completeness, separately from workload success. A card preserves quoted job
 sections for diagnosis but remains undeterminable until verification succeeds.
 Historical results below describe the verifier used at their observation time.
 
+At 2026-09-26 07:40 UTC, on a same-path two-commit replay whose E2E matrix ran
+two instrumented jobs (excerpt; the check settled detail lists every job):
+
+```text
+FAIL https://github.com/garnet-labs/sentry-javascript/pull/4 (head a3ab2c6)
+  [no] capture completeness: capture not declared; comparison undeterminable
+  [ok] pair line: pair ce38306 (previous) → a3ab2c6 (this commit) from the record summary
+  [ok] check settled: All required jobs passed or were skipped, …, E2E remix-hydrogen Test, E2E hydrogen-react-router-7 Test, … completed
+  [no] public profile identity: garnet-labs/sentry-javascript / run 36225998050 / profile 01a0dc93-c92e-791e-afb1-fb562466c2d3; recorded dc937a7108457e0349f7a598b843026ef7cd9949 (refs/pull/4/merge); expected head a3ab2c604fafb23985fb54526314d6fd03b27644
+  [no] sensor coverage: E2E hydrogen-react-router-7 Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered
+not shareable until every leg reads ok
+```
+
+The record summary says `jobs: 1`. Without the sensor coverage leg nothing on
+the record shows that a second E2E job ran unobserved.
+
 Real output from the commands in this repository, unedited except for the shell
 prompt. Captured 2026-09-10. Each example names the fork pull request it came
 from so the output can be checked against the live state.
