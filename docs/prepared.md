@@ -36,6 +36,12 @@ undeclared changed paths, changed commit messages, or different file contents.
 If interrupted while authoring a commit, inspect and finish the declared local
 states before resuming; the command never discards partial work.
 
+Path-gated workflows select jobs from the changed paths, so a baseline on the
+default branch may never run the job the change runs. To record the base of a
+change, make the baseline touch the same paths with a neutral edit (for
+example a trailing comment in each changed file) so commit 1 selects the same
+jobs as commit 2.
+
 The comparison is `immediate-parent-to-head`. The second workflow still has to
 finish and `replay verify <pr-url>` must pass before sharing. Prepared input,
 successful commands, and successful CI alone are not runtime evidence.

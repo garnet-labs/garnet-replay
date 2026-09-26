@@ -5,7 +5,7 @@ import { buildModel, classify, extractChains, recordedEvidence, renderCard } fro
 import { livePr } from "../lib/commands.mjs"
 import { publicProfile } from "../lib/gh.mjs"
 import { detectEcosystem, planReplay } from "../lib/replay-pr.mjs"
-import { publicProfileIdentity, verifyExhibit } from "../lib/verify.mjs"
+import { evaluateExhibit, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
 
 const HEAD = "a".repeat(40)
 const PREVIOUS = "b".repeat(40)
@@ -80,7 +80,10 @@ test("public JSON is fetched anonymously from only the supported selector", asyn
   await assert.rejects(publicProfile(LINK, { fetchImpl: async () => ({ ok: true, json: async () => { throw new SyntaxError("invalid JSON") } }) }), /invalid JSON/)
 })
 
-function fetchExhibit(run, body = record()) {
+const ACTION_STEP = { name: "Run garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea", conclusion: "success" }
+const START_FAILURE = "##[warning]Jibril did not start: setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error). The workflow continues without runtime monitoring for this job."
+
+function fetchExhibit(run, body = record(), logs = ["Garnet Run Profile report: ok"]) {
   return async (url, options) => {
     if (url.startsWith("https://app.garnet.ai/api/")) {
       assert.equal(options.headers, undefined)
@@ -90,6 +93,14 @@ function fetchExhibit(run, body = record()) {
     if (url.includes("/pulls/1")) return { ok: true, json: async () => ({ head: { sha: HEAD }, base: { sha: PREVIOUS }, state: "open", body: "", labels: [] }) }
     if (url.includes("/comments?")) return { ok: true, json: async () => [{ user: { login: "garnet-runtime-review[bot]" }, body }] }
     if (url.includes("/check-runs?")) return { ok: true, json: async () => ({ check_runs: [{ name: "Garnet", status: "completed", conclusion: "success" }] }) }
+    if (url.includes("/actions/runs/123/jobs?")) {
+      return { ok: true, json: async () => ({ total_count: logs.length + 1, jobs: [
+        ...logs.map((_, id) => ({ id, name: `E2E ${id}`, steps: [ACTION_STEP] })),
+        { id: 99, name: "Lint", steps: [{ name: "Run lint", conclusion: "success" }] },
+      ] }) }
+    }
+    const logMatch = /\/actions\/jobs\/(\d+)\/logs$/.exec(url)
+    if (logMatch !== null && Number(logMatch[1]) < logs.length) return { ok: true, text: async () => logs[Number(logMatch[1])] }
     assert.fail(`unexpected fetch ${url}`)
   }
 }
@@ -205,4 +216,27 @@ test("injected replay preserves Dependabot policy at its selected base and check
     assert.ok(reads.some((args) => args[1]?.includes("/contents/.github/dependabot.yml")))
     assert.doesNotMatch(result.plan.body, /- \.github\/dependabot\.yml/)
   }
+})
+
+test("sensor coverage fails when any instrumented job's sensor did not start", async () => {
+  const url = "https://github.com/garnet-labs/example/pull/1"
+  const partial = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record(), ["Garnet Run Profile report: ok", START_FAILURE]) })
+  assert.equal(partial.status, "FAIL")
+  const coverage = partial.legs.find((entry) => entry.name === "sensor coverage")
+  assert.equal(coverage.ok, false)
+  assert.match(coverage.detail, /E2E 1: sensor did not start \(setup did not complete: Failed to create agent.*HTTP 500.*\); 1 of 2 jobs covered/)
+  assert.equal(sensorCoverage({ runId: "123", jobs: [{ name: "E2E", log: null }] }).ok, false)
+  assert.equal(sensorCoverage({ runId: "123", jobs: [] }).ok, false)
+  assert.equal(sensorCoverage({ runId: "123", jobs: null }).ok, false)
+  assert.equal(sensorCoverage({ runId: null, jobs: [] }).ok, false)
+  assert.equal(sensorCoverage({ runId: "123", jobs: [{ name: "E2E", log: "ok" }] }).detail, "sensor started in 1 of 1 job")
+})
+
+test("check settled accepts path-gated skipped jobs in the recording run but not cancelled ones", () => {
+  const pr = { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body: "" }
+  const comments = [{ user: "garnet-runtime-review[bot]", body: record() }]
+  const job = (name, conclusion) => ({ name, status: "completed", conclusion, details_url: "https://github.com/garnet-labs/example/actions/runs/123/job/1" })
+  const settled = (checks) => evaluateExhibit({ pr, comments, checks, permalinkStatus: 200 }).legs.find((entry) => entry.name === "check settled")
+  assert.equal(settled([job("E2E", "success"), job("Deno Unit Tests", "skipped")]).ok, true)
+  assert.equal(settled([job("E2E", "success"), job("Lint", "cancelled")]).ok, false)
 })
