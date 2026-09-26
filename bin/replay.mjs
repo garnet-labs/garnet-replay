@@ -23,6 +23,18 @@ function option(args, name, fallback) {
   return index === -1 || args[index + 1] === undefined ? fallback : args[index + 1]
 }
 
+function multiOption(args, name) {
+  const values = []
+  args.forEach((arg, index) => {
+    if (arg === name && args[index + 1] !== undefined) values.push(args[index + 1])
+  })
+  return values
+}
+
+function csvList(value) {
+  return typeof value === "string" && value !== "" ? value.split(",").map((entry) => entry.trim()).filter((entry) => entry !== "") : null
+}
+
 function replayPath(out, pr) {
   return join(out, "github", pr.owner, pr.repo, `${pr.number}.json`)
 }
@@ -157,6 +169,15 @@ async function pair(args) {
   const to = option(args, "--to", null)
   const comparisonScope = option(args, "--scope", "immediate-parent-to-head")
   const note = option(args, "--note", null)
+  const steps = csvList(option(args, "--steps", null))
+  const claims = multiOption(args, "--claim")
+  const intentPath = option(args, "--intent", null)
+  if (intentPath !== null) {
+    const parsed = JSON.parse(await readFile(resolve(intentPath), "utf8"))
+    const list = Array.isArray(parsed) ? parsed : parsed?.claims
+    if (!Array.isArray(list)) throw new Error("--intent file must be a claim array or an object with a claims array")
+    claims.push(...list)
+  }
   const baseExecutedSha = option(args, "--base-executed-sha", null)
   const headExecutedSha = option(args, "--head-executed-sha", null)
   if ([basePath, headPath, repository, baseSha, headSha, baseReceiptUrl, headReceiptUrl, baseRunId, headRunId, dependency, from, to, note]
@@ -192,6 +213,8 @@ async function pair(args) {
       headReceiptUrl,
       prCommentUrl: `https://github.com/${repository}/pull/${prNumber}`,
       comparisonScope,
+      ...(steps === null ? {} : { steps }),
+      ...(claims.length === 0 ? {} : { claims }),
       attestedShas: {
         ...(baseExecutedSha === null ? {} : { baseline: baseExecutedSha }),
         ...(headExecutedSha === null ? {} : { update: headExecutedSha }),
@@ -389,6 +412,8 @@ records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
   live <repo-url|path> --dependency x --from a --to b               constructed transition when no real pull request exists
   pair --base ... --head ...                                        build a replay JSON from two profile files
+      [--steps "Run E2E test,Install deps"] [--claim "network:mock.shop:present-before-absent-after:Run E2E test"]...
+      [--intent file.json]                                                scope workload rows to recorded steps and check declared runtime claims
   serve [--root public] [--port 8787] [--run-replays] [--origin URL]   URL-to-replay interface and local runner
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `

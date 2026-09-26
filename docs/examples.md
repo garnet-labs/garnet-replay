@@ -509,3 +509,24 @@ Kept so weaker signals are not lost behind the consumed line; only head-bound ut
 | 58 | `5d80a00` | head-bound | yes | no | no receipts |
 | 57 | — | no | — | — | skipped: no record comment |
 | … | | | | | |
+
+## Intended behaviour section on a card
+
+When an `intent` block exists (a `pair` run with `--steps "Run E2E test"` and
+the three declared claims over the constructed Sentry-shaped fixture pair —
+`mock.shop` and `o1.ingest.sentry.io` under step `14. Run E2E test` on the
+base, only the ingest host on the head), `replay card` renders:
+
+```text
+**Intended behaviour** · intent-check-result
+
+- `storefront-removed`: Expected behaviour change is present in the record
+- `sentry-ingest-kept`: Expected behaviour change is present in the record
+- `no-new-outbound`: Expected behaviour change is present in the record
+```
+
+A contradicted claim renders `Record contradicts the stated change`; a
+matched behaviour on neither side renders `Not observable in either record`;
+a missing step or incomplete capture renders `Not determinable: <reason>`.
+Workload delta rows no claim covers follow under `Change the pull request
+does not describe:`. The section is absent when no claims were declared.
