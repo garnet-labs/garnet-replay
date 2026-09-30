@@ -75,3 +75,9 @@ faithful workload remain open; see the report for ownership and next actions.
 - `replay find` uses the GitHub search and list APIs; broad scans time out, so
   use `--author`, `--search`, `--limit`.
 - The benchmark (`benchmark/`) is a single Devin-reviewer pass over 25 seeds.
+
+## pnpm opportunity ledger
+
+The pnpm value-wedge and demand-signal ledger lives in
+`docs/pnpm-wedges.md` on the `ledger/pnpm-signal` branch and is maintained by
+the daily demand-signal automation, not by the replay commands.
