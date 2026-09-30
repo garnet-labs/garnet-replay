@@ -3,7 +3,8 @@ import test from "node:test"
 import { assertOneCommit } from "../lib/guards.mjs"
 import { livePr, setup } from "../lib/commands.mjs"
 import {
-  executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, setupPrBodyText, SETUP_BRANCH,
+  executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
+  replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity,
 } from "../lib/replay-pr.mjs"
 
 const SHA_A = "a".repeat(40)
@@ -25,6 +26,40 @@ function purePlan(overrides = {}) {
     work: "/tmp/work", recordWorkflows: RECORDERS, ...overrides,
   })
 }
+
+test("replay identity ignores branch variants and claims one open logical change", () => {
+  const first = withReplayIdentity(purePlan())
+  const alternate = withReplayIdentity(purePlan({ branch: "chore/alternate" }))
+  assert.equal(first.logicalId, alternate.logicalId)
+  assert.equal(first.attemptId, alternate.attemptId)
+  assert.deepEqual(replayIdentityFromBody(first.body), replayIdentity(first))
+  assert.match(first.body, /<!-- change-id:[0-9a-f]{64} attempt:[0-9a-f]{64} -->/)
+  assert.equal(first.steps.find((step) => step.id === "pr-body").writeFileContent.content, first.body)
+
+  const conflicting = {
+    number: 9, headRefName: "chore/alternate", title: alternate.title, body: alternate.body,
+    url: `https://github.com/${FORK}/pull/9`,
+  }
+  assert.equal(replayAdmissionConflict({ replays: [] }, first, [conflicting]), conflicting)
+  assert.equal(replayAdmissionConflict({ replays: [] }, alternate, [conflicting]), null)
+})
+
+test("replay admission recognizes pre-marker pull requests and ledger claims", () => {
+  const plan = withReplayIdentity(purePlan())
+  const legacy = {
+    number: 7, headRefName: "chore/older", title: plan.title,
+    body: plan.body.replace(/\n*<!-- change-id:.*?-->\n?/, "\n"),
+    url: `https://github.com/${FORK}/pull/7`,
+  }
+  assert.equal(replayAdmissionConflict({ replays: [] }, plan, [legacy]), legacy)
+
+  const ledgerPr = {
+    number: 8, headRefName: "chore/ledger", title: "different", body: "different",
+    url: `https://github.com/${FORK}/pull/8`,
+  }
+  const target = { replays: [{ upstreamPr: plan.upstreamPr, forkPr: 8, branch: ledgerPr.headRefName }] }
+  assert.equal(replayAdmissionConflict(target, plan, [ledgerPr]), ledgerPr)
+})
 
 function setupFiles() {
   return { ".github/workflows/garnet-record.yml": "on:\n  pull_request:\n" }
@@ -265,10 +300,13 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
 
 const RECORDING_BODY = "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n"
 
-function liveExec({ recording }) {
+function liveExec({ recording, openPrs = [] }) {
   return (command, args) => {
     assert.equal(command, "gh")
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
+    if (args[0] === "pr" && args[1] === "list" && args.includes("number,title,body,url,author,createdAt,state,labels,files,headRefName,baseRefName,isDraft")) {
+      return JSON.stringify(openPrs.map((pr) => ({ state: "OPEN", ...pr })))
+    }
     if (args[1]?.includes(":.github/workflows")) {
       return JSON.stringify({ tree: recording ? [{ path: "garnet-record.yml", type: "blob" }] : [] })
     }
@@ -299,7 +337,26 @@ test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   assert.equal(result.plan.mode, "pure-replay")
   assert.equal(result.plan.singleCommit, true)
   assert.equal(result.plan.record, "fork-workflow")
+  assert.match(result.plan.body, /<!-- change-id:[0-9a-f]{64} attempt:[0-9a-f]{64} -->/)
   assert.doesNotMatch(result.plan.body, NO_UPSTREAM)
+})
+
+test("livePr: refuses an alternate branch for an already-open logical replay", async () => {
+  const body = "2 files:\n\n- src/a.ts\n- src/b.ts\n"
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--branch", "chore/alternate", "--dry-run"], {
+      exec: liveExec({
+        recording: true,
+        openPrs: [{
+          number: 9, headRefName: "chore/original", title: "feat: add thing", body,
+          url: `https://github.com/${FORK}/pull/9`,
+        }],
+      }),
+      log: () => {},
+      save: () => assert.fail("must not save"),
+    }),
+    /already claims this logical change/,
+  )
 })
 
 test("livePr: explicit --record inject still bundles on an onboarded fork", async () => {
