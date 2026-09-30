@@ -185,6 +185,7 @@ test("injected replay preserves Dependabot policy at its selected base and check
       reads.push(args)
       if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
       if (args[0] === "pr") return "[]"
+      if (args.includes("repos/garnet-labs/posthog/pulls?state=open&per_page=100")) return "[[]]"
       const path = args[1]
       if (path.includes("/git/trees/")) return '{"tree":[]}'
       if (path.endsWith("/pulls/1/files")) return '[{"filename":"package.json","status":"modified"}]'
@@ -202,6 +203,7 @@ test("injected replay preserves Dependabot policy at its selected base and check
     assert.equal(result.executed, false)
     assert.equal(result.health.verdict, "none")
     assert.equal(reads.filter((args) => args[0] === "pr").length, 1)
+    assert.ok(reads.some((args) => args.includes("repos/garnet-labs/posthog/pulls?state=open&per_page=100")))
     assert.ok(reads.some((args) => args[1]?.includes("/contents/.github/dependabot.yml")))
     assert.doesNotMatch(result.plan.body, /- \.github\/dependabot\.yml/)
   }

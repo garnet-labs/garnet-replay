@@ -35,7 +35,7 @@ faithful workload remain open; see the report for ownership and next actions.
 | 1 | Capture completeness as a field and a gate | `capture` block, `assessCapture`, schema, tests | done |
 | 2 | Comparison pair everywhere, rebase supersession | `pair`, `supersession`, pair line in comments and cards, `verify` pair leg | done |
 | 3 | Exhibit verifier before anything is shared | `replay verify`: comment, head-bound, finalized, determinable, pair, permalink, check, residue, label, open | done; PASS not yet seen on a live exhibit |
-| 4 | Repin to the stable action tag | `live/templates/garnet-record.yml` pins main `e546567a` | open until a stable tag covers it |
+| 4 | Repin to the stable action tag | templates and `GARNET_ACTION_PIN` at `245ad6be` (v2.3.0); `replay repin` moves existing forks | done |
 | 5 | Vocabulary: "new behavior" on rendered surfaces, banned-word gate | `contract/vocab.json`, `assertVocabClean`, `verdictPhrase` | done |
 | 6 | Claim class on every statement | `claims`, `CLAIM_CLASSES`, card and comment render them | done |
 | 7 | Specimen finder over real pull requests and history | `replay find`, `lib/observe.mjs`, `lib/find.mjs` | done |
@@ -47,7 +47,7 @@ faithful workload remain open; see the report for ownership and next actions.
 | 12 | Cohort rates with count reconciliation | `replay cohort` | done |
 | 13 | Status ladder 0–6, stage done only from its own artifact | `replay status` | done |
 | 14 | Stage 2 mirror, gate, REVIEW.md, no fork code in privileged path | `live/templates/stage2/`, `replay stage2` | done; not merged on any fork |
-| 15 | Reviewer/agent consumption evidence | `replay consume` | done; no live citation yet |
+| 15 | Reviewer/agent consumption evidence | `replay consume`, `replay harvest` | done; pnpm harvest 2026-09-22: 9 of 38 recorded pull requests consumed head-bound, 38 with receipts |
 | 16 | Docs for team and agents | `README.md`, `AGENTS.md`, `SKILL.md`, `docs/` | done |
 | 17 | Tests | `npm test`: 57 | done |
 | 18 | Live proof on `garnet-labs/posthog` with cold read | `docs/examples.md` | in flight |

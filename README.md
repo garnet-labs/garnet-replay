@@ -28,7 +28,7 @@ Each stage answers one question and leaves one artifact in the target ledger
 | 1 | replay | `replay live <slug> …` | Does the record show new behavior on the fork? |
 | 2 | card | `replay card <fork-pr-url>` | Would this have helped the review? |
 | 3 | cohort | `replay cohort <slug> …` | What are the rates over 10–50 pull requests? |
-| 4 | pilot | `replay consume <fork-pr-url>` | Did a reviewer or agent cite the head-bound record? |
+| 4 | pilot | `replay consume <fork-pr-url>` · `replay harvest <slug>` | Did a reviewer or agent cite the head-bound record? What else did they say about it? |
 | 5 | integration | `replay stage2 <slug>` | Does approve/escalate behavior change with the record present? |
 | 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
 
@@ -60,7 +60,8 @@ $R live posthog --allow-build puppeteer --work ~/repos/posthog   # lockfile unto
 $R verify https://github.com/garnet-labs/posthog/pull/<N>       # share gate; run before anyone sees it
 $R card   https://github.com/garnet-labs/posthog/pull/<N>       # out/posthog/pr-<N>-card.md
 $R cohort posthog --from-observations --limit 20                # out/posthog/cohort-<k>.md
-$R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, check state
+$R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, receipts, check state
+$R harvest posthog --limit 40                                   # consume every recorded fork pull request
 $R stage2 posthog --dry-run                                     # evidence mirror + garnet/evidence gate
 $R status posthog
 ```
@@ -91,7 +92,9 @@ fork's own dependency pull requests are recorded from then on.
 - Exactly two new commits, both non-empty, counted with `git rev-list --count`.
 - The exact upstream head is fetched by `refs/pull/N/head` and checked with
   `git cat-file`; a nearby commit is never substituted.
-- One draft pull request per branch; an existing one is reused, never duplicated.
+- One open pull request per logical change. The body carries opaque change and
+  attempt identities; `live` reads the fork before any write, reuses the same
+  branch, and refuses another branch claiming the same change.
 - Every artifact names its pair: head SHA, compared SHA, version transition, and
   scope (`pr-base-to-head`, `immediate-parent-to-head`, `previous-recorded-head-to-head`).
 - Missing, partial, stale, unbound, or varying evidence is `undeterminable`. It is
@@ -160,6 +163,15 @@ and `REVIEW.md` grounding instructions for reviewers and review agents.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
 
+`consume` keeps every weaker signal as a receipt, tiered `utterance` (the contract
+sentence `Runtime evidence (Garnet, head <sha7>):`), `citation` (head commit or
+profile link in prose), `observation` (a destination from the record repeated by the
+reviewer) and `mention` (runtime wording, nothing bound). Only head-bound `utterance`
+and `citation` rows count as consumed; the rest are written to the ledger and to
+`out/<slug>/pr-<N>-consume.json` with the full source comments so nothing is lost.
+`replay harvest <slug>` runs `consume` over every fork pull request that carries a
+record and writes `out/<slug>/consumption-harvest.md`.
+
 ## Layout
 
 ```
@@ -187,6 +199,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
+- [docs/consumption-roadmap.md](docs/consumption-roadmap.md) — reviewer consumption across review agents: mechanism, roadmap, artifacts to maintain
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
@@ -198,8 +211,9 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 ## Status
 
 The recording workflow template pins `garnet-org/action` to commit
-`e546567a72e4fede11ec39d6e9f75b539adef22c` (main, 2026-09-04). No stable tag
-covers it yet; repin when one does. Pull requests from other repositories receive
+`245ad6be82de3200c205109c8ca7ac816dc692ea` (release v2.3.0). `replay repin <slug>`
+moves an existing fork's recording workflows to that pin with one routine commit
+on the fork default branch (`--dry-run` prints the plan). Pull requests from other repositories receive
 neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,
 best-effort record; the harness reports that as not recorded, not as unchanged.
 Repository visibility and external publishing are decisions outside this code.

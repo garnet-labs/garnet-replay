@@ -10,7 +10,7 @@ import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planA
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
-import { evaluateConsumption, renderConsumeReport } from "../lib/consume.mjs"
+import { RECEIPT_TIERS, describeSignals, evaluateConsumption, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { planStage2, renderStage2Plan } from "../lib/stage2.mjs"
 import { STAGES, ensureTarget } from "../lib/ledger.mjs"
@@ -1158,6 +1158,108 @@ test("consume: only a head-bound citation by a non-Garnet reviewer counts as con
   const staleReview = evaluateConsumption({ pr, comments: [record], reviews: [{ user: { login: "reviewer" }, state: "APPROVED", commit_id: SHA_C, body: `Runtime grounding (head \`${SHA_C.slice(0, 7)}\`)` }] })
   assert.equal(staleReview.consumed, false)
   assert.match(renderConsumeReport(cited, { prUrl: `https://github.com/${FORK}/pull/77` }), /reviewer/)
+})
+
+test("consume: weaker receipts are kept per tier without becoming consumption", () => {
+  const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY }
+  assert.deepEqual(recordDestinations(RECORD_BODY), ["storage.googleapis.com"])
+  const result = evaluateConsumption({
+    pr, comments: [
+      record,
+      { id: 1, html_url: "https://github.com/x/c1", user: { login: "devin-ai-integration[bot]" }, body: `Runtime evidence (Garnet, head ${SHA_B.slice(0, 7)}): one new connection.` },
+      { id: 2, user: { login: "qodo[bot]" }, body: `Runtime evidence (Garnet, head ${SHA_C.slice(0, 7)}): stale sentence.` },
+      { id: 3, user: { login: "greptile[bot]" }, body: "The Garnet record shows the installer reached storage[.]googleapis[.]com; is that expected?" },
+      { id: 4, user: { login: "coderabbitai[bot]" }, body: "Runtime Review noted; nothing bound here." },
+      { id: 5, user: { login: "coderabbitai[bot]" }, body: "Please add tests for the config loader." },
+      { id: 6, user: { login: "github-actions[bot]" }, body: "Garnet workflow finished." },
+    ],
+    reviews: [{ user: { login: "human" }, state: "COMMENTED", commit_id: SHA_B, body: `Looked at the profile https://app.garnet.ai/public/runs/123?profile=00000000-0000-4000-8000-000000000000 before approving.` }],
+    reviewComments: [],
+  })
+  assert.equal(result.consumed, true)
+  assert.deepEqual(result.consumers, ["human (review commented)", "devin-ai-integration[bot] (comment)"])
+  assert.deepEqual(result.signals, { utterance: 1, citation: 1, observation: 1, mention: 2 })
+  assert.equal(result.receipts.length, 5)
+  const byLogin = Object.fromEntries(result.receipts.map((row) => [row.login, row]))
+  assert.equal(byLogin["devin-ai-integration[bot]"].tier, RECEIPT_TIERS.UTTERANCE)
+  assert.equal(byLogin["devin-ai-integration[bot]"].headBound, true)
+  assert.equal(byLogin["qodo[bot]"].tier, RECEIPT_TIERS.MENTION)
+  assert.equal(byLogin["qodo[bot]"].headBound, false)
+  assert.deepEqual(byLogin["greptile[bot]"].matched, ["storage.googleapis.com"])
+  assert.equal(byLogin.human.tier, RECEIPT_TIERS.CITATION)
+  assert.equal(byLogin.human.onHead, true)
+  assert.equal(byLogin["coderabbitai[bot]"].tier, RECEIPT_TIERS.MENTION)
+  assert.equal("github-actions[bot]" in byLogin, false)
+
+  const stamped = evaluateConsumption({ pr, comments: [record, { user: { login: "qodo-code-review[bot]" }, body: `Review updated until commit <a href="https://github.com/${FORK}/commit/${SHA_B}">${SHA_B.slice(0, 7)}</a>\n\n><code>[.github/workflows/garnet-record.yml[81]](https://github.com/${FORK}/pull/45/files#diff-6dfd${SHA_B}R81)</code>` }] })
+  assert.equal(stamped.consumed, false)
+  assert.deepEqual(stamped.signals, { utterance: 0, citation: 0, observation: 0, mention: 0 })
+
+  const weakOnly = evaluateConsumption({ pr, comments: [record, { user: { login: "greptile[bot]" }, body: "The Garnet record shows storage.googleapis.com was reached." }] })
+  assert.equal(weakOnly.consumed, false)
+  assert.deepEqual(weakOnly.signals, { utterance: 0, citation: 0, observation: 1, mention: 0 })
+  const report = renderConsumeReport(weakOnly, { prUrl: `https://github.com/${FORK}/pull/77` })
+  assert.match(report, /\*\*not consumed\*\*/)
+  assert.match(report, /#### Receipts · 1 receipt\(s\): 1 observation/)
+  assert.match(report, /\| observation \| greptile\[bot\] \| comment \|/)
+  assert.equal(describeSignals(tallyReceipts([])), "no receipts")
+
+  const target = ensureTarget("consume-status", { upstream: "acme/widgets", fork: "garnet-labs/widgets" })
+  target.consumption = [{ forkPr: 3, headSha: SHA_B, consumed: false, consumers: [], mirror: false, recordBound: true, signals: weakOnly.signals, receipts: weakOnly.receipts, checkedAt: "2026-09-22T00:00:00Z" }]
+  const row = stageRows(target).find((r) => r.n === 4)
+  assert.equal(row.state, "in-flight")
+  assert.match(row.detail, /no head-bound consumption yet · 1 receipt\(s\): 1 observation · 1 receipt\(s\) across 1 checked/)
+  const harvest = renderHarvestReport([{ number: 3, result: weakOnly }, { number: 4, result: null }], { fork: "garnet-labs/widgets" })
+  assert.match(harvest, /1 pull request\(s\) with a record checked · 0 consumed \(head-bound\) · 1 with at least one receipt · 1 skipped/)
+  assert.match(harvest, /\| 4 \| — \| no \|/)
+})
+
+test("consume: negative, pre-record and repository-link utterances never advance the pilot", () => {
+  const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z" }
+  const sha7 = SHA_B.slice(0, 7)
+
+  const negative = evaluateConsumption({
+    pr, comments: [
+      record,
+      { id: 1, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): no runtime evidence for this head; undeterminable.` },
+      { id: 2, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `**Runtime grounding** (head \`${sha7}\`): Garnet evidence is pending for this head.` },
+      { id: 3, user: { login: "human" }, created_at: "2026-09-20T13:00:00Z", body: `No Garnet record yet for ${sha7}, waiting.` },
+    ],
+  })
+  assert.equal(negative.consumed, false)
+  assert.deepEqual(negative.signals, { utterance: 2, citation: 1, observation: 0, mention: 0 })
+  for (const row of negative.receipts) {
+    assert.equal(row.headBound, false, row.login)
+    assert.ok(row.matched.includes("reports no evidence"), row.login)
+  }
+
+  const early = evaluateConsumption({
+    pr, comments: [
+      record,
+      { id: 4, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
+      { id: 5, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:30:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
+    ],
+  })
+  assert.equal(early.consumed, true)
+  assert.deepEqual(early.consumers, ["devin-ai-integration[bot] (comment)"])
+  assert.equal(early.receipts[0].headBound, false)
+  assert.ok(early.receipts[0].matched.includes("written before the record"))
+  assert.equal(early.receipts[1].headBound, true)
+
+  const links = evaluateConsumption({
+    pr, comments: [
+      record,
+      { id: 6, user: { login: "github-advanced-security[bot]" }, body: "Show more details\n\n[details](https://github.com/garnet-labs/pnpm/security/code-scanning/50)" },
+      { id: 7, user: { login: "coderabbitai[bot]" }, body: "The garnet-labs fork uses onlyBuiltDependencies; fine." },
+      { id: 8, user: { login: "greptile[bot]" }, body: "Per the Garnet record, storage.googleapis.com is new." },
+    ],
+  })
+  assert.equal(links.consumed, false)
+  assert.deepEqual(links.signals, { utterance: 0, citation: 0, observation: 1, mention: 0 })
+  assert.equal(links.receipts.length, 1)
+  assert.equal(links.receipts[0].login, "greptile[bot]")
 })
 
 // ---------------------------------------------------------------- verify
