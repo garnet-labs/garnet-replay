@@ -6,6 +6,7 @@ import {
   executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
   replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity,
 } from "../lib/replay-pr.mjs"
+import { planPrepared } from "../lib/replay-prepared.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -42,6 +43,30 @@ test("replay identity ignores branch variants and claims one open logical change
   }
   assert.equal(replayAdmissionConflict({ replays: [] }, first, [conflicting]), conflicting)
   assert.equal(replayAdmissionConflict({ replays: [] }, alternate, [conflicting]), null)
+})
+
+test("prepared replay identity distinguishes exact file contents", () => {
+  const workflow = ".github/workflows/record.yml"
+  const baseSpec = {
+    baseline: {
+      [workflow]: "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n",
+      "package.json": "{\"dependencies\":{\"example\":\"1.0.0\"}}\n",
+    },
+    change: { "package.json": "{\"dependencies\":{\"example\":\"2.0.0\"}}\n" },
+    transition: { name: "example", from: "1.0.0", to: "2.0.0" },
+    workflow,
+  }
+  const prepared = (spec) => planPrepared({
+    slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "main",
+    work: "/tmp/work", spec,
+  })
+  const first = replayIdentity(prepared(baseSpec))
+  const second = replayIdentity(prepared({
+    ...baseSpec,
+    change: { "package.json": "{\"dependencies\":{\"example\":\"2.0.1\"}}\n" },
+  }))
+  assert.equal(first.logicalId, second.logicalId)
+  assert.notEqual(first.attemptId, second.attemptId)
 })
 
 test("replay admission recognizes pre-marker pull requests and ledger claims", () => {
@@ -300,12 +325,18 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
 
 const RECORDING_BODY = "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n"
 
-function liveExec({ recording, openPrs = [] }) {
+function liveExec({ recording, openPrs = [], recentPrs = [] }) {
   return (command, args) => {
     assert.equal(command, "gh")
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
     if (args[0] === "pr" && args[1] === "list" && args.includes("number,title,body,url,author,createdAt,state,labels,files,headRefName,baseRefName,isDraft")) {
-      return JSON.stringify(openPrs.map((pr) => ({ state: "OPEN", ...pr })))
+      return JSON.stringify(recentPrs.map((pr) => ({ state: "OPEN", ...pr })))
+    }
+    if (args[0] === "api" && args.includes(`repos/${FORK}/pulls?state=open&per_page=100`)) {
+      return JSON.stringify([openPrs.map((pr) => ({
+        number: pr.number, title: pr.title, body: pr.body, html_url: pr.url,
+        head: { ref: pr.headRefName },
+      }))])
     }
     if (args[1]?.includes(":.github/workflows")) {
       return JSON.stringify({ tree: recording ? [{ path: "garnet-record.yml", type: "blob" }] : [] })
