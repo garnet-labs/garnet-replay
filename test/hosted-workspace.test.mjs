@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
 import { once } from "node:events"
+import { createServer } from "node:http"
 import { test } from "node:test"
 import { createHostedWorkspace, readPublicReplay } from "../lib/hosted-workspace.mjs"
 import { renderLanding, renderReplayPending } from "../public/replay-page.mjs"
@@ -80,4 +81,24 @@ test("public receipt lookups never forward ambient GitHub credentials", async (t
     assert.ok(url.startsWith("https://api.github.com/repos/a/b/"))
     assert.equal(options.headers.authorization, undefined)
   }
+})
+
+test("Vercel entry restores the rewritten path and serves the hosted viewer", async (t) => {
+  const { default: handler, rewrittenUrl } = await import("../api/index.mjs")
+  assert.equal(rewrittenUrl("/api/index?__path=garnet-labs/posthog/pull/139"), "/garnet-labs/posthog/pull/139")
+  assert.equal(rewrittenUrl("/api/index?__path=api/replay&url=astral-sh%2Fuv%23999999"), "/api/replay?url=astral-sh%2Fuv%23999999")
+  assert.equal(rewrittenUrl("/api/index?__path="), "/")
+  assert.equal(rewrittenUrl("/workspace.mjs"), "/workspace.mjs")
+  const server = createServer(handler)
+  server.listen(0, "127.0.0.1")
+  await once(server, "listening")
+  t.after(() => new Promise((resolve) => server.close(resolve)))
+  const origin = `http://127.0.0.1:${server.address().port}`
+  for (const path of ["workspace", "api/workspace", "garnet-labs/posthog/pull/139"]) {
+    assert.equal((await fetch(`${origin}/api/index?__path=${path}`)).status, 200, path)
+  }
+  const catalog = await (await fetch(`${origin}/api/index?__path=api/workspace`)).json()
+  assert.equal(catalog.runnerAvailable, false)
+  const response = await fetch(`${origin}/api/index?__path=api/replay/prepare`, { method: "POST", body: "{}" })
+  assert.equal(response.status, 405)
 })

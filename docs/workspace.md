@@ -62,10 +62,13 @@ per-user authorization and isolated durable workers.
 
 ## Host the public evidence viewer
 
-`node server.mjs` starts the deployment entrypoint on port 3000 (`PORT` overrides
-it). Vercel detects this Node HTTP server; `vercel.json` includes the saved
-evidence, target ledgers, and validation schema in the function. No build or
-dependency installation is required.
+On Vercel, `api/index.mjs` is the only function. `vercel.json` serves `public/`
+as static files first, then rewrites every other path (`/workspace`, `/api/*`,
+direct PR routes) to that function, which restores the original path from
+`__path`. The function bundle includes the saved evidence, target ledgers,
+contract vocabulary and validation schema. No build or dependency installation is
+required. `node server.mjs` runs the same viewer on port 3000 (`PORT` overrides
+it) for any other Node host.
 
 This entrypoint supports saved evidence, direct PR URLs, and anonymous public
 GitHub receipt lookups. It ignores ambient GitHub credentials. GitHub rate limits,
