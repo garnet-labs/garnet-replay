@@ -92,7 +92,9 @@ fork's own dependency pull requests are recorded from then on.
 - Exactly two new commits, both non-empty, counted with `git rev-list --count`.
 - The exact upstream head is fetched by `refs/pull/N/head` and checked with
   `git cat-file`; a nearby commit is never substituted.
-- One draft pull request per branch; an existing one is reused, never duplicated.
+- One open pull request per logical change. The body carries opaque change and
+  attempt identities; `live` reads the fork before any write, reuses the same
+  branch, and refuses another branch claiming the same change.
 - Every artifact names its pair: head SHA, compared SHA, version transition, and
   scope (`pr-base-to-head`, `immediate-parent-to-head`, `previous-recorded-head-to-head`).
 - Missing, partial, stale, unbound, or varying evidence is `undeterminable`. It is
