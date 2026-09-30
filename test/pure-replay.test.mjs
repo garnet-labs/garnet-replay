@@ -61,11 +61,16 @@ test("prepared replay identity distinguishes exact file contents", () => {
     work: "/tmp/work", spec,
   })
   const first = replayIdentity(prepared(baseSpec))
+  const resumed = replayIdentity(planPrepared({
+    slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "main",
+    work: "/tmp/work", spec: baseSpec, resume: true,
+  }))
   const second = replayIdentity(prepared({
     ...baseSpec,
     change: { "package.json": "{\"dependencies\":{\"example\":\"2.0.1\"}}\n" },
   }))
   assert.equal(first.logicalId, second.logicalId)
+  assert.equal(first.attemptId, resumed.attemptId)
   assert.notEqual(first.attemptId, second.attemptId)
 })
 
