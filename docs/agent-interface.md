@@ -15,6 +15,7 @@ procedure; this page is the contract and the gap list.
 | Fail closed | pending, partial, stale, or unbound evidence is `undeterminable`; the wait step never treats a placeholder comment as a record | `lib/evidence.mjs`, `lib/wait.mjs`, `lib/receipt.mjs` |
 | Exit code | `0` on success, `1` on any error (message on stderr) and on `verify` FAIL | `bin/replay.mjs` |
 | Machine-readable state | one ledger per target, `targets/<slug>.json`, written by the commands; `status <slug>` prints the next command | `lib/ledger.mjs`, `lib/status.mjs` |
+| Duplicate admission | every replay pull request carries opaque logical-change and exact-attempt identities; `live` refuses another open branch with the same logical identity and also recognizes exact legacy title/body or ledger claims | `replayIdentity`, `assertReplayAdmission` in `lib/replay-pr.mjs` |
 | Machine-readable artifacts | `out/<slug>/` holds the card, verify report, and consumption report as JSON beside the Markdown | `lib/commands.mjs` |
 | Vocabulary gate | rendered artifacts are checked against `contract/vocab.json` before they are written | `assertVocabClean` |
 
@@ -40,9 +41,11 @@ the evidence semantics; they change how the result is delivered.
 4. **Wait as a separate verb.** `replay wait <pr-url> [--commit 1|2]` returns
    `recorded | pending | failed` with the exact SHA it is bound to, so an agent
    can poll on its own schedule instead of holding a `live` process open.
-5. **Idempotency keys in the ledger.** Each replay row already carries branch and
-   SHAs; add a `runId` so two agents cannot open two pull requests for the same
-   candidate, and `live` refuses when a row for the same transition is open.
+5. **Atomic remote claims.** Logical and exact-attempt identities now travel in
+   the pull request body and ledger, and `live` refuses an observed open
+   duplicate before writing. The read-then-create window is not an atomic
+   distributed lock; close it with a compare-and-set remote claim if concurrent
+   writers become routine.
 6. **Structured refusals.** Guard failures currently throw prose. Emit
    `{ "guard": "fork-target", "expected", "actual" }` so an agent can report the
    refusal without parsing.

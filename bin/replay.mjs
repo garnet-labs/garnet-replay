@@ -12,6 +12,7 @@ import { listTargets } from "../lib/ledger.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
 import { verifyExitCode } from "../lib/verify.mjs"
+import { decideExitCode } from "../lib/decide.mjs"
 import { run } from "../lib/gh.mjs"
 import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
@@ -21,6 +22,18 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 function option(args, name, fallback) {
   const index = args.indexOf(name)
   return index === -1 || args[index + 1] === undefined ? fallback : args[index + 1]
+}
+
+function multiOption(args, name) {
+  const values = []
+  args.forEach((arg, index) => {
+    if (arg === name && args[index + 1] !== undefined) values.push(args[index + 1])
+  })
+  return values
+}
+
+function csvList(value) {
+  return typeof value === "string" && value !== "" ? value.split(",").map((entry) => entry.trim()).filter((entry) => entry !== "") : null
 }
 
 function replayPath(out, pr) {
@@ -157,6 +170,15 @@ async function pair(args) {
   const to = option(args, "--to", null)
   const comparisonScope = option(args, "--scope", "immediate-parent-to-head")
   const note = option(args, "--note", null)
+  const steps = csvList(option(args, "--steps", null))
+  const claims = multiOption(args, "--claim")
+  const intentPath = option(args, "--intent", null)
+  if (intentPath !== null) {
+    const parsed = JSON.parse(await readFile(resolve(intentPath), "utf8"))
+    const list = Array.isArray(parsed) ? parsed : parsed?.claims
+    if (!Array.isArray(list)) throw new Error("--intent file must be a claim array or an object with a claims array")
+    claims.push(...list)
+  }
   const baseExecutedSha = option(args, "--base-executed-sha", null)
   const headExecutedSha = option(args, "--head-executed-sha", null)
   if ([basePath, headPath, repository, baseSha, headSha, baseReceiptUrl, headReceiptUrl, baseRunId, headRunId, dependency, from, to, note]
@@ -192,6 +214,8 @@ async function pair(args) {
       headReceiptUrl,
       prCommentUrl: `https://github.com/${repository}/pull/${prNumber}`,
       comparisonScope,
+      ...(steps === null ? {} : { steps }),
+      ...(claims.length === 0 ? {} : { claims }),
       attestedShas: {
         ...(baseExecutedSha === null ? {} : { baseline: baseExecutedSha }),
         ...(headExecutedSha === null ? {} : { update: headExecutedSha }),
@@ -380,15 +404,22 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
   verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
+  decide <fork-pr-url> [--json]                                     merge-safety decision from the head-bound record: merge | hold | undeterminable; exits 0/1/2
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt
   harvest <slug> [--limit 50] [--state all] [--fork owner/repo]      consume every recorded fork pull request; backfills the consumption ledger
+  uat <slug> --pr N [--cold-read 0..5] [--decision-impact r] ...     score one checked pull request by hand: cold read, decision impact,
+                                                                    attribution, value hypothesis (supported|not-supported|unknown) + --note
   status [<slug>]                                                   ladder board and the next command
-  stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
+  stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, garnet/evidence gate, REVIEW.md, re-review + adapters
+                                                                    reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
+                                                                    --record-workflow <path> listens to one recorder; --add-record adds the harness recorder; --replace-mirror overwrites mirror files
 
 records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
   live <repo-url|path> --dependency x --from a --to b               constructed transition when no real pull request exists
   pair --base ... --head ...                                        build a replay JSON from two profile files
+      [--steps "Run E2E test,Install deps"] [--claim "network:mock.shop:present-before-absent-after:Run E2E test"]...
+      [--intent file.json]                                                scope workload rows to recorded steps and check declared runtime claims
   serve [--root public] [--port 8787] [--run-replays] [--origin URL]   URL-to-replay interface and local runner
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `
@@ -396,6 +427,10 @@ records and pages
 async function main(args) {
   const command = args[0]
   if (command === undefined || command === "--help" || command === "-h") {
+    console.log(USAGE)
+    return undefined
+  }
+  if (args[1] === "--help" || args[1] === "-h") {
     console.log(USAGE)
     return undefined
   }
@@ -411,8 +446,14 @@ async function main(args) {
     process.exitCode = verifyExitCode(result)
     return result
   }
+  if (command === "decide") {
+    const result = await ladder.decide(args.slice(1))
+    process.exitCode = decideExitCode(result)
+    return result
+  }
   if (command === "consume") return ladder.consume(args.slice(1))
   if (command === "harvest") return ladder.harvest(args.slice(1))
+  if (command === "uat") return ladder.uat(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))

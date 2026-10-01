@@ -1,0 +1,13 @@
+{
+  "task": "real-164",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only bumps the @typescript/native-preview dev-dependency version pin with no new packages or scripts, and all recorded destination changes are tagged runner background CI infrastructure.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only bumps the @typescript/native-preview dev-dependency version pin with no new packages or scripts, and all recorded destination changes are tagged runner background CI infrastructure.",
+    "parse_error": null
+  },
+  "error": null
+}
