@@ -17,6 +17,23 @@ npm test                      # offline regression suite
 node bin/replay.mjs --help
 ```
 
+## Current status
+
+- Harness: all seven ladder commands, the `verify` share gate, identity and
+  duplicate-admission guards, and the offline suite (`npm test`) are in place.
+- Evidence: recorded batches ([prospects](docs/prospect-batch.md),
+  [2026-09-24](docs/batch-2026-09-24.md)) produced successful recording jobs but
+  **no exhibit passes `replay verify`** yet. The recorder does not declare capture
+  completeness and public reports name merge refs instead of replay heads. The
+  viewer shows these records as observations scoped to the recorded jobs
+  ("capture not declared"); none clears the share gate, and no causal claim is
+  made from them.
+- Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
+  [docs/agent-interface.md](docs/agent-interface.md).
+- Viewer: <https://garnet-replay.vercel.app> is read-only; recording stays local.
+
+Details and open requirements: [docs/ledger.md](docs/ledger.md).
+
 ## The ladder
 
 Each stage answers one question and leaves one artifact in the target ledger
@@ -92,7 +109,9 @@ fork's own dependency pull requests are recorded from then on.
 - Exactly two new commits, both non-empty, counted with `git rev-list --count`.
 - The exact upstream head is fetched by `refs/pull/N/head` and checked with
   `git cat-file`; a nearby commit is never substituted.
-- One draft pull request per branch; an existing one is reused, never duplicated.
+- One open pull request per logical change. The body carries opaque change and
+  attempt identities; `live` reads the fork before any write, reuses the same
+  branch, and refuses another branch claiming the same change.
 - Every artifact names its pair: head SHA, compared SHA, version transition, and
   scope (`pr-base-to-head`, `immediate-parent-to-head`, `previous-recorded-head-to-head`).
 - Missing, partial, stale, unbound, or varying evidence is `undeterminable`. It is
@@ -127,6 +146,11 @@ authentication and isolated workers.
 See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
 and the HTTP interface.
 
+The public evidence viewer runs at <https://garnet-replay.vercel.app>
+(`api/index.mjs` on Vercel, or `node server.mjs` on any Node host). It serves saved evidence and anonymous GitHub receipt lookups;
+preparation and recording stay in the local harness. See
+[hosting](docs/workspace.md#host-the-public-evidence-viewer) for deployment limits.
+
 ## Supported ecosystems
 
 Three layers, and only one of them is tied to a package manager:
@@ -152,7 +176,14 @@ as unsupported and the run stops before writing. See [docs/stage1.md](docs/stage
 `replay stage2 <slug>` opens one pull request on the fork with an evidence mirror
 (`workflow_run`, resident on the default branch, never runs pull request code),
 an acceptance gate `garnet/evidence` that requires a record bound to the exact head,
-and `REVIEW.md` grounding instructions for reviewers and review agents.
+`REVIEW.md` grounding instructions for reviewers and review agents, thin per-tool
+adapter files, and a re-review step that asks the configured review tools
+(`--reviewers`, default `devin,coderabbit,greptile`) to look again once per head,
+only after `garnet/evidence` has succeeded for that exact head. The mirror and
+gate listen to every recording workflow that can run on a dependency change
+(`--record-workflow <path>` narrows to one); existing mirror files stop the plan
+without `--replace-mirror`, and a fork workflow that already listens to
+the same recorder stops it outright.
 `replay consume` then reports whether anyone cited the head-bound record.
 See [docs/stage2.md](docs/stage2.md).
 
@@ -163,7 +194,10 @@ reviewer) and `mention` (runtime wording, nothing bound). Only head-bound `utter
 and `citation` rows count as consumed; the rest are written to the ledger and to
 `out/<slug>/pr-<N>-consume.json` with the full source comments so nothing is lost.
 `replay harvest <slug>` runs `consume` over every fork pull request that carries a
-record and writes `out/<slug>/consumption-harvest.md`.
+record and writes `out/<slug>/consumption-harvest.md`. Each row carries a funnel
+(delivered, visible, re-review requested, attention, grounded, observation, and how
+each strong receipt arrived); `replay uat <slug> --pr N` adds the hand-read fields:
+cold-read 0..5, decision impact, attribution, value hypothesis.
 
 ## Layout
 
@@ -193,19 +227,22 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
 - [docs/consumption-roadmap.md](docs/consumption-roadmap.md) — reviewer consumption across review agents: mechanism, roadmap, artifacts to maintain
+- [docs/reviewer-readiness.md](docs/reviewer-readiness.md) — reviewer readiness ranking and golden path, updated after each fork proof round
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
 - [docs/prospect-batch.md](docs/prospect-batch.md) — five-fork validation, exact evidence, limitations, and remaining work
+- [docs/batch-2026-09-18.md](docs/batch-2026-09-18.md) — six ordinary changes, a three-change Dependabot sample, and thirteen harness gaps with code sites
 - [.devin/skills/prospect-replays/SKILL.md](.devin/skills/prospect-replays/SKILL.md) — bounded batch orchestration
 - [AGENTS.md](AGENTS.md) and [SKILL.md](SKILL.md) — how coding agents run this
 
 ## Status
 
 The recording workflow template pins `garnet-org/action` to commit
-`e546567a72e4fede11ec39d6e9f75b539adef22c` (main, 2026-09-04). No stable tag
-covers it yet; repin when one does. Pull requests from other repositories receive
+`245ad6be82de3200c205109c8ca7ac816dc692ea` (release v2.3.0). `replay repin <slug>`
+moves an existing fork's recording workflows to that pin with one routine commit
+on the fork default branch (`--dry-run` prints the plan). Pull requests from other repositories receive
 neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,
 best-effort record; the harness reports that as not recorded, not as unchanged.
 Repository visibility and external publishing are decisions outside this code.

@@ -1,0 +1,18 @@
+{
+  "task": "real-reference-31",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"api.ipify.org\", \"httpbin.org\", \"ip-api.com\", \"registry.npmjs.org\"], \"verdict\": \"new-behavior\", \"reason\": \"The chart-helpers dependency introduction creates new workload network contacts including external IP detection and HTTP testing services.\"}",
+  "answer": {
+    "new_destinations": [
+      "api.ipify.org",
+      "httpbin.org",
+      "ip-api.com",
+      "registry.npmjs.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The chart-helpers dependency introduction creates new workload network contacts including external IP detection and HTTP testing services.",
+    "parse_error": null
+  },
+  "error": null
+}

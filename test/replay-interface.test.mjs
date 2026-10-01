@@ -103,6 +103,8 @@ test("the landing opens PR routes; missing evidence exposes a next action withou
   assert.ok(html.includes('data-pr-form'))
   assert.ok(html.includes("replay.example"))
   assert.ok(!html.includes("#record="))
+  assert.equal(record.capture, "not-declared")
+  assert.ok(html.includes("recorded jobs only · capture not declared"))
   const pending = renderReplayPending({
     pr: parseReplayInput("astral-sh/uv#123"), target, canPrepare: true, state: "no-record", title: "<script>unsafe</script>",
   })

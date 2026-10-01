@@ -358,12 +358,20 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     author explicit before/after files; record commit 1 before publishing commit 2
   find <owner/repo> --slug <s> --fork <owner/repo> [--limit 30]   rank real pull requests; candidate evidence only
   find --history <dir> [--limit 200] [--top 15]                     rank dependency transitions in local git history
+  find --paths <glob,..> --workload-name <n> --workload-paths <glob,..> [--record-mode <m> --record-job <w/j>]
+                                                                    scope candidates to workload paths and persist the
+                                                                    target's record mode for later live runs
   live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
-                                                                    two-commit replay of an upstream pull request on the fork
+                                                                    replay of an upstream pull request on the fork: one commit once the fork is
+                                                                    onboarded (replay setup), two bundled commits with --record inject
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
+  setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
+                                                                    one-time onboarding: recording as a ready pull request on the fork; merge it,
+                                                                    then replays carry only the change
   fork <owner/repo> [--org garnet-labs]                             create the matching garnet-labs fork
   refresh <slug> [--work dir] [--dry-run]                            refresh a stale fork default branch from upstream
+  repin <slug> [--work dir] [--dry-run]                              move the fork's recording workflows to the harness action pin (one routine commit on the default branch)
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
   live <slug> --allow-build x [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
@@ -374,8 +382,12 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt
   harvest <slug> [--limit 50] [--state all] [--fork owner/repo]      consume every recorded fork pull request; backfills the consumption ledger
+  uat <slug> --pr N [--cold-read 0..5] [--decision-impact r] ...     score one checked pull request by hand: cold read, decision impact,
+                                                                    attribution, value hypothesis (supported|not-supported|unknown) + --note
   status [<slug>]                                                   ladder board and the next command
-  stage2 <slug> [--ecosystem x] [--dry-run]                         opt-in: evidence mirror, garnet/evidence gate, REVIEW.md
+  stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, garnet/evidence gate, REVIEW.md, re-review + adapters
+                                                                    reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
+                                                                    --record-workflow <path> listens to one recorder; --add-record adds the harness recorder; --replace-mirror overwrites mirror files
 
 records and pages
   known <pr-url>                                                    turn an existing Runtime Review comment into a replay JSON
@@ -391,9 +403,15 @@ async function main(args) {
     console.log(USAGE)
     return undefined
   }
+  if (args[1] === "--help" || args[1] === "-h") {
+    console.log(USAGE)
+    return undefined
+  }
   if (command === "find") return ladder.find(args.slice(1))
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))
+  if (command === "repin") return ladder.repin(args.slice(1))
+  if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
   if (command === "verify") {
@@ -403,6 +421,7 @@ async function main(args) {
   }
   if (command === "consume") return ladder.consume(args.slice(1))
   if (command === "harvest") return ladder.harvest(args.slice(1))
+  if (command === "uat") return ladder.uat(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))

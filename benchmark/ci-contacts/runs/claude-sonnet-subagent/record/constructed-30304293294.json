@@ -1,0 +1,15 @@
+{
+  "task": "constructed-30304293294",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"httpbin.org\"], \"verdict\": \"new-behavior\", \"reason\": \"The diff adds a postinstall script that curls httpbin.org, and the CI record confirms a new workload destination httpbin.org via bash -> node -> dash -> curl.\"}\n",
+  "answer": {
+    "new_destinations": [
+      "httpbin.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The diff adds a postinstall script that curls httpbin.org, and the CI record confirms a new workload destination httpbin.org via bash -> node -> dash -> curl.",
+    "parse_error": null
+  },
+  "error": null
+}

@@ -1,0 +1,18 @@
+{
+  "task": "real-reference-31",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"api.ipify.org\", \"httpbin.org\", \"ip-api.com\", \"registry.npmjs.org\"], \"verdict\": \"new-behavior\", \"reason\": \"Adding the chart-helpers dependency causes new workload processes to reach registry.npmjs.org plus api.ipify.org, httpbin.org, and ip-api.com during install, per the CI execution record.\"}\n",
+  "answer": {
+    "new_destinations": [
+      "api.ipify.org",
+      "httpbin.org",
+      "ip-api.com",
+      "registry.npmjs.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "Adding the chart-helpers dependency causes new workload processes to reach registry.npmjs.org plus api.ipify.org, httpbin.org, and ip-api.com during install, per the CI execution record.",
+    "parse_error": null
+  },
+  "error": null
+}
