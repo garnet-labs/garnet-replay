@@ -17,6 +17,23 @@ npm test                      # offline regression suite
 node bin/replay.mjs --help
 ```
 
+## Current status
+
+- Harness: all seven ladder commands, the `verify` share gate, identity and
+  duplicate-admission guards, and the offline suite (`npm test`) are in place.
+- Evidence: recorded batches ([prospects](docs/prospect-batch.md),
+  [2026-09-24](docs/batch-2026-09-24.md)) produced successful recording jobs but
+  **no exhibit passes `replay verify`** yet. The recorder does not declare capture
+  completeness and public reports name merge refs instead of replay heads. The
+  viewer shows these records as observations scoped to the recorded jobs
+  ("capture not declared"); none clears the share gate, and no causal claim is
+  made from them.
+- Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
+  [docs/agent-interface.md](docs/agent-interface.md).
+- Viewer: <https://garnet-replay.vercel.app> is read-only; recording stays local.
+
+Details and open requirements: [docs/ledger.md](docs/ledger.md).
+
 ## The ladder
 
 Each stage answers one question and leaves one artifact in the target ledger
@@ -128,6 +145,11 @@ under `/workspace`. This is a single-user local service; a hosted service needs
 authentication and isolated workers.
 See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
 and the HTTP interface.
+
+The public evidence viewer runs at <https://garnet-replay.vercel.app>
+(`api/index.mjs` on Vercel, or `node server.mjs` on any Node host). It serves saved evidence and anonymous GitHub receipt lookups;
+preparation and recording stay in the local harness. See
+[hosting](docs/workspace.md#host-the-public-evidence-viewer) for deployment limits.
 
 ## Supported ecosystems
 
