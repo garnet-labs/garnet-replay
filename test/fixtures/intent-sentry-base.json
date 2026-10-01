@@ -1,0 +1,50 @@
+{
+  "_note": "constructed fixture — authored to shape like garnet-labs/sentry-javascript E2E (hydrogen) before the mock.shop removal; not a real run",
+  "timestamp": "2026-09-26T10:00:00Z",
+  "github": {
+    "workflow": "build.yml",
+    "job": "E2E remix-hydrogen Test",
+    "sha": "1111111111111111111111111111111111111111",
+    "run_id": "36000000001",
+    "repository": "garnet-labs/sentry-javascript"
+  },
+  "profile_id": "01a00000-0000-7000-8000-000000000001",
+  "egress": [
+    {
+      "name": "mock.shop",
+      "address": "203.0.113.10",
+      "ports": ["443"],
+      "pid": 101,
+      "ancestry": ["Runner.Worker", "node", "vitest"],
+      "step": "14. Run E2E test",
+      "result": "connect"
+    },
+    {
+      "name": "o1.ingest.sentry.io",
+      "address": "203.0.113.11",
+      "ports": ["443"],
+      "pid": 102,
+      "ancestry": ["Runner.Worker", "node", "vitest"],
+      "step": "14. Run E2E test",
+      "result": "connect"
+    },
+    {
+      "name": "cdn.playwright.dev",
+      "address": "203.0.113.12",
+      "ports": ["443"],
+      "pid": 103,
+      "ancestry": ["Runner.Worker", "npx", "playwright"],
+      "step": "13. Install Playwright",
+      "result": "connect"
+    },
+    {
+      "name": "github-cloud.s3.amazonaws.com",
+      "address": "203.0.113.99",
+      "ports": ["443"],
+      "pid": 1,
+      "ancestry": ["action-runner", "git"],
+      "step": "",
+      "result": "connect"
+    }
+  ]
+}
