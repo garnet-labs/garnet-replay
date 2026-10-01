@@ -1,0 +1,942 @@
+{
+  "slug": "opencode",
+  "upstream": "anomalyco/opencode",
+  "fork": "garnet-labs/opencode",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49792,
+      "title": "perf(desktop): remember window bounds without electron-window-state",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:32:13Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "bun.lock",
+        "packages/desktop/package.json",
+        "packages/desktop/src/main/windows/index.ts",
+        "packages/desktop/src/main/windows/window-state.test.ts",
+        "packages/desktop/src/main/windows/window-state.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49791,
+      "title": "perf(desktop): replace electron-store with a plain JSON settings store",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:27:08Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "bun.lock",
+        "packages/desktop/package.json",
+        "packages/desktop/src/main/storage/store.test.ts",
+        "packages/desktop/src/main/storage/store.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49819,
+      "title": "fix(core): filter ambiguous watcher events",
+      "author": "dkarter",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T17:10:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/core/src/filesystem/watcher.ts",
+        "packages/core/test/filesystem/watcher.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49818,
+      "title": "feat(tui): add set-as-default for session model",
+      "author": "snhsish",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T17:06:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "packages/opencode/test/config/config.test.ts",
+        "packages/opencode/test/config/tui.test.ts",
+        "packages/opencode/test/server/httpapi-sdk.test.ts",
+        "packages/tui/src/app.tsx",
+        "packages/tui/src/component/dialog-model.tsx",
+        "packages/tui/src/component/set-default-model.ts",
+        "packages/tui/src/config/keybind.ts",
+        "packages/web/src/content/docs/keybinds.mdx",
+        "packages/web/src/content/docs/models.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49815,
+      "title": "fix(app): keep shortcuts filter focused while typing",
+      "author": "fschrhunt",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:53:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/app/e2e/regression/settings-search.spec.ts",
+        "packages/app/src/settings/keybinds/keybinds.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49814,
+      "title": "docs: add OCI Generative AI provider docs and logo",
+      "author": "fede-kamel",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:53:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/ui/src/assets/icons/provider/oci.svg",
+        "packages/ui/src/components/provider-icons/sprite.svg",
+        "packages/ui/src/components/provider-icons/types.ts",
+        "packages/web/src/content/docs/providers.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49813,
+      "title": "feat(theme): resolve state precedence",
+      "author": "jlongster",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T16:52:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/theme/src/tui/index.ts",
+        "packages/theme/src/tui/resolve.ts",
+        "packages/theme/src/tui/types.ts",
+        "packages/tui/test/theme/v2/component.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49811,
+      "title": "fix(opencode): disable cleanup during Homebrew upgrades",
+      "author": "Ashwinhegde19",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:49:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/opencode/src/installation/index.ts",
+        "packages/opencode/test/installation/installation.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49810,
+      "title": "fix(sdk): support Node package imports",
+      "author": "kitlangton",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:34:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "packages/client/script/build-package.ts",
+        "packages/core/src/filesystem/watcher.ts",
+        "packages/core/test/filesystem/ignore.test.ts",
+        "packages/sdk/script/build.ts",
+        "packages/sdk/script/verify-package.ts",
+        "packages/server/script/build.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49808,
+      "title": "fix(core): register compatible Responses provider",
+      "author": "Dante-dan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:22:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/core/src/provider.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49807,
+      "title": "fix(tui): use invoked bin name in exit resume hint",
+      "author": "cestercian",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:20:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/tui/src/mini/splash.ts",
+        "packages/tui/test/mini/splash.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49805,
+      "title": "fix(client): rewrite wildcard service URLs to loopback",
+      "author": "cestercian",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T16:01:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "packages/cli/src/commands/handlers/pair.ts",
+        "packages/client/src/effect/service.ts",
+        "packages/client/src/promise/service.ts",
+        "packages/client/src/pty-handoff.ts",
+        "packages/client/src/service.ts",
+        "packages/client/test/promise-service.test.ts",
+        "packages/client/test/service-url.test.ts",
+        "packages/client/test/service.test.ts",
+        "packages/desktop/src/main/service/background-service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49804,
+      "title": "fix(tui): pass markdown renderer into /btw answer dialog",
+      "author": "cestercian",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T15:58:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/tui/src/feature-plugins/prompt/btw.tsx",
+        "packages/tui/test/feature-plugins/btw-answer.test.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49799,
+      "title": "feat(opencode): model-agnostic MCP tool search",
+      "author": "dylan-russell-klaviyo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T15:03:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "packages/core/src/v1/config/config.ts",
+        "packages/core/src/v1/config/mcp.ts",
+        "packages/opencode/src/mcp/index.ts",
+        "packages/opencode/src/mcp/tool-search.ts",
+        "packages/opencode/src/session/prompt.ts",
+        "packages/opencode/src/session/tools.ts",
+        "packages/opencode/src/tool/mcp-search.ts",
+        "packages/opencode/src/tool/registry.ts",
+        "packages/opencode/src/tool/task.ts",
+        "packages/opencode/test/event-manifest.test.ts",
+        "packages/opencode/test/mcp/tool-search.test.ts",
+        "packages/opencode/test/session/tool-search-partition.test.ts",
+        "packages/opencode/test/session/tools.test.ts",
+        "packages/opencode/test/tool/code-mode-integration.test.ts",
+        "packages/opencode/test/tool/code-mode.test.ts",
+        "packages/opencode/test/tool/registry.test.ts",
+        "packages/opencode/test/tool/task.test.ts",
+        "packages/schema/src/mcp-event.ts",
+        "packages/web/src/content/docs/mcp-servers.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49797,
+      "title": "perf(desktop): collect orphaned draft blobs after the window is up",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:53:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/desktop/src/main/storage/drafts.test.ts",
+        "packages/desktop/src/main/storage/drafts.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49795,
+      "title": "fix(core): resolve npm for Git plugin preparation",
+      "author": "app/opencode-agent",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:46:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/core/test/npm.test.ts",
+        "packages/util/src/npm-config.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49794,
+      "title": "perf(desktop): install the context menu after the first window exists",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:35:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/desktop/src/main/desktop.ts",
+        "packages/desktop/src/main/lifecycle/environment.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49793,
+      "title": "feat(desktop): reveal session workspace metadata",
+      "author": "usrnk1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:33:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "packages/app/src/home/sessions/alt-hold.test.ts",
+        "packages/app/src/home/sessions/alt-hold.ts",
+        "packages/app/src/home/sessions/controller.tsx",
+        "packages/app/src/home/sessions/records.test.ts",
+        "packages/app/src/home/sessions/records.ts",
+        "packages/app/src/home/sessions/region.tsx",
+        "packages/app/src/home/sessions/view.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49789,
+      "title": "perf(desktop): load node-pty when an interactive WSL install starts",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:21:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/desktop/src/main/wsl/runtime.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49788,
+      "title": "refactor(ai): type each protocol's provider metadata round-trip",
+      "author": "nexxeln",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:19:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "packages/ai/src/protocols/anthropic-messages.ts",
+        "packages/ai/src/protocols/bedrock-converse.ts",
+        "packages/ai/src/protocols/gemini.ts",
+        "packages/ai/src/protocols/open-responses.ts",
+        "packages/ai/src/protocols/openai-chat.ts",
+        "packages/ai/src/protocols/shared.ts",
+        "packages/ai/src/protocols/utils/responses-compaction.ts",
+        "packages/ai/src/protocols/utils/responses-hosted-tools.ts",
+        "packages/ai/test/provider/anthropic-messages.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49786,
+      "title": "perf(codemode): load the TypeScript compiler on first transpile",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T14:14:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/codemode/src/interpreter/execute.ts",
+        "packages/codemode/src/interpreter/transpile.node.ts",
+        "packages/codemode/src/interpreter/transpile.workerd.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49783,
+      "title": "feat:  add  universal terminal thinking ui to opencode terminal",
+      "author": "chiruchintha",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-18T14:05:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/tui/src/component/spinner.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49781,
+      "title": "add feature universal terminal thinking ui",
+      "author": "chiruchintha",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-18T13:58:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/tui/src/component/spinner.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49780,
+      "title": "perf(client): poll for a starting service every 25 ms",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:50:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/client/src/service-timing.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49779,
+      "title": "fix(app): keep shortcuts search field focused while typing",
+      "author": "ysm-dev",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:41:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/app/src/settings/keybinds/keybinds.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49778,
+      "title": "perf(ui): let the resize observer take the first scrollbar measurement",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:39:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/ui/src/components/scroll-view.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49775,
+      "title": "fix(opencode): guard large snapshot restores",
+      "author": "Dante-dan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:33:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/opencode/src/snapshot/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49774,
+      "title": "perf(desktop): load the browser pane on first use",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:31:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/desktop/src/main/ipc-handlers/events.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49772,
+      "title": "perf(desktop): leave declarations and source maps out of the asar",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:18:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/desktop/electron-builder.config.test.ts",
+        "packages/desktop/electron-builder.config.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 49770,
+      "title": "perf(desktop): only persist the background colour when it changes",
+      "author": "Hona",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T13:14:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/desktop/src/main/windows/appearance.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T17:12:29.827Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 49818,
+      "forkPr": 2,
+      "branch": "chore/update-12fu",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "5f9d9187c01708b4e700c9c81c1045ab482bf31d",
+      "headSha": "3066f63b1b18956a6fb80751b6c064618c577ae2",
+      "forkHeadSha": "867c88cf3cd647da7ff11e7781d8e454ce6ca46e",
+      "firstSha": "d755c10aa8b9b40511582fac869f0858840b1ab8",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "pending",
+      "openedAt": "2026-09-18T17:22:09.990Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 2,
+      "card": "out/opencode/pr-2-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "867c88cf3cd647da7ff11e7781d8e454ce6ca46e",
+      "previousSha": "d755c10aa8b9b40511582fac869f0858840b1ab8",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:48.732Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

@@ -1,5 +1,6 @@
 import { escapeHtml as h, safeUrl } from "./workspace-model.mjs"
 import { parseReplayInput } from "./pr-route.mjs"
+import { FEATURED } from "./featured.mjs"
 
 function prForm(value = "", compact = false) {
   return `<form class="pr-form ${compact ? "compact-form" : ""}" data-pr-form>
@@ -13,13 +14,15 @@ function prForm(value = "", compact = false) {
 
 /** Render the URL-first landing page using actual saved examples. */
 export function renderLanding(catalog, origin) {
-  const examples = catalog.records.filter((row) => row.label === "real" && parseReplayInput(row.url) !== null).slice(0, 3)
+  const routable = catalog.records.filter((row) => parseReplayInput(row.url) !== null)
+  const featured = FEATURED.flatMap(({ id, note }) => routable.filter((row) => row.id === id).map((row) => ({ ...row, note })))
+  const examples = featured.length > 0 ? featured : routable.filter((row) => row.label === "real").slice(0, 3)
   const example = examples[0] === undefined ? "/owner/repo/pull/123" : parseReplayInput(examples[0].url).path
   return `<div class="landing">
     <section class="hero">
       <div class="hero-kicker"><span class="mini-mark" aria-hidden="true">↳</span> A DIFFERENT VIEW OF YOUR PULL REQUEST</div>
       <h1>From pull request<br>to <span>runtime evidence.</span></h1>
-      <p class="hero-copy">See what changed when the code ran.<br>Open a GitHub PR to inspect its replay or prepare a new one.</p>
+      <p class="hero-copy">See what changed when the code ran.<br>${catalog.runnerAvailable === false ? "Open a GitHub PR to inspect its recorded runtime evidence." : "Open a GitHub PR to inspect its replay or prepare a new one."}</p>
       ${prForm()}
       <div class="input-hint"><span>GitHub URL, PR path, or <code>owner/repo#123</code></span><kbd>/</kbd></div>
     </section>
@@ -33,13 +36,13 @@ export function renderLanding(catalog, origin) {
         </div>
       </div>
     </section>
-    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A SAVED REPLAY</h2><span>HISTORICAL EVIDENCE</span></div>
+    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A REFERENCE REPLAY</h2><span>SAVED EVIDENCE · SHARE GATE PENDING</span></div>
       ${examples.map((row) => `<a class="example-row" href="${h(parseReplayInput(row.url).path)}" data-pr-link>
-        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong></span>
-        <span class="example-verdict ${h(row.verdict)}">${h(row.verdict.replaceAll("-", " "))}</span><span aria-hidden="true">↗</span>
+        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong>${row.note === undefined ? "" : `<span class="example-note">${h(row.note)}</span>`}</span>
+        <span class="example-verdict ${h(row.verdict)}">${row.label === "constructed" ? "constructed · " : ""}${h(row.verdict.replaceAll("-", " "))}${row.capture === "not-declared" ? '<small class="example-scope">recorded jobs only · capture not declared</small>' : ""}</span><span aria-hidden="true">↗</span>
       </a>`).join("") || '<p class="muted">Paste a PR to look for evidence on GitHub.</p>'}
     </section>
-    <footer class="replay-footer"><span>GARNET / REPLAY</span><span>Exact commits. Recorded actions. Traceable evidence.</span><a href="/workspace">Open workspace ↗</a></footer>
+    <footer class="replay-footer"><span>GARNET / REPLAY</span><span>${catalog.runnerAvailable === false ? "Public evidence viewer · recording runs in the local harness." : "Exact commits. Recorded actions. Traceable evidence."}</span><a href="/workspace">Open workspace ↗</a></footer>
   </div>`
 }
 
@@ -73,9 +76,9 @@ export function renderReplayPending(result) {
   </section>
   ${result.state === "loading" ? "" : `<section class="prepare-panel">
     <div class="section-label"><span>NEXT REPLAY</span><span>${target === null ? "SETUP REQUIRED" : h(target.slug.toUpperCase())}</span></div>
-    <div class="prepare-copy"><div><h2>${result.canPrepare ? "Replay this change on your fork." : "Bring runtime evidence to this PR."}</h2>
-      <p>${result.canPrepare ? `The harness checks the change and recorder, then prepares a two-commit replay on ${h(target.fork)}.` : target !== null ? "Open the upstream PR to prepare a replay, or refresh this fork’s existing recording." : "Connect this repository to the harness with a configured fork, or add Garnet to its workflow to record future runs."}</p></div>
-      ${result.canPrepare ? '<button id="prepare-pr" class="primary">Prepare replay <span aria-hidden="true">→</span></button>' : '<a class="button-link" href="https://github.com/garnet-labs/garnet-replay#real-replay" target="_blank" rel="noreferrer">Setup guide ↗</a>'}
+    <div class="prepare-copy"><div><h2>${result.canPrepare ? "Replay this change on your fork." : result.runnerAvailable === false ? "Prepare a replay in the local harness." : "Bring runtime evidence to this PR."}</h2>
+      <p>${result.canPrepare ? `The harness checks the change and recorder, then prepares a two-commit replay on ${h(target.fork)}.` : result.runnerAvailable === false ? "This viewer reads public evidence. Use the local harness to prepare and record a new replay on your fork." : target !== null ? "Open the upstream PR to prepare a replay, or refresh this fork’s existing recording." : "Connect this repository to the harness with a configured fork, or add Garnet to its workflow to record future runs."}</p></div>
+      ${result.canPrepare ? '<button id="prepare-pr" class="primary">Prepare replay <span aria-hidden="true">→</span></button>' : '<a class="button-link" href="https://github.com/garnet-labs/garnet-replay#runbook" target="_blank" rel="noreferrer">Setup guide ↗</a>'}
     </div><div id="replay-job">${job === undefined ? "" : renderReplayJob(job, result.runnerEnabled)}</div>
   </section>`}`
 }

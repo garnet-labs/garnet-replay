@@ -49,6 +49,11 @@ test("prepared: can publish against an existing fork-only base branch", () => {
   assert.equal(plan.steps.find((step) => step.id === "branch").args.at(-1), "origin/garnet/replay-base")
   assert.ok(plan.steps.find((step) => step.id === "verify-commits").args.includes("origin/garnet/replay-base..HEAD"))
   assert.ok(plan.steps.find((step) => step.id === "pr-create").args.includes("garnet/replay-base"))
+  assert.throws(() => planPrepared({ ...input, baseBranch: "garnet/replay-base", branch: "main" }), /feature branch/)
+  assert.throws(() => planPrepared({ ...input, baseBranch: "garnet/replay-base", branch: "garnet/replay-base" }), /feature branch/)
+  for (const bad of ["main~1", "main^", "main..dev", "a:b", "-x", "", "HEAD@{1}", "a b"]) {
+    assert.throws(() => planPrepared({ ...input, baseBranch: bad }), /base branch is invalid/)
+  }
 })
 
 test("prepared: rejects ambiguous states, absent recorders, and path escapes", () => {

@@ -1,0 +1,60 @@
+diff --git a/npm-testbed/app/package-lock.json b/npm-testbed/app/package-lock.json
+new file mode 100644
+index 0000000..626e807
+--- /dev/null
++++ b/npm-testbed/app/package-lock.json
+@@ -0,0 +1,41 @@
++{
++  "name": "npm-testbed-app",
++  "version": "1.0.0",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "npm-testbed-app",
++      "version": "1.0.0",
++      "dependencies": {
++        "chart-helpers": "file:../vendor/chart-helpers-1.0.0.tgz"
++      }
++    },
++    "node_modules/chart-helpers": {
++      "version": "1.0.0",
++      "resolved": "file:../vendor/chart-helpers-1.0.0.tgz",
++      "integrity": "sha512-Hhrm8IxgBLpbRpZ8p07CVWnQOtkRiTB3LHLBgzz7EafG30K4aK/01TNmoEbQKc1qNQM/brKo1D2LnRHbu0ELPg==",
++      "bundleDependencies": [
++        "date-fmt"
++      ],
++      "dependencies": {
++        "date-fmt": "1.0.0"
++      }
++    },
++    "node_modules/chart-helpers/node_modules/date-fmt": {
++      "version": "1.0.0",
++      "bundleDependencies": [
++        "metrics-beacon"
++      ],
++      "inBundle": true,
++      "dependencies": {
++        "metrics-beacon": "1.0.0"
++      }
++    },
++    "node_modules/chart-helpers/node_modules/date-fmt/node_modules/metrics-beacon": {
++      "version": "1.0.0",
++      "hasInstallScript": true,
++      "inBundle": true
++    }
++  }
++}
+diff --git a/npm-testbed/app/package.json b/npm-testbed/app/package.json
+index 9fe1f4f..6558cfd 100644
+--- a/npm-testbed/app/package.json
++++ b/npm-testbed/app/package.json
+@@ -7,5 +7,7 @@
+   "scripts": {
+     "smoke": "node smoke/run.mjs"
+   },
+-  "dependencies": {}
++  "dependencies": {
++    "chart-helpers": "file:../vendor/chart-helpers-1.0.0.tgz"
++  }
+ }
