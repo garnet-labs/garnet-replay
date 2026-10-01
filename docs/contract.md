@@ -114,3 +114,54 @@ rendered surfaces; machine JSON keeps its field names. Residue terms (`devin`,
 `harness`, `execution diff`, session URLs) may not appear anywhere on the fork.
 `assertVocabClean()` and `assertOutbound()` in `lib/guards.mjs` are the tests.
 "Execution Diff" is the internal block name; people read "new behavior".
+
+## `intent` — declared claims checked against the scoped delta
+
+Optional block on the diff (present only when claims were declared, e.g. via
+`replay pair --steps … --claim …` or `--intent file.json`):
+
+```json
+"intent": {
+  "outcome": "supported | contradicted | needs-explanation | undeterminable",
+  "steps": ["Run E2E test"],
+  "claims": [
+    { "id": "storefront-removed", "kind": "network",
+      "match": { "destination": "mock.shop" },
+      "expect": "present-before-absent-after",
+      "outcome": "supported", "before": ["mock.shop"], "after": [],
+      "steps": ["Run E2E test"], "source": "pr-body" }
+  ],
+  "uncovered": { "added": [], "removed": [] },
+  "stepsMissing": { "base": [], "head": [] }
+}
+```
+
+A claim is `kind` (`network` or `process`), a `match` (`destination` exact or
+`*.suffix` for network; `ancestry` substring for process; omitted for
+`no-added`/`no-removed`), an `expect`
+(`present-before-absent-after`, `absent-before-present-after`, `present-both`,
+`absent-both`, `no-added`, `no-removed`), and optional `steps` naming the
+recorded workflow steps (ordinal stripped) it is scoped to. Per-claim
+outcomes:
+
+| Outcome | When |
+|---|---|
+| `supported` | both sides recorded, complete capture, steps present, predicate holds |
+| `contradicted` | same preconditions, predicate false |
+| `unobservable` | preconditions hold but the matched behaviour appears on neither side (removal/addition cannot be told apart from "never exercised") |
+| `undeterminable` | a side is null, capture is not complete, or a scoped step is missing on either side |
+
+Aggregate `outcome`: `supported` only when every claim is supported and the
+scoped delta holds no added or removed workload row outside the claims;
+`contradicted` when any claim is; `needs-explanation` when all claims are
+supported but uncovered delta rows remain; otherwise `undeterminable`. The
+block emits one `intent-check-result` claim in `claims`. Runner background
+rows never count toward a claim. Step scoping also restricts the diff's
+workload `network`/`process` rows to the declared steps and reports
+`execution_diff.steps` / `steps_missing`.
+
+## `intent-check-result` — did the record carry the stated change?
+
+Added to the `claims` class enum. One line is emitted when an `intent` block
+exists: the aggregate outcome and the claim count over the declared steps.
+It never judges safety and never reads as "verified" or "clean".
