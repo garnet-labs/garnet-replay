@@ -1,0 +1,13 @@
+{
+  "task": "real-173",
+  "model": "claude-haiku-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"This is a version bump of @posthog/mcp-analytics from 0.4.0 to 0.5.0 and related @posthog/core changes, all existing dependencies.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "This is a version bump of @posthog/mcp-analytics from 0.4.0 to 0.5.0 and related @posthog/core changes, all existing dependencies.",
+    "parse_error": null
+  },
+  "error": null
+}

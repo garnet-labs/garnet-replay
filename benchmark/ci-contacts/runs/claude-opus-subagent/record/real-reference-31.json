@@ -1,0 +1,18 @@
+{
+  "task": "real-reference-31",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [\"api.ipify.org\", \"httpbin.org\", \"ip-api.com\", \"registry.npmjs.org\"], \"verdict\": \"new-behavior\", \"reason\": \"With complete capture against the immediate parent, the head's workload newly reaches registry.npmjs.org and, from a node process spawned under the install (node → dash → node), api.ipify.org, httpbin.org and ip-api.com, consistent with an install script in the added chart-helpers tarball phoning out to IP-lookup and echo services.\"}\n",
+  "answer": {
+    "new_destinations": [
+      "api.ipify.org",
+      "httpbin.org",
+      "ip-api.com",
+      "registry.npmjs.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "With complete capture against the immediate parent, the head's workload newly reaches registry.npmjs.org and, from a node process spawned under the install (node → dash → node), api.ipify.org, httpbin.org and ip-api.com, consistent with an install script in the added chart-helpers tarball phoning out to IP-lookup and echo services.",
+    "parse_error": null
+  },
+  "error": null
+}
