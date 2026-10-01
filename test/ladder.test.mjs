@@ -526,6 +526,37 @@ test("recorder health: the fork's newest pull requests say whether Runtime Revie
   assert.ok(calls.some((c) => c.startsWith("pr list") && c.includes(FORK)), calls.join("\n"))
 })
 
+test("recorder health: a batch's own in-flight pull requests are not a stalled recorder", () => {
+  const bot = { login: "garnet-runtime-review[bot]" }
+  const final = (sha) => ({ user: bot, updated_at: "2026-10-01T03:40:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${sha} -->\n<!-- garnet:summary {"status":"finalized","changed":0} -->\nRuntime Review` })
+  const pending = (sha) => ({ user: bot, updated_at: "2026-10-01T03:35:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment: ${sha} -->\n<!-- garnet:commit ${sha} -->\n⏳ recording` })
+  const now = Date.parse("2026-10-01T04:00:00Z")
+  const comments = { 60: [], 59: [pending(SHA_A)], 58: [final(SHA_B)], 57: [pending(SHA_C)], 56: [] }
+  const exec = (cmd, args) => {
+    if (args[0] === "pr" && args[1] === "list") {
+      return JSON.stringify([
+        { number: 60, createdAt: "2026-10-01T03:50:00Z" },
+        { number: 59, createdAt: "2026-10-01T03:30:00Z" },
+        { number: 58, createdAt: "2026-10-01T03:20:00Z" },
+        { number: 57, createdAt: "2026-09-30T01:00:00Z" },
+        { number: 56, createdAt: "2026-09-29T01:00:00Z" },
+      ])
+    }
+    const pr = Number(/issues\/(\d+)\/comments/.exec(args[1])?.[1])
+    return JSON.stringify(comments[pr])
+  }
+  const health = recorderHealth(FORK, { exec, limit: 3, now })
+  assert.equal(health.verdict, "ok")
+  assert.equal(health.fresh, 2)
+  assert.equal(health.lastFinal.pr, 58)
+  assert.match(health.line, /2 in-flight pull requests younger than 60 min skipped$/)
+
+  comments[58] = [pending(SHA_B)]
+  const old = recorderHealth(FORK, { exec, limit: 3, now: now + 3 * 3600_000 })
+  assert.equal(old.verdict, "stalled", "placeholders past the freshness window still read as a stall")
+  assert.equal(old.fresh, 0)
+})
+
 test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
   const planned = "chore(deps): sync dependency manifests before update\n\n- Cargo.lock"
   assert.equal(resolvedFirstMessage(["Cargo.lock", RECORD_WORKFLOW_PATH], planned), planned)

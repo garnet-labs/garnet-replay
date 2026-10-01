@@ -1,0 +1,23 @@
+{
+  "comment": "Real npm packages added to a minimal app on the garnet-labs/express fork (base branch app-deps). The hypothesis column is a pre-registration guess for stratified sampling only; the answer key comes from the recorded run.",
+  "base_dependencies": { "ms": "2.1.3" },
+  "packages": [
+    ["puppeteer", "23.11.1", "download"], ["electron", "33.2.1", "download"], ["cypress", "13.17.0", "download"],
+    ["@sentry/cli", "2.20.7", "download"], ["prisma", "5.22.0", "download"], ["node-sass", "9.0.0", "download"],
+    ["chromedriver", "131.0.0", "download"], ["sharp", "0.32.6", "download"], ["ngrok", "4.3.3", "download"],
+    ["geckodriver", "4.5.1", "download"], ["canvas", "2.11.2", "download"], ["bcrypt", "5.1.1", "download"],
+    ["sqlite3", "5.1.7", "download"], ["better-sqlite3", "11.7.0", "download"], ["@tensorflow/tfjs-node", "4.22.0", "download"],
+    ["ffmpeg-static", "5.2.0", "download"], ["pngquant-bin", "9.0.0", "download"], ["gifsicle", "7.0.1", "download"],
+    ["playwright-chromium", "1.20.0", "download"], ["electron-chromedriver", "33.0.0", "download"], ["re2", "1.21.4", "download"],
+    ["cwebp-bin", "8.0.0", "download"], ["optipng-bin", "9.0.0", "download"], ["mozjpeg", "8.0.0", "download"],
+    ["zeromq", "6.1.2", "download"],
+    ["core-js", "3.39.0", "script"], ["esbuild", "0.24.0", "script"], ["@swc/core", "1.10.1", "script"],
+    ["protobufjs", "7.4.0", "script"], ["msw", "2.7.0", "script"], ["argon2", "0.41.1", "script"],
+    ["lmdb", "3.2.0", "script"], ["dtrace-provider", "0.8.8", "script"], ["deasync", "0.1.30", "script"],
+    ["@parcel/watcher", "2.5.0", "script"], ["node-pty", "1.0.0", "script"],
+    ["lodash", "4.17.21", "none"], ["dayjs", "1.11.13", "none"], ["zod", "3.24.1", "none"], ["chalk", "5.4.1", "none"],
+    ["commander", "12.1.0", "none"], ["uuid", "11.0.3", "none"], ["date-fns", "4.1.0", "none"], ["yaml", "2.6.1", "none"],
+    ["ajv", "8.17.1", "none"], ["axios", "1.7.9", "none"], ["nodemon", "3.1.9", "none"], ["husky", "9.1.7", "none"],
+    ["@napi-rs/canvas", "0.1.65", "none"], ["pino", "9.5.0", "none"]
+  ]
+}

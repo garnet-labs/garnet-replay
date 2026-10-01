@@ -1,0 +1,316 @@
+{
+  "slug": "express",
+  "upstream": "expressjs/express",
+  "fork": "garnet-labs/express",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 7494,
+      "title": "build(deps-dev): bump supertest from 6.3.0 to 7.3.0",
+      "author": "noritaka1166",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-29T16:50:10Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "supertest",
+        "from": "6.3.0",
+        "to": "7.3.0"
+      },
+      "files": 4,
+      "paths": [
+        "package.json",
+        "test/acceptance/downloads.js",
+        "test/express.static.js",
+        "test/support/utils.js"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "major",
+            "points": 2,
+            "reason": "major version transition"
+          }
+        ]
+      },
+      "observedAt": "2026-10-01T04:20:53.415Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 7493,
+      "title": "build(deps-dev): bump morgan from 1.12.0 to 1.12.1",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-29T01:35:51Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "morgan",
+        "from": "1.12.0",
+        "to": "1.12.1"
+      },
+      "files": 1,
+      "paths": [
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-10-01T04:20:53.415Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 7497,
+      "title": "minor change",
+      "author": "jainnamanofficial7-star",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-30T18:28:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "Readme.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-01T04:20:53.415Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 7496,
+      "title": "fix(security): Prototype-pollution write via __proto__ route param in route-separation user loader",
+      "author": "failsafesecurity",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-29T22:04:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "examples/route-separation/user.js"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-01T04:20:53.415Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 7495,
+      "title": "fix(security): Stored XSS in online example via unescaped User-Agent rendered into the visitor list",
+      "author": "failsafesecurity",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-29T22:04:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "examples/online/index.js"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-01T04:20:53.415Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 4,
+      "branch": "deps/add-puppeteer",
+      "scope": "immediate-parent-to-head",
+      "mode": "prepared",
+      "baseSha": "098652669930ef3393c2a63fea5eb8a287877b81",
+      "headSha": "64e565c53424e2fab8e2d94ed8f6f03bf2261b38",
+      "forkHeadSha": "64e565c53424e2fab8e2d94ed8f6f03bf2261b38",
+      "firstSha": "098652669930ef3393c2a63fea5eb8a287877b81",
+      "transition": {
+        "name": "puppeteer",
+        "from": "absent",
+        "to": "23.11.1"
+      },
+      "record": "prepared-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "18da58f122153749f7d9414b28c88572477a668693164d7f365fd9e843b58817",
+      "attemptId": "757025f6789a14d2ed3f85d78a9cb628ec6cb7feb97c86bbf5b19abce3560e95",
+      "state": "undeterminable",
+      "openedAt": "2026-10-01T04:26:53.270Z"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 12,
+      "branch": "deps/add-node-sass",
+      "scope": "immediate-parent-to-head",
+      "mode": "prepared",
+      "baseSha": "d60dd5bc5f6ad9ba7e33b99d4495d17942033f8f",
+      "headSha": "97acac79cc8d17a2560fba791f922b29afbb0f5a",
+      "forkHeadSha": "97acac79cc8d17a2560fba791f922b29afbb0f5a",
+      "firstSha": "d60dd5bc5f6ad9ba7e33b99d4495d17942033f8f",
+      "transition": {
+        "name": "node-sass",
+        "from": "absent",
+        "to": "9.0.0"
+      },
+      "record": "prepared-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "1baaab84438c6178d76c589352d6def0e76ee4a775b0037c6daaa130c4a83e45",
+      "attemptId": "e2d021f97c8e3b8b3acac2b44be06f56dd4aa34d0a5b3699f4964089a826cc59",
+      "state": "undeterminable",
+      "openedAt": "2026-10-01T04:34:14.471Z"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 23,
+      "branch": "deps/add-gifsicle",
+      "scope": "immediate-parent-to-head",
+      "mode": "prepared",
+      "baseSha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+      "headSha": "e75764c5e970399725984957c73d882c5c927cd2",
+      "forkHeadSha": "e75764c5e970399725984957c73d882c5c927cd2",
+      "firstSha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+      "transition": {
+        "name": "gifsicle",
+        "from": "absent",
+        "to": "7.0.1"
+      },
+      "record": "prepared-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "dcd38145b9f91a066f8ddcc843589cdceeeafa86270a2358df6301a9d12670ac",
+      "attemptId": "df8fdf84bffdd0ba389b01bfaa67d32f14a7fc24852ea2f7cbde02b885c89dc2",
+      "state": "undeterminable",
+      "openedAt": "2026-10-01T04:37:03.165Z"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 30,
+      "branch": "deps/add-chalk",
+      "scope": "immediate-parent-to-head",
+      "mode": "prepared",
+      "baseSha": "730fa8c49285bb859e4e0db0c224afaaa1894474",
+      "headSha": "ace477032a4a2a81117fc7a58a20fa76f064b153",
+      "forkHeadSha": "ace477032a4a2a81117fc7a58a20fa76f064b153",
+      "firstSha": "730fa8c49285bb859e4e0db0c224afaaa1894474",
+      "transition": {
+        "name": "chalk",
+        "from": "absent",
+        "to": "5.4.1"
+      },
+      "record": "prepared-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "afd2b9661fcfbf4fc82cf2cdbb8ff5cdc0a71e44f5cf3c048512955d4a86391f",
+      "attemptId": "670a23f23fb5ecd0cc1993a89b7e6f4f6bbcfe148dd514287a6e052925f0c24f",
+      "state": "undeterminable",
+      "openedAt": "2026-10-01T04:41:05.344Z"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 37,
+      "branch": "deps/add-husky",
+      "scope": "immediate-parent-to-head",
+      "mode": "prepared",
+      "baseSha": "96951e2a7affabae41bbc698521c0756d1a0987b",
+      "headSha": "711e84efa3646acda2786902d3d9b054028f81a0",
+      "forkHeadSha": "711e84efa3646acda2786902d3d9b054028f81a0",
+      "firstSha": "96951e2a7affabae41bbc698521c0756d1a0987b",
+      "transition": {
+        "name": "husky",
+        "from": "absent",
+        "to": "9.1.7"
+      },
+      "record": "prepared-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "91bec391e6ddc6b4cdd98d6d7c7bb47eb6744b49b4d6a012a5a5c33ffb9e1f0e",
+      "attemptId": "e729b57f638863fa6894c69ae31623d1cb25828fb19dc6208ebe2f5a1e4c3ced",
+      "state": "undeterminable",
+      "openedAt": "2026-10-01T04:42:55.631Z"
+    }
+  ],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
