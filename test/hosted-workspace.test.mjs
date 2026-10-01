@@ -4,6 +4,7 @@ import { createServer } from "node:http"
 import { test } from "node:test"
 import { createHostedWorkspace, readPublicReplay } from "../lib/hosted-workspace.mjs"
 import { renderLanding, renderReplayPending } from "../public/replay-page.mjs"
+import { parseReplayInput } from "../public/pr-route.mjs"
 
 test("hosted viewer serves direct links and evidence while rejecting every mutation", async (t) => {
   const reads = []
@@ -101,4 +102,26 @@ test("Vercel entry restores the rewritten path and serves the hosted viewer", as
   assert.equal(catalog.runnerAvailable, false)
   const response = await fetch(`${origin}/api/index?__path=api/replay/prepare`, { method: "POST", body: "{}" })
   assert.equal(response.status, 405)
+})
+
+test("the landing features saved reference replays with their scope", async () => {
+  const { FEATURED } = await import("../public/featured.mjs")
+  const server = await createHostedWorkspace({ revision: "test" })
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve))
+  try {
+    const origin = `http://127.0.0.1:${server.address().port}`
+    const catalog = await (await fetch(`${origin}/api/workspace`)).json()
+    const html = renderLanding(catalog, origin)
+    for (const { id, note } of FEATURED) {
+      const row = catalog.records.find((record) => record.id === id)
+      assert.ok(row, `${id} is saved evidence`)
+      assert.ok(html.includes(parseReplayInput(row.url).path))
+      assert.ok(html.includes(note.replaceAll("&", "&amp;")))
+      assert.equal((await fetch(`${origin}${parseReplayInput(row.url).path}`)).status, 200)
+    }
+    assert.ok(html.includes("constructed · new behavior"))
+    assert.ok(html.includes("recorded jobs only · capture not declared"))
+  } finally {
+    server.close()
+  }
 })

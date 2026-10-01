@@ -51,6 +51,8 @@ body:not([data-surface="workspace"]) .topbar { padding-inline: max(24px, calc((1
 .example-verdict { font-size: 10px; white-space: nowrap; color: var(--muted); }
 .example-verdict.new-behavior { color: var(--accent); }
 .example-verdict.undeterminable { color: var(--amber); }
+.example-note { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.example-scope { display: block; margin-top: 3px; color: var(--muted); white-space: normal; }
 .replay-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 33px 0; color: var(--muted); font-size: 10px; }
 body[data-surface="pr"] #content { max-width: 1184px; margin: 0 auto; }
 .pr-location { display: flex; gap: 17px; align-items: center; padding: 24px 28px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }

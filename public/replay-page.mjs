@@ -1,5 +1,6 @@
 import { escapeHtml as h, safeUrl } from "./workspace-model.mjs"
 import { parseReplayInput } from "./pr-route.mjs"
+import { FEATURED } from "./featured.mjs"
 
 function prForm(value = "", compact = false) {
   return `<form class="pr-form ${compact ? "compact-form" : ""}" data-pr-form>
@@ -13,7 +14,9 @@ function prForm(value = "", compact = false) {
 
 /** Render the URL-first landing page using actual saved examples. */
 export function renderLanding(catalog, origin) {
-  const examples = catalog.records.filter((row) => row.label === "real" && parseReplayInput(row.url) !== null).slice(0, 3)
+  const routable = catalog.records.filter((row) => parseReplayInput(row.url) !== null)
+  const featured = FEATURED.flatMap(({ id, note }) => routable.filter((row) => row.id === id).map((row) => ({ ...row, note })))
+  const examples = featured.length > 0 ? featured : routable.filter((row) => row.label === "real").slice(0, 3)
   const example = examples[0] === undefined ? "/owner/repo/pull/123" : parseReplayInput(examples[0].url).path
   return `<div class="landing">
     <section class="hero">
@@ -33,10 +36,10 @@ export function renderLanding(catalog, origin) {
         </div>
       </div>
     </section>
-    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A SAVED REPLAY</h2><span>HISTORICAL EVIDENCE</span></div>
+    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A REFERENCE REPLAY</h2><span>SAVED EVIDENCE · NOT YET SHARE-VERIFIED</span></div>
       ${examples.map((row) => `<a class="example-row" href="${h(parseReplayInput(row.url).path)}" data-pr-link>
-        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong></span>
-        <span class="example-verdict ${h(row.verdict)}">${h(row.verdict.replaceAll("-", " "))}</span><span aria-hidden="true">↗</span>
+        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong>${row.note === undefined ? "" : `<span class="example-note">${h(row.note)}</span>`}</span>
+        <span class="example-verdict ${h(row.verdict)}">${row.label === "constructed" ? "constructed · " : ""}${h(row.verdict.replaceAll("-", " "))}${row.capture === "not-declared" ? '<small class="example-scope">recorded jobs only · capture not declared</small>' : ""}</span><span aria-hidden="true">↗</span>
       </a>`).join("") || '<p class="muted">Paste a PR to look for evidence on GitHub.</p>'}
     </section>
     <footer class="replay-footer"><span>GARNET / REPLAY</span><span>${catalog.runnerAvailable === false ? "Public evidence viewer · recording runs in the local harness." : "Exact commits. Recorded actions. Traceable evidence."}</span><a href="/workspace">Open workspace ↗</a></footer>
