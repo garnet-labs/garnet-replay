@@ -36,7 +36,7 @@ export function renderLanding(catalog, origin) {
         </div>
       </div>
     </section>
-    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A REFERENCE REPLAY</h2><span>SAVED EVIDENCE · NOT YET SHARE-VERIFIED</span></div>
+    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A REFERENCE REPLAY</h2><span>SAVED EVIDENCE · SHARE GATE PENDING</span></div>
       ${examples.map((row) => `<a class="example-row" href="${h(parseReplayInput(row.url).path)}" data-pr-link>
         <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong>${row.note === undefined ? "" : `<span class="example-note">${h(row.note)}</span>`}</span>
         <span class="example-verdict ${h(row.verdict)}">${row.label === "constructed" ? "constructed · " : ""}${h(row.verdict.replaceAll("-", " "))}${row.capture === "not-declared" ? '<small class="example-scope">recorded jobs only · capture not declared</small>' : ""}</span><span aria-hidden="true">↗</span>

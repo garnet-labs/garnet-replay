@@ -26,7 +26,7 @@ node bin/replay.mjs --help
   **no exhibit passes `replay verify`** yet. The recorder does not declare capture
   completeness and public reports name merge refs instead of replay heads. The
   viewer shows these records as observations scoped to the recorded jobs
-  ("capture not declared"); none is a verified exhibit, and no causal claim is
+  ("capture not declared"); none clears the share gate, and no causal claim is
   made from them.
 - Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
   [docs/agent-interface.md](docs/agent-interface.md).
