@@ -173,14 +173,103 @@ test("scoped steps drop workload rows outside the declared steps", async () => {
   assert.deepEqual(scoped.execution_diff.steps_missing, { base: [], head: [] })
 })
 
+const HEAD_SHA = "a".repeat(40)
+const PREV_SHA = "b".repeat(40)
+
+function boundComment(sha = HEAD_SHA) {
+  return {
+    user: { login: "garnet-runtime-review[bot]" },
+    body: `<!-- garnet:commit ${sha} --><!-- garnet:summary {"status":"finalized","previous":"${PREV_SHA}"} -->`,
+  }
+}
+
 test("the card renders the Intended behaviour section only with an intent block", async () => {
   const base = await fixture("intent-sentry-base.json")
   const head = await fixture("intent-sentry-head.json")
   const intent = evaluateClaims({ base, head, claims: CLAIMS, steps: ["Run E2E test"], capture: COMPLETE })
-  const model = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: null, comment: null, intent })
+  const model = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: HEAD_SHA, comment: boundComment(), intent })
   const card = renderCard(model)
   assert.match(card, /Intended behaviour/)
   assert.match(card, /`storefront-removed`: Expected behaviour change is present in the record/)
-  const plain = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: null, comment: null })
+  const plain = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: HEAD_SHA, comment: boundComment() })
   assert.doesNotMatch(renderCard(plain), /Intended behaviour/)
+})
+
+test("a stale or head-unbound record never renders an intent section", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  const intent = evaluateClaims({ base, head, claims: CLAIMS, steps: ["Run E2E test"], capture: COMPLETE })
+  const stale = buildModel({
+    slug: "sentry-javascript", forkPr: 3, headSha: HEAD_SHA,
+    comment: boundComment("c".repeat(40)), intent,
+  })
+  assert.equal(stale.intent, null)
+  assert.doesNotMatch(renderCard(stale), /Intended behaviour/)
+  const unbound = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: HEAD_SHA, comment: null, intent })
+  assert.equal(unbound.intent, null)
+})
+
+test("a destination moved to a scoped step on the head is added, not shared", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = clone(base)
+  head.github.sha = "3333333333333333333333333333333333333333"
+  head.github.run_id = "36000000003"
+  const moved = head.egress.find((entry) => entry.name === "cdn.playwright.dev")
+  moved.step = "14. Run E2E test"
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["Run E2E test"] },
+  })
+  assert.deepEqual(diff.execution_diff.network_added.map((row) => row.destination), ["cdn.playwright.dev"])
+  assert.equal(diff.execution_diff.network_added[0].step, "Run E2E test")
+  assert.equal(diff.execution_diff.network_removed.filter((row) => row.destination === "cdn.playwright.dev").length, 0)
+})
+
+test("a process moved to a scoped step on the head is added, not shared", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = clone(base)
+  head.github.sha = "3333333333333333333333333333333333333333"
+  head.github.run_id = "36000000003"
+  const moved = head.egress.find((entry) => entry.name === "cdn.playwright.dev")
+  moved.step = "14. Run E2E test"
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["Run E2E test"] },
+  })
+  const added = diff.execution_diff.processes_added.map((row) => row.ancestry.join(" → "))
+  assert.ok(added.includes("Runner.Worker → npx → playwright"))
+})
+
+test("a claim scoped to a step outside the declared scope is undeterminable", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  const result = evaluateClaims({
+    base, head, steps: ["Run E2E test"], capture: COMPLETE,
+    claims: [{ id: "out-of-scope", kind: "network", match: { destination: "cdn.playwright.dev" }, expect: "present-both", steps: ["Install Playwright"], source: "test" }],
+  })
+  assert.equal(result.claims[0].outcome, "undeterminable")
+  assert.equal(result.claims[0].reason, 'step "Install Playwright" is outside the declared scope')
+})
+
+test("a contradicted claim does not cover its head-only destination", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  head.egress.push({
+    name: "telemetry.example.net", address: "203.0.113.50", ports: ["443"], pid: 250,
+    ancestry: ["Runner.Worker", "node", "vitest"], step: "14. Run E2E test", result: "connect",
+  })
+  const result = evaluateClaims({
+    base, head, steps: ["Run E2E test"], capture: COMPLETE,
+    claims: [{ id: "telemetry-kept", kind: "network", match: { destination: "telemetry.example.net" }, expect: "present-both", steps: ["Run E2E test"], source: "test" }],
+  })
+  assert.equal(result.claims[0].outcome, "contradicted")
+  assert.deepEqual(result.uncovered.added.map((row) => row.destination), ["telemetry.example.net"])
+})
+
+test("repetition variance makes every claim undeterminable", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  const result = evaluateClaims({ base, head, claims: CLAIMS, steps: ["Run E2E test"], capture: COMPLETE, variance: 1 })
+  assert.equal(result.outcome, "undeterminable")
+  assert.ok(result.claims.every((claim) => claim.outcome === "undeterminable" && claim.reason === "repetitions disagree"))
 })
