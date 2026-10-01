@@ -11,9 +11,12 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - The fork is the only write target. Never push, comment, label, or open a pull
   request on the upstream repository. Never add a link to the upstream
   repository, its pull requests, or `owner/repo#N` on the fork.
-- Exactly two commits per replay, both non-empty, routine wording. No mention of
-  Garnet, demos, tests, tools, or sessions in branch names, commits, titles,
-  bodies, or cards.
+- Commit shape: a replay on an onboarded fork is exactly one commit — the
+  change itself; onboarding is its own one-commit pull request, never bundled
+  into a replay. Only specialized experiments (e.g. before/after sequencing)
+  use exactly two commits. All commits non-empty, routine wording. No mention
+  of Garnet, demos, tests, tools, or sessions in branch names, commits,
+  titles, bodies, or cards.
 - The harness never posts Garnet comments. The fork's recording workflow does.
 - Every artifact names its pair (head, compared commit, transition, scope).
 - Missing, partial, stale, or unbound evidence is `undeterminable`. Never write
@@ -66,7 +69,10 @@ changes.
   no `api_token`; explicit-token jobs need `api_token` and no `id-token`. Pull
   requests from other repositories receive neither and degrade to a local
   record.
-- The action pin in `live/templates/garnet-record.yml` is a main-branch commit.
-  Do not describe it as a release. Repin when a stable tag covers it.
+- The action pin in `live/templates/garnet-record.yml` is the commit covered by
+  release `v2.3.0` (`GARNET_ACTION_PIN` in `lib/replay-pr.mjs`). Move existing
+  forks with `replay repin <slug>`; never edit their workflows by hand. Since
+  v2.3.0 the companion GitHub App owns the Runtime Review comment; the action
+  posts none.
 - An execution chain is one root-to-action path. Today's action class is an
   outbound connection. A destination is the leaf of the action, not the chain.

@@ -1,0 +1,13 @@
+{
+  "task": "real-140",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The record shows only a runner background destination disappearing, and capture is not declared complete, so it cannot support that the @swc/core bump adds no new workload network behavior.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The record shows only a runner background destination disappearing, and capture is not declared complete, so it cannot support that the @swc/core bump adds no new workload network behavior.",
+    "parse_error": null
+  },
+  "error": null
+}

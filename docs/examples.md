@@ -335,6 +335,32 @@ establish a current share-gate result. Every observation and its available
 ancestry is accessible in the viewer; the original artifact remains in Raw JSON.
 See [workspace.md](workspace.md) for the planner and HTTP interface.
 
+## 7. Public viewer entrypoint
+
+```sh
+node server.mjs
+```
+
+The landing page offers:
+
+```text
+Open a GitHub PR to inspect its recorded runtime evidence.
+Public evidence viewer · recording runs in the local harness.
+```
+
+A configured upstream PR without a record directs the next action to:
+
+```text
+Prepare a replay in the local harness.
+This viewer reads public evidence. Use the local harness to prepare and record a new replay on your fork.
+```
+
+The local HTTP checks return `runnerAvailable: false` and `canPrepare: false`.
+Both preparation and Start POSTs return 405, including with valid local-origin
+and intent headers. A separate test supplies ambient GitHub credentials and
+checks that public lookups omit authorization. These checks verify the entrypoint
+locally; they do not establish a deployed Vercel URL.
+
 ## Preserving the selected base's Dependabot policy
 
 Read-only CLI probe on 2026-09-11, after the five-prospect corrections:
@@ -467,13 +493,13 @@ dry run: nothing was executed.
 
 head: `ae2920f` · `ae2920fc99dbaa9069d8c258225b1c6a8df56904`
 
-**consumed** · 1 reviewer(s) or agent(s) cited the head-bound record · reviewer-consumption-evidence
+**not consumed** · no head-bound citation on the current head · reviewer-consumption-evidence
 
 | check | state | detail | claim class |
 |---|---|---|---|
 | record | yes | record bound to head ae2920f | comparison-result |
 | mirror | yes | evidence mirror in the body names the head commit | reviewer-consumption-evidence |
-| consumers | yes | head-bound citation by devin-ai-integration[bot] (comment) | reviewer-consumption-evidence |
+| consumers | no | no reviewer or agent cited the head-bound record | reviewer-consumption-evidence |
 | receipts | yes | 3 receipt(s): 2 citation, 1 mention · devin-ai-integration[bot], qodo-code-review[bot] | reviewer-consumption-evidence |
 | check | yes | Garnet Jibril Release Gate / reproduce / Verify profile, App comment and permalink: failure · Garnet Jibril Release Gate / reproduce / Same workload without the sensor: success · Garnet Jibril Release Gate / reproduce / Simulation — credential-less run skips cleanly: success · Garnet Jibril Release Gate / reproduce / Reproduce self-repo reference on Blacksmith: success · Mirror Garnet evidence for AI reviewers: success · Garnet Jibril Release Gate / reproduce: skipped | required-check-state |
 
@@ -486,7 +512,7 @@ Kept so weaker signals are not lost behind the consumed line; only head-bound ut
 | tier | who | where | commit | matched | excerpt |
 |---|---|---|---|---|---|
 | citation | devin-ai-integration[bot] | [review-comment](https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074133485) | `ae2920f` (head) | head ae2920f, reports no evidence | 🔍 **No runtime evidence for this head** |
-| citation (head-bound) | devin-ai-integration[bot] | [review-comment](https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074198082) | `ae2920f` (head) | head ae2920f | Timing: the review ran before the TS CI Node 24 leg finished. Head-bound record for `ae2920f` now exists (job 106845400061): `Download action repository 'garnet-org/action@2609a287b43720d73e26304558b2ead0fafd369b'`, `Jibril Version: v2.1... |
+| citation | devin-ai-integration[bot] | [review-comment](https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074198082) | `ae2920f` (head) | head ae2920f, written before the record | Timing: the review ran before the TS CI Node 24 leg finished. Head-bound record for `ae2920f` now exists (job 106845400061): `Download action repository 'garnet-org/action@2609a287b43720d73e26304558b2ead0fafd369b'`, `Jibril Version: v2.1... |
 | mention | qodo-code-review[bot] | [comment](https://github.com/garnet-labs/pnpm/pull/66#issuecomment-5780431967) | — | — | TEST["Test workflow"] --> ACTION{{"Garnet action"}} <-- RELEASE["Release workflow"] |
 
 
@@ -502,16 +528,16 @@ pnpm · pull request 66 · head ae2920f · delivered yes · visible yes · rerev
 
 ## Consumption harvest across a fork
 
-`replay harvest pnpm --limit 60` (run 2026-09-22), first rows of `out/pnpm/consumption-harvest.md`. Each row also writes `out/pnpm/pr-<N>-consume.json` with the source comments; the ledger stores that path relative to the repository.
+`replay harvest pnpm --limit 60` (run 2026-09-22, after the negation and finalization-time fixes), first rows of `out/pnpm/consumption-harvest.md`. Each row also writes `out/pnpm/pr-<N>-consume.json` with the source comments; the ledger stores that path relative to the repository.
 
 ### Consumption harvest · garnet-labs/pnpm
 
-57 pull request(s) with a record checked · 9 consumed (head-bound) · 33 with at least one receipt · 3 skipped (no record)
+57 pull request(s) with a record checked · 7 consumed (head-bound) · 33 with at least one receipt · 3 skipped (no record)
 
 | pull request | head | record | mirror | consumed | receipts |
 |---|---|---|---|---|---|
-| 66 | `ae2920f` | head-bound | yes | yes · devin-ai-integration[bot] (comment) | 3 receipt(s): 2 citation, 1 mention |
-| 65 | `da56d8e` | head-bound | yes | yes · devin-ai-integration[bot] (comment) | 4 receipt(s): 1 citation, 3 mention |
+| 66 | `ae2920f` | head-bound | yes | no | 3 receipt(s): 2 citation, 1 mention |
+| 65 | `68303b0` | head-bound | yes | no | 3 receipt(s): 3 mention |
 | 64 | `d858adb` | head-bound | yes | no | no receipts |
 | 63 | `afc58c1` | head-bound | yes | no | no receipts |
 | 62 | `d0511cd` | head-bound | yes | yes · devin-ai-integration[bot] (comment) | 1 receipt(s): 1 utterance |

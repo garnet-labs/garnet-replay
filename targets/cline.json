@@ -1,0 +1,1638 @@
+{
+  "slug": "cline",
+  "upstream": "cline/cline",
+  "fork": "garnet-labs/cline",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14241,
+      "title": "feat(cli): add PostHog-gated cloud tasks and conversation handoff",
+      "author": "johnwschoi",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T23:02:59Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 52,
+      "paths": [
+        "apps/cli/README.md",
+        "apps/cli/package.json",
+        "apps/cli/src/cli.cloud.tuistory.e2e.test.ts",
+        "apps/cli/src/index.ts",
+        "apps/cli/src/runtime/active-runtime.test.ts",
+        "apps/cli/src/runtime/active-runtime.ts",
+        "apps/cli/src/runtime/cloud/auth.ts",
+        "apps/cli/src/runtime/cloud/eligibility.test.ts",
+        "apps/cli/src/runtime/cloud/eligibility.ts",
+        "apps/cli/src/runtime/cloud/runtime.test.ts",
+        "apps/cli/src/runtime/cloud/runtime.ts",
+        "apps/cli/src/runtime/cloud/storage.test.ts",
+        "apps/cli/src/runtime/cloud/storage.ts",
+        "apps/cli/src/runtime/interactive/chat-command-runner.test.ts",
+        "apps/cli/src/runtime/interactive/chat-command-runner.ts",
+        "apps/cli/src/runtime/interactive/fork/metadata.test.ts",
+        "apps/cli/src/runtime/interactive/fork/metadata.ts",
+        "apps/cli/src/runtime/interactive/session-runtime.test.ts",
+        "apps/cli/src/runtime/interactive/session-runtime.ts",
+        "apps/cli/src/runtime/run-interactive.test.ts",
+        "apps/cli/src/runtime/run-interactive.ts",
+        "apps/cli/src/tests/cloud-hub-fixture.ts",
+        "apps/cli/src/tests/cloud-posthog-preload.ts",
+        "apps/cli/src/tests/seed-cloud-handoff-session.ts",
+        "apps/cli/src/tui/commands/slash-command-registry.test.ts",
+        "apps/cli/src/tui/commands/slash-command-registry.ts",
+        "apps/cli/src/tui/components/dialogs/cloud-branch-dialog.tsx",
+        "apps/cli/src/tui/components/dialogs/cloud-dialogs.tsx",
+        "apps/cli/src/tui/components/dialogs/command-palette-items.ts",
+        "apps/cli/src/tui/components/dialogs/command-palette.test.ts",
+        "apps/cli/src/tui/components/dialogs/command-palette.tsx",
+        "apps/cli/src/tui/contexts/session-context.tsx",
+        "apps/cli/src/tui/hooks/cloud-keyboard.test.ts",
+        "apps/cli/src/tui/hooks/use-agent-events.ts",
+        "apps/cli/src/tui/hooks/use-cloud-state.ts",
+        "apps/cli/src/tui/hooks/use-cloud-transcript.test.ts",
+        "apps/cli/src/tui/hooks/use-cloud-transcript.ts",
+        "apps/cli/src/tui/hooks/use-model-selector.tsx",
+        "apps/cli/src/tui/hooks/use-prompt-input-controller.ts",
+        "apps/cli/src/tui/hooks/use-root-keyboard.ts",
+        "apps/cli/src/tui/hooks/use-slash-commands.ts",
+        "apps/cli/src/tui/root.tsx",
+        "apps/cli/src/tui/types.ts",
+        "apps/cli/src/tui/utils/hydrate-messages.ts",
+        "apps/cli/src/tui/views/cloud-composer.tsx",
+        "apps/cli/src/tui/views/cloud-handoff.test.ts",
+        "apps/cli/src/tui/views/cloud-handoff.ts",
+        "apps/cli/src/tui/views/cloud-view-helpers.test.ts",
+        "apps/cli/src/tui/views/cloud-view-helpers.ts",
+        "apps/cli/src/tui/views/cloud-view.tsx",
+        "bun.lock",
+        "sdk/packages/shared/src/feature-flags.ts"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14243,
+      "title": "fix(desktop): claim the Hub daemon sentinel in the sidecar entrypoint",
+      "author": "saoudrizwan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T23:48:26Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".github/workflows/sdk-test.yml",
+        "apps/examples/desktop-app/package.json",
+        "apps/examples/desktop-app/scripts/desktop-startup.test.ts",
+        "apps/examples/desktop-app/sidecar/index.ts"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14240,
+      "title": "refactor(core): share cloud sessions and handoff runtime across clients",
+      "author": "johnwschoi",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T23:02:51Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 42,
+      "paths": [
+        "apps/examples/desktop-app/sidecar/chat-session.ts",
+        "apps/examples/desktop-app/sidecar/cloud-session-snapshots.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions-api.test.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions-hub.test.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions-lifecycle.test.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions-state.test.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions.ts",
+        "apps/examples/desktop-app/sidecar/session-data/common.ts",
+        "apps/examples/desktop-app/sidecar/session-data/messages.ts",
+        "apps/examples/desktop-app/tsconfig.dev.json",
+        "apps/examples/desktop-app/tsconfig.json",
+        "apps/examples/desktop-app/webview/lib/cloud-repositories.ts",
+        "sdk/AGENTS.md",
+        "sdk/ARCHITECTURE.md",
+        "sdk/DOC.md",
+        "sdk/biome.json",
+        "sdk/packages/core/bun.mts",
+        "sdk/packages/core/package.json",
+        "sdk/packages/core/src/cloud/api.test.ts",
+        "sdk/packages/core/src/cloud/api.ts",
+        "sdk/packages/core/src/cloud/controller-websocket.test.ts",
+        "sdk/packages/core/src/cloud/controller.test.ts",
+        "sdk/packages/core/src/cloud/controller.ts",
+        "sdk/packages/core/src/cloud/handoff.test.ts",
+        "sdk/packages/core/src/cloud/handoff.ts",
+        "sdk/packages/core/src/cloud/index.ts",
+        "sdk/packages/core/src/cloud/repositories.ts",
+        "sdk/packages/core/src/cloud/seeded.test.ts",
+        "sdk/packages/core/src/cloud/snapshots.test.ts",
+        "sdk/packages/core/src/cloud/snapshots.ts",
+        "sdk/packages/core/src/cloud/state.ts",
+        "sdk/packages/core/src/cloud/types.ts",
+        "sdk/packages/core/src/hub/client/index.test.ts",
+        "sdk/packages/core/src/hub/client/index.ts",
+        "sdk/packages/core/src/hub/runtime-host/hub-event-projector.test.ts",
+        "sdk/packages/core/src/hub/runtime-host/hub-event-projector.ts",
+        "sdk/packages/core/src/hub/runtime-host/hub-runtime-host.ts",
+        "sdk/packages/core/src/hub/server/hub-upgrades.test.ts",
+        "sdk/packages/core/src/services/cloud-handoff/index.ts",
+        "sdk/packages/core/src/services/cloud-handoff/model-catalog.test.ts",
+        "sdk/packages/core/src/services/cloud-handoff/model-catalog.ts",
+        "sdk/packages/core/tsconfig.build.json"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14208,
+      "title": "feat(desktop): add a local Usage tab for Codex, Claude Code and Cline",
+      "author": "SergioChan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T03:28:32Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 24,
+      "paths": [
+        "apps/examples/desktop-app/package.json",
+        "apps/examples/desktop-app/sidecar/commands-usage.test.ts",
+        "apps/examples/desktop-app/sidecar/commands-usage.ts",
+        "apps/examples/desktop-app/sidecar/commands.ts",
+        "apps/examples/desktop-app/webview/components/agent-sidebar.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/sections.ts",
+        "apps/examples/desktop-app/webview/components/views/settings/settings-view.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/usage-share-dialog.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/usage-view.test.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/usage-view.tsx",
+        "apps/examples/desktop-app/webview/hooks/use-usage.ts",
+        "apps/examples/desktop-app/webview/lib/share-card-layout.test.ts",
+        "apps/examples/desktop-app/webview/lib/share-card-layout.ts",
+        "apps/examples/desktop-app/webview/lib/share-card.test.ts",
+        "apps/examples/desktop-app/webview/lib/share-card.ts",
+        "apps/examples/desktop-app/webview/lib/usage-types.ts",
+        "sdk/packages/core/src/index.ts",
+        "sdk/packages/core/src/services/usage-patterns/head.test.ts",
+        "sdk/packages/core/src/services/usage-patterns/head.ts",
+        "sdk/packages/core/src/services/usage-patterns/index.ts",
+        "sdk/packages/core/src/services/usage-patterns/patterns.ts",
+        "sdk/packages/core/src/services/usage-patterns/sources.ts",
+        "sdk/packages/core/src/services/usage-patterns/types.ts",
+        "sdk/packages/core/src/services/usage-patterns/usage.test.ts"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14203,
+      "title": "desktop: fix Sign in failing while the sidecar is still starting or being respawned",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T02:27:32Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "apps/examples/desktop-app/package.json",
+        "apps/examples/desktop-app/src-tauri/src/main.rs",
+        "apps/examples/desktop-app/webview/components/views/onboarding/onboarding-view.test.tsx",
+        "apps/examples/desktop-app/webview/components/views/onboarding/onboarding-view.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/account-view.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/settings-view.tsx",
+        "apps/examples/desktop-app/webview/lib/desktop-client.test.ts",
+        "apps/examples/desktop-app/webview/lib/desktop-client.ts",
+        "apps/examples/desktop-app/webview/lib/provider-connection.ts",
+        "sdk/ARCHITECTURE.md",
+        "sdk/packages/core/src/hub/server/index.test.ts",
+        "sdk/packages/core/src/remote/shell-path.test.ts",
+        "sdk/packages/core/src/remote/shell-path.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14198,
+      "title": "chore(ui): prepare next.10 parity release",
+      "author": "johnwschoi",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-16T22:16:15Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "sdk/packages/ui/README.md",
+        "sdk/packages/ui/package.json",
+        "sdk/packages/ui/scripts/smoke-package.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14249,
+      "title": "ci(desktop): boot the packaged sidecar against an isolated Hub before publishing",
+      "author": "saoudrizwan",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T04:49:30Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/desktop-publish.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14244,
+      "title": "feat(ci): add nightly desktop publish workflow",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-18T00:19:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/workflows/desktop-publish.yml",
+        "apps/examples/desktop-app/src-tauri/src/main.rs",
+        "apps/examples/desktop-app/src-tauri/tauri.nightly.conf.json"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14210,
+      "title": "fix(cli): re-sign darwin binaries after bun compile",
+      "author": "Brooooooklyn",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T05:08:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".cline/skills/publish-cli/SKILL.md",
+        ".github/workflows/cli-publish.yml",
+        "apps/cli/DISTRIBUTION.md",
+        "apps/cli/script/build.ts"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14202,
+      "title": "fix(ci): build LLM dependency before UI release chat tests",
+      "author": "johnwschoi",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T01:25:14Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/ui-publish.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14228,
+      "title": "refactor(sdk): Consolidate model catalogs behind provider settings manager",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T20:30:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 67,
+      "paths": [
+        "apps/cli/src/acp/acpAgent.ts",
+        "apps/cli/src/acp/index.ts",
+        "apps/cli/src/commands/schedule/model-selection.ts",
+        "apps/cli/src/connectors/session-runtime.ts",
+        "apps/cli/src/index.ts",
+        "apps/cli/src/main.ts",
+        "apps/cli/src/runtime/run-interactive.ts",
+        "apps/cli/src/tui/cline-account.ts",
+        "apps/cli/src/tui/components/dialogs/provider-picker.tsx",
+        "apps/cli/src/tui/components/model-selector/cline-model-picker.tsx",
+        "apps/cli/src/tui/components/model-selector/cline-model-selector.tsx",
+        "apps/cli/src/tui/hooks/use-model-selector.tsx",
+        "apps/cli/src/tui/utils/provider-configured.ts",
+        "apps/cli/src/tui/views/onboarding/controller.ts",
+        "apps/cli/src/utils/cline-client-identity.ts",
+        "apps/cli/src/utils/enterprise.ts",
+        "apps/cli/src/utils/free-model-cost.test.ts",
+        "apps/cli/src/utils/free-model-cost.ts",
+        "apps/cli/src/utils/provider-catalog.ts",
+        "apps/cli/src/utils/provider-settings.ts",
+        "apps/cline-hub/src/server/deps.ts",
+        "apps/cline-hub/src/server/desktop-commands.ts",
+        "apps/cline-hub/src/server/providers.ts",
+        "apps/examples/desktop-app/sidecar/chat-session.ts",
+        "apps/examples/desktop-app/sidecar/cloud-sessions.ts",
+        "apps/examples/desktop-app/sidecar/commands.ts",
+        "apps/examples/desktop-app/sidecar/index.ts",
+        "apps/examples/desktop-app/sidecar/observability.ts",
+        "apps/examples/desktop-app/sidecar/provider-settings.ts",
+        "apps/examples/menubar/sidecar/index.ts",
+        "apps/examples/vscode/src/extension.ts",
+        "apps/vscode/src/common.ts",
+        "apps/vscode/src/core/controller/models/__tests__/refreshClineRecommendedModels.test.ts",
+        "apps/vscode/src/core/controller/models/refreshClineRecommendedModels.ts",
+        "apps/vscode/src/sdk/cline-session-factory.ts",
+        "apps/vscode/src/sdk/model-catalog/catalog.test.ts",
+        "apps/vscode/src/sdk/model-catalog/catalog.ts",
+        "apps/vscode/src/sdk/model-provider-settings.test.ts",
+        "apps/vscode/src/sdk/model-provider-settings.ts",
+        "apps/vscode/src/services/ClineClientIdentity.test.ts",
+        "apps/vscode/src/services/ClineClientIdentity.ts",
+        "apps/vscode/src/test/cline-core-vitest-stub.ts",
+        "apps/vscode/test-setup.js",
+        "apps/vscode/webview-ui/src/components/settings/providers/ClinePassProvider.tsx",
+        "sdk/ARCHITECTURE.md",
+        "sdk/DOC.md",
+        "sdk/packages/core/src/index.ts",
+        "sdk/packages/core/src/services/llms/cline-recommended-models.test.ts",
+        "sdk/packages/core/src/services/llms/cline-recommended-models.ts",
+        "sdk/packages/core/src/services/llms/provider-defaults.test.ts",
+        "sdk/packages/core/src/services/llms/provider-defaults.ts",
+        "sdk/packages/core/src/services/providers/local-provider-service.test.ts",
+        "sdk/packages/core/src/services/providers/local-provider-service.ts",
+        "sdk/packages/core/src/services/storage/provider-model-catalog.test.ts",
+        "sdk/packages/core/src/services/storage/provider-settings-manager.ts",
+        "sdk/packages/llms/src/catalog/catalog-cline-recommended.test.ts",
+        "sdk/packages/llms/src/catalog/catalog-cline-recommended.ts",
+        "sdk/packages/llms/src/catalog/catalog-live.ts",
+        "sdk/packages/llms/src/catalog/cline-catalog-context.ts",
+        "sdk/packages/llms/src/index.browser.ts",
+        "sdk/packages/llms/src/index.ts",
+        "sdk/packages/llms/src/providers/cline-client-headers.test.ts",
+        "sdk/packages/llms/src/providers/cline-client-headers.ts",
+        "sdk/packages/llms/src/providers/request-headers.ts",
+        "sdk/packages/shared/src/index.browser.ts",
+        "sdk/packages/shared/src/index.ts",
+        "sdk/packages/shared/src/runtime/cline-client-identity.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14224,
+      "title": "Add Client Type to Recommended Models requests",
+      "author": "BarreiroT",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T18:44:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 24,
+      "paths": [
+        "apps/cli/src/acp/index.ts",
+        "apps/cli/src/index.ts",
+        "apps/cli/src/main.ts",
+        "apps/cli/src/utils/cline-client-identity.ts",
+        "apps/cli/src/utils/free-model-cost.test.ts",
+        "apps/cli/src/utils/free-model-cost.ts",
+        "apps/examples/desktop-app/sidecar/index.ts",
+        "apps/vscode/src/common.ts",
+        "apps/vscode/src/services/ClineClientIdentity.test.ts",
+        "apps/vscode/src/services/ClineClientIdentity.ts",
+        "apps/vscode/vitest.config.ts",
+        "sdk/packages/core/src/index.ts",
+        "sdk/packages/core/src/services/llms/cline-recommended-models.test.ts",
+        "sdk/packages/core/src/services/llms/cline-recommended-models.ts",
+        "sdk/packages/llms/src/catalog/catalog-cline-recommended.ts",
+        "sdk/packages/llms/src/catalog/catalog-live.test.ts",
+        "sdk/packages/llms/src/index.browser.ts",
+        "sdk/packages/llms/src/index.ts",
+        "sdk/packages/llms/src/providers/cline-client-headers.test.ts",
+        "sdk/packages/llms/src/providers/cline-client-headers.ts",
+        "sdk/packages/llms/src/providers/request-headers.ts",
+        "sdk/packages/shared/src/index.browser.ts",
+        "sdk/packages/shared/src/index.ts",
+        "sdk/packages/shared/src/runtime/cline-client-identity.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14206,
+      "title": "Desktop: fix provider execution, browser metadata, and MCP paths",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T02:44:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 46,
+      "paths": [
+        "apps/cli/src/commands/rpc-runtime/provider-registry.test.ts",
+        "apps/cli/src/tui/components/dialogs/provider-picker-helpers.ts",
+        "apps/cli/src/tui/components/dialogs/provider-picker.test.ts",
+        "apps/cli/src/tui/components/dialogs/provider-picker.tsx",
+        "apps/cli/src/tui/views/onboarding/controller.ts",
+        "apps/cli/src/tui/views/onboarding/screens.tsx",
+        "apps/cli/src/tui/views/onboarding/view.tsx",
+        "apps/cli/src/utils/local-cli.ts",
+        "apps/cline-hub/src/server/providers.ts",
+        "apps/examples/desktop-app/sidecar/ARCHITECTURE.md",
+        "apps/examples/desktop-app/sidecar/commands.ts",
+        "apps/examples/desktop-app/sidecar/mcp.test.ts",
+        "apps/examples/desktop-app/sidecar/paths.ts",
+        "apps/examples/desktop-app/src-tauri/src/main.rs",
+        "apps/examples/desktop-app/webview/app/page.tsx",
+        "apps/examples/desktop-app/webview/components/views/chat/chat-messages.test.tsx",
+        "apps/examples/desktop-app/webview/components/views/chat/messages/message-bubble.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/settings-view.tsx",
+        "apps/examples/desktop-app/webview/hooks/chat-session/helpers.test.ts",
+        "apps/examples/desktop-app/webview/hooks/chat-session/helpers.ts",
+        "apps/examples/desktop-app/webview/hooks/use-chat-session.test.tsx",
+        "apps/examples/desktop-app/webview/hooks/use-chat-session.ts",
+        "apps/examples/desktop-app/webview/lib/chat-schema.ts",
+        "apps/examples/desktop-app/webview/lib/provider-model-catalog.ts",
+        "apps/examples/desktop-app/webview/lib/provider-schema.ts",
+        "apps/examples/desktop-app/webview/tsconfig.json",
+        "sdk/DOC.md",
+        "sdk/packages/core/src/services/llms/handler-factory.test.ts",
+        "sdk/packages/core/src/services/llms/handler-factory.ts",
+        "sdk/packages/core/src/services/llms/provider-defaults.test.ts",
+        "sdk/packages/core/src/services/llms/provider-defaults.ts",
+        "sdk/packages/core/src/services/providers/local-provider-service.test.ts",
+        "sdk/packages/core/src/services/providers/local-provider-service.ts",
+        "sdk/packages/core/src/services/providers/model-source.test.ts",
+        "sdk/packages/core/src/services/providers/model-source.ts",
+        "sdk/packages/llms/src/index.browser.ts",
+        "sdk/packages/llms/src/index.ts",
+        "sdk/packages/llms/src/providers.ts",
+        "sdk/packages/llms/src/providers/compat.ts",
+        "sdk/packages/llms/src/providers/local-cli.test.ts",
+        "sdk/packages/llms/src/providers/local-cli.ts",
+        "sdk/packages/shared/src/index.browser.ts",
+        "sdk/packages/shared/src/index.ts",
+        "sdk/packages/shared/src/provider-auth.test.ts",
+        "sdk/packages/shared/src/provider-auth.ts",
+        "sdk/packages/shared/src/rpc/runtime.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14193,
+      "title": "fix(core): own compaction through canonical conversation snapshots",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T19:26:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 76,
+      "paths": [
+        "apps/cli/src/acp/acpAgent.ts",
+        "apps/cli/src/acp/session-load.test.ts",
+        "apps/cli/src/acp/session-load.ts",
+        "apps/cli/src/runtime/interactive/compaction.test.ts",
+        "apps/cli/src/runtime/interactive/compaction.ts",
+        "apps/cli/src/runtime/interactive/exit-summary.ts",
+        "apps/cli/src/runtime/interactive/fork/metadata.ts",
+        "apps/cli/src/runtime/interactive/fork/title.ts",
+        "apps/cli/src/runtime/interactive/session-runtime.test.ts",
+        "apps/cli/src/runtime/interactive/session-runtime.ts",
+        "apps/cli/src/session/export.ts",
+        "apps/cli/src/tui/checkpoint-picker-items.ts",
+        "apps/cli/src/tui/types.ts",
+        "apps/cli/src/tui/utils/hydrate-messages.test.ts",
+        "apps/cli/src/tui/utils/hydrate-messages.ts",
+        "apps/cli/src/utils/resume.ts",
+        "apps/cline-hub/src/server/session-mapping.test.ts",
+        "apps/examples/desktop-app/sidecar/chat-session.ts",
+        "apps/examples/desktop-app/sidecar/session-data/agents.ts",
+        "apps/examples/desktop-app/sidecar/session-data/messages.test.ts",
+        "apps/examples/desktop-app/sidecar/session-data/messages.ts",
+        "apps/examples/desktop-app/sidecar/types.ts",
+        "apps/examples/desktop-app/webview/hooks/chat-session/helpers.test.ts",
+        "apps/vscode/src/sdk/message-translator.test.ts",
+        "apps/vscode/src/sdk/message-translator.ts",
+        "apps/vscode/src/sdk/sdk-compaction-coordinator.test.ts",
+        "apps/vscode/src/sdk/sdk-compaction-coordinator.ts",
+        "apps/vscode/src/sdk/sdk-compaction.test.ts",
+        "apps/vscode/src/sdk/sdk-compaction.ts",
+        "apps/vscode/src/sdk/session-host.ts",
+        "apps/vscode/src/sdk/vscode-session-host.ts",
+        "sdk/ARCHITECTURE.md",
+        "sdk/DOC.md",
+        "sdk/packages/core/src/ClineCore.ts",
+        "sdk/packages/core/src/cline-core/types.ts",
+        "sdk/packages/core/src/extensions/context/compaction.test.ts",
+        "sdk/packages/core/src/extensions/context/compaction.ts",
+        "sdk/packages/core/src/hub/runtime-host/hub-runtime-host.test.ts",
+        "sdk/packages/core/src/hub/runtime-host/hub-runtime-host.ts",
+        "sdk/packages/core/src/hub/server/boundary.test.ts",
+        "sdk/packages/core/src/hub/server/handlers/session-handlers.ts",
+        "sdk/packages/core/src/hub/server/hub-server-transport.ts",
+        "sdk/packages/core/src/index.ts",
+        "sdk/packages/core/src/runtime/config/agent-message-codec.test.ts",
+        "sdk/packages/core/src/runtime/config/agent-message-codec.ts",
+        "sdk/packages/core/src/runtime/host/history.ts",
+        "sdk/packages/core/src/runtime/host/local-runtime-host.e2e.test.ts",
+        "sdk/packages/core/src/runtime/host/local-runtime-host.test.ts",
+        "sdk/packages/core/src/runtime/host/local-runtime-host.ts",
+        "sdk/packages/core/src/runtime/host/runtime-host-support.ts",
+        "sdk/packages/core/src/runtime/host/runtime-host.ts",
+        "sdk/packages/core/src/runtime/orchestration/session-runtime-orchestrator.ts",
+        "sdk/packages/core/src/services/llms/handler-factory.ts",
+        "sdk/packages/core/src/services/session-data.test.ts",
+        "sdk/packages/core/src/services/session-data.ts",
+        "sdk/packages/core/src/services/usage.ts",
+        "sdk/packages/core/src/session/checkpoint-restore.ts",
+        "sdk/packages/core/src/session/display-messages.ts",
+        "sdk/packages/core/src/session/models/conversation-snapshot.test.ts",
+        "sdk/packages/core/src/session/models/conversation-snapshot.ts",
+        "sdk/packages/core/src/session/models/session-compaction.test.ts",
+        "sdk/packages/core/src/session/models/session-compaction.ts",
+        "sdk/packages/core/src/session/services/persistence-service.test.ts",
+        "sdk/packages/core/src/session/services/persistence-service.ts",
+        "sdk/packages/core/src/session/session-snapshot.ts",
+        "sdk/packages/core/src/session/session-versioning-service.ts",
+        "sdk/packages/core/src/session/stores/conversation-store.test.ts",
+        "sdk/packages/core/src/session/stores/conversation-store.ts",
+        "sdk/packages/core/src/session/stores/session-manifest-store.ts",
+        "sdk/packages/core/src/session/team/team-child-session-manager.ts",
+        "sdk/packages/core/src/types/session.ts",
+        "sdk/packages/llms/src/index.ts",
+        "sdk/packages/shared/src/agents/types.ts",
+        "sdk/packages/shared/src/hub.ts",
+        "sdk/packages/shared/src/index.ts",
+        "sdk/packages/shared/src/llms/messages.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14259,
+      "title": "docs: fix three stale documentation anchors",
+      "author": "lihongyuan99",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T12:33:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/api/authentication.mdx",
+        "docs/enterprise-solutions/api-reference.mdx",
+        "docs/tools-reference/all-cline-tools.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14257,
+      "title": "fix(sdk): keep read-result footers honest through transport truncation",
+      "author": "Souptik96",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T09:55:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "sdk/packages/core/src/session/services/message-builder.test.ts",
+        "sdk/packages/core/src/session/services/message-builder.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14255,
+      "title": "fix(sdk): stop counting a trailing newline as an extra insert_line boundary",
+      "author": "FanouZeng-TT",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T09:30:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "apps/vscode/src/sdk/sdk-diff-edit-coordinator.test.ts",
+        "apps/vscode/src/sdk/sdk-diff-edit-coordinator.ts",
+        "sdk/packages/core/src/extensions/tools/executors/editor.test.ts",
+        "sdk/packages/core/src/extensions/tools/executors/editor.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14254,
+      "title": "fix: prevent [object Object] leakage in hook payloads",
+      "author": "nabucho",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T09:04:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "apps/vscode/src/sdk/hooks-adapter.test.ts",
+        "apps/vscode/src/sdk/hooks-adapter.ts",
+        "sdk/packages/core/src/hooks/hook-file-hooks.ts",
+        "sdk/packages/core/src/hooks/subprocess.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14252,
+      "title": "fix(acp): forward token usage and cost to ACP clients",
+      "author": "iamenahs",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T06:56:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/cli/src/acp/acpAgent.ts",
+        "apps/cli/src/acp/session-updates.test.ts",
+        "apps/cli/src/acp/session-updates.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14247,
+      "title": "feat: add ainetcafe as an OpenAI-compatible provider",
+      "author": "mario03690",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T03:12:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "docs/provider-config/other-30-plus-providers.mdx",
+        "sdk/packages/llms/src/providers/builtins.ts",
+        "sdk/packages/llms/src/providers/ids.ts",
+        "sdk/packages/llms/src/providers/provider-keys.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14246,
+      "title": "feat: add Inference APIs as an OpenAI-compatible provider",
+      "author": "TaylorHawkes",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T02:42:57Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "docs/provider-config/other-30-plus-providers.mdx",
+        "sdk/packages/llms/src/providers/builtins.ts",
+        "sdk/packages/llms/src/providers/ids.ts",
+        "sdk/packages/llms/src/providers/provider-keys.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14239,
+      "title": "fix(vscode): stop rendering the raw tool envelope for silent commands",
+      "author": "saoudrizwan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T22:26:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/vscode/src/sdk/message-translator.test.ts",
+        "apps/vscode/src/sdk/message-translator.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14236,
+      "title": "fix(core): stop search refreshes during disposal",
+      "author": "johnwschoi",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T21:16:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "sdk/ARCHITECTURE.md",
+        "sdk/packages/core/src/session/search/session-history-search.test.ts",
+        "sdk/packages/core/src/session/search/session-history-search.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14235,
+      "title": "fix(mentions): match @file after parens, brackets, and quotes",
+      "author": "soroush5",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T21:15:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "sdk/packages/core/src/services/workspace/mention-enricher.test.ts",
+        "sdk/packages/core/src/services/workspace/mention-enricher.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14230,
+      "title": "test(core): fix Windows hub startup cleanup race",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-17T20:55:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "sdk/packages/core/src/hub/server/index.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14225,
+      "title": "fix(core): align configured subagent approvals with subagents and teammates",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T19:21:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "sdk/ARCHITECTURE.md",
+        "sdk/DOC.md",
+        "sdk/packages/core/src/extensions/tools/team/configured-agent-tool.ts",
+        "sdk/packages/core/src/runtime/orchestration/runtime-builder.configured-agent-execution.test.ts",
+        "sdk/packages/core/src/runtime/orchestration/runtime-builder.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14223,
+      "title": "docs(clinepass): add MuseSpark-1.3-contributor and DeepSeek V4.1 Flash; deprecate GLM-5.2, Kimi K2.6/K2.7 Code, DeepSeek V4 Flash",
+      "author": "app/cline-cloud",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T18:03:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/getting-started/clinepass.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14222,
+      "title": "feat(desktop): spotlight SSH remote environments once for existing installs",
+      "author": "saoudrizwan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T17:49:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "apps/examples/desktop-app/webview/app/page.tsx",
+        "apps/examples/desktop-app/webview/components/ssh-remote-environments-announcement.test.tsx",
+        "apps/examples/desktop-app/webview/components/ssh-remote-environments-announcement.tsx",
+        "apps/examples/desktop-app/webview/lib/feature-announcements.test.ts",
+        "apps/examples/desktop-app/webview/lib/feature-announcements.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14216,
+      "title": "fix(shared): use sh as default shell on FreeBSD",
+      "author": "apg19590209",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-17T11:49:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "sdk/packages/shared/src/parse/shell.test.ts",
+        "sdk/packages/shared/src/parse/shell.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14213,
+      "title": "Carry the provider's Retry-After on ClineError",
+      "author": "unolife",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T08:09:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/vscode/src/services/error/ClineError.ts",
+        "apps/vscode/src/services/error/__tests__/ClineError.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14207,
+      "title": "Fix rules path drift: load and surface .cline/rules consistently across VS Code, Desktop, and SDK",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T02:51:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "apps/examples/desktop-app/webview/components/views/settings/extensions-view.test.tsx",
+        "apps/examples/desktop-app/webview/components/views/settings/extensions-view.tsx",
+        "apps/vscode/src/core/context/instructions/user-instructions/__tests__/cline-rules-toggles.test.ts",
+        "apps/vscode/src/core/context/instructions/user-instructions/cline-rules.ts",
+        "apps/vscode/src/types/cline-shared-storage.d.ts",
+        "sdk/packages/shared/src/storage/index.ts",
+        "sdk/packages/shared/src/storage/paths.test.ts",
+        "sdk/packages/shared/src/storage/paths.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14205,
+      "title": "fix(vscode): list project rules from .cline/rules in the Rules panel",
+      "author": "gold-beyond",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T02:30:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "apps/vscode/src/core/context/instructions/user-instructions/__tests__/cline-rules.test.ts",
+        "apps/vscode/src/core/context/instructions/user-instructions/cline-rules.ts",
+        "apps/vscode/src/core/context/instructions/user-instructions/rule-helpers.ts",
+        "apps/vscode/src/core/storage/disk.ts",
+        "apps/vscode/src/types/cline-shared-storage.d.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14204,
+      "title": "fix(webview): expose Plan/Act toggle as accessible radiogroup",
+      "author": "franjorub",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T02:28:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/vscode/webview-ui/src/components/chat/ChatTextArea.test.tsx",
+        "apps/vscode/webview-ui/src/components/chat/ChatTextArea.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14200,
+      "title": "fix(cli): enable transcript mouse wheel scrolling",
+      "author": "521Peter",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T23:35:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/cli/src/tui/components/chat-message-list.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14199,
+      "title": "docs: support-agent reference docs for the Cline Support Agent Hub",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-16T22:30:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "docs/support-agent-hub/README.md",
+        "docs/support-agent-hub/agent-plugins.md",
+        "docs/support-agent-hub/cline-clients.md",
+        "docs/support-agent-hub/cline-configuration.md",
+        "docs/support-agent-hub/cline-hub.md",
+        "docs/support-agent-hub/cline-pass.md",
+        "docs/support-agent-hub/cline-plugins.md",
+        "docs/support-agent-hub/cline-provider.md",
+        "docs/support-agent-hub/cline-sdk.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14197,
+      "title": "fix(agents): run subagent tool calls concurrently by default",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-16T21:12:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "sdk/DOC.md",
+        "sdk/packages/agents/src/agent-runtime.test.ts",
+        "sdk/packages/agents/src/agent-runtime.ts",
+        "sdk/packages/core/src/extensions/tools/team/configured-agent-tool.test.ts",
+        "sdk/packages/core/src/extensions/tools/team/configured-agent-tool.ts",
+        "sdk/packages/core/src/extensions/tools/team/spawn-agent-concurrency.test.ts",
+        "sdk/packages/core/src/extensions/tools/team/spawn-agent-tool.ts",
+        "sdk/packages/shared/src/agent.ts",
+        "sdk/packages/shared/src/tools/create.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14196,
+      "title": "fix(core): stream session-import JSONL reads instead of loading whole files",
+      "author": "SergioChan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T21:06:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "sdk/packages/core/src/services/session-import/claude-code.ts",
+        "sdk/packages/core/src/services/session-import/codex.ts",
+        "sdk/packages/core/src/services/session-import/jsonl-reader.test.ts",
+        "sdk/packages/core/src/services/session-import/jsonl-reader.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14195,
+      "title": "core: trigger compaction on the provider's actual input-token count",
+      "author": "abeatrix",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-16T19:54:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "sdk/packages/agents/src/agent-runtime.ts",
+        "sdk/packages/core/src/extensions/context/compaction-shared.ts",
+        "sdk/packages/core/src/extensions/context/compaction.test.ts",
+        "sdk/packages/core/src/extensions/context/compaction.ts",
+        "sdk/packages/core/src/runtime/orchestration/session-runtime-orchestrator.test.ts",
+        "sdk/packages/core/src/runtime/orchestration/session-runtime-orchestrator.ts",
+        "sdk/packages/shared/src/agent.ts",
+        "sdk/packages/shared/src/agents/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14194,
+      "title": "fix(core): reject read-file line numbers in patch context",
+      "author": "crwvrosenblum",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T19:37:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "sdk/packages/core/src/extensions/tools/executors/apply-patch-parser.ts",
+        "sdk/packages/core/src/extensions/tools/executors/apply-patch.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14190,
+      "title": "fix(vscode): convert a fetched page's table into a table",
+      "author": "L4XB",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T17:47:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/vscode/src/services/browser/UrlContentFetcher.ts",
+        "apps/vscode/src/services/browser/htmlToMarkdown.test.ts",
+        "apps/vscode/src/services/browser/htmlToMarkdown.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:52.426Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 14239,
+      "forkPr": 28,
+      "branch": "chore/update-azj",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "d6ede1a89c6de6b64c00f7581fe1536ad156a8c5",
+      "headSha": "062dd68b6552b20b0cb5694e2f3d5b4fdda2e58c",
+      "forkHeadSha": "d36728cf6cb869b0700178753e7f3112706850ec",
+      "firstSha": "16d688a73022fdab409bd664e1410e4f9a996652",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "pending",
+      "openedAt": "2026-09-18T17:03:42.999Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 28,
+      "card": "out/cline/pr-28-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "d36728cf6cb869b0700178753e7f3112706850ec",
+      "previousSha": "16d688a73022fdab409bd664e1410e4f9a996652",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:46.928Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

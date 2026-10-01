@@ -5751,7 +5751,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-203-consume.json",
-      "checkedAt": "2026-09-22T17:29:42.975Z"
+      "checkedAt": "2026-09-22T17:45:17.553Z"
     },
     {
       "forkPr": 202,
@@ -5768,7 +5768,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-202-consume.json",
-      "checkedAt": "2026-09-22T17:29:49.731Z"
+      "checkedAt": "2026-09-22T17:45:24.321Z"
     },
     {
       "forkPr": 201,
@@ -5809,13 +5809,13 @@
           "headBound": false,
           "matched": [
             "head 863b41b",
-            "reports no evidence"
+            "written before the record"
           ],
           "excerpt": "**[Evidence from the check](https://app.greptile.com/trex/artifacts/2556e975-0fc0-42f9-b886-a70b1a77cb41)**"
         }
       ],
       "raw": "out/posthog/pr-201-consume.json",
-      "checkedAt": "2026-09-22T17:29:57.447Z"
+      "checkedAt": "2026-09-22T17:45:31.782Z"
     },
     {
       "forkPr": 200,
@@ -5846,7 +5846,7 @@
         }
       ],
       "raw": "out/posthog/pr-200-consume.json",
-      "checkedAt": "2026-09-22T17:30:02.183Z"
+      "checkedAt": "2026-09-22T17:45:36.471Z"
     },
     {
       "forkPr": 199,
@@ -5863,7 +5863,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-199-consume.json",
-      "checkedAt": "2026-09-22T17:30:06.374Z"
+      "checkedAt": "2026-09-22T17:45:40.955Z"
     },
     {
       "forkPr": 198,
@@ -5880,7 +5880,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-198-consume.json",
-      "checkedAt": "2026-09-22T17:30:15.985Z"
+      "checkedAt": "2026-09-22T17:45:51.093Z"
     },
     {
       "forkPr": 197,
@@ -5897,7 +5897,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-197-consume.json",
-      "checkedAt": "2026-09-22T17:30:20.454Z"
+      "checkedAt": "2026-09-22T17:45:55.203Z"
     },
     {
       "forkPr": 193,
@@ -5914,7 +5914,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-193-consume.json",
-      "checkedAt": "2026-09-22T17:30:26.483Z"
+      "checkedAt": "2026-09-22T17:46:01.058Z"
     },
     {
       "forkPr": 192,
@@ -5931,7 +5931,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-192-consume.json",
-      "checkedAt": "2026-09-22T17:30:31.956Z"
+      "checkedAt": "2026-09-22T17:46:06.576Z"
     },
     {
       "forkPr": 191,
@@ -5948,7 +5948,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-191-consume.json",
-      "checkedAt": "2026-09-22T17:30:37.492Z"
+      "checkedAt": "2026-09-22T17:46:12.750Z"
     },
     {
       "forkPr": 188,
@@ -5965,7 +5965,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-188-consume.json",
-      "checkedAt": "2026-09-22T17:30:39.595Z"
+      "checkedAt": "2026-09-22T17:46:14.372Z"
     },
     {
       "forkPr": 187,
@@ -5982,7 +5982,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-187-consume.json",
-      "checkedAt": "2026-09-22T17:30:41.729Z"
+      "checkedAt": "2026-09-22T17:46:16.127Z"
     },
     {
       "forkPr": 186,
@@ -5999,7 +5999,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-186-consume.json",
-      "checkedAt": "2026-09-22T17:30:43.721Z"
+      "checkedAt": "2026-09-22T17:46:17.751Z"
     },
     {
       "forkPr": 185,
@@ -6016,7 +6016,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-185-consume.json",
-      "checkedAt": "2026-09-22T17:30:45.608Z"
+      "checkedAt": "2026-09-22T17:46:19.165Z"
     },
     {
       "forkPr": 184,
@@ -6033,7 +6033,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-184-consume.json",
-      "checkedAt": "2026-09-22T17:30:47.643Z"
+      "checkedAt": "2026-09-22T17:46:20.899Z"
     },
     {
       "forkPr": 183,
@@ -6050,7 +6050,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-183-consume.json",
-      "checkedAt": "2026-09-22T17:30:49.790Z"
+      "checkedAt": "2026-09-22T17:46:22.667Z"
     },
     {
       "forkPr": 182,
@@ -6067,7 +6067,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-182-consume.json",
-      "checkedAt": "2026-09-22T17:30:51.743Z"
+      "checkedAt": "2026-09-22T17:46:24.349Z"
     },
     {
       "forkPr": 181,
@@ -6084,7 +6084,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-181-consume.json",
-      "checkedAt": "2026-09-22T17:30:53.601Z"
+      "checkedAt": "2026-09-22T17:46:25.980Z"
     },
     {
       "forkPr": 180,
@@ -6101,7 +6101,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-180-consume.json",
-      "checkedAt": "2026-09-22T17:30:55.541Z"
+      "checkedAt": "2026-09-22T17:46:27.460Z"
     },
     {
       "forkPr": 179,
@@ -6118,7 +6118,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-179-consume.json",
-      "checkedAt": "2026-09-22T17:30:57.762Z"
+      "checkedAt": "2026-09-22T17:46:29.148Z"
     },
     {
       "forkPr": 178,
@@ -6149,7 +6149,7 @@
         }
       ],
       "raw": "out/posthog/pr-178-consume.json",
-      "checkedAt": "2026-09-22T17:30:59.595Z"
+      "checkedAt": "2026-09-22T17:46:30.994Z"
     },
     {
       "forkPr": 177,
@@ -6166,7 +6166,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-177-consume.json",
-      "checkedAt": "2026-09-22T17:31:01.664Z"
+      "checkedAt": "2026-09-22T17:46:32.673Z"
     },
     {
       "forkPr": 176,
@@ -6183,7 +6183,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-176-consume.json",
-      "checkedAt": "2026-09-22T17:31:03.629Z"
+      "checkedAt": "2026-09-22T17:46:34.442Z"
     },
     {
       "forkPr": 175,
@@ -6200,7 +6200,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-175-consume.json",
-      "checkedAt": "2026-09-22T17:31:05.401Z"
+      "checkedAt": "2026-09-22T17:46:35.944Z"
     },
     {
       "forkPr": 174,
@@ -6217,7 +6217,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-174-consume.json",
-      "checkedAt": "2026-09-22T17:31:06.966Z"
+      "checkedAt": "2026-09-22T17:46:37.618Z"
     },
     {
       "forkPr": 173,
@@ -6234,7 +6234,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-173-consume.json",
-      "checkedAt": "2026-09-22T17:31:08.691Z"
+      "checkedAt": "2026-09-22T17:46:39.129Z"
     },
     {
       "forkPr": 172,
@@ -6251,7 +6251,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-172-consume.json",
-      "checkedAt": "2026-09-22T17:31:10.488Z"
+      "checkedAt": "2026-09-22T17:46:40.533Z"
     },
     {
       "forkPr": 171,
@@ -6268,7 +6268,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-171-consume.json",
-      "checkedAt": "2026-09-22T17:31:12.309Z"
+      "checkedAt": "2026-09-22T17:46:42.042Z"
     },
     {
       "forkPr": 170,
@@ -6285,7 +6285,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-170-consume.json",
-      "checkedAt": "2026-09-22T17:31:14.188Z"
+      "checkedAt": "2026-09-22T17:46:43.613Z"
     },
     {
       "forkPr": 169,
@@ -6302,7 +6302,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-169-consume.json",
-      "checkedAt": "2026-09-22T17:31:15.721Z"
+      "checkedAt": "2026-09-22T17:46:45.236Z"
     },
     {
       "forkPr": 168,
@@ -6319,7 +6319,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-168-consume.json",
-      "checkedAt": "2026-09-22T17:31:17.520Z"
+      "checkedAt": "2026-09-22T17:46:46.897Z"
     },
     {
       "forkPr": 167,
@@ -6336,7 +6336,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-167-consume.json",
-      "checkedAt": "2026-09-22T17:31:19.375Z"
+      "checkedAt": "2026-09-22T17:46:48.767Z"
     },
     {
       "forkPr": 166,
@@ -6353,7 +6353,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-166-consume.json",
-      "checkedAt": "2026-09-22T17:31:21.008Z"
+      "checkedAt": "2026-09-22T17:46:50.542Z"
     },
     {
       "forkPr": 165,
@@ -6370,7 +6370,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-165-consume.json",
-      "checkedAt": "2026-09-22T17:31:22.682Z"
+      "checkedAt": "2026-09-22T17:46:52.637Z"
     },
     {
       "forkPr": 164,
@@ -6387,7 +6387,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-164-consume.json",
-      "checkedAt": "2026-09-22T17:31:24.215Z"
+      "checkedAt": "2026-09-22T17:46:54.480Z"
     },
     {
       "forkPr": 163,
@@ -6404,7 +6404,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-163-consume.json",
-      "checkedAt": "2026-09-22T17:31:25.970Z"
+      "checkedAt": "2026-09-22T17:46:56.393Z"
     },
     {
       "forkPr": 162,
@@ -6421,7 +6421,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-162-consume.json",
-      "checkedAt": "2026-09-22T17:31:27.880Z"
+      "checkedAt": "2026-09-22T17:46:58.249Z"
     },
     {
       "forkPr": 161,
@@ -6438,7 +6438,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-161-consume.json",
-      "checkedAt": "2026-09-22T17:31:29.529Z"
+      "checkedAt": "2026-09-22T17:46:59.891Z"
     },
     {
       "forkPr": 160,
@@ -6455,7 +6455,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-160-consume.json",
-      "checkedAt": "2026-09-22T17:31:30.988Z"
+      "checkedAt": "2026-09-22T17:47:01.574Z"
     },
     {
       "forkPr": 159,
@@ -6472,7 +6472,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-159-consume.json",
-      "checkedAt": "2026-09-22T17:31:32.931Z"
+      "checkedAt": "2026-09-22T17:47:03.474Z"
     },
     {
       "forkPr": 158,
@@ -6489,7 +6489,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-158-consume.json",
-      "checkedAt": "2026-09-22T17:31:34.450Z"
+      "checkedAt": "2026-09-22T17:47:05.009Z"
     },
     {
       "forkPr": 157,
@@ -6506,7 +6506,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-157-consume.json",
-      "checkedAt": "2026-09-22T17:31:36.284Z"
+      "checkedAt": "2026-09-22T17:47:06.867Z"
     },
     {
       "forkPr": 156,
@@ -6523,7 +6523,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-156-consume.json",
-      "checkedAt": "2026-09-22T17:31:37.839Z"
+      "checkedAt": "2026-09-22T17:47:08.582Z"
     },
     {
       "forkPr": 155,
@@ -6540,7 +6540,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-155-consume.json",
-      "checkedAt": "2026-09-22T17:31:39.624Z"
+      "checkedAt": "2026-09-22T17:47:10.388Z"
     },
     {
       "forkPr": 154,
@@ -6557,7 +6557,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-154-consume.json",
-      "checkedAt": "2026-09-22T17:31:41.528Z"
+      "checkedAt": "2026-09-22T17:47:12.131Z"
     },
     {
       "forkPr": 153,
@@ -6574,7 +6574,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-153-consume.json",
-      "checkedAt": "2026-09-22T17:31:43.508Z"
+      "checkedAt": "2026-09-22T17:47:13.793Z"
     },
     {
       "forkPr": 152,
@@ -6591,7 +6591,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-152-consume.json",
-      "checkedAt": "2026-09-22T17:31:45.239Z"
+      "checkedAt": "2026-09-22T17:47:15.436Z"
     },
     {
       "forkPr": 151,
@@ -6608,7 +6608,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-151-consume.json",
-      "checkedAt": "2026-09-22T17:31:46.771Z"
+      "checkedAt": "2026-09-22T17:47:17.094Z"
     },
     {
       "forkPr": 150,
@@ -6625,7 +6625,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-150-consume.json",
-      "checkedAt": "2026-09-22T17:31:48.346Z"
+      "checkedAt": "2026-09-22T17:47:18.933Z"
     },
     {
       "forkPr": 149,
@@ -6642,7 +6642,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-149-consume.json",
-      "checkedAt": "2026-09-22T17:31:50.065Z"
+      "checkedAt": "2026-09-22T17:47:20.975Z"
     },
     {
       "forkPr": 148,
@@ -6659,7 +6659,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-148-consume.json",
-      "checkedAt": "2026-09-22T17:31:51.753Z"
+      "checkedAt": "2026-09-22T17:47:22.632Z"
     },
     {
       "forkPr": 147,
@@ -6690,7 +6690,7 @@
         }
       ],
       "raw": "out/posthog/pr-147-consume.json",
-      "checkedAt": "2026-09-22T17:31:53.546Z"
+      "checkedAt": "2026-09-22T17:47:24.526Z"
     },
     {
       "forkPr": 146,
@@ -6707,7 +6707,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-146-consume.json",
-      "checkedAt": "2026-09-22T17:31:55.400Z"
+      "checkedAt": "2026-09-22T17:47:26.556Z"
     },
     {
       "forkPr": 145,
@@ -6724,7 +6724,7 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-145-consume.json",
-      "checkedAt": "2026-09-22T17:31:57.091Z"
+      "checkedAt": "2026-09-22T17:47:28.543Z"
     },
     {
       "forkPr": 144,
@@ -6741,7 +6741,1538 @@
       },
       "receipts": [],
       "raw": "out/posthog/pr-144-consume.json",
-      "checkedAt": "2026-09-22T17:31:58.590Z"
+      "checkedAt": "2026-09-22T17:47:30.318Z"
+    },
+    {
+      "forkPr": 143,
+      "headSha": "dc5d44995e3cf33022d85c4497044407ae60b45e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-143-consume.json",
+      "checkedAt": "2026-09-22T17:47:32.065Z"
+    },
+    {
+      "forkPr": 142,
+      "headSha": "60e3e792e21618431bf2e168a16238a1d3d4aee8",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5378172929,
+          "url": "https://github.com/garnet-labs/posthog/pull/142#issuecomment-5378172929",
+          "at": "2026-08-22T05:22:40Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 60e3e79",
+            "run 32552873673"
+          ],
+          "excerpt": "**Recorded runs**"
+        }
+      ],
+      "raw": "out/posthog/pr-142-consume.json",
+      "checkedAt": "2026-09-22T17:47:34.153Z"
+    },
+    {
+      "forkPr": 141,
+      "headSha": "684bbd11dbf4b7b2aada2cb64f33c29f9318e959",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-141-consume.json",
+      "checkedAt": "2026-09-22T17:47:36.203Z"
+    },
+    {
+      "forkPr": 140,
+      "headSha": "607ae123417df1a6816e0351f42b582741076be1",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3835114387,
+          "url": "https://github.com/garnet-labs/posthog/pull/140#discussion_r3835114387",
+          "at": "2026-08-22T04:39:59Z",
+          "commit": "607ae12",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The branch contains only this marker after `origin/replay-base/26`; there is no following dependency-update commit and no dependency-manifest change. Update the marker to describe the baseline-only recording accurately, or include the de..."
+        }
+      ],
+      "raw": "out/posthog/pr-140-consume.json",
+      "checkedAt": "2026-09-22T17:47:38.189Z"
+    },
+    {
+      "forkPr": 139,
+      "headSha": "5aba3c461a4872f7ca3d6a07ce739f2cb883e0cf",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-139-consume.json",
+      "checkedAt": "2026-09-22T17:47:40.220Z"
+    },
+    {
+      "forkPr": 136,
+      "headSha": "b93f5206a2a3eed6b46d26a69315ae7415592890",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-136-consume.json",
+      "checkedAt": "2026-09-22T17:47:46.126Z"
+    },
+    {
+      "forkPr": 134,
+      "headSha": "ac8e551bda709adfc2541f9f38b09bc58398609e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-134-consume.json",
+      "checkedAt": "2026-09-22T17:47:50.462Z"
+    },
+    {
+      "forkPr": 133,
+      "headSha": "ee4f50a6f75eb1b1dc92023e31cdd65b4b5d015f",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-133-consume.json",
+      "checkedAt": "2026-09-22T17:47:57.320Z"
+    },
+    {
+      "forkPr": 131,
+      "headSha": "ea9d45715a3931c03d2eaa430d56c18c3fca65c8",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-131-consume.json",
+      "checkedAt": "2026-09-22T17:48:02.934Z"
+    },
+    {
+      "forkPr": 130,
+      "headSha": "eb0d3f112a57265e92e744ca62ee0a1c0cd6a1ef",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-130-consume.json",
+      "checkedAt": "2026-09-22T17:48:12.139Z"
+    },
+    {
+      "forkPr": 129,
+      "headSha": "1fd330a82e88bd6067113ee43b50250a3dbe4684",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-129-consume.json",
+      "checkedAt": "2026-09-22T17:48:26.889Z"
+    },
+    {
+      "forkPr": 128,
+      "headSha": "37d3c7dfaad17d296d17893bce8c83361eaa8d4c",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3763876241,
+          "url": "https://github.com/garnet-labs/posthog/pull/128#discussion_r3763876241",
+          "at": "2026-08-12T05:41:34Z",
+          "commit": "6128a10",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "You're right, and the Garnet evidence makes the correction unambiguous. At the previous commit the install does not reach `storage.googleapis.com`; at HEAD it does — with the only intervening change being the `puppeteer` entry added to `..."
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5262506155,
+          "url": "https://github.com/garnet-labs/posthog/pull/128#issuecomment-5262506155",
+          "at": "2026-08-12T05:03:57Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Both recorded install jobs ran for each of the two commits, so the before/after pair is complete: 2/2 expected jobs at the baseline (`76ca2d3`) and 2/2 at the head (`6128a10`)."
+        }
+      ],
+      "raw": "out/posthog/pr-128-consume.json",
+      "checkedAt": "2026-09-22T17:48:32.645Z"
+    },
+    {
+      "forkPr": 127,
+      "headSha": "34061225e5da0523ff31acabbbc13512a134487e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-127-consume.json",
+      "checkedAt": "2026-09-22T17:48:37.639Z"
+    },
+    {
+      "forkPr": 126,
+      "headSha": "09af9f62058a9c93047b05d42f4b0516b3a3cabb",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3762455233,
+          "url": "https://github.com/garnet-labs/posthog/pull/126#discussion_r3762455233",
+          "at": "2026-08-11T23:26:04Z",
+          "commit": "09af9f6",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "A pull request that changes only `patches/**` skips this recorded `pnpm install`, although pnpm applies the repository's patch files during that installation. That leaves the head commit without required runtime evidence for a changed de..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3762455243,
+          "url": "https://github.com/garnet-labs/posthog/pull/126#discussion_r3762455243",
+          "at": "2026-08-11T23:26:04Z",
+          "commit": "09af9f6",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "This workflow independently copies the parser workflow's `setup-uv` revision and uv version without a synchronization check. A parser-only pin update triggers this recorded job because it watches `build-hogql-parser-rs.yml`, but the job ..."
+        }
+      ],
+      "raw": "out/posthog/pr-126-consume.json",
+      "checkedAt": "2026-09-22T17:48:42.667Z"
+    },
+    {
+      "forkPr": 125,
+      "headSha": "c2b1bbdbe6649d55ef0780313604249784e3b28a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-125-consume.json",
+      "checkedAt": "2026-09-22T17:48:46.477Z"
+    },
+    {
+      "forkPr": 124,
+      "headSha": "640cb5d149dfbb59c53a3c05d6c303e1e8e2a1e3",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-124-consume.json",
+      "checkedAt": "2026-09-22T17:48:53.040Z"
+    },
+    {
+      "forkPr": 123,
+      "headSha": "68a10f44e34a27d3677eed8aabdbcdb9fd5579e4",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-123-consume.json",
+      "checkedAt": "2026-09-22T17:48:59.859Z"
+    },
+    {
+      "forkPr": 122,
+      "headSha": "8a3651ac08be09a13f5513951973b3dd980751b9",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-122-consume.json",
+      "checkedAt": "2026-09-22T17:49:03.904Z"
+    },
+    {
+      "forkPr": 121,
+      "headSha": "8b4f5602256272b862f94bf4dd4380f90e67f9fe",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-121-consume.json",
+      "checkedAt": "2026-09-22T17:49:10.594Z"
+    },
+    {
+      "forkPr": 120,
+      "headSha": "0657cf845f2fe4dca8a3b0f8f7b786f4c3afa3db",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-120-consume.json",
+      "checkedAt": "2026-09-22T17:49:14.728Z"
+    },
+    {
+      "forkPr": 119,
+      "headSha": "59d0e23a107088e1ef3876656c4097952242d1d0",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3762241500,
+          "url": "https://github.com/garnet-labs/posthog/pull/119#discussion_r3762241500",
+          "at": "2026-08-11T22:38:32Z",
+          "commit": "59d0e23",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**[Focused runtime evidence parser suite passes](https://app.greptile.com/trex/artifacts/7e397452-cbab-43d3-ad66-72164c726633)**"
+        }
+      ],
+      "raw": "out/posthog/pr-119-consume.json",
+      "checkedAt": "2026-09-22T17:49:19.832Z"
+    },
+    {
+      "forkPr": 118,
+      "headSha": "e22126fea69705a491b71e4353a47653393bd7c4",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3762231843,
+          "url": "https://github.com/garnet-labs/posthog/pull/118#discussion_r3762231843",
+          "at": "2026-08-11T22:36:31Z",
+          "commit": "25dc7aa",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "`pnpm/action-setup@v4` and `actions/setup-node@v4` execute after the Garnet step receives `GARNET_API_TOKEN`, but before the action's post-job cleanup removes `/etc/default/jibril`. The pinned Garnet action writes the token to that file,..."
+        }
+      ],
+      "raw": "out/posthog/pr-118-consume.json",
+      "checkedAt": "2026-09-22T17:49:23.809Z"
+    },
+    {
+      "forkPr": 117,
+      "headSha": "912f83fbbcf9c52c373ea1cee78144c9d5ff6431",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761975344,
+          "url": "https://github.com/garnet-labs/posthog/pull/117#discussion_r3761975344",
+          "at": "2026-08-11T21:50:38Z",
+          "commit": "80b268b",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "🟡 **Recorded install job pinned to older toolchain versions than the rest of CI**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761979771,
+          "url": "https://github.com/garnet-labs/posthog/pull/117#discussion_r3761979771",
+          "at": "2026-08-11T21:51:24Z",
+          "commit": "80b268b",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Good catch, and it's the same argument the PR already makes for pnpm — fixed in e1f5e98: `actions/checkout` now uses the canonical `de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2` and `actions/setup-node` the canonical `6044e13b5dc448..."
+        }
+      ],
+      "raw": "out/posthog/pr-117-consume.json",
+      "checkedAt": "2026-09-22T17:49:27.583Z"
+    },
+    {
+      "forkPr": 116,
+      "headSha": "371915b193b0a3852efae8055b02812364b92d2e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3762023818,
+          "url": "https://github.com/garnet-labs/posthog/pull/116#discussion_r3762023818",
+          "at": "2026-08-11T21:59:50Z",
+          "commit": "371915b",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- name: Garnet Runtime Visibility"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5259662147,
+          "url": "https://github.com/garnet-labs/posthog/pull/116#issuecomment-5259662147",
+          "at": "2026-08-11T22:36:55Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**What I consumed.** Two things, both on this PR: the sticky Runtime Review comment from `garnet-runtime-review[bot]` (contract 6.9.8) comparing `7f8a740` → `5d2093a`, and the raw profiles behind it (`/api/v1/projects/{id}/profiles?run_i..."
+        },
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5259675081,
+          "url": "https://github.com/garnet-labs/posthog/pull/116#issuecomment-5259675081",
+          "at": "2026-08-11T22:38:36Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Here is a direct comparison of what each analysis layer contributed, with evidence from the Garnet runtime data in the PR comment."
+        }
+      ],
+      "raw": "out/posthog/pr-116-consume.json",
+      "checkedAt": "2026-09-22T17:49:31.890Z"
+    },
+    {
+      "forkPr": 115,
+      "headSha": "4913618b543f70fdf601a673bd0386e497d5e937",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)",
+        "greptile-apps[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 3,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5259665815,
+          "url": "https://github.com/garnet-labs/posthog/pull/115#issuecomment-5259665815",
+          "at": "2026-08-11T22:37:23Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 4913618",
+            "run 31537963206"
+          ],
+          "excerpt": "| | Greptile / T-Rex | Garnet Runtime Review |"
+        },
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5259674305,
+          "url": "https://github.com/garnet-labs/posthog/pull/115#issuecomment-5259674305",
+          "at": "2026-08-11T22:38:30Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 4913618"
+          ],
+          "excerpt": "## Without Garnet Runtime Context (Static Analysis Only)"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5260298887,
+          "url": "https://github.com/garnet-labs/posthog/pull/115#issuecomment-5260298887",
+          "at": "2026-08-12T00:02:54Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 4913618",
+            "run 31537963206"
+          ],
+          "excerpt": "**1. Every artifact cited as \"Garnet\" in that comment is T-Rex.** The 3.6-second frozen filtered install, the `node v24.19.0 / pnpm 10.29.3` alignment line, the legacy-`pnpm`-field warning, the `HEAD^` vs `HEAD` comparison — all of those..."
+        },
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5260301955,
+          "url": "https://github.com/garnet-labs/posthog/pull/115#issuecomment-5260301955",
+          "at": "2026-08-12T00:03:22Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "## Garnet Evidence (kernel-level network tracing)"
+        }
+      ],
+      "raw": "out/posthog/pr-115-consume.json",
+      "checkedAt": "2026-09-22T17:49:39.088Z"
+    },
+    {
+      "forkPr": 114,
+      "headSha": "94d06bf49f82f86b89daa8bfdd7efbbac5569cc2",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-114-consume.json",
+      "checkedAt": "2026-09-22T17:49:44.238Z"
+    },
+    {
+      "forkPr": 113,
+      "headSha": "e670377955b83e8e7ce65a653c7b9f2fadcb014b",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3762171348,
+          "url": "https://github.com/garnet-labs/posthog/pull/113#discussion_r3762171348",
+          "at": "2026-08-11T22:25:56Z",
+          "commit": "c6bb067",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**[Mutable Garnet action and credential check output](https://app.greptile.com/trex/artifacts/9a46d0bb-3228-4f8c-90b2-4fa2bd3aa362)**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3768584242,
+          "url": "https://github.com/garnet-labs/posthog/pull/113#discussion_r3768584242",
+          "at": "2026-08-12T17:04:53Z",
+          "commit": "e670377",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "🟡 **New recorded job leaves the runtime sensor version unpinned, unlike every other job using it**"
+        }
+      ],
+      "raw": "out/posthog/pr-113-consume.json",
+      "checkedAt": "2026-09-22T17:49:50.243Z"
+    },
+    {
+      "forkPr": 112,
+      "headSha": "7ff9aba949227f126da3c7c8aaa3a9c40ca0ab82",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 2,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761973030,
+          "url": "https://github.com/garnet-labs/posthog/pull/112#discussion_r3761973030",
+          "at": "2026-08-11T21:50:13Z",
+          "commit": "7ff9aba",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head 7ff9aba"
+          ],
+          "excerpt": "This matches the newly recorded chain — Runtime evidence (Garnet, head `7ff9aba`): `bash > sh > MainThread` → `storage.googleapis[.]com` (`Garnet Runtime Visibility/dep-install`) — https://app.garnet.ai/public/runs/31537928823?profile=01..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761973140,
+          "url": "https://github.com/garnet-labs/posthog/pull/112#discussion_r3761973140",
+          "at": "2026-08-11T21:50:15Z",
+          "commit": "7ff9aba",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head 7ff9aba"
+          ],
+          "excerpt": "Adding `puppeteer` to `pnpm.onlyBuiltDependencies` (`package.json:220`) permits its postinstall lifecycle script to run on every workspace install, which downloads and unpacks a Chrome for Testing binary from `storage.googleapis.com` int..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761981405,
+          "url": "https://github.com/garnet-labs/posthog/pull/112#discussion_r3761981405",
+          "at": "2026-08-11T21:51:41Z",
+          "commit": "7ff9aba",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Agreed on the framing: the allowlist entry is precisely a new trust grant, and the recorded run shows exactly the egress it implies (`storage.googleapis.com` under the install chain) and nothing else. That's the intended review surface o..."
+        }
+      ],
+      "raw": "out/posthog/pr-112-consume.json",
+      "checkedAt": "2026-09-22T17:50:00.889Z"
+    },
+    {
+      "forkPr": 111,
+      "headSha": "465504d3dd48107521d61fae97fc0b1a356bc491",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761966179,
+          "url": "https://github.com/garnet-labs/posthog/pull/111#discussion_r3761966179",
+          "at": "2026-08-11T21:48:54Z",
+          "commit": "465504d",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "🟡 **New recorded job runs a step that needs a repository secret without a fork guard, so pull requests from forks fail**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3761968140,
+          "url": "https://github.com/garnet-labs/posthog/pull/111#discussion_r3761968140",
+          "at": "2026-08-11T21:49:17Z",
+          "commit": "465504d",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Same-repo guard is deliberately omitted to match the pre-existing `dep-install` job in this file, which has no guard either; both jobs pass on this PR (branch is in-repo, not a fork). Adding the guard to only the new job would make the t..."
+        }
+      ],
+      "raw": "out/posthog/pr-111-consume.json",
+      "checkedAt": "2026-09-22T17:50:05.162Z"
+    },
+    {
+      "forkPr": 110,
+      "headSha": "0eb8ea0c40886f4ee41bc2998359dfd6d71bc9c3",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-110-consume.json",
+      "checkedAt": "2026-09-22T17:50:08.952Z"
+    },
+    {
+      "forkPr": 109,
+      "headSha": "3ba4c6b79ce50ef0fff43c02728831d4d6e31f2f",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-109-consume.json",
+      "checkedAt": "2026-09-22T17:50:17.385Z"
+    },
+    {
+      "forkPr": 108,
+      "headSha": "64a0b6d6ab47636433c33451e20caeba04101a53",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3761776450,
+          "url": "https://github.com/garnet-labs/posthog/pull/108#discussion_r3761776450",
+          "at": "2026-08-11T21:15:52Z",
+          "commit": "64a0b6d",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- Python validator authored and executed against the requested base and HEAD commits; it parses changed YAML, checks fallback token placement, detects the reviewer-token failure configuration, and resolves Garnet action pins, with the ta..."
+        }
+      ],
+      "raw": "out/posthog/pr-108-consume.json",
+      "checkedAt": "2026-09-22T17:50:23.452Z"
+    },
+    {
+      "forkPr": 107,
+      "headSha": "d361684c8ce9ec8fb0c298318cd246501fa6b4f3",
+      "consumed": true,
+      "consumers": [
+        "greptile-apps[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 2,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5258140157,
+          "url": "https://github.com/garnet-labs/posthog/pull/107#issuecomment-5258140157",
+          "at": "2026-08-11T19:56:04Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head d361684"
+          ],
+          "excerpt": "Yes, the Garnet runtime data materially improves the analysis. Here's what it shows and why it matters:"
+        },
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5258174078,
+          "url": "https://github.com/garnet-labs/posthog/pull/107#issuecomment-5258174078",
+          "at": "2026-08-11T19:59:24Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head d361684"
+          ],
+          "excerpt": "The Garnet runtime comment is already in the thread. Here's a precise breakdown:"
+        }
+      ],
+      "raw": "out/posthog/pr-107-consume.json",
+      "checkedAt": "2026-09-22T17:50:32.123Z"
+    },
+    {
+      "forkPr": 106,
+      "headSha": "11fac11b5f706e11bd448d4bae1806d4f901bbad",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-106-consume.json",
+      "checkedAt": "2026-09-22T17:50:54.746Z"
+    },
+    {
+      "forkPr": 105,
+      "headSha": "f63435f0ece35dead7b115677fae046c9f5c199b",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-105-consume.json",
+      "checkedAt": "2026-09-22T17:50:59.914Z"
+    },
+    {
+      "forkPr": 104,
+      "headSha": "0e370a315e8b1333fdf652365e1c750ee6381459",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3752857321,
+          "url": "https://github.com/garnet-labs/posthog/pull/104#discussion_r3752857321",
+          "at": "2026-08-10T19:51:02Z",
+          "commit": "0e370a3",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head 0e370a3",
+            "reports no evidence"
+          ],
+          "excerpt": "🟨 **Dependency bump installs a package that runs an install-time script, with no head-bound runtime evidence provided**"
+        }
+      ],
+      "raw": "out/posthog/pr-104-consume.json",
+      "checkedAt": "2026-09-22T17:51:16.690Z"
+    },
+    {
+      "forkPr": 103,
+      "headSha": "00a442b3de5b0adb635236e0ab967a7c75f57e71",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-103-consume.json",
+      "checkedAt": "2026-09-22T17:51:24.010Z"
+    },
+    {
+      "forkPr": 102,
+      "headSha": "b25a9d0ba39e1d07673fb66e3b5916a8583a0487",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-102-consume.json",
+      "checkedAt": "2026-09-22T17:51:28.381Z"
+    },
+    {
+      "forkPr": 101,
+      "headSha": "5c1ee99a478bfbd5db3699247f3f2512b3dc12e4",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-101-consume.json",
+      "checkedAt": "2026-09-22T17:51:32.541Z"
+    },
+    {
+      "forkPr": 100,
+      "headSha": "0cd105fe90d8e7559514fc8bb231700c72e260d5",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-100-consume.json",
+      "checkedAt": "2026-09-22T17:51:36.650Z"
+    },
+    {
+      "forkPr": 99,
+      "headSha": "1cc1842d1e29b35266fd1687bea9ca434a211be8",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-99-consume.json",
+      "checkedAt": "2026-09-22T17:51:40.259Z"
+    },
+    {
+      "forkPr": 98,
+      "headSha": "a8b98add0bbdb9eeedd501f9ad7170ba22a9a9f1",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-98-consume.json",
+      "checkedAt": "2026-09-22T17:51:43.864Z"
+    },
+    {
+      "forkPr": 97,
+      "headSha": "39c1023e03c150e819f02b577262d9880dd2f6b2",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3740589912,
+          "url": "https://github.com/garnet-labs/posthog/pull/97#discussion_r3740589912",
+          "at": "2026-08-08T11:34:20Z",
+          "commit": "39c1023",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Intentional — the point of this PR is to execute the package's lifecycle scripts under the Garnet sensor so the recorded execution chains land on the PR as runtime evidence. The install is isolated to a throwaway `/tmp/install` project, ..."
+        }
+      ],
+      "raw": "out/posthog/pr-97-consume.json",
+      "checkedAt": "2026-09-22T17:51:48.234Z"
+    },
+    {
+      "forkPr": 96,
+      "headSha": "ce48b8d2763216b776e103179f2f8f049c1677ce",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-96-consume.json",
+      "checkedAt": "2026-09-22T17:51:52.160Z"
+    },
+    {
+      "forkPr": 95,
+      "headSha": "96d422fc593eeb785ec22a99a9a171dc3695ebad",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-95-consume.json",
+      "checkedAt": "2026-09-22T17:51:56.915Z"
+    },
+    {
+      "forkPr": 94,
+      "headSha": "0b2a668379f06f4ec004813e01ad35239bc6680d",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3732471640,
+          "url": "https://github.com/garnet-labs/posthog/pull/94#discussion_r3732471640",
+          "at": "2026-08-06T23:47:57Z",
+          "commit": "0b2a668",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "with the explicit rule \"Cancel superseded PR runs; never cancel across master pushes.\" This workflow uses a hand-rolled group keyed on `github.event.pull_request.number || github.ref` and an unconditional `cancel-in-progress: true`, whic..."
+        }
+      ],
+      "raw": "out/posthog/pr-94-consume.json",
+      "checkedAt": "2026-09-22T17:52:10.131Z"
+    },
+    {
+      "forkPr": 93,
+      "headSha": "ce42a7ec89a3610653dccb2b59df7e3f31f29f0f",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-93-consume.json",
+      "checkedAt": "2026-09-22T17:52:13.991Z"
+    },
+    {
+      "forkPr": 92,
+      "headSha": "c83a38a2cca4a4cb731edfcf899ac3c4036b5a77",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-92-consume.json",
+      "checkedAt": "2026-09-22T17:52:17.574Z"
+    },
+    {
+      "forkPr": 91,
+      "headSha": "f78bd61835508738b7dd84301c2d094bdd9ffe16",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3732410617,
+          "url": "https://github.com/garnet-labs/posthog/pull/91#discussion_r3732410617",
+          "at": "2026-08-06T23:29:17Z",
+          "commit": "f78bd61",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "When a contributor runs the workflow before updating `manifest.json`, the workflow derives the tarball path from the old pinned version, causing the Garnet record to describe the previous package rather than exposing registry egress or l..."
+        }
+      ],
+      "raw": "out/posthog/pr-91-consume.json",
+      "checkedAt": "2026-09-22T17:52:22.442Z"
+    },
+    {
+      "forkPr": 89,
+      "headSha": "32de66f4fa18d05950d1c672b62f9e757d89a8c8",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-89-consume.json",
+      "checkedAt": "2026-09-22T17:52:33.725Z"
+    },
+    {
+      "forkPr": 88,
+      "headSha": "cfd24b093c16067657fa190d3144b8c07e5cfc6a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 1,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3732320273,
+          "url": "https://github.com/garnet-labs/posthog/pull/88#discussion_r3732320273",
+          "at": "2026-08-06T23:02:48Z",
+          "commit": "cfd24b0",
+          "onHead": true,
+          "tier": "observation",
+          "headBound": false,
+          "matched": [
+            "example.com",
+            "httpbin.org"
+          ],
+          "excerpt": "The 1.0.0 tarball's `setup.mjs` only printed a line. The 1.0.1 tarball's `setup.mjs` spawns `node beacon.mjs` via `child_process.spawn`, and `beacon.mjs` issues HTTPS GETs to `https://example.com/` and `https://httpbin.org/ip`. Both vers..."
+        }
+      ],
+      "raw": "out/posthog/pr-88-consume.json",
+      "checkedAt": "2026-09-22T17:52:52.312Z"
+    },
+    {
+      "forkPr": 84,
+      "headSha": "3599210450c1b6788c7ff26bda0a460094f2d646",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5209095522,
+          "url": "https://github.com/garnet-labs/posthog/pull/84#issuecomment-5209095522",
+          "at": "2026-08-06T21:00:58Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Evidence on this PR: `repos/garnet-labs/posthog/actions/runs?branch=devin/1786045482-imds-probe2` returned `total_count: 0` for ~40 minutes after the PR opened, and the head commit `9f1cfb8` has one workflow run (`Inkeep Agent`, skipped)..."
+        },
+        {
+          "kind": "comment",
+          "login": "greptile-apps[bot]",
+          "id": 5209098122,
+          "url": "https://github.com/garnet-labs/posthog/pull/84#issuecomment-5209098122",
+          "at": "2026-08-06T21:01:27Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Since ~15:22 UTC today, GitHub has had webhook triggers throttled/dropped. The `pull_request` event that should have triggered the probe workflow was never delivered to Actions. The head commit `9f1cfb8` has **zero** check runs for the r..."
+        }
+      ],
+      "raw": "out/posthog/pr-84-consume.json",
+      "checkedAt": "2026-09-22T17:52:56.522Z"
+    },
+    {
+      "forkPr": 77,
+      "headSha": "50b8a3b1b71d92e0b1c67e774a5df974b90b3406",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3723722709,
+          "url": "https://github.com/garnet-labs/posthog/pull/77#discussion_r3723722709",
+          "at": "2026-08-05T20:16:44Z",
+          "commit": "ad55fa3",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "`See PR comment above` provides no PR number, profile URL, or repository-local reference, so readers viewing this README outside the original pull request cannot locate or validate the claimed Garnet Execution Profile."
+        },
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3724610810,
+          "url": "https://github.com/garnet-labs/posthog/pull/77#discussion_r3724610810",
+          "at": "2026-08-05T22:49:13Z",
+          "commit": "ad55fa3",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The fix is straightforward — replace the vague reference with a direct link to this PR or to the Garnet profile URL:"
+        },
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3726006058,
+          "url": "https://github.com/garnet-labs/posthog/pull/77#discussion_r3726006058",
+          "at": "2026-08-06T04:59:10Z",
+          "commit": "ad55fa3",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The Garnet profile URL is already present in the PR's runtime evidence:"
+        },
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3726837952,
+          "url": "https://github.com/garnet-labs/posthog/pull/77#discussion_r3726837952",
+          "at": "2026-08-06T07:39:00Z",
+          "commit": "ad55fa3",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Confirmed — the README now links directly to the public Garnet Execution Profile (`https://app.garnet.ai/public/runs/30943456707?profile=019fce41-777e-7c8a-b6af-b95345080ccf`). The vague reference is gone and the link is durable regardle..."
+        }
+      ],
+      "raw": "out/posthog/pr-77-consume.json",
+      "checkedAt": "2026-09-22T17:52:58.485Z"
+    },
+    {
+      "forkPr": 76,
+      "headSha": "148cffb43c735d18a6b0e5214c66d9ced42efbd6",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-76-consume.json",
+      "checkedAt": "2026-09-22T17:53:04.471Z"
+    },
+    {
+      "forkPr": 75,
+      "headSha": "7b5a5002e408a0afc2e04d94c73c546e711db8a5",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3694048879,
+          "url": "https://github.com/garnet-labs/posthog/pull/75#discussion_r3694048879",
+          "at": "2026-08-01T00:13:58Z",
+          "commit": "e2e1359",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Under the v6.6 contract trees are rooted at `Runner.Worker` (no per-job root — see the `· job` legacy handling at line 200-203), so identical lineage strings across jobs are expected whenever two jobs run the same tool. The consequence i..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3694056505,
+          "url": "https://github.com/garnet-labs/posthog/pull/75#discussion_r3694056505",
+          "at": "2026-08-01T00:15:09Z",
+          "commit": "e2e1359",
+          "onHead": false,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head 7b5a500",
+            "written before the record"
+          ],
+          "excerpt": "Valid catch — fixed in 7b5a500. `seen` is now a key→record map and a later `+` occurrence upgrades an already-seen record to `new=True`, so a chain that pre-exists in one job can never mask a genuinely new chain in another. Regression te..."
+        }
+      ],
+      "raw": "out/posthog/pr-75-consume.json",
+      "checkedAt": "2026-09-22T17:53:08.729Z"
+    },
+    {
+      "forkPr": 74,
+      "headSha": "ab9f93b0be490ba4dfbf9b9c71a38d0f1ebe4e20",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/posthog/pr-74-consume.json",
+      "checkedAt": "2026-09-22T17:53:18.909Z"
     }
   ],
   "stage2": {
@@ -6758,5 +8289,5 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 4
 }
