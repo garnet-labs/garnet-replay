@@ -90,6 +90,7 @@ body[data-surface="pr"] #content { max-width: 1184px; margin: 0 auto; }
 @keyframes replay-pulse { 50% { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .state-visual.loading span:last-child { animation: none; } }
 @media (max-width: 650px) {
+  body[data-surface="workspace"] .workspace-link { display: none; }
   .landing { padding: 44px 22px 0; }
   .hero h1 { letter-spacing: -1.7px; font-size: 39px; }
   .hero-kicker { font-size: 8px; gap: 9px; letter-spacing: .8px; }
