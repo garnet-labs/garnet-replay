@@ -1,0 +1,125 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 23,
+    "url": "https://github.com/garnet-labs/express/pull/23",
+    "title": "chore(deps): add gifsicle 7.0.1"
+  },
+  "base": {
+    "sha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "e75764c5e970399725984957c73d882c5c927cd2",
+    "profile_id": "01a0f5c1-f59d-783b-aa64-25a48cac31a9",
+    "run_id": "36815951778"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "raw.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "140.82.113.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 11,
+      "destinations": 4,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 1,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36815951778?profile=01a0f5c1-f59d-783b-aa64-25a48cac31a9",
+    "head_json": "https://app.garnet.ai/api/public/runs/36815951778?profile=01a0f5c1-f59d-783b-aa64-25a48cac31a9",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/23#issuecomment-5924817160"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:38:43 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+    "head_sha": "e75764c5e970399725984957c73d882c5c927cd2",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base ee8c2fd → head e75764c · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "1 outbound connection recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "e75764c5e970399725984957c73d882c5c927cd2",
+    "current_head": "e75764c5e970399725984957c73d882c5c927cd2",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head e75764c across 1 job: workload outbound connections +1 −0, runner background +0 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between ee8c2fd and e75764c (previous-recorded-head-to-head): 1 outbound connection recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 27,
+    "url": "https://github.com/garnet-labs/express/pull/27",
+    "title": "chore(deps): add ajv 8.17.1"
+  },
+  "base": {
+    "sha": "2e1a441f8fb0f05679e3cb1d598195cfd5bb5488",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "81adf18eac0413138138b856d522589fb4f46cbf",
+    "profile_id": "01a0f5c4-9e4c-789d-9b70-dcdc7ae552a8",
+    "run_id": "36816222804"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "169.254.169.254 (cloud metadata)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 11,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 3,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36816222804?profile=01a0f5c4-9e4c-789d-9b70-dcdc7ae552a8",
+    "head_json": "https://app.garnet.ai/api/public/runs/36816222804?profile=01a0f5c4-9e4c-789d-9b70-dcdc7ae552a8",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/27#issuecomment-5924865160"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:41:38 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "2e1a441f8fb0f05679e3cb1d598195cfd5bb5488",
+    "head_sha": "81adf18eac0413138138b856d522589fb4f46cbf",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 2e1a441 → head 81adf18 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "81adf18eac0413138138b856d522589fb4f46cbf",
+    "current_head": "81adf18eac0413138138b856d522589fb4f46cbf",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 81adf18 across 1 job: workload outbound connections +0 −0, runner background +3 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 2e1a441 and 81adf18 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}
