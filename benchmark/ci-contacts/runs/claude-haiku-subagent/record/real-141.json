@@ -1,0 +1,13 @@
+{
+  "task": "real-141",
+  "model": "claude-haiku-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The capture is not declared, so we cannot verify whether all workload connections were recorded.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The capture is not declared, so we cannot verify whether all workload connections were recorded.",
+    "parse_error": null
+  },
+  "error": null
+}

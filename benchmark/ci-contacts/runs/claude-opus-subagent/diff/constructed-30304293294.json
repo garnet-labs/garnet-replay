@@ -1,0 +1,16 @@
+{
+  "task": "constructed-30304293294",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [\"httpbin.org\", \"registry.npmjs.org\"], \"verdict\": \"new-behavior\", \"reason\": \"The PR adds a postinstall script that curls https://httpbin.org/get on every install. It also makes install fetch ms-2.1.3 from registry.npmjs.org, where before the app had no dependencies.\"}\n",
+  "answer": {
+    "new_destinations": [
+      "httpbin.org",
+      "registry.npmjs.org"
+    ],
+    "verdict": "new-behavior",
+    "reason": "The PR adds a postinstall script that curls https://httpbin.org/get on every install. It also makes install fetch ms-2.1.3 from registry.npmjs.org, where before the app had no dependencies.",
+    "parse_error": null
+  },
+  "error": null
+}

@@ -1966,10 +1966,8 @@
     {
       "forkPr": 66,
       "headSha": "ae2920fc99dbaa9069d8c258225b1c6a8df56904",
-      "consumed": true,
-      "consumers": [
-        "devin-ai-integration[bot] (comment)"
-      ],
+      "consumed": false,
+      "consumers": [],
       "mirror": true,
       "recordBound": true,
       "signals": {
@@ -2004,9 +2002,10 @@
           "commit": "ae2920f",
           "onHead": true,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
-            "head ae2920f"
+            "head ae2920f",
+            "written before the record"
           ],
           "excerpt": "Timing: the review ran before the TS CI Node 24 leg finished. Head-bound record for `ae2920f` now exists (job 106845400061): `Download action repository 'garnet-org/action@2609a287b43720d73e26304558b2ead0fafd369b'`, `Jibril Version: v2.1..."
         },
@@ -2025,20 +2024,18 @@
         }
       ],
       "raw": "out/pnpm/pr-66-consume.json",
-      "checkedAt": "2026-09-22T17:29:44.993Z"
+      "checkedAt": "2026-09-22T17:44:50.543Z"
     },
     {
       "forkPr": 65,
-      "headSha": "da56d8e2965bb6e7aec7f9bc5e2942420a7f6226",
-      "consumed": true,
-      "consumers": [
-        "devin-ai-integration[bot] (comment)"
-      ],
+      "headSha": "68303b0c7ac6d74da3bef80678138e6e6e205943",
+      "consumed": false,
+      "consumers": [],
       "mirror": true,
       "recordBound": true,
       "signals": {
         "utterance": 0,
-        "citation": 1,
+        "citation": 0,
         "observation": 0,
         "mention": 3
       },
@@ -2049,7 +2046,7 @@
           "id": 4074055324,
           "url": "https://github.com/garnet-labs/pnpm/pull/65#discussion_r4074055324",
           "at": "2026-09-22T16:40:22Z",
-          "commit": "da56d8e",
+          "commit": "68303b0",
           "onHead": true,
           "tier": "mention",
           "headBound": false,
@@ -2083,25 +2080,10 @@
           "headBound": false,
           "matched": [],
           "excerpt": ">• Replaces the v2.2.0 Garnet action SHA with the v2.3.0 candidate. The existing API token input remains unchanged."
-        },
-        {
-          "kind": "comment",
-          "login": "devin-ai-integration[bot]",
-          "id": 5780913673,
-          "url": "https://github.com/garnet-labs/pnpm/pull/65#issuecomment-5780913673",
-          "at": "2026-09-22T17:23:22Z",
-          "commit": null,
-          "onHead": null,
-          "tier": "citation",
-          "headBound": true,
-          "matched": [
-            "head da56d8e"
-          ],
-          "excerpt": "1. **The 4 regular findings — all on fork-only `garnet-dependabot-*` / `garnet-execution-diff` fixture workflows**, not on anything pnpm runs: `dangerous-triggers` (a `pull_request_target` fixture), `unpinned-uses`, `artipacked`, `adhoc-..."
         }
       ],
       "raw": "out/pnpm/pr-65-consume.json",
-      "checkedAt": "2026-09-22T17:29:47.082Z"
+      "checkedAt": "2026-09-22T17:44:52.737Z"
     },
     {
       "forkPr": 64,
@@ -2118,7 +2100,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-64-consume.json",
-      "checkedAt": "2026-09-22T17:29:49.335Z"
+      "checkedAt": "2026-09-22T17:44:54.606Z"
     },
     {
       "forkPr": 63,
@@ -2135,7 +2117,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-63-consume.json",
-      "checkedAt": "2026-09-22T17:29:51.325Z"
+      "checkedAt": "2026-09-22T17:44:56.789Z"
     },
     {
       "forkPr": 62,
@@ -2170,7 +2152,7 @@
         }
       ],
       "raw": "out/pnpm/pr-62-consume.json",
-      "checkedAt": "2026-09-22T17:29:53.329Z"
+      "checkedAt": "2026-09-22T17:44:59.019Z"
     },
     {
       "forkPr": 61,
@@ -2231,7 +2213,7 @@
         }
       ],
       "raw": "out/pnpm/pr-61-consume.json",
-      "checkedAt": "2026-09-22T17:29:55.535Z"
+      "checkedAt": "2026-09-22T17:45:01.387Z"
     },
     {
       "forkPr": 60,
@@ -2248,7 +2230,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-60-consume.json",
-      "checkedAt": "2026-09-22T17:29:57.338Z"
+      "checkedAt": "2026-09-22T17:45:03.747Z"
     },
     {
       "forkPr": 59,
@@ -2265,7 +2247,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-59-consume.json",
-      "checkedAt": "2026-09-22T17:29:59.175Z"
+      "checkedAt": "2026-09-22T17:45:06.008Z"
     },
     {
       "forkPr": 58,
@@ -2282,7 +2264,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-58-consume.json",
-      "checkedAt": "2026-09-22T17:30:02.550Z"
+      "checkedAt": "2026-09-22T17:45:08.458Z"
     },
     {
       "forkPr": 56,
@@ -2313,7 +2295,7 @@
         }
       ],
       "raw": "out/pnpm/pr-56-consume.json",
-      "checkedAt": "2026-09-22T17:30:04.812Z"
+      "checkedAt": "2026-09-22T17:45:10.551Z"
     },
     {
       "forkPr": 55,
@@ -2330,7 +2312,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-55-consume.json",
-      "checkedAt": "2026-09-22T17:30:06.847Z"
+      "checkedAt": "2026-09-22T17:45:12.785Z"
     },
     {
       "forkPr": 54,
@@ -2400,7 +2382,7 @@
         }
       ],
       "raw": "out/pnpm/pr-54-consume.json",
-      "checkedAt": "2026-09-22T17:30:09.327Z"
+      "checkedAt": "2026-09-22T17:45:15.129Z"
     },
     {
       "forkPr": 53,
@@ -2458,11 +2440,12 @@
           "commit": "89ead80",
           "onHead": true,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
             "head 89ead80",
             "run 34560996197",
-            "profile 01a08ea7-7756-70aa-94b0-ba6eb24a7a99"
+            "profile 01a08ea7-7756-70aa-94b0-ba6eb24a7a99",
+            "reports no evidence"
           ],
           "excerpt": "The record has since finalized for `89ead80f3f9fa64eadb644872ee511f9552e7cc1`, compared with `0424b4e766e7d4a1539a29696f17dd8d3dca9da7`; the description's mirrored marker now matches. The current profile records pnpm contacting `1.1.1.1:..."
         },
@@ -2481,7 +2464,7 @@
         }
       ],
       "raw": "out/pnpm/pr-53-consume.json",
-      "checkedAt": "2026-09-22T17:30:11.730Z"
+      "checkedAt": "2026-09-22T17:45:17.316Z"
     },
     {
       "forkPr": 52,
@@ -2498,7 +2481,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-52-consume.json",
-      "checkedAt": "2026-09-22T17:30:14.061Z"
+      "checkedAt": "2026-09-22T17:45:19.487Z"
     },
     {
       "forkPr": 51,
@@ -2545,7 +2528,7 @@
         }
       ],
       "raw": "out/pnpm/pr-51-consume.json",
-      "checkedAt": "2026-09-22T17:30:16.636Z"
+      "checkedAt": "2026-09-22T17:45:22.483Z"
     },
     {
       "forkPr": 50,
@@ -2562,7 +2545,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-50-consume.json",
-      "checkedAt": "2026-09-22T17:30:19.374Z"
+      "checkedAt": "2026-09-22T17:45:25.380Z"
     },
     {
       "forkPr": 49,
@@ -2606,7 +2589,7 @@
         }
       ],
       "raw": "out/pnpm/pr-49-consume.json",
-      "checkedAt": "2026-09-22T17:30:21.577Z"
+      "checkedAt": "2026-09-22T17:45:27.900Z"
     },
     {
       "forkPr": 48,
@@ -2718,7 +2701,7 @@
         }
       ],
       "raw": "out/pnpm/pr-48-consume.json",
-      "checkedAt": "2026-09-22T17:30:24.270Z"
+      "checkedAt": "2026-09-22T17:45:31.076Z"
     },
     {
       "forkPr": 47,
@@ -2749,7 +2732,7 @@
         }
       ],
       "raw": "out/pnpm/pr-47-consume.json",
-      "checkedAt": "2026-09-22T17:30:26.352Z"
+      "checkedAt": "2026-09-22T17:45:33.183Z"
     },
     {
       "forkPr": 46,
@@ -2766,7 +2749,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-46-consume.json",
-      "checkedAt": "2026-09-22T17:30:28.664Z"
+      "checkedAt": "2026-09-22T17:45:35.636Z"
     },
     {
       "forkPr": 45,
@@ -2810,7 +2793,7 @@
         }
       ],
       "raw": "out/pnpm/pr-45-consume.json",
-      "checkedAt": "2026-09-22T17:30:31.244Z"
+      "checkedAt": "2026-09-22T17:45:37.989Z"
     },
     {
       "forkPr": 44,
@@ -2827,7 +2810,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-44-consume.json",
-      "checkedAt": "2026-09-22T17:30:33.684Z"
+      "checkedAt": "2026-09-22T17:45:40.158Z"
     },
     {
       "forkPr": 43,
@@ -2875,7 +2858,7 @@
         }
       ],
       "raw": "out/pnpm/pr-43-consume.json",
-      "checkedAt": "2026-09-22T17:30:36.480Z"
+      "checkedAt": "2026-09-22T17:45:42.692Z"
     },
     {
       "forkPr": 42,
@@ -2892,15 +2875,13 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-42-consume.json",
-      "checkedAt": "2026-09-22T17:30:38.395Z"
+      "checkedAt": "2026-09-22T17:45:44.594Z"
     },
     {
       "forkPr": 41,
       "headSha": "bac98fe7a2cd25a446d9e61255c43ebe503d7f79",
-      "consumed": true,
-      "consumers": [
-        "devin-ai-integration[bot] (comment)"
-      ],
+      "consumed": false,
+      "consumers": [],
       "mirror": true,
       "recordBound": true,
       "signals": {
@@ -2958,9 +2939,10 @@
           "commit": "bac98fe",
           "onHead": true,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
-            "head bac98fe"
+            "head bac98fe",
+            "written before the record"
           ],
           "excerpt": "Fixed in bac98fe: a final `Experiment outcome` step writes the three outcomes to the step summary and exits 1 when any of install, compile or the cold second install is not `success`. The `continue-on-error` on the experiment steps stays..."
         },
@@ -2986,9 +2968,10 @@
           "commit": "d97c814",
           "onHead": false,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
-            "head bac98fe"
+            "head bac98fe",
+            "written before the record"
           ],
           "excerpt": "Fixed in bac98fe: the workflow now grants `contents: read` only. The Garnet step takes the token explicitly, so it never needed `id-token: write`, and the PR comment is posted by the GitHub App, so `pull-requests: write` was unused."
         },
@@ -3004,7 +2987,7 @@
           "headBound": false,
           "matched": [
             "head bac98fe",
-            "reports no evidence"
+            "written before the record"
           ],
           "excerpt": "Fixed in bac98fe: the canary step has `continue-on-error: true` and an id, and its outcome is printed with the others in `What was written`. A canary that cannot reach example.com is itself part of the record and no longer stops the inst..."
         },
@@ -3036,7 +3019,7 @@
         }
       ],
       "raw": "out/pnpm/pr-41-consume.json",
-      "checkedAt": "2026-09-22T17:30:40.795Z"
+      "checkedAt": "2026-09-22T17:45:47.023Z"
     },
     {
       "forkPr": 40,
@@ -3067,7 +3050,7 @@
         }
       ],
       "raw": "out/pnpm/pr-40-consume.json",
-      "checkedAt": "2026-09-22T17:30:43.585Z"
+      "checkedAt": "2026-09-22T17:45:49.489Z"
     },
     {
       "forkPr": 39,
@@ -3124,7 +3107,7 @@
         }
       ],
       "raw": "out/pnpm/pr-39-consume.json",
-      "checkedAt": "2026-09-22T17:30:45.778Z"
+      "checkedAt": "2026-09-22T17:45:51.900Z"
     },
     {
       "forkPr": 38,
@@ -3183,7 +3166,7 @@
         }
       ],
       "raw": "out/pnpm/pr-38-consume.json",
-      "checkedAt": "2026-09-22T17:30:48.226Z"
+      "checkedAt": "2026-09-22T17:45:54.439Z"
     },
     {
       "forkPr": 37,
@@ -3214,7 +3197,7 @@
         }
       ],
       "raw": "out/pnpm/pr-37-consume.json",
-      "checkedAt": "2026-09-22T17:30:50.305Z"
+      "checkedAt": "2026-09-22T17:45:56.594Z"
     },
     {
       "forkPr": 36,
@@ -3245,7 +3228,7 @@
         }
       ],
       "raw": "out/pnpm/pr-36-consume.json",
-      "checkedAt": "2026-09-22T17:30:52.443Z"
+      "checkedAt": "2026-09-22T17:45:58.569Z"
     },
     {
       "forkPr": 35,
@@ -3315,7 +3298,7 @@
         }
       ],
       "raw": "out/pnpm/pr-35-consume.json",
-      "checkedAt": "2026-09-22T17:30:54.538Z"
+      "checkedAt": "2026-09-22T17:46:00.677Z"
     },
     {
       "forkPr": 34,
@@ -3332,7 +3315,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-34-consume.json",
-      "checkedAt": "2026-09-22T17:30:56.849Z"
+      "checkedAt": "2026-09-22T17:46:02.794Z"
     },
     {
       "forkPr": 33,
@@ -3390,7 +3373,7 @@
         }
       ],
       "raw": "out/pnpm/pr-33-consume.json",
-      "checkedAt": "2026-09-22T17:30:59.204Z"
+      "checkedAt": "2026-09-22T17:46:04.777Z"
     },
     {
       "forkPr": 32,
@@ -3473,7 +3456,7 @@
         }
       ],
       "raw": "out/pnpm/pr-32-consume.json",
-      "checkedAt": "2026-09-22T17:31:01.562Z"
+      "checkedAt": "2026-09-22T17:46:06.698Z"
     },
     {
       "forkPr": 31,
@@ -3560,7 +3543,7 @@
         }
       ],
       "raw": "out/pnpm/pr-31-consume.json",
-      "checkedAt": "2026-09-22T17:31:04.164Z"
+      "checkedAt": "2026-09-22T17:46:09.097Z"
     },
     {
       "forkPr": 30,
@@ -3577,13 +3560,15 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-30-consume.json",
-      "checkedAt": "2026-09-22T17:31:06.386Z"
+      "checkedAt": "2026-09-22T17:46:11.304Z"
     },
     {
       "forkPr": 28,
       "headSha": "4ac471a487c25e33e84090de87e6afa39af974b0",
-      "consumed": false,
-      "consumers": [],
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
       "mirror": true,
       "recordBound": true,
       "signals": {
@@ -3642,10 +3627,9 @@
           "commit": "4ac471a",
           "onHead": true,
           "tier": "citation",
-          "headBound": false,
+          "headBound": true,
           "matched": [
-            "head 4ac471a",
-            "reports no evidence"
+            "head 4ac471a"
           ],
           "excerpt": "Already the case at this head: 4ac471a removed `(?:-pending)?` from `GARNET_OWNED_MARKER_RE`, so pending placeholders are rejected and the poll keeps waiting until the recorded comment lands (verified live on this PR — the mirror ran onl..."
         },
@@ -3690,7 +3674,7 @@
         }
       ],
       "raw": "out/pnpm/pr-28-consume.json",
-      "checkedAt": "2026-09-22T17:31:08.579Z"
+      "checkedAt": "2026-09-22T17:46:13.691Z"
     },
     {
       "forkPr": 27,
@@ -3707,7 +3691,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-27-consume.json",
-      "checkedAt": "2026-09-22T17:31:11.348Z"
+      "checkedAt": "2026-09-22T17:46:15.865Z"
     },
     {
       "forkPr": 26,
@@ -3741,7 +3725,7 @@
         }
       ],
       "raw": "out/pnpm/pr-26-consume.json",
-      "checkedAt": "2026-09-22T17:31:13.506Z"
+      "checkedAt": "2026-09-22T17:46:17.958Z"
     },
     {
       "forkPr": 25,
@@ -3758,7 +3742,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-25-consume.json",
-      "checkedAt": "2026-09-22T17:31:15.836Z"
+      "checkedAt": "2026-09-22T17:46:19.863Z"
     },
     {
       "forkPr": 24,
@@ -3775,7 +3759,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-24-consume.json",
-      "checkedAt": "2026-09-22T17:31:17.897Z"
+      "checkedAt": "2026-09-22T17:46:21.793Z"
     },
     {
       "forkPr": 23,
@@ -3792,7 +3776,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-23-consume.json",
-      "checkedAt": "2026-09-22T17:31:19.975Z"
+      "checkedAt": "2026-09-22T17:46:24.334Z"
     },
     {
       "forkPr": 22,
@@ -3836,7 +3820,7 @@
         }
       ],
       "raw": "out/pnpm/pr-22-consume.json",
-      "checkedAt": "2026-09-22T17:31:21.868Z"
+      "checkedAt": "2026-09-22T17:46:26.161Z"
     },
     {
       "forkPr": 20,
@@ -3853,7 +3837,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-20-consume.json",
-      "checkedAt": "2026-09-22T17:31:23.912Z"
+      "checkedAt": "2026-09-22T17:46:27.959Z"
     },
     {
       "forkPr": 19,
@@ -3923,7 +3907,7 @@
         }
       ],
       "raw": "out/pnpm/pr-19-consume.json",
-      "checkedAt": "2026-09-22T17:31:25.886Z"
+      "checkedAt": "2026-09-22T17:46:29.920Z"
     },
     {
       "forkPr": 18,
@@ -3980,7 +3964,7 @@
         }
       ],
       "raw": "out/pnpm/pr-18-consume.json",
-      "checkedAt": "2026-09-22T17:31:27.945Z"
+      "checkedAt": "2026-09-22T17:46:31.830Z"
     },
     {
       "forkPr": 17,
@@ -4011,7 +3995,7 @@
         }
       ],
       "raw": "out/pnpm/pr-17-consume.json",
-      "checkedAt": "2026-09-22T17:31:30.549Z"
+      "checkedAt": "2026-09-22T17:46:33.877Z"
     },
     {
       "forkPr": 16,
@@ -4094,7 +4078,7 @@
         }
       ],
       "raw": "out/pnpm/pr-16-consume.json",
-      "checkedAt": "2026-09-22T17:31:32.981Z"
+      "checkedAt": "2026-09-22T17:46:35.932Z"
     },
     {
       "forkPr": 15,
@@ -4111,7 +4095,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-15-consume.json",
-      "checkedAt": "2026-09-22T17:31:34.872Z"
+      "checkedAt": "2026-09-22T17:46:37.801Z"
     },
     {
       "forkPr": 14,
@@ -4181,7 +4165,7 @@
         }
       ],
       "raw": "out/pnpm/pr-14-consume.json",
-      "checkedAt": "2026-09-22T17:31:37.074Z"
+      "checkedAt": "2026-09-22T17:46:39.997Z"
     },
     {
       "forkPr": 13,
@@ -4198,7 +4182,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-13-consume.json",
-      "checkedAt": "2026-09-22T17:31:39.028Z"
+      "checkedAt": "2026-09-22T17:46:42.099Z"
     },
     {
       "forkPr": 12,
@@ -4215,14 +4199,13 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-12-consume.json",
-      "checkedAt": "2026-09-22T17:31:40.788Z"
+      "checkedAt": "2026-09-22T17:46:43.794Z"
     },
     {
       "forkPr": 11,
       "headSha": "eefe8f09d92ab7d53cb9cc8cfe8a0cf089a7c384",
       "consumed": true,
       "consumers": [
-        "blacksmith-sh[bot] (comment)",
         "devin-ai-integration[bot] (comment)"
       ],
       "mirror": false,
@@ -4282,9 +4265,10 @@
           "commit": null,
           "onHead": null,
           "tier": "citation",
-          "headBound": true,
+          "headBound": false,
           "matched": [
-            "run 32410011363"
+            "run 32410011363",
+            "written before the record"
           ],
           "excerpt": "| <code>test/install/nodeRuntime.ts (71.353 s)/nodeRuntime.ts (71.353 s)</code> | [View Logs](https://app.blacksmith.sh/garnet-labs/runs/32410011363/jobs/96558960866?attempt=1&ref=gh_comment&autoLogin=true&tab=tests&status=failed#test=dc..."
         },
@@ -4306,7 +4290,7 @@
         }
       ],
       "raw": "out/pnpm/pr-11-consume.json",
-      "checkedAt": "2026-09-22T17:31:43.052Z"
+      "checkedAt": "2026-09-22T17:46:45.825Z"
     },
     {
       "forkPr": 10,
@@ -4323,7 +4307,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-10-consume.json",
-      "checkedAt": "2026-09-22T17:31:44.903Z"
+      "checkedAt": "2026-09-22T17:46:47.857Z"
     },
     {
       "forkPr": 9,
@@ -4354,7 +4338,7 @@
         }
       ],
       "raw": "out/pnpm/pr-9-consume.json",
-      "checkedAt": "2026-09-22T17:31:47.064Z"
+      "checkedAt": "2026-09-22T17:46:49.974Z"
     },
     {
       "forkPr": 8,
@@ -4371,7 +4355,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-8-consume.json",
-      "checkedAt": "2026-09-22T17:31:48.990Z"
+      "checkedAt": "2026-09-22T17:46:51.962Z"
     },
     {
       "forkPr": 7,
@@ -4388,7 +4372,7 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-7-consume.json",
-      "checkedAt": "2026-09-22T17:31:51.188Z"
+      "checkedAt": "2026-09-22T17:46:54.163Z"
     }
   ],
   "stage2": {

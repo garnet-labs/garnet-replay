@@ -1262,6 +1262,59 @@ test("consume: negative, pre-record and repository-link utterances never advance
   assert.equal(links.receipts[0].login, "greptile[bot]")
 })
 
+test("consume: negative runtime findings stay head-bound; negative permalinks and placeholder-era comments do not", () => {
+  const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
+  const sha7 = SHA_B.slice(0, 7)
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T12:00:00Z", updated_at: "2026-09-20T12:10:00Z" }
+  const permalink = "https://app.garnet.ai/public/runs/123?profile=00000000-0000-4000-8000-000000000000"
+
+  const findings = evaluateConsumption({
+    pr,
+    comments: [
+      record,
+      { id: 1, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): no new outbound connections were observed; install completed without failures.` },
+      { id: 2, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `**Runtime grounding** (head \`${sha7}\`): record shows no missing destinations, one new connection to storage.googleapis.com.` },
+      { id: 3, user: { login: "greptile[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `Checked the runtime record for ${sha7}: nothing stale, no absent chains.` },
+    ],
+  })
+  assert.equal(findings.consumed, true)
+  assert.deepEqual(findings.signals, { utterance: 2, citation: 1, observation: 0, mention: 0 })
+  for (const row of findings.receipts) {
+    assert.equal(row.headBound, true, row.login)
+    assert.ok(!row.matched.includes("reports no evidence"), row.login)
+  }
+
+  const unavailable = evaluateConsumption({
+    pr,
+    comments: [
+      record,
+      { id: 4, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `The record at ${permalink} is stale and not available for this head.` },
+      { id: 5, user: { login: "greptile[bot]" }, created_at: "2026-09-20T13:00:00Z", body: "Profile 00000000-0000-4000-8000-000000000000 is still pending." },
+      { id: 6, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T13:00:00Z", body: `Read ${permalink}; one new connection.` },
+    ],
+  })
+  assert.equal(unavailable.consumed, true)
+  assert.deepEqual(unavailable.consumers, ["devin-ai-integration[bot] (comment)"])
+  assert.equal(unavailable.receipts.length, 3)
+  assert.equal(unavailable.receipts[0].headBound, false)
+  assert.ok(unavailable.receipts[0].matched.includes("reports no evidence"))
+  assert.equal(unavailable.receipts[1].headBound, false)
+  assert.equal(unavailable.receipts[2].headBound, true)
+
+  const placeholder = evaluateConsumption({
+    pr,
+    comments: [
+      record,
+      { id: 7, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
+      { id: 8, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:15:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
+    ],
+  })
+  assert.equal(placeholder.consumed, true)
+  assert.equal(placeholder.receipts[0].headBound, false)
+  assert.ok(placeholder.receipts[0].matched.includes("written before the record"))
+  assert.equal(placeholder.receipts[1].headBound, true)
+})
+
 // ---------------------------------------------------------------- verify
 
 test("verify: the share gate fails on pending checks, stale heads, residue; passes a clean exhibit", () => {

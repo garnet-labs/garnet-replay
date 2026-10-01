@@ -1,0 +1,340 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "pnpm",
+    "url": "https://github.com/garnet-labs/pnpm"
+  },
+  "pull_request": {
+    "number": 71,
+    "url": "https://github.com/garnet-labs/pnpm/pull/71",
+    "title": "fix(ci): cover ignore-scripts when the project declares a removal script"
+  },
+  "base": {
+    "sha": "0df40d13ce171035339fcb6b2c9c973757e09a1a",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "6723627e9f6a401d56b7a52544bbc599679d4863",
+    "profile_id": "01a0d1f8-bc36-711e-80a9-3a6bd0230e24",
+    "run_id": "35960382902"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "142.248.80.92",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "169.254.169.123",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.56",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.57",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.58",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "69.89.207.99",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "api.snapcraft[.]io",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "cloudfront.cdn.snapcraftcontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blacksmith.blob.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.112.21",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.113.21",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.21",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.22",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "8.8.8.8",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "144.202.66.214",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "169.254.169.123",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "172.233.189.68",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.56",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.57",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "185.125.190.58",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "23.111.186.186",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "23.155.72.147",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "91.189.91.157",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "192.168.127.1",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "registry.npmjs[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "api.snapcraft[.]io",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "cloudfront.cdn.snapcraftcontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "codeload.github[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "github[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "npm.jsr[.]io",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "node-registry.bit[.]cloud",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "release-assets.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "dualstack.k.sni.global.fastly[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "localhost (dns resolver)",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "nodejs[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "unofficial-builds.nodejs[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "static.rust-lang[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "productionresultssa11.blob.core[.]windows",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 268,
+      "destinations": 47,
+      "jobs_recorded": 2,
+      "jobs_changed": 2,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 38,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35960382902?profile=01a0d1f8-bc36-711e-80a9-3a6bd0230e24",
+    "head_json": "https://app.garnet.ai/api/public/runs/35960382902?profile=01a0d1f8-bc36-711e-80a9-3a6bd0230e24",
+    "pr_comment": "https://github.com/garnet-labs/pnpm/pull/71#issuecomment-5808114121"
+  },
+  "recorded": {
+    "at": "2026-09-24 06:11:46 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "0df40d13ce171035339fcb6b2c9c973757e09a1a",
+    "head_sha": "6723627e9f6a401d56b7a52544bbc599679d4863",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 0df40d1 → head 6723627 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "38 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "6723627e9f6a401d56b7a52544bbc599679d4863",
+    "current_head": "6723627e9f6a401d56b7a52544bbc599679d4863",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 6723627 across 2 jobs: workload outbound connections +38 −0, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 0df40d1 and 6723627 (previous-recorded-head-to-head): 38 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}
