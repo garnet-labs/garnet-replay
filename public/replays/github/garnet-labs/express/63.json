@@ -1,0 +1,125 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 63,
+    "url": "https://github.com/garnet-labs/express/pull/63",
+    "title": "chore(deps): add opencode-ai 1.18.32"
+  },
+  "base": {
+    "sha": "8d695f544dfa5fae3648f2b3fa1101580ef51a2b",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "95a089d61e0d3d7cf7d66e5f5d63f2e083e84aff",
+    "profile_id": "01a0f5f3-1f05-7a9a-a109-e072658dd614",
+    "run_id": "36820168778"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [
+      {
+        "destination": "169.254.169.254 (cloud metadata)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 8,
+      "destinations": 4,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 2
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36820168778?profile=01a0f5f3-1f05-7a9a-a109-e072658dd614",
+    "head_json": "https://app.garnet.ai/api/public/runs/36820168778?profile=01a0f5f3-1f05-7a9a-a109-e072658dd614",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/63#issuecomment-5925360974"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:32:25 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "8d695f544dfa5fae3648f2b3fa1101580ef51a2b",
+    "head_sha": "95a089d61e0d3d7cf7d66e5f5d63f2e083e84aff",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 8d695f5 → head 95a089d · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "95a089d61e0d3d7cf7d66e5f5d63f2e083e84aff",
+    "current_head": "95a089d61e0d3d7cf7d66e5f5d63f2e083e84aff",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 95a089d across 1 job: workload outbound connections +0 −0, runner background +0 −2."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 8d695f5 and 95a089d (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

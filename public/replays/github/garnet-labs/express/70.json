@@ -1,0 +1,126 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 70,
+    "url": "https://github.com/garnet-labs/express/pull/70",
+    "title": "chore(deps): add chromadb 3.5.0"
+  },
+  "base": {
+    "sha": "37e5065f1f46cee4433e4767c42361e7213a4413",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "2724865a781df206ad44ac972368bb39d0a6466d",
+    "profile_id": "01a0f5f4-eeeb-7be5-9fdb-fe84abd8216d",
+    "run_id": "36820334324"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 9,
+      "destinations": 5,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36820334324?profile=01a0f5f4-eeeb-7be5-9fdb-fe84abd8216d",
+    "head_json": "https://app.garnet.ai/api/public/runs/36820334324?profile=01a0f5f4-eeeb-7be5-9fdb-fe84abd8216d",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/70#issuecomment-5925388574"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:34:24 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "37e5065f1f46cee4433e4767c42361e7213a4413",
+    "head_sha": "2724865a781df206ad44ac972368bb39d0a6466d",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 37e5065 → head 2724865 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "2724865a781df206ad44ac972368bb39d0a6466d",
+    "current_head": "2724865a781df206ad44ac972368bb39d0a6466d",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 2724865 across 1 job: workload outbound connections +0 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 37e5065 and 2724865 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

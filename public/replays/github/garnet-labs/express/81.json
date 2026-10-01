@@ -1,0 +1,112 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 81,
+    "url": "https://github.com/garnet-labs/express/pull/81",
+    "title": "chore(deps): add @google/genai 2.24.0"
+  },
+  "base": {
+    "sha": "5b7d4a25429336c88356201c9a8a97cdf89e0e4e",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "2e350a69db2525628567207b9a12444d19100b26",
+    "profile_id": "01a0f5f8-3392-7eba-9e3e-44fd83889bed",
+    "run_id": "36820623739"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 15,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36820623739?profile=01a0f5f8-3392-7eba-9e3e-44fd83889bed",
+    "head_json": "https://app.garnet.ai/api/public/runs/36820623739?profile=01a0f5f8-3392-7eba-9e3e-44fd83889bed",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/81#issuecomment-5925424281"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:37:58 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "5b7d4a25429336c88356201c9a8a97cdf89e0e4e",
+    "head_sha": "2e350a69db2525628567207b9a12444d19100b26",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 5b7d4a2 → head 2e350a6 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "2e350a69db2525628567207b9a12444d19100b26",
+    "current_head": "2e350a69db2525628567207b9a12444d19100b26",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 2e350a6 across 1 job: workload outbound connections +0 −0, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 5b7d4a2 and 2e350a6 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 56,
+    "url": "https://github.com/garnet-labs/express/pull/56",
+    "title": "chore(deps): add node-llama-cpp 3.21.1"
+  },
+  "base": {
+    "sha": "717d41cd4ae98a480a493ae6db8080fb0a012fcb",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "92719021b540af6548792f0a23af7d3f9578e41e",
+    "profile_id": "01a0f5f1-24a3-7619-b780-5b02f9a076ca",
+    "run_id": "36819978277"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "140.82.112.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 18,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36819978277?profile=01a0f5f1-24a3-7619-b780-5b02f9a076ca",
+    "head_json": "https://app.garnet.ai/api/public/runs/36819978277?profile=01a0f5f1-24a3-7619-b780-5b02f9a076ca",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/56#issuecomment-5925341067"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:30:15 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "717d41cd4ae98a480a493ae6db8080fb0a012fcb",
+    "head_sha": "92719021b540af6548792f0a23af7d3f9578e41e",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 717d41c → head 9271902 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "92719021b540af6548792f0a23af7d3f9578e41e",
+    "current_head": "92719021b540af6548792f0a23af7d3f9578e41e",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 9271902 across 1 job: workload outbound connections +0 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 717d41c and 9271902 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

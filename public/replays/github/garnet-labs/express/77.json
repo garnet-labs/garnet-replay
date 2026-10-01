@@ -1,0 +1,112 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 77,
+    "url": "https://github.com/garnet-labs/express/pull/77",
+    "title": "chore(deps): add sqlite-vec 0.1.9"
+  },
+  "base": {
+    "sha": "19ba8b4f25ba1ac16093ea25ab32eb5e170c1cb2",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "714938bdb63b96261f4695b5324baf32d4d9968d",
+    "profile_id": "01a0f5f7-7e51-760e-b64e-e61b561597d9",
+    "run_id": "36820560153"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 10,
+      "destinations": 5,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36820560153?profile=01a0f5f7-7e51-760e-b64e-e61b561597d9",
+    "head_json": "https://app.garnet.ai/api/public/runs/36820560153?profile=01a0f5f7-7e51-760e-b64e-e61b561597d9",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/77#issuecomment-5925413921"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:37:12 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "19ba8b4f25ba1ac16093ea25ab32eb5e170c1cb2",
+    "head_sha": "714938bdb63b96261f4695b5324baf32d4d9968d",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 19ba8b4 → head 714938b · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "714938bdb63b96261f4695b5324baf32d4d9968d",
+    "current_head": "714938bdb63b96261f4695b5324baf32d4d9968d",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 714938b across 1 job: workload outbound connections +0 −0, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 19ba8b4 and 714938b (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}
