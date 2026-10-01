@@ -158,7 +158,13 @@ supported but uncovered delta rows remain; otherwise `undeterminable`. The
 block emits one `intent-check-result` claim in `claims`. Runner background
 rows never count toward a claim. Step scoping also restricts the diff's
 workload `network`/`process` rows to the declared steps and reports
-`execution_diff.steps` / `steps_missing`.
+`execution_diff.steps` / `steps_missing`; scoped presence is keyed by
+section plus destination (or ancestry), so a row that moved into a scoped
+step counts as added. A claim scoped to a step outside the declared `steps`
+is `undeterminable` (`step "…" is outside the declared scope`), and
+repetition variance makes every claim `undeterminable`
+(`repetitions disagree`). Only `supported` claims cover delta rows: a
+contradicted claim never hides the row it matched.
 
 ## `intent-check-result` — did the record carry the stated change?
 
