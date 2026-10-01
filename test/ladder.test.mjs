@@ -16,7 +16,7 @@ import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, pa
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
-import { STAGES, ensureTarget } from "../lib/ledger.mjs"
+import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 
 const SHA_A = "a".repeat(40)
@@ -1876,4 +1876,14 @@ test("verify: the fork's re-review lock comment is not session residue, other co
   assert.equal(findResidue("routine body", [lock]), null)
   assert.equal(findResidue("routine body", [lock, "Reviewed by Devin"]), "Devin")
   assert.equal(findResidue("see app.devin.ai/x", [lock]), "app.devin.ai")
+})
+
+test("saveTarget keeps rows a concurrent command added and drops rows this process removed", () => {
+  const seen = { replays: new Set(["branch:a", "branch:gone"]), observations: new Set(), evidence: new Set(), consumption: new Set() }
+  const mine = { slug: "x", replays: [{ upstreamPr: null, branch: "a", state: "recorded" }, { upstreamPr: null, branch: "b" }] }
+  const disk = { slug: "x", replays: [{ upstreamPr: null, branch: "a", state: "pending" }, { upstreamPr: null, branch: "gone" }, { upstreamPr: null, branch: "c" }] }
+  const merged = mergeConcurrentRows(mine, disk, seen)
+  assert.deepEqual(merged.replays.map((row) => row.branch), ["a", "b", "c"])
+  assert.equal(merged.replays[0].state, "recorded")
+  assert.equal(mergeConcurrentRows(mine, null, seen), mine)
 })
