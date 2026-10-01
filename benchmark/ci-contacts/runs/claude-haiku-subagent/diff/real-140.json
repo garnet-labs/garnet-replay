@@ -1,0 +1,13 @@
+{
+  "task": "real-140",
+  "model": "claude-haiku-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"This is a version bump of @swc/core from 1.11.4 to 1.15.18, which was already being downloaded from npm; only the version number changes.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "This is a version bump of @swc/core from 1.11.4 to 1.15.18, which was already being downloaded from npm; only the version number changes.",
+    "parse_error": null
+  },
+  "error": null
+}
