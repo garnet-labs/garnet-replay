@@ -1962,7 +1962,2435 @@
   "replays": [],
   "evidence": [],
   "cohorts": [],
-  "consumption": [],
+  "consumption": [
+    {
+      "forkPr": 66,
+      "headSha": "ae2920fc99dbaa9069d8c258225b1c6a8df56904",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 2,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 4074133485,
+          "url": "https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074133485",
+          "at": "2026-09-22T16:49:10Z",
+          "commit": "ae2920f",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head ae2920f",
+            "reports no evidence"
+          ],
+          "excerpt": "🔍 **No runtime evidence for this head**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 4074198082,
+          "url": "https://github.com/garnet-labs/pnpm/pull/66#discussion_r4074198082",
+          "at": "2026-09-22T16:55:48Z",
+          "commit": "ae2920f",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head ae2920f"
+          ],
+          "excerpt": "Timing: the review ran before the TS CI Node 24 leg finished. Head-bound record for `ae2920f` now exists (job 106845400061): `Download action repository 'garnet-org/action@2609a287b43720d73e26304558b2ead0fafd369b'`, `Jibril Version: v2.1..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5780431967,
+          "url": "https://github.com/garnet-labs/pnpm/pull/66#issuecomment-5780431967",
+          "at": "2026-09-22T16:48:24Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "TEST[\"Test workflow\"] --> ACTION{{\"Garnet action\"}} <-- RELEASE[\"Release workflow\"]"
+        }
+      ],
+      "raw": "out/pnpm/pr-66-consume.json",
+      "checkedAt": "2026-09-22T17:29:44.993Z"
+    },
+    {
+      "forkPr": 65,
+      "headSha": "da56d8e2965bb6e7aec7f9bc5e2942420a7f6226",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 4074055324,
+          "url": "https://github.com/garnet-labs/pnpm/pull/65#discussion_r4074055324",
+          "at": "2026-09-22T16:40:22Z",
+          "commit": "da56d8e",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [
+            "head 8016b6c (not the current head)"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head 8016b6c): `Runner.Worker` → `bash` → `node` reached `registry.npmjs.org` in Garnet Execution Diff/execution-diff (https://app.garnet.ai/public/runs/35753947252?profile=01a0c9ef-af8b-70e0-8883-d12baf267b07)...."
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5780091075,
+          "url": "https://github.com/garnet-labs/pnpm/pull/65#issuecomment-5780091075",
+          "at": "2026-09-22T16:24:56Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Garnet action update**"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5780300797,
+          "url": "https://github.com/garnet-labs/pnpm/pull/65#issuecomment-5780300797",
+          "at": "2026-09-22T16:39:30Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Replaces the v2.2.0 Garnet action SHA with the v2.3.0 candidate. The existing API token input remains unchanged."
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5780913673,
+          "url": "https://github.com/garnet-labs/pnpm/pull/65#issuecomment-5780913673",
+          "at": "2026-09-22T17:23:22Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head da56d8e"
+          ],
+          "excerpt": "1. **The 4 regular findings — all on fork-only `garnet-dependabot-*` / `garnet-execution-diff` fixture workflows**, not on anything pnpm runs: `dangerous-triggers` (a `pull_request_target` fixture), `unpinned-uses`, `artipacked`, `adhoc-..."
+        }
+      ],
+      "raw": "out/pnpm/pr-65-consume.json",
+      "checkedAt": "2026-09-22T17:29:47.082Z"
+    },
+    {
+      "forkPr": 64,
+      "headSha": "d858adb7ccf6e236d4286e5b61f974d86c7aa53e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-64-consume.json",
+      "checkedAt": "2026-09-22T17:29:49.335Z"
+    },
+    {
+      "forkPr": 63,
+      "headSha": "afc58c16d097a9c34eefb94f3b342b076a47129b",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-63-consume.json",
+      "checkedAt": "2026-09-22T17:29:51.325Z"
+    },
+    {
+      "forkPr": 62,
+      "headSha": "d0511cd4a1947cd61a62a39f92e7c693591e027b",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 1,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3994241853,
+          "url": "https://github.com/garnet-labs/pnpm/pull/62#discussion_r3994241853",
+          "at": "2026-09-11T23:42:50Z",
+          "commit": "d0511cd",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head d0511cd"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head d0511cd): `Runner.Worker → bash → curl` reached registry.npmjs.org in Garnet Jibril Release Gate/reproduce with `&quot;` quoting. Profile: https://app.garnet.ai/public/runs/34658254423?profile=01a092ce-af60..."
+        }
+      ],
+      "raw": "out/pnpm/pr-62-consume.json",
+      "checkedAt": "2026-09-22T17:29:53.329Z"
+    },
+    {
+      "forkPr": 61,
+      "headSha": "e9bbfe92b0aa5b4a044b3fb52bec9c59750d75b9",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 1,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 4044423311,
+          "url": "https://github.com/garnet-labs/pnpm/pull/61#discussion_r4044423311",
+          "at": "2026-09-18T06:43:03Z",
+          "commit": "e9bbfe9",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The Runtime Review comment can contain several job sections. These checks search the entire body independently, so the step and destination do not need to occur in the same section or chain. L3 does not prevent the false pass because L3 ..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 4044423388,
+          "url": "https://github.com/garnet-labs/pnpm/pull/61#discussion_r4044423388",
+          "at": "2026-09-18T06:43:04Z",
+          "commit": "e9bbfe9",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head e9bbfe9"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head e9bbfe9): `Runner.Worker → bash → curl` reached `registry.npmjs[.]org` in `Garnet Jibril Release Gate/reproduce`. Profile: https://app.garnet.ai/public/runs/34659392702?profile=01a092df-8a4d-77ae-8efe-0b365..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 4044482658,
+          "url": "https://github.com/garnet-labs/pnpm/pull/61#discussion_r4044482658",
+          "at": "2026-09-18T06:52:38Z",
+          "commit": "e9bbfe9",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The normalized step and destination are searched independently across the entire comment. If the quoted workload step appears in one section while the destination appears only in unrelated runner-platform or other-step evidence, both che..."
+        }
+      ],
+      "raw": "out/pnpm/pr-61-consume.json",
+      "checkedAt": "2026-09-22T17:29:55.535Z"
+    },
+    {
+      "forkPr": 60,
+      "headSha": "035e0267ccddd3a9acfee9c1c4260b63f8a8f97c",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-60-consume.json",
+      "checkedAt": "2026-09-22T17:29:57.338Z"
+    },
+    {
+      "forkPr": 59,
+      "headSha": "664b018b9b20c80b0febc9c71344248fa8178973",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-59-consume.json",
+      "checkedAt": "2026-09-22T17:29:59.175Z"
+    },
+    {
+      "forkPr": 58,
+      "headSha": "5d80a0076c42989ecbc7d04f7de3b2059d806dd7",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-58-consume.json",
+      "checkedAt": "2026-09-22T17:30:02.550Z"
+    },
+    {
+      "forkPr": 56,
+      "headSha": "a89d7000380164f6c002051eff50ef1ad0879256",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3993436380,
+          "url": "https://github.com/garnet-labs/pnpm/pull/56#discussion_r3993436380",
+          "at": "2026-09-11T21:12:29Z",
+          "commit": "a89d700",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "After stopping `jibril.service`, this job only confirms that the service is stopped and that no local profile file exists. The action post-step runs after this final job step, and no dependent job checks whether it reported the stopped r..."
+        }
+      ],
+      "raw": "out/pnpm/pr-56-consume.json",
+      "checkedAt": "2026-09-22T17:30:04.812Z"
+    },
+    {
+      "forkPr": 55,
+      "headSha": "906250160205287abae4477989d693fbd8ed760f",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-55-consume.json",
+      "checkedAt": "2026-09-22T17:30:06.847Z"
+    },
+    {
+      "forkPr": 54,
+      "headSha": "045b6dbb41255e04fa2efd24668459fcbe46d13e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3986167608,
+          "url": "https://github.com/garnet-labs/pnpm/pull/54#discussion_r3986167608",
+          "at": "2026-09-11T05:23:55Z",
+          "commit": "045b6db",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "A PR author can post `STICKY_MARKER` with forged commit and summary markers. `fetchPullRequest` then reports attacker-controlled data as exact-head Garnet evidence."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5629887345,
+          "url": "https://github.com/garnet-labs/pnpm/pull/54#issuecomment-5629887345",
+          "at": "2026-09-11T05:22:19Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "FIXTURE --> PROFILE[\"Execution profiles\"] --> RENDER[\"Evidence renderers\"] --> COMMENTS[\"PR comments\"]"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5629922284,
+          "url": "https://github.com/garnet-labs/pnpm/pull/54#issuecomment-5629922284",
+          "at": "2026-09-11T05:26:49Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Check the comment's author login before accepting a control-plane marker as <br>authoritative. This prevents arbitrary users from suppressing the bot's <br>execution profile comment.**"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5630528913,
+          "url": "https://github.com/garnet-labs/pnpm/pull/54#issuecomment-5630528913",
+          "at": "2026-09-11T06:40:20Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Check the comment's author login before accepting a control-plane marker as <br>authoritative. This prevents arbitrary users from suppressing the bot's <br>execution profile comment.**"
+        }
+      ],
+      "raw": "out/pnpm/pr-54-consume.json",
+      "checkedAt": "2026-09-22T17:30:09.327Z"
+    },
+    {
+      "forkPr": 53,
+      "headSha": "89ead80f3f9fa64eadb644872ee511f9552e7cc1",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 3,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3985844206,
+          "url": "https://github.com/garnet-labs/pnpm/pull/53#discussion_r3985844206",
+          "at": "2026-09-11T04:09:29Z",
+          "commit": "89ead80",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head 89ead80",
+            "reports no evidence"
+          ],
+          "excerpt": "🔍 **Runtime evidence predates the version bump**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3985844250,
+          "url": "https://github.com/garnet-labs/pnpm/pull/53#discussion_r3985844250",
+          "at": "2026-09-11T04:09:30Z",
+          "commit": "89ead80",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 89ead80"
+          ],
+          "excerpt": "The description names `1d19789c` as planned head, while this PR ends at `89ead80f`. Update its comparison and runtime narrative."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3985851207,
+          "url": "https://github.com/garnet-labs/pnpm/pull/53#discussion_r3985851207",
+          "at": "2026-09-11T04:11:13Z",
+          "commit": "89ead80",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head 89ead80",
+            "run 34560996197",
+            "profile 01a08ea7-7756-70aa-94b0-ba6eb24a7a99"
+          ],
+          "excerpt": "The record has since finalized for `89ead80f3f9fa64eadb644872ee511f9552e7cc1`, compared with `0424b4e766e7d4a1539a29696f17dd8d3dca9da7`; the description's mirrored marker now matches. The current profile records pnpm contacting `1.1.1.1:..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5629320815,
+          "url": "https://github.com/garnet-labs/pnpm/pull/53#issuecomment-5629320815",
+          "at": "2026-09-11T04:09:04Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Adds a pull-request workflow that installs the pinned released binary, copies and hashes the frozen fixture, and configures 1.1.1.1 as the sole nameserver. Garnet records the install while postconditions verify React installation and ..."
+        }
+      ],
+      "raw": "out/pnpm/pr-53-consume.json",
+      "checkedAt": "2026-09-22T17:30:11.730Z"
+    },
+    {
+      "forkPr": 52,
+      "headSha": "29b3135a968d38bb67f1aa78a4bb851732453391",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-52-consume.json",
+      "checkedAt": "2026-09-22T17:30:14.061Z"
+    },
+    {
+      "forkPr": 51,
+      "headSha": "f77d0046b2b0c227acaf2022695fe78e2e3c5fdf",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3983849001,
+          "url": "https://github.com/garnet-labs/pnpm/pull/51#discussion_r3983849001",
+          "at": "2026-09-10T21:56:06Z",
+          "commit": "f77d004",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head f77d004",
+            "reports no evidence"
+          ],
+          "excerpt": "🔍 **No head-bound runtime evidence**"
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5623869199,
+          "url": "https://github.com/garnet-labs/pnpm/pull/51#issuecomment-5623869199",
+          "at": "2026-09-10T18:55:36Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "|**Recording and dependency installation** <br> `.github/workflows/garnet-cargo-optout-replay.yml`|Starts Garnet recording and installs JavaScript dependencies with Node 24 and pnpm 12.4.1.|"
+        }
+      ],
+      "raw": "out/pnpm/pr-51-consume.json",
+      "checkedAt": "2026-09-22T17:30:16.636Z"
+    },
+    {
+      "forkPr": 50,
+      "headSha": "bcba38e488e693811060c8be16dd1c3ee1582a38",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-50-consume.json",
+      "checkedAt": "2026-09-22T17:30:19.374Z"
+    },
+    {
+      "forkPr": 49,
+      "headSha": "d4a8a0fea6519ac1f97ff0fabdbe0a75ea41f6d4",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3970845393,
+          "url": "https://github.com/garnet-labs/pnpm/pull/49#discussion_r3970845393",
+          "at": "2026-09-09T16:38:00Z",
+          "commit": "aa2b209",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "with the raw Garnet comment body. <b><i>renderEvidenceSection</i></b> always surrounds that body with a heading,"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5605366781,
+          "url": "https://github.com/garnet-labs/pnpm/pull/49#issuecomment-5605366781",
+          "at": "2026-09-09T16:37:59Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">with the raw Garnet comment body. <b><i>renderEvidenceSection</i></b> always surrounds that body with a heading,"
+        }
+      ],
+      "raw": "out/pnpm/pr-49-consume.json",
+      "checkedAt": "2026-09-22T17:30:21.577Z"
+    },
+    {
+      "forkPr": 48,
+      "headSha": "d40afff36dcd786622523701996cdc2cff381940",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 6
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3970589494,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#discussion_r3970589494",
+          "at": "2026-09-09T16:11:38Z",
+          "commit": "d40afff",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head d40afff",
+            "reports no evidence"
+          ],
+          "excerpt": "🔍 **No runtime evidence for this head**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3970589734,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#discussion_r3970589734",
+          "at": "2026-09-09T16:11:40Z",
+          "commit": "d40afff",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Validate the PR evidence section against the selected Runtime Review comment's actual bytes, not only its commit marker. Account for the mirror wrapper and the documented pointer fallback when the source exceeds the body limit or contain..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3970589871,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#discussion_r3970589871",
+          "at": "2026-09-09T16:11:41Z",
+          "commit": "d40afff",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Separate platform capability from observed profile production in release_report and L14. Static YAML parsing can state that a Linux runner supports the sensor, but it cannot prove the action executes or records. Either add runtime eviden..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3970755287,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#discussion_r3970755287",
+          "at": "2026-09-09T16:29:33Z",
+          "commit": "d40afff",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Disposition: disclosed** — Correct, and expected on this PR: it changes the gate that produces runtime evidence, and nothing under `pnpm/` or `pnpr/` runs in the instrumented cell, so there is no head-bound profile to ground a review o..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3970757705,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#discussion_r3970757705",
+          "at": "2026-09-09T16:29:45Z",
+          "commit": "d40afff",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Disposition: fixed** — Fixed exactly as suggested: an unmeasurable flush fails L9 and names why (no `Post Garnet runtime monitoring` step in the reproduce job timeline). Ledger F30."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5604970327,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#issuecomment-5604970327",
+          "at": "2026-09-09T16:09:02Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">**Recommendation:** Keep the live upstream fetch and focused Python shape analyzer: they directly support the gate&#x27;s purpose of validating current pnpm behavior. Consider extracting stable posture checks into a policy engine only i..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5605024921,
+          "url": "https://github.com/garnet-labs/pnpm/pull/48#issuecomment-5605024921",
+          "at": "2026-09-09T16:13:06Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">the trusted Runtime Review comment."
+        }
+      ],
+      "raw": "out/pnpm/pr-48-consume.json",
+      "checkedAt": "2026-09-22T17:30:24.270Z"
+    },
+    {
+      "forkPr": 47,
+      "headSha": "5e817672e12ba8ad23f1ae6689bb97038d783479",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5596988887,
+          "url": "https://github.com/garnet-labs/pnpm/pull/47#issuecomment-5596988887",
+          "at": "2026-09-09T06:24:54Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "B -->|Demo| F[\"Demo PR\"] --> G[\"Runtime evidence\"]"
+        }
+      ],
+      "raw": "out/pnpm/pr-47-consume.json",
+      "checkedAt": "2026-09-22T17:30:26.352Z"
+    },
+    {
+      "forkPr": 46,
+      "headSha": "1583b1fb9921c0b5a815af7bcd7d79a99732219a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-46-consume.json",
+      "checkedAt": "2026-09-22T17:30:28.664Z"
+    },
+    {
+      "forkPr": 45,
+      "headSha": "08429365f5919fec645ae02a55d68dd2aa030692",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3962253829,
+          "url": "https://github.com/garnet-labs/pnpm/pull/45#discussion_r3962253829",
+          "at": "2026-09-08T21:06:39Z",
+          "commit": "0842936",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "privileged runner, execute arbitrary commands during every recorded install, and forge the uploaded"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5591638180,
+          "url": "https://github.com/garnet-labs/pnpm/pull/45#issuecomment-5591638180",
+          "at": "2026-09-08T20:46:22Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">privileged runner, execute arbitrary commands during every recorded install, and forge the uploaded"
+        }
+      ],
+      "raw": "out/pnpm/pr-45-consume.json",
+      "checkedAt": "2026-09-22T17:30:31.244Z"
+    },
+    {
+      "forkPr": 44,
+      "headSha": "48245e1c9068c803f46bfff3d174638fc498ce58",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-44-consume.json",
+      "checkedAt": "2026-09-22T17:30:33.684Z"
+    },
+    {
+      "forkPr": 43,
+      "headSha": "a4abb18faa6447ed6c22b7fb3a8285eae3efae08",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 1,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3965104605,
+          "url": "https://github.com/garnet-labs/pnpm/pull/43#discussion_r3965104605",
+          "at": "2026-09-09T05:57:05Z",
+          "commit": "a4abb18",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head a4abb18"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head a4abb18): `Runner.Worker → bash → node` reached `registry.npmjs.org` under “Start the clock” in [Garnet Jibril Release Gate/reproduce](https://app.garnet.ai/public/runs/34311733947?profile=01a08476-307d-745..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5596542293,
+          "url": "https://github.com/garnet-labs/pnpm/pull/43#issuecomment-5596542293",
+          "at": "2026-09-09T05:56:12Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Validates sensor startup, profile identity, workload attribution, Runtime Review finalization, public permalinks, pnpm integration shape and execution, reviewer findings, timing, and matrix coverage. Produces the authoritative verdict..."
+        }
+      ],
+      "raw": "out/pnpm/pr-43-consume.json",
+      "checkedAt": "2026-09-22T17:30:36.480Z"
+    },
+    {
+      "forkPr": 42,
+      "headSha": "d6b0a551b5015b6404528aa9ca670d5bed08d8e3",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-42-consume.json",
+      "checkedAt": "2026-09-22T17:30:38.395Z"
+    },
+    {
+      "forkPr": 41,
+      "headSha": "bac98fe7a2cd25a446d9e61255c43ebe503d7f79",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 3,
+        "observation": 0,
+        "mention": 6
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3939139531,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3939139531",
+          "at": "2026-09-05T02:24:58Z",
+          "commit": "bac98fe",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "After recording starts, `What was written` launches unrelated tools and reads runner files. The execution profile no longer isolates the install and compile."
+        },
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3939139565,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3939139565",
+          "at": "2026-09-05T02:24:59Z",
+          "commit": "d97c814",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The workflow already supplies `GARNET_API_TOKEN` directly to the Garnet action. Existing Garnet workflows in this repository operate with `contents: read`; verify whether this release candidate genuinely requires OIDC before retaining it..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3939139617,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3939139617",
+          "at": "2026-09-05T02:25:00Z",
+          "commit": "d97c814",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Pull-request-controlled build scripts and binaries run with `id-token: write`. They can mint workload credentials outside the Garnet action."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3963082093,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3963082093",
+          "at": "2026-09-08T23:12:06Z",
+          "commit": "bac98fe",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head bac98fe"
+          ],
+          "excerpt": "Fixed in bac98fe: a final `Experiment outcome` step writes the three outcomes to the step summary and exits 1 when any of install, compile or the cold second install is not `success`. The `continue-on-error` on the experiment steps stays..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3963082094,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3963082094",
+          "at": "2026-09-08T23:12:06Z",
+          "commit": "bac98fe",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Disclosed, not fixed. The token has to be on the runner that records, and the recorded job has to run the crates' build scripts, so the two share a job by design. What limits it is now in the workflow header: the action writes the token ..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3963082097,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3963082097",
+          "at": "2026-09-08T23:12:06Z",
+          "commit": "d97c814",
+          "onHead": false,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head bac98fe"
+          ],
+          "excerpt": "Fixed in bac98fe: the workflow now grants `contents: read` only. The Garnet step takes the token explicitly, so it never needed `id-token: write`, and the PR comment is posted by the GitHub App, so `pull-requests: write` was unused."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3963082121,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#discussion_r3963082121",
+          "at": "2026-09-08T23:12:06Z",
+          "commit": "bac98fe",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head bac98fe",
+            "reports no evidence"
+          ],
+          "excerpt": "Fixed in bac98fe: the canary step has `continue-on-error: true` and an id, and its outcome is printed with the others in `What was written`. A canary that cannot reach example.com is itself part of the record and no longer stops the inst..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548714920,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#issuecomment-5548714920",
+          "at": "2026-09-05T02:23:14Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">The isolated two-job workflow is appropriate because it keeps pnpm compilation, toolchain installation, artifact retrieval, and fixture setup outside the Garnet recording window. Reusing an existing CI job or building inside the recorde..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548724324,
+          "url": "https://github.com/garnet-labs/pnpm/pull/41#issuecomment-5548724324",
+          "at": "2026-09-05T02:24:58Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">The workflow already supplies `GARNET_API_TOKEN` directly to the Garnet action. Existing Garnet workflows in this repository operate with `contents: read`; verify whether this release candidate genuinely requires OIDC before retaining i..."
+        }
+      ],
+      "raw": "out/pnpm/pr-41-consume.json",
+      "checkedAt": "2026-09-22T17:30:40.795Z"
+    },
+    {
+      "forkPr": 40,
+      "headSha": "1b0e83d51d7c284e766e8f82d0e87576ff331f96",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548562842,
+          "url": "https://github.com/garnet-labs/pnpm/pull/40#issuecomment-5548562842",
+          "at": "2026-09-05T01:54:39Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "PathA --> Garnet[\"Garnet recording\"]"
+        }
+      ],
+      "raw": "out/pnpm/pr-40-consume.json",
+      "checkedAt": "2026-09-22T17:30:43.585Z"
+    },
+    {
+      "forkPr": 39,
+      "headSha": "bb64e582d862d109a426b0b36c542a2748b070df",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3938987070,
+          "url": "https://github.com/garnet-labs/pnpm/pull/39#discussion_r3938987070",
+          "at": "2026-09-05T01:25:16Z",
+          "commit": "bb64e58",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "On fork pull requests touching these paths, `GARNET_API_TOKEN` is unavailable, but the job always invokes the authenticated Garnet action. Those contributions cannot complete this workflow."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548359768,
+          "url": "https://github.com/garnet-labs/pnpm/pull/39#issuecomment-5548359768",
+          "at": "2026-09-05T01:18:38Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">Because the Garnet action intentionally does not fail the job, these executions can complete while"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548386414,
+          "url": "https://github.com/garnet-labs/pnpm/pull/39#issuecomment-5548386414",
+          "at": "2026-09-05T01:23:26Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Adds a path-scoped, three-cell workflow that configures dnsmasq as the sole resolver with &#x27;no_tld_query&#x27;, then performs 25 isolated pnpm installs. Garnet records process flows while tcpdump and dnsmasq logs are summarized an..."
+        }
+      ],
+      "raw": "out/pnpm/pr-39-consume.json",
+      "checkedAt": "2026-09-22T17:30:45.778Z"
+    },
+    {
+      "forkPr": 38,
+      "headSha": "381401991f75a4740669605e3173c102f476917d",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3938869883,
+          "url": "https://github.com/garnet-labs/pnpm/pull/38#discussion_r3938869883",
+          "at": "2026-09-05T00:46:57Z",
+          "commit": "3814019",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [
+            "head edf91cb (not the current head)"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head edf91cb): `Runner.Worker → bash → pnpm` stopped reaching `8.8.4.4` in Garnet DNS egress/install. [Execution Profile](https://app.garnet.ai/public/runs/33933449875?profile=01a06efe-0352-7fe2-8b67-c59175a1ddc1)"
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5547940033,
+          "url": "https://github.com/garnet-labs/pnpm/pull/38#issuecomment-5547940033",
+          "at": "2026-09-05T00:12:49Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Adds a private DNS egress fixture with pinned npm dependencies and a GitHub Actions workflow that configures DNS, installs pnpm 12.2.1, and runs `pnpm install` under Garnet runtime visibility."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5548370966,
+          "url": "https://github.com/garnet-labs/pnpm/pull/38#issuecomment-5548370966",
+          "at": "2026-09-05T01:20:42Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">The manifest pins only direct versions. Generate and commit a fixture lockfile, then make the recorded install fail if pnpm would update it."
+        }
+      ],
+      "raw": "out/pnpm/pr-38-consume.json",
+      "checkedAt": "2026-09-22T17:30:48.226Z"
+    },
+    {
+      "forkPr": 37,
+      "headSha": "0a5761acad4b304c3d1de8ae336635790d96b935",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3938564084,
+          "url": "https://github.com/garnet-labs/pnpm/pull/37#discussion_r3938564084",
+          "at": "2026-09-04T23:32:53Z",
+          "commit": "e1e3a90",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The recorded job sets `PNPM_VERSION` to `12.2.1`, so its install command resolves to `npm install -g pnpm@12.2.1`. This repeats the baseline release instead of testing pnpm 12.3.0, leaving the intended DNS-egress evidence for the target ..."
+        }
+      ],
+      "raw": "out/pnpm/pr-37-consume.json",
+      "checkedAt": "2026-09-22T17:30:50.305Z"
+    },
+    {
+      "forkPr": 36,
+      "headSha": "25f4d40966b5966b3853e7f0230a9b4a4eb17132",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5544493669,
+          "url": "https://github.com/garnet-labs/pnpm/pull/36#issuecomment-5544493669",
+          "at": "2026-09-04T17:59:13Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The CI workflow now uses updated reusable workflow references. The test workflow updates the conditional Garnet action to a v2.3.0 candidate, sets Jibril to `v2.17.0-rc.9`, and enables debug logging."
+        }
+      ],
+      "raw": "out/pnpm/pr-36-consume.json",
+      "checkedAt": "2026-09-22T17:30:52.443Z"
+    },
+    {
+      "forkPr": 35,
+      "headSha": "04324247a25f0040199311f81a00dc35be98fa01",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3970236602,
+          "url": "https://github.com/garnet-labs/pnpm/pull/35#discussion_r3970236602",
+          "at": "2026-09-09T15:33:09Z",
+          "commit": "0432424",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The fork evidence workflow posts re-review commands without determining whether head-bound Garnet evidence was newly mirrored. This can request an ungrounded review when evidence is absent and duplicate requests after the same-repository..."
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5514107959,
+          "url": "https://github.com/garnet-labs/pnpm/pull/35#issuecomment-5514107959",
+          "at": "2026-09-02T18:04:47Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "|**Runtime evidence review guidance** <br> `.github/copilot-instructions.md`, `AGENTS.md`, `REVIEW_GUIDE.md`|Review instructions require head-SHA validation, runtime evidence from Garnet, a runtime grounding statement, and clear separati..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5604448465,
+          "url": "https://github.com/garnet-labs/pnpm/pull/35#issuecomment-5604448465",
+          "at": "2026-09-09T15:31:07Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- ➕ Ensures the first review has runtime evidence."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5604476028,
+          "url": "https://github.com/garnet-labs/pnpm/pull/35#issuecomment-5604476028",
+          "at": "2026-09-09T15:33:08Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">The fork evidence workflow posts re-review commands without determining whether head-bound Garnet evidence was newly mirrored. This can request an ungrounded review when evidence is absent and duplicate requests after the same-repositor..."
+        }
+      ],
+      "raw": "out/pnpm/pr-35-consume.json",
+      "checkedAt": "2026-09-22T17:30:54.538Z"
+    },
+    {
+      "forkPr": 34,
+      "headSha": "528ce4629967d18ef506e2dd400d96fc6ddfcb30",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-34-consume.json",
+      "checkedAt": "2026-09-22T17:30:56.849Z"
+    },
+    {
+      "forkPr": 33,
+      "headSha": "7d0c763bd9dd05ef8ddc7b57b742db539ecaa257",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review",
+          "login": "coderabbitai[bot]",
+          "id": 5091590803,
+          "url": "https://github.com/garnet-labs/pnpm/pull/33#pullrequestreview-5091590803",
+          "at": "2026-09-02T15:20:40Z",
+          "commit": "b910035",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- Line 268: Gate the Garnet action to supported Linux runners in",
+          "state": "changes_requested"
+        },
+        {
+          "kind": "review-comment",
+          "login": "coderabbitai[bot]",
+          "id": 3915698272,
+          "url": "https://github.com/garnet-labs/pnpm/pull/33#discussion_r3915698272",
+          "at": "2026-09-02T15:20:39Z",
+          "commit": "7d0c763",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "printf '%s\\n' '--- local repository references to garnet action ---'"
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5511825189,
+          "url": "https://github.com/garnet-labs/pnpm/pull/33#issuecomment-5511825189",
+          "at": "2026-09-02T15:14:05Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The pull request updates Garnet Action references across four GitHub workflows. The test workflow also names the optional Garnet step and sets Jibril to `v2.17.0-rc.9`. Release jobs now run the action only on Linux runners."
+        }
+      ],
+      "raw": "out/pnpm/pr-33-consume.json",
+      "checkedAt": "2026-09-22T17:30:59.204Z"
+    },
+    {
+      "forkPr": 32,
+      "headSha": "2d685c4dbf28de77074561026c82cfa38e73a39b",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 5
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5497129525,
+          "url": "https://github.com/garnet-labs/pnpm/pull/32#issuecomment-5497129525",
+          "at": "2026-09-01T16:30:15Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "|**Reusable test workflow wiring** <br> `.github/workflows/test.yml`|Adds optional Garnet version and cell ID inputs, isolates concurrency groups by cell, invokes the summary action, and upgrades the Garnet action.|"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5548876590,
+          "url": "https://github.com/garnet-labs/pnpm/pull/32#issuecomment-5548876590",
+          "at": "2026-09-05T02:54:21Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "01:11:46  JSON profile was not written within the bounded wait; the Runtime Review below is"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5549139498,
+          "url": "https://github.com/garnet-labs/pnpm/pull/32#issuecomment-5549139498",
+          "at": "2026-09-05T03:47:05Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "03:37:25  JSON profile was not written within the bounded wait; the Runtime Review below is"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5549669222,
+          "url": "https://github.com/garnet-labs/pnpm/pull/32#issuecomment-5549669222",
+          "at": "2026-09-05T05:27:42Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "after the Garnet action installed and started the sensor; only the file content differed."
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5549900903,
+          "url": "https://github.com/garnet-labs/pnpm/pull/32#issuecomment-5549900903",
+          "at": "2026-09-05T06:13:35Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "| Runtime Review state | \"Execution Profiles … still being recorded\" | same | same |"
+        }
+      ],
+      "raw": "out/pnpm/pr-32-consume.json",
+      "checkedAt": "2026-09-22T17:31:01.562Z"
+    },
+    {
+      "forkPr": 31,
+      "headSha": "3c6b5e1cd7b85d54046df498632439a009dff739",
+      "consumed": true,
+      "consumers": [
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 1,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "greptile-apps[bot]",
+          "id": 3883961210,
+          "url": "https://github.com/garnet-labs/pnpm/pull/31#discussion_r3883961210",
+          "at": "2026-08-28T20:51:46Z",
+          "commit": "3c6b5e1",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- The authored Node harness starts a local GitHub-comments API, injects controlled Garnet profile failures, and invokes the workload-view CLI main path, proving both failures are exercised end to end."
+        },
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3883977278,
+          "url": "https://github.com/garnet-labs/pnpm/pull/31#discussion_r3883977278",
+          "at": "2026-08-28T20:54:43Z",
+          "commit": "3c6b5e1",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "the section just written by the other or a concurrent human edit. This makes runtime evidence or the"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3938808127,
+          "url": "https://github.com/garnet-labs/pnpm/pull/31#discussion_r3938808127",
+          "at": "2026-09-05T00:27:02Z",
+          "commit": "3c6b5e1",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Do not classify destinations or execution chains as stable unless all three distinct repetitions for that side are present. Preserve partial observations as variance or an explicitly incomplete state while the receipt is undeterminable. ..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3938808259,
+          "url": "https://github.com/garnet-labs/pnpm/pull/31#discussion_r3938808259",
+          "at": "2026-09-05T00:27:04Z",
+          "commit": "3c6b5e1",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": true,
+          "matched": [
+            "head 3c6b5e1"
+          ],
+          "excerpt": "Runtime evidence (Garnet, head 3c6b5e1): `Runner.Worker › bash › node → registry.npmjs.org` appears in `Garnet Execution Diff/execution-diff` ([profile](https://app.garnet.ai/public/runs/33564858169?profile=01a05f05-d336-73c0-ae5a-d069d8..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5457657784,
+          "url": "https://github.com/garnet-labs/pnpm/pull/31#issuecomment-5457657784",
+          "at": "2026-08-28T20:54:42Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">the section just written by the other or a concurrent human edit. This makes runtime evidence or the"
+        }
+      ],
+      "raw": "out/pnpm/pr-31-consume.json",
+      "checkedAt": "2026-09-22T17:31:04.164Z"
+    },
+    {
+      "forkPr": 30,
+      "headSha": "1b572258682998a78550318f350725427a72e099",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-30-consume.json",
+      "checkedAt": "2026-09-22T17:31:06.386Z"
+    },
+    {
+      "forkPr": 28,
+      "headSha": "4ac471a487c25e33e84090de87e6afa39af974b0",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 1,
+        "observation": 0,
+        "mention": 6
+      },
+      "receipts": [
+        {
+          "kind": "review",
+          "login": "coderabbitai[bot]",
+          "id": 5024493613,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#pullrequestreview-5024493613",
+          "at": "2026-08-25T21:40:36Z",
+          "commit": "5d53a34",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- Around line 63-67: Update the Garnet runtime evidence guidance in the",
+          "state": "changes_requested"
+        },
+        {
+          "kind": "review-comment",
+          "login": "coderabbitai[bot]",
+          "id": 3857674904,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#discussion_r3857674904",
+          "at": "2026-08-25T21:40:35Z",
+          "commit": "4ac471a",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "In @.pr_agent.toml around lines 63 - 67, Update the Garnet runtime evidence"
+        },
+        {
+          "kind": "review-comment",
+          "login": "coderabbitai[bot]",
+          "id": 3857674911,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#discussion_r3857674911",
+          "at": "2026-08-25T21:40:35Z",
+          "commit": "4ac471a",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "**Require provenance, not only SHA equality, for transported runtime evidence.**"
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3857839517,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#discussion_r3857839517",
+          "at": "2026-08-25T22:03:57Z",
+          "commit": "4ac471a",
+          "onHead": true,
+          "tier": "citation",
+          "headBound": false,
+          "matched": [
+            "head 4ac471a",
+            "reports no evidence"
+          ],
+          "excerpt": "Already the case at this head: 4ac471a removed `(?:-pending)?` from `GARNET_OWNED_MARKER_RE`, so pending placeholders are rejected and the poll keeps waiting until the recorded comment lands (verified live on this PR — the mirror ran onl..."
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5417104929,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#issuecomment-5417104929",
+          "at": "2026-08-25T21:33:29Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The PR updates Garnet runtime-evidence instructions, adds head validation after polling, records the mirror result, and conditionally requests an AI re-review."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5417125469,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#issuecomment-5417125469",
+          "at": "2026-08-25T21:35:19Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Re-trigger AI reviews after Garnet evidence is mirrored"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5417150205,
+          "url": "https://github.com/garnet-labs/pnpm/pull/28#issuecomment-5417150205",
+          "at": "2026-08-25T21:37:38Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">Avoid waiting for Garnet evidence when the evidence-producing test leg did not run."
+        }
+      ],
+      "raw": "out/pnpm/pr-28-consume.json",
+      "checkedAt": "2026-09-22T17:31:08.579Z"
+    },
+    {
+      "forkPr": 27,
+      "headSha": "684bc6b0f9ac6ce120f6726de5edf38a80c8e62d",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-27-consume.json",
+      "checkedAt": "2026-09-22T17:31:11.348Z"
+    },
+    {
+      "forkPr": 26,
+      "headSha": "db112704fdf1ff358ea5450b6bdfcf0eef521b86",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 1,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "coderabbitai[bot]",
+          "id": 3858524381,
+          "url": "https://github.com/garnet-labs/pnpm/pull/26#discussion_r3858524381",
+          "at": "2026-08-25T23:54:03Z",
+          "commit": "db11270",
+          "onHead": true,
+          "tier": "utterance",
+          "headBound": false,
+          "matched": [
+            "head db11270",
+            "reports no evidence"
+          ],
+          "excerpt": "**Runtime grounding** (head `db11270`): absent; no head-bound Garnet record is available."
+        }
+      ],
+      "raw": "out/pnpm/pr-26-consume.json",
+      "checkedAt": "2026-09-22T17:31:13.506Z"
+    },
+    {
+      "forkPr": 25,
+      "headSha": "dbad9e67ef9c0a8d20c022ff6a8f85b5a09d26d7",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-25-consume.json",
+      "checkedAt": "2026-09-22T17:31:15.836Z"
+    },
+    {
+      "forkPr": 24,
+      "headSha": "df05e4f5a7311623aab3e0e2d9f19e4c111a6123",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-24-consume.json",
+      "checkedAt": "2026-09-22T17:31:17.897Z"
+    },
+    {
+      "forkPr": 23,
+      "headSha": "e97fb38a0369124f799ec33dc60b8a281acb196a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-23-consume.json",
+      "checkedAt": "2026-09-22T17:31:19.975Z"
+    },
+    {
+      "forkPr": 22,
+      "headSha": "ca6e12b1af97342191615d0113c39b34d9d4292e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5416884887,
+          "url": "https://github.com/garnet-labs/pnpm/pull/22#issuecomment-5416884887",
+          "at": "2026-08-25T21:14:15Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The pull request updates Garnet action references from v2.2.0 to the pinned v2.3.0-rc.1 version in release, test, and latest-tag GitHub workflows."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5416913233,
+          "url": "https://github.com/garnet-labs/pnpm/pull/22#issuecomment-5416913233",
+          "at": "2026-08-25T21:16:41Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Bump Garnet action to v2.3.0-rc.1 across CI workflows"
+        }
+      ],
+      "raw": "out/pnpm/pr-22-consume.json",
+      "checkedAt": "2026-09-22T17:31:21.868Z"
+    },
+    {
+      "forkPr": 20,
+      "headSha": "27a39306fdfb320460a7646af94b5f15ec9f1c19",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-20-consume.json",
+      "checkedAt": "2026-09-22T17:31:23.912Z"
+    },
+    {
+      "forkPr": 19,
+      "headSha": "ea4225ffe735d1b10990fb34462ae91359927983",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3835298421,
+          "url": "https://github.com/garnet-labs/pnpm/pull/19#discussion_r3835298421",
+          "at": "2026-08-22T05:42:26Z",
+          "commit": "ea4225f",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "causing the PR description to mirror attacker-controlled “runtime evidence”. This expands the trust"
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5378207022,
+          "url": "https://github.com/garnet-labs/pnpm/pull/19#issuecomment-5378207022",
+          "at": "2026-08-22T05:31:13Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The PR adds a script that validates and mirrors head-bound Garnet Runtime Review comments into pull request descriptions. CI workflows invoke it for same-repository and fork pull requests. `REVIEW.md` defines evidence-based review rules."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5378238288,
+          "url": "https://github.com/garnet-labs/pnpm/pull/19#issuecomment-5378238288",
+          "at": "2026-08-22T05:39:17Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Mirror head-bound Garnet runtime evidence into PR descriptions for AI reviews"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5378251237,
+          "url": "https://github.com/garnet-labs/pnpm/pull/19#issuecomment-5378251237",
+          "at": "2026-08-22T05:42:25Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">causing the PR description to mirror attacker-controlled “runtime evidence”. This expands the trust"
+        }
+      ],
+      "raw": "out/pnpm/pr-19-consume.json",
+      "checkedAt": "2026-09-22T17:31:25.886Z"
+    },
+    {
+      "forkPr": 18,
+      "headSha": "b6d4f967289a8f39038796d413a218d52318f90a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3834074326,
+          "url": "https://github.com/garnet-labs/pnpm/pull/18#discussion_r3834074326",
+          "at": "2026-08-21T22:18:05Z",
+          "commit": "b6d4f96",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "can let the release workflow proceed (including publishing) without producing a Garnet runtime"
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5375309330,
+          "url": "https://github.com/garnet-labs/pnpm/pull/18#issuecomment-5375309330",
+          "at": "2026-08-21T20:55:16Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The pull request upgrades Garnet action references from v2.2.0 to pinned v2.3.0-rc.1 revisions in release, test, and registry update workflows."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5375951254,
+          "url": "https://github.com/garnet-labs/pnpm/pull/18#issuecomment-5375951254",
+          "at": "2026-08-21T22:13:41Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">can let the release workflow proceed (including publishing) without producing a Garnet runtime"
+        }
+      ],
+      "raw": "out/pnpm/pr-18-consume.json",
+      "checkedAt": "2026-09-22T17:31:27.945Z"
+    },
+    {
+      "forkPr": 17,
+      "headSha": "8e34879d13f10441930903ca9862d885e90d57bd",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5336118462,
+          "url": "https://github.com/garnet-labs/pnpm/pull/17#issuecomment-5336118462",
+          "at": "2026-08-19T00:49:50Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "<div>Review mode: <code>⚖️ Balanced</code>: This is a localized dependency/config update, but it changes install engine enforcement and includes runtime evidence of three unclassified outbound tooling destinations, requiring a careful se..."
+        }
+      ],
+      "raw": "out/pnpm/pr-17-consume.json",
+      "checkedAt": "2026-09-22T17:31:30.549Z"
+    },
+    {
+      "forkPr": 16,
+      "headSha": "8d62fe980efe69323dc252123a9cd4082c431ec6",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 5
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3818383373,
+          "url": "https://github.com/garnet-labs/pnpm/pull/16#discussion_r3818383373",
+          "at": "2026-08-20T03:24:50Z",
+          "commit": "dba8494",
+          "onHead": false,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The runtime-evidence policy makes absence of an explanation the trigger for reporting new workload destinations. An explanation does not establish that an endpoint or execution chain is trusted, so explained but malicious or unsafe lifec..."
+        },
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3823397637,
+          "url": "https://github.com/garnet-labs/pnpm/pull/16#discussion_r3823397637",
+          "at": "2026-08-20T16:23:28Z",
+          "commit": "8d62fe9",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Addressed in e91e365: `pnpm/action-setup` now pins `version: 12.0.0-rc.6`, matching the root `packageManager` field it already resolved — the installed toolchain is unchanged but now explicit in the workflow. Node setup stays omitted on ..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5335831318,
+          "url": "https://github.com/garnet-labs/pnpm/pull/16#issuecomment-5335831318",
+          "at": "2026-08-19T00:10:04Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Runs fixture installation on Linux under Garnet runtime visibility."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5335854845,
+          "url": "https://github.com/garnet-labs/pnpm/pull/16#issuecomment-5335854845",
+          "at": "2026-08-19T00:13:20Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">+(1) For dependency, lockfile, or CI changes, state explicitly which execution chains rooted in install/build/test tooling (pnpm, node, node-gyp, install scripts) the recording shows and which destinations they reached, and whether any ..."
+        },
+        {
+          "kind": "comment",
+          "login": "coderabbitai[bot]",
+          "id": 5349996089,
+          "url": "https://github.com/garnet-labs/pnpm/pull/16#issuecomment-5349996089",
+          "at": "2026-08-20T01:18:49Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Added a GitHub Actions workflow that installs the `native-build-install` fixture and records runtime activity. Added runtime evidence documentation and review guidance for execution-related findings."
+        }
+      ],
+      "raw": "out/pnpm/pr-16-consume.json",
+      "checkedAt": "2026-09-22T17:31:32.981Z"
+    },
+    {
+      "forkPr": 15,
+      "headSha": "459389f3514677acabe9ff6acb459623f209154e",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-15-consume.json",
+      "checkedAt": "2026-09-22T17:31:34.872Z"
+    },
+    {
+      "forkPr": 14,
+      "headSha": "b3b71bb52769a61332c976cb99fcc1ee031ef8dd",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 4
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3800282022,
+          "url": "https://github.com/garnet-labs/pnpm/pull/14#discussion_r3800282022",
+          "at": "2026-08-18T01:42:11Z",
+          "commit": "b3b71bb",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "Impact: The job can time out and the recorded install behaviour no longer reflects only the fixture being tested."
+        },
+        {
+          "kind": "review-comment",
+          "login": "qodo-code-review[bot]",
+          "id": 3800286773,
+          "url": "https://github.com/garnet-labs/pnpm/pull/14#discussion_r3800286773",
+          "at": "2026-08-18T01:43:31Z",
+          "commit": "b3b71bb",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "PR-controlled lifecycle scripts execute on the same privileged runner where the Garnet action retains its API token for the monitoring service. Isolate untrusted fixture execution from the credential, use a narrowly scoped ephemeral inge..."
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5322378392,
+          "url": "https://github.com/garnet-labs/pnpm/pull/14#issuecomment-5322378392",
+          "at": "2026-08-18T01:41:20Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- ➖ Creates more runners and Garnet recording sessions for few eligible fixtures"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5322391316,
+          "url": "https://github.com/garnet-labs/pnpm/pull/14#issuecomment-5322391316",
+          "at": "2026-08-18T01:43:29Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">+      - name: Garnet Runtime Visibility"
+        }
+      ],
+      "raw": "out/pnpm/pr-14-consume.json",
+      "checkedAt": "2026-09-22T17:31:37.074Z"
+    },
+    {
+      "forkPr": 13,
+      "headSha": "78c96705222bafd2c1bb92d7993cdd93aa0e4b25",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-13-consume.json",
+      "checkedAt": "2026-09-22T17:31:39.028Z"
+    },
+    {
+      "forkPr": 12,
+      "headSha": "b8f912597c352dcf42f36b611dc27acc2c009b69",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-12-consume.json",
+      "checkedAt": "2026-09-22T17:31:40.788Z"
+    },
+    {
+      "forkPr": 11,
+      "headSha": "eefe8f09d92ab7d53cb9cc8cfe8a0cf089a7c384",
+      "consumed": true,
+      "consumers": [
+        "blacksmith-sh[bot] (comment)",
+        "devin-ai-integration[bot] (comment)"
+      ],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 2,
+        "observation": 0,
+        "mention": 3
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "nicolasparada",
+          "id": 5337081966,
+          "url": "https://github.com/garnet-labs/pnpm/pull/11#issuecomment-5337081966",
+          "at": "2026-08-19T03:18:59Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "@devin try the pinned sha behind garnet action `v2.3.0-rc.1`"
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5360160791,
+          "url": "https://github.com/garnet-labs/pnpm/pull/11#issuecomment-5360160791",
+          "at": "2026-08-20T18:38:17Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "CI test-branch: exercise Garnet action v2.3.0-rc.1 across workflow paths"
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5360784972,
+          "url": "https://github.com/garnet-labs/pnpm/pull/11#issuecomment-5360784972",
+          "at": "2026-08-20T19:37:53Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "- Heavy TS CI ubuntu/Node 24 (~36 min of tests) on `blacksmith-8vcpu-ubuntu-2404`: `stopping jibril service (waiting up to 1830s…)` at 19:27:12 → `jibril service stop finished in 450s` → `Result=success, ExecMainStatus=0, ActiveState=ina..."
+        },
+        {
+          "kind": "comment",
+          "login": "blacksmith-sh[bot]",
+          "id": 5361045495,
+          "url": "https://github.com/garnet-labs/pnpm/pull/11#issuecomment-5361045495",
+          "at": "2026-08-20T20:03:36Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "run 32410011363"
+          ],
+          "excerpt": "| <code>test/install/nodeRuntime.ts (71.353 s)/nodeRuntime.ts (71.353 s)</code> | [View Logs](https://app.blacksmith.sh/garnet-labs/runs/32410011363/jobs/96558960866?attempt=1&ref=gh_comment&autoLogin=true&tab=tests&status=failed#test=dc..."
+        },
+        {
+          "kind": "comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 5361617318,
+          "url": "https://github.com/garnet-labs/pnpm/pull/11#issuecomment-5361617318",
+          "at": "2026-08-20T21:01:27Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "citation",
+          "headBound": true,
+          "matched": [
+            "head eefe8f0",
+            "run 32410011363"
+          ],
+          "excerpt": "**Results for head `eefe8f0`** (review-findings remediation: `8728094` dumper hardening + changeset, `eefe8f0` node20 + `ci.yml` push back to `main`-only). PR-path jobs compare base→head; the App comment above compares parent→head (`8728..."
+        }
+      ],
+      "raw": "out/pnpm/pr-11-consume.json",
+      "checkedAt": "2026-09-22T17:31:43.052Z"
+    },
+    {
+      "forkPr": 10,
+      "headSha": "93bf2f1a048e8563add43c1730395c3c621a4f4b",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-10-consume.json",
+      "checkedAt": "2026-09-22T17:31:44.903Z"
+    },
+    {
+      "forkPr": 9,
+      "headSha": "e1333d2430d470886f577eaa27d3aee0a8d924b4",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 1
+      },
+      "receipts": [
+        {
+          "kind": "review-comment",
+          "login": "devin-ai-integration[bot]",
+          "id": 3754392508,
+          "url": "https://github.com/garnet-labs/pnpm/pull/9#discussion_r3754392508",
+          "at": "2026-08-11T00:16:48Z",
+          "commit": "e1333d2",
+          "onHead": true,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": "The new install job provisions pnpm with a different setup action (`pnpm/action-setup@a7487c7` at `.github/workflows/garnet-dep-install.yml:44`) than the one all other jobs in this repository use, so the recorded install can run with a p..."
+        }
+      ],
+      "raw": "out/pnpm/pr-9-consume.json",
+      "checkedAt": "2026-09-22T17:31:47.064Z"
+    },
+    {
+      "forkPr": 8,
+      "headSha": "68f3b79b41e1f97e12e2fe08d1ea5a33fe4a5682",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-8-consume.json",
+      "checkedAt": "2026-09-22T17:31:48.990Z"
+    },
+    {
+      "forkPr": 7,
+      "headSha": "8c3afdc4f60e2dad98bdbf257992aa46e76e8cfd",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/pnpm/pr-7-consume.json",
+      "checkedAt": "2026-09-22T17:31:51.188Z"
+    }
+  ],
   "stage2": {
     "state": "unstarted"
   },
@@ -1977,5 +4405,5 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 4
 }

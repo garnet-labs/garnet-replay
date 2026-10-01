@@ -4,6 +4,9 @@ Use `live <slug> --prepared <json> --work <checkout> --branch <new-branch>`
 when the question compares two explicit states, such as two released binaries
 under one resolver configuration. Run with `--dry-run` first.
 
+Pass `--base-branch <fork-branch>` when the comparison should be isolated from
+the fork's default branch. The branch must already exist on the fork.
+
 The input is a JSON object with:
 
 - `transition`: `name`, `from`, `to` strings identifying the comparison.

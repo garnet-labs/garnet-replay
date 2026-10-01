@@ -1,0 +1,126 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 208,
+    "url": "https://github.com/garnet-labs/posthog/pull/208",
+    "title": "feat(marketing-analytics): add standalone metric chart"
+  },
+  "base": {
+    "sha": "0dccdf1d8336be1ff7ebb12863ad018b25787038",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+    "profile_id": "01a0d1d6-bc7d-7117-beb6-afa340167358",
+    "run_id": "35959015428"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "140.82.113.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 28,
+      "destinations": 9,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35959015428?profile=01a0d1d6-bc7d-7117-beb6-afa340167358",
+    "head_json": "https://app.garnet.ai/api/public/runs/35959015428?profile=01a0d1d6-bc7d-7117-beb6-afa340167358",
+    "pr_comment": "https://github.com/garnet-labs/posthog/pull/208#issuecomment-5808115009"
+  },
+  "recorded": {
+    "at": "2026-09-24 05:15:06 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "0dccdf1d8336be1ff7ebb12863ad018b25787038",
+    "head_sha": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 0dccdf1 → head 5e8dafb · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+    "current_head": "5e8dafb0316bd5df6a8016790c6d2bedad6d54b3",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 5e8dafb across 1 job: workload outbound connections +0 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 0dccdf1 and 5e8dafb (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

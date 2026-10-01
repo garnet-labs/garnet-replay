@@ -1,0 +1,13 @@
+{
+  "task": "real-173",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"The record shows only runner background destination changes, and capture is not declared complete, so it cannot support that the @posthog/mcp bump adds no workload network contact.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "The record shows only runner background destination changes, and capture is not declared complete, so it cannot support that the @posthog/mcp bump adds no workload network contact.",
+    "parse_error": null
+  },
+  "error": null
+}

@@ -1,0 +1,197 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "pnpm",
+    "url": "https://github.com/garnet-labs/pnpm"
+  },
+  "pull_request": {
+    "number": 70,
+    "url": "https://github.com/garnet-labs/pnpm/pull/70",
+    "title": "fix(network): cap proxy connections and retry transient connection drops"
+  },
+  "base": {
+    "sha": "92ba9a0d0a36bfe8aae38e4fe327c9737205b327",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+    "profile_id": "01a0d1f8-98e1-7fe6-b1e3-1411348efa37",
+    "run_id": "35960336270"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "44.190.5.123",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "72.30.35.89",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "74.208.14.149",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "96.19.94.82",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "api.snapcraft[.]io",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "cloudfront.cdn.snapcraftcontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "static.rust-lang[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "api.github[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blacksmith.blob.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "104.207.148.118",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "23.143.196.202",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "23.157.160.168",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "69.89.207.199",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "unofficial-builds.nodejs[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 99,
+      "destinations": 22,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 9,
+        "removed": 5
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35960336270?profile=01a0d1f8-98e1-7fe6-b1e3-1411348efa37",
+    "head_json": "https://app.garnet.ai/api/public/runs/35960336270?profile=01a0d1f8-98e1-7fe6-b1e3-1411348efa37",
+    "pr_comment": "https://github.com/garnet-labs/pnpm/pull/70#issuecomment-5808111841"
+  },
+  "recorded": {
+    "at": "2026-09-24 05:48:26 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "92ba9a0d0a36bfe8aae38e4fe327c9737205b327",
+    "head_sha": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 92ba9a0 → head 35efe21 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "9 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+    "current_head": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 35efe21 across 1 job: workload outbound connections +9 −5, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 92ba9a0 and 35efe21 (previous-recorded-head-to-head): 9 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

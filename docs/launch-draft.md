@@ -46,8 +46,7 @@ plain `GITHUB_TOKEN`; no GitHub App is needed to read the result. Recording
 uses GitHub OIDC with `id-token: write` and no `GARNET_API_TOKEN`; fork pull
 requests get no OIDC token and fall back to a local-only review. The generated
 workflow pins
-`e546567a72e4fede11ec39d6e9f75b539adef22c`, unreleased before v2.3.0. Repin it
-at the v2.3.0 tag.
+`245ad6be82de3200c205109c8ca7ac816dc692ea` (release v2.3.0).
 
 There is also a local benchmark in the repo. Devin reviewed both arms once per
 seed, not as a human study. Across 25 seeds, judgment changed 7/25, highest
