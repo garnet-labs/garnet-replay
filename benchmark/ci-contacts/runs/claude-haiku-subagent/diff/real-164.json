@@ -1,0 +1,13 @@
+{
+  "task": "real-164",
+  "model": "claude-haiku-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"This is a version bump of @typescript/native-preview from 7.0.0-dev.20260421.2 to 7.0.0-dev.20260707.2, which was already being downloaded from npm before the change.\"}",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "This is a version bump of @typescript/native-preview from 7.0.0-dev.20260421.2 to 7.0.0-dev.20260707.2, which was already being downloaded from npm before the change.",
+    "parse_error": null
+  },
+  "error": null
+}

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://storage.googleapis.com/coderabbit_public_assets/schema.v2.json
+# Garnet Runtime Review adapter for CodeRabbit. The contract lives in REVIEW.md;
+# this file only points CodeRabbit at it.
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "REVIEW.md"
+reviews:
+  path_instructions:
+    - path: "**"
+      instructions: |
+        Apply REVIEW.md. The pull request description carries a `Runtime evidence (Garnet)`
+        section between `<!-- garnet:evidence:begin -->` and `<!-- garnet:evidence:end -->`.
+        Use it only when its `garnet:commit` SHA equals the pull request head; otherwise say
+        the runtime evidence is absent or stale for this head. Prefix each runtime-grounded
+        statement exactly with `Runtime evidence (Garnet, head <sha7>): ` and name the
+        execution chain, destination and workflow/job it came from. Never repeat verdicts or
+        safety judgments from the record; judge the diff yourself.

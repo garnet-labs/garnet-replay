@@ -1,0 +1,131 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "posthog",
+    "url": "https://github.com/garnet-labs/posthog"
+  },
+  "pull_request": {
+    "number": 203,
+    "url": "https://github.com/garnet-labs/posthog/pull/203",
+    "title": "chore(deps): bump for 3.14 wheel coverage"
+  },
+  "base": {
+    "sha": "d7edcbd4a227ca8778da0e115c4db1517af5e25e",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+    "profile_id": "01a09166-6050-7307-94aa-cc579877690d",
+    "run_id": "34624686640"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "blob.bn9prdstrz04a.store.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "productionresultssa4.blob.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.113.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 28,
+      "destinations": 12,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 1,
+        "removed": 1
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/34624686640?profile=01a09166-6050-7307-94aa-cc579877690d",
+    "head_json": "https://app.garnet.ai/api/public/runs/34624686640?profile=01a09166-6050-7307-94aa-cc579877690d",
+    "pr_comment": "https://github.com/garnet-labs/posthog/pull/203#issuecomment-5637786292"
+  },
+  "recorded": {
+    "at": "2026-09-11 16:56:39 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "d7edcbd4a227ca8778da0e115c4db1517af5e25e",
+    "head_sha": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base d7edcbd → head b0d8c42 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "1 outbound connection recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+    "current_head": "b0d8c42c9c7ae28f8aa43f5e5e7dcdd862d7b7cf",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head b0d8c42 across 1 job: workload outbound connections +1 −1, runner background +0 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between d7edcbd and b0d8c42 (previous-recorded-head-to-head): 1 outbound connection recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

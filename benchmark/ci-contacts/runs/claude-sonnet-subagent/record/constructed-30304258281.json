@@ -1,0 +1,13 @@
+{
+  "task": "constructed-30304258281",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only adds the ms package with no install/postinstall scripts, and the CI record shows 0 outbound destinations on head with no destination changes recorded.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only adds the ms package with no install/postinstall scripts, and the CI record shows 0 outbound destinations on head with no destination changes recorded.",
+    "parse_error": null
+  },
+  "error": null
+}
