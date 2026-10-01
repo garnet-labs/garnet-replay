@@ -1,0 +1,131 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 51,
+    "url": "https://github.com/garnet-labs/express/pull/51",
+    "title": "chore(deps): add optipng-bin 9.0.0"
+  },
+  "base": {
+    "sha": "82df57aa635e5890339c8972b2c6b621bd79dcfa",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "1c805a14bb625d654e9b1f82dfd7bbd8bd0cb48c",
+    "profile_id": "01a0f5d5-62bc-70d3-9285-440f396a9be3",
+    "run_id": "36817626296"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "raw.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.112.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 18,
+      "destinations": 7,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 1,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36817626296?profile=01a0f5d5-62bc-70d3-9285-440f396a9be3",
+    "head_json": "https://app.garnet.ai/api/public/runs/36817626296?profile=01a0f5d5-62bc-70d3-9285-440f396a9be3",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/51#issuecomment-5924990217"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:59:57 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "82df57aa635e5890339c8972b2c6b621bd79dcfa",
+    "head_sha": "1c805a14bb625d654e9b1f82dfd7bbd8bd0cb48c",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 82df57a → head 1c805a1 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "1 outbound connection recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "1c805a14bb625d654e9b1f82dfd7bbd8bd0cb48c",
+    "current_head": "1c805a14bb625d654e9b1f82dfd7bbd8bd0cb48c",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 1c805a1 across 1 job: workload outbound connections +1 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 82df57a and 1c805a1 (previous-recorded-head-to-head): 1 outbound connection recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

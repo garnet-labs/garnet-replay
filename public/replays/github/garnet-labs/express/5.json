@@ -1,0 +1,143 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 5,
+    "url": "https://github.com/garnet-labs/express/pull/5",
+    "title": "chore(deps): add chromedriver 131.0.0"
+  },
+  "base": {
+    "sha": "b87e30a627a172915a874af047f3b1b401fe70ef",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "a962f3681c8bd081f5ebf6519911b11eaa794bf3",
+    "profile_id": "01a0f5be-d020-7384-b91f-97518d611a71",
+    "run_id": "36815736733"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "googlechromelabs.github[.]io",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "storage.googleapis[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 19,
+      "destinations": 8,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 2,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 2,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36815736733?profile=01a0f5be-d020-7384-b91f-97518d611a71",
+    "head_json": "https://app.garnet.ai/api/public/runs/36815736733?profile=01a0f5be-d020-7384-b91f-97518d611a71",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/5#issuecomment-5924799428"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:35:17 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "b87e30a627a172915a874af047f3b1b401fe70ef",
+    "head_sha": "a962f3681c8bd081f5ebf6519911b11eaa794bf3",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base b87e30a → head a962f36 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "2 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "a962f3681c8bd081f5ebf6519911b11eaa794bf3",
+    "current_head": "a962f3681c8bd081f5ebf6519911b11eaa794bf3",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head a962f36 across 1 job: workload outbound connections +2 −0, runner background +2 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between b87e30a and a962f36 (previous-recorded-head-to-head): 2 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

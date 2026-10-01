@@ -1,0 +1,137 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 18,
+    "url": "https://github.com/garnet-labs/express/pull/18",
+    "title": "chore(deps): add better-sqlite3 11.7.0"
+  },
+  "base": {
+    "sha": "e8383d8e1eca2783f32952efaeb86468f3f9b589",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "8e6a769914a6d9ab963a8c10db9b00d2491f38f6",
+    "profile_id": "01a0f5c1-70bd-7c0f-a6ea-d9ddf54ec8c4",
+    "run_id": "36815950739"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "github[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "release-assets.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 18,
+      "destinations": 7,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 2,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36815950739?profile=01a0f5c1-70bd-7c0f-a6ea-d9ddf54ec8c4",
+    "head_json": "https://app.garnet.ai/api/public/runs/36815950739?profile=01a0f5c1-70bd-7c0f-a6ea-d9ddf54ec8c4",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/18#issuecomment-5924818395"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:38:09 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "e8383d8e1eca2783f32952efaeb86468f3f9b589",
+    "head_sha": "8e6a769914a6d9ab963a8c10db9b00d2491f38f6",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base e8383d8 → head 8e6a769 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "2 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "8e6a769914a6d9ab963a8c10db9b00d2491f38f6",
+    "current_head": "8e6a769914a6d9ab963a8c10db9b00d2491f38f6",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 8e6a769 across 1 job: workload outbound connections +2 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between e8383d8 and 8e6a769 (previous-recorded-head-to-head): 2 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

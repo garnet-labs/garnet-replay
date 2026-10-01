@@ -1,0 +1,197 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "codex",
+    "url": "https://github.com/garnet-labs/codex"
+  },
+  "pull_request": {
+    "number": 25,
+    "url": "https://github.com/garnet-labs/codex/pull/25",
+    "title": "Move retry backoff into `codex-async-utils`"
+  },
+  "base": {
+    "sha": "9320fbc0f7a164a9776da161f45e9a72678851d1",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+    "profile_id": "01a0b575-ab81-7729-8b5e-fe2405631d50",
+    "run_id": "35371495692"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "13.227.87.62",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "13.227.87.85",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-request-orchestrator-prod-iad-02",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.112.23",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "100.60.233.171",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "3.170.185.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "54.80.53.243",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.113.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.113.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "dualstack.python.map.fastly[.]net",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "3.88.92.19",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "34.202.120.200",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "65.8.20.55",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 61,
+      "destinations": 26,
+      "jobs_recorded": 4,
+      "jobs_changed": 1,
+      "jobs_unchanged": 3,
+      "workload": {
+        "added": 4,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 6,
+        "removed": 4
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35371495692?profile=01a0b575-ab81-7729-8b5e-fe2405631d50",
+    "head_json": "https://app.garnet.ai/api/public/runs/35371495692?profile=01a0b575-ab81-7729-8b5e-fe2405631d50",
+    "pr_comment": "https://github.com/garnet-labs/codex/pull/25#issuecomment-5733315135"
+  },
+  "recorded": {
+    "at": "2026-09-18 16:59:41 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "9320fbc0f7a164a9776da161f45e9a72678851d1",
+    "head_sha": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 9320fbc → head 86e5222 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "4 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+    "current_head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 86e5222 across 4 jobs: workload outbound connections +4 −0, runner background +6 −4."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 9320fbc and 86e5222 (previous-recorded-head-to-head): 4 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

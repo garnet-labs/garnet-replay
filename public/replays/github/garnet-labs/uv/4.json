@@ -1,0 +1,138 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "uv",
+    "url": "https://github.com/garnet-labs/uv"
+  },
+  "pull_request": {
+    "number": 4,
+    "url": "https://github.com/garnet-labs/uv/pull/4",
+    "title": "Retry failed partial downloads with HTTP Range header when supported"
+  },
+  "base": {
+    "sha": "976ae594edcb68fb2d46d0ce096befa2c41d2973",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "2ef25221633f68fd67add73e757b73e0d9533e14",
+    "profile_id": "01a08d4e-d651-741b-9c0a-3666ff4ee271",
+    "run_id": "34534049128"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "glb-2a3c35-public-internal.githubapp[.]com (140.82.113.23) (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "glb-p4a577-public-internal.githubapp[.]com (20.75.202.224) (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 17,
+      "destinations": 8,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 3,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/34534049128?profile=01a08d4e-d651-741b-9c0a-3666ff4ee271",
+    "head_json": "https://app.garnet.ai/api/public/runs/34534049128?profile=01a08d4e-d651-741b-9c0a-3666ff4ee271",
+    "pr_comment": "https://github.com/garnet-labs/uv/pull/4#issuecomment-5625834635"
+  },
+  "recorded": {
+    "at": "2026-09-10 21:52:18 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "976ae594edcb68fb2d46d0ce096befa2c41d2973",
+    "head_sha": "2ef25221633f68fd67add73e757b73e0d9533e14",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 976ae59 → head 2ef2522 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "2ef25221633f68fd67add73e757b73e0d9533e14",
+    "current_head": "2ef25221633f68fd67add73e757b73e0d9533e14",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 2ef2522 across 1 job: workload outbound connections +0 −0, runner background +3 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 976ae59 and 2ef2522 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

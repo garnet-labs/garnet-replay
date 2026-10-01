@@ -1,0 +1,126 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 28,
+    "url": "https://github.com/garnet-labs/express/pull/28",
+    "title": "chore(deps): add axios 1.7.9"
+  },
+  "base": {
+    "sha": "2e1a441f8fb0f05679e3cb1d598195cfd5bb5488",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "393d6d29af51f200e402b16a61569bc70cd109bf",
+    "profile_id": "01a0f5c5-11e5-7058-b30e-c6666b3610b9",
+    "run_id": "36816262245"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 15,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36816262245?profile=01a0f5c5-11e5-7058-b30e-c6666b3610b9",
+    "head_json": "https://app.garnet.ai/api/public/runs/36816262245?profile=01a0f5c5-11e5-7058-b30e-c6666b3610b9",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/28#issuecomment-5924864376"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:42:07 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "2e1a441f8fb0f05679e3cb1d598195cfd5bb5488",
+    "head_sha": "393d6d29af51f200e402b16a61569bc70cd109bf",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 2e1a441 → head 393d6d2 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "393d6d29af51f200e402b16a61569bc70cd109bf",
+    "current_head": "393d6d29af51f200e402b16a61569bc70cd109bf",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 393d6d2 across 1 job: workload outbound connections +0 −0, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 2e1a441 and 393d6d2 (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}
