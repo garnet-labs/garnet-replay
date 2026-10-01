@@ -1,0 +1,1488 @@
+{
+  "slug": "continue",
+  "upstream": "continuedev/continue",
+  "fork": "garnet-labs/continue",
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13251,
+      "title": "[Snyk] Fix for 2 vulnerabilities",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T10:34:27Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/package-lock.json",
+        "docs/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13285,
+      "title": "[Snyk] Security upgrade adm-zip from 0.5.17 to 0.6.1",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T10:20:49Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "adm-zip",
+        "from": "0.5.17",
+        "to": "0.6.1"
+      },
+      "files": 1,
+      "paths": [
+        "binary/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13279,
+      "title": "[Snyk] Security upgrade adm-zip from 0.5.17 to 0.6.1",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T10:24:32Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "adm-zip",
+        "from": "0.5.17",
+        "to": "0.6.1"
+      },
+      "files": 1,
+      "paths": [
+        "binary/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13253,
+      "title": "[Snyk] Fix for 1 vulnerabilities",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T10:43:28Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "core/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13252,
+      "title": "[Snyk] Security upgrade sharp from 0.32.6 to 0.35.4",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T10:35:04Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "sharp",
+        "from": "0.32.6",
+        "to": "0.35.4"
+      },
+      "files": 1,
+      "paths": [
+        "core/vendor/modules/@xenova/transformers/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13238,
+      "title": "[Snyk] Security upgrade undici from 6.24.0 to 6.28.1",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T09:42:49Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "undici",
+        "from": "6.24.0",
+        "to": "6.28.1"
+      },
+      "files": 1,
+      "paths": [
+        "extensions/vscode/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13237,
+      "title": "[Snyk] Security upgrade undici from 7.27.2 to 7.29.1",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T09:31:44Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "undici",
+        "from": "7.27.2",
+        "to": "7.29.1"
+      },
+      "files": 1,
+      "paths": [
+        "binary/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13292,
+      "title": "Rebrand/ruckus",
+      "author": "jakesixtyoneeighty",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-18T01:52:43Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".gitignore",
+        ".vscode/extensions.json",
+        "README.md",
+        "core/autocomplete/templating/validation.ts",
+        "core/config/json/loadRcConfigs.ts",
+        "core/config/load.ts",
+        "core/config/loadLocalAssistants.ts",
+        "core/config/markdown/bundledSkills.vitest.ts",
+        "core/config/markdown/loadMarkdownSkills.ts",
+        "core/config/markdown/loadMarkdownSkills.vitest.ts",
+        "core/config/onboarding.ts",
+        "core/config/profile/doLoadConfig.ts",
+        "core/config/profile/doLoadConfig.vitest.ts",
+        "core/config/util.ts",
+        "core/config/yaml/loadYaml.ts",
+        "core/config/yaml/models.ts",
+        "core/core.ts",
+        "core/index.d.ts",
+        "core/indexing/continueignore.ts",
+        "core/indexing/docs/DocsService.ts",
+        "core/indexing/ignore.ts",
+        "core/indexing/walkDir.ts",
+        "core/llm/fetchModels.ts",
+        "core/llm/llms/VercelAIGateway.ts",
+        "core/llm/llms/VercelAIGateway.vitest.ts",
+        "core/llm/llms/index.ts",
+        "core/llm/toolSupport.ts",
+        "core/protocol/core.ts",
+        "core/tools/definitions/readSkill.ts",
+        "core/tools/implementations/readSkill.ts",
+        "core/util/constants.ts",
+        "core/util/paths.ts",
+        "docs/development/ruckuside-gateway-skills.md",
+        "examples/skills/code-review/SKILL.md",
+        "examples/skills/code-review/references/checklist.md",
+        "extensions/cli/src/env.ts",
+        "extensions/cli/src/session.ts",
+        "extensions/intellij/src/main/resources/META-INF/plugin.xml",
+        "extensions/vscode/.vscodeignore",
+        "extensions/vscode/config_schema.json",
+        "extensions/vscode/continue_tutorial.py",
+        "extensions/vscode/e2e/actions/GUI.actions.ts",
+        "extensions/vscode/package.json",
+        "extensions/vscode/scripts/esbuild.js",
+        "extensions/vscode/src/ContinueConsoleWebviewViewProvider.ts",
+        "extensions/vscode/src/ContinueGUIWebviewViewProvider.ts",
+        "extensions/vscode/src/VsCodeIde.ts",
+        "extensions/vscode/src/activation/InlineTipManager.ts",
+        "extensions/vscode/src/activation/JumpManager.ts",
+        "extensions/vscode/src/activation/JumpManager.vitest.ts",
+        "extensions/vscode/src/activation/NextEditWindowManager.ts",
+        "extensions/vscode/src/activation/activate.ts",
+        "extensions/vscode/src/autocomplete/RecentlyVisitedRangesService.ts",
+        "extensions/vscode/src/autocomplete/completionProvider.ts",
+        "extensions/vscode/src/autocomplete/statusBar.ts",
+        "extensions/vscode/src/commands.ts",
+        "extensions/vscode/src/diff/vertical/handler.ts",
+        "extensions/vscode/src/diff/vertical/manager.ts",
+        "extensions/vscode/src/extension.ts",
+        "extensions/vscode/src/extension/VsCodeExtension.ts",
+        "extensions/vscode/src/extension/VsCodeMessenger.ts",
+        "extensions/vscode/src/lang-server/codeLens/providers/ConfigJsonConverterCodeLensProvider.ts",
+        "extensions/vscode/src/lang-server/codeLens/providers/DownloadYamlExtensionCodeLensProvider.ts",
+        "extensions/vscode/src/lang-server/codeLens/providers/QuickActionsCodeLensProvider.ts",
+        "extensions/vscode/src/lang-server/codeLens/providers/SuggestionsCodeLensProvider.ts",
+        "extensions/vscode/src/lang-server/codeLens/providers/VerticalPerLineCodeLensProvider.ts",
+        "extensions/vscode/src/quickEdit/EditDecorationManager.ts",
+        "extensions/vscode/src/quickEdit/QuickEditQuickPick.ts",
+        "extensions/vscode/src/util/errorHandling.ts",
+        "extensions/vscode/src/util/ideUtils.ts",
+        "extensions/vscode/src/util/util.ts",
+        "extensions/vscode/src/util/vscode.ts",
+        "extensions/vscode/src/util/workspaceConfig.ts",
+        "extensions/vscode/src/webviewProtocol.ts",
+        "gui/src/components/OnboardingCard/OnboardingCard.tsx",
+        "gui/src/components/OnboardingCard/components/OnboardingCardLanding.tsx",
+        "gui/src/components/OnboardingCard/components/OnboardingProvidersTab.tsx",
+        "gui/src/components/dialogs/FeedbackDialog.tsx",
+        "gui/src/components/mainInput/GradientBorder.tsx",
+        "gui/src/components/mainInput/TipTapEditor/components/StyledComponents.ts",
+        "gui/src/components/svg/ContinueLogo.tsx",
+        "gui/src/components/svg/ContinueSignet.tsx",
+        "gui/src/components/svg/RuckusLogo.tsx",
+        "gui/src/components/svg/RuckusSignet.tsx",
+        "gui/src/components/ui/Button.tsx",
+        "gui/src/components/ui/Card.tsx",
+        "gui/src/forms/AddModelForm.test.tsx",
+        "gui/src/forms/AddModelForm.tsx",
+        "gui/src/index.css",
+        "gui/src/pages/AddNewModel/configs/fetchProviderModels.ts",
+        "gui/src/pages/AddNewModel/configs/providers.ts",
+        "gui/src/pages/config/features/indexing/IndexingProgress.tsx",
+        "gui/src/pages/config/features/keyboard/KeyboardShortcuts.tsx",
+        "gui/src/pages/config/sections/HelpSection.tsx",
+        "gui/src/pages/config/sections/UserSettingsSection.tsx",
+        "gui/src/pages/gui/ToolCallDiv/MCPAppRenderer.tsx",
+        "gui/src/pages/gui/ToolCallDiv/ToolCallStatusMessage.tsx",
+        "gui/src/styles/theme.ts",
+        "gui/tailwind.config.cjs",
+        "packages/openai-adapters/src/apis/VercelAIGateway.ts"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13229,
+      "title": "fix(ci): update FFmpeg 7.1 → 8.1 for jetbrains-tests",
+      "author": "thanhnnict",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-05T04:04:07Z",
+      "kind": "workflow",
+      "transition": {
+        "name": "FFmpeg",
+        "from": "7.1",
+        "to": "8.1"
+      },
+      "files": 1,
+      "paths": [
+        ".github/actions/run-jetbrains-tests/action.yml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "major",
+            "points": 2,
+            "reason": "major version transition"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13245,
+      "title": "[Snyk] Security upgrade nltk from 3.6.3 to 3.10.3",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T10:01:50Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nltk",
+        "from": "3.6.3",
+        "to": "3.10.3"
+      },
+      "files": 1,
+      "paths": [
+        "manual-testing-sandbox/requirements.txt"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13241,
+      "title": "[Snyk] Security upgrade nltk from 3.6.3 to 3.10.3",
+      "author": "sestinj",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T09:30:25Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nltk",
+        "from": "3.6.3",
+        "to": "3.10.3"
+      },
+      "files": 1,
+      "paths": [
+        "manual-testing-sandbox/requirements.txt"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13276,
+      "title": "fix(ollama): preserve tools across agent turns",
+      "author": "iwasatapex",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-14T04:55:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/actions/run-jetbrains-tests/action.yml",
+        "core/llm/llms/Ollama.test.ts",
+        "core/llm/llms/Ollama.ts"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13293,
+      "title": "feat: add Inference APIs as an LLM provider",
+      "author": "TaylorHawkes",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-18T02:49:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "core/llm/autodetect.ts",
+        "core/llm/llms/InferenceAPIs.ts",
+        "core/llm/llms/index.ts",
+        "docs/customize/model-providers/more/inferenceapis.mdx",
+        "docs/docs.json",
+        "extensions/vscode/config_schema.json",
+        "gui/src/pages/AddNewModel/configs/providers.ts",
+        "packages/openai-adapters/src/index.ts",
+        "packages/openai-adapters/src/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13287,
+      "title": "Put the response status and headers on the error the backoff reads",
+      "author": "unolife",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-17T07:47:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/llm/index.test.ts",
+        "core/llm/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13286,
+      "title": "feat: add Y-API as an OpenAI-compatible provider",
+      "author": "jiweiyeah",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T12:35:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "core/llm/llms/OpenAI-compatible.vitest.ts",
+        "core/llm/llms/YApi.ts",
+        "core/llm/llms/index.ts",
+        "core/llm/toolSupport.ts",
+        "docs/customize/model-providers/more/y-api.mdx",
+        "packages/openai-adapters/src/index.ts",
+        "packages/openai-adapters/src/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13284,
+      "title": "fix: reject on non-zero exit code regardless of stderr (Windows hang)",
+      "author": "avgon",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-16T09:14:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "extensions/cli/src/tools/runTerminalCommand.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13283,
+      "title": "docs: fix provider configuration examples",
+      "author": "Maurenz2530",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T16:53:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/customize/model-providers/more/deepseek.mdx",
+        "docs/customize/model-providers/more/groq.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13281,
+      "title": "docs: add Bourse model provider",
+      "author": "Maurenz2530",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-15T16:24:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/customize/model-providers/more/bourse.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13278,
+      "title": "fix: correlate id-less parallel tool-call fragments by stream index",
+      "author": "ege-arhan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-14T13:13:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "core/config/types.ts",
+        "core/index.d.ts",
+        "core/llm/openaiTypeConverters.test.ts",
+        "core/llm/openaiTypeConverters.ts",
+        "gui/src/redux/slices/sessionSlice.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13274,
+      "title": "fix(cli): prevent PowerShell command hangs and fix non-zero exit code rejection",
+      "author": "maoxin1234",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-14T01:51:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "core/tools/implementations/runTerminalCommand.ts",
+        "extensions/cli/src/tools/runTerminalCommand.test.ts",
+        "extensions/cli/src/tools/runTerminalCommand.ts",
+        "extensions/cli/vitest.setup.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13272,
+      "title": "fix(vscode): respect disabled automatic inline suggestions",
+      "author": "KayanoLiam",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T14:18:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/customize/deep-dives/autocomplete.mdx",
+        "extensions/vscode/src/autocomplete/__tests__/ContinueCompletionProvider.vitest.ts",
+        "extensions/vscode/src/autocomplete/completionProvider.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13271,
+      "title": "fix(vscode): cap and chunk file search initialization to prevent event loop starvation (#13249)",
+      "author": "maoxin1234",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T13:24:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "extensions/vscode/src/util/FileSearch.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13270,
+      "title": "fix(cli): support physical delete and home/end navigation (#13265)",
+      "author": "maoxin1234",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T13:22:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "extensions/cli/src/ui/TextBuffer.test.ts",
+        "extensions/cli/src/ui/TextBuffer.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13269,
+      "title": "fix(ollama): preserve tools across agent loop turns (#13254)",
+      "author": "maoxin1234",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-13T05:43:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/llm/llms/Ollama.test.ts",
+        "core/llm/llms/Ollama.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13264,
+      "title": "feat: add API Route as an LLM provider",
+      "author": "DennyHo0917",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-12T13:49:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "core/llm/autodetect.ts",
+        "core/llm/llms/ApiRoute.ts",
+        "core/llm/llms/index.ts",
+        "docs/customize/model-providers/more/apiroute.mdx",
+        "docs/docs.json",
+        "extensions/vscode/config_schema.json",
+        "gui/public/logos/apiroute.png",
+        "gui/src/pages/AddNewModel/configs/providers.ts",
+        "packages/openai-adapters/src/index.ts",
+        "packages/openai-adapters/src/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13258,
+      "title": "fix(ollama): preserve tools across agent loop turns",
+      "author": "dvd233",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-12T12:08:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/llm/llms/Ollama.test.ts",
+        "core/llm/llms/Ollama.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13257,
+      "title": "docs: fix 'overriden' typo in CLI permissions spec",
+      "author": "mrchatam",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T23:40:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "extensions/cli/spec/permissions.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13256,
+      "title": "docs: fix 'extention' typo in chat how-to guide",
+      "author": "mrchatam",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-11T23:32:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/chat/how-to-use-it.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13247,
+      "title": "fix(core): match nested and Windows paths in isSecurityConcern",
+      "author": "siddiqueirshad",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T14:36:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/indexing/ignore.ts",
+        "core/indexing/ignore.vitest.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13246,
+      "title": "docs: correct response spelling in Gemini comments",
+      "author": "noooooooookro",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T10:27:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/llm/llms/gemini-types.ts",
+        "packages/openai-adapters/src/util/gemini-types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13244,
+      "title": "fix(cli): bound repeated tool-call loops",
+      "author": "noooooooookro",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-08T06:32:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "extensions/cli/src/stream/handleToolCalls.test.ts",
+        "extensions/cli/src/stream/handleToolCalls.ts",
+        "extensions/cli/src/stream/streamChatResponse.autoContinuation.test.ts",
+        "extensions/cli/src/stream/streamChatResponse.ts",
+        "extensions/cli/src/stream/toolCallLoopGuard.test.ts",
+        "extensions/cli/src/stream/toolCallLoopGuard.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13243,
+      "title": "fix(vscode): execute runCommand so the terminal actually runs the command",
+      "author": "mydd7",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T17:07:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "extensions/vscode/src/VsCodeIde.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13240,
+      "title": "docs: add Standard Compute OpenAI-compatible setup",
+      "author": "henrikdukefoss",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-07T07:19:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/customize/model-providers/more/standardcompute.mdx",
+        "docs/docs.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13236,
+      "title": "fix(cli): keep id-less Ollama tool-call deltas instead of dropping them",
+      "author": "bunnysayzz",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T05:37:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "extensions/cli/src/stream/streamChatResponse.helpers.test.ts",
+        "extensions/cli/src/stream/streamChatResponse.helpers.ts",
+        "extensions/vscode/src/extension.ts",
+        "packages/terminal-security/src/evaluateTerminalCommandSecurity.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13235,
+      "title": "fix(cli): keep Ollama tool calls when stream deltas omit id",
+      "author": "seethinajayadileep",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T05:26:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "extensions/cli/src/stream/processToolCallDelta.test.ts",
+        "extensions/cli/src/stream/streamChatResponse.helpers.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13234,
+      "title": "fix(indexing): escape apostrophes in LanceDB SQL path predicates",
+      "author": "seethinajayadileep",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-06T05:26:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "core/indexing/LanceDbIndex.ts",
+        "core/indexing/escapeLanceSqlString.test.ts",
+        "core/indexing/escapeLanceSqlString.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13232,
+      "title": "fix: preserve Windows drive letter colons in URI path segments",
+      "author": "icn5381",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-05T16:16:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "core/util/uri.test.ts",
+        "core/util/uri.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13230,
+      "title": "Add AIgateway as LLM provider",
+      "author": "Rakesh1002",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-05T06:41:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "core/llm/autodetect.ts",
+        "core/llm/llms/AIgateway.ts",
+        "core/llm/llms/index.ts",
+        "docs/customize/model-providers/more/aigateway.mdx",
+        "docs/docs.json",
+        "extensions/vscode/config_schema.json",
+        "gui/src/pages/AddNewModel/configs/providers.ts",
+        "packages/openai-adapters/src/index.ts",
+        "packages/openai-adapters/src/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13228,
+      "title": "docs: add Pilot Protocol MCP guide",
+      "author": "TeoSlayer",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-04T21:31:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/guides/overview.mdx",
+        "docs/guides/pilot-protocol-mcp-agent-networking.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13275,
+      "title": "fix(ollama): preserve tools across agent turns",
+      "author": "iwasatapex",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-09-14T04:28:18Z",
+      "kind": "undeterminable",
+      "transition": null,
+      "files": 0,
+      "paths": [],
+      "gap": {
+        "total": 1,
+        "reasons": [
+          {
+            "id": "undeterminable-surface",
+            "points": 1,
+            "reason": "change surface undeterminable from metadata"
+          }
+        ]
+      },
+      "observedAt": "2026-09-18T16:45:45.375Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 13274,
+      "forkPr": 2,
+      "branch": "chore/update-a8q",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "5522c6f44ca0ac3528b37244818fbfa39b5af470",
+      "headSha": "8ba69327436cad1551712d6aae8b4dfdd4188c36",
+      "forkHeadSha": "f5ba72df880343ff76bca9883315a09f33070e88",
+      "firstSha": "841edb8fcf81f73224c599cdfb07248027ae9104",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "pending",
+      "openedAt": "2026-09-18T17:10:12.035Z"
+    },
+    {
+      "upstreamPr": 12850,
+      "forkPr": 5,
+      "branch": "deps/form-data-4.0.6",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "d0a3c0b626b5bebc3bef4742eec05a0242be0bab",
+      "headSha": "560d41331d0aa8d44fac25eb40b5b705385a18d9",
+      "forkHeadSha": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+      "firstSha": "d522cd12e3a7b75523cf910c0ad8f772f53b9fe6",
+      "transition": {
+        "name": "form-data",
+        "from": "4.0.4",
+        "to": "4.0.6"
+      },
+      "record": "instrument",
+      "ecosystem": "npm",
+      "state": "pending",
+      "openedAt": "2026-09-19T06:14:05.811Z"
+    }
+  ],
+  "evidence": [
+    {
+      "forkPr": 2,
+      "card": "out/continue/pr-2-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "f5ba72df880343ff76bca9883315a09f33070e88",
+      "previousSha": "841edb8fcf81f73224c599cdfb07248027ae9104",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-18T17:27:44.285Z"
+    },
+    {
+      "forkPr": 4,
+      "card": "out/continue/pr-4-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "3f8d4d9a47a4a2452dc6a870dae7caa1c3c7e187",
+      "previousSha": "f18d8fab9a65212ea34f53e96d078894548da0fb",
+      "scope": "previous-recorded-head-to-head",
+      "renderedAt": "2026-09-19T06:24:23.908Z"
+    },
+    {
+      "forkPr": 5,
+      "card": "out/continue/pr-5-card.md",
+      "verdict": "undeterminable",
+      "reason": "incomplete",
+      "headSha": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+      "previousSha": "d522cd12e3a7b75523cf910c0ad8f772f53b9fe6",
+      "scope": "immediate-parent-to-head",
+      "renderedAt": "2026-09-19T06:24:26.211Z"
+    }
+  ],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

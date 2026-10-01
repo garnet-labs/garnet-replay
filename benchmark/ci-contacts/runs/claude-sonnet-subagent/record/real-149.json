@@ -1,0 +1,13 @@
+{
+  "task": "real-149",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only bumps posthog-js and @posthog/core version pins in the lockfile with no new packages or scripts, and the only recorded destination change is a runner background hosted-compute host.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only bumps posthog-js and @posthog/core version pins in the lockfile with no new packages or scripts, and the only recorded destination change is a runner background hosted-compute host.",
+    "parse_error": null
+  },
+  "error": null
+}

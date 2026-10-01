@@ -1,0 +1,13 @@
+{
+  "task": "real-184",
+  "model": "claude-opus-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"Removing a stub types package should not add network behavior, and the record shows only runner background changes, but capture is not declared complete, so no-new-behavior cannot be supported from the record.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "Removing a stub types package should not add network behavior, and the record shows only runner background changes, but capture is not declared complete, so no-new-behavior cannot be supported from the record.",
+    "parse_error": null
+  },
+  "error": null
+}

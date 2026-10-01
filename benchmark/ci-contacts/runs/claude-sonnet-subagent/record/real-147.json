@@ -1,0 +1,13 @@
+{
+  "task": "real-147",
+  "model": "claude-sonnet-subagent",
+  "track": "record",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"no-new-behavior\", \"reason\": \"The diff only bumps posthog-js and @posthog/core version pins in the lockfile with no new packages or scripts, and the CI record shows no destination changes at all.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "no-new-behavior",
+    "reason": "The diff only bumps posthog-js and @posthog/core version pins in the lockfile with no new packages or scripts, and the CI record shows no destination changes at all.",
+    "parse_error": null
+  },
+  "error": null
+}

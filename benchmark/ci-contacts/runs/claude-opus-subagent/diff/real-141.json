@@ -1,0 +1,13 @@
+{
+  "task": "real-141",
+  "model": "claude-opus-subagent",
+  "track": "diff",
+  "reply": "{\"new_destinations\": [], \"verdict\": \"cannot-tell\", \"reason\": \"This PR bumps posthog-js, @posthog/core, @posthog/types and unlayer-types and reshuffles jest peer variants, presumably all from the same registry. The material does not show the new tarballs install scripts or what CI runs with them.\"}\n",
+  "answer": {
+    "new_destinations": [],
+    "verdict": "cannot-tell",
+    "reason": "This PR bumps posthog-js, @posthog/core, @posthog/types and unlayer-types and reshuffles jest peer variants, presumably all from the same registry. The material does not show the new tarballs install scripts or what CI runs with them.",
+    "parse_error": null
+  },
+  "error": null
+}

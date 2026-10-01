@@ -27,7 +27,7 @@ jobs:
 
       # OIDC exchange; pull requests from other repositories receive no token
       # and the action falls back to a local, best-effort record.
-      - uses: garnet-org/action@e546567a72e4fede11ec39d6e9f75b539adef22c # main 2026-09-04
+      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea # v2.3.0
 
       - name: Install dependencies (lifecycle scripts execute here)
         run: {{INSTALL_COMMAND}}
