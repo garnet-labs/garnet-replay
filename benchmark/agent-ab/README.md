@@ -18,6 +18,22 @@ Policy the agent applies (`POLICY` in `lib/agent-ab.mjs`): the install/build job
 must not contact destinations beyond the registry and runner infrastructure
 unless the description discloses them.
 
+## Cohorts
+
+`score.mjs --cohort` and `run.mjs --cohort` select one or more:
+
+- `baseline` (50): install-script, downloader, native and ordinary npm packages.
+- `ai-infra` (34): AI runtimes, agent CLIs, MCP, model SDKs and vector stores
+  (`onnxruntime-node`, `@anthropic-ai/claude-code`, `@openai/codex`,
+  `@modelcontextprotocol/sdk`, `ai`, `langchain`, ...), each pinned to a version
+  published at least a week before recording. Same constructed app.
+- `prospect` (18, `prospect-tasks.json` via `build-prospects.mjs`): real upstream
+  pull requests already replayed on prospect forks (Cline, Codex, Continue,
+  DeepSec, Dub, Open-SWE, openai-node, OpenCode, OpenHands, pnpm, PostHog,
+  Sentry JavaScript, MCP servers, uv, Vite). Real repository context, no
+  repository tree tool, multi-ecosystem; the npm-registry policy wording makes
+  this cohort exploratory, reported separately, never pooled into the headline.
+
 ## Answer key
 
 From the finalized record only (`answerKey` in `lib/ci-contacts.mjs`, then
@@ -85,6 +101,11 @@ the install/import job succeeds, and none of the violating hosts appear.
 6. Repairs for the best-performing treatment arm, then `score.mjs --split heldout`.
 
 Cost is model tokens only; npm metadata and tarballs are cached per process.
+`run.mjs` prices every episode from the gateway's published per-token rates,
+sums recorded spend under `runs/`, checks `/v1/credits` before each episode, and
+stops at `--budget-usd` (default 300) or `--credit-floor-usd` (default 2). A
+model without published pricing, or a response without usage, stops the run:
+unmetered spend is never assumed free.
 
 ## Limits to state with any result
 

@@ -13,6 +13,7 @@ test("taskId and split are deterministic", () => {
   const tasks = corpusTasks({ packages: [["lodash", "4.17.21", "none"], ["@sentry/cli", "2.39.1", "download"]] })
   assert.deepEqual(tasks.map((t) => t.id), ["npm-lodash", "npm-sentry-cli"])
   assert.ok(tasks.every((t) => t.split === "dev" || t.split === "heldout"))
+  assert.deepEqual(corpusTasks({ packages: [["ai", "7.0.111", "none", "ai-infra"], ["lodash", "4.17.21", "none"]] }).map((t) => t.cohort), ["ai-infra", "baseline"])
 })
 
 test("arms differ only in how the record reaches the agent", () => {

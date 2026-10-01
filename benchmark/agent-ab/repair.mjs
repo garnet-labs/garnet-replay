@@ -13,6 +13,7 @@ import { parseArgs } from "node:util"
 
 import { ARMS, repairChange, repairVerified, truthFor } from "../../lib/agent-ab.mjs"
 import { normalizeDestination } from "../../lib/ci-contacts.mjs"
+import { forkEnv } from "./fork-env.mjs"
 
 const { values: args } = parseArgs({ options: {
   model: { type: "string" },
@@ -23,6 +24,7 @@ if (typeof args.model !== "string") throw new Error("--model is required")
 const fork = "garnet-labs/express"
 const slug = args.model.replace("/", "__")
 const short = args.model.split("/").at(-1).replace(/[^a-z0-9]+/gi, "-")
+const env = forkEnv("garnet-labs/express")
 const tasks = new Map(JSON.parse(readFileSync("benchmark/agent-ab/tasks.json", "utf8")).map((t) => [t.id, t]))
 const outDir = "benchmark/agent-ab/prepared-repairs"
 mkdirSync(outDir, { recursive: true })
@@ -77,7 +79,7 @@ for (const arm of ARMS) {
     const match = /fork pull request (\d+) on garnet-labs\/express/.exec(log)
     if (match === null) { results.push({ model: args.model, arm, task: task.id, submitted: true, verified: null, reason: "not recorded" }); continue }
     const url = `https://github.com/${fork}/pull/${match[1]}`
-    try { execFileSync("node", ["bin/replay.mjs", "known", url], { stdio: "ignore" }) } catch {
+    try { execFileSync("node", ["bin/replay.mjs", "known", url], { env, stdio: "ignore" }) } catch {
       results.push({ model: args.model, arm, task: task.id, submitted: true, pr: url, verified: null, reason: "no finalized record" })
       continue
     }

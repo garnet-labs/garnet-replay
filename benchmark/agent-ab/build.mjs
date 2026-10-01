@@ -13,11 +13,13 @@ import { parseArgs } from "node:util"
 import { corpusTasks } from "../../lib/agent-ab.mjs"
 import { buildTask } from "../../lib/ci-contacts.mjs"
 import { isGarnetComment, parseReceipt } from "../../lib/receipt.mjs"
+import { forkEnv } from "./fork-env.mjs"
 
 const { values: args } = parseArgs({ options: { logs: { type: "string", default: join(homedir(), "abrun", "logs") } } })
 const corpus = JSON.parse(readFileSync("benchmark/agent-ab/corpus.json", "utf8"))
 const fork = "garnet-labs/express"
-const gh = (...a) => String(execFileSync("gh", a, { maxBuffer: 64 * 1024 * 1024 }))
+const env = forkEnv(fork)
+const gh = (...a) => String(execFileSync("gh", a, { env, maxBuffer: 64 * 1024 * 1024 }))
 
 const tasks = []
 const skipped = []
@@ -29,7 +31,7 @@ for (const t of corpusTasks(corpus)) {
   const url = `https://github.com/${fork}/pull/${number}`
   const replayPath = `public/replays/github/${fork}/${number}.json`
   try {
-    execFileSync("node", ["bin/replay.mjs", "known", url], { stdio: "ignore" })
+    execFileSync("node", ["bin/replay.mjs", "known", url], { env, stdio: "ignore" })
   } catch {
     skipped.push(`${t.id}: no finalized record on ${url}`)
     continue
@@ -46,7 +48,7 @@ for (const t of corpusTasks(corpus)) {
     id: t.id, label: "real", title: pr.title, body: pr.body.replace(/\n*<!--[\s\S]*?-->\s*$/g, "").trim(), diff, replay,
     source_note: `real npm package ${t.name}@${t.version} added to a minimal app; recorded pair on ${url}`,
   })
-  tasks.push({ ...task, split: t.split, hypothesis: t.hypothesis, package: { name: t.name, version: t.version }, pr: url, tree: { ...spec.baseline, ...spec.change },
+  tasks.push({ ...task, split: t.split, cohort: t.cohort, hypothesis: t.hypothesis, package: { name: t.name, version: t.version }, pr: url, tree: { ...spec.baseline, ...spec.change },
     head_sha: pr.head.sha, garnet_comment: comment,
     receipt: parsed === null ? null : { permalink: parsed.permalink, runId: parsed.runId, profileId: parsed.profileId } })
 }

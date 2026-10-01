@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Score benchmark/agent-ab/runs against the recorded answer keys; every arm is
 // compared with control on the tasks both ran.
-//   node benchmark/agent-ab/score.mjs [--split dev|heldout|ci-contacts|all] [--repairs benchmark/agent-ab/repairs.json] [--admit-undeclared]
+//   node benchmark/agent-ab/score.mjs [--split dev|heldout|ci-contacts|all] [--cohort baseline,ai-infra,prospect] [--repairs benchmark/agent-ab/repairs.json] [--admit-undeclared]
 // Without --admit-undeclared an accept key needs declared complete capture, as in
 // the CI Contacts answer key; with it, observed-clean records count as accepts.
 import { existsSync, readdirSync, readFileSync } from "node:fs"
@@ -14,16 +14,19 @@ import { classifyUtterance } from "../../lib/consume.mjs"
 
 const { values: args } = parseArgs({ options: {
   split: { type: "string", default: "all" },
+  cohort: { type: "string" },
   repairs: { type: "string", default: "benchmark/agent-ab/repairs.json" },
   "admit-undeclared": { type: "boolean", default: false },
 } })
 const truthOf = (task) => {
-  const truth = truthOf(task)
+  const truth = truthFor(task.key, task.body)
   return truth.decision === "accept" && task.key.capture !== "complete" && !args["admit-undeclared"] ? { ...truth, decision: "undeterminable" } : truth
 }
-const tasks = ["benchmark/agent-ab/tasks.json", "benchmark/ci-contacts/tasks.json"].filter(existsSync)
-  .flatMap((f) => JSON.parse(readFileSync(f, "utf8")).map((t) => ({ ...t, split: t.split ?? "ci-contacts" })))
+const cohorts = args.cohort === undefined ? null : new Set(args.cohort.split(","))
+const tasks = ["benchmark/agent-ab/tasks.json", "benchmark/agent-ab/prospect-tasks.json", "benchmark/ci-contacts/tasks.json"].filter(existsSync)
+  .flatMap((f) => JSON.parse(readFileSync(f, "utf8")).map((t) => ({ ...t, split: t.split ?? "ci-contacts", cohort: t.cohort ?? "baseline" })))
   .filter((t) => args.split === "all" || t.split === args.split)
+  .filter((t) => cohorts === null || cohorts.has(t.cohort))
 const byId = new Map(tasks.map((t) => [t.id, t]))
 const repairs = existsSync(args.repairs) ? JSON.parse(readFileSync(args.repairs, "utf8")) : []
 const root = "benchmark/agent-ab/runs"
