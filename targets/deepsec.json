@@ -50,7 +50,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -100,7 +100,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -145,7 +145,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -186,7 +186,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -227,7 +227,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -269,7 +269,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -277,7 +277,7 @@
       "title": "fix(deps): bump tar to patch CVE-2026-73566",
       "author": "aeonframework",
       "bot": false,
-      "state": "OPEN",
+      "state": "CLOSED",
       "createdAt": "2026-08-22T15:41:26Z",
       "kind": "dependency",
       "transition": null,
@@ -305,7 +305,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -351,7 +351,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -402,7 +402,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -440,7 +440,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -471,7 +471,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -502,7 +502,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -534,7 +534,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -560,7 +560,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -568,7 +568,7 @@
       "title": "Report max turns exhaustion for Claude setup task",
       "author": "penberg",
       "bot": false,
-      "state": "OPEN",
+      "state": "CLOSED",
       "createdAt": "2026-08-25T09:12:04Z",
       "kind": "code",
       "transition": null,
@@ -586,7 +586,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -614,7 +614,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -643,7 +643,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -674,7 +674,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -709,7 +709,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -737,7 +737,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -765,7 +765,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -775,40 +775,68 @@
       "bot": false,
       "state": "OPEN",
       "createdAt": "2026-08-12T06:06:52Z",
-      "kind": "code",
+      "kind": "install-surface",
       "transition": null,
-      "files": 18,
+      "files": 26,
       "paths": [
         "docs/models.md",
+        "packages/deepsec/package.json",
         "packages/deepsec/src/__tests__/agent-defaults.test.ts",
+        "packages/deepsec/src/__tests__/ensure-connected-workspace.test.ts",
         "packages/deepsec/src/__tests__/model-picker.test.ts",
         "packages/deepsec/src/__tests__/model-route.test.ts",
+        "packages/deepsec/src/__tests__/preflight.test.ts",
         "packages/deepsec/src/agent-defaults.ts",
         "packages/deepsec/src/auth/ensure-connected-workspace.ts",
         "packages/deepsec/src/auth/model-picker.ts",
         "packages/deepsec/src/auth/model-route.ts",
         "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/sandbox-all.ts",
         "packages/deepsec/src/commands/sandbox-process.ts",
         "packages/deepsec/src/preflight.ts",
         "packages/deepsec/src/resolve-agent-type.ts",
         "packages/deepsec/src/setup/options.ts",
+        "packages/processor/package.json",
         "packages/processor/src/__tests__/grok-build.test.ts",
+        "packages/processor/src/__tests__/pi-sdk-tools.test.ts",
         "packages/processor/src/__tests__/registry.test.ts",
         "packages/processor/src/agents/grok-build.ts",
+        "packages/processor/src/agents/pi-sdk.ts",
         "packages/processor/src/index.ts",
-        "packages/processor/src/setup-agent.ts"
+        "packages/processor/src/setup-agent.ts",
+        "pnpm-lock.yaml"
       ],
       "gap": {
-        "total": 3,
+        "total": 10,
         "reasons": [
           {
             "id": "no-record",
             "points": 3,
             "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -834,7 +862,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -861,7 +889,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -889,7 +917,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -916,7 +944,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -946,7 +974,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -974,7 +1002,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -1006,7 +1034,7 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
     },
     {
       "evidence_class": "candidate-evidence",
@@ -1032,13 +1060,487 @@
           }
         ]
       },
-      "observedAt": "2026-09-10T20:09:36.035Z"
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 178,
+      "title": "Upgrade codex and claude to latest",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-23T12:56:16Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/deepsec/package.json",
+        "packages/processor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 139,
+      "title": "Ship one-shot Deepsec initialization",
+      "author": "cramforce",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-04T20:51:25Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "CONTRIBUTING.md",
+        "README.md",
+        "docs/architecture.md",
+        "docs/configuration.md",
+        "docs/data-layout.md",
+        "docs/faq.md",
+        "docs/getting-started.md",
+        "docs/models.md",
+        "docs/plugins.md",
+        "docs/vercel-setup.md",
+        "docs/writing-matchers.md",
+        "e2e/bundle.test.ts",
+        "e2e/pipeline-sandbox.test.ts",
+        "e2e/pipeline.test.ts",
+        "knip.json",
+        "packages/core/src/__tests__/run.test.ts",
+        "packages/core/src/config.ts",
+        "packages/core/src/run.ts",
+        "packages/deepsec/SKILL.md",
+        "packages/deepsec/build.mjs",
+        "packages/deepsec/package.json",
+        "packages/deepsec/src/__tests__/agent-config.test.ts",
+        "packages/deepsec/src/__tests__/agent-defaults.test.ts",
+        "packages/deepsec/src/__tests__/credential-brokering.test.ts",
+        "packages/deepsec/src/__tests__/ensure-connected-workspace.test.ts",
+        "packages/deepsec/src/__tests__/env-file.test.ts",
+        "packages/deepsec/src/__tests__/model-picker.test.ts",
+        "packages/deepsec/src/__tests__/model-route.test.ts",
+        "packages/deepsec/src/__tests__/network-policy.test.ts",
+        "packages/deepsec/src/__tests__/preflight.test.ts",
+        "packages/deepsec/src/__tests__/setup-coordinator.test.ts",
+        "packages/deepsec/src/__tests__/setup-coverage.test.ts",
+        "packages/deepsec/src/__tests__/setup-fingerprint.test.ts",
+        "packages/deepsec/src/__tests__/setup-generated-matchers.test.ts",
+        "packages/deepsec/src/__tests__/setup-install.test.ts",
+        "packages/deepsec/src/__tests__/setup-interaction.test.ts",
+        "packages/deepsec/src/__tests__/setup-lock.test.ts",
+        "packages/deepsec/src/__tests__/setup-options.test.ts",
+        "packages/deepsec/src/__tests__/setup-output.test.ts",
+        "packages/deepsec/src/__tests__/setup-plan.test.ts",
+        "packages/deepsec/src/__tests__/setup-project-name.test.ts",
+        "packages/deepsec/src/__tests__/setup-protocol.test.ts",
+        "packages/deepsec/src/__tests__/setup-reporter.test.ts",
+        "packages/deepsec/src/__tests__/setup-repository-analysis.test.ts",
+        "packages/deepsec/src/__tests__/setup-state.test.ts",
+        "packages/deepsec/src/__tests__/setup-tui.test.ts",
+        "packages/deepsec/src/__tests__/setup-workspace-config.test.ts",
+        "packages/deepsec/src/__tests__/vercel-link.test.ts",
+        "packages/deepsec/src/agent-config.ts",
+        "packages/deepsec/src/agent-defaults.ts",
+        "packages/deepsec/src/atomic-file.ts",
+        "packages/deepsec/src/auth/ensure-connected-workspace.ts",
+        "packages/deepsec/src/auth/model-picker.ts",
+        "packages/deepsec/src/auth/model-route-prompt.ts",
+        "packages/deepsec/src/auth/model-route.ts",
+        "packages/deepsec/src/auth/vercel-link.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/init-project.ts",
+        "packages/deepsec/src/commands/init.ts",
+        "packages/deepsec/src/commands/process.ts",
+        "packages/deepsec/src/commands/revalidate.ts",
+        "packages/deepsec/src/commands/sandbox-all.ts",
+        "packages/deepsec/src/commands/sandbox-process.ts",
+        "packages/deepsec/src/commands/setup.ts",
+        "packages/deepsec/src/commands/triage.ts",
+        "packages/deepsec/src/config.ts",
+        "packages/deepsec/src/env-file.ts",
+        "packages/deepsec/src/preflight.ts",
+        "packages/deepsec/src/sandbox/orchestrator.ts",
+        "packages/deepsec/src/sandbox/setup.ts",
+        "packages/deepsec/src/sandbox/types.ts",
+        "packages/deepsec/src/setup/coordinator.ts",
+        "packages/deepsec/src/setup/coverage.ts",
+        "packages/deepsec/src/setup/fingerprint.ts",
+        "packages/deepsec/src/setup/generated-matchers.ts",
+        "packages/deepsec/src/setup/install.ts",
+        "packages/deepsec/src/setup/interaction.ts",
+        "packages/deepsec/src/setup/lock.ts",
+        "packages/deepsec/src/setup/options.ts",
+        "packages/deepsec/src/setup/output.ts",
+        "packages/deepsec/src/setup/plan.ts",
+        "packages/deepsec/src/setup/project-name.ts",
+        "packages/deepsec/src/setup/protocol.ts",
+        "packages/deepsec/src/setup/reporter.ts",
+        "packages/deepsec/src/setup/repository-analysis.ts",
+        "packages/deepsec/src/setup/state.ts",
+        "packages/deepsec/src/setup/status.ts",
+        "packages/deepsec/src/setup/tui.tsx",
+        "packages/deepsec/src/setup/workspace-config.ts",
+        "packages/deepsec/src/version.ts",
+        "packages/deepsec/tsconfig.json",
+        "packages/processor/src/__tests__/attribution.test.ts",
+        "packages/processor/src/__tests__/codex-setup.test.ts",
+        "packages/processor/src/__tests__/pi-sdk-tools.test.ts",
+        "packages/processor/src/__tests__/process-revalidate.test.ts",
+        "packages/processor/src/__tests__/shared.test.ts",
+        "packages/processor/src/agents/claude-agent-sdk.ts",
+        "packages/processor/src/agents/codex-sdk.ts",
+        "packages/processor/src/agents/pi-sdk.ts",
+        "packages/processor/src/agents/shared.ts"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 177,
+      "title": "feat(scanner): add py-litestar-route matcher",
+      "author": "PerryLink",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-21T13:56:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "packages/processor/src/prompt/highlights.ts",
+        "packages/processor/src/prompt/slug-notes.ts",
+        "packages/scanner/src/__tests__/detect-tech.test.ts",
+        "packages/scanner/src/__tests__/framework-matchers.test.ts",
+        "packages/scanner/src/detect-tech.ts",
+        "packages/scanner/src/index.ts",
+        "packages/scanner/src/matchers/index.ts",
+        "packages/scanner/src/matchers/py-litestar-route.ts",
+        "prompt-samples/07-overflow-fallback.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 176,
+      "title": "Fix typo in README",
+      "author": "Londopy",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-09-20T08:35:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 175,
+      "title": "Add Labs status badges to README",
+      "author": "Railly",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-16T17:38:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 138,
+      "title": "Add Atlas Cloud provider preset",
+      "author": "binyangzhu000-sudo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-04T06:36:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".env.example",
+        "docs/models.md",
+        "packages/deepsec/src/__tests__/agent-config.test.ts",
+        "packages/deepsec/src/__tests__/agent-defaults.test.ts",
+        "packages/deepsec/src/agent-config.ts",
+        "packages/deepsec/src/agent-defaults.ts",
+        "packages/deepsec/src/atlas-provider.ts",
+        "packages/deepsec/src/cli.ts",
+        "packages/deepsec/src/commands/process.ts",
+        "packages/deepsec/src/commands/revalidate.ts",
+        "packages/deepsec/src/commands/sandbox-all.ts",
+        "packages/deepsec/src/commands/sandbox-process.ts",
+        "packages/processor/src/__tests__/pi-sdk-tools.test.ts",
+        "packages/processor/src/agents/pi-sdk.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 137,
+      "title": "Classify provider policy refusals instead of parsing them as findings JSON",
+      "author": "ValentinTorassa",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-03T20:28:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "packages/processor/src/__tests__/shared.test.ts",
+        "packages/processor/src/agents/claude-agent-sdk.ts",
+        "packages/processor/src/agents/codex-sdk.ts",
+        "packages/processor/src/agents/pi-sdk.ts",
+        "packages/processor/src/agents/shared.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 136,
+      "title": "Round fractional token counts in metrics output",
+      "author": "med8bra",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-08-01T16:34:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/deepsec/src/__tests__/metrics.test.ts",
+        "packages/deepsec/src/commands/metrics.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 134,
+      "title": "Add first-class Kimi K3 support through Fireworks",
+      "author": "WadeWarren",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-07-29T19:32:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "README.md",
+        "docs/configuration.md",
+        "docs/models.md",
+        "docs/vercel-setup.md",
+        "packages/deepsec/src/__tests__/agent-config.test.ts",
+        "packages/deepsec/src/__tests__/credential-brokering.test.ts",
+        "packages/deepsec/src/__tests__/network-policy.test.ts",
+        "packages/deepsec/src/__tests__/preflight.test.ts",
+        "packages/deepsec/src/agent-config.ts",
+        "packages/deepsec/src/commands/process.ts",
+        "packages/deepsec/src/commands/revalidate.ts",
+        "packages/deepsec/src/commands/sandbox-all.ts",
+        "packages/deepsec/src/commands/sandbox-process.ts",
+        "packages/processor/src/__tests__/pi-sdk-tools.test.ts",
+        "packages/processor/src/agents/pi-sdk.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 133,
+      "title": "feat(pi): add built-in MiniMax provider presets",
+      "author": "octo-patch",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-07-29T12:35:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "docs/configuration.md",
+        "docs/models.md",
+        "packages/processor/src/__tests__/pi-sdk-tools.test.ts",
+        "packages/processor/src/agents/pi-sdk.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-09-24T05:02:43.004Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": 178,
+      "forkPr": 11,
+      "branch": "chore/manifests-4y",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "42ed66efd3fc039767312e1b3aa66db6e173c850",
+      "headSha": "5e35942d0be941bdb09d06125a560a538fb2cdb4",
+      "forkHeadSha": "44210fc391ada675ed314e809c93212ef7c86a2f",
+      "firstSha": "eb9c3d309d9c27c2f4e773d6ff27c13c26f8bb37",
+      "transition": null,
+      "record": "fork-workflow",
+      "ecosystem": "pnpm",
+      "state": "undeterminable",
+      "openedAt": "2026-09-24T05:12:59.408Z"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
-  "consumption": [],
+  "consumption": [
+    {
+      "forkPr": 11,
+      "headSha": "44210fc391ada675ed314e809c93212ef7c86a2f",
+      "consumed": false,
+      "consumers": [],
+      "mirror": false,
+      "recordBound": true,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "raw": "out/deepsec/pr-11-consume.json",
+      "checkedAt": "2026-09-24T05:58:03.904Z"
+    }
+  ],
   "stage2": {
     "state": "unstarted"
   },
