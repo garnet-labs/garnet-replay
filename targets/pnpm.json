@@ -3452,6 +3452,22 @@
   ],
   "replays": [
     {
+      "upstreamPr": 15289,
+      "forkPr": 70,
+      "branch": "chore/network-proxy-cap-b",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "3bab6e6e841ed7a9b8ebc591a4006a9c948d042f",
+      "headSha": "bb7e324cdb55d0d7e6d9c6052a5818b9ee50d52f",
+      "forkHeadSha": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+      "firstSha": "92ba9a0d0a36bfe8aae38e4fe327c9737205b327",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "undeterminable",
+      "openedAt": "2026-09-24T05:11:25.000Z"
+    },
+    {
       "upstreamPr": 15278,
       "forkPr": 71,
       "branch": "chore/ci-ignore-scripts-b",
@@ -3499,7 +3515,7 @@
             "head ae2920f",
             "reports no evidence"
           ],
-          "excerpt": "🔍 **No runtime evidence for this head**"
+          "excerpt": "\ud83d\udd0d **No runtime evidence for this head**"
         },
         {
           "kind": "review-comment",
@@ -3587,7 +3603,7 @@
           "matched": [
             "head 8016b6c (not the current head)"
           ],
-          "excerpt": "Runtime evidence (Garnet, head 8016b6c): `Runner.Worker` → `bash` → `node` reached `registry.npmjs.org` in Garnet Execution Diff/execution-diff (https://app.garnet.ai/public/runs/35753947252?profile=01a0c9ef-af8b-70e0-8883-d12baf267b07)...."
+          "excerpt": "Runtime evidence (Garnet, head 8016b6c): `Runner.Worker` \u2192 `bash` \u2192 `node` reached `registry.npmjs.org` in Garnet Execution Diff/execution-diff (https://app.garnet.ai/public/runs/35753947252?profile=01a0c9ef-af8b-70e0-8883-d12baf267b07)...."
         },
         {
           "kind": "comment",
@@ -3613,7 +3629,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">• Replaces the v2.2.0 Garnet action SHA with the v2.3.0 candidate. The existing API token input remains unchanged."
+          "excerpt": ">\u2022 Replaces the v2.2.0 Garnet action SHA with the v2.3.0 candidate. The existing API token input remains unchanged."
         }
       ],
       "raw": "out/pnpm/pr-65-consume.json",
@@ -3682,7 +3698,7 @@
           "matched": [
             "head d0511cd"
           ],
-          "excerpt": "Runtime evidence (Garnet, head d0511cd): `Runner.Worker → bash → curl` reached registry.npmjs.org in Garnet Jibril Release Gate/reproduce with `&quot;` quoting. Profile: https://app.garnet.ai/public/runs/34658254423?profile=01a092ce-af60..."
+          "excerpt": "Runtime evidence (Garnet, head d0511cd): `Runner.Worker \u2192 bash \u2192 curl` reached registry.npmjs.org in Garnet Jibril Release Gate/reproduce with `&quot;` quoting. Profile: https://app.garnet.ai/public/runs/34658254423?profile=01a092ce-af60..."
         }
       ],
       "raw": "out/pnpm/pr-62-consume.json",
@@ -3730,7 +3746,7 @@
           "matched": [
             "head e9bbfe9"
           ],
-          "excerpt": "Runtime evidence (Garnet, head e9bbfe9): `Runner.Worker → bash → curl` reached `registry.npmjs[.]org` in `Garnet Jibril Release Gate/reproduce`. Profile: https://app.garnet.ai/public/runs/34659392702?profile=01a092df-8a4d-77ae-8efe-0b365..."
+          "excerpt": "Runtime evidence (Garnet, head e9bbfe9): `Runner.Worker \u2192 bash \u2192 curl` reached `registry.npmjs[.]org` in `Garnet Jibril Release Gate/reproduce`. Profile: https://app.garnet.ai/public/runs/34659392702?profile=01a092df-8a4d-77ae-8efe-0b365..."
         },
         {
           "kind": "review-comment",
@@ -3948,7 +3964,7 @@
             "head 89ead80",
             "reports no evidence"
           ],
-          "excerpt": "🔍 **Runtime evidence predates the version bump**"
+          "excerpt": "\ud83d\udd0d **Runtime evidence predates the version bump**"
         },
         {
           "kind": "review-comment",
@@ -3994,7 +4010,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">• Adds a pull-request workflow that installs the pinned released binary, copies and hashes the frozen fixture, and configures 1.1.1.1 as the sole nameserver. Garnet records the install while postconditions verify React installation and ..."
+          "excerpt": ">\u2022 Adds a pull-request workflow that installs the pinned released binary, copies and hashes the frozen fixture, and configures 1.1.1.1 as the sole nameserver. Garnet records the install while postconditions verify React installation and ..."
         }
       ],
       "raw": "out/pnpm/pr-53-consume.json",
@@ -4045,7 +4061,7 @@
             "head f77d004",
             "reports no evidence"
           ],
-          "excerpt": "🔍 **No head-bound runtime evidence**"
+          "excerpt": "\ud83d\udd0d **No head-bound runtime evidence**"
         },
         {
           "kind": "comment",
@@ -4153,7 +4169,7 @@
             "head d40afff",
             "reports no evidence"
           ],
-          "excerpt": "🔍 **No runtime evidence for this head**"
+          "excerpt": "\ud83d\udd0d **No runtime evidence for this head**"
         },
         {
           "kind": "review-comment",
@@ -4192,7 +4208,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "**Disposition: disclosed** — Correct, and expected on this PR: it changes the gate that produces runtime evidence, and nothing under `pnpm/` or `pnpr/` runs in the instrumented cell, so there is no head-bound profile to ground a review o..."
+          "excerpt": "**Disposition: disclosed** \u2014 Correct, and expected on this PR: it changes the gate that produces runtime evidence, and nothing under `pnpm/` or `pnpr/` runs in the instrumented cell, so there is no head-bound profile to ground a review o..."
         },
         {
           "kind": "review-comment",
@@ -4205,7 +4221,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "**Disposition: fixed** — Fixed exactly as suggested: an unmeasurable flush fails L9 and names why (no `Post Garnet runtime monitoring` step in the reproduce job timeline). Ledger F30."
+          "excerpt": "**Disposition: fixed** \u2014 Fixed exactly as suggested: an unmeasurable flush fails L9 and names why (no `Post Garnet runtime monitoring` step in the reproduce job timeline). Ledger F30."
         },
         {
           "kind": "comment",
@@ -4375,7 +4391,7 @@
           "matched": [
             "head a4abb18"
           ],
-          "excerpt": "Runtime evidence (Garnet, head a4abb18): `Runner.Worker → bash → node` reached `registry.npmjs.org` under “Start the clock” in [Garnet Jibril Release Gate/reproduce](https://app.garnet.ai/public/runs/34311733947?profile=01a08476-307d-745..."
+          "excerpt": "Runtime evidence (Garnet, head a4abb18): `Runner.Worker \u2192 bash \u2192 node` reached `registry.npmjs.org` under \u201cStart the clock\u201d in [Garnet Jibril Release Gate/reproduce](https://app.garnet.ai/public/runs/34311733947?profile=01a08476-307d-745..."
         },
         {
           "kind": "comment",
@@ -4388,7 +4404,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">• Validates sensor startup, profile identity, workload attribution, Runtime Review finalization, public permalinks, pnpm integration shape and execution, reviewer findings, timing, and matrix coverage. Produces the authoritative verdict..."
+          "excerpt": ">\u2022 Validates sensor startup, profile identity, workload attribution, Runtime Review finalization, public permalinks, pnpm integration shape and execution, reviewer findings, timing, and matrix coverage. Produces the authoritative verdict..."
         }
       ],
       "raw": "out/pnpm/pr-43-consume.json",
@@ -4637,7 +4653,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">• Adds a path-scoped, three-cell workflow that configures dnsmasq as the sole resolver with &#x27;no_tld_query&#x27;, then performs 25 isolated pnpm installs. Garnet records process flows while tcpdump and dnsmasq logs are summarized an..."
+          "excerpt": ">\u2022 Adds a path-scoped, three-cell workflow that configures dnsmasq as the sole resolver with &#x27;no_tld_query&#x27;, then performs 25 isolated pnpm installs. Garnet records process flows while tcpdump and dnsmasq logs are summarized an..."
         }
       ],
       "raw": "out/pnpm/pr-39-consume.json",
@@ -4670,7 +4686,7 @@
           "matched": [
             "head edf91cb (not the current head)"
           ],
-          "excerpt": "Runtime evidence (Garnet, head edf91cb): `Runner.Worker → bash → pnpm` stopped reaching `8.8.4.4` in Garnet DNS egress/install. [Execution Profile](https://app.garnet.ai/public/runs/33933449875?profile=01a06efe-0352-7fe2-8b67-c59175a1ddc1)"
+          "excerpt": "Runtime evidence (Garnet, head edf91cb): `Runner.Worker \u2192 bash \u2192 pnpm` stopped reaching `8.8.4.4` in Garnet DNS egress/install. [Execution Profile](https://app.garnet.ai/public/runs/33933449875?profile=01a06efe-0352-7fe2-8b67-c59175a1ddc1)"
         },
         {
           "kind": "comment",
@@ -4815,7 +4831,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "- ➕ Ensures the first review has runtime evidence."
+          "excerpt": "- \u2795 Ensures the first review has runtime evidence."
         },
         {
           "kind": "comment",
@@ -4986,7 +5002,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "| Runtime Review state | \"Execution Profiles … still being recorded\" | same | same |"
+          "excerpt": "| Runtime Review state | \"Execution Profiles \u2026 still being recorded\" | same | same |"
         }
       ],
       "raw": "out/pnpm/pr-32-consume.json",
@@ -5060,7 +5076,7 @@
           "matched": [
             "head 3c6b5e1"
           ],
-          "excerpt": "Runtime evidence (Garnet, head 3c6b5e1): `Runner.Worker › bash › node → registry.npmjs.org` appears in `Garnet Execution Diff/execution-diff` ([profile](https://app.garnet.ai/public/runs/33564858169?profile=01a05f05-d336-73c0-ae5a-d069d8..."
+          "excerpt": "Runtime evidence (Garnet, head 3c6b5e1): `Runner.Worker \u203a bash \u203a node \u2192 registry.npmjs.org` appears in `Garnet Execution Diff/execution-diff` ([profile](https://app.garnet.ai/public/runs/33564858169?profile=01a05f05-d336-73c0-ae5a-d069d8..."
         },
         {
           "kind": "comment",
@@ -5165,7 +5181,7 @@
           "matched": [
             "head 4ac471a"
           ],
-          "excerpt": "Already the case at this head: 4ac471a removed `(?:-pending)?` from `GARNET_OWNED_MARKER_RE`, so pending placeholders are rejected and the poll keeps waiting until the recorded comment lands (verified live on this PR — the mirror ran onl..."
+          "excerpt": "Already the case at this head: 4ac471a removed `(?:-pending)?` from `GARNET_OWNED_MARKER_RE`, so pending placeholders are rejected and the poll keeps waiting until the recorded comment lands (verified live on this PR \u2014 the mirror ran onl..."
         },
         {
           "kind": "comment",
@@ -5398,7 +5414,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "causing the PR description to mirror attacker-controlled “runtime evidence”. This expands the trust"
+          "excerpt": "causing the PR description to mirror attacker-controlled \u201cruntime evidence\u201d. This expands the trust"
         },
         {
           "kind": "comment",
@@ -5437,7 +5453,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">causing the PR description to mirror attacker-controlled “runtime evidence”. This expands the trust"
+          "excerpt": ">causing the PR description to mirror attacker-controlled \u201cruntime evidence\u201d. This expands the trust"
         }
       ],
       "raw": "out/pnpm/pr-19-consume.json",
@@ -5525,7 +5541,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "<div>Review mode: <code>⚖️ Balanced</code>: This is a localized dependency/config update, but it changes install engine enforcement and includes runtime evidence of three unclassified outbound tooling destinations, requiring a careful se..."
+          "excerpt": "<div>Review mode: <code>\u2696\ufe0f Balanced</code>: This is a localized dependency/config update, but it changes install engine enforcement and includes runtime evidence of three unclassified outbound tooling destinations, requiring a careful se..."
         }
       ],
       "raw": "out/pnpm/pr-17-consume.json",
@@ -5569,7 +5585,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "Addressed in e91e365: `pnpm/action-setup` now pins `version: 12.0.0-rc.6`, matching the root `packageManager` field it already resolved — the installed toolchain is unchanged but now explicit in the workflow. Node setup stays omitted on ..."
+          "excerpt": "Addressed in e91e365: `pnpm/action-setup` now pins `version: 12.0.0-rc.6`, matching the root `packageManager` field it already resolved \u2014 the installed toolchain is unchanged but now explicit in the workflow. Node setup stays omitted on ..."
         },
         {
           "kind": "comment",
@@ -5582,7 +5598,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": ">• Runs fixture installation on Linux under Garnet runtime visibility."
+          "excerpt": ">\u2022 Runs fixture installation on Linux under Garnet runtime visibility."
         },
         {
           "kind": "comment",
@@ -5682,7 +5698,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "- ➖ Creates more runners and Garnet recording sessions for few eligible fixtures"
+          "excerpt": "- \u2796 Creates more runners and Garnet recording sessions for few eligible fixtures"
         },
         {
           "kind": "comment",
@@ -5788,7 +5804,7 @@
           "tier": "mention",
           "headBound": false,
           "matched": [],
-          "excerpt": "- Heavy TS CI ubuntu/Node 24 (~36 min of tests) on `blacksmith-8vcpu-ubuntu-2404`: `stopping jibril service (waiting up to 1830s…)` at 19:27:12 → `jibril service stop finished in 450s` → `Result=success, ExecMainStatus=0, ActiveState=ina..."
+          "excerpt": "- Heavy TS CI ubuntu/Node 24 (~36 min of tests) on `blacksmith-8vcpu-ubuntu-2404`: `stopping jibril service (waiting up to 1830s\u2026)` at 19:27:12 \u2192 `jibril service stop finished in 450s` \u2192 `Result=success, ExecMainStatus=0, ActiveState=ina..."
         },
         {
           "kind": "comment",
@@ -5820,7 +5836,7 @@
             "head eefe8f0",
             "run 32410011363"
           ],
-          "excerpt": "**Results for head `eefe8f0`** (review-findings remediation: `8728094` dumper hardening + changeset, `eefe8f0` node20 + `ci.yml` push back to `main`-only). PR-path jobs compare base→head; the App comment above compares parent→head (`8728..."
+          "excerpt": "**Results for head `eefe8f0`** (review-findings remediation: `8728094` dumper hardening + changeset, `eefe8f0` node20 + `ci.yml` push back to `main`-only). PR-path jobs compare base\u2192head; the App comment above compares parent\u2192head (`8728..."
         }
       ],
       "raw": "out/pnpm/pr-11-consume.json",
