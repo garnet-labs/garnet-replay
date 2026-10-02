@@ -4,7 +4,7 @@ import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import test from "node:test"
 import { aggregateIntent, evaluateClaims, parseClaim } from "../lib/intent.mjs"
-import { executionDiffFromProfiles, stepEntries } from "../lib/profile-diff.mjs"
+import { declaredStepName, executionDiffFromProfiles, stepEntries } from "../lib/profile-diff.mjs"
 import { renderCard, buildModel } from "../lib/card.mjs"
 import { validate } from "../lib/validate.mjs"
 import { decideVerdict } from "../lib/evidence.mjs"
@@ -342,4 +342,46 @@ test("decideVerdict reports missing scoped steps as undeterminable", () => {
   assert.equal(decision.verdict, "undeterminable")
   assert.equal(decision.reasons[0], 'step "Run E2E test" was not recorded before the change, so the scoped comparison is not available')
   assert.match(decision.reasons.at(-1), /in the recorded steps; this is an observation, not a comparison result/)
+})
+
+test("ordinal-prefixed declared steps are equivalent to canonical names", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  const result = evaluateClaims({
+    base, head, capture: COMPLETE,
+    claims: ["network:mock.shop:present-before-absent-after:14. Run E2E test"],
+    steps: ["14. Run E2E test"],
+  })
+  assert.equal(result.outcome, "supported")
+  assert.deepEqual(result.claims.map((claim) => claim.outcome), ["supported"])
+  assert.deepEqual(result.steps, ["Run E2E test"])
+  assert.deepEqual(result.stepsMissing, { base: [], head: [] })
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["14. Run E2E test"], claims: ["network:mock.shop:present-before-absent-after:14. Run E2E test"] },
+  })
+  assert.deepEqual(diff.execution_diff.steps_missing, { base: [], head: [] })
+  assert.equal(diff.execution_diff.network_removed.length, 1)
+  assert.equal(diff.execution_diff.network_removed[0].destination, "mock.shop")
+  assert.equal(diff.intent.claims[0].outcome, "supported")
+})
+
+test("declaredStepName normalizes declared step names", () => {
+  assert.equal(declaredStepName("14. Run E2E test"), "Run E2E test")
+  assert.equal(declaredStepName("Run E2E test"), "Run E2E test")
+  assert.equal(declaredStepName("  3.  x "), "x")
+  assert.equal(declaredStepName(""), null)
+  assert.equal(declaredStepName(14), null)
+})
+
+test("a missing declared step renders its own card headline", async () => {
+  const comment = {
+    user: { login: "garnet-runtime-review[bot]" },
+    body: `<!-- garnet:commit ${HEAD_SHA} --><!-- garnet:replay {"head":"${HEAD_SHA}","verdict":"undeterminable","reason":"steps-missing","capture":"complete","final":true} -->`,
+  }
+  const model = buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: HEAD_SHA, comment })
+  assert.equal(model.reason, "steps-missing")
+  const card = renderCard(model)
+  assert.ok(card.includes("A declared step was not recorded on both sides, so the scoped comparison is not available."))
+  assert.ok(!card.includes("Capture is incomplete"))
 })
