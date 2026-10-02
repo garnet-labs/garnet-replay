@@ -5963,7 +5963,7 @@
       "headSha": "6723627e9f6a401d56b7a52544bbc599679d4863",
       "consumed": false,
       "consumers": [],
-      "mirror": false,
+      "mirror": true,
       "recordBound": true,
       "signals": {
         "utterance": 0,
@@ -5973,7 +5973,109 @@
       },
       "receipts": [],
       "raw": "out/pnpm/pr-71-consume.json",
-      "checkedAt": "2026-09-24T05:58:01.717Z"
+      "checkedAt": "2026-10-02T17:59:02.102Z",
+      "funnel": {
+        "delivered": true,
+        "visible": true,
+        "rereviewRequested": false,
+        "attention": false,
+        "grounded": false,
+        "observation": false,
+        "consumedHow": [],
+        "coldRead": null,
+        "decisionImpact": "unknown",
+        "attribution": "unknown",
+        "valueHypothesis": "unknown"
+      }
+    },
+    {
+      "forkPr": 84,
+      "headSha": "194646d6fc62b9cba3833ef76cb9016cd8d042e6",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 2
+      },
+      "receipts": [
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5955000695,
+          "url": "https://github.com/garnet-labs/pnpm/pull/84#issuecomment-5955000695",
+          "at": "2026-10-02T14:50:20Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">• Run the Garnet action on Linux before dependency installation.",
+          "qualifies": false
+        },
+        {
+          "kind": "comment",
+          "login": "qodo-code-review[bot]",
+          "id": 5955033916,
+          "url": "https://github.com/garnet-labs/pnpm/pull/84#issuecomment-5955033916",
+          "at": "2026-10-02T14:52:06Z",
+          "commit": null,
+          "onHead": null,
+          "tier": "mention",
+          "headBound": false,
+          "matched": [],
+          "excerpt": ">The test job grants <b><i>id-token: write</i></b> to every step, rather than only to the new Garnet action. On a",
+          "qualifies": false
+        }
+      ],
+      "funnel": {
+        "delivered": false,
+        "visible": true,
+        "rereviewRequested": false,
+        "attention": true,
+        "grounded": false,
+        "observation": false,
+        "consumedHow": [],
+        "coldRead": null,
+        "decisionImpact": "unknown",
+        "attribution": "unknown",
+        "valueHypothesis": "unknown"
+      },
+      "raw": "out/pnpm/pr-84-consume.json",
+      "checkedAt": "2026-10-02T17:58:56.764Z"
+    },
+    {
+      "forkPr": 82,
+      "headSha": "4736537e0c1d20d934f1b8e8d81e548961c9c36a",
+      "consumed": false,
+      "consumers": [],
+      "mirror": true,
+      "recordBound": false,
+      "signals": {
+        "utterance": 0,
+        "citation": 0,
+        "observation": 0,
+        "mention": 0
+      },
+      "receipts": [],
+      "funnel": {
+        "delivered": false,
+        "visible": true,
+        "rereviewRequested": false,
+        "attention": false,
+        "grounded": false,
+        "observation": false,
+        "consumedHow": [],
+        "coldRead": null,
+        "decisionImpact": "unknown",
+        "attribution": "unknown",
+        "valueHypothesis": "unknown"
+      },
+      "raw": "out/pnpm/pr-82-consume.json",
+      "checkedAt": "2026-10-02T17:58:59.762Z"
     }
   ],
   "stage2": {
