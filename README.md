@@ -17,6 +17,26 @@ npm test                      # offline regression suite
 node bin/replay.mjs --help
 ```
 
+## Start here: what the upstream already records
+
+If the upstream's own CI already runs `garnet-org/action`, read its records
+before replaying anything:
+
+```sh
+GH_TOKEN=$(gh auth token) node bin/replay.mjs upstream pnpm/pnpm --pr 16522
+```
+
+It lists every job of the pull request's pushes that ran a Garnet step (run,
+attempt, action SHA, profile link, or "skipped: no authentication"), reads each
+public profile, and tables workload destinations with the process lineage that
+reached them, split into "every profile" and "some profiles". Read-only: no
+fork, no ledger write, no comment; output in `out/<slug>/upstream-pr-<N>.{md,json}`.
+These are observations: the profile names the ref it is bound to (pnpm's are
+`refs/pull/N/merge`) and capture is undeclared, so `verify` never accepts them and they
+never support "introduced by this change". Replay on the fork (below) only when
+the question needs an exact-head before/after pair. The pnpm result:
+[docs/pnpm-proof.md](docs/pnpm-proof.md).
+
 ## Current status
 
 - Harness: all seven ladder commands, the `verify` share gate, identity and
@@ -41,6 +61,7 @@ Each stage answers one question and leaves one artifact in the target ledger
 
 | # | Stage | Command | Exit question |
 |---|---|---|---|
+| − | upstream | `replay upstream <owner/repo> --pr N` | Does the upstream already record this change, and what did its processes reach? |
 | 0 | find | `replay find <owner/repo>` | Is there a review gap worth recording on a real change? |
 | 1 | replay | `replay live <slug> …` | Does the record show new behavior on the fork? |
 | 2 | card | `replay card <fork-pr-url>` | Would this have helped the review? |
@@ -209,6 +230,8 @@ lib/find.mjs              history-based transition finder
 lib/replay-pr.mjs         real-PR replay planner and executor
 lib/replay-transition.mjs pnpm transition planner (bump, then allow build scripts)
 lib/evidence.mjs          capture, verdict, pair, supersession, claims
+lib/upstream.mjs          read-only: profiles the upstream's own CI recorded for one pull request
+lib/ledger.mjs            target ledgers: keyed row merge, file lock, atomic rename
 lib/guards.mjs            fork-only, no-leak, vocabulary, residue, two-commit guards
 lib/card.mjs · cohort.mjs · status.mjs · consume.mjs · verify.mjs · stage2.mjs
 live/templates/           recording workflow and Stage 2 workflows
@@ -230,6 +253,8 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/reviewer-readiness.md](docs/reviewer-readiness.md) — reviewer readiness ranking and golden path, updated after each fork proof round
 - [docs/contract.md](docs/contract.md) — evidence fields and their semantics
 - [docs/examples.md](docs/examples.md) — worked examples with real output
+- [docs/pnpm-proof.md](docs/pnpm-proof.md) — pnpm already records; three candidate PRs, limits, and the App ask
+- [docs/harness-audit.md](docs/harness-audit.md) — which commands are the core, which are optional, and the learning each guard keeps
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
 - [docs/fork-ci-hygiene.md](docs/fork-ci-hygiene.md) — which workflows stay on in replay forks and POCs, the 2026-09-23 cleanup, and how to undo it
