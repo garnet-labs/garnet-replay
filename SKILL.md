@@ -24,6 +24,10 @@ For an earlier push in the same upstream pull request, use `replay live <slug> -
 9. **Stage 2 (opt-in only).** `replay stage2 <slug> --dry-run`, then without. After merge on the fork, `replay consume <pr-url>` reports check state and reviewer citations.
 10. **Status.** `replay status <slug>`. Report the board and the next command.
 
+## Landing pull requests here
+
+Open pull requests as drafts. Mark one ready for review to signal approval; either Devin or a human may do so. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and no review thread is unresolved. Add the `hold` label to stop merging. Resolving a thread does not trigger a new workflow run; start `auto-merge` through `workflow_dispatch` with the pull request number, or wait for a later check event. Require the `test` check in `main` branch protection as the backstop.
+
 ## Agent evaluation
 
 To measure whether the record changes an agent's review, use `benchmark/agent-ab/` (README there): record each prepared pair once, freeze `tasks.json` from finalized records only, run the four arms with one model, score with `score.mjs`. Never label a task from the corpus hypothesis.

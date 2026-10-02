@@ -122,6 +122,10 @@ fork's own dependency pull requests are recorded from then on.
 
 Use `replay live <slug> --pr <N> --first-commit <sha>` to compare an earlier commit in that pull request with its head; commit 1 is the earlier tree and commit 2 the head, under `previous-recorded-head-to-head`. When the replay base has its own recorder, omit `--record-workflow`; passing it is refused rather than replacing the base's workflow with the fork's copy. On pnpm, TS CI chunk 2/3 is the only recorded leg; changes limited to `pnpm/` or `pnpr/` do not run TypeScript tests.
 
+## Landing pull requests here
+
+Open pull requests as drafts. Marking one ready for review is the approval signal; either Devin or a human may do this. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and every review thread is resolved. Add the `hold` label to stop it from merging. Resolving a thread does not trigger another run; use `workflow_dispatch` or wait for a later check event. Branch protection on `main` requiring the `test` check is the backstop.
+
 ## Evidence contract
 
 Every replay JSON carries `capture` (expected and recorded cells, executed SHA
