@@ -617,3 +617,25 @@ matched behaviour on neither side renders `Not observable in either record`;
 a missing step or incomplete capture renders `Not determinable: <reason>`.
 Workload delta rows no claim covers follow under `Change the pull request
 does not describe:`. The section is absent when no claims were declared.
+
+A declared step missing on one side makes the whole scoped comparison
+`undeterminable` while the delta rows stay on the card as observations. A
+`pair` run over the same fixtures with
+`--steps "Run E2E test,Install Playwright"` and a base record lacking the
+`Install Playwright` step reports
+`step "Install Playwright" was not recorded before the change, so the scoped comparison is not available`
+and renders:
+
+```text
+> A declared step was not recorded on both sides, so the scoped comparison is not available.
+
+Result: **undeterminable** (steps-missing) · comparison-result
+
+**Intended behaviour** · intent-check-result
+
+- `network:mock.shop:present-before-absent-after`: Expected behaviour change is present in the record
+
+Change the pull request does not describe:
+- `cdn.playwright.dev`
+- `Runner.Worker → npx → playwright`
+```
