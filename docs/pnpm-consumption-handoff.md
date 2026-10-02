@@ -23,12 +23,13 @@ so step 2 never reaches the re-review request.
 
 | fork PR | head | record | public profile identity | capture completeness |
 |---|---|---|---|---|
+| [#86](https://github.com/garnet-labs/pnpm/pull/86) (18:10 UTC, contract 6.13.0) | `3370e6f` | final, first snapshot (`previous: null`) | records `81538af` (`refs/pull/86/merge`), expected head `3370e6f` | not declared |
 | [#84](https://github.com/garnet-labs/pnpm/pull/84) | `194646d` | head-bound, no machine summary (still being written) | no exact selector on the record | not declared |
 | [#82](https://github.com/garnet-labs/pnpm/pull/82) | `4736537` | pending placeholder | no exact selector on the record | not declared |
 | [#71](https://github.com/garnet-labs/pnpm/pull/71) | `6723627` | final, pair `0df40d1 → 6723627` | records `fd90a96` (`refs/pull/71/merge`), expected head `6723627` | not declared |
 | [#65](https://github.com/garnet-labs/pnpm/pull/65) | `68303b0` | final | merge-ref, not head | not declared (also a session-residue leg) |
 
-The newest finalized record (#71) still reads `public-head-mismatch`, which is
+The newest finalized records (#86 on contract 6.13.0, #71 on 6.10) still read `public-head-mismatch`, which is
 the condition in `docs/intent-check.md` lane C. Per the brief, `refresh → find →
 live → verify → re-trigger → consume` was not started. The candidate to run
 once identity clears is unchanged from issue #44: upstream pnpm/pnpm#16522
