@@ -29,7 +29,7 @@ jobs:
     name: auto-merge
     runs-on: ubuntu-latest
     concurrency:
-      group: auto-merge-${{ github.event.pull_request.number || github.event.review.pull_request.number || inputs.pr || github.event.check_suite.head_sha || github.event.workflow_run.head_sha || github.event.sha || github.run_id }}
+      group: auto-merge-${{ github.event.pull_request.number || inputs.pr || github.event.check_suite.head_sha || github.event.workflow_run.head_sha || github.event.sha || github.run_id }}
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -43,7 +43,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           AUTO_MERGE_REPO: ${{ github.repository }}
-          AUTO_MERGE_PR: ${{ github.event.pull_request.number || github.event.review.pull_request.number || inputs.pr }}
+          AUTO_MERGE_PR: ${{ github.event.pull_request.number || inputs.pr }}
           AUTO_MERGE_SHA: ${{ github.event.check_suite.head_sha || github.event.workflow_run.head_sha || github.event.sha }}
         run: |
           if [ -n "$AUTO_MERGE_PR" ]; then

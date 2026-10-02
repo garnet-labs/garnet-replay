@@ -26,7 +26,7 @@ For an earlier push in the same upstream pull request, use `replay live <slug> -
 
 ## Landing pull requests here
 
-Open pull requests as drafts. Mark one ready for review to signal approval; either Devin or a human may do so. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and no review thread is unresolved. Add the `hold` label to stop merging. Resolving a thread does not trigger a new workflow run; start `auto-merge` through `workflow_dispatch` with the pull request number, or wait for a later check event. Require the `test` check in `main` branch protection as the backstop.
+Open pull requests as drafts. Mark one ready for review to signal approval; either Devin or a human may do so. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and no review thread is unresolved. A `CHANGES_REQUESTED` review blocks merging until that reviewer approves or the review is dismissed. Add the `hold` label to stop merging. Resolving a thread does not trigger a new workflow run; start `auto-merge` through `workflow_dispatch` with the pull request number, or wait for a later check event. Require the `test` check in `main` branch protection as the backstop.
 
 ## Agent evaluation
 

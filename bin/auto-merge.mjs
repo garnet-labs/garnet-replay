@@ -49,7 +49,7 @@ export function main(argv = process.argv.slice(2), { exec, stdout = process.stdo
       if (!Array.isArray(checks) || !Array.isArray(statuses) || !Number.isSafeInteger(unresolvedThreads)) {
         throw new Error(`could not read checks, statuses, or review threads for pull request #${number}`)
       }
-      const decision = mergeDecision({ pr, checkRuns: checks, statuses, unresolvedThreads })
+      const decision = mergeDecision({ pr, checkRuns: checks, statuses, unresolvedThreads, reviews: pr.reviews })
       stdout.write(`#${number} ${decision.action}: ${decision.reason}\n`)
       if (decision.action === "merge" && !options.dryRun) {
         try {

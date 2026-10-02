@@ -112,6 +112,29 @@ test("unresolved review threads skip the pull request", () => {
   assert.equal(decision({ unresolvedThreads: 1 }).action, "skip")
 })
 
+test("latest changes-requested review blocks and names its author", () => {
+  const result = decision({
+    reviews: [{ author: { login: "reviewer" }, state: "CHANGES_REQUESTED", submittedAt: "2026-01-01T00:00:00Z" }],
+  })
+  assert.equal(result.action, "skip")
+  assert.match(result.reason, /reviewer/)
+})
+
+test("a later approval by the same author clears a changes-requested review", () => {
+  assert.equal(decision({
+    reviews: [
+      { author: { login: "reviewer" }, state: "CHANGES_REQUESTED", submittedAt: "2026-01-01T00:00:00Z" },
+      { author: { login: "reviewer" }, state: "APPROVED", submittedAt: "2026-01-02T00:00:00Z" },
+    ],
+  }).action, "merge")
+})
+
+test("commented reviews do not block a pull request", () => {
+  assert.equal(decision({
+    reviews: [{ author: { login: "reviewer" }, state: "COMMENTED", submittedAt: "2026-01-01T00:00:00Z" }],
+  }).action, "merge")
+})
+
 test("the reason names the first blocker", () => {
   const result = decision({
     pr: readyPr({ isDraft: true }),
@@ -202,11 +225,13 @@ test("checkRuns returns paginated check-run objects", () => {
   assert.deepEqual(result, runs)
 })
 
-test("CLI dry run prints its decision without calling merge", () => {
+test("CLI passes PR reviews into its dry-run decision", () => {
   const output = []
   const errors = []
   const commands = []
-  const pr = readyPr()
+  const pr = readyPr({
+    reviews: [{ author: { login: "reviewer" }, state: "CHANGES_REQUESTED", submittedAt: "2026-01-01T00:00:00Z" }],
+  })
   const result = main(["--repo", "owner/repo", "--pr", "48", "--dry-run"], {
     stdout: { write: (value) => output.push(value) },
     stderr: { write: (value) => errors.push(value) },
@@ -223,7 +248,7 @@ test("CLI dry run prints its decision without calling merge", () => {
   })
   assert.equal(result, 0)
   assert.deepEqual(output, [
-    "#48 merge: checks and statuses are settled, test succeeded, and no review threads are unresolved\n",
+    "#48 skip: review from reviewer requests changes\n",
   ])
   assert.deepEqual(errors, [])
   assert.equal(commands.some((args) => args[0] === "pr" && args[1] === "merge"), false)

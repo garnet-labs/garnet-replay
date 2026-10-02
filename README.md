@@ -124,7 +124,7 @@ Use `replay live <slug> --pr <N> --first-commit <sha>` to compare an earlier com
 
 ## Landing pull requests here
 
-Open pull requests as drafts. Marking one ready for review is the approval signal; either Devin or a human may do this. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and every review thread is resolved. Add the `hold` label to stop it from merging. Resolving a thread does not trigger another run; use `workflow_dispatch` or wait for a later check event. Branch protection on `main` requiring the `test` check is the backstop.
+Open pull requests as drafts. Marking one ready for review is the approval signal; either Devin or a human may do this. The `auto-merge` workflow squash-merges a ready `devin/` pull request when all check runs and commit statuses are green and every review thread is resolved. A `CHANGES_REQUESTED` review blocks merging until that reviewer approves or the review is dismissed. Add the `hold` label to stop it from merging. Resolving a thread does not trigger another run; use `workflow_dispatch` or wait for a later check event. Branch protection on `main` requiring the `test` check is the backstop.
 
 ## Evidence contract
 
