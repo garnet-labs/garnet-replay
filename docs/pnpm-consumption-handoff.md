@@ -67,7 +67,7 @@ Next measurement is a funded `run.mjs --cohort prospect` plus
 
 ## Workflow changes on the fork (brief items 1 and 2)
 
-Shipped as one pnpm fork PR (`.github/scripts/garnet-rereview.mjs`,
+Shipped as https://github.com/garnet-labs/pnpm/pull/86 (draft; `.github/scripts/garnet-rereview.mjs`,
 `garnet-evidence-gate.mjs`, both evidence workflows):
 
 - `GARNET_REVIEW_TRIGGER_TOKEN` (user PAT secret, re-review step only) posts the
