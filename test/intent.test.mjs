@@ -7,6 +7,7 @@ import { aggregateIntent, evaluateClaims, parseClaim } from "../lib/intent.mjs"
 import { executionDiffFromProfiles, stepEntries } from "../lib/profile-diff.mjs"
 import { renderCard, buildModel } from "../lib/card.mjs"
 import { validate } from "../lib/validate.mjs"
+import { decideVerdict } from "../lib/evidence.mjs"
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
 const COMPLETE = { status: "complete" }
@@ -272,4 +273,73 @@ test("repetition variance makes every claim undeterminable", async () => {
   const result = evaluateClaims({ base, head, claims: CLAIMS, steps: ["Run E2E test"], capture: COMPLETE, variance: 1 })
   assert.equal(result.outcome, "undeterminable")
   assert.ok(result.claims.every((claim) => claim.outcome === "undeterminable" && claim.reason === "repetitions disagree"))
+})
+
+test("a declared step missing on the base makes the whole comparison undeterminable", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  base.egress = base.egress.filter((entry) => entry.step !== "14. Run E2E test")
+  const head = await fixture("intent-sentry-head.json")
+  head.egress.push({
+    name: "telemetry.example.net", address: "203.0.113.50", ports: ["443"], pid: 250,
+    ancestry: ["Runner.Worker", "node", "vitest"], step: "14. Run E2E test", result: "connect",
+  })
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["Run E2E test"] },
+  })
+  assert.equal(diff.verdict.value, "undeterminable")
+  assert.ok(diff.verdict.reasons.some((reason) => reason.includes('step "Run E2E test" was not recorded before the change')))
+  assert.ok(diff.verdict.reasons.some((reason) => reason.includes("observation, not a comparison result")))
+  assert.ok(diff.execution_diff.network_added.some((row) => row.destination === "telemetry.example.net"))
+})
+
+test("a destination under both a scoped and an unscoped step yields one scoped row", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  for (const step of ["14. Run E2E test", "13. Install Playwright"]) {
+    head.egress.push({
+      name: "api.example", address: "203.0.113.60", ports: ["443"], pid: 260,
+      ancestry: ["Runner.Worker", "node"], step, result: "connect",
+    })
+  }
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["Run E2E test"] },
+  })
+  const added = diff.execution_diff.network_added.filter((row) => row.destination === "api.example")
+  assert.equal(added.length, 1)
+  assert.equal(added[0].step, "Run E2E test")
+  assert.equal(diff.execution_diff.totals.workload.added, 1)
+})
+
+test("an ancestry seen in two scoped steps yields one process row", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  head.egress.push({
+    name: "api.example", address: "203.0.113.60", ports: ["443"], pid: 261,
+    ancestry: ["Runner.Worker", "node", "deploy"], step: "14. Run E2E test", result: "connect",
+  })
+  head.egress.push({
+    name: "cdn.playwright.dev", address: "203.0.113.61", ports: ["443"], pid: 262,
+    ancestry: ["Runner.Worker", "node", "deploy"], step: "13. Install Playwright", result: "connect",
+  })
+  const diff = executionDiffFromProfiles({
+    baseline: base, update: head,
+    meta: { label: "constructed", prNumber: 3, steps: ["Run E2E test", "Install Playwright"] },
+  })
+  const added = diff.execution_diff.processes_added.filter((row) => row.ancestry.join(" → ") === "Runner.Worker → node → deploy")
+  assert.equal(added.length, 1)
+})
+
+test("decideVerdict reports missing scoped steps as undeterminable", () => {
+  const decision = decideVerdict({
+    capture: { status: "complete", reasons: [] },
+    comparisonAvailable: true,
+    workloadAdded: 1,
+    workloadRemoved: 0,
+    stepsMissing: { base: ["Run E2E test"], head: [] },
+  })
+  assert.equal(decision.verdict, "undeterminable")
+  assert.equal(decision.reasons[0], 'step "Run E2E test" was not recorded before the change, so the scoped comparison is not available')
+  assert.match(decision.reasons.at(-1), /in the recorded steps; this is an observation, not a comparison result/)
 })
