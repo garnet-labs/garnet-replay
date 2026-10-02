@@ -224,7 +224,7 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
     git("commit", "-m", "feat: pull request head")
     const headSha = git("rev-parse", "HEAD")
     const plan = replayPlan({
-      upstreamTitle: "feat: exact earlier push",
+      upstreamTitle: "fix(deps): update undici to 7.29.1",
       baseSha,
       headSha,
       changes: [
@@ -242,8 +242,12 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
 
     assert.equal(plan.scope, "previous-recorded-head-to-head")
     assert.equal(plan.firstCommitSha, firstSha)
+    assert.equal(plan.transition, null)
     assert.equal(plan.messages.first, "feat: earlier upstream push")
     assert.match(plan.body, /^Two commits: the first is an earlier push of this change, the second is its final state\.\n/)
+    for (const text of [plan.body, plan.messages.first, plan.messages.change]) {
+      assert.doesNotMatch(text, /Bumps|allowlist/)
+    }
     assert.ok(plan.steps.some((step) => step.id === "base-branch"))
     assert.ok(!plan.steps.some((step) => step.id === "first-fork-record"))
     const runSteps = plan.steps.filter((step) => [
