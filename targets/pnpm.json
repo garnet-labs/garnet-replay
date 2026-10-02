@@ -3452,6 +3452,22 @@
   ],
   "replays": [
     {
+      "upstreamPr": 15289,
+      "forkPr": 70,
+      "branch": "chore/network-proxy-cap-b",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "3bab6e6e841ed7a9b8ebc591a4006a9c948d042f",
+      "headSha": "bb7e324cdb55d0d7e6d9c6052a5818b9ee50d52f",
+      "forkHeadSha": "35efe219dfdd3d96cf9aabb441005dad467b59ed",
+      "firstSha": "92ba9a0d0a36bfe8aae38e4fe327c9737205b327",
+      "transition": null,
+      "record": "instrument",
+      "ecosystem": null,
+      "state": "undeterminable",
+      "openedAt": "2026-09-24T05:11:25.000Z"
+    },
+    {
       "upstreamPr": 15278,
       "forkPr": 71,
       "branch": "chore/ci-ignore-scripts-b",

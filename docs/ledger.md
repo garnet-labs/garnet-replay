@@ -74,8 +74,8 @@ faithful workload remain open; see the report for ownership and next actions.
 
 ## Known limits
 
-- The recording template is pinned to a main-branch commit of
-  `garnet-org/action`, not a release.
+- The recording template is pinned to release v2.3.0 (`245ad6be`) since
+  September 24; the September 11 rows above ran on a main-branch pin.
 - Pull requests from other repositories receive neither secrets nor OIDC; a
   fork-origin run is a local record and reads as not recorded.
 - Transitions are pnpm only. `--allow-build` needs a dependency already in the
