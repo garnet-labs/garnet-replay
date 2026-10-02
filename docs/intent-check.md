@@ -85,7 +85,12 @@ existing code file in the same directory (walking up to the nearest ancestor
 with one) — job selection in every observed target is per project/path
 prefix, not per file; a **rename** is a deletion plus an addition. The plan
 prints the computed touch set in `--dry-run` and refuses when any added file
-has no existing code sibling under the same top-level project directory.
+has no existing code sibling under the same top-level project directory. It
+also reads the recorder's `on.pull_request.paths` / `paths-ignore` filter (the
+stage-1 path check already parses it) and refuses when the touch set would not
+trigger the recorder even though the full change set would — a recorder keyed
+on an added file's exact path gets no commit-1 run, so no base record, and the
+sequence would wait 45 minutes for nothing.
 
 Rejected: `workflow_dispatch` of the job at the base SHA (job selection differs
 per repo; Sentry's matrix would be empty), recording the base branch on push
@@ -172,6 +177,14 @@ one when proposing.
   workflow step that runs the deterministic check (`pair --intent`) against
   the two public profiles and writes the section into the PR body between
   `garnet:intent:begin/end` markers, fail-closed like the mirror. Not in A–D.
+  Trigger: not `pull_request` (it fires before either profile exists). Like
+  the mirror, lane E runs on the App comment event (`issue_comment`
+  created/edited by the App login) and re-runs on every edit, so it runs once
+  per finished profile; it writes the section only when both profiles are
+  final for the current head and `previous`/base is bound, otherwise it
+  writes `Not determinable: <reason>`. A new head invalidates the section
+  (same stale rule as `verify`), and the step replaces the marked block rather
+  than appending.
 - No gate. `merge-gate` may later consume `intent.outcome`; not in this slice.
 
 ### D5 — Cohort measurement (the PMF test)
@@ -198,7 +211,7 @@ unrecorded jobs; inferring intent without a declared claim; touching
 |---|---|---|---|---|
 | A — check core | `lib/intent.mjs` (pure: `parseClaim`, `evaluateClaims`, `aggregateIntent`), step filter in `profile-diff.mjs`, `intent` schema block, `intent-check-result` claim class, `replay intent` + `pair --steps --intent`, card section, `docs/examples.md`, tests incl. Sentry fixture (base fixture constructed, labelled) | `lib/intent.mjs`, `lib/profile-diff.mjs`, `lib/evidence.mjs`, `lib/card.mjs`, `schema/`, `bin/replay.mjs`, `test/intent.test.mjs`, `docs/contract.md` | `npm test`, `node bin/replay.mjs --help`, vocabulary test, rendered card read at desktop+phone | — |
 | B — base record | `live --base same-path` two-commit sequencing on onboarded forks: touch generator by extension, guards (refuse unknown syntax / non-code-only PRs / already-open sequence), dry-run plan text, `docs/stage1.md` §1c | `lib/replay-pr.mjs`, `lib/guards.mjs`, `lib/commands.mjs`, `test/replay.test.mjs`, `docs/stage1.md` | `npm test`, `live sentry --pr 3 --dry-run` shows both commits | — |
-| C — Sentry proof | run B on a fresh fork PR for #24708 (branch from `replay-base/hydrogen-recorded`, steps `Run E2E test`), then A with the three claims above; `replay verify`; card | fork `garnet-labs/sentry-javascript` only | expected `storefront-removed: supported` if base shows `mock.shop`, else `unobservable` — reported as found. Known limit: public reports carry the merge-ref SHA, so `verify` will fail on `public-head-mismatch` unless executed-source linkage exists (`pair --base-executed-sha/--head-executed-sha` from a recorder attestation); until the recorder attests the checkout SHA (a `garnet-org/action` change, outside this repo), the proof ships as a card marked `undeterminable / public-head-mismatch` on the identity leg while the intent block stands on the two profiles' own `run.commit_sha` pair | A + B merged |
+| C — Sentry proof | run B on a fresh fork PR for #24708 (branch from `replay-base/hydrogen-recorded`, steps `Run E2E test`), then A with the three claims above; `replay verify`; card | fork `garnet-labs/sentry-javascript` only | expected `storefront-removed: supported` if base shows `mock.shop`, else `unobservable` — reported as found. Known limit: public reports carry the merge-ref SHA, so `verify` will fail on `public-head-mismatch` unless executed-source linkage exists (`pair --base-executed-sha/--head-executed-sha` from a recorder attestation); `run.commit_sha` on both public reports is a merge ref, so neither observation is bound to a replay commit and every claim is `undeterminable / public-head-mismatch` — the intent block does not stand on the merge-ref pair. `verify` FAIL means not shareable: no card leaves `out/` until the recorder attests the checkout SHA (owner decision 4, a `garnet-org/action` change outside this repo) or the fork's PR runs are read through the authenticated API that reports the head SHA. Until then lane C only establishes whether `mock.shop` appears in the base record, as an internal finding | A + B merged, decision 4 resolved |
 | D — cohort | `find --claims`, ledger columns, first 10 candidates listed with the claim sentence quoted | `lib/find.mjs`, `lib/ledger.mjs`, `docs/ledger.md` | `npm test`, finder output labelled candidate evidence | A |
 
 A and B touch disjoint core files; both add a flag to `bin/replay.mjs`/`lib/commands.mjs`
@@ -214,3 +227,4 @@ A and B touch disjoint core files; both add a flag to `bin/replay.mjs`/`lib/comm
 3. Whether `--propose` (one model call) is in v1 or deferred.
 4. Whether to ask `garnet-org/action` for a checkout-SHA attestation so lane C
    (and every prospect-batch card) can pass the identity leg of `verify`.
+   Lane C is blocked on this: without it no Sentry card is shareable.
