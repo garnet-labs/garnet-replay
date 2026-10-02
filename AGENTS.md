@@ -29,6 +29,11 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
   State the measured command and omitted workloads in the evidence manifest.
   Destination equality does not prove execution-chain or application equivalence.
 - Finder output is candidate evidence. Only a recorded run says what ran.
+- `replay upstream` is read-only and observational: it reports the ref each
+  profile is bound to and never feeds `verify`, `card`, or the ledger.
+- Target ledgers are written only through `saveTarget` (keyed row merge under
+  `targets/<slug>.json.lock`, then atomic rename). Parallel commands on one
+  target are safe; never restore rows by hand.
 - Run `replay verify <pr-url>` before any pull request or card is shown to anyone.
   FAIL means not shareable.
 - Do not change `garnet-org/action`, `garnet-org/control-plane`, or
