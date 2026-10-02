@@ -627,7 +627,9 @@ A declared step missing on one side makes the whole scoped comparison
 and renders:
 
 ```text
-Result: **undeterminable** (incomplete) · comparison-result
+> A declared step was not recorded on both sides, so the scoped comparison is not available.
+
+Result: **undeterminable** (steps-missing) · comparison-result
 
 **Intended behaviour** · intent-check-result
 

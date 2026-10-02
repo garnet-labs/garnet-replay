@@ -166,7 +166,8 @@
       "required": ["value", "reasons"],
       "properties": {
         "value": { "type": "string", "enum": ["new-behavior", "unchanged", "recorded", "undeterminable"] },
-        "reasons": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        "reasons": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "reason": { "type": "string", "enum": ["steps-missing"] }
       }
     },
     "supersession": {
