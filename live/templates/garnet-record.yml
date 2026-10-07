@@ -1,13 +1,14 @@
 # Records the dependency install under the Garnet sensor on every pull request,
-# Dependabot's included, and on every push to the default branch. Garnet posts
-# one Runtime Review comment per head commit and compares it with the previous
-# recorded commit on the pull request, or with the recorded base-branch commit
-# for its first one.
+# Dependabot's included, and on every push to the default branch. Pull request
+# runs get one Runtime Review comment per head commit. Default-branch pushes
+# post no comment; they leave the base record a pull request's first recorded
+# commit is compared with. Later commits compare with the previous recorded
+# commit on the pull request.
 name: Garnet Runtime Visibility
 
 on:
   push:
-    branches: [{{DEFAULT_BRANCH}}]
+    branches: ['{{DEFAULT_BRANCH}}']
   pull_request:
 
 permissions: {}
