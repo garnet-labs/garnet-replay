@@ -72,13 +72,13 @@ it) for any other Node host.
 
 This entrypoint supports saved evidence, direct PR URLs, and anonymous public
 GitHub receipt lookups. It ignores ambient GitHub credentials. GitHub rate limits,
-private PRs, and unavailable receipts remain explicit lookup failures. The page
-directs preparation to the local harness; all mutations return HTTP 405.
+private PRs, and unavailable receipts remain explicit lookup failures. Unless the
+hosted runner below is configured, the page directs preparation to the local
+harness and all mutations return HTTP 405.
 
-There is no worker or writable job store in this entrypoint. Recording and durable
-artifact updates still use the local harness. New checked-in evidence reaches the
-viewer through a deployment. A team recording service requires authenticated
-authorization, isolated workers and durable job/artifact storage.
+The entrypoint has no worker or writable job store of its own: hosted recording
+runs on GitHub Actions (below), and durable artifact updates still use the local
+harness. New checked-in evidence reaches the viewer through a deployment.
 
 ## Create replays from the hosted viewer
 

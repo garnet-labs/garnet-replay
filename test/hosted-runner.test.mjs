@@ -85,6 +85,7 @@ test("hosted runner dispatches prepare, binds start to the prepared run, and rep
   assert.equal(recording.state, "recording")
   assert.equal(recording.forkUrl, "https://github.com/garnet-labs/uv/pull/7")
   assert.equal(await runner.forPr(pr.url, null), null)
+  assert.equal(await runner.forPr("https://github.com/garnet-labs/uv/pull/5", target), null)
   assert.equal(await runner.get("../1"), null)
 })
 
@@ -104,6 +105,7 @@ test("hosted creation requires the operator key and exact origin", async (t) => 
   assert.equal((await post({})).status, 401)
   assert.equal((await post({ "x-replay-operator": "wrong" })).status, 401)
   assert.equal((await post({ origin: "https://other.example", "x-replay-operator": "key" })).status, 403)
+  assert.equal((await post({ origin: base, "x-replay-operator": "key" })).status, 403)
   assert.equal((await post({ "x-replay-operator": "key" })).status, 202)
   assert.deepEqual(prepared, ["https://github.com/astral-sh/uv/pull/999999"])
 })
