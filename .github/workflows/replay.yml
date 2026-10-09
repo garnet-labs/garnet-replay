@@ -1,0 +1,72 @@
+name: replay
+run-name: replay ${{ inputs.slug }}#${{ inputs.number }} ${{ inputs.action }} ${{ inputs.request }} ${{ inputs.plan }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [prepare, start]
+        required: true
+      slug:
+        type: string
+        required: true
+      number:
+        type: string
+        required: true
+      request:
+        type: string
+        required: true
+      plan:
+        description: Run ID of the prepare job whose plan this start must match
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: replay-${{ inputs.slug }}-${{ inputs.action == 'start' && 'record' || inputs.request }}
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Download the prepared plan
+        if: inputs.action == 'start'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLAN_RUN: ${{ inputs.plan }}
+        run: |
+          [[ "$PLAN_RUN" =~ ^[0-9]+$ ]] || { echo "plan must be a run ID"; exit 1; }
+          gh run download "$PLAN_RUN" --repo "$GITHUB_REPOSITORY" --name replay-job --dir "$RUNNER_TEMP/prepared"
+      - name: Authenticate git with the fork token
+        env:
+          GH_TOKEN: ${{ secrets.REPLAY_FORK_TOKEN }}
+        run: gh auth setup-git
+      - name: Run the canonical replay job
+        env:
+          GH_TOKEN: ${{ secrets.REPLAY_FORK_TOKEN }}
+          REPLAY_ACTION: ${{ inputs.action }}
+          REPLAY_SLUG: ${{ inputs.slug }}
+          REPLAY_NUMBER: ${{ inputs.number }}
+          REPLAY_PLAN_FILE: ${{ runner.temp }}/prepared/job.json
+          GIT_AUTHOR_NAME: garnet-replay
+          GIT_AUTHOR_EMAIL: replay@garnet.ai
+          GIT_COMMITTER_NAME: garnet-replay
+          GIT_COMMITTER_EMAIL: replay@garnet.ai
+        run: node bin/replay-job.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: replay-job
+          path: out/hosted-job/job.json
+          if-no-files-found: error
+          retention-days: 30

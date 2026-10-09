@@ -330,7 +330,10 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
 
 const RECORDING_BODY = "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n"
 
-function liveExec({ recording, openPrs = [], recentPrs = [] }) {
+function liveExec({ recording, openPrs = [], recentPrs = [], commits = [
+  { sha: SHA_C, commit: { message: "feat: earlier upstream push\n\nbody" } },
+  { sha: SHA_B, commit: { message: "feat: pull request head" } },
+] }) {
   return (command, args) => {
     assert.equal(command, "gh")
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
@@ -352,6 +355,7 @@ function liveExec({ recording, openPrs = [], recentPrs = [] }) {
     if (args[1]?.endsWith("/pulls/501/files")) {
       return JSON.stringify(CHANGES.map((change) => ({ filename: change.path, status: change.status })))
     }
+    if (args.at(-1)?.endsWith("/pulls/501/commits")) return JSON.stringify([commits])
     if (args[1]?.endsWith("/pulls/501")) {
       return JSON.stringify({ title: "feat: add thing", base: { sha: SHA_A }, head: { sha: SHA_B } })
     }
@@ -375,6 +379,75 @@ test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   assert.equal(result.plan.record, "fork-workflow")
   assert.match(result.plan.body, /<!-- change-id:[0-9a-f]{64} attempt:[0-9a-f]{64} -->/)
   assert.doesNotMatch(result.plan.body, NO_UPSTREAM)
+})
+
+test("livePr: refuses a recorder overlay when the change's base records itself", async () => {
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--record-workflow", ".github/workflows/ci.yml", "--dry-run"], {
+      exec: liveExec({ recording: true }),
+      log: () => {},
+      save: () => assert.fail("dry run must not save"),
+    }),
+    /the change's base already runs \.github\/workflows\/garnet-record\.yml on pull requests; --record-workflow would replace it with garnet-labs\/posthog@main's copy\. Drop --record-workflow so the replay runs the base's own workflows/,
+  )
+})
+
+test("livePr: resolves an earlier upstream commit and plans its comparison scope", async () => {
+  const result = await livePr(["posthog", "--pr", "501", "--first-commit", "ccccccc", "--dry-run"], {
+    exec: liveExec({ recording: true }),
+    log: () => {},
+    save: () => assert.fail("dry run must not save"),
+  })
+  assert.equal(result.plan.firstCommitSha, SHA_C)
+  assert.equal(result.plan.scope, "previous-recorded-head-to-head")
+  assert.equal(result.plan.messages.first, "feat: earlier upstream push")
+  assert.equal(result.plan.firstStages, "first-commit")
+  assert.ok(result.plan.steps.some((step) => step.id === "verify-first-commit" && step.args.includes(`${SHA_C}^{commit}`)))
+  assert.match(result.plan.body, /attempt:[0-9a-f]{64}/)
+  assert.match(result.plan.steps.find((step) => step.id === "first-commit-paths").note, /ccccccc/)
+  const rendered = renderPlan(result.plan)
+  assert.match(rendered, /first upstream commit: c{40}/)
+  assert.match(rendered, /compares: ccccccc → bbbbbbb/)
+  assert.match(rendered, /scope: previous-recorded-head-to-head/)
+})
+
+test("livePr: rejects first-commit values outside the pull request and its head", async () => {
+  const exec = liveExec({ recording: true })
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--first-commit", "deadbee", "--dry-run"], { exec, log: () => {} }),
+    /is not a commit in pull request/,
+  )
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--first-commit", SHA_B, "--dry-run"], { exec, log: () => {} }),
+    /must not equal the pull request head/,
+  )
+})
+
+test("livePr: rejects combining first-commit with --first", async () => {
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--first", "src/a.ts", "--first-commit", SHA_C, "--dry-run"], {
+      exec: liveExec({ recording: true }),
+      log: () => {},
+    }),
+    /--first-commit cannot be combined with --first/,
+  )
+})
+
+test("livePr: rejects first-commit with allow-build and instrument modes", async () => {
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--allow-build", "puppeteer", "--first-commit", SHA_C, "--dry-run"], {
+      exec: () => assert.fail("incompatible mode must stop before GitHub access"),
+      log: () => {},
+    }),
+    /--first-commit is only available with --pr <N>; it cannot be combined with --dependency, --allow-build, or --prepared/,
+  )
+  await assert.rejects(
+    livePr(["posthog", "--pr", "501", "--record", "instrument", "--job", ".github/workflows/ci.yml/test", "--first-commit", SHA_C, "--dry-run"], {
+      exec: () => assert.fail("incompatible mode must stop before GitHub access"),
+      log: () => {},
+    }),
+    /--first-commit cannot be combined with --record instrument/,
+  )
 })
 
 test("livePr: refuses an alternate branch for an already-open logical replay", async () => {
