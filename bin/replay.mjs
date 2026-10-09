@@ -385,9 +385,10 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   find --paths <glob,..> --workload-name <n> --workload-paths <glob,..> [--record-mode <m> --record-job <w/j>]
                                                                     scope candidates to workload paths and persist the
                                                                     target's record mode for later live runs
-  live <slug> --pr <N> [--work dir] [--first p,..] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
+  live <slug> --pr <N> [--work dir] [--first p,.. | --first-commit sha] [--record inject] [--ecosystem npm|pnpm|yarn|cargo|ruby|uv|go] [--sync-fork | --base-branch b [--record-workflow p] | --allow-behind] [--label l] [--allow-pending-recorder] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     replay of an upstream pull request on the fork: one commit once the fork is
-                                                                    onboarded (replay setup), two bundled commits with --record inject
+                                                                    onboarded (replay setup); --first-commit <sha> compares two upstream
+                                                                    PR commits instead of the PR base and head
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
   setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
