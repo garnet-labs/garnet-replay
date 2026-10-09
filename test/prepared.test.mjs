@@ -51,7 +51,8 @@ test("prepared: can publish against an existing fork-only base branch", () => {
   assert.ok(plan.steps.find((step) => step.id === "pr-create").args.includes("garnet/replay-base"))
   assert.throws(() => planPrepared({ ...input, baseBranch: "garnet/replay-base", branch: "main" }), /feature branch/)
   assert.throws(() => planPrepared({ ...input, baseBranch: "garnet/replay-base", branch: "garnet/replay-base" }), /feature branch/)
-  for (const bad of ["main~1", "main^", "main..dev", "a:b", "-x", "", "HEAD@{1}", "a b"]) {
+  assert.doesNotThrow(() => planPrepared({ ...input, baseBranch: "release@2026" }))
+  for (const bad of ["main~1", "main^", "main..dev", "a:b", "-x", "", "HEAD", "@", "HEAD@{1}", "a b"]) {
     assert.throws(() => planPrepared({ ...input, baseBranch: bad }), /base branch is invalid/)
   }
 })
