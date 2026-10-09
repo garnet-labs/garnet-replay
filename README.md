@@ -28,6 +28,8 @@ node bin/replay.mjs --help
   viewer shows these records as observations scoped to the recorded jobs
   ("capture not declared"); none clears the share gate, and no causal claim is
   made from them.
+- Walkthroughs for humans and agents (read evidence, hosted wizard, CLI,
+  agent procedure, consumption, contributing): [docs/walkthroughs.md](docs/walkthroughs.md).
 - Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
   [docs/agent-interface.md](docs/agent-interface.md).
 - Viewer: <https://garnet-replay.vercel.app>. With the hosted runner configured
@@ -148,14 +150,16 @@ action after reviewing that plan. The local runner records both commits and runs
 the canonical share gate before saving a completed result.
 
 Saved-artifact browsing, target ledgers, and the advanced command composer live
-under `/workspace`. This is a single-user local service; a hosted service needs
-authentication and isolated workers.
+under `/workspace`. The local server is single-user; the hosted viewer gates
+writes behind an operator key and runs them on GitHub Actions.
 See [docs/workspace.md](docs/workspace.md) for navigation, evidence semantics,
 and the HTTP interface.
 
 The public evidence viewer runs at <https://garnet-replay.vercel.app>
-(`api/index.mjs` on Vercel, or `node server.mjs` on any Node host). It serves saved evidence and anonymous GitHub receipt lookups;
-preparation and recording stay in the local harness. See
+(`api/index.mjs` on Vercel, or `node server.mjs` on any Node host). It serves saved evidence and anonymous GitHub receipt lookups. With the hosted
+runner configured, its wizard prepares and records replays through the `replay`
+workflow ([setup](docs/workspace.md#create-replays-from-the-hosted-viewer));
+otherwise it is read-only. See
 [hosting](docs/workspace.md#host-the-public-evidence-viewer) for deployment limits.
 
 ## Supported ecosystems

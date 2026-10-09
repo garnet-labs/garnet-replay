@@ -42,7 +42,9 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - Explicit checks (`typeof x === "string"`, `x !== null`), no truthiness on data.
 - Network and git go through `lib/gh.mjs` so commands can run with an injected
   `exec` in tests. Everything in `lib/*.mjs` that decides something is a pure
-  function with a test in `test/`.
+  function with a test in `test/`. The one exception is `lib/hosted-runner.mjs`:
+  the Vercel function has no `gh` CLI, so it calls the GitHub REST API with
+  `fetch` through an injected `fetchImpl` that tests replace.
 - `contract/vocab.json` is vendored from the Runtime Review testbed. Do not edit
   it here; re-vendor it.
 - `targets/*.json` are ledgers written by the commands. Do not hand-edit them

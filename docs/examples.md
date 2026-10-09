@@ -377,6 +377,12 @@ and intent headers. A separate test supplies ambient GitHub credentials and
 checks that public lookups omit authorization. These checks verify the entrypoint
 locally; they do not establish a deployed Vercel URL.
 
+With `REPLAY_DISPATCH_TOKEN`, `REPLAY_OPERATOR_KEY` and `REPLAY_ORIGIN` set, the
+same page runs the five-step wizard through `.github/workflows/replay.yml`
+([walkthrough](walkthroughs.md#replay-a-new-pr-from-the-hosted-wizard)). No
+credentialed hosted run has been recorded yet, so this section shows no hosted
+wizard output; the offline behavior is covered by `test/hosted-runner.test.mjs`.
+
 ## Preserving the selected base's Dependabot policy
 
 Read-only CLI probe on 2026-09-11, after the five-prospect corrections:
