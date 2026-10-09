@@ -385,3 +385,12 @@ test("a missing declared step renders its own card headline", async () => {
   assert.ok(card.includes("A declared step was not recorded on both sides, so the scoped comparison is not available."))
   assert.ok(!card.includes("Capture is incomplete"))
 })
+
+test("an unscoped supported claim covers the rows it matched", async () => {
+  const base = await fixture("intent-sentry-base.json")
+  const head = await fixture("intent-sentry-head.json")
+  const claims = [{ id: "storefront-removed", kind: "network", match: { destination: "mock.shop" }, expect: "present-before-absent-after", source: "pr-body" }]
+  const result = evaluateClaims({ base, head, claims, steps: null, capture: COMPLETE })
+  assert.equal(result.claims[0].outcome, "supported")
+  assert.deepEqual(result.uncovered.removed.filter((row) => row.destination === "mock.shop"), [])
+})
