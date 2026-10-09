@@ -30,7 +30,10 @@ node bin/replay.mjs --help
   made from them.
 - Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
   [docs/agent-interface.md](docs/agent-interface.md).
-- Viewer: <https://garnet-replay.vercel.app> is read-only; recording stays local.
+- Viewer: <https://garnet-replay.vercel.app>. With the hosted runner configured
+  ([docs/workspace.md](docs/workspace.md#create-replays-from-the-hosted-viewer)),
+  its wizard prepares and records a replay on the garnet-labs fork through the
+  `replay` workflow; otherwise it is read-only.
 
 Details and open requirements: [docs/ledger.md](docs/ledger.md).
 

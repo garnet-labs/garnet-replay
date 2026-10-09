@@ -438,7 +438,10 @@ test("replay --pr: an injected recorder also covers Dependabot; a fork without d
   assert.equal(dependabotConfig("go").includes("package-ecosystem: gomod"), true)
   assert.equal(dependabotConfig("ruby").includes("package-ecosystem: bundler"), true)
   assert.throws(() => dependabotConfig("bazel"), /no Dependabot ecosystem/)
-  assert.match(recordWorkflow("npm"), /Dependabot's included/)
+  assert.match(recordWorkflow("npm", "main"), /Dependabot's included/)
+  assert.match(recordWorkflow("npm", "develop"), /\non:\n  push:\n    branches: \['develop'\]\n  pull_request:\n/)
+  assert.doesNotMatch(recordWorkflow("npm", "main"), /\{\{[A-Z_]+\}\}/)
+  assert.throws(() => recordWorkflow("npm"), /invalid default branch/)
   assert.equal(resolvedFirstMessage([".github/dependabot.yml", ".github/workflows/garnet-record.yml"], "chore(deps): sync"), "ci: record dependency installs on pull requests\n\n- .github/dependabot.yml\n- .github/workflows/garnet-record.yml")
 })
 

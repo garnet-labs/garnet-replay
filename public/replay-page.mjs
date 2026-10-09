@@ -74,13 +74,30 @@ export function renderReplayPending(result) {
     <div class="state-copy" role="status"><span class="eyebrow">PULL REQUEST → REPLAY</span><h2>${h(heading)}</h2><p>${h(result.lookupError ?? description)}</p></div>
     ${result.state === "loading" ? "" : `<div class="request-actions"><button id="refresh-pr">Check GitHub again ↻</button>${result.recordId !== null && result.recordId !== undefined ? '<button id="open-historical">Inspect historical record →</button>' : ""}</div>`}
   </section>
+  ${result.state === "loading" ? "" : renderReplaySteps(result, job)}
   ${result.state === "loading" ? "" : `<section class="prepare-panel">
     <div class="section-label"><span>NEXT REPLAY</span><span>${target === null ? "SETUP REQUIRED" : h(target.slug.toUpperCase())}</span></div>
     <div class="prepare-copy"><div><h2>${result.canPrepare ? "Replay this change on your fork." : result.runnerAvailable === false ? "Prepare a replay in the local harness." : "Bring runtime evidence to this PR."}</h2>
       <p>${result.canPrepare ? `The harness checks the change and recorder, then prepares a two-commit replay on ${h(target.fork)}.` : result.runnerAvailable === false ? "This viewer reads public evidence. Use the local harness to prepare and record a new replay on your fork." : target !== null ? "Open the upstream PR to prepare a replay, or refresh this fork’s existing recording." : "Connect this repository to the harness with a configured fork, or add Garnet to its workflow to record future runs."}</p></div>
-      ${result.canPrepare ? '<button id="prepare-pr" class="primary">Prepare replay <span aria-hidden="true">→</span></button>' : '<a class="button-link" href="https://github.com/garnet-labs/garnet-replay#runbook" target="_blank" rel="noreferrer">Setup guide ↗</a>'}
+      ${result.canPrepare ? `${result.operatorRequired === true ? '<label class="operator-key">Operator key<input id="operator-key" type="password" autocomplete="off" placeholder="Required to write to garnet-labs forks"></label>' : ""}<button id="prepare-pr" class="primary">Prepare replay <span aria-hidden="true">→</span></button>` : '<a class="button-link" href="https://github.com/garnet-labs/garnet-replay#runbook" target="_blank" rel="noreferrer">Setup guide ↗</a>'}
     </div><div id="replay-job">${job === undefined ? "" : renderReplayJob(job, result.runnerEnabled)}</div>
   </section>`}`
+}
+
+/** Show where this PR is in the replay sequence: PR, fork, plan, recording, evidence. */
+export function renderReplaySteps(result, job) {
+  const order = ["preparing", "prepared", "recording", "verifying", "complete"]
+  const reached = job === undefined || job === null ? -1 : order.indexOf(job.state)
+  const blocked = job?.state === "blocked" || job?.state === "interrupted"
+  const position = job?.plan === undefined ? 2 : 3
+  const steps = [
+    ["Pull request", result.state === "unavailable" ? "blocked" : "done", result.state === "unavailable" ? "GitHub could not be read" : `${result.pr.repository} #${result.pr.number}`],
+    ["Fork", result.target === null ? "blocked" : "done", result.target === null ? "No garnet-labs fork configured" : result.target.fork],
+    ["Plan", reached >= 1 ? "done" : reached === 0 ? "active" : blocked && position === 2 ? "blocked" : "next", reached >= 1 ? "Exact pair checked" : "Base, head and recorder"],
+    ["Record", reached >= 4 ? "done" : reached >= 2 ? "active" : blocked && position === 3 ? "blocked" : "next", "Draft PR on the fork"],
+    ["Evidence", reached >= 4 ? "done" : "next", reached >= 4 ? "Share gate cleared" : "Receipt and execution diff"],
+  ]
+  return `<ol class="replay-steps" id="replay-steps" aria-label="Replay steps">${steps.map(([name, state, detail], index) => `<li class="${state}"${state === "active" ? ' aria-current="step"' : ""}><span class="step-index">${index + 1}</span><span><strong>${h(name)}</strong><small>${h(detail)}</small></span></li>`).join("")}</ol>`
 }
 
 /** Present only states reported by the canonical runner. */
@@ -101,6 +118,7 @@ export function renderReplayJob(job, enabled = true) {
     ${job.state === "prepared" ? `<p>Starting creates a draft pull request on <strong>${h(job.plan.fork)}</strong> and runs its recording workflow.</p>
       ${enabled ? `<button class="primary" id="start-pr" data-job="${h(job.id)}">Start replay on fork →</button>` : '<p>Recording is disabled on this server. Enable it with <code>node bin/replay.mjs serve --run-replays</code>, then reopen this PR.</p>'}` : ""}
     ${safeUrl(job.forkUrl) === null ? "" : `<a href="${h(safeUrl(job.forkUrl))}" target="_blank" rel="noreferrer">Inspect fork progress ↗</a>`}
+    ${safeUrl(job.runUrl) === null ? "" : `<a href="${h(safeUrl(job.runUrl))}" target="_blank" rel="noreferrer">Open the harness run ↗</a>`}
     ${job.lines?.length > 0 ? `<details><summary>Harness output</summary><pre class="raw">${h(job.lines.join("\n"))}</pre></details>` : ""}
   </div>`
 }
