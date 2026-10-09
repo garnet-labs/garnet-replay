@@ -44,11 +44,12 @@ The wizard is pull request → fork → plan → record → evidence
    recording workflow, and runs the share gate.
 5. The evidence step opens the fork PR's live receipt.
 
-Writes are enabled only when `REPLAY_DISPATCH_TOKEN`, `REPLAY_OPERATOR_KEY`
-and `REPLAY_ORIGIN` are set on Vercel and `REPLAY_FORK_TOKEN` is a repository
-secret; otherwise the viewer is read-only and every mutation returns 405. The
-fork token exists only inside GitHub Actions and should be scoped to the
-configured forks. No credentialed hosted run has been recorded in
+The viewer enables Prepare and Start only when `REPLAY_DISPATCH_TOKEN`,
+`REPLAY_OPERATOR_KEY` and `REPLAY_ORIGIN` are set on Vercel; otherwise it is
+read-only and every mutation returns 405. The viewer cannot see repository
+secrets: without the `REPLAY_FORK_TOKEN` Actions secret, Start dispatches and
+the workflow job stops before any fork write. That token exists only inside
+GitHub Actions and should be scoped to the configured forks. No credentialed hosted run has been recorded in
 [examples.md](examples.md) yet; until one is, the local path below is the
 reference.
 
