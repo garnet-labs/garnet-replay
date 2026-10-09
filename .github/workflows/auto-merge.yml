@@ -46,6 +46,10 @@ jobs:
           AUTO_MERGE_PR: ${{ github.event.pull_request.number || inputs.pr }}
           AUTO_MERGE_SHA: ${{ github.event.check_suite.head_sha || github.event.workflow_run.head_sha || github.event.sha }}
         run: |
+          if [ ! -f bin/auto-merge.mjs ]; then
+            echo "::notice::bin/auto-merge.mjs is not on the default branch yet; nothing to evaluate"
+            exit 0
+          fi
           if [ -n "$AUTO_MERGE_PR" ]; then
             node bin/auto-merge.mjs --repo "$AUTO_MERGE_REPO" --pr "$AUTO_MERGE_PR"
           else
