@@ -377,6 +377,9 @@ async function live(args) {
 
 const USAGE = `usage: replay <command> [options]
 
+start here (read-only; no fork, no ledger)
+  upstream <owner/repo> --pr <N> [--slug s] [--limit 20]            read-only: profiles the upstream's own CI already recorded for one pull request
+
 ladder (one target ledger per upstream repository, one fork as the only write target)
   live <slug> --prepared <json> --work <checkout> [--branch b] [--resume] [--label l] [--dry-run]
                                                                     author explicit before/after files; record commit 1 before publishing commit 2
@@ -456,6 +459,7 @@ async function main(args) {
   if (command === "harvest") return ladder.harvest(args.slice(1))
   if (command === "uat") return ladder.uat(args.slice(1))
   if (command === "status") return ladder.status(args.slice(1))
+  if (command === "upstream") return ladder.upstream(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))

@@ -83,3 +83,14 @@ faithful workload remain open; see the report for ownership and next actions.
 - `replay find` uses the GitHub search and list APIs; broad scans time out, so
   use `--author`, `--search`, `--limit`.
 - The benchmark (`benchmark/`) is a single Devin-reviewer pass over 25 seeds.
+
+## 2026-10-02: ledger writes and upstream reads
+
+- Lost-row race (pnpm#70 dropped when pnpm#71 saved): the keyed merge from
+  `e026930` re-reads the file, but two processes could still read before either
+  renamed. `saveTarget` now holds `targets/<slug>.json.lock` (exclusive create,
+  stale after 30 s) across read, merge and rename; `test/ledger-lock.test.mjs`
+  runs eight writer processes and keeps every row. With the race closed, no
+  `replay recover` command was added; the earlier hand restore stays as recorded.
+- `replay upstream <owner/repo> --pr N` reads profiles the upstream's own CI
+  recorded (pnpm since its v2.3.0 pin). Result: `docs/pnpm-proof.md`.
