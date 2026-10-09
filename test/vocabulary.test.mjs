@@ -64,7 +64,12 @@ test("intent card copy uses observation vocabulary", () => {
     uncovered: { added: [{ side: "added", destination: "telemetry.example.net", step: "Run E2E test" }], removed: [] },
     stepsMissing: { base: [], head: [] },
   }
-  const card = renderCard(buildModel({ slug: "sentry-javascript", forkPr: 3, headSha: null, comment: null, intent }))
+  const headSha = "a".repeat(40)
+  const comment = {
+    user: { login: "garnet-runtime-review[bot]" },
+    body: `<!-- garnet:commit ${headSha} --><!-- garnet:summary {"status":"finalized","previous":"${"b".repeat(40)}"} -->`,
+  }
+  const card = renderCard(buildModel({ slug: "sentry-javascript", forkPr: 3, headSha, comment, intent }))
   assert.equal(FORBIDDEN.test(card), false, "intent card copy contains forbidden vocabulary")
   for (const phrase of [
     "Expected behaviour change is present in the record",

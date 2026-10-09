@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, executionDiffFromProfiles, renderExecutionDiffText } from "../lib/execution-diff.mjs"
+import { declaredStepName } from "../lib/profile-diff.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
 import { listTargets } from "../lib/ledger.mjs"
@@ -170,7 +171,9 @@ async function pair(args) {
   const to = option(args, "--to", null)
   const comparisonScope = option(args, "--scope", "immediate-parent-to-head")
   const note = option(args, "--note", null)
-  const steps = csvList(option(args, "--steps", null))
+  const stepNames = csvList(option(args, "--steps", null))
+  const steps = stepNames === null ? null
+    : [...new Set(stepNames.map((name) => declaredStepName(name)).filter((name) => name !== null))]
   const claims = multiOption(args, "--claim")
   const intentPath = option(args, "--intent", null)
   if (intentPath !== null) {
