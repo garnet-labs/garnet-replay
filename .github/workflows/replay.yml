@@ -70,3 +70,17 @@ jobs:
           path: out/hosted-job/job.json
           if-no-files-found: error
           retention-days: 30
+      - name: Tell receipts a replay was recorded
+        if: success() && inputs.action == 'start'
+        env:
+          GH_TOKEN: ${{ secrets.RECEIPTS_DISPATCH_TOKEN }}
+          RECEIPTS_REPO: ${{ vars.RECEIPTS_REPO }}
+          REPLAY_SLUG: ${{ inputs.slug }}
+          REPLAY_NUMBER: ${{ inputs.number }}
+        run: |
+          if [ -z "$GH_TOKEN" ] || [ -z "$RECEIPTS_REPO" ]; then
+            echo "::notice::RECEIPTS_REPO or RECEIPTS_DISPATCH_TOKEN is not set; receipts picks this up on its daily sweep"
+            exit 0
+          fi
+          gh api "repos/$RECEIPTS_REPO/dispatches" -f event_type=replay-recorded \
+            -f "client_payload[slug]=$REPLAY_SLUG" -f "client_payload[number]=$REPLAY_NUMBER"
