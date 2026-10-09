@@ -743,8 +743,9 @@ main {
 }
 .notice {
   border: 1px solid var(--line);
+  border-left: 2px solid var(--amber);
   border-radius: 6px;
-  background: var(--amber-bg);
+  background: var(--panel);
   padding: 14px;
   font-size: 12px;
   line-height: 1.7;
@@ -1323,4 +1324,21 @@ button.primary {
   border-color: var(--accent);
   color: #fff;
   border-radius: 999px;
+}
+
+button.quiet {
+  background: transparent;
+  color: var(--muted);
+}
+button.quiet:hover {
+  color: var(--text);
+}
+button.quiet {
+  border-color: transparent;
+  font-size: 12px;
+}
+.notice + .notice,
+.provenance-strip + .notice,
+.meta-row + .notice {
+  margin-top: 12px;
 }

@@ -8,7 +8,7 @@ body:not([data-surface="workspace"]) .topbar { padding-inline: max(24px, calc((1
 .workspace-link { color: var(--muted); font-size: 12px; margin-right: 16px; }
 .landing { max-width: 940px; margin: 0 auto; padding: 82px 30px 0; }
 .hero { max-width: 780px; margin: auto; }
-.hero-kicker, .section-label { display: flex; justify-content: space-between; align-items: center; font: 10px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: 1.1px; color: var(--muted); }
+.hero-kicker, .section-label { display: flex; justify-content: space-between; align-items: center; font-size: 12px; line-height: 1.5; color: var(--muted); }
 .hero-kicker { justify-content: flex-start; gap: 12px; margin-bottom: 22px; }
 .mini-mark { color: var(--accent); font-size: 24px; line-height: 1; }
 .hero h1 { font-size: clamp(36px, 5.6vw, 62px); font-weight: 500; letter-spacing: -2.8px; line-height: 1.08; margin: 0; }
@@ -40,6 +40,7 @@ body:not([data-surface="workspace"]) .topbar { padding-inline: max(24px, calc((1
 .url-swap button { width: 100%; border: 0; border-radius: 0; text-align: left; font-size: 10px; color: var(--muted); padding: 10px 14px; }
 .url-swap button span { float: right; }
 .section-label h2 { font: inherit; margin: 0; }
+.examples { margin-top: 64px; }
 .examples .section-label { margin-bottom: 12px; }
 .example-row { display: flex; align-items: center; gap: 15px; padding: 19px 4px; border-bottom: 1px solid var(--line); color: var(--text); }
 .example-row:hover { background: var(--panel); text-decoration: none; }
@@ -102,7 +103,7 @@ body[data-surface="pr"] #content { max-width: 1184px; margin: 0 auto; }
   .shortcut { margin-top: 38px; }
   .shortcut-layout { grid-template-columns: 1fr; gap: 18px; }
   .shortcut h2 br { display: none; }
-  .section-label { font-size: 8px; letter-spacing: .6px; }
+
   .example-row { flex-wrap: wrap; gap: 6px 10px; }
   .example-text { flex-basis: 75%; }
   .example-row > span:last-child { display: none; }
