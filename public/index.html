@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,10 +15,8 @@
     <a class="skip" href="#content">Skip to evidence</a>
     <header class="topbar">
       <a class="brand" href="/" aria-label="Garnet Replay home"
-        ><img src="/replay.svg" alt="" width="26" height="26" /><span
-          >garnet<span class="brand-divider">/</span
-          ><strong>replay</strong></span
-        ></a
+        ><span class="brand-mark" aria-hidden="true"></span
+        ><strong>Garnet</strong><span class="brand-product">Replay</span></a
       >
       <form id="search-form" role="search">
         <span aria-hidden="true">⌕</span
@@ -31,6 +29,7 @@
         /><kbd>/</kbd>
       </form>
       <div class="top-actions">
+        <a href="https://receipts-sigma-beryl.vercel.app" class="workspace-link">Receipts</a>
         <a href="/workspace" class="workspace-link">Workspace</a>
         <button
           id="theme"

@@ -526,5 +526,5 @@ document.addEventListener("keydown", (event) => {
   }
 })
 window.addEventListener("popstate", route)
-document.documentElement.dataset.theme = preference("replay-theme") ?? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+document.documentElement.dataset.theme = preference("replay-theme") ?? "dark"
 void load()
