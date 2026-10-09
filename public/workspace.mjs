@@ -1,6 +1,6 @@
 import { composeCommand, escapeHtml as h, matchingCandidates, matchingRecords, renderCandidate, safeUrl } from "./workspace-model.mjs"
 import { parseReplayInput, replayShareStatus } from "./pr-route.mjs"
-import { renderLanding, renderPrLocation, renderReplayPending, renderReplayJob } from "./replay-page.mjs"
+import { renderLanding, renderPrLocation, renderReplayPending, renderReplayJob, renderReplaySteps } from "./replay-page.mjs"
 
 const $ = (selector) => document.querySelector(selector)
 const content = $("#content")
@@ -75,15 +75,23 @@ async function replayAction(action, id) {
   const version = requestVersion
   const container = $("#replay-job")
   if (container === null) return
-  container.innerHTML = renderReplayJob({ state: "preparing", message: "Reading the upstream pair and the fork recorder." })
+  const keyInput = $("#operator-key")
+  if (keyInput !== null && keyInput.value !== "") operatorKey(keyInput.value)
+  const key = operatorKey()
+  if (currentPr.operatorRequired === true && key === null) {
+    container.innerHTML = renderReplayJob({ state: "blocked", message: "Enter the operator key to create a replay on the fork." })
+    return
+  }
+  container.innerHTML = renderReplayJob({ state: action === "prepare" ? "preparing" : "recording", message: action === "prepare" ? "Reading the upstream pair and the fork recorder." : "Starting the recording run." })
   $("#prepare-pr").disabled = true
   try {
     const response = await fetch(`/api/replay/${action}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-Replay-Intent": "same-origin" },
+      headers: { "Content-Type": "application/json", "X-Replay-Intent": "same-origin", ...(key === null ? {} : { "X-Replay-Operator": key }) },
       body: JSON.stringify(action === "prepare" ? { url: currentPr.pr.url } : { id }),
     })
     const result = await response.json()
+    if (response.status === 401) operatorKey("")
     if (!response.ok) throw new Error(result.error ?? "The runner could not accept this replay.")
     if (version !== requestVersion) return
     await pollJob(result.id, version)
@@ -101,16 +109,29 @@ async function pollJob(id, version) {
     const job = await response.json()
     if (version !== requestVersion) return
     $("#replay-job").innerHTML = renderReplayJob(job, currentPr.runnerEnabled)
+    const steps = $("#replay-steps")
+    if (steps !== null) steps.outerHTML = renderReplaySteps(currentPr, job)
     if (job.state === "complete") {
-      await openPr(currentPr.pr, false, true)
+      const fork = job.runUrl === undefined ? null : parseReplayInput(job.forkUrl ?? "")
+      await openPr(fork ?? currentPr.pr, fork !== null, true)
       return
     }
-    if (["preparing", "recording", "verifying"].includes(job.state)) jobTimer = setTimeout(() => void pollJob(id, version), 1500)
+    if (["preparing", "recording", "verifying"].includes(job.state)) jobTimer = setTimeout(() => void pollJob(id, version), job.runUrl === undefined ? 1500 : 10000)
     else $("#prepare-pr").disabled = false
   } catch (error) {
     if (version !== requestVersion) return
     $("#replay-job").innerHTML = renderReplayJob({ state: "blocked", message: error.message })
     $("#prepare-pr").disabled = false
+  }
+}
+
+function operatorKey(value) {
+  try {
+    if (value === "") sessionStorage.removeItem("replay-operator")
+    else if (value !== undefined) sessionStorage.setItem("replay-operator", value)
+    return sessionStorage.getItem("replay-operator")
+  } catch {
+    return null
   }
 }
 

@@ -1,5 +1,9 @@
 import test from "node:test"
 import assert from "node:assert/strict"
+import { execFileSync } from "node:child_process"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
@@ -16,8 +20,9 @@ import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, pa
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
-import { STAGES, ensureTarget } from "../lib/ledger.mjs"
+import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
+import { PNPM_82_COMMENT, PNPM_84_COMMENT, PNPM_85_COMMENT } from "./fixtures/pnpm-app-comments.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -191,6 +196,94 @@ test("replay --pr: two commits, exact head fetch, fork-only writes, no upstream 
   assert.throws(() => replayPlan({ record: "inject", ecosystem: "bazel" }), /no install command/)
 })
 
+test("replay --pr: --first-commit stages the upstream trees for both commits", async () => {
+  const work = mkdtempSync(join(tmpdir(), "garnet-first-commit-"))
+  const git = (...args) => execFileSync("git", ["-C", work, ...args], { encoding: "utf8" }).trim()
+  try {
+    git("init", "-b", "main")
+    git("config", "user.name", "Garnet Replay Test")
+    git("config", "user.email", "test@example.com")
+    git("config", "commit.gpgsign", "false")
+    writeFileSync(join(work, "stable.txt"), "base\n")
+    writeFileSync(join(work, "delete-at-head.txt"), "base\n")
+    git("add", "-A")
+    git("commit", "-m", "base")
+    const baseSha = git("rev-parse", "HEAD")
+
+    writeFileSync(join(work, "stable.txt"), "earlier\n")
+    writeFileSync(join(work, "delete-at-head.txt"), "earlier\n")
+    writeFileSync(join(work, "only-first.txt"), "first only\n")
+    git("add", "-A")
+    git("commit", "-m", "feat: earlier upstream push")
+    const firstSha = git("rev-parse", "HEAD")
+
+    writeFileSync(join(work, "stable.txt"), "head\n")
+    rmSync(join(work, "delete-at-head.txt"))
+    rmSync(join(work, "only-first.txt"))
+    git("add", "-A")
+    git("commit", "-m", "feat: pull request head")
+    const headSha = git("rev-parse", "HEAD")
+    const plan = replayPlan({
+      upstreamTitle: "feat: exact earlier push",
+      baseSha,
+      headSha,
+      changes: [
+        { path: "delete-at-head.txt", status: "removed", previous: null },
+        { path: "stable.txt", status: "modified", previous: null },
+      ],
+      firstPaths: [],
+      firstCommitSha: firstSha,
+      firstCommitMessage: "feat: earlier upstream push",
+      work,
+      baseBranch: "replay-base",
+      baseRecords: [".github/workflows/ci.yml"],
+      recordWorkflows: [],
+    })
+
+    assert.equal(plan.scope, "previous-recorded-head-to-head")
+    assert.equal(plan.firstCommitSha, firstSha)
+    assert.equal(plan.messages.first, "feat: earlier upstream push")
+    assert.match(plan.body, /^Two commits: the first is an earlier push of this change, the second is its final state\.\n/)
+    assert.ok(plan.steps.some((step) => step.id === "base-branch"))
+    assert.ok(!plan.steps.some((step) => step.id === "first-fork-record"))
+    const runSteps = plan.steps.filter((step) => [
+      "first-commit-paths", "first-check", "first-commit",
+      "change-head", "change-check", "change-commit",
+    ].includes(step.id))
+    git("checkout", "-B", "replay-base", baseSha)
+    await executePlan({ ...plan, steps: runSteps }, {
+      exec: (command, args, options = {}) => execFileSync(command, args, { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], ...options }),
+      log: () => {},
+    })
+
+    assert.equal(git("rev-list", "--count", `${baseSha}..HEAD`), "2")
+    assert.equal(git("rev-parse", "HEAD~1^{tree}"), git("rev-parse", `${firstSha}^{tree}`))
+    assert.equal(git("rev-parse", "HEAD^{tree}"), git("rev-parse", `${headSha}^{tree}`))
+    assert.equal(git("show", "HEAD~1:only-first.txt"), "first only")
+    assert.equal(git("show", "HEAD~1:delete-at-head.txt"), "earlier")
+    assert.equal(git("ls-tree", "--name-only", "HEAD", "--", "only-first.txt"), "")
+    assert.equal(git("ls-tree", "--name-only", "HEAD", "--", "delete-at-head.txt"), "")
+
+    const fallback = replayPlan({
+      upstreamTitle: "feat: regular upstream change",
+      firstCommitSha: SHA_C,
+      firstCommitMessage: `Review ${UPSTREAM}`,
+      firstPaths: [],
+    })
+    assert.match(fallback.messages.first, /^chore: sync touched files before update/)
+    assert.throws(() => replayPlan({ firstCommitSha: SHA_C }), /--first-commit cannot be combined with --first/)
+    assert.throws(() => replayPlan({
+      upstreamTitle: "feat: regular upstream change",
+      firstCommitSha: SHA_C,
+      firstPaths: [],
+      record: "instrument",
+      instrument: { path: ".github/workflows/ci.yml", content: "jobs: {}", changes: [], job: "test" },
+    }), /--record instrument/)
+  } finally {
+    rmSync(work, { recursive: true, force: true })
+  }
+})
+
 test("replay --pr: commit 1 and the body name manifests only when every touched path is one", () => {
   const manifests = ["Cargo.toml", "Cargo.lock", "crates/uv/Cargo.toml", "nodejs/package.json", "pnpm-lock.yaml", "pyproject.toml", "uv.lock", "go.mod", "Gemfile.lock"]
   assert.equal(allManifests(manifests), true)
@@ -345,7 +438,10 @@ test("replay --pr: an injected recorder also covers Dependabot; a fork without d
   assert.equal(dependabotConfig("go").includes("package-ecosystem: gomod"), true)
   assert.equal(dependabotConfig("ruby").includes("package-ecosystem: bundler"), true)
   assert.throws(() => dependabotConfig("bazel"), /no Dependabot ecosystem/)
-  assert.match(recordWorkflow("npm"), /Dependabot's included/)
+  assert.match(recordWorkflow("npm", "main"), /Dependabot's included/)
+  assert.match(recordWorkflow("npm", "develop"), /\non:\n  push:\n    branches: \['develop'\]\n  pull_request:\n/)
+  assert.doesNotMatch(recordWorkflow("npm", "main"), /\{\{[A-Z_]+\}\}/)
+  assert.throws(() => recordWorkflow("npm"), /invalid default branch/)
   assert.equal(resolvedFirstMessage([".github/dependabot.yml", ".github/workflows/garnet-record.yml"], "chore(deps): sync"), "ci: record dependency installs on pull requests\n\n- .github/dependabot.yml\n- .github/workflows/garnet-record.yml")
 })
 
@@ -524,6 +620,59 @@ test("recorder health: the fork's newest pull requests say whether Runtime Revie
   assert.deepEqual(health.pending.map((r) => r.pr), [52, 51])
   assert.equal(health.lastFinal.pr, 50)
   assert.ok(calls.some((c) => c.startsWith("pr list") && c.includes(FORK)), calls.join("\n"))
+})
+
+test("recorder health: pnpm App markers distinguish final, terminal no-profile, and pending comments", () => {
+  const bot = { login: "garnet-runtime-review[bot]" }
+  const final = { user: bot, created_at: "2026-10-02T01:58:31Z", updated_at: "2026-10-02T01:58:31Z", body: PNPM_85_COMMENT }
+  const noProfile = { user: bot, created_at: "2026-10-02T00:52:36Z", updated_at: "2026-10-02T00:52:36Z", body: PNPM_84_COMMENT }
+  const pending = { user: bot, created_at: "2026-09-30T02:55:49Z", updated_at: "2026-09-30T02:55:49Z", body: PNPM_82_COMMENT }
+  const finalObservation = observeRecord(85, [final])
+  const noProfileObservation = observeRecord(84, [noProfile])
+  const pendingObservation = observeRecord(82, [pending])
+
+  assert.equal(finalObservation.state, "final")
+  assert.equal(noProfileObservation.state, "no-profile")
+  assert.equal(pendingObservation.state, "pending")
+  assert.equal(observeRecord(85, [final, pending]).state, "final", "the newest timestamp wins even when the comments are newest-first")
+
+  const health = recorderVerdict([finalObservation, noProfileObservation])
+  assert.equal(health.verdict, "ok")
+  assert.equal(health.lastFinal.pr, 85)
+  assert.deepEqual(health.pending, [])
+  assert.equal(recorderVerdict([noProfileObservation]).verdict, "none")
+  assert.equal(recorderVerdict([finalObservation, noProfileObservation, pendingObservation]).verdict, "ok")
+})
+
+test("recorder health: a batch's own in-flight pull requests are not a stalled recorder", () => {
+  const bot = { login: "garnet-runtime-review[bot]" }
+  const final = (sha) => ({ user: bot, updated_at: "2026-10-01T03:40:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${sha} -->\n<!-- garnet:summary {"status":"finalized","changed":0} -->\nRuntime Review` })
+  const pending = (sha) => ({ user: bot, updated_at: "2026-10-01T03:35:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment: ${sha} -->\n<!-- garnet:commit ${sha} -->\n⏳ recording` })
+  const now = Date.parse("2026-10-01T04:00:00Z")
+  const comments = { 60: [], 59: [pending(SHA_A)], 58: [final(SHA_B)], 57: [pending(SHA_C)], 56: [] }
+  const exec = (cmd, args) => {
+    if (args[0] === "pr" && args[1] === "list") {
+      return JSON.stringify([
+        { number: 60, createdAt: "2026-10-01T03:50:00Z" },
+        { number: 59, createdAt: "2026-10-01T03:30:00Z" },
+        { number: 58, createdAt: "2026-10-01T03:20:00Z" },
+        { number: 57, createdAt: "2026-09-30T01:00:00Z" },
+        { number: 56, createdAt: "2026-09-29T01:00:00Z" },
+      ])
+    }
+    const pr = Number(/issues\/(\d+)\/comments/.exec(args[1])?.[1])
+    return JSON.stringify(comments[pr])
+  }
+  const health = recorderHealth(FORK, { exec, limit: 3, now })
+  assert.equal(health.verdict, "ok")
+  assert.equal(health.fresh, 2)
+  assert.equal(health.lastFinal.pr, 58)
+  assert.match(health.line, /2 in-flight pull requests younger than 60 min skipped$/)
+
+  comments[58] = [pending(SHA_B)]
+  const old = recorderHealth(FORK, { exec, limit: 3, now: now + 3 * 3600_000 })
+  assert.equal(old.verdict, "stalled", "placeholders past the freshness window still read as a stall")
+  assert.equal(old.fresh, 0)
 })
 
 test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
@@ -1845,4 +1994,14 @@ test("verify: the fork's re-review lock comment is not session residue, other co
   assert.equal(findResidue("routine body", [lock]), null)
   assert.equal(findResidue("routine body", [lock, "Reviewed by Devin"]), "Devin")
   assert.equal(findResidue("see app.devin.ai/x", [lock]), "app.devin.ai")
+})
+
+test("saveTarget keeps rows a concurrent command added and drops rows this process removed", () => {
+  const seen = { replays: new Set(["branch:a", "branch:gone"]), observations: new Set(), evidence: new Set(), consumption: new Set() }
+  const mine = { slug: "x", replays: [{ upstreamPr: null, branch: "a", state: "recorded" }, { upstreamPr: null, branch: "b" }] }
+  const disk = { slug: "x", replays: [{ upstreamPr: null, branch: "a", state: "pending" }, { upstreamPr: null, branch: "gone" }, { upstreamPr: null, branch: "c" }] }
+  const merged = mergeConcurrentRows(mine, disk, seen)
+  assert.deepEqual(merged.replays.map((row) => row.branch), ["a", "b", "c"])
+  assert.equal(merged.replays[0].state, "recorded")
+  assert.equal(mergeConcurrentRows(mine, null, seen), mine)
 })

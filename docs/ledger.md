@@ -3,6 +3,14 @@
 One row per requirement. A row is done only when its artifact exists and was
 checked live; "implemented" is not done.
 
+## September 24 batch checkpoint
+
+Action v2.3.0 (`245ad6be`) through harness `821b1e0`: five fork PRs, five
+recorded jobs on the exact pin, App-owned comments only, **zero strict
+evidence passes** — the same undeclared-capture and merge-ref identity legs
+as September 11 still fail under contract 6.10.0. Rows, wedge verdicts and the
+Dependabot simulation are in [docs/batch-2026-09-24.md](batch-2026-09-24.md).
+
 ## September 11 batch checkpoint
 
 The earlier table below is historical. The current evidence and remaining
@@ -66,8 +74,8 @@ faithful workload remain open; see the report for ownership and next actions.
 
 ## Known limits
 
-- The recording template is pinned to a main-branch commit of
-  `garnet-org/action`, not a release.
+- The recording template is pinned to release v2.3.0 (`245ad6be`) since
+  September 24; the September 11 rows above ran on a main-branch pin.
 - Pull requests from other repositories receive neither secrets nor OIDC; a
   fork-origin run is a local record and reads as not recorded.
 - Transitions are pnpm only. `--allow-build` needs a dependency already in the

@@ -1,0 +1,191 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "sentry-javascript",
+    "url": "https://github.com/garnet-labs/sentry-javascript"
+  },
+  "pull_request": {
+    "number": 4,
+    "url": "https://github.com/garnet-labs/sentry-javascript/pull/4",
+    "title": "test(e2e): fix flaky hydrogen send-to-sentry tests"
+  },
+  "base": {
+    "sha": "ce383063c1df2081e65264435d85d130d9cba551",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "a3ab2c604fafb23985fb54526314d6fd03b27644",
+    "profile_id": "01a0dc93-c92e-791e-afb1-fb562466c2d3",
+    "run_id": "36225998050"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "a308.dscd.akamai[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "playwright.download.prss.microsoft[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blob.bn9prdstrz04a.store.core.windows[.]net (52.239.172.36)",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "results-receiver.actions[.]githubusercontent",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.24",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "glb-2a3c35-public-internal.githubapp[.]com (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "fg.microsoft.map.fastly[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "mock[.]shop",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blob.bn3prdstrz12a.store.core.windows[.]net (20.209.113.193)",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.113.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "140.82.114.23",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-request-orchestrator-prod-iad-01",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 63,
+      "destinations": 26,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 4,
+        "removed": 3
+      },
+      "runner_background": {
+        "added": 3,
+        "removed": 3
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36225998050?profile=01a0dc93-c92e-791e-afb1-fb562466c2d3",
+    "head_json": "https://app.garnet.ai/api/public/runs/36225998050?profile=01a0dc93-c92e-791e-afb1-fb562466c2d3",
+    "pr_comment": "https://github.com/garnet-labs/sentry-javascript/pull/4#issuecomment-5844140473"
+  },
+  "recorded": {
+    "at": "2026-09-26 07:17:18 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "ce383063c1df2081e65264435d85d130d9cba551",
+    "head_sha": "a3ab2c604fafb23985fb54526314d6fd03b27644",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base ce38306 → head a3ab2c6 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "4 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "a3ab2c604fafb23985fb54526314d6fd03b27644",
+    "current_head": "a3ab2c604fafb23985fb54526314d6fd03b27644",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head a3ab2c6 across 1 job: workload outbound connections +4 −3, runner background +3 −3."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between ce38306 and a3ab2c6 (previous-recorded-head-to-head): 4 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

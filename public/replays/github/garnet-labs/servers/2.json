@@ -1,0 +1,137 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "servers",
+    "url": "https://github.com/garnet-labs/servers"
+  },
+  "pull_request": {
+    "number": 2,
+    "url": "https://github.com/garnet-labs/servers/pull/2",
+    "title": "fix(fetch): port to mcp SDK v2"
+  },
+  "base": {
+    "sha": "9d9f9b61e82aeb63fc903526af05847d34936f39",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+    "profile_id": "01a0b574-cb8c-7576-8bd1-e24f8e36c12a",
+    "run_id": "35371539977"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [],
+    "network_removed": [
+      {
+        "destination": "productionresultssa9.blob.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "raw.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "releases.astral[.]sh",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "results-receiver.actions[.]githubusercontent",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 3,
+      "destinations": 3,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 0,
+        "removed": 4
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35371539977?profile=01a0b574-cb8c-7576-8bd1-e24f8e36c12a",
+    "head_json": "https://app.garnet.ai/api/public/runs/35371539977?profile=01a0b574-cb8c-7576-8bd1-e24f8e36c12a",
+    "pr_comment": "https://github.com/garnet-labs/servers/pull/2#issuecomment-5733316285"
+  },
+  "recorded": {
+    "at": "2026-09-18 16:58:33 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "9d9f9b61e82aeb63fc903526af05847d34936f39",
+    "head_sha": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 9d9f9b6 → head 84eceb0 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "4 outbound connections recorded only before the change; nothing new recorded",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+    "current_head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 84eceb0 across 1 job: workload outbound connections +0 −4, runner background +0 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between 9d9f9b6 and 84eceb0 (previous-recorded-head-to-head): 4 outbound connections recorded only before the change; nothing new recorded."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

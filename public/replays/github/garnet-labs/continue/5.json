@@ -1,0 +1,184 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "continue",
+    "url": "https://github.com/garnet-labs/continue"
+  },
+  "pull_request": {
+    "number": 5,
+    "url": "https://github.com/garnet-labs/continue/pull/5",
+    "title": "chore(deps): bump form-data from 4.0.4 to 4.0.6 in /extensions/cli",
+    "dependency": {
+      "name": "form-data",
+      "from": "4.0.4",
+      "to": "4.0.6"
+    }
+  },
+  "base": {
+    "sha": "d522cd12e3a7b75523cf910c0ad8f772f53b9fe6",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+    "profile_id": "01a0b856-2d61-7f93-9892-af73c17e5767",
+    "run_id": "35426057775"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "blob.bn9prdstrz04a.store.core.windows[.]net",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "productionresultssa16.blob.core[.]windows",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blob.blz25prdstrz09a.store.core[.]windows",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "blob.bnz49prdstrz09a.store.core[.]windows",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "accounts.google[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "clients2.google[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "update.googleapis[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "www.google[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "storage.googleapis[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-01[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 57,
+      "destinations": 18,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 4,
+        "removed": 5
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/35426057775?profile=01a0b856-2d61-7f93-9892-af73c17e5767",
+    "head_json": "https://app.garnet.ai/api/public/runs/35426057775?profile=01a0b856-2d61-7f93-9892-af73c17e5767",
+    "pr_comment": "https://github.com/garnet-labs/continue/pull/5#issuecomment-5739818603"
+  },
+  "recorded": {
+    "at": "2026-09-19 06:20:10 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "d522cd12e3a7b75523cf910c0ad8f772f53b9fe6",
+    "head_sha": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": "form-data 4.0.4 → 4.0.6",
+    "line": "base d522cd1 → head df338ea · scope previous-recorded-head-to-head · form-data 4.0.4 → 4.0.6 · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "4 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+    "current_head": "df338ea7d1b2888b19319f49aad5479b291f8d7e",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head df338ea across 1 job: workload outbound connections +4 −5, runner background +1 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between d522cd1 and df338ea (previous-recorded-head-to-head): 4 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

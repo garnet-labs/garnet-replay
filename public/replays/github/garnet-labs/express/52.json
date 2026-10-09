@@ -1,0 +1,137 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 52,
+    "url": "https://github.com/garnet-labs/express/pull/52",
+    "title": "chore(deps): add dtrace-provider 0.8.8"
+  },
+  "base": {
+    "sha": "8d16d828a888a7e16b64b9e6b6262156b91cf333",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "599e269bf6c58df36f3cba44fc747e54456fdd61",
+    "profile_id": "01a0f5d0-ece2-7dcc-9b40-e23695f4fd5b",
+    "run_id": "36817255560"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "nodejs[.]org",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "hosted-compute-watchdog-prod-eus-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 11,
+      "destinations": 7,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 1,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 2,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36817255560?profile=01a0f5d0-ece2-7dcc-9b40-e23695f4fd5b",
+    "head_json": "https://app.garnet.ai/api/public/runs/36817255560?profile=01a0f5d0-ece2-7dcc-9b40-e23695f4fd5b",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/52#issuecomment-5924990659"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:55:04 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "8d16d828a888a7e16b64b9e6b6262156b91cf333",
+    "head_sha": "599e269bf6c58df36f3cba44fc747e54456fdd61",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base 8d16d82 → head 599e269 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "1 outbound connection recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "599e269bf6c58df36f3cba44fc747e54456fdd61",
+    "current_head": "599e269bf6c58df36f3cba44fc747e54456fdd61",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 599e269 across 1 job: workload outbound connections +1 −0, runner background +2 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between 8d16d82 and 599e269 (previous-recorded-head-to-head): 1 outbound connection recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

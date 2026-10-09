@@ -30,7 +30,10 @@ node bin/replay.mjs --help
   made from them.
 - Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
   [docs/agent-interface.md](docs/agent-interface.md).
-- Viewer: <https://garnet-replay.vercel.app> is read-only; recording stays local.
+- Viewer: <https://garnet-replay.vercel.app>. With the hosted runner configured
+  ([docs/workspace.md](docs/workspace.md#create-replays-from-the-hosted-viewer)),
+  its wizard prepares and records a replay on the garnet-labs fork through the
+  `replay` workflow; otherwise it is read-only.
 
 Details and open requirements: [docs/ledger.md](docs/ledger.md).
 
@@ -83,18 +86,19 @@ $R stage2 posthog --dry-run                                     # evidence mirro
 $R status posthog
 ```
 
-Every replay is two commits on the fork, in routine wording:
+Use `--first-commit <sha>` for a two-commit comparison of an earlier commit in
+the upstream pull request with its head:
 
-- commit 1 sets up the state the change is judged against (manifest and lockfile as
-  the change found them, or the bump with install scripts still blocked);
-- commit 2 is the change the pull request is about (the upstream diff, or the
-  allowlist decision that lets the new install script run).
+- commit 1 is the earlier upstream commit;
+- commit 2 is the pull request head.
 
 The Garnet comment on commit 2 compares it with commit 1, so "what changed" in the
-record mirrors what the pull request itself changed. To make that comparison
+record mirrors the change between those upstream states. To make that comparison
 exist, `live` pushes commit 1 alone, opens the pull request, waits until commit 1
 is recorded (45 min by default, `--wait-minutes N`), and only then pushes commit 2.
-The harness never posts comments; the fork's own recording workflow does.
+On an already aligned, onboarded default-branch path, an ordinary replay remains
+one commit. The harness never posts comments; the fork's own recording workflow
+does.
 
 A fork that has no recording workflow gets one in commit 1. It runs on every pull
 request of the fork, Dependabot's included, and needs no secret (OIDC). A fork
@@ -106,7 +110,8 @@ fork's own dependency pull requests are recorded from then on.
 - Writes go to the fork only. The upstream is a read-only remote with push disabled.
 - No upstream URL, `owner/repo#N`, or bare `#N` in branch names, commits, titles,
   bodies, or rendered artifacts. No session or tool residue either.
-- Exactly two new commits, both non-empty, counted with `git rev-list --count`.
+- A pure replay on the aligned, onboarded path is one non-empty commit; pair,
+  transition, and setup plans create exactly two non-empty commits.
 - The exact upstream head is fetched by `refs/pull/N/head` and checked with
   `git cat-file`; a nearby commit is never substituted.
 - One open pull request per logical change. The body carries opaque change and
@@ -117,6 +122,8 @@ fork's own dependency pull requests are recorded from then on.
 - Missing, partial, stale, unbound, or varying evidence is `undeterminable`. It is
   never rendered as "unchanged".
 - Finder output is candidate evidence. Only a recorded run says what ran.
+
+Use `replay live <slug> --pr <N> --first-commit <sha>` to compare an earlier commit in that pull request with its head; commit 1 is the earlier tree and commit 2 the head, under `previous-recorded-head-to-head`. When the replay base has its own recorder, omit `--record-workflow`; passing it is refused rather than replacing the base's workflow with the fork's copy. On pnpm, TS CI chunk 2/3 is the only recorded leg; changes limited to `pnpm/` or `pnpr/` do not run TypeScript tests.
 
 ## Evidence contract
 
@@ -232,6 +239,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 - [docs/examples.md](docs/examples.md) — worked examples with real output
 - [docs/ledger.md](docs/ledger.md) — ship ledger: what is done, what is not
 - [docs/agent-interface.md](docs/agent-interface.md) — what agents driving the CLI can rely on, and the gap list to an agent-grade tool
+- [docs/fork-ci-hygiene.md](docs/fork-ci-hygiene.md) — which workflows stay on in replay forks and POCs, the 2026-09-23 cleanup, and how to undo it
 - [docs/prospect-batch.md](docs/prospect-batch.md) — five-fork validation, exact evidence, limitations, and remaining work
 - [docs/batch-2026-09-18.md](docs/batch-2026-09-18.md) — six ordinary changes, a three-change Dependabot sample, and thirteen harness gaps with code sites
 - [.devin/skills/prospect-replays/SKILL.md](.devin/skills/prospect-replays/SKILL.md) — bounded batch orchestration
