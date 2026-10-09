@@ -19,10 +19,11 @@ output. Rules live in [AGENTS.md](../AGENTS.md); the operating procedure is
 2. Paste a fork or upstream PR URL, or swap `github.com` for the viewer host.
 3. Read the pair line first (head, compared commit, scope), then capture
    status, then the rows. Workload and runner background are separate tables.
-4. `undeterminable`, "capture not declared" and "recorded jobs only" mean the
-   record does not support a comparison. They are not a clean result.
+4. `undeterminable` means the record cannot support the comparison.
+   "Capture not declared" and "recorded jobs only" scope the comparison to the
+   jobs that were recorded; none of these is a clean result.
 5. Before showing any PR to anyone, run `node bin/replay.mjs verify <pr-url>`.
-   Only a full PASS is shareable.
+   Only evidence that clears every leg of the share gate is shareable.
 
 ## Replay a new PR from the hosted wizard
 
