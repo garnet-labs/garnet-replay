@@ -72,13 +72,42 @@ it) for any other Node host.
 
 This entrypoint supports saved evidence, direct PR URLs, and anonymous public
 GitHub receipt lookups. It ignores ambient GitHub credentials. GitHub rate limits,
-private PRs, and unavailable receipts remain explicit lookup failures. The page
-directs preparation to the local harness; all mutations return HTTP 405.
+private PRs, and unavailable receipts remain explicit lookup failures. Unless the
+hosted runner below is configured, the page directs preparation to the local
+harness and all mutations return HTTP 405.
 
-There is no worker or writable job store in this entrypoint. Recording and durable
-artifact updates still use the local harness. New checked-in evidence reaches the
-viewer through a deployment. A team recording service requires authenticated
-authorization, isolated workers and durable job/artifact storage.
+The entrypoint has no worker or writable job store of its own: hosted recording
+runs on GitHub Actions (below), and durable artifact updates still use the local
+harness. New checked-in evidence reaches the viewer through a deployment.
+
+## Create replays from the hosted viewer
+
+The hosted viewer can run the same wizard as the local server: pull request →
+fork → plan → record → evidence. It never runs git or holds fork credentials in
+the function. **Prepare replay** dispatches the harness repository's
+`.github/workflows/replay.yml` (`action: prepare`), which runs
+`bin/replay-job.mjs` → `executeReplayJob` → `live <slug> --pr <n> --dry-run` and
+uploads the plan as the `replay-job` artifact. **Start replay on fork**
+dispatches `action: start` with the prepare run ID; the job downloads that plan,
+and `live` refuses to write if the recomputed plan's signature differs. It then
+waits for the fork record and runs `verifyExhibit`, as the local runner does.
+The viewer reads job state from the run, its artifact and the fork PR on
+`plan.branch`; on completion it opens the fork PR's live receipt.
+
+Recording is enabled only when all of these are set:
+
+| Where | Name | Purpose |
+| --- | --- | --- |
+| Vercel | `REPLAY_DISPATCH_TOKEN` | `actions: write` on `garnet-labs/garnet-replay` (dispatch, read runs and artifacts, read fork PRs) |
+| Vercel | `REPLAY_OPERATOR_KEY` | Shared key the wizard asks for before any write |
+| Vercel | `REPLAY_ORIGIN` | Exact public origin, e.g. `https://garnet-replay.vercel.app` |
+| Vercel (optional) | `REPLAY_READ_TOKEN` | Read-only token for receipt lookups instead of anonymous rate limits |
+| Repo secret | `REPLAY_FORK_TOKEN` | Contents, pull requests and workflows write on the `garnet-labs` forks |
+
+Without them the viewer stays read-only and every mutation returns 405. One
+recording runs per target at a time (workflow concurrency). Target ledgers and
+saved execution diffs written by the job are not committed back; the evidence
+remains on the fork PR's receipt.
 
 Deploy to a separate Vercel project, verify its generated URL first, then attach a
 free subdomain such as `replay.ci.run`. Inspect existing domain assignments before

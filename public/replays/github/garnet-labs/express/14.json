@@ -1,0 +1,130 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 14,
+    "url": "https://github.com/garnet-labs/express/pull/14",
+    "title": "chore(deps): add sharp 0.32.6"
+  },
+  "base": {
+    "sha": "d60dd5bc5f6ad9ba7e33b99d4495d17942033f8f",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "79f54363b270527a7bdbbce0182e7a8bf8c98a6b",
+    "profile_id": "01a0f5be-d681-757a-b28b-94d0317897e3",
+    "run_id": "36815738655"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "github[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "release-assets.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 21,
+      "destinations": 8,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 2,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 1,
+        "removed": 0
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36815738655?profile=01a0f5be-d681-757a-b28b-94d0317897e3",
+    "head_json": "https://app.garnet.ai/api/public/runs/36815738655?profile=01a0f5be-d681-757a-b28b-94d0317897e3",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/14#issuecomment-5924796983"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:35:19 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "d60dd5bc5f6ad9ba7e33b99d4495d17942033f8f",
+    "head_sha": "79f54363b270527a7bdbbce0182e7a8bf8c98a6b",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base d60dd5b → head 79f5436 · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "2 outbound connections recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "79f54363b270527a7bdbbce0182e7a8bf8c98a6b",
+    "current_head": "79f54363b270527a7bdbbce0182e7a8bf8c98a6b",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 79f5436 across 1 job: workload outbound connections +2 −0, runner background +1 −0."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between d60dd5b and 79f5436 (previous-recorded-head-to-head): 2 outbound connections recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 71,
+    "url": "https://github.com/garnet-labs/express/pull/71",
+    "title": "chore(deps): add tiktoken 1.0.22"
+  },
+  "base": {
+    "sha": "edcd31b50257c1c170a3b3f95822b30bce9668a3",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "23864abb3a37b8ee89fd1cad6afec2a95dbe67a0",
+    "profile_id": "01a0f5f5-d4de-7a67-90a0-f63b6c4a060d",
+    "run_id": "36820414269"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "hosted-compute-watchdog-prod-iad-02[.]githubapp (github infra)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      },
+      {
+        "destination": "ip6-allrouters",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "20.75.202.224",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 9,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 0,
+      "jobs_unchanged": 1,
+      "workload": {
+        "added": 0,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 2,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36820414269?profile=01a0f5f5-d4de-7a67-90a0-f63b6c4a060d",
+    "head_json": "https://app.garnet.ai/api/public/runs/36820414269?profile=01a0f5f5-d4de-7a67-90a0-f63b6c4a060d",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/71#issuecomment-5925396159"
+  },
+  "recorded": {
+    "at": "2026-10-01 05:35:23 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "edcd31b50257c1c170a3b3f95822b30bce9668a3",
+    "head_sha": "23864abb3a37b8ee89fd1cad6afec2a95dbe67a0",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base edcd31b → head 23864ab · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "unchanged",
+    "reasons": [
+      "no outbound connection was added or removed across the recorded jobs",
+      "scope: the recorded jobs only; the record carries no capture accounting"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "23864abb3a37b8ee89fd1cad6afec2a95dbe67a0",
+    "current_head": "23864abb3a37b8ee89fd1cad6afec2a95dbe67a0",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 23864ab across 1 job: workload outbound connections +0 −0, runner background +2 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "No new behavior between edcd31b and 23864ab (previous-recorded-head-to-head): no outbound connection was added or removed across the recorded jobs."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}

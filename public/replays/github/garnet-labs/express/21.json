@@ -1,0 +1,125 @@
+{
+  "schema_version": "execution-diff/v1",
+  "mode": "known-evidence",
+  "label": "real",
+  "repo": {
+    "owner": "garnet-labs",
+    "name": "express",
+    "url": "https://github.com/garnet-labs/express"
+  },
+  "pull_request": {
+    "number": 21,
+    "url": "https://github.com/garnet-labs/express/pull/21",
+    "title": "chore(deps): add pngquant-bin 9.0.0"
+  },
+  "base": {
+    "sha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+    "profile_id": null,
+    "run_id": null
+  },
+  "head": {
+    "sha": "6141f9be08efc5f3bc3fa5c6c4e2e3b13efa5676",
+    "profile_id": "01a0f5c0-6e09-7aed-ab03-32a8dcb3d53b",
+    "run_id": "36815869699"
+  },
+  "comparison": {
+    "available": true,
+    "scope": "previous-recorded-head-to-head"
+  },
+  "execution_diff": {
+    "processes_added": [],
+    "processes_removed": [],
+    "network_added": [
+      {
+        "destination": "raw.githubusercontent[.]com",
+        "section": "workload",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "network_removed": [
+      {
+        "destination": "169.254.169.254 (cloud metadata)",
+        "section": "runner background",
+        "process": null,
+        "ancestry": []
+      }
+    ],
+    "files_added": [],
+    "files_removed": [],
+    "kinds_recorded": [
+      "network"
+    ],
+    "totals": {
+      "execution_chains": 18,
+      "destinations": 6,
+      "jobs_recorded": 1,
+      "jobs_changed": 1,
+      "jobs_unchanged": 0,
+      "workload": {
+        "added": 1,
+        "removed": 0
+      },
+      "runner_background": {
+        "added": 0,
+        "removed": 1
+      }
+    }
+  },
+  "receipt_urls": {
+    "base": null,
+    "head": "https://app.garnet.ai/public/runs/36815869699?profile=01a0f5c0-6e09-7aed-ab03-32a8dcb3d53b",
+    "head_json": "https://app.garnet.ai/api/public/runs/36815869699?profile=01a0f5c0-6e09-7aed-ab03-32a8dcb3d53b",
+    "pr_comment": "https://github.com/garnet-labs/express/pull/21#issuecomment-5924816744"
+  },
+  "recorded": {
+    "at": "2026-10-01 04:37:03 UTC",
+    "contract": "6.10.0",
+    "source": "github-app-comment"
+  },
+  "pair": {
+    "base_sha": "ee8c2fd2485a7692bbb4c36a64be2102294182a5",
+    "head_sha": "6141f9be08efc5f3bc3fa5c6c4e2e3b13efa5676",
+    "scope": "previous-recorded-head-to-head",
+    "label": "real",
+    "transition": null,
+    "line": "base ee8c2fd → head 6141f9b · scope previous-recorded-head-to-head · real"
+  },
+  "capture": {
+    "status": "not-declared",
+    "expected_cells": null,
+    "recorded_cells": null,
+    "executed_sha_verified": null,
+    "lineage_missing": null,
+    "final_record": null,
+    "reasons": [
+      "the record carries no capture accounting; completeness is not claimed"
+    ]
+  },
+  "verdict": {
+    "value": "new-behavior",
+    "reasons": [
+      "1 outbound connection recorded only after the change"
+    ]
+  },
+  "supersession": {
+    "superseded": false,
+    "record_head": "6141f9be08efc5f3bc3fa5c6c4e2e3b13efa5676",
+    "current_head": "6141f9be08efc5f3bc3fa5c6c4e2e3b13efa5676",
+    "reasons": []
+  },
+  "claims": [
+    {
+      "class": "observed-runtime-behavior",
+      "text": "Recorded on head 6141f9b across 1 job: workload outbound connections +1 −0, runner background +0 −1."
+    },
+    {
+      "class": "comparison-result",
+      "text": "New behavior between ee8c2fd and 6141f9b (previous-recorded-head-to-head): 1 outbound connection recorded only after the change."
+    },
+    {
+      "class": "unsupported-claim",
+      "text": "Not carried by this record: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened."
+    }
+  ]
+}
