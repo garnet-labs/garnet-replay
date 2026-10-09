@@ -20,14 +20,19 @@ export function renderLanding(catalog, origin) {
   const example = examples[0] === undefined ? "/owner/repo/pull/123" : parseReplayInput(examples[0].url).path
   return `<div class="landing">
     <section class="hero">
-      <div class="hero-kicker"><span class="mini-mark" aria-hidden="true">↳</span> A DIFFERENT VIEW OF YOUR PULL REQUEST</div>
       <h1>From pull request<br>to <span>runtime evidence.</span></h1>
-      <p class="hero-copy">See what changed when the code ran.<br>${catalog.runnerAvailable === false ? "Open a GitHub PR to inspect its recorded runtime evidence." : "Open a GitHub PR to inspect its replay or prepare a new one."}</p>
+      <p class="hero-copy">${catalog.runnerAvailable === false ? "Paste a GitHub pull request to see what changed when its code ran." : "Paste a GitHub pull request to see what changed when its code ran, or replay it on its fork."}</p>
       ${prForm()}
-      <div class="input-hint"><span>GitHub URL, PR path, or <code>owner/repo#123</code></span><kbd>/</kbd></div>
+      <div class="input-hint"><span>Also accepts <code>owner/repo#123</code></span></div>
+    </section>
+    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">Reference replays</h2><span>Share gate pending</span></div>
+      ${examples.map((row) => `<a class="example-row" href="${h(parseReplayInput(row.url).path)}" data-pr-link>
+        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong>${row.note === undefined ? "" : `<span class="example-note">${h(row.note)}</span>`}</span>
+        <span class="example-verdict ${h(row.verdict)}">${row.label === "constructed" ? "constructed · " : ""}${h(row.verdict.replaceAll("-", " "))}${row.capture === "not-declared" ? '<small class="example-scope">recorded jobs only · capture not declared</small>' : ""}</span><span aria-hidden="true">↗</span>
+      </a>`).join("") || '<p class="muted">Paste a PR to look for evidence on GitHub.</p>'}
     </section>
     <section class="shortcut" id="shortcut" aria-labelledby="shortcut-title">
-      <div class="section-label"><span>THE URL IS THE INTERFACE</span><span>01 / 02</span></div>
+      <div class="section-label"><span>Shortcut</span></div>
       <div class="shortcut-layout"><div><h2 id="shortcut-title">Change the host.<br> Keep the pull request.</h2><p>Replace <code>github.com</code> with this Replay host in your address bar.</p></div>
         <div class="url-swap">
           <div class="url-line before"><span aria-hidden="true">−</span><code><del>github.com</del>${h(example)}</code></div>
@@ -35,12 +40,6 @@ export function renderLanding(catalog, origin) {
           <button data-copy-host="${h(new URL(origin).host)}">Copy Replay host <span aria-hidden="true">↗</span></button>
         </div>
       </div>
-    </section>
-    <section class="examples" aria-labelledby="examples-title"><div class="section-label"><h2 id="examples-title">OPEN A REFERENCE REPLAY</h2><span>SAVED EVIDENCE · SHARE GATE PENDING</span></div>
-      ${examples.map((row) => `<a class="example-row" href="${h(parseReplayInput(row.url).path)}" data-pr-link>
-        <span class="example-icon" aria-hidden="true">↳</span><span class="example-text"><span class="example-repo">${h(row.repository)} <span>#${row.number}</span></span><strong>${h(row.title)}</strong>${row.note === undefined ? "" : `<span class="example-note">${h(row.note)}</span>`}</span>
-        <span class="example-verdict ${h(row.verdict)}">${row.label === "constructed" ? "constructed · " : ""}${h(row.verdict.replaceAll("-", " "))}${row.capture === "not-declared" ? '<small class="example-scope">recorded jobs only · capture not declared</small>' : ""}</span><span aria-hidden="true">↗</span>
-      </a>`).join("") || '<p class="muted">Paste a PR to look for evidence on GitHub.</p>'}
     </section>
     <footer class="replay-footer"><span>GARNET / REPLAY</span><span>${catalog.runnerAvailable === false ? "Public evidence viewer · recording runs in the local harness." : "Exact commits. Recorded actions. Traceable evidence."}</span><a href="/workspace">Open workspace ↗</a></footer>
   </div>`

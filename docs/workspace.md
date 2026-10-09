@@ -103,6 +103,7 @@ Recording is enabled only when all of these are set:
 | Vercel | `REPLAY_ORIGIN` | Exact public origin, e.g. `https://garnet-replay.vercel.app` |
 | Vercel (optional) | `REPLAY_READ_TOKEN` | Read-only token for receipt lookups instead of anonymous rate limits |
 | Repo secret | `REPLAY_FORK_TOKEN` | Contents, pull requests and workflows write on the `garnet-labs` forks |
+| Repo variable + secret (optional) | `RECEIPTS_REPO`, `RECEIPTS_DISPATCH_TOKEN` | After a start, send `replay-recorded` to the receipts repository so its inventory refreshes now instead of on the daily sweep |
 
 Without them the viewer stays read-only and every mutation returns 405. One
 recording runs per target at a time (workflow concurrency). Target ledgers and
