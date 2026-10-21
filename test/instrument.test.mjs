@@ -19,6 +19,89 @@ test("instrumentWorkflow adds the sensor after checkout with matrix gating and p
   assert.equal(result.content.slice(0, start), body.slice(0, start))
 })
 
+test("instrumentWorkflow inserts permissions after the multiline Sentry runner value", () => {
+  const runsOnValue = [
+    "    runs-on:",
+    "      namespace-profile-sentry-javascript;overrides.cache-tag=sentry-javascript${{ github.event_name == 'pull_request'",
+    "      && '-pr' || '' }}",
+  ].join("\n")
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  test:",
+    ...runsOnValue.split("\n"),
+    "    timeout-minutes: 15",
+    "    steps:",
+    "      - run: echo test",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test" })
+  const expected = [
+    runsOnValue,
+    "    permissions:",
+    "      contents: read",
+    "      id-token: write",
+    "    timeout-minutes: 15",
+  ].join("\n")
+
+  assert.ok(result.content.includes(runsOnValue))
+  assert.ok(result.content.includes(expected))
+})
+
+test("instrumentWorkflow inserts permissions after a block-sequence runner value", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  test:",
+    "    runs-on:",
+    "      - ubuntu-latest",
+    "      - self-hosted",
+    "    timeout-minutes: 15",
+    "    steps:",
+    "      - run: echo test",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test" })
+  const expected = [
+    "    runs-on:",
+    "      - ubuntu-latest",
+    "      - self-hosted",
+    "    permissions:",
+    "      contents: read",
+    "      id-token: write",
+    "    timeout-minutes: 15",
+  ].join("\n")
+
+  assert.ok(result.content.includes(expected))
+})
+
+test("instrumentWorkflow keeps permissions immediately after a single-line runner", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "",
+    "    steps:",
+    "      - run: echo test",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test" })
+  const expected = [
+    "    runs-on: ubuntu-latest",
+    "    permissions:",
+    "      contents: read",
+    "      id-token: write",
+    "",
+    "    steps:",
+  ].join("\n")
+
+  assert.ok(result.content.includes(expected))
+})
+
 test("instrumentWorkflow replaces a literal runner without matrix gating", async () => {
   const body = await fixture("anomalyco_opencode-typecheck.yml")
   const result = instrumentWorkflow(body, { job: "typecheck", runsOn: "ubuntu-24.04" })
