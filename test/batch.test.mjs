@@ -590,6 +590,16 @@ test("known product and specimen failures are not shareable and skip cards", () 
   assert.notEqual(specimen.action, "card")
 })
 
+test("board labels verify legs whose names use contract vocabulary", () => {
+  const verify = { status: "FAIL", legs: [{ name: "verdict determinable", ok: false }, { name: "head-bound", ok: false }, { name: "label", ok: true }] }
+  const board = {
+    name: "sample",
+    rows: [{ slug: "a", upstream: "source/a", fork: "garnet-labs/a", upstreamPr: 3, onboardingPr: null, replayPr: null, state: "awaiting-record", verify, publicReports: [], outreach: "gated" }],
+  }
+  const text = renderBoard(board)
+  assert.match(text, /\| outcome determinable, head-bound \|/)
+})
+
 test("board guard rejects upstream URLs and qualified upstream issue references", () => {
   const board = {
     name: "sample",
