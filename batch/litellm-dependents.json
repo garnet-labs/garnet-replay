@@ -7,7 +7,8 @@
       "fork": "garnet-labs/OpenHands",
       "pr": null,
       "find": { "limit": 40 },
-      "record": null,
+      "record": { "mode": "instrument", "job": "ci.yml/test-and-build" },
+      "work": "~/work/openhands",
       "blocked": null
     },
     {

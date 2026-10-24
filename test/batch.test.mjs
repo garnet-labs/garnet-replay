@@ -1,7 +1,7 @@
 import test from "node:test"
 import assert from "node:assert/strict"
 import { mkdtempSync, writeFileSync } from "node:fs"
-import { tmpdir } from "node:os"
+import { homedir, tmpdir } from "node:os"
 import { join } from "node:path"
 import { nextAction, planGroups, renderBoard, runBatch, validateTargets } from "../lib/batch.mjs"
 
@@ -47,6 +47,11 @@ test("targets validate fork ownership and preserve blocked rows", () => {
   assert.equal(result.rows[0].validation, null)
   assert.match(result.rows[1].validation, /garnet-labs/)
   assert.equal(result.rows[2].blocked, "no source")
+  const tilde = validateTargets({
+    name: "home",
+    targets: [{ slug: "home", upstream: "source/home", fork: "garnet-labs/home", work: "~/work/home" }],
+  })
+  assert.equal(tilde.rows[0].work, join(homedir(), "work", "home"))
 })
 
 test("write probe 403 blocks before setup/live", async () => {
@@ -68,6 +73,95 @@ test("write probe 403 blocks before setup/live", async () => {
   assert.equal(board.rows[0].state, "blocked-infra")
   assert.match(board.rows[0].reason, /no push access/)
   assert.deepEqual(commands, [])
+})
+
+test("write probe failures without a 403 retain their stderr tail", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "probe", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const commands = []
+  const board = await runBatch([file, "--out", join(dir, "out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: false, stderr: "temporary network failure" }),
+    runCommand: async (argv) => {
+      commands.push(argv[2])
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(board.rows[0].state, "blocked-infra")
+  assert.equal(board.rows[0].reason, "write probe failed for garnet-labs/alpha: temporary network failure")
+  assert.deepEqual(commands, [])
+})
+
+test("dry-run without an eligible candidate probes fork/write and runs setup dry-run", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "empty", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha" }] }))
+  let forkProbes = 0
+  let writeProbes = 0
+  const commands = []
+  const board = await runBatch([file, "--out", join(dir, "out"), "--dry-run"], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+    probeFork: () => { forkProbes += 1; return true },
+    probeWrite: () => { writeProbes += 1; return { ok: true } },
+    runCommand: async (argv) => {
+      const command = argv[2]
+      commands.push(command)
+      if (command === "setup") {
+        assert.ok(argv.includes("--dry-run"))
+        assert.ok(argv.includes("--work"))
+        return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(forkProbes, 1)
+  assert.equal(writeProbes, 1)
+  assert.deepEqual(commands, ["setup"])
+  assert.equal(board.rows[0].state, "needs-find")
+  assert.equal(board.rows[0].reason, "find is skipped in dry-run; no eligible candidate in the ledger")
+})
+
+test("dry-run no-candidate setup blockers win and real runs still repeat find", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  for (const scenario of [
+    { name: "setup-failed", output: { code: 1, stdout: "", stderr: "setup failed" }, expected: "setup-failed" },
+    { name: "needs-record-job", output: { code: 0, stdout: "plan recorder changes", stderr: "" }, expected: "needs-record-job" },
+  ]) {
+    const file = join(dir, `${scenario.name}.json`)
+    writeFileSync(file, JSON.stringify({ name: scenario.name, targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha" }] }))
+    const board = await runBatch([file, "--out", join(dir, `${scenario.name}-out`), "--dry-run"], {
+      env: { GH_TOKEN: "test-token" },
+      exec: (command) => command === "git" ? "sha" : "",
+      readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+      probeFork: () => true,
+      probeWrite: () => ({ ok: true }),
+      runCommand: async (argv) => argv[2] === "setup" ? scenario.output : { code: 0, stdout: "", stderr: "" },
+    })
+    assert.equal(board.rows[0].state, scenario.expected)
+  }
+
+  const file = join(dir, "live.json")
+  writeFileSync(file, JSON.stringify({ name: "live", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha" }] }))
+  const commands = []
+  const board = await runBatch([file, "--out", join(dir, "live-out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+    probeFork: () => { throw new Error("no candidate should reach fork") },
+    probeWrite: () => { throw new Error("no candidate should reach write") },
+    runCommand: async (argv) => {
+      commands.push(argv[2])
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.deepEqual(commands, ["find"])
+  assert.equal(board.rows[0].state, "no-candidate")
 })
 
 test("two consecutive identical infra blockers stop later targets", async () => {
@@ -195,7 +289,18 @@ test("pending verification awaits a record and keeps an undeterminable verdict",
       const command = argv[2]
       commands.push(command)
       if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
-      if (command === "verify") return { code: 1, stdout: JSON.stringify({ status: "FAIL", legs: [{ name: "comment present", ok: false, detail: "no record" }] }), stderr: "" }
+      if (command === "verify") return {
+        code: 1,
+        stdout: JSON.stringify({
+          status: "FAIL",
+          legs: [
+            { name: "comment present", ok: true, detail: "1 Garnet comment" },
+            { name: "comment finalized", ok: false, detail: "record still pending" },
+          ],
+          receipt: { commentPresent: true, pending: true, finalized: false, noProfile: false },
+        }),
+        stderr: "",
+      }
       if (command === "card") throw new Error("card must not run")
       return { code: 0, stdout: "", stderr: "" }
     },
@@ -203,6 +308,142 @@ test("pending verification awaits a record and keeps an undeterminable verdict",
   assert.equal(board.rows[0].state, "awaiting-record")
   assert.equal(board.rows[0].verdict, "undeterminable")
   assert.equal(commands.includes("live"), false)
+})
+
+test("a final not-recorded receipt is terminal and never awaiting or shareable", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "not-recorded", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const commands = []
+  const board = await runBatch([file, "--out", join(dir, "out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", setupPr: null, observations: [], replays: [{ upstreamPr: 1, forkPr: 3 }] }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      const command = argv[2]
+      commands.push(command)
+      if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (command === "verify") return {
+        code: 1,
+        stdout: JSON.stringify({
+          status: "FAIL",
+          legs: [
+            { name: "comment present", ok: true, detail: "1 Garnet comment" },
+            { name: "comment finalized", ok: false, detail: "no machine summary on the record" },
+          ],
+          receipt: { commentPresent: true, pending: false, finalized: false, noProfile: true },
+        }),
+        stderr: "",
+      }
+      if (command === "card") throw new Error("card must not run")
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(board.rows[0].state, "not-recorded")
+  assert.equal(board.rows[0].verdict, "undeterminable")
+  assert.equal(board.rows[0].shareable, false)
+  assert.equal(commands.includes("card"), false)
+})
+
+test("live dry-run refuses only on the exact allow-pending note", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  const target = {
+    slug: "alpha",
+    upstream: "source/alpha",
+    fork: "garnet-labs/alpha",
+    pr: 1,
+    record: { mode: "instrument", job: "ci.yml/test" },
+  }
+  writeFileSync(file, JSON.stringify({ name: "live-refusal", targets: [target] }))
+  const refusalCommands = []
+  const refused = await runBatch([file, "--out", join(dir, "refused")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      const command = argv[2]
+      refusalCommands.push(argv.slice(2))
+      if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (command === "live") return {
+        code: 0,
+        stdout: "recorder health: none · no finalized records\nwithout --allow-pending-recorder, the run stops here",
+        stderr: "",
+      }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(refused.rows[0].state, "live-refused")
+  assert.match(refused.rows[0].reason, /recorder health: none/)
+  assert.equal(refusalCommands.some((args) => args[0] === "live" && !args.includes("--dry-run")), false)
+
+  const broadText = await runBatch([file, "--out", join(dir, "broad"), "--dry-run"], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      if (argv[2] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (argv[2] === "live") return {
+        code: 0,
+        stdout: "recorder health: none · no finalized records\nplan guard: refused when behind-base; unsupported ecosystem",
+        stderr: "",
+      }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.notEqual(broadText.rows[0].state, "live-refused")
+})
+
+test("a nonzero live result rereads the ledger and verifies a newly opened fork PR", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "resume-live", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  let replayCreated = false
+  const commands = []
+  const board = await runBatch([file, "--out", join(dir, "out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({
+      slug: "alpha",
+      observations: [],
+      replays: replayCreated ? [{ upstreamPr: 1, forkPr: 9 }] : [],
+    }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      const command = argv[2]
+      commands.push(argv.slice(2))
+      if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (command === "live" && argv.includes("--dry-run")) return { code: 0, stdout: "recorder health: none", stderr: "" }
+      if (command === "live") {
+        replayCreated = true
+        return { code: 1, stdout: "", stderr: "wait timed out after opening pull request" }
+      }
+      if (command === "verify") return {
+        code: 0,
+        stdout: JSON.stringify({
+          status: "PASS",
+          legs: [
+            { name: "comment present", ok: true, detail: "1 Garnet comment" },
+            { name: "comment finalized", ok: true, detail: "record is final" },
+          ],
+          receipt: { commentPresent: true, pending: false, finalized: true, noProfile: false },
+        }),
+        stderr: "",
+      }
+      if (command === "card") return { code: 0, stdout: "card: out/card.md", stderr: "" }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(board.rows[0].state, "pass")
+  assert.equal(board.rows[0].replayPr, "https://github.com/garnet-labs/alpha/pull/9")
+  assert.ok(commands.some((args) => args[0] === "verify"))
 })
 
 test("merged setup PR is rechecked and proceeds when recorder is present", async () => {
