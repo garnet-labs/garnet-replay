@@ -1,0 +1,68 @@
+{
+  "harness": {
+    "openhands_dspy_probe": "22be09e",
+    "skyvern": "5b13221345dec38659b5963d1a5f8b500cf06890"
+  },
+  "actionPin": "8cccc85403e4ac4e05fb7822c994d3c199f9aa57 (v2.4.0)",
+  "failClosedProbe": {
+    "pr": "https://github.com/garnet-labs/OpenHands/pull/27",
+    "head": "514ae95b265bad3e9df6dac93378d43f2fb0f5b2",
+    "exit": 1
+  },
+  "rows": [
+    {
+      "target": "OpenHands",
+      "upstream": "upstream change 18873",
+      "forkPr": "https://github.com/garnet-labs/OpenHands/pull/26",
+      "head": "b6176ea8af38306914b5ae5995c79c876ca17435",
+      "verify": "FAIL",
+      "exit": 1,
+      "failing": [
+        "capture completeness",
+        "check settled",
+        "public profile identity"
+      ],
+      "publicReport": "https://app.garnet.ai/public/runs/40065042983?profile=01a16c67-861b-7075-bdf6-c6250dd74549",
+      "coldRead": "FAIL",
+      "outreach": "gated"
+    },
+    {
+      "target": "dspy",
+      "upstream": "upstream change 10706",
+      "forkPr": "https://github.com/garnet-labs/dspy/pull/2",
+      "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
+      "verify": "FAIL",
+      "exit": 1,
+      "failing": [
+        "capture completeness",
+        "public profile identity"
+      ],
+      "publicReport": "https://app.garnet.ai/public/runs/40069918928?profile=01a16c95-5696-7d2e-9867-6515f75ca55e",
+      "coldRead": "FAIL",
+      "outreach": "gated"
+    },
+    {
+      "target": "skyvern",
+      "upstream": "upstream change 9021",
+      "standsInFor": "databricks-agents",
+      "forkPr": "https://github.com/garnet-labs/skyvern/pull/2",
+      "onboardingPr": "https://github.com/garnet-labs/skyvern/pull/1",
+      "head": "fce207f42e777e61e486f7f56e797c82d85b8622",
+      "verify": "FAIL",
+      "exit": 1,
+      "failing": [
+        "capture completeness",
+        "public profile identity"
+      ],
+      "publicReport": "https://app.garnet.ai/public/runs/40076776136?profile=01a16d20-86d2-77c1-bb59-5e543ac3c448",
+      "coldRead": "FAIL",
+      "coldReadNote": "headline +2 -4 destinations is Azure blob/GitHub host rotation under the workload tree; red X on both commits from claude-review (missing fork secret); title truncated",
+      "outreach": "gated"
+    },
+    {
+      "target": "databricks-agents",
+      "state": "blocked: no public GitHub source repository",
+      "outreach": "gated"
+    }
+  ]
+}

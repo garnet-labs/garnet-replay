@@ -11,6 +11,14 @@ Devin App lacks repository access. databricks-agents and the npm IOC set are
 blocked, the other targets did not start, and outreach is gated. See
 [docs/batch-2026-10-24.md](batch-2026-10-24.md).
 
+## October 24 first-wave exhibits
+
+| target | fork PR | upstream change | state | failing legs | public report |
+|---|---|---|---|---|---|
+| OpenHands | [OpenHands#26](https://github.com/garnet-labs/OpenHands/pull/26) | upstream change 18873 | FAIL | capture completeness; check settled; public profile identity | [run 40065042983](https://app.garnet.ai/public/runs/40065042983?profile=01a16c67-861b-7075-bdf6-c6250dd74549) |
+| dspy | [dspy#2](https://github.com/garnet-labs/dspy/pull/2) | upstream change 10706 | FAIL | capture completeness; public profile identity | [run 40069918928](https://app.garnet.ai/public/runs/40069918928?profile=01a16c95-5696-7d2e-9867-6515f75ca55e) |
+| skyvern | [skyvern#2](https://github.com/garnet-labs/skyvern/pull/2) | upstream change 9021 | FAIL | capture completeness; public profile identity | [run 40076776136](https://app.garnet.ai/public/runs/40076776136?profile=01a16d20-86d2-77c1-bb59-5e543ac3c448) |
+
 ## September 24 batch checkpoint
 
 Action v2.3.0 (`245ad6be`) through harness `821b1e0`: five fork PRs, five

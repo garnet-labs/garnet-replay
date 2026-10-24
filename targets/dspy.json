@@ -1,0 +1,1540 @@
+{
+  "slug": "dspy",
+  "upstream": "stanfordnlp/dspy",
+  "fork": "garnet-labs/dspy",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10719,
+      "title": "[6/6] Remove LiteLLM and document the native-only migration",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T19:29:22Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 99,
+      "paths": [
+        ".github/workflows/run_tests.yml",
+        "README.md",
+        "docs/Pipfile",
+        "docs/Pipfile.lock",
+        "docs/README.md",
+        "docs/docs/api/models/Embedder.md",
+        "docs/docs/api/utils/Errors.md",
+        "docs/docs/api/utils/disable_litellm_logging.md",
+        "docs/docs/api/utils/enable_litellm_logging.md",
+        "docs/docs/api/utils/index.md",
+        "docs/docs/community/normalized-lm-api-migration.md",
+        "docs/docs/diving-deeper/react.md",
+        "docs/docs/getting-started/installation.md",
+        "docs/docs/js/hero-interactive.js",
+        "docs/docs/learn/programming/language_models.md",
+        "docs/docs/learn/programming/modules.md",
+        "docs/docs/learn/programming/tools.md",
+        "docs/docs/roadmap.md",
+        "docs/docs/tutorials/cache/index.md",
+        "docs/docs/tutorials/custom_lm_engines/index.md",
+        "docs/docs/tutorials/deployment/index.md",
+        "docs/docs/tutorials/entity_extraction/index.ipynb",
+        "docs/docs/tutorials/rag/index.ipynb",
+        "docs/mkdocs.yml",
+        "docs/scripts/generate_api_docs.py",
+        "dspy/_vendor/lm15-provenance.txt",
+        "dspy/_vendor/lm15/errors.py",
+        "dspy/_vendor/lm15/providers/common.py",
+        "dspy/_vendor/lm15/providers/openai.py",
+        "dspy/_vendor/lm15/providers/openai_chat.py",
+        "dspy/adapters/types/citation.py",
+        "dspy/clients/__init__.py",
+        "dspy/clients/_litellm.py",
+        "dspy/clients/backend_selection.py",
+        "dspy/clients/base_lm.py",
+        "dspy/clients/cache.py",
+        "dspy/clients/call_result.py",
+        "dspy/clients/capabilities.py",
+        "dspy/clients/costs.py",
+        "dspy/clients/disk_serialization.py",
+        "dspy/clients/embedding.py",
+        "dspy/clients/engines/__init__.py",
+        "dspy/clients/engines/litellm_engine.py",
+        "dspy/clients/engines/litellm_errors.py",
+        "dspy/clients/engines/lm15_engine.py",
+        "dspy/clients/execution.py",
+        "dspy/clients/lm.py",
+        "dspy/clients/lm15_boundary.py",
+        "dspy/clients/openai.py",
+        "dspy/clients/requests.py",
+        "dspy/lm15.py",
+        "dspy/utils/lazy_import.py",
+        "dspy/utils/usage_tracker.py",
+        "pyproject.toml",
+        "tests/adapters/test_baml_adapter.py",
+        "tests/adapters/test_chat_adapter.py",
+        "tests/adapters/test_json_adapter.py",
+        "tests/adapters/test_xml_adapter.py",
+        "tests/clients/test_backend_capabilities.py",
+        "tests/clients/test_cache.py",
+        "tests/clients/test_custom_engine_contract.py",
+        "tests/clients/test_disk_serialization.py",
+        "tests/clients/test_embedding.py",
+        "tests/clients/test_engine_errors.py",
+        "tests/clients/test_engine_failure_lifecycle.py",
+        "tests/clients/test_gauntlet_followups.py",
+        "tests/clients/test_lazy_litellm_import.py",
+        "tests/clients/test_lm.py",
+        "tests/clients/test_lm15_adaptations_and_timeouts.py",
+        "tests/clients/test_lm15_boundary.py",
+        "tests/clients/test_lm15_rc3_integration.py",
+        "tests/clients/test_lm_call_contract.py",
+        "tests/clients/test_lm_engine_execution.py",
+        "tests/clients/test_lm_schema_conversion.py",
+        "tests/clients/test_native_metadata.py",
+        "tests/clients/test_native_only.py",
+        "tests/clients/test_prompt_cache.py",
+        "tests/clients/test_registered_providers.py",
+        "tests/clients/test_tool_argument_repair.py",
+        "tests/conftest.py",
+        "tests/predict/test_chain_of_thought.py",
+        "tests/predict/test_decision_prompts.py",
+        "tests/predict/test_predict.py",
+        "tests/primitives/test_base_module.py",
+        "tests/reliability/README.md",
+        "tests/reliability/conftest.py",
+        "tests/reliability/reliability_conf.yaml",
+        "tests/reliability/utils.py",
+        "tests/streaming/test_streaming.py",
+        "tests/teleprompt/test_bootstrap_trace.py",
+        "tests/test_utils/engines.py",
+        "tests/test_utils/server/__init__.py",
+        "tests/test_utils/server/litellm_server.py",
+        "tests/test_utils/server/litellm_server_config.yaml",
+        "tests/test_utils/test_reliability_config.py",
+        "tests/test_utils/test_server.py",
+        "tests/utils/test_lazy_import.py",
+        "tests/utils/test_settings.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 12,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10703,
+      "title": "fix(dspy): require patched installers and CA bundles",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T14:56:50Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".github/workflow_scripts/install_testpypi_pkg.sh",
+        ".github/workflows/build_and_release.yml",
+        ".github/workflows/dependency-range.yml",
+        ".github/workflows/docs-push.yml",
+        ".github/workflows/precommits_check.yml",
+        "docs/Pipfile",
+        "docs/Pipfile.lock",
+        "docs/requirements.txt",
+        "docs/vercel.json",
+        "pyproject.toml",
+        "scripts/bootstrap_python.sh",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10673,
+      "title": "Add incremental internal typing with ty in CI and pre-commit",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-19T22:33:49Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".github/workflows/run_tests.yml",
+        ".pre-commit-config.yaml",
+        "CONTRIBUTING.md",
+        "dspy/dsp/utils/settings.py",
+        "dspy/utils/asyncify.py",
+        "dspy/utils/usage_tracker.py",
+        "pyproject.toml",
+        "tests/typing/asyncify.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10711,
+      "title": "fix(ci): repair publisher container CA trust",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T19:10:49Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/actions/pypi-publish/Dockerfile",
+        ".github/actions/pypi-publish/action.yml",
+        ".github/workflows/build_and_release.yml"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10718,
+      "title": "Preserve logging stream types with ty",
+      "author": "yftx293",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T06:17:39Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "dspy/utils/logging_utils.py",
+        "pyproject.toml",
+        "tests/typing/logging_utils.py"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10688,
+      "title": "Preserve parallel executor task types with ty",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-20T19:34:06Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "dspy/utils/parallelizer.py",
+        "pyproject.toml",
+        "tests/typing/parallelizer.py"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10684,
+      "title": "Preserve callback decorator signatures with ty",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-20T16:11:36Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "dspy/utils/callback.py",
+        "dspy/utils/callback_context.py",
+        "pyproject.toml",
+        "tests/typing/callbacks.py"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10706,
+      "title": "chore(deps): bump nbconvert from 7.17.1 to 7.17.2 in /docs",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T16:53:50Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nbconvert",
+        "from": "7.17.1",
+        "to": "7.17.2"
+      },
+      "files": 1,
+      "paths": [
+        "docs/requirements.txt"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10705,
+      "title": "chore(deps): bump zensical from 0.0.69 to 0.0.70 in /docs",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T16:53:47Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "zensical",
+        "from": "0.0.69",
+        "to": "0.0.70"
+      },
+      "files": 1,
+      "paths": [
+        "docs/requirements.txt"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10715,
+      "title": "ci(deps): add a three-day release window for latest dependencies",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T19:43:43Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/dependency-range.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10713,
+      "title": "Migrate adapters and candidates to canonical requests and responses",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T19:37:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 62,
+      "paths": [
+        "dspy/adapters/__init__.py",
+        "dspy/adapters/_legacy_type_markers.py",
+        "dspy/adapters/base.py",
+        "dspy/adapters/chat_adapter.py",
+        "dspy/adapters/two_step_adapter.py",
+        "dspy/adapters/types/audio.py",
+        "dspy/adapters/types/base_type.py",
+        "dspy/adapters/types/citation.py",
+        "dspy/adapters/types/document.py",
+        "dspy/adapters/types/file.py",
+        "dspy/adapters/types/image.py",
+        "dspy/adapters/types/reasoning.py",
+        "dspy/adapters/types/tool.py",
+        "dspy/adapters/utils.py",
+        "dspy/clients/base_lm.py",
+        "dspy/clients/engines/dummy_engine.py",
+        "dspy/clients/engines/litellm_engine.py",
+        "dspy/clients/engines/lm15_engine.py",
+        "dspy/clients/execution.py",
+        "dspy/clients/lm15_boundary.py",
+        "dspy/clients/requests.py",
+        "dspy/primitives/facade.py",
+        "dspy/streaming/streamify.py",
+        "dspy/streaming/streaming_listener.py",
+        "dspy/teleprompt/gepa/gepa_utils.py",
+        "dspy/teleprompt/grpo.py",
+        "dspy/utils/inspect_history.py",
+        "tests/adapters/conftest.py",
+        "tests/adapters/test_baml_adapter.py",
+        "tests/adapters/test_chat_adapter.py",
+        "tests/adapters/test_citation.py",
+        "tests/adapters/test_decision_types.py",
+        "tests/adapters/test_document.py",
+        "tests/adapters/test_json_adapter.py",
+        "tests/adapters/test_reasoning.py",
+        "tests/adapters/test_tool.py",
+        "tests/adapters/test_two_step_adapter.py",
+        "tests/adapters/test_xml_adapter.py",
+        "tests/callback/test_callback.py",
+        "tests/clients/test_backend_capabilities.py",
+        "tests/clients/test_engine_errors.py",
+        "tests/clients/test_lm_call_contract.py",
+        "tests/clients/test_lm_message_deprecation.py",
+        "tests/clients/test_tool_argument_repair.py",
+        "tests/evaluate/test_evaluate.py",
+        "tests/flex/test_flex_gepa.py",
+        "tests/flex/test_flex_interpreter.py",
+        "tests/predict/test_chain_of_thought.py",
+        "tests/predict/test_decision_prompts.py",
+        "tests/predict/test_predict.py",
+        "tests/predict/test_react.py",
+        "tests/predict/test_react_v2.py",
+        "tests/predict/test_rlm.py",
+        "tests/primitives/test_facade.py",
+        "tests/signatures/test_adapter_file.py",
+        "tests/signatures/test_adapter_image.py",
+        "tests/streaming/test_streaming.py",
+        "tests/teleprompt/test_gepa.py",
+        "tests/teleprompt/test_gepa_builtin_instruction_proposer.py",
+        "tests/teleprompt/test_gepa_instruction_proposer.py",
+        "tests/test_utils/engines.py",
+        "tests/utils/test_mcp.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10707,
+      "title": "feat(adapters): make XML the default adapter",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T17:56:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 30,
+      "paths": [
+        "docs/docs/api/utils/configure.md",
+        "docs/docs/diving-deeper/adapters.md",
+        "docs/docs/diving-deeper/settings-and-context.md",
+        "docs/docs/getting-started/first-program.md",
+        "docs/docs/learn/programming/adapters.md",
+        "dspy/adapters/chat_adapter.py",
+        "dspy/adapters/utils.py",
+        "dspy/predict/predict.py",
+        "dspy/predict/react.py",
+        "dspy/predict/refine.py",
+        "dspy/streaming/streaming_listener.py",
+        "dspy/teleprompt/bootstrap_finetune.py",
+        "dspy/teleprompt/gepa/gepa_utils.py",
+        "dspy/teleprompt/grpo.py",
+        "dspy/utils/callback.py",
+        "dspy/utils/dummies.py",
+        "tests/adapters/test_chat_adapter.py",
+        "tests/callback/test_callback.py",
+        "tests/clients/test_legacy_lm_deprecation.py",
+        "tests/clients/test_lm_async_execution.py",
+        "tests/clients/test_lm_engine_compatibility_fixes.py",
+        "tests/clients/test_lm_engine_execution.py",
+        "tests/predict/test_chain_of_thought.py",
+        "tests/predict/test_code_act.py",
+        "tests/predict/test_predict.py",
+        "tests/predict/test_react_v2.py",
+        "tests/predict/test_rlm.py",
+        "tests/primitives/test_facade.py",
+        "tests/streaming/test_streaming.py",
+        "tests/teleprompt/test_gepa.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10721,
+      "title": "docs: add tutorial for hard dollar limit on Evaluate/optimizer runs",
+      "author": "Africanus12",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T05:43:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/docs/tutorials/dollar-budget.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10720,
+      "title": "fix(dspy): let majority() vote on non-string field values",
+      "author": "SaiMouli3",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T21:07:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/predict/aggregation.py",
+        "tests/predict/test_aggregation.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10717,
+      "title": "fix(cache): default restrict_pickle=True for disk cache reads",
+      "author": "ninglinLiu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T03:20:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "dspy/clients/__init__.py",
+        "dspy/clients/cache.py",
+        "tests/clients/test_cache.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10712,
+      "title": "Build canonical LM requests from generation options",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T19:35:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "dspy/clients/backend_selection.py",
+        "dspy/clients/lm15_boundary.py",
+        "dspy/clients/requests.py",
+        "tests/clients/test_lm15_boundary.py",
+        "tests/clients/test_lm_schema_conversion.py",
+        "tests/clients/test_registered_providers.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10709,
+      "title": "refactor(lm): define minimal engine protocols and share validation",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T18:48:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/clients/engines/base.py",
+        "dspy/clients/lm.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10708,
+      "title": "docs(lm): document the DSPy 3.5 Request/Response migration",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T18:48:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "docs/docs/api/models/BaseLM.md",
+        "docs/docs/api/models/LM.md",
+        "docs/docs/api/primitives/Tool.md",
+        "docs/docs/community/normalized-lm-api-migration.md",
+        "docs/docs/diving-deeper/adapters.md",
+        "docs/docs/diving-deeper/tools.md",
+        "docs/docs/learn/programming/adapters.md",
+        "docs/docs/learn/programming/language_models.md",
+        "docs/docs/tutorials/custom_lm_engines/index.md",
+        "docs/docs/tutorials/gepa_trusted_monitor/index.ipynb",
+        "docs/docs/tutorials/rag/index.ipynb",
+        "docs/mkdocs.yml"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10704,
+      "title": "docs(dspy): add ContextFetch to Providers and Integrations",
+      "author": "lachy3433",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T15:07:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/docs/community/built-with-dspy.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10702,
+      "title": "docs: remove unavailable community resources and restore moved links",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T14:39:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/docs/community/built-with-dspy.md",
+        "docs/docs/community/community-resources.md",
+        "docs/docs/community/use-cases.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10701,
+      "title": "fix(signatures): reject cross-section duplicate names in Signature.insert",
+      "author": "ninglinLiu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T14:30:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/signatures/signature.py",
+        "tests/signatures/test_signature.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10700,
+      "title": "docs: resolve portable DejaVu font for Zensical social cards",
+      "author": "ninglinLiu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T13:15:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/scripts/zensical_build.py",
+        "docs/static/fonts/DejaVuSans.ttf",
+        "docs/static/fonts/LICENSE-DejaVu.txt"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10699,
+      "title": "docs: fix async-tool tutorial cross-links",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T12:09:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/docs/tutorials/async/index.md",
+        "docs/docs/tutorials/yahoo_finance_react/index.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10698,
+      "title": "feat(PythonInterpreter): make the large-variable threshold configurable",
+      "author": "tomron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T09:28:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/primitives/python_interpreter.py",
+        "tests/primitives/test_python_interpreter.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10697,
+      "title": "fix(ChatAdapter): don't fall back to JSONAdapter on field validation errors",
+      "author": "tomron",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T09:23:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "dspy/__init__.py",
+        "dspy/adapters/chat_adapter.py",
+        "dspy/adapters/utils.py",
+        "dspy/adapters/xml_adapter.py",
+        "dspy/utils/exceptions.py",
+        "tests/adapters/test_chat_adapter.py",
+        "tests/adapters/test_xml_adapter.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10696,
+      "title": "fix(tool): do not publish *args or **kwargs as required parameters",
+      "author": "mengchen-atx",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-21T23:41:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/adapters/types/tool.py",
+        "tests/adapters/test_tool.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10695,
+      "title": "fix(rlm): show falsy and structured interpreter values in the trajectory",
+      "author": "mengchen-atx",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-21T23:17:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "dspy/predict/rlm.py",
+        "dspy/primitives/code_interpreter.py",
+        "tests/predict/test_rlm.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10692,
+      "title": "fix(PythonInterpreter): inject variables above 64 KiB through the filesystem",
+      "author": "mengchen-atx",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-21T23:04:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/primitives/python_interpreter.py",
+        "tests/primitives/test_python_interpreter.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10691,
+      "title": "Fix broken company logos on the Use Cases page",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-21T19:02:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/docs/community/use-cases.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10686,
+      "title": "fix(client): validate reasoning models and normalize tokens in LM.copy (fixes #10577)",
+      "author": "21-aakash",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T17:10:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/clients/lm.py",
+        "tests/clients/test_lm.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10685,
+      "title": "feat(harbor): evaluate and optimize DSPy programs in Harbor trials",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T17:04:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "docs/docs/learn/programming/harbor.md",
+        "docs/docs/tutorials/build_ai_program/index.md",
+        "docs/docs/tutorials/harbor/index.ipynb",
+        "docs/mkdocs.yml",
+        "dspy/experimental/_harbor_mcp.py",
+        "dspy/experimental/harbor.py",
+        "tests/experimental/resources/harbor_mcp_server.py",
+        "tests/experimental/test_harbor.py",
+        "tests/experimental/test_harbor_docker.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10683,
+      "title": "fix(dspy): preserve CoT parse failures in bootstrap traces",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-20T14:51:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "dspy/adapters/base.py",
+        "dspy/teleprompt/bootstrap_trace.py",
+        "tests/predict/test_chain_of_thought.py",
+        "tests/teleprompt/test_bootstrap_trace.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10682,
+      "title": "fix(teleprompt): handle metric_threshold=0.0 in BootstrapFewShot (fixes #10603)",
+      "author": "21-aakash",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-20T14:23:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/teleprompt/bootstrap.py",
+        "tests/teleprompt/test_bootstrap.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10681,
+      "title": "docs(dspy): correct precision_score docstring example value",
+      "author": "Blacksujit",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-20T11:09:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "dspy/evaluate/metrics.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10680,
+      "title": "fix(dspy): name Evaluate result column after bound-method metrics",
+      "author": "Blacksujit",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T11:07:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/evaluate/evaluate.py",
+        "tests/evaluate/test_evaluate.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10679,
+      "title": "fix(dspy): format non-string list items for str input fields",
+      "author": "Blacksujit",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T11:06:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/adapters/utils.py",
+        "tests/adapters/test_adapter_utils.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10678,
+      "title": "fix(dspy): parse negative numbers in string signature Literal types",
+      "author": "Blacksujit",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T11:05:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/signatures/signature.py",
+        "tests/signatures/test_signature.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10677,
+      "title": "docs: add a Fikra API tab to the LM setup guide",
+      "author": "dawn-pixellate",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-20T08:30:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/docs/learn/programming/language_models.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10676,
+      "title": "fix(dspy): keep the RLM trajectory when a turn reply cannot be parsed",
+      "author": "Hugo-DDT",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-20T02:04:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "dspy/predict/rlm.py",
+        "tests/predict/test_rlm.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 10670,
+      "title": "Refresh LiteLLM metadata to 1.106.0 and reject router-fee-only estimates",
+      "author": "isaacbmiller",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-18T13:09:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "dspy/clients/costs.py",
+        "dspy/clients/model_metadata/provenance.json",
+        "dspy/clients/model_metadata/snapshot.json.gz",
+        "tests/clients/test_native_metadata.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.892Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 10706,
+      "forkPr": 2,
+      "branch": "deps/nbconvert-7.17.2",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "9597fe1fea452dc271afc347ab9a44adc5847dd0",
+      "headSha": "faff061f25bf6977010f51fa11eda9d7b2c57d10",
+      "forkHeadSha": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
+      "firstSha": "0975b70e81bc034225705866786a6c6d31872236",
+      "firstCommitSha": null,
+      "transition": {
+        "name": "nbconvert",
+        "from": "7.17.1",
+        "to": "7.17.2"
+      },
+      "record": "fork-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "eca8f84c260cea3cf02648b6d83f3e1cc0a8ad506e5bbca08d8e3f4833377306",
+      "attemptId": "ad27822e2b2a7478ecdb1f412003bc2b8beac087637491884ab6ae8b62aecb74",
+      "state": "undeterminable",
+      "openedAt": "2026-10-24T06:21:59.159Z"
+    },
+    {
+      "upstreamPr": 10705,
+      "forkPr": 3,
+      "branch": "deps/zensical-0.0.70",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "9597fe1fea452dc271afc347ab9a44adc5847dd0",
+      "headSha": "d2d8bf02835e526beaec5afad2ec9c89a13920b9",
+      "forkHeadSha": "cf5960d82264c5ee827528adef2164967ce99395",
+      "firstSha": "fd3c646370c12b1289f5419781116eb7cd1a5537",
+      "firstCommitSha": null,
+      "transition": {
+        "name": "zensical",
+        "from": "0.0.69",
+        "to": "0.0.70"
+      },
+      "record": "fork-workflow",
+      "ecosystem": null,
+      "packageDir": null,
+      "logicalId": "d7152b3566f80bf10ab87349a31cb10b790c44926f0f279b6156de27c7c0ce5e",
+      "attemptId": "c2f1394b32f206dadaf8ae59b226f1b69288e1ad03ec5f27ea22760644f26e32",
+      "state": "undeterminable",
+      "openedAt": "2026-10-24T06:38:35.751Z"
+    }
+  ],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0,
+  "setupPr": 1
+}
