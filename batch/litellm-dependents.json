@@ -1,0 +1,51 @@
+{
+  "name": "litellm-dependents",
+  "targets": [
+    {
+      "slug": "openhands",
+      "upstream": "OpenHands/OpenHands",
+      "fork": "garnet-labs/OpenHands",
+      "pr": null,
+      "find": { "limit": 40 },
+      "record": null,
+      "blocked": null
+    },
+    {
+      "slug": "dspy",
+      "upstream": "stanfordnlp/dspy",
+      "fork": "garnet-labs/dspy",
+      "pr": null,
+      "find": { "limit": 40 },
+      "record": null,
+      "blocked": null
+    },
+    {
+      "slug": "databricks-agents",
+      "upstream": null,
+      "blocked": "no public GitHub source repository for the databricks-agents package"
+    },
+    {
+      "slug": "skyvern",
+      "upstream": "Skyvern-AI/skyvern",
+      "fork": "garnet-labs/skyvern",
+      "pr": null,
+      "find": { "limit": 40 },
+      "record": null,
+      "blocked": null
+    },
+    {
+      "slug": "cognee",
+      "upstream": "topoteretes/cognee",
+      "fork": "garnet-labs/cognee",
+      "pr": null,
+      "find": { "limit": 40 },
+      "record": null,
+      "blocked": null
+    },
+    {
+      "slug": "npm-iocs",
+      "upstream": null,
+      "blocked": "no read access to the npm analysis feed (GitHub API 404)"
+    }
+  ]
+}

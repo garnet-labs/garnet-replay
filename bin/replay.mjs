@@ -404,7 +404,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     script as skipped, then allow it; the lockfile stays as it is (pnpm)
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
-  verify <pr-url> [--label real|constructed]                        share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
+  verify <pr-url> [--label real|constructed] [--json]                 share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
+  batch <targets.json> [--out dir] [--concurrency 2] [--only slug,..] [--dry-run] [--wait-minutes N]
   decide <fork-pr-url> [--json]                                     merge-safety decision from the head-bound record: merge | hold | undeterminable; exits 0/1/2
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt
   harvest <slug> [--limit 50] [--state all] [--fork owner/repo]      consume every recorded fork pull request; backfills the consumption ledger
@@ -462,6 +463,7 @@ async function main(args) {
   if (command === "seed-constructed") return seedConstructed(args.slice(1))
   if (command === "pair") return pair(args.slice(1))
   if (command === "live") return live(args.slice(1))
+  if (command === "batch") return ladder.batch(args.slice(1))
   if (command === "serve") {
     const root = resolve(option(args.slice(1), "--root", join(ROOT, "public")))
     const port = Number(option(args.slice(1), "--port", "8787"))
