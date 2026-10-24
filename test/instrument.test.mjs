@@ -103,6 +103,105 @@ test("instrumentWorkflow keeps permissions immediately after a single-line runne
   assert.ok(result.content.includes(expected))
 })
 
+test("instrumentWorkflow finds steps after adding permissions to a job with services", () => {
+  const actionLine = `      - uses: garnet-org/action@${GARNET_ACTION_PIN} # ${GARNET_ACTION_PIN_LABEL}`
+  for (const hasPermissions of [false, true]) {
+    const bodyLines = [
+      "on:",
+      "  pull_request:",
+      "jobs:",
+      "  test:",
+      "    runs-on: ubuntu-latest",
+      ...(hasPermissions ? ["    permissions:", "      contents: read"] : []),
+      "    services:",
+      "      postgres:",
+      "        image: postgres:14",
+      "        ports:",
+      "          - 5432:5432",
+      "    steps:",
+      `      - uses: actions/checkout@${"a".repeat(40)} # v3`,
+      "        with:",
+      "          persist-credentials: false",
+      "      # set up Python for the test job",
+      `      - uses: actions/setup-python@${"b".repeat(40)}`,
+      "        with:",
+      "          python-version: '3.11'",
+      "      - run: pytest",
+      "",
+    ]
+    const expectedLines = [
+      "on:",
+      "  pull_request:",
+      "jobs:",
+      "  test:",
+      "    runs-on: ubuntu-latest",
+      "    permissions:",
+      "      contents: read",
+      "      id-token: write",
+      "    services:",
+      "      postgres:",
+      "        image: postgres:14",
+      "        ports:",
+      "          - 5432:5432",
+      "    steps:",
+      `      - uses: actions/checkout@${"a".repeat(40)} # v3`,
+      "        with:",
+      "          persist-credentials: false",
+      actionLine,
+      "      # set up Python for the test job",
+      `      - uses: actions/setup-python@${"b".repeat(40)}`,
+      "        with:",
+      "          python-version: '3.11'",
+      "      - run: pytest",
+      "",
+    ]
+
+    const body = bodyLines.join("\n")
+    const result = instrumentWorkflow(body, { job: "test" })
+    assert.equal(result.content, expectedLines.join("\n"))
+    assert.equal(result.content.split("\n").filter((line) => line === actionLine).length, 1)
+    assert.ok(result.content.indexOf(actionLine) > result.content.indexOf("          persist-credentials: false"))
+    assert.ok(result.content.indexOf(actionLine) < result.content.indexOf("      # set up Python"))
+    assert.ok(result.content.indexOf(actionLine) < result.content.indexOf("actions/setup-python"))
+    assert.match(result.content, /runs-on: ubuntu-latest\n    permissions:\n      contents: read\n      id-token: write/)
+  }
+})
+
+test("instrumentWorkflow fails closed when no valid steps list is found", () => {
+  for (const lines of [
+    ["    steps:", "    - run: echo test"],
+    ["    steps:", "    timeout-minutes: 15", "      - run: echo test"],
+  ]) {
+    const body = [
+      "on:",
+      "  pull_request:",
+      "jobs:",
+      "  test:",
+      "    runs-on: ubuntu-latest",
+      ...lines,
+      "",
+    ].join("\n")
+    assert.throws(() => instrumentWorkflow(body, { job: "test" }), /job test: cannot locate steps list/)
+  }
+})
+
+test("instrumentWorkflow keeps insertion inside the steps block", () => {
+  const body = [
+    "on:",
+    "  pull_request:",
+    "jobs:",
+    "  test:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - uses: actions/checkout@v4",
+    "    timeout-minutes: 15",
+    "",
+  ].join("\n")
+  const result = instrumentWorkflow(body, { job: "test" })
+  const actionLine = `      - uses: garnet-org/action@${GARNET_ACTION_PIN} # ${GARNET_ACTION_PIN_LABEL}`
+  assert.ok(result.content.indexOf(actionLine) < result.content.indexOf("    timeout-minutes: 15"))
+})
+
 test("instrumentWorkflow replaces a literal runner without matrix gating", async () => {
   const body = await fixture("anomalyco_opencode-typecheck.yml")
   const result = instrumentWorkflow(body, { job: "typecheck", runsOn: "ubuntu-24.04" })
