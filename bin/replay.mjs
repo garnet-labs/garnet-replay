@@ -397,6 +397,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   fork <owner/repo> [--org garnet-labs]                             create the matching garnet-labs fork
   refresh <slug> [--work dir] [--dry-run]                            refresh a stale fork default branch from upstream
   repin <slug> [--work dir] [--dry-run]                              move the fork's recording workflows to the harness action pin (one routine commit on the default branch)
+  pin --check [--json] | --update                                    check the latest release or update the harness pin
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
   live <slug> --allow-build x [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
@@ -440,6 +441,11 @@ async function main(args) {
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))
   if (command === "repin") return ladder.repin(args.slice(1))
+  if (command === "pin") {
+    const result = await ladder.pin(args.slice(1))
+    if (args[1] === "--check" && result.status === "behind") process.exitCode = 1
+    return result
+  }
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))

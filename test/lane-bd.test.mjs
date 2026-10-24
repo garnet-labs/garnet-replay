@@ -10,6 +10,7 @@ import { executionDiffFromProfiles } from "../lib/execution-diff.mjs"
 import { createReplayBranch } from "../live/replay-branch.mjs"
 import { renderComparison, repostPrComment } from "../renderer/compare.mjs"
 import { validate } from "../lib/validate.mjs"
+import { GARNET_ACTION_PIN } from "../lib/replay-pr.mjs"
 
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
 const seeds = JSON.parse(await readFile(new URL("../seeds/seeds.json", import.meta.url), "utf8"))
@@ -95,7 +96,7 @@ test("live replay supports package subdirectories and dependency adds", async ()
 
 test("live replay workflow uses GitHub OIDC by default", async () => {
   const workflow = await readFile("live/templates/garnet-dependency-replay.yml", "utf8")
-  assert.match(workflow, /garnet-org\/action@245ad6be82de3200c205109c8ca7ac816dc692ea/)
+  assert.ok(workflow.includes(`garnet-org/action@${GARNET_ACTION_PIN}`))
   assert.match(workflow, /^concurrency:\n  group: garnet-dependency-replay-\$\{\{ github\.event\.pull_request\.number \}\}\n  cancel-in-progress: true$/m)
   assert.match(workflow, /^permissions: \{\}$/m)
   assert.match(workflow, /^  record:[\s\S]*?^      id-token: write$/m)

@@ -1,0 +1,54 @@
+name: action pin
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: action-pin
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Check release pin
+        id: pin
+        run: |
+          set +e
+          output="$(node bin/replay.mjs pin --check --json)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -gt 1 ]; then exit "$status"; fi
+          tag="$(node -e 'process.stdout.write(JSON.parse(process.argv[1]).latestTag)' "$output")"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      - name: Update source pin
+        if: steps.pin.outputs.status == '1'
+        run: node bin/replay.mjs pin --update
+      - name: Test updated pin
+        if: steps.pin.outputs.status == '1'
+        run: |
+          npm test
+          node bin/replay.mjs --help
+      - name: Commit and push pin update
+        if: steps.pin.outputs.status == '1'
+        env:
+          PIN_TAG: ${{ steps.pin.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- lib/replay-pr.mjs AGENTS.md README.md docs/plan.md live/templates/garnet-record.yml live/templates/garnet-dependency-replay.yml
+          git commit -am "chore: move action pin to $PIN_TAG"
+          git push origin HEAD:main

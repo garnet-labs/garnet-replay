@@ -9,17 +9,101 @@ function row(slug, fork, work = `/work/${slug}`) {
   return { slug, upstream: `source/${slug}`, fork, work, validation: null, blocked: null, pr: 1, find: {}, record: null, liveArgs: [] }
 }
 
-test("batch state machine orders find, fork, write, setup, live, verify, card", () => {
+function runBatchOffline(args, deps = {}) {
+  return runBatch(args, {
+    probeFork: () => true,
+    readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
+    readRecordingWorkflows: () => ({ bodies: {} }),
+    ...deps,
+  })
+}
+
+test("batch state machine orders find, fork, write, refresh, setup, repin, live, verify, card", () => {
   const target = { observations: [], replays: [], workload: null }
   assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: false, upstreamPr: null, findChecked: false }).stage, "find")
   assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: false }).stage, "fork")
   assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true }).stage, "write")
-  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true }).stage, "setup")
-  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, setupChecked: true, setupNothing: true }).stage, "live")
-  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, setupChecked: true, setupNothing: true, replayDone: true }).stage, "verify")
-  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, setupChecked: true, setupNothing: true, replayDone: true, verifyResult: { status: "PASS", legs: [] } }).stage, "card")
-  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, setupChecked: true, setupNothing: true, replayDone: true, verifyResult: { status: "PASS", legs: [] } }).action, "card")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true }).stage, "refresh")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true }).stage, "setup")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true }).stage, "repin")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true, repinChecked: true }).stage, "live")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true, repinChecked: true, replayDone: true }).stage, "verify")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true, repinChecked: true, replayDone: true, verifyResult: { status: "PASS", legs: [] } }).stage, "card")
+  assert.equal(nextAction(row("alpha", "garnet-labs/alpha"), { ledgerExists: true, upstreamPr: 1, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true, repinChecked: true, replayDone: true, verifyResult: { status: "PASS", legs: [] } }).action, "card")
   assert.deepEqual(target.replays, [])
+})
+
+test("batch refreshes a stale fork before setup and repins before the live dry-run", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-freshness-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "freshness", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const commands = []
+  const oldPin = "245ad6be82de3200c205109c8ca7ac816dc692ea"
+  const board = await runBatchOffline([file, "--out", join(dir, "out"), "--dry-run"], {
+    readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
+    probeWrite: () => ({ ok: true }),
+    readForkFreshness: () => ({ forkBehind: 2, forkDefault: "main" }),
+    readRecordingWorkflows: () => ({ bodies: { ".github/workflows/ci.yml": `- uses: garnet-org/action@${oldPin} # v2.3.0` } }),
+    runCommand: async (argv) => {
+      const call = argv.slice(2)
+      commands.push(call)
+      if (call[0] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (call[0] === "live") return { code: 1, stdout: "recorder health: none", stderr: "" }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.deepEqual(commands.map((call) => call[0]), ["refresh", "setup", "repin", "live"])
+  assert.deepEqual(commands[0], ["refresh", "alpha", "--dry-run"])
+  assert.deepEqual(commands[2], ["repin", "alpha", "--dry-run"])
+  assert.equal(board.rows[0].actionPin, "245ad6be (v2.3.0)")
+  assert.match(renderBoard(board), /\| action pin \|/)
+})
+
+test("batch fails closed when fork freshness is unknown or refresh fails", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-refresh-failure-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "refresh-failure", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const base = {
+    readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
+    probeWrite: () => ({ ok: true }),
+    runCommand: async () => ({ code: 1, stdout: "", stderr: "refresh failed" }),
+  }
+  const unknown = await runBatchOffline([file, "--out", join(dir, "unknown-out")], {
+    ...base,
+    readForkFreshness: () => { throw new Error("compare failed") },
+  })
+  assert.equal(unknown.rows[0].state, "blocked-infra")
+  assert.equal(unknown.rows[0].reason, "fork freshness unknown")
+  const failed = await runBatchOffline([file, "--out", join(dir, "failed-out")], {
+    ...base,
+    readForkFreshness: () => ({ forkBehind: 1, forkDefault: "main" }),
+  })
+  assert.equal(failed.rows[0].state, "blocked-infra")
+  assert.equal(failed.rows[0].reason, "refresh failed")
+})
+
+test("batch blocks on failed repin before live", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-repin-failure-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "repin-failure", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const commands = []
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
+    readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
+    probeWrite: () => ({ ok: true }),
+    readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
+    readRecordingWorkflows: () => ({ bodies: { ".github/workflows/ci.yml": "uses: garnet-org/action@old" } }),
+    runCommand: async (argv) => {
+      const command = argv[2]
+      commands.push(command)
+      if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (command === "repin") return { code: 1, stdout: "", stderr: "push rejected" }
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.deepEqual(commands, ["setup", "repin"])
+  assert.equal(board.rows[0].state, "blocked-infra")
+  assert.equal(board.rows[0].stage, "repin")
+  assert.equal(board.rows[0].reason, "push rejected")
 })
 
 test("planGroups serializes same forks and rejects duplicate/shared identities", () => {
@@ -59,7 +143,7 @@ test("write probe 403 blocks before setup/live", async () => {
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "probe", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [{ upstreamPr: 1, gap: { total: 1 }, kind: "dependency", transition: null, paths: [] }], replays: [] }),
@@ -80,7 +164,7 @@ test("write probe failures without a 403 retain their stderr tail", async () => 
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "probe", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -103,7 +187,7 @@ test("dry-run without an eligible candidate probes fork/write and runs setup dry
   let forkProbes = 0
   let writeProbes = 0
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out"), "--dry-run"], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out"), "--dry-run"], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -135,7 +219,7 @@ test("dry-run no-candidate setup blockers win and real runs still repeat find", 
   ]) {
     const file = join(dir, `${scenario.name}.json`)
     writeFileSync(file, JSON.stringify({ name: scenario.name, targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha" }] }))
-    const board = await runBatch([file, "--out", join(dir, `${scenario.name}-out`), "--dry-run"], {
+    const board = await runBatchOffline([file, "--out", join(dir, `${scenario.name}-out`), "--dry-run"], {
       env: { GH_TOKEN: "test-token" },
       exec: (command) => command === "git" ? "sha" : "",
       readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -149,7 +233,7 @@ test("dry-run no-candidate setup blockers win and real runs still repeat find", 
   const file = join(dir, "live.json")
   writeFileSync(file, JSON.stringify({ name: "live", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha" }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "live-out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "live-out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -176,7 +260,7 @@ test("two consecutive identical infra blockers stop later targets", async () => 
     ],
   }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out"), "--concurrency", "1"], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out"), "--concurrency", "1"], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: (slug) => ({ slug, observations: [], replays: [] }),
@@ -208,7 +292,7 @@ test("same-fork targets serialize while different forks overlap at concurrency t
   let active = 0
   let peak = 0
   let sameForkOverlap = false
-  const board = await runBatch([file, "--out", join(dir, "out"), "--concurrency", "2"], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out"), "--concurrency", "2"], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: (slug) => ({ slug, observations: [], replays: [{ upstreamPr: 1, forkPr: 5 }] }),
@@ -244,7 +328,7 @@ test("blocked target never launches a child; one target error does not stop anot
   const blockedFile = join(dir, "blocked.json")
   writeFileSync(blockedFile, JSON.stringify({ name: "blocked", targets: [{ slug: "blocked", upstream: null, blocked: "no source" }] }))
   let blockedCalls = 0
-  const blockedBoard = await runBatch([blockedFile, "--out", join(dir, "blocked-out")], {
+  const blockedBoard = await runBatchOffline([blockedFile, "--out", join(dir, "blocked-out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     runCommand: async () => { blockedCalls += 1; return { code: 0, stdout: "", stderr: "" } },
@@ -257,7 +341,7 @@ test("blocked target never launches a child; one target error does not stop anot
     { slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 },
     { slug: "beta", upstream: "source/beta", fork: "garnet-labs/beta", pr: 1 },
   ] }))
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: (slug) => ({ slug, observations: [], replays: [{ upstreamPr: 1, forkPr: 5 }] }),
@@ -279,7 +363,7 @@ test("pending verification awaits a record and keeps an undeterminable verdict",
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "pending", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", setupPr: null, observations: [], replays: [{ upstreamPr: 1, forkPr: 3 }] }),
@@ -315,7 +399,7 @@ test("a final not-recorded receipt is terminal and never awaiting or shareable",
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "not-recorded", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", setupPr: null, observations: [], replays: [{ upstreamPr: 1, forkPr: 3 }] }),
@@ -359,7 +443,7 @@ test("live dry-run refuses only on the exact allow-pending note", async () => {
   }
   writeFileSync(file, JSON.stringify({ name: "live-refusal", targets: [target] }))
   const refusalCommands = []
-  const refused = await runBatch([file, "--out", join(dir, "refused")], {
+  const refused = await runBatchOffline([file, "--out", join(dir, "refused")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -381,7 +465,7 @@ test("live dry-run refuses only on the exact allow-pending note", async () => {
   assert.match(refused.rows[0].reason, /recorder health: none/)
   assert.equal(refusalCommands.some((args) => args[0] === "live" && !args.includes("--dry-run")), false)
 
-  const broadText = await runBatch([file, "--out", join(dir, "broad"), "--dry-run"], {
+  const broadText = await runBatchOffline([file, "--out", join(dir, "broad"), "--dry-run"], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({ slug: "alpha", observations: [], replays: [] }),
@@ -406,7 +490,7 @@ test("a nonzero live result rereads the ledger and verifies a newly opened fork 
   writeFileSync(file, JSON.stringify({ name: "resume-live", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
   let replayCreated = false
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : "",
     readLedger: () => ({
@@ -451,7 +535,7 @@ test("merged setup PR is rechecked and proceeds when recorder is present", async
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "merged", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1, record: { mode: "instrument", job: ".github/workflows/ci.yml/test" } }] }))
   let setupCalls = 0
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command, args) => {
       if (command === "git") return "sha"
@@ -481,7 +565,7 @@ test("open onboarding PR ends the target before live", async () => {
   const file = join(dir, "targets.json")
   writeFileSync(file, JSON.stringify({ name: "open", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1, record: { mode: "instrument", job: ".github/workflows/ci.yml/test" } }] }))
   const commands = []
-  const board = await runBatch([file, "--out", join(dir, "out")], {
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
     env: { GH_TOKEN: "test-token" },
     exec: (command) => command === "git" ? "sha" : JSON.stringify({ state: "open", merged: false }),
     readLedger: () => ({ slug: "alpha", setupPr: 7, record: { mode: "instrument", job: ".github/workflows/ci.yml/test" }, observations: [], replays: [] }),
@@ -497,7 +581,7 @@ test("open onboarding PR ends the target before live", async () => {
 })
 
 test("known product and specimen failures are not shareable and skip cards", () => {
-  const common = { upstreamPr: 1, ledgerExists: true, forkExists: true, writeProbed: true, setupChecked: true, setupNothing: true, replayDone: true }
+  const common = { upstreamPr: 1, ledgerExists: true, forkExists: true, writeProbed: true, refreshChecked: true, setupChecked: true, setupNothing: true, repinChecked: true, replayDone: true }
   const product = nextAction(row("a", "garnet-labs/a"), { ...common, verifyResult: { status: "FAIL", legs: [{ name: "capture completeness", ok: false }] } })
   const specimen = nextAction(row("b", "garnet-labs/b"), { ...common, verifyResult: { status: "FAIL", legs: [{ name: "head-bound", ok: false }] } })
   assert.equal(product.state, "fail-product-gates")

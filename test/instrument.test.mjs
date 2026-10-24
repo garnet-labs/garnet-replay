@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import test from "node:test"
 import { fork as forkCommand } from "../lib/commands.mjs"
-import { executePlan, instrumentWorkflow, planRefresh, planReplay, renderPlan, renderRefreshPlan } from "../lib/replay-pr.mjs"
+import { GARNET_ACTION_PIN, GARNET_ACTION_PIN_LABEL, executePlan, instrumentWorkflow, planRefresh, planReplay, renderPlan, renderRefreshPlan } from "../lib/replay-pr.mjs"
 
 const fixture = (name) => readFile(join("test/fixtures/workflows", name), "utf8")
 
@@ -13,8 +13,9 @@ test("instrumentWorkflow adds the sensor after checkout with matrix gating and p
   const start = result.content.indexOf("  test:")
   const end = result.content.indexOf("\n  lint:", start + 4)
   const job = result.content.slice(start, end < 0 ? undefined : end)
-  assert.match(job, /- name: Checkout code[\s\S]*- uses: garnet-org\/action@245ad6be82de3200c205109c8ca7ac816dc692ea/)
+  assert.ok(job.includes(`- uses: garnet-org/action@${GARNET_ACTION_PIN} # ${GARNET_ACTION_PIN_LABEL}`))
   assert.match(job, /if: runner\.os == 'Linux'/)
+  assert.match(job, /job_index: \$\{\{ strategy\.job-index \}\}/)
   assert.match(job, /runs-on: \$\{\{ matrix\.os \}\}\n    permissions:\n      contents: read\n      id-token: write/)
   assert.equal(result.content.slice(0, start), body.slice(0, start))
 })
@@ -106,6 +107,7 @@ test("instrumentWorkflow replaces a literal runner without matrix gating", async
   const body = await fixture("anomalyco_opencode-typecheck.yml")
   const result = instrumentWorkflow(body, { job: "typecheck", runsOn: "ubuntu-24.04" })
   assert.match(result.content, /runs-on: ubuntu-24\.04/)
+  assert.doesNotMatch(result.content, /job_index:/)
   assert.doesNotMatch(result.content, /garnet-org\/action@[^\n]+\n\s+if: runner\.os/)
   assert.match(result.content, /permissions:\n\s+contents: read\n\s+id-token: write/)
 })
@@ -114,6 +116,7 @@ test("instrumentWorkflow drops jobs and dangling needs", async () => {
   const body = await fixture("OpenHands_OpenHands-ci.yml")
   const result = instrumentWorkflow(body, { job: "test-and-build", dropJobs: ["live-e2e"] })
   assert.doesNotMatch(result.content, /^\s+live-e2e:/m)
+  assert.match(result.content, /job_index: \$\{\{ strategy\.job-index \}\}/)
   assert.doesNotMatch(result.content, /needs:\s*\[[^\]]*live-e2e/)
   assert.match(result.content, /test-and-build:[\s\S]*garnet-org\/action@[\s\S]*if: runner\.os == 'Linux'/)
 })
