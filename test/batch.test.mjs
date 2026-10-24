@@ -13,7 +13,7 @@ function runBatchOffline(args, deps = {}) {
   return runBatch(args, {
     probeFork: () => true,
     readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
-    readRecordingWorkflows: () => ({ bodies: {} }),
+    readWorkflowBodies: () => ({}),
     ...deps,
   })
 }
@@ -43,7 +43,7 @@ test("batch refreshes a stale fork before setup and repins before the live dry-r
     readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
     probeWrite: () => ({ ok: true }),
     readForkFreshness: () => ({ forkBehind: 2, forkDefault: "main" }),
-    readRecordingWorkflows: () => ({ bodies: { ".github/workflows/ci.yml": `- uses: garnet-org/action@${oldPin} # v2.3.0` } }),
+    readWorkflowBodies: () => ({ ".github/workflows/ci.yml": `- uses: garnet-org/action@${oldPin} # v2.3.0` }),
     runCommand: async (argv) => {
       const call = argv.slice(2)
       commands.push(call)
@@ -91,7 +91,7 @@ test("batch blocks on failed repin before live", async () => {
     readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
     probeWrite: () => ({ ok: true }),
     readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
-    readRecordingWorkflows: () => ({ bodies: { ".github/workflows/ci.yml": "uses: garnet-org/action@old" } }),
+    readWorkflowBodies: () => ({ ".github/workflows/ci.yml": "uses: garnet-org/action@old" }),
     runCommand: async (argv) => {
       const command = argv[2]
       commands.push(command)
@@ -104,6 +104,38 @@ test("batch blocks on failed repin before live", async () => {
   assert.equal(board.rows[0].state, "blocked-infra")
   assert.equal(board.rows[0].stage, "repin")
   assert.equal(board.rows[0].reason, "push rejected")
+})
+
+test("batch repins stale reusable or push workflows but leaves an excluded-only action ref", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-repin-all-workflows-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "repin-all", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const oldPin = "245ad6be82de3200c205109c8ca7ac816dc692ea"
+  const run = async (workflows, outName) => {
+    const commands = []
+    await runBatchOffline([file, "--out", join(dir, outName), "--dry-run"], {
+      readLedger: () => ({ observations: [], replays: [], setupPr: null, record: { mode: "instrument" } }),
+      probeWrite: () => ({ ok: true }),
+      readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
+      readWorkflowBodies: () => workflows,
+      runCommand: async (argv) => {
+        const call = argv.slice(2)
+        commands.push(call)
+        if (call[0] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+        if (call[0] === "live") return { code: 1, stdout: "recorder health: none", stderr: "" }
+        return { code: 0, stdout: "", stderr: "" }
+      },
+    })
+    return commands
+  }
+  const stale = await run({
+    ".github/workflows/reusable.yml": `on:\n  workflow_call:\njobs:\n  record:\n    steps:\n      - uses: garnet-org/action@${oldPin}`,
+  }, "stale-out")
+  assert.ok(stale.some((call) => call[0] === "repin"))
+  const excluded = await run({
+    ".github/workflows/garnet-dependabot-record.yml": `uses: garnet-org/action@${oldPin}`,
+  }, "excluded-out")
+  assert.equal(excluded.some((call) => call[0] === "repin"), false)
 })
 
 test("planGroups serializes same forks and rejects duplicate/shared identities", () => {
