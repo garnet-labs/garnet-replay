@@ -1,0 +1,1561 @@
+{
+  "slug": "skyvern",
+  "upstream": "Skyvern-AI/skyvern",
+  "fork": "garnet-labs/skyvern",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9051,
+      "title": "Upgrade undici to 7.30.1 and body-parser to 1.20.9 in the Claude Desktop bundle (SKY-18930)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T04:06:14Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "undici",
+        "from": null,
+        "to": "7.30.1"
+      },
+      "files": 4,
+      "paths": [
+        "skyvern/cli/mcpb/claude_desktop/package-lock.json",
+        "skyvern/cli/mcpb/claude_desktop/package.json",
+        "skyvern/cli/mcpb/releases/skyvern-claude-desktop.mcpb",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9033,
+      "title": "Log which locator matches Copilot was shown as visible (SKY-18704)",
+      "author": "andrewneilson",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T16:33:29Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "pyproject.toml",
+        "skyvern/forge/sdk/copilot/tools/__init__.py",
+        "skyvern/forge/sdk/copilot/tools/locator_inspection.py",
+        "tests/unit/test_copilot_locator_inspection.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9032,
+      "title": "Upgrade pypdf to 6.21.2 and map its moved size-limit checks (SKY-18829)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T15:52:52Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "pypdf",
+        "from": null,
+        "to": "6.21.2"
+      },
+      "files": 4,
+      "paths": [
+        "pyproject.toml",
+        "skyvern/forge/sdk/utils/pdf_parser.py",
+        "tests/unit/workflow/test_file_parser_block.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9023,
+      "title": "Upgrade Playwright and Patchright to 1.56.0",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T06:42:52Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "pyproject.toml",
+        "skyvern/forge/sdk/copilot/runtime.py",
+        "skyvern/webeye/real_browser_state.py",
+        "tests/unit/copilot/test_turn_origin_seam.py",
+        "tests/unit/test_copilot_runtime.py",
+        "tests/unit/test_pending_navigation.py",
+        "tests/unit/test_real_browser_manager.py",
+        "tests/unit/workflow/test_block_browser_state_recovery.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9015,
+      "title": "Add 19 agent benchmark cases built from failing production Task V3 runs",
+      "author": "cindehaa",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T21:18:22Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "docs/api-reference/openapi.json",
+        "fern/openapi/skyvern_openapi.json",
+        "pyproject.toml",
+        "skyvern-frontend/src/components/BrowserStream.test.tsx",
+        "skyvern-frontend/src/components/BrowserStream.tsx",
+        "skyvern-frontend/src/components/Flippable.tsx",
+        "skyvern-frontend/src/components/RecordingPill.tsx",
+        "skyvern-frontend/src/hooks/useRecordingElapsedSeconds.test.ts",
+        "skyvern-frontend/src/hooks/useRecordingElapsedSeconds.ts",
+        "skyvern-frontend/src/routes/browserSessions/BrowserSessionStream.test.tsx",
+        "skyvern-frontend/src/routes/browserSessions/BrowserSessionStream.tsx",
+        "skyvern-frontend/src/routes/browserSessions/hooks/useProcessRecordingMutation.test.tsx",
+        "skyvern-frontend/src/routes/browserSessions/hooks/useProcessRecordingMutation.ts",
+        "skyvern-frontend/src/routes/streaming/useRecordingMessageChannel.test.ts",
+        "skyvern-frontend/src/routes/streaming/useRecordingMessageChannel.ts",
+        "skyvern-frontend/src/routes/workflows/copilot/RecordingRefinementProgressCard.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.blockActions.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.composerControls.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.credentialCard.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.demonstration.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.historyRace.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.reviewGate.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.runGrounding.test.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/WorkflowCopilotChat.tsx",
+        "skyvern-frontend/src/routes/workflows/copilot/useDemonstrationRecorder.ts",
+        "skyvern-frontend/src/routes/workflows/copilot/workflowCopilotTypes.ts",
+        "skyvern-frontend/src/routes/workflows/editor/FlowRenderer.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowAddMenu.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowAdderBusy.css",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowAdderBusy.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowEditor.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowHeader.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/WorkflowInputs.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/Workspace.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/__tests__/WorkflowAddMenu.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/collapse/collapseModeGate.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/collapse/collapseModeGate.ts",
+        "skyvern-frontend/src/routes/workflows/editor/controls/RedoControl.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/controls/RedoControl.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/controls/UndoControl.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/controls/UndoControl.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/edges/EdgeWithAddButton.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/edges/EdgeWithAddButton.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/header/CodeSubmenu.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/header/EditorOverflowMenu.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/hooks/useWorkflowHistory.ts",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/CodeBlockNode/CodeBlockNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/DataExportNode/DataExportNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/DownloadNode/DownloadNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/EmailInboxNode/EmailInboxNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/FileParserNode/FileParserNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/FileUploadNode/FileUploadNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/GoogleSheetsReadNode/GoogleSheetsReadNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/GoogleSheetsWriteNode/GoogleSheetsWriteNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/HttpRequestNode/HttpRequestNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/HumanInteractionNode/HumanInteractionNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/LoopNode/LoopNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/NodeActionMenu.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/NodeAdderNode/NodeAdderNode.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/NodeAdderNode/NodeAdderNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/PDFParserNode/PDFParserNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/PdfFillNode/PdfFillNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/PrintPageNode/PrintPageNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/SendEmailNode/SendEmailNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/SplitPdfNode/SplitPdfNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/StartNode/StartNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/TerminateNode/TerminateNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/TextPromptNode/TextPromptNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/WaitNode/WaitNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/WebSearchNode/WebSearchNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/WorkflowTriggerNode/WorkflowTriggerNode.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/nodes/components/NodeHeader.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/PendingRecordingStartDialog.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/RecordingFeedbackPrompt.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/RecordingFeedbackPrompt.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/RecordingPanel.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/RecordingPanel.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/applyRecordedBlocksToGraph.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/optimisticSteps.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/optimisticSteps.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/pendingRecordingStartGate.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/pendingRecordingStartGate.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/recordingDraftStepEdits.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/recordingDraftStepEdits.ts",
+        "skyvern-frontend/src/routes/workflows/editor/recording/useApplyRecordedBlocks.test.tsx",
+        "skyvern-frontend/src/routes/workflows/editor/recording/useApplyRecordedBlocks.ts",
+        "skyvern-frontend/src/routes/workflows/editor/sortable/dragModeGate.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/sortable/dragModeGate.ts",
+        "skyvern-frontend/src/routes/workflows/editor/workflowYamlDocument.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/workspaceAuthoringActions.test.ts",
+        "skyvern-frontend/src/routes/workflows/editor/workspaceAuthoringActions.ts",
+        "skyvern-frontend/src/routes/workflows/studio/BrowserTab.test.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/CopilotPaneHeader.test.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/CopilotPaneHeader.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/EditorTab.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/StreamPresenter.test.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/StreamPresenter.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/StudioBrowserStream.test.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/StudioBrowserStream.tsx",
+        "skyvern-frontend/src/routes/workflows/studio/StudioPaneDefaults.test.tsx"
+      ],
+      "gap": {
+        "total": 8,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9021,
+      "title": "Upgrade graphql-core to 3.2.12 and nbconvert to 7.17.2 in the lockfile (SKY-18864)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T03:39:15Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "graphql-core",
+        "from": null,
+        "to": "3.2.12"
+      },
+      "files": 1,
+      "paths": [
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9031,
+      "title": "Let Copilot find and use logins from a connected Bitwarden vault (SKY-18784)",
+      "author": "andrewneilson",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T15:12:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 42,
+      "paths": [
+        "skyvern/config.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/copilot/agent.py",
+        "skyvern/forge/sdk/copilot/build_test_outcome.py",
+        "skyvern/forge/sdk/copilot/credential_pause.py",
+        "skyvern/forge/sdk/copilot/credential_resolution.py",
+        "skyvern/forge/sdk/copilot/hooks.py",
+        "skyvern/forge/sdk/copilot/output_policy.py",
+        "skyvern/forge/sdk/copilot/output_utils.py",
+        "skyvern/forge/sdk/copilot/recoverable_failure.py",
+        "skyvern/forge/sdk/copilot/request_policy.py",
+        "skyvern/forge/sdk/copilot/tools/__init__.py",
+        "skyvern/forge/sdk/copilot/tools/credential_fill.py",
+        "skyvern/forge/sdk/copilot/tools/credentials.py",
+        "skyvern/forge/sdk/copilot/tools/mcp_hooks.py",
+        "skyvern/forge/sdk/copilot/tools/run_execution.py",
+        "skyvern/forge/sdk/copilot/workflow_credential_utils.py",
+        "skyvern/forge/sdk/credential_site_policy.py",
+        "skyvern/forge/sdk/schemas/copilot_turn_outcome.py",
+        "skyvern/forge/sdk/schemas/credentials.py",
+        "skyvern/forge/sdk/services/bitwarden.py",
+        "skyvern/forge/sdk/workflow/context_manager.py",
+        "skyvern/forge/sdk/workflow/models/block.py",
+        "skyvern/forge/sdk/workflow/models/credential_release.py",
+        "skyvern/forge/taskv3/tools.py",
+        "tests/unit/conftest.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_bitwarden_login.py",
+        "tests/unit/test_bitwarden_null_credentials.py",
+        "tests/unit/test_bitwarden_session_cache.py",
+        "tests/unit/test_code_block_sandbox.py",
+        "tests/unit/test_context_manager.py",
+        "tests/unit/test_copilot_credential_pause.py",
+        "tests/unit/test_copilot_diagnosis_repair_contract.py",
+        "tests/unit/test_copilot_fill_credential_field.py",
+        "tests/unit/test_copilot_output_policy.py",
+        "tests/unit/test_copilot_request_policy_workflow_credentials.py",
+        "tests/unit/test_copilot_tools_credential_id_misbinding.py",
+        "tests/unit/test_copilot_tools_list_credentials.py",
+        "tests/unit/test_taskv3_tools.py",
+        "tests/unit/workflow/test_code_block_escalation.py",
+        "tests/unit/workflow/test_code_block_recorder.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9022,
+      "title": "Fail the run at the first unexpected browser connection loss (SKY-18726)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T05:59:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 41,
+      "paths": [
+        "skyvern/core/script_generations/real_skyvern_page_ai.py",
+        "skyvern/core/script_generations/script_skyvern_page.py",
+        "skyvern/core/script_generations/skyvern_page.py",
+        "skyvern/exceptions.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/workflow/credential_fallback.py",
+        "skyvern/forge/sdk/workflow/models/block.py",
+        "skyvern/forge/sdk/workflow/retry_policy.py",
+        "skyvern/forge/sdk/workflow/service.py",
+        "skyvern/services/script_service.py",
+        "skyvern/services/task_v2_service.py",
+        "skyvern/webeye/actions/handler.py",
+        "skyvern/webeye/browser_state.py",
+        "skyvern/webeye/navigation.py",
+        "skyvern/webeye/real_browser_manager.py",
+        "skyvern/webeye/real_browser_state.py",
+        "tests/unit/_task_block_fakes.py",
+        "tests/unit/test_agent_step_cancellation.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_ai_click_empty_actions.py",
+        "tests/unit/test_code_block_downloads.py",
+        "tests/unit/test_code_block_sandbox.py",
+        "tests/unit/test_copilot_failure_publication.py",
+        "tests/unit/test_credential_fallback.py",
+        "tests/unit/test_download_file_action_handler.py",
+        "tests/unit/test_print_page_block.py",
+        "tests/unit/test_real_browser_manager.py",
+        "tests/unit/test_real_browser_state_arm.py",
+        "tests/unit/test_real_browser_state_navigate.py",
+        "tests/unit/test_real_browser_state_reload.py",
+        "tests/unit/test_script_service_block_outcome.py",
+        "tests/unit/test_script_service_fallback_engine.py",
+        "tests/unit/test_script_skyvern_page.py",
+        "tests/unit/test_send_email_block.py",
+        "tests/unit/test_task_v2_completion_gate.py",
+        "tests/unit/test_task_v2_failure_deliverable.py",
+        "tests/unit/test_taskv2_block_browser_address_propagation.py",
+        "tests/unit/test_workflow_webhook_delivery.py",
+        "tests/unit/workflow/test_block_browser_state_recovery.py",
+        "tests/unit/workflow/test_code_block_escalation.py",
+        "tests/unit/workflow/test_execute_single_block_phases.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9052,
+      "title": "Delete the Temporal schedules of deleted schedules in the orphan sweep, behind a flag (SKY-18564)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T04:47:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "skyvern/forge/sdk/db/repositories/schedules.py",
+        "skyvern/forge/sdk/routes/workflow_schedules.py",
+        "skyvern/forge/sdk/workflow/service.py",
+        "tests/unit/forge/sdk/test_workflow_schedules_routes.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9050,
+      "title": "Upgrade undici to 7.30.1 and vitest to 4.1.12 in the frontend lockfile (SKY-18931)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T03:34:31Z",
+      "kind": "code",
+      "transition": {
+        "name": "undici",
+        "from": null,
+        "to": "7.30.1"
+      },
+      "files": 9,
+      "paths": [
+        "skyvern-frontend/src/components/FileUpload.test.tsx",
+        "skyvern-frontend/src/components/FileUpload.tsx",
+        "skyvern/cli/run_commands.py",
+        "skyvern/forge/__main__.py",
+        "skyvern/forge/payload_limits.py",
+        "skyvern/forge/sdk/routes/streaming/cdp_input.py",
+        "tests/unit/forge/sdk/routes/streaming/test_file_upload_websocket_limit.py",
+        "tests/unit/test_forge_log_uvicorn_levels.py",
+        "tests/unit/test_quickstart_command.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9049,
+      "title": "RBAC v2 slice 4b part 1: frontend API layer for role settings (SKY-18909)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T03:05:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "skyvern/webeye/actions/handler.py",
+        "skyvern/webeye/actions/handler_utils.py",
+        "tests/unit/test_handler_utils_download_file.py",
+        "tests/unit/test_upload_file_wait.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9048,
+      "title": "RBAC v2 slice 6 part 1: detect the downgrade pause once (SKY-18910)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T02:23:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "skyvern/exceptions.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/request_logging.py",
+        "skyvern/webeye/actions/handler.py",
+        "skyvern/webeye/scraper/domUtils.js",
+        "tests/unit/test_browser_effect_sink_enumeration.py",
+        "tests/unit/test_request_logging.py",
+        "tests/unit/test_scroll_action_progress.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9047,
+      "title": "Apply an agent's configured proxy region to API runs that omit one (SKY-18884)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T01:42:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "skyvern/forge/sdk/routes/agent_protocol.py",
+        "tests/unit/test_workflow_browser_profile_id.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9046,
+      "title": "Save the page DOM on every Task V3 turn step of sampled runs, and flush each turn as it ends (SKY-18892)",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T00:58:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "skyvern/config.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/artifact/manager.py",
+        "skyvern/forge/taskv3/engine.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/forge/taskv3/turn_dom.py",
+        "skyvern/schemas/steps.py",
+        "skyvern/webeye/actions/handler.py",
+        "tests/unit/forge/sdk/artifact/test_manager.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_dom_scrape_crash_guards.js",
+        "tests/unit/test_element_engine_selection_threading.py",
+        "tests/unit/test_taskv3_engine.py",
+        "tests/unit/test_taskv3_loop.py",
+        "tests/unit/test_taskv3_turn_dom.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9045,
+      "title": "Update API specifications with fern api update",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T00:42:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "fern/openapi/skyvern_openapi.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9044,
+      "title": "Correct the drift-reader Phase 1 plan shape to what production plans today (SKY-14983)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-24T00:17:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "skyvern/forge/agent.py",
+        "tests/unit/test_agent_task_v3.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9043,
+      "title": "Fix the Task V3 answer audit's quote check, dropdown and placeholder plumbing, and bound its holds per task",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T23:41:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "docs/api-reference/openapi.json",
+        "skyvern/forge/sdk/workflow/models/workflow.py",
+        "skyvern/forge/sdk/workflow/service.py",
+        "skyvern/forge/taskv3/answer_basis_audit.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/forge/taskv3/tools.py",
+        "skyvern/webeye/actions/actions.py",
+        "tests/unit/test_output_parameter_size_guards.py",
+        "tests/unit/test_script_skyvern_page.py",
+        "tests/unit/test_taskv3_answer_basis_audit.py",
+        "tests/unit/test_taskv3_loop.py",
+        "tests/unit/test_workflow_run_detail_template_cross_org.py",
+        "tests/unit/workflow/test_workflow_run_timeline_tree.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9042,
+      "title": "Keep the country calling code in an international phone field, and stop reporting a wrong one as entered (SKY-18890)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T22:59:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "skyvern/exceptions.py",
+        "skyvern/forge/prompts/skyvern/check-phone-number-format.j2",
+        "skyvern/webeye/actions/handler.py",
+        "tests/unit/test_input_text_phone_readback.py",
+        "tests/unit/test_input_text_tel_card_routing.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9041,
+      "title": "Record one step per Task V3 turn, with its model call and tool calls, without changing bills (SKY-18790)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T21:29:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "skyvern-frontend/src/api/types.ts",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/artifact/manager.py",
+        "skyvern/forge/sdk/db/repositories/tasks.py",
+        "skyvern/forge/sdk/models.py",
+        "skyvern/forge/taskv3/engine.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/schemas/steps.py",
+        "tests/unit/forge/sdk/artifact/test_manager.py",
+        "tests/unit/forge/sdk/db/test_repositories.py",
+        "tests/unit/forge/sdk/db/test_tasks_repository.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_taskv3_loop.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9040,
+      "title": "Return every in-loop 404/410 to the Task V3 model, behind a run-arm flag (SKY-16206)",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T20:58:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "skyvern/config.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/taskv3/engine.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/forge/taskv3/run_arms.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_taskv3_loop.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9039,
+      "title": "Stop routing benchmark-flagged runs to the deleted Hetzner fleet and remove Hetzner code paths (SKY-18907)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T20:25:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "skyvern/config.py",
+        "skyvern/services/planner_levers.py",
+        "tests/unit/test_forge_log_driver_pipe_noise.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9038,
+      "title": "Keep Task V3 turn steps out of the per-step pricing skill's step counts (SKY-18896)",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T19:42:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "skyvern/forge/agent_functions.py",
+        "skyvern/forge/taskv3/engine.py",
+        "skyvern/forge/taskv3/loop.py",
+        "tests/unit/test_taskv3_engine.py",
+        "tests/unit/test_taskv3_goal_check.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9037,
+      "title": "Task V3 observe: name a Yes/No button pair's question on both buttons and echo it on click (SKY-18212)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T19:03:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "skyvern/forge/sdk/workflow/models/block.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/forge/taskv3/tools.py",
+        "tests/unit/test_taskv3_loop.py",
+        "tests/unit/test_taskv3_tools.py",
+        "tests/unit/workflow/test_block_anti_bot_retry.py",
+        "tests/unit/workflow/test_block_anti_bot_retry_skip.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9036,
+      "title": "Charter: Task V3 gates act on recorded state, with a dated exceptions register (SKY-18888)",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T18:29:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "tests/unit/test_mcp_http_auth.py",
+        "tests/unit/test_run_commands_cleanup.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9035,
+      "title": "Assert the radio click gate agrees with the driver instead of naming one Playwright version's aria-disabled shapes (SKY-18878)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T17:46:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "skyvern/cli/mcp_tools/argument_validation.py",
+        "skyvern/forge/taskv3/tools.py",
+        "tests/unit/test_mcp_argument_validation.py",
+        "tests/unit/test_taskv3_tools.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9034,
+      "title": "Drive the registered-browser deadline tests with a frozen test clock (SKY-18881)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T17:16:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "tests/unit/_external_cdp_fakes.py",
+        "tests/unit/test_external_cdp_sessions.py",
+        "tests/unit/test_workflow_runtime_completion.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9030,
+      "title": "Save the final screenshot for Task V3 workflow blocks (SKY-18862)",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T14:29:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/api/llm/api_handler_factory.py",
+        "tests/unit/force_stub_app.py",
+        "tests/unit/test_agent_cleanup_download_suffix.py",
+        "tests/unit/test_api_handler_factory.py",
+        "tests/unit/test_execute_step_exception_handling.py",
+        "tests/unit/test_screenshot_target_closed_callers.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9029,
+      "title": "Let the Task V3 model select a replayed CSV instead of refusing it by shape (SKY-18752)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T13:46:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/api/files.py",
+        "skyvern/forge/sdk/workflow/models/block.py",
+        "skyvern/forge/taskv3/engine.py",
+        "skyvern/forge/taskv3/loop.py",
+        "skyvern/forge/taskv3/tools.py",
+        "skyvern/webeye/browser_manager.py",
+        "skyvern/webeye/browser_state.py",
+        "skyvern/webeye/cdp_download_interceptor.py",
+        "skyvern/webeye/real_browser_manager.py",
+        "skyvern/webeye/real_browser_state.py",
+        "tests/unit/test_agent_task_v3.py",
+        "tests/unit/test_cdp_download_interceptor.py",
+        "tests/unit/test_download_in_page_fetch_recovery_e2e.py",
+        "tests/unit/test_real_browser_manager.py",
+        "tests/unit/test_taskv3_loop.py",
+        "tests/unit/test_taskv3_tools.py",
+        "tests/unit/test_workflow_block_engine.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9028,
+      "title": "Test the radio click gate against the driver's enabled check, not one Playwright version's rule (SKY-18878)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T13:01:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "skyvern/forge/taskv3/tools.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9027,
+      "title": "Align the real-Chromium tests with planned browser replacement, pinned Patchright, Playwright 1.56 and full-Chromium type-ahead (SKY-18752)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T11:44:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "tests/unit/test_copilot_demonstration_tap.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9026,
+      "title": "Stop re-entering an externally supplied one-time code; generated TOTP unchanged (SKY-18619)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T08:55:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "skyvern/errors/errors.py",
+        "skyvern/forge/agent.py",
+        "skyvern/forge/sdk/core/skyvern_context.py",
+        "skyvern/webeye/actions/handler.py",
+        "skyvern/webeye/actions/multi_field_totp.py",
+        "tests/unit/test_browser_effect_sink_enumeration.py",
+        "tests/unit/test_multi_field_totp.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9025,
+      "title": "Revert per-snapshot curator evidence admission (SKY-18507)",
+      "author": "andrewneilson",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T08:12:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "pytest.ini"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9024,
+      "title": "Persist run-end HAR encounters and page identity (SKY-18366)",
+      "author": "LawyZheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T07:18:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "skyvern/webeye/scraper/domUtils.js",
+        "skyvern/webeye/scraper/scraper.py",
+        "skyvern/webeye/utils/dom.py",
+        "tests/unit/test_dom_scrape_crash_guards.js",
+        "tests/unit/test_iframe_e2e.py",
+        "tests/unit/test_stale_context_guards.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9020,
+      "title": "Register a session browser before its first goto so later blocks see it (SKY-18860)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T02:16:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "skyvern/forge/sdk/workflow/models/block.py",
+        "skyvern/webeye/real_browser_manager.py",
+        "tests/unit/test_real_browser_manager.py",
+        "tests/unit/workflow/test_execute_single_block_phases.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9019,
+      "title": "Log and alert when a saved workflow version adds a skyvern-1.0 engine pin",
+      "author": "pedrohsdb",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T01:29:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "skyvern/forge/sdk/db/repositories/workflow_runs.py",
+        "skyvern/forge/sdk/workflow/service.py",
+        "tests/unit/test_workflow_block_engine.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9018,
+      "title": "Serve browser test pages locally instead of from the internet (SKY-18854)",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:48:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "skyvern/forge/sdk/api/llm/api_handler_factory.py",
+        "skyvern/forge/sdk/api/llm/config_registry.py",
+        "tests/unit/conftest.py",
+        "tests/unit/dns_fixtures.py",
+        "tests/unit/embedded/test_tab_management_e2e.py",
+        "tests/unit/test_background_task_executor.py",
+        "tests/unit/test_code_block_downloads.py",
+        "tests/unit/test_code_block_sandbox.py",
+        "tests/unit/test_config_registry.py",
+        "tests/unit/test_files_resolve_local_or_download.py",
+        "tests/unit/test_llm_output_truncation.py",
+        "tests/unit/test_mcp_observe_v2.py",
+        "tests/unit/test_taskv3_loop.py",
+        "tests/unit/test_taskv3_tools.py",
+        "tests/unit/workflow/test_http_request_block.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9017,
+      "title": "Update API specifications with fern api update",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T00:45:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "fern/openapi/skyvern_openapi.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9016,
+      "title": "Build a task run response when the task has no navigation goal",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:05:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "skyvern/services/run_service.py",
+        "tests/unit/test_run_service.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9014,
+      "title": "A2A Agent: Implement A2UI cards",
+      "author": "wintonzheng",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T20:38:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "skyvern/forge/request_logging.py",
+        "skyvern/forge/request_privacy.py",
+        "skyvern/forge/sdk/forge_log.py",
+        "tests/unit/test_forge_log_redaction.py",
+        "tests/unit/test_request_logging.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9013,
+      "title": "Refuse browser egress to a destination we cannot resolve (SKY-18836)",
+      "author": "AronPerez",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T19:28:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "skyvern/forge/sdk/browser_egress_policy.py",
+        "skyvern/forge/sdk/routes/streaming/cdp_input.py",
+        "skyvern/utils/url_validators.py",
+        "skyvern/webeye/actions/handler.py",
+        "skyvern/webeye/navigation.py",
+        "tests/unit/forge/sdk/routes/streaming/test_cdp_input_session.py",
+        "tests/unit/test_chain_click_blocked_anchor_navigation.py",
+        "tests/unit/test_code_block_sandbox.py",
+        "tests/unit/test_url_validators.py",
+        "tests/unit/webeye/test_navigation_retry.py",
+        "tests/unit/workflow/test_web_search.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T06:05:55.085Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 9021,
+      "forkPr": 2,
+      "branch": "deps/graphql-core-3.2.12",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "58021413fc0b31f9dd341db27f50c09e677349d8",
+      "headSha": "273b6786b9757d0137715d09238a4e998569e15a",
+      "forkHeadSha": "fce207f42e777e61e486f7f56e797c82d85b8622",
+      "firstSha": "63fdb949e5869d6fa107ec2854798e6b1bca901a",
+      "firstCommitSha": null,
+      "transition": {
+        "name": "graphql-core",
+        "from": null,
+        "to": "3.2.12"
+      },
+      "record": "fork-workflow",
+      "ecosystem": "uv",
+      "packageDir": null,
+      "logicalId": "f287aac38d8340064918cf97dbe85bbbdbb82fd7fcdfb80a5ed36ece6648390d",
+      "attemptId": "f573c135ce8dada794c407a3ebd508c7206a88785901b6fc2552057f5bb194aa",
+      "state": "undeterminable",
+      "openedAt": "2026-10-24T08:06:55.339Z"
+    }
+  ],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0,
+  "setupPr": 1
+}
