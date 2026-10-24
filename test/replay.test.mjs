@@ -9,6 +9,7 @@ import test from "node:test"
 import { buildExecutionDiff, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
 import { parsePrUrl, parseReceipt, isGarnetComment } from "../lib/receipt.mjs"
+import { assertSamePathOptions, planReplay, pullRequestPathFilter, recordsAnyPath, renderPlan, samePathTouchSet } from "../lib/replay-pr.mjs"
 import { validate } from "../lib/validate.mjs"
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -73,7 +74,7 @@ test("rendered execution diff keeps the known evidence line shapes", () => {
 
 test("validator rejects a document with a bad required field and extra property", () => {
   const diff = buildExecutionDiff(corpus.prs[0])
-  const bad = structuredClone(diff)
+  const bad = JSON.parse(JSON.stringify(diff))
   delete bad.head.sha
   bad.extra = true
   const errors = validate(schema, bad)
@@ -182,4 +183,105 @@ test("known evidence reports no record without making a network request", async 
   } finally {
     globalThis.fetch = originalFetch
   }
+})
+
+test("same-path touch sets use changed files and nearest code siblings", () => {
+  const available = [
+    "packages/app/changed.ts",
+    "packages/app/config.ts",
+    "packages/app/old.ts",
+    "packages/app/source.ts",
+  ]
+  assert.deepEqual(
+    samePathTouchSet([{ path: "packages/app/changed.ts", status: "modified" }], available).paths,
+    ["packages/app/changed.ts"],
+  )
+  assert.deepEqual(
+    samePathTouchSet([{ path: "packages/app/old.ts", status: "removed" }], available).paths,
+    ["packages/app/old.ts"],
+  )
+  assert.deepEqual(
+    samePathTouchSet([{ path: "packages/app/new.ts", status: "added" }], available).paths,
+    ["packages/app/changed.ts"],
+  )
+  assert.deepEqual(
+    samePathTouchSet([
+      { path: "packages/app/settings.json", status: "modified" },
+      { path: "packages/app/source.ts", status: "modified" },
+    ], available).paths,
+    ["packages/app/changed.ts", "packages/app/source.ts"],
+  )
+  const rename = samePathTouchSet([
+    { path: "packages/app/new.ts", previous: "packages/app/old.ts", status: "renamed" },
+  ], available)
+  assert.deepEqual(rename.paths, ["packages/app/changed.ts", "packages/app/old.ts"])
+  assert.deepEqual(rename.changedPaths, ["packages/app/old.ts", "packages/app/new.ts"])
+})
+
+test("same-path touch sets refuse non-code changes and missing in-project siblings", () => {
+  assert.throws(
+    () => samePathTouchSet([{ path: "packages/app/readme.md", status: "modified" }], ["packages/app/source.ts"]),
+    /only non-code files/,
+  )
+  assert.throws(
+    () => samePathTouchSet([
+      { path: "packages/app/settings.json", status: "modified" },
+      { path: "packages/other/source.ts", status: "modified" },
+    ], ["packages/other/source.ts"]),
+    /no existing code file beside packages\/app\/settings\.json/,
+  )
+})
+
+test("same-path mode rejects incompatible live options and checks both recorder filter forms", () => {
+  for (const option of ["--first", "--first-commit", "--record", "--prepared", "--dependency", "--allow-build"]) {
+    assert.throws(() => assertSamePathOptions(["live", "sentry-javascript", "--base", "same-path", option]), new RegExp(option))
+    assert.throws(() => assertSamePathOptions(["--base", "same-path", `${option}=value`]), new RegExp(option))
+  }
+  const ignored = pullRequestPathFilter("on:\n  pull_request:\n    paths-ignore:\n      - packages/app/*.ts\n")
+  assert.deepEqual(ignored, { pathsIgnore: ["packages/app/*.ts"] })
+  assert.equal(recordsAnyPath({ recorder: ignored }, ["packages/app/source.ts"]), false)
+  assert.equal(recordsAnyPath({ recorder: ignored }, ["packages/app/settings.json"]), true)
+  const changes = [{ path: "packages/app/settings.json", status: "modified" }]
+  assert.throws(() => planReplay({
+    slug: "sentry-javascript",
+    upstream: "getsentry/sentry-javascript",
+    fork: "garnet-labs/sentry-javascript",
+    defaultBranch: "develop",
+    upstreamPr: 4,
+    baseSha: "base",
+    headSha: "head",
+    changes,
+    record: "fork-workflow",
+    recordFilters: { recorder: ignored },
+    forkHoldsBase: false,
+    samePathTouches: { paths: ["packages/app/source.ts"], changedPaths: ["packages/app/settings.json"], commonDirectory: "packages/app" },
+  }), /same-path touch set would not trigger/)
+})
+
+test("same-path replay plans print the touch set and publish two ordered commits", () => {
+  const plan = planReplay({
+    slug: "sentry-javascript",
+    upstream: "getsentry/sentry-javascript",
+    fork: "garnet-labs/sentry-javascript",
+    defaultBranch: "develop",
+    upstreamPr: 4,
+    baseSha: "base",
+    headSha: "head",
+    changes: [{ path: "packages/app/source.ts", status: "modified" }],
+    record: "fork-workflow",
+    recordWorkflows: [".github/workflows/build.yml"],
+    forkHoldsBase: false,
+    samePathTouches: { paths: ["packages/app/source.ts"], changedPaths: ["packages/app/source.ts"], commonDirectory: "packages/app" },
+  })
+  const ids = plan.steps.map((step) => step.id)
+  assert.equal(plan.scope, "immediate-parent-to-head")
+  assert.equal(plan.messages.first, "chore: tidy comments in packages/app")
+  assert.equal(plan.firstCommitLabel, "same-path touch")
+  assert.match(renderPlan(plan), /same-path touch set \(1\): packages\/app\/source\.ts/)
+  assert.ok(renderPlan(plan).includes("commit 1 (same-path touch)"))
+  assert.ok(ids.indexOf("first-commit") < ids.indexOf("change-commit"))
+  assert.ok(ids.indexOf("push-first") < ids.indexOf("wait-first-record"))
+  assert.ok(ids.indexOf("wait-first-record") < ids.indexOf("push-change"))
+  assert.ok(ids.indexOf("first-commit") < ids.indexOf("push-first"))
+  assert.ok(ids.indexOf("change-commit") < ids.indexOf("push-change"))
 })

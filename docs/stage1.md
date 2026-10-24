@@ -158,6 +158,24 @@ node bin/replay.mjs live posthog --allow-build puppeteer --work ~/repos/posthog 
 Other ecosystems do not have an equivalent "blocked, then allowed" state, so
 transitions are pnpm only. Use 1a for them.
 
+## 1c. Record a same-path pair
+
+For an upstream pull request whose base and head need comparable recordings,
+use:
+
+```sh
+node bin/replay.mjs live sentry-javascript --pr 4 --base same-path --work ~/repos/sentry-javascript --dry-run
+```
+
+Commit 1 adds a behavior-neutral comment to the computed same-path touch set;
+added files and files without the configured comment syntax use an existing
+code sibling within the same project directory. The plan refuses non-code-only
+changes, missing siblings, and a touch set that misses the recorder's
+`paths`/`paths-ignore` filter when the full change would trigger it. The dry
+run prints the exact set. Commit 1 is named `same-path touch`, is pushed alone,
+and is recorded before the change is pushed as commit 2. Scope is
+`immediate-parent-to-head`.
+
 ## 2. Wait for the record
 
 `live` returns once commit 2 is pushed; commit 1 is already recorded by then.

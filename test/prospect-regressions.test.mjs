@@ -12,6 +12,7 @@ const PREVIOUS = "b".repeat(40)
 const PROFILE = "00000000-0000-4000-8000-000000000000"
 const LINK = `https://app.garnet.ai/public/runs/123?profile=${PROFILE}`
 const RUN = { repository: "garnet-labs/example", run_id: "123", profile_id: PROFILE, commit_sha: HEAD, ref: "refs/heads/change" }
+const TREE = "c".repeat(40)
 
 function record(capture = "complete", link = LINK) {
   return `<!-- garnet-runtime-review -->
@@ -38,8 +39,8 @@ example
 </details>`
 }
 
-function profileCheck(run = RUN) {
-  return publicProfileIdentity({ profile: { run }, permalink: LINK, repository: RUN.repository, headSha: HEAD })
+function profileCheck(run = RUN, linkage = null, prNumber = 1) {
+  return publicProfileIdentity({ profile: { run }, permalink: LINK, repository: RUN.repository, headSha: HEAD, prNumber, linkage })
 }
 
 test("card scope follows the recorded pair when the ledger identifies commit 1", () => {
@@ -48,10 +49,9 @@ test("card scope follows the recorded pair when the ledger identifies commit 1",
   assert.equal(buildModel({ ...input, replay: { firstSha: "c".repeat(40), scope: "immediate-parent-to-head" } }).scope, "previous-recorded-head-to-head")
 })
 
-test("public report identity requires repository, run, profile and the exact head", () => {
+test("public report identity accepts the exact head or verified executed-source linkage", () => {
   assert.equal(profileCheck().ok, true)
   for (const patch of [
-    { commit_sha: PREVIOUS, ref: "refs/pull/1/merge" },
     { repository: "garnet-labs/elsewhere" },
     { run_id: "124" },
     { profile_id: "11111111-1111-4111-8111-111111111111" },
@@ -59,8 +59,20 @@ test("public report identity requires repository, run, profile and the exact hea
   ]) {
     assert.equal(profileCheck({ ...RUN, ...patch }).ok, false)
   }
+  const mergeRun = { ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }
+  const linkage = { recordedTree: TREE, headTree: TREE, recordedParents: [HEAD] }
+  const linked = profileCheck(mergeRun, linkage)
+  assert.equal(linked.ok, true)
+  assert.match(linked.detail, /; executed-source linkage: merge ref b{7} has parent a{7} and tree c{7} identical to the head tree$/)
+  assert.equal(profileCheck(mergeRun, { ...linkage, headTree: "d".repeat(40) }).ok, false)
+  assert.match(profileCheck(mergeRun, { ...linkage, headTree: "d".repeat(40) }).detail, /tree/)
+  assert.equal(profileCheck(mergeRun, { ...linkage, recordedParents: [PREVIOUS] }).ok, false)
+  assert.match(profileCheck(mergeRun, { ...linkage, recordedParents: [PREVIOUS] }).detail, /parent/)
+  assert.equal(profileCheck({ ...mergeRun, ref: "refs/pull/2/merge" }, linkage).ok, false)
+  assert.match(profileCheck({ ...mergeRun, ref: "refs/pull/2/merge" }, linkage).detail, /ref/)
+  assert.equal(profileCheck(mergeRun, null).ok, false)
+  assert.match(profileCheck(mergeRun, null).detail, /linkage unreadable/)
   assert.equal(publicProfileIdentity({ profile: null, permalink: LINK, repository: RUN.repository, headSha: HEAD }).ok, false)
-  assert.match(profileCheck({ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }).detail, /refs\/pull\/1\/merge/)
 })
 
 test("public JSON is fetched anonymously from only the supported selector", async () => {
@@ -91,8 +103,10 @@ function fetchExhibit(run, body = record(), logs = ["Garnet Run Profile report: 
     }
     if (url.startsWith("https://app.garnet.ai/public/")) return { status: 200 }
     if (url.includes("/pulls/1")) return { ok: true, json: async () => ({ head: { sha: HEAD }, base: { sha: PREVIOUS }, state: "open", body: "", labels: [] }) }
+    if (url.endsWith(`/commits/${PREVIOUS}`)) return { ok: true, json: async () => ({ commit: { tree: { sha: TREE } }, parents: [{ sha: HEAD }] }) }
+    if (url.endsWith(`/commits/${HEAD}`)) return { ok: true, json: async () => ({ commit: { tree: { sha: TREE } }, parents: [] }) }
     if (url.includes("/comments?")) return { ok: true, json: async () => [{ user: { login: "garnet-runtime-review[bot]" }, body }] }
-    if (url.includes("/check-runs?")) return { ok: true, json: async () => ({ check_runs: [{ name: "Garnet", status: "completed", conclusion: "success" }] }) }
+    if (url.includes("/check-runs?")) return { ok: true, json: async () => ({ check_runs: [{ name: "Garnet", status: "completed", conclusion: "success", details_url: "https://github.com/garnet-labs/example/actions/runs/123" }] }) }
     if (url.includes("/actions/runs/123/jobs?")) {
       return { ok: true, json: async () => ({ total_count: logs.length + 1, jobs: [
         ...logs.map((_, id) => ({ id, name: `E2E ${id}`, steps: [ACTION_STEP] })),
@@ -105,16 +119,32 @@ function fetchExhibit(run, body = record(), logs = ["Garnet Run Profile report: 
   }
 }
 
-test("live verification rejects HTTP 200 with merge-ref or missing identity", async () => {
+test("live verification fetches commit linkage only for a merge-ref report", async () => {
   const url = "https://github.com/garnet-labs/example/pull/1"
-  const good = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN) })
-  assert.equal(good.status, "PASS")
-  for (const run of [{ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }, undefined]) {
-    const result = await verifyExhibit(url, { fetchImpl: fetchExhibit(run) })
-    assert.equal(result.status, "FAIL")
-    assert.equal(result.legs.find((entry) => entry.name === "public permalink").ok, true)
-    assert.equal(result.legs.find((entry) => entry.name === "public profile identity").ok, false)
-  }
+  const exactCalls = []
+  const exactFetch = fetchExhibit(RUN)
+  const good = await verifyExhibit(url, { fetchImpl: async (...args) => {
+    exactCalls.push(args[0])
+    return exactFetch(...args)
+  } })
+  assert.equal(good.status, "PASS", JSON.stringify(good.legs.filter((entry) => !entry.ok)))
+  assert.equal(exactCalls.some((request) => /\/commits\/[^/]+$/.test(request)), false)
+  const linkageCalls = []
+  const linkageFetch = fetchExhibit({ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" })
+  const linked = await verifyExhibit(url, { fetchImpl: async (...args) => {
+    linkageCalls.push(args[0])
+    return linkageFetch(...args)
+  } })
+  assert.equal(linked.status, "PASS")
+  assert.deepEqual(linkageCalls.filter((request) => /\/commits\/[^/]+$/.test(request)).sort(), [
+    `https://api.github.com/repos/garnet-labs/example/commits/${HEAD}`,
+    `https://api.github.com/repos/garnet-labs/example/commits/${PREVIOUS}`,
+  ].sort())
+  assert.match(linked.legs.find((entry) => entry.name === "public profile identity").detail, /executed-source linkage/)
+  const result = await verifyExhibit(url, { fetchImpl: fetchExhibit(undefined) })
+  assert.equal(result.status, "FAIL")
+  assert.equal(result.legs.find((entry) => entry.name === "public permalink").ok, true)
+  assert.equal(result.legs.find((entry) => entry.name === "public profile identity").ok, false)
   const missing = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record("complete", "https://app.garnet.ai")) })
   assert.equal(missing.status, "FAIL")
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))

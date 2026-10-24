@@ -36,6 +36,30 @@ not shareable until every leg reads ok
 The record summary says `jobs: 1`. Without the sensor coverage leg nothing on
 the record shows that a second E2E job ran unobserved.
 
+### 2026-10-24 live verification of Sentry PR #4
+
+```text
+FAIL https://github.com/garnet-labs/sentry-javascript/pull/4 (head a3ab2c6)
+  [ok] comment present: 1 Garnet comment
+  [ok] head-bound: record bound to a3ab2c6
+  [no] capture completeness: capture not declared; comparison undeterminable
+  [ok] comment finalized: record is final; its contract does not declare capture completeness
+  [ok] verdict determinable: App summary present
+  [ok] pair line: pair ce38306 (previous) → a3ab2c6 (this commit) from the record summary
+  [ok] public permalink: GET https://app.garnet.ai/public/runs/36225998050?profile=01a0dc93-c92e-791e-afb1-fb562466c2d3&amp;utm_source=github&amp;utm_medium=pr_comment → 200
+  [ok] check settled: All required jobs passed or were skipped, Playwright ${{ matrix.bundle }}${{ ((matrix.project && (matrix.project != 'chromium') && format(' {0}', matrix.project)) || '') }}${{ ((matrix.shard && format(' ({0}/{1})', matrix.shard, matrix.shards)) || '') }} Tests, Upload Artifacts, PW ${{ matrix.bundle }} Tests, Size Check, E2E ${{ (matrix.label || matrix.test-application) }} Test (optional), E2E remix-hydrogen Test, E2E hydrogen-react-router-7 Test, Bundler Plugin Integration Tests (Node ${{ matrix.node }}), Bun Integration Tests, Deno Integration Tests, Deno Unit Tests, Node (${{ matrix.node }})${{ (((matrix.typescript && format(' (TS {0})', matrix.typescript))) || '') }} Integration Tests, Build Lambda layer, Bun Unit Tests, Cloudflare Integration Tests, Node (24) Unit Tests, Node (22) Unit Tests, Node (26) Unit Tests, Node (20.19) Unit Tests, Build bundles, Build tarballs, Check for faulty .d.ts files, Lint, Browser Unit Tests, Circular Dependency Check, Check lockfile, Check file formatting, Check PR branches, Build, Get CI Metadata / Get Metadata completed
+  [ok] no session residue: PR body and other comments carry no harness or session traces
+  [ok] label: label real
+  [ok] pull request open: state open
+  [ok] public profile identity: garnet-labs/sentry-javascript / run 36225998050 / profile 01a0dc93-c92e-791e-afb1-fb562466c2d3; recorded dc937a7108457e0349f7a598b843026ef7cd9949 (refs/pull/4/merge); expected head a3ab2c604fafb23985fb54526314d6fd03b27644; executed-source linkage: merge ref dc937a7 has parent a3ab2c6 and tree f44819f identical to the head tree
+  [no] sensor coverage: E2E hydrogen-react-router-7 Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered
+not shareable until every leg reads ok
+```
+
+Identity now verifies the executed-source linkage. The overall result remains
+`FAIL` because completeness is undeclared and the second E2E job has no sensor
+record.
+
 Real output from the commands in this repository, unedited except for the shell
 prompt. Captured 2026-09-10. Each example names the fork pull request it came
 from so the output can be checked against the live state.

@@ -5,6 +5,7 @@
   "record": null,
   "workload": null,
   "notes": [
+    "2026-10-24: Replays of the isaacs change touching the deno test application use --base same-path: one build.yml/job_e2e_tests entry (deno) and one build.yml/job_node_unit_tests entry (Node 20.19). The E2E matrix is diff-selected and each matrix job starts one sensor.",
     "2026-09-26: fork PR #3 (hydrogen E2E, test files only) showed Shopify Monorail and OTLP hosts in Run E2E test with previous: null. Same-path prepared replay (fork PR #4, ce38306 -> a3ab2c6) recorded those hosts at base and head; only mock.shop left at head. Not a head-only delta. E2E hydrogen-react-router-7 sensor did not start on #3 and both #4 commits (control plane HTTP 500 on POST /api/v1/agents); public profiles record the refs/pull/N/merge SHA, so verify fails identity."
   ],
   "observations": [
