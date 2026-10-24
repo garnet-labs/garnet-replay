@@ -50,6 +50,1594 @@
         ]
       },
       "observedAt": "2026-09-11T17:03:08.006Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18873,
+      "title": "chore(main): release 1.33.1",
+      "author": "app/openhands-release-bot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T15:24:38Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".release-please-manifest.json",
+        "README.md",
+        "README.windows.md",
+        "config/defaults.json",
+        "helm/agent-canvas/Chart.yaml",
+        "package-lock.json",
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18852,
+      "title": "chore(main): release 1.33.0",
+      "author": "app/openhands-release-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T04:02:39Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".release-please-manifest.json",
+        "README.md",
+        "README.windows.md",
+        "config/defaults.json",
+        "helm/agent-canvas/Chart.yaml",
+        "package-lock.json",
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18851,
+      "title": "chore: bump agent-server to 1.58.1, automation to 1.25.1, and @openhands/extensions to 0.35.0",
+      "author": "all-hands-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:47:14Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "agent-server",
+        "from": null,
+        "to": "1.58.1"
+      },
+      "files": 8,
+      "paths": [
+        ".agents/skills/local-stack-runtime/references/guide.md",
+        ".pr/sdk-version-bump.svg",
+        "__tests__/scripts/dev-safe.test.ts",
+        "config/defaults.json",
+        "package-lock.json",
+        "package.json",
+        "scripts/check-sdk-version-sync.mjs",
+        "scripts/dev-safe.mjs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18842,
+      "title": "chore: bump @openhands/extensions to 0.34.0",
+      "author": "ak684",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T19:09:48Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "@openhands/extensions",
+        "from": null,
+        "to": "0.34.0"
+      },
+      "files": 5,
+      "paths": [
+        "__tests__/components/features/mcp-page/install-server-modal.test.tsx",
+        "__tests__/fixtures/integrations/sentry.extensions-afb5930.json",
+        "__tests__/utils/mcp-marketplace-utils.test.ts",
+        "package-lock.json",
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18839,
+      "title": "chore(main): release 1.32.0",
+      "author": "app/openhands-release-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T16:48:46Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".release-please-manifest.json",
+        "README.md",
+        "README.windows.md",
+        "config/defaults.json",
+        "helm/agent-canvas/Chart.yaml",
+        "package-lock.json",
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18837,
+      "title": "chore: bump agent-server to 1.58.0",
+      "author": "all-hands-bot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T16:04:05Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "agent-server",
+        "from": null,
+        "to": "1.58.0"
+      },
+      "files": 8,
+      "paths": [
+        ".agents/skills/local-stack-runtime/references/guide.md",
+        ".pr/sdk-version-bump.svg",
+        "__tests__/scripts/dev-safe.test.ts",
+        "config/defaults.json",
+        "package-lock.json",
+        "package.json",
+        "scripts/check-sdk-version-sync.mjs",
+        "scripts/dev-safe.mjs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18843,
+      "title": "feat(feature-policy): add a startup feature policy, gating Add Backend first",
+      "author": "DevinVinson",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T21:16:30Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 24,
+      "paths": [
+        ".agents/skills/frontend-development/references/guide.md",
+        ".agents/skills/local-stack-runtime/references/guide.md",
+        ".pr/design.html",
+        ".pr/screenshots/01-before-no-policy-backend-menu.png",
+        ".pr/screenshots/02-after-backends-add-off-expanded.png",
+        ".pr/screenshots/03-after-backends-add-off-collapsed.jpg",
+        ".pr/screenshots/04-after-manage-window-unchanged.jpg",
+        "__tests__/agent-server-ui-providers.test.tsx",
+        "__tests__/components/backends/backend-selector.test.tsx",
+        "__tests__/scripts/docker-script-imports.test.ts",
+        "__tests__/scripts/feature-policy.test.ts",
+        "__tests__/scripts/static-server.test.ts",
+        "config/features.json",
+        "docker/Dockerfile",
+        "docs/SELF_HOSTING.md",
+        "scripts/feature-policy.mjs",
+        "scripts/static-server.mjs",
+        "src/components/features/backends/backend-selector.tsx",
+        "src/components/providers/agent-server-ui-providers.tsx",
+        "src/feature-policy/feature-policy-context.tsx",
+        "src/feature-policy/feature-policy.ts",
+        "src/lib/index.ts",
+        "src/react-app-env.d.ts",
+        "vite.config.ts"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18878,
+      "title": "perf: reduce full test runtime with isolated runner reuse and consolidation",
+      "author": "neubig",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T17:20:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "__tests__/components/automations/automation-setup-draft-service.test.ts",
+        "__tests__/components/automations/build-automation-pills.test.tsx",
+        "__tests__/components/automations/detail/active-status-badge.test.tsx",
+        "__tests__/components/automations/detail/configuration-section.test.tsx",
+        "__tests__/components/automations/detail/detail-header.test.tsx",
+        "__tests__/components/automations/detail/disabled-reason-banner.test.tsx",
+        "__tests__/components/automations/detail/not-found-state.test.tsx",
+        "__tests__/components/automations/detail/prompt-section.test.tsx",
+        "__tests__/components/automations/detail/run-status-badge.test.tsx",
+        "__tests__/components/automations/error-state.test.tsx",
+        "__tests__/components/automations/kebab-menu.test.tsx",
+        "__tests__/components/automations/search-input.test.tsx",
+        "__tests__/components/automations/to-latest-run-state.test.ts",
+        "__tests__/components/automations/toggle-switch.test.tsx",
+        "__tests__/components/backends/environment-switch-overlay.test.tsx",
+        "__tests__/components/backends/managed-agents-session-row.test.tsx",
+        "__tests__/components/buttons/circle-plus-check-toggle.test.tsx",
+        "__tests__/components/buttons/copyable-content-wrapper.test.tsx",
+        "__tests__/components/chat-message.test.tsx",
+        "__tests__/components/chat/btw-messages.test.tsx",
+        "__tests__/components/chat/goal-status-banner.test.tsx",
+        "__tests__/components/chat/goal-status-content.test.tsx",
+        "__tests__/components/conversation-events/chat/event-content-helpers/create-skill-ready-event.test.ts",
+        "__tests__/components/conversation-events/chat/event-content-helpers/get-acp-tool-call-content.test.ts",
+        "__tests__/components/conversation-events/chat/event-content-helpers/get-invoke-skill-items.test.ts",
+        "__tests__/components/conversation-events/chat/event-content-helpers/get-observation-result.test.ts",
+        "__tests__/components/conversation-events/chat/event-content-helpers/get-skill-ready-items.test.ts",
+        "__tests__/components/conversation-events/chat/event-message-components/event-group.test.tsx",
+        "__tests__/components/conversation-events/chat/event-message-components/skill-item-expanded.test.ts",
+        "__tests__/components/conversation-events/chat/event-message-components/skill-ready-content-list.test.tsx",
+        "__tests__/components/features/chat/change-agent-context-menu.test.tsx",
+        "__tests__/components/features/chat/components/chat-input-field.test.tsx",
+        "__tests__/components/features/chat/components/context-window-ring.test.tsx",
+        "__tests__/components/features/chat/components/resolve-picker-kind.test.ts",
+        "__tests__/components/features/chat/model-messages.test.tsx",
+        "__tests__/components/features/chat/typing-indicator.test.ts",
+        "__tests__/components/features/chat/workspace-mode-selector.test.tsx",
+        "__tests__/components/features/conversation-panel/advanced-conversation-options-modal.test.tsx",
+        "__tests__/components/features/conversation-panel/budget-display.test.tsx",
+        "__tests__/components/features/conversation-panel/budget-usage-text.test.tsx",
+        "__tests__/components/features/conversation-panel/confirm-stop-modal.test.tsx",
+        "__tests__/components/features/conversation-panel/conversation-active-tag-filters.test.tsx",
+        "__tests__/components/features/conversation-panel/conversation-tag-icons.test.ts",
+        "__tests__/components/features/conversation-panel/edit-conversation-tags-modal.test.tsx",
+        "__tests__/components/features/conversation-panel/start-task-status-badge.test.tsx",
+        "__tests__/components/features/files-tab/file-tree-view.test.tsx",
+        "__tests__/components/features/files-tab/workspace-path.test.tsx",
+        "__tests__/components/features/launch/plugin-launch-modal.test.tsx",
+        "__tests__/components/features/launch/plugin-launch-plugin-section.test.tsx",
+        "__tests__/components/features/markdown/code.test.tsx",
+        "__tests__/components/features/markdown/markdown-renderer-streaming.test.tsx",
+        "__tests__/components/features/markdown/markdown-renderer.test.tsx",
+        "__tests__/components/features/markdown/markdown-table-scroll.test.tsx",
+        "__tests__/components/features/markdown/plan-components.test.tsx",
+        "__tests__/components/features/markdown/rehype-fade-in-words.test.tsx",
+        "__tests__/components/features/markdown/table.test.tsx",
+        "__tests__/components/features/plugins/add-plugin-modal.test.tsx",
+        "__tests__/components/features/plugins/build-plugins-view-model.test.ts",
+        "__tests__/components/features/plugins/plugin-files-section.test.tsx",
+        "__tests__/components/features/plugins/plugin-spec-identity.test.ts",
+        "__tests__/components/features/plugins/plugins-toolbar.test.tsx",
+        "__tests__/components/features/settings/settings-layout.test.tsx",
+        "__tests__/components/features/settings/settings-nav-divider.test.tsx",
+        "__tests__/components/features/settings/settings-nav-header.test.tsx",
+        "__tests__/components/features/settings/settings-nav-link.test.tsx",
+        "__tests__/components/features/settings/settings-navigation.test.tsx",
+        "__tests__/components/features/sidebar/sidebar-onboarding-checklist-item-preview.test.tsx",
+        "__tests__/components/features/sidebar/sidebar-onboarding-checklist-llm-complete.test.ts",
+        "__tests__/components/features/skills/build-skill-pills.test.tsx",
+        "__tests__/components/features/skills/extensions-mobile-hub.test.tsx",
+        "__tests__/components/features/skills/get-skill-card-description.test.ts",
+        "__tests__/components/features/skills/get-skill-chat-launch-message.test.ts",
+        "__tests__/components/features/skills/is-copyable-skill-source.test.ts",
+        "__tests__/components/features/skills/skill-card-pill-row.test.tsx",
+        "__tests__/components/features/skills/skill-facet-rail.test.tsx",
+        "__tests__/components/features/skills/skill-filter.test.ts",
+        "__tests__/components/features/skills/skill-filters-modal.test.tsx",
+        "__tests__/components/image-preview.test.tsx",
+        "__tests__/components/onboarding/choose-agent-step.test.tsx",
+        "__tests__/components/onboarding/onboarding-preview.test.ts",
+        "__tests__/components/onboarding/onboarding-progress-bar.test.tsx",
+        "__tests__/components/settings/agent-profiles/agent-profile-actions-menu.test.tsx",
+        "__tests__/components/settings/agent-profiles/merge-agent-profile-save-input.test.ts",
+        "__tests__/components/settings/agent-profiles/profile-behavior-form.test.ts",
+        "__tests__/components/settings/app-settings/getting-started-checklist-switch.test.tsx",
+        "__tests__/components/settings/app-settings/recommended-automations-switch.test.tsx",
+        "__tests__/components/settings/meta-llm-profiles/meta-profile-editor.test.tsx",
+        "__tests__/components/settings/meta-llm-profiles/router-profiles.test.ts",
+        "__tests__/components/shared/brand-button.test.tsx",
+        "__tests__/components/shared/navigation-link.test.tsx",
+        "__tests__/components/suggestions.test.tsx",
+        "__tests__/components/user-avatar.test.tsx",
+        "__tests__/hooks/use-pinned-home-route.test.ts",
+        "__tests__/hooks/use-resizable-panels.test.ts",
+        "__tests__/hooks/use-scroll-to-bottom.test.ts",
+        "__tests__/hooks/use-streamed-text.test.tsx",
+        "__tests__/hooks/use-sync-document-language.test.ts",
+        "__tests__/scripts/inline-styles-lint.test.ts",
+        "__tests__/scripts/raw-colors-lint.test.ts",
+        "__tests__/scripts/restyle-lint.test.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18865,
+      "title": "docs(verify-openhands): map maintenance 2026-10-23",
+      "author": "enyst",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T09:10:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 49,
+      "paths": [
+        ".agents/skills/verify-openhands/references/feature-map/F01-first-run-and-sign-in.md",
+        ".agents/skills/verify-openhands/references/feature-map/F03-home.md",
+        ".agents/skills/verify-openhands/references/feature-map/F05-composer.md",
+        ".agents/skills/verify-openhands/references/feature-map/F06-agent-activity.md",
+        ".agents/skills/verify-openhands/references/feature-map/F07-conversation-page.md",
+        ".agents/skills/verify-openhands/references/feature-map/F11-provider-connections.md",
+        ".agents/skills/verify-openhands/references/feature-map/F13-agent-profiles.md",
+        ".agents/skills/verify-openhands/references/feature-map/F17-mcp-servers.md",
+        ".agents/skills/verify-openhands/references/feature-map/F19-plugins.md",
+        ".agents/skills/verify-openhands/references/feature-map/F21-automations-dashboard.md",
+        ".agents/skills/verify-openhands/references/feature-map/F22-automation-creation.md",
+        ".agents/skills/verify-openhands/references/feature-map/F23-automation-detail.md",
+        ".agents/skills/verify-openhands/references/feature-map/F25-backends-and-cloud.md",
+        ".agents/skills/verify-openhands/references/feature-map/F26-runtime-variants.md",
+        ".agents/skills/verify-openhands/references/feature-map/F28-automation-setup-page.md",
+        ".agents/skills/verify-openhands/references/feature-map/README.md",
+        ".pr/bugs/2026-10-23/compact-duplicate-toast/two-toasts.png",
+        ".pr/bugs/2026-10-23/event-log-gap/branch-from-here-500.png",
+        ".pr/bugs/2026-10-23/event-log-gap/reload-empty-conversation.png",
+        ".pr/bugs/2026-10-23/mcp-oauth-raw-html/hubspot-desktop.png",
+        ".pr/bugs/2026-10-23/mcp-oauth-raw-html/hubspot-phone.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/before-18832-wrapped-empty.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/desktop-empty-reset.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/desktop-results-return-reset.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/phone-empty-reset.png",
+        ".pr/map-maintenance/2026-10-23/F01-locked-cloud-first-run.png",
+        ".pr/map-maintenance/2026-10-23/F03-pinned-migration.png",
+        ".pr/map-maintenance/2026-10-23/F03-pins-after-browser-reset.png",
+        ".pr/map-maintenance/2026-10-23/F03-tooltip-phase.png",
+        ".pr/map-maintenance/2026-10-23/F05-goal-resume-capped.png",
+        ".pr/map-maintenance/2026-10-23/F07-stale-delete.png",
+        ".pr/map-maintenance/2026-10-23/F11-redacted-key-rejected.png",
+        ".pr/map-maintenance/2026-10-23/F13-json-suffix-updated.png",
+        ".pr/map-maintenance/2026-10-23/F17-install-options.png",
+        ".pr/map-maintenance/2026-10-23/F17-install-unsupported-cloudflare.png",
+        ".pr/map-maintenance/2026-10-23/F17-oauth-abandoned.png",
+        ".pr/map-maintenance/2026-10-23/F19-refresh-missing-source.png",
+        ".pr/map-maintenance/2026-10-23/F21-card-repo-pills.png",
+        ".pr/map-maintenance/2026-10-23/F21-card-run-phase.png",
+        ".pr/map-maintenance/2026-10-23/F21-edit-repos.png",
+        ".pr/map-maintenance/2026-10-23/F22-phone-rail-dragged.png",
+        ".pr/map-maintenance/2026-10-23/F22-review-no-llm-profile.png",
+        ".pr/map-maintenance/2026-10-23/F22-template-filters-rail.png",
+        ".pr/map-maintenance/2026-10-23/F23-activity-log-phase.png",
+        ".pr/map-maintenance/2026-10-23/F23-edit-repositories-read-only.png",
+        ".pr/map-maintenance/2026-10-23/F23-edit-repositories.png",
+        ".pr/map-maintenance/2026-10-23/F25-digitalocean-sign-in-typed-key.png",
+        ".pr/map-maintenance/2026-10-23/F28-create.png",
+        ".pr/map-maintenance/2026-10-23/F28-repositories.png"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18853,
+      "title": "chore: remove merged PR artifacts",
+      "author": "all-hands-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T04:56:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 78,
+      "paths": [
+        ".pr/bugs/2026-10-22/azure-encoded-label/azure-desktop-first-run.png",
+        ".pr/bugs/2026-10-22/azure-encoded-label/azure-label.png",
+        ".pr/bugs/2026-10-22/azure-encoded-label/azure-overview.png",
+        ".pr/bugs/2026-10-22/escape-pill-popovers/escape-agent-pill-first-run.png",
+        ".pr/bugs/2026-10-22/escape-pill-popovers/escape-agent-pill-still-open.png",
+        ".pr/bugs/2026-10-22/escape-pill-popovers/escape-llm-pill-still-open.png",
+        ".pr/bugs/2026-10-22/profile-editor-stale-reopen/reopen-correct-120.png",
+        ".pr/bugs/2026-10-22/profile-editor-stale-reopen/reopen-stale-240.png",
+        ".pr/bugs/2026-10-22/profile-editor-stale-reopen/stale-reopen-first-run.png",
+        ".pr/bugs/2026-10-23/compact-duplicate-toast/two-toasts.png",
+        ".pr/bugs/2026-10-23/event-log-gap/branch-from-here-500.png",
+        ".pr/bugs/2026-10-23/event-log-gap/reload-empty-conversation.png",
+        ".pr/bugs/2026-10-23/mcp-oauth-raw-html/hubspot-desktop.png",
+        ".pr/bugs/2026-10-23/mcp-oauth-raw-html/hubspot-phone.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/before-18832-wrapped-empty.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/desktop-empty-reset.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/desktop-results-return-reset.png",
+        ".pr/bugs/2026-10-23/template-filter-rail-reset/phone-empty-reset.png",
+        ".pr/do-smallest/after.png",
+        ".pr/do-smallest/before.png",
+        ".pr/do-smallest/explicit-default.png",
+        ".pr/do-smallest/phone.png",
+        ".pr/do-smallest/verification.md",
+        ".pr/map-maintenance/2026-10-22/F01-locked-cloud-first-run.png",
+        ".pr/map-maintenance/2026-10-22/F03-rail-dismiss-x.png",
+        ".pr/map-maintenance/2026-10-22/F04-grouped-folders-fresh-browser.png",
+        ".pr/map-maintenance/2026-10-22/F05-agent-profile-pill.png",
+        ".pr/map-maintenance/2026-10-22/F06-markdown-alerts-light-plus.png",
+        ".pr/map-maintenance/2026-10-22/F08-diff-markdown-preview-capped.png",
+        ".pr/map-maintenance/2026-10-22/F09-desktop-nav-seven.png",
+        ".pr/map-maintenance/2026-10-22/F10-provider-picker-anth.png",
+        ".pr/map-maintenance/2026-10-22/F12-row-menu-local.png",
+        ".pr/map-maintenance/2026-10-22/F13-active-drives-conversation.png",
+        ".pr/map-maintenance/2026-10-22/F13-default-shared-editor.png",
+        ".pr/map-maintenance/2026-10-22/F13-list-active-badge.png",
+        ".pr/map-maintenance/2026-10-22/F13-profile-router-editor.png",
+        ".pr/map-maintenance/2026-10-22/F15-profile-behavior-known-failure.png",
+        ".pr/map-maintenance/2026-10-22/F16-recommended-automations-switch.png",
+        ".pr/map-maintenance/2026-10-22/F17-server-health-failed-dot.png",
+        ".pr/map-maintenance/2026-10-22/F18-toggle-default-profile.png",
+        ".pr/map-maintenance/2026-10-22/F22-prompt-draft-no-profile.png",
+        ".pr/map-maintenance/2026-10-22/F22-template-filters.png",
+        ".pr/map-maintenance/2026-10-22/F25-cloud-first-message-order.png",
+        ".pr/map-maintenance/2026-10-22/F25-providers-tab-default-off.png",
+        ".pr/map-maintenance/2026-10-22/F26-lib-host-app-styled.png",
+        ".pr/map-maintenance/2026-10-23/F01-locked-cloud-first-run.png",
+        ".pr/map-maintenance/2026-10-23/F03-pinned-migration.png",
+        ".pr/map-maintenance/2026-10-23/F03-pins-after-browser-reset.png",
+        ".pr/map-maintenance/2026-10-23/F03-tooltip-phase.png",
+        ".pr/map-maintenance/2026-10-23/F05-goal-resume-capped.png",
+        ".pr/map-maintenance/2026-10-23/F07-stale-delete.png",
+        ".pr/map-maintenance/2026-10-23/F11-redacted-key-rejected.png",
+        ".pr/map-maintenance/2026-10-23/F13-json-suffix-updated.png",
+        ".pr/map-maintenance/2026-10-23/F17-install-options.png",
+        ".pr/map-maintenance/2026-10-23/F17-install-unsupported-cloudflare.png",
+        ".pr/map-maintenance/2026-10-23/F17-oauth-abandoned.png",
+        ".pr/map-maintenance/2026-10-23/F19-refresh-missing-source.png",
+        ".pr/map-maintenance/2026-10-23/F21-card-repo-pills.png",
+        ".pr/map-maintenance/2026-10-23/F21-card-run-phase.png",
+        ".pr/map-maintenance/2026-10-23/F21-edit-repos.png",
+        ".pr/map-maintenance/2026-10-23/F22-phone-rail-dragged.png",
+        ".pr/map-maintenance/2026-10-23/F22-review-no-llm-profile.png",
+        ".pr/map-maintenance/2026-10-23/F22-template-filters-rail.png",
+        ".pr/map-maintenance/2026-10-23/F23-activity-log-phase.png",
+        ".pr/map-maintenance/2026-10-23/F23-edit-repositories-read-only.png",
+        ".pr/map-maintenance/2026-10-23/F23-edit-repositories.png",
+        ".pr/map-maintenance/2026-10-23/F25-digitalocean-sign-in-typed-key.png",
+        ".pr/map-maintenance/2026-10-23/F28-create.png",
+        ".pr/map-maintenance/2026-10-23/F28-repositories.png",
+        ".pr/secret-after.png",
+        ".pr/secret-before.png",
+        ".pr/secret-edit-after.png",
+        ".pr/secret-shown.png",
+        ".pr/stay-signed-in/after-restart.png",
+        ".pr/stay-signed-in/before-sign-in-form.png",
+        ".pr/stay-signed-in/not-saved.png",
+        ".pr/verify-launch-flags/launch-lock-to-cloud.png",
+        ".pr/verify-launch-flags/launch-mars-web.png"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18895,
+      "title": "fix(launch): open conversations without waiting for plugin metadata",
+      "author": "yxccai",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T02:52:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".pr/issue-18799/after-pending.png",
+        ".pr/issue-18799/after-timing.json",
+        ".pr/issue-18799/after.webm",
+        ".pr/issue-18799/before-pending.png",
+        ".pr/issue-18799/before-timing.json",
+        ".pr/issue-18799/before.webm",
+        ".pr/issue-18799/reproduce-navigation.spec.ts.txt",
+        ".pr/issue-18799/verification.md",
+        "__tests__/api/use-create-conversation-metadata.test.ts",
+        "src/api/plugins-management-service.test.ts",
+        "src/api/plugins-management-service.ts",
+        "src/hooks/mutation/use-create-conversation.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18894,
+      "title": "fix(conversation): reset state after connection edits",
+      "author": "Fieldnote-Echo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T02:00:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "__tests__/hooks/query/use-paginated-conversations.test.tsx",
+        "__tests__/hooks/query/use-sub-conversations.test.tsx",
+        "__tests__/hooks/query/use-user-conversation.test.tsx",
+        "__tests__/routes/conversation-backend-switch.test.tsx",
+        "src/hooks/query/use-paginated-conversations.ts",
+        "src/hooks/query/use-sub-conversations.ts",
+        "src/hooks/query/use-user-conversation.ts",
+        "src/routes/conversation.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18892,
+      "title": "fix(mars): isolate invalid OAuth relay attempts",
+      "author": "Fieldnote-Echo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T01:50:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/scripts/mars-oauth.test.ts",
+        "scripts/mars-oauth.mjs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18890,
+      "title": "fix(automations): bound tarball decompression",
+      "author": "Fieldnote-Echo",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-24T01:04:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/utils/tar-unpack.test.ts",
+        "src/utils/tar-unpack.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18887,
+      "title": "Feat/llm settings connection groups",
+      "author": "DevinVinson",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T22:37:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "__tests__/components/settings/llm-profiles/default-llm-profile-selector.test.tsx",
+        "__tests__/components/settings/llm-profiles/llm-profiles-manager.test.tsx",
+        "__tests__/components/settings/llm-profiles/profile-row.test.tsx",
+        "__tests__/routes/llm-settings.test.tsx",
+        "src/components/features/settings/llm-profiles/default-llm-profile-selector.tsx",
+        "src/components/features/settings/llm-profiles/llm-profiles-manager.tsx",
+        "src/components/features/settings/llm-profiles/llm-settings-local-view.tsx",
+        "src/components/features/settings/llm-profiles/profile-row.tsx",
+        "src/components/features/settings/llm-profiles/profiles-body.test.ts",
+        "src/components/features/settings/llm-profiles/profiles-body.tsx",
+        "src/components/features/settings/llm-profiles/provider-connection-actions-menu.tsx",
+        "src/components/features/settings/llm-profiles/provider-connection-group.test.tsx",
+        "src/components/features/settings/llm-profiles/provider-connection-group.tsx",
+        "src/components/features/settings/llm-profiles/provider-connection-row.tsx",
+        "src/components/features/settings/llm-profiles/provider-connections-manager.test.tsx",
+        "src/components/features/settings/llm-profiles/provider-connections-manager.tsx",
+        "src/components/features/settings/settings-dropdown-input.tsx",
+        "src/i18n/translation.json",
+        "src/routes/llm-settings.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18881,
+      "title": "fix(automations): let custom-script automations choose their LLM",
+      "author": "abhayymishraa",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T19:13:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "__tests__/components/automations/automation-setup-panel.test.tsx",
+        "src/components/features/automations/setup/automation-setup-panel.tsx",
+        "src/components/features/automations/setup/automation-setup-prompt-stack.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18876,
+      "title": "chore: remove merged PR artifacts",
+      "author": "all-hands-bot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T17:19:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".pr/evidence/after-drag-down.gif",
+        ".pr/evidence/after-drag-down.webm",
+        ".pr/evidence/after-drag-up.gif",
+        ".pr/evidence/after-drag-up.webm",
+        ".pr/evidence/before-drag-down.gif",
+        ".pr/evidence/before-drag-down.webm",
+        ".pr/evidence/before-drag-up.gif",
+        ".pr/evidence/before-drag-up.webm"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18875,
+      "title": "fix(condense): avoid duplicate error toast on failed compaction",
+      "author": "suzhiguo7",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T16:31:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".pr/evidence/baseline-after-two-toasts.png",
+        ".pr/evidence/baseline-before-compact.png",
+        ".pr/evidence/fix-after-one-toast.png",
+        ".pr/evidence/fix-before-compact.png",
+        "__tests__/hooks/mutation/use-condense-conversation.test.tsx",
+        "src/hooks/mutation/use-condense-conversation.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18874,
+      "title": "feat(canvas): attribute local Cloud signup entries (ALL-5962)",
+      "author": "malhotra5",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T15:44:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/components/backends/device-flow-login.test.tsx",
+        "src/components/features/backends/device-flow-auth.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18871,
+      "title": "fix(automations): show plugin-spec configuration in detail views",
+      "author": "wpyaoxueros",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T15:01:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".pr/plugin-spec/README.md",
+        ".pr/plugin-spec/after-phone.png",
+        ".pr/plugin-spec/after.png",
+        ".pr/plugin-spec/before.png",
+        "__tests__/components/automations/detail/configuration-section.test.tsx",
+        "__tests__/components/automations/detail/script-section.test.tsx",
+        "src/components/features/automations/detail/configuration-section.tsx",
+        "src/components/features/automations/detail/script-section.tsx",
+        "src/hooks/query/use-automation-tarball-files.ts",
+        "src/i18n/translation.json",
+        "src/types/automation.ts",
+        "src/utils/automation-preset-sources.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18870,
+      "title": "fix: mask secret values in request and Settings forms",
+      "author": "neubig",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T12:15:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        ".pr/secret-after.png",
+        ".pr/secret-before.png",
+        ".pr/secret-edit-after.png",
+        ".pr/secret-shown.png",
+        "__tests__/components/features/conversation/secret-request-card.test.tsx",
+        "__tests__/components/features/settings/secrets-settings/secret-form-behavior.test.tsx",
+        "__tests__/components/features/settings/secrets-settings/secret-form.test.tsx",
+        "src/components/features/conversation/secret-request-card.tsx",
+        "src/components/features/settings/secrets-settings/secret-form.tsx",
+        "src/i18n/translation.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18867,
+      "title": "feat(verify): stand in for DigitalOcean so Managed Agents can be verified",
+      "author": "enyst",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T09:27:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".agents/skills/verify-openhands/SKILL.md",
+        ".agents/skills/verify-openhands/references/feature-map/F25-backends-and-cloud.md",
+        ".agents/skills/verify-openhands/references/feature-map/F26-runtime-variants.md",
+        ".agents/skills/verify-openhands/scripts/fixtures/digitalocean-standin.mjs",
+        ".agents/skills/verify-openhands/scripts/fixtures/digitalocean-standin.test.mjs",
+        ".pr/digitalocean-standin/1-panel.png",
+        ".pr/digitalocean-standin/2-removal.png",
+        ".pr/digitalocean-standin/3-new-agent.png"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18866,
+      "title": "fix(ci): finalize mock-LLM markers after test scheduling",
+      "author": "enyst",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T09:25:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".agents/skills/e2e-testing/references/guide.md",
+        "__tests__/e2e/mock-llm-done-marker-reporter.test.ts",
+        "playwright.mock-llm-docker.config.ts",
+        "playwright.mock-llm.config.ts",
+        "tests/e2e/mock-llm/reporters/done-marker-reporter.ts",
+        "tests/e2e/mock-llm/reporters/done-marker-teardown.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18864,
+      "title": "fix(mcp): leave the server's HTML error page out of MCP connection errors",
+      "author": "enyst",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-23T09:08:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".pr/mcp-error-without-html/after-desktop.png",
+        ".pr/mcp-error-without-html/after-phone.png",
+        "__tests__/utils/mcp-test-error-message.test.ts",
+        "src/components/features/mcp-page/install-server-modal.tsx",
+        "src/components/features/settings/mcp-settings/mcp-server-form.tsx",
+        "src/utils/mcp-test-error-message.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18863,
+      "title": "fix(conversation): show one toast when Compact context fails",
+      "author": "enyst",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-23T09:08:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".pr/compact-context-single-toast/after-one-toast.png",
+        ".pr/compact-context-single-toast/before-two-toasts.png",
+        "__tests__/hooks/mutation/use-condense-conversation-error-toast.test.ts",
+        "src/hooks/mutation/use-condense-conversation.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18861,
+      "title": "fix(automations): keep the template filter rail scrolled when results empty or return",
+      "author": "enyst",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-23T08:59:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".pr/template-filter-rail-scroll/after-desktop-empty-kept.png",
+        ".pr/template-filter-rail-scroll/after-desktop-results-return-kept.png",
+        ".pr/template-filter-rail-scroll/after-phone-empty-kept.png",
+        "__tests__/components/automations/recommended-automations.test.tsx",
+        "src/components/features/automations/recommended-automations-section.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18859,
+      "title": "fix(chat): close the composer's agent-profile and model pill popovers on Escape",
+      "author": "OrangerXu",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T08:41:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".pr/18808/escape-before-after.png",
+        "__tests__/components/features/chat/components/chat-input-llm-profile-picker.test.tsx",
+        "__tests__/components/features/chat/components/chat-input-profile-picker.test.tsx",
+        "src/components/features/chat/components/chat-input-llm-profile-picker.tsx",
+        "src/components/features/chat/components/chat-input-profile-picker.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18857,
+      "title": "refactor(automations): express run bar heights in CSS",
+      "author": "enyst",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T05:39:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/components/features/home/automation-run-activity-sparkline.test.ts",
+        "src/components/features/home/featured-automations/automation-run-activity-sparkline.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18856,
+      "title": "refactor(onboarding): express slide offsets in CSS",
+      "author": "enyst",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-23T05:36:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/components/onboarding/onboarding-modal.test.tsx",
+        "src/components/features/onboarding/onboarding-modal.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18850,
+      "title": "fix(verify-openhands): bug run puts back the viewport a block changed",
+      "author": "enyst",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:38:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".agents/skills/verify-openhands/scripts/control-openhands.mjs",
+        ".agents/skills/verify-openhands/scripts/control-openhands.test.mjs",
+        ".agents/skills/verify-openhands/scripts/lib/known-bug.mjs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18849,
+      "title": "chore(verify-openhands): time network responses and order them by completion",
+      "author": "enyst",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:35:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".agents/skills/verify-openhands/SKILL.md",
+        ".agents/skills/verify-openhands/scripts/browser-daemon.mjs",
+        ".agents/skills/verify-openhands/scripts/control-openhands.mjs",
+        ".agents/skills/verify-openhands/scripts/control-openhands.test.mjs",
+        ".agents/skills/verify-openhands/scripts/lib/network-timing.mjs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18848,
+      "title": "feat(verify-openhands): launch --mars-web and --lock-to-cloud",
+      "author": "enyst",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T00:29:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".agents/skills/verify-openhands/SKILL.md",
+        ".agents/skills/verify-openhands/scripts/browser-daemon.mjs",
+        ".agents/skills/verify-openhands/scripts/control-openhands.mjs",
+        ".agents/skills/verify-openhands/scripts/control-openhands.test.mjs",
+        ".agents/skills/verify-openhands/scripts/lib/launcher-env.mjs",
+        ".pr/verify-launch-flags/launch-lock-to-cloud.png",
+        ".pr/verify-launch-flags/launch-mars-web.png"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18845,
+      "title": "chore: remove merged PR artifacts",
+      "author": "all-hands-bot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T21:44:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".pr/cloud-first-run.png",
+        ".pr/design.html",
+        ".pr/evidence.png",
+        ".pr/sdk-version-bump.svg"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18844,
+      "title": "feat(i18n): add Russian to the language list",
+      "author": "abdullahtas0",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T21:27:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/i18n/index.ts",
+        "src/i18n/translation.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18840,
+      "title": "Fix Model Router first-message preference persistence",
+      "author": "BE-TI-ROSP",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T17:31:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "src/components/features/settings/meta-llm-profiles/meta-llm-settings-view.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18838,
+      "title": "fix: constrain LiteLLM version in dev-safe launcher",
+      "author": "sahithib20",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T16:32:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "__tests__/scripts/dev-safe.test.ts",
+        "scripts/dev-safe.mjs"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18836,
+      "title": "feat(mcp): let the install dialog choose between installable library options",
+      "author": "ak684",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T16:03:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "__tests__/components/features/mcp-page/install-server-modal.test.tsx",
+        "__tests__/fixtures/integrations/sentry.extensions-afb5930.json",
+        "__tests__/utils/mcp-marketplace-utils.test.ts",
+        "src/components/features/mcp-page/install-server-modal.tsx",
+        "src/i18n/translation.json",
+        "src/utils/mcp-marketplace-utils.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18834,
+      "title": "fix(acp): send the enabled catalog skills when launching an ACP profile",
+      "author": "simonrosenberg",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-22T14:58:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".github/pr-assets/acp-enabled-skills-01-before.png",
+        ".github/pr-assets/acp-enabled-skills-02-after.png",
+        "__tests__/api/agent-server-adapter.test.ts",
+        "src/api/agent-server-adapter.test.ts",
+        "src/api/agent-server-adapter.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18833,
+      "title": "style(automations): tab the setup choice modal between native and MCP server",
+      "author": "FraterCCCLXIII",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T14:23:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "__tests__/components/automations/recommended-automations.test.tsx",
+        "src/components/features/automations/built-in-integration-choice-modal.tsx",
+        "src/i18n/translation.json",
+        "src/utils/pill-toggle-classes.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18832,
+      "title": "style(automations): restyle template filter chips as a draggable scroll rail",
+      "author": "FraterCCCLXIII",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T14:22:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "__tests__/components/shared/horizontal-scroll-fade.test.tsx",
+        "src/components/features/automations/recommended-automations-section.tsx",
+        "src/components/features/automations/template-filter-chips.tsx",
+        "src/components/shared/horizontal-scroll-fade.tsx",
+        "src/hooks/use-drag-scroll.ts",
+        "src/utils/pill-toggle-classes.ts",
+        "src/utils/scroll-fade-state.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-24T04:13:15.920Z"
     }
   ],
   "replays": [
