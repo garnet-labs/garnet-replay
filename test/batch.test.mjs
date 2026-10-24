@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { mkdtempSync, writeFileSync } from "node:fs"
 import { homedir, tmpdir } from "node:os"
 import { join } from "node:path"
-import { chosenPr, nextAction, planGroups, renderBoard, resumableReplay, runBatch, validateTargets } from "../lib/batch.mjs"
+import { chosenPr, existingReplay, nextAction, planGroups, renderBoard, runBatch, validateTargets } from "../lib/batch.mjs"
 
 function row(slug, fork, work = `/work/${slug}`) {
   return { slug, upstream: `source/${slug}`, fork, work, validation: null, blocked: null, pr: 1, find: {}, record: null, liveArgs: [] }
@@ -16,6 +16,45 @@ function runBatchOffline(args, deps = {}) {
     readWorkflowBodies: () => ({}),
     ...deps,
   })
+}
+
+async function runBatchWithNewReplay({ target, pr, upstreamPr, forkPr }) {
+  const dir = mkdtempSync(join(tmpdir(), "batch-new-replay-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({
+    name: "new-replay",
+    targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr, work: "/work/alpha" }],
+  }))
+  let ledger = target
+  const commands = []
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ledger,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      const call = argv.slice(2)
+      commands.push(call)
+      if (call[0] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (call[0] === "live" && call.includes("--dry-run")) return { code: 0, stdout: "recorder health: ok", stderr: "" }
+      if (call[0] === "live") {
+        ledger = {
+          ...ledger,
+          replays: [...(Array.isArray(ledger.replays) ? ledger.replays : []), {
+            upstreamPr,
+            forkPr,
+            state: "pending",
+            openedAt: "2026-10-24T12:00:00.000Z",
+          }],
+        }
+        return { code: 0, stdout: "live complete", stderr: "" }
+      }
+      if (call[0] === "verify") return { code: 0, stdout: JSON.stringify({ status: "PASS", legs: [] }), stderr: "" }
+      if (call[0] === "card") return { code: 0, stdout: "card: out/card.md", stderr: "" }
+      return { code: 1, stdout: "unexpected batch command", stderr: "" }
+    },
+  })
+  return { board, commands }
 }
 
 test("batch state machine orders find, fork, write, refresh, setup, repin, live, verify, card", () => {
@@ -33,19 +72,18 @@ test("batch state machine orders find, fork, write, refresh, setup, repin, live,
   assert.deepEqual(target.replays, [])
 })
 
-test("resumableReplay selects the latest pending replay and falls back to array order", () => {
-  const earlier = { upstreamPr: 18872, forkPr: 25, state: "pending", openedAt: "2026-10-23T11:00:00.000Z" }
-  const later = { upstreamPr: 18873, forkPr: 26, state: "pending", openedAt: "2026-10-23T12:00:00.000Z" }
-  assert.equal(resumableReplay({ replays: [later, earlier] }), later)
+test("existingReplay selects the latest replay with a fork PR regardless of state", () => {
+  const earlier = { upstreamPr: 18872, forkPr: 25, state: "undeterminable", openedAt: "2026-10-23T11:00:00.000Z" }
+  const later = { upstreamPr: 18873, forkPr: 26, state: "fail-specimen", verdict: "FAIL", openedAt: "2026-10-23T12:00:00.000Z" }
+  assert.equal(existingReplay({ replays: [later, earlier] }), later)
 
-  const first = { upstreamPr: 18872, forkPr: 25, state: "pending" }
-  const last = { upstreamPr: 18873, forkPr: 26, state: "pending" }
-  assert.equal(resumableReplay({ replays: [first, last] }), last)
-  assert.equal(resumableReplay({ replays: [{ upstreamPr: 1, forkPr: 1, state: "undeterminable" }] }), null)
-  assert.equal(resumableReplay({ replays: [{ upstreamPr: 1, forkPr: "1", state: "pending" }] }), null)
+  const first = { upstreamPr: 18872, forkPr: 25, state: "undeterminable" }
+  const last = { upstreamPr: 18873, forkPr: 26, state: "recorded" }
+  assert.equal(existingReplay({ replays: [first, last] }), last)
+  assert.equal(existingReplay({ replays: [{ upstreamPr: 1, forkPr: "1", state: "pending" }] }), null)
 })
 
-test("chosenPr resumes a pending replay before observations and keeps explicit and fallback selection", () => {
+test("chosenPr prefers an explicit PR, then the latest existing replay, then observations", () => {
   const target = {
     observations: [
       { upstreamPr: 19000, gap: { total: 100 }, kind: "other", transition: null, paths: [] },
@@ -60,66 +98,105 @@ test("chosenPr resumes a pending replay before observations and keeps explicit a
   assert.equal(chosenPr(target, { pr: null }), 18873)
   assert.equal(chosenPr(target, { pr: 20000 }), 20000)
 
-  const withoutPending = {
+  const withoutReplay = {
     ...target,
-    replays: [
-      { upstreamPr: 17270, forkPr: 10, state: "undeterminable" },
-      { upstreamPr: 18873, forkPr: 26, state: "recorded" },
-    ],
+    replays: [],
   }
-  assert.equal(chosenPr(withoutPending, { pr: null }), 19000)
+  assert.equal(chosenPr(withoutReplay, { pr: null }), 19000)
 })
 
-test("batch resumes the pending replay in real and dry-run modes without invoking live", async () => {
+test("batch resumes undeterminable and failed-specimen replays in real and dry-run modes", async () => {
+  for (const replayState of [
+    { state: "undeterminable" },
+    { state: "fail-specimen", verdict: "FAIL" },
+  ]) {
+    const target = {
+      slug: "alpha",
+      setupPr: null,
+      record: { mode: "instrument" },
+      workload: null,
+      observations: [
+        { upstreamPr: 19000, gap: { total: 100 }, kind: "other", transition: null, paths: [] },
+        { upstreamPr: 19001, gap: { total: 50 }, kind: "other", transition: null, paths: [] },
+      ],
+      replays: [
+        { upstreamPr: 17270, forkPr: 10, state: "undeterminable" },
+        { upstreamPr: 18873, forkPr: 26, ...replayState, openedAt: "2026-10-23T12:00:00.000Z" },
+      ],
+    }
+
+    for (const dryRun of [false, true]) {
+      const dir = mkdtempSync(join(tmpdir(), "batch-resume-existing-"))
+      const file = join(dir, "targets.json")
+      writeFileSync(file, JSON.stringify({
+        name: "resume-existing",
+        targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: null, work: "/work/alpha" }],
+      }))
+      const commands = []
+      const args = [file, "--out", join(dir, "out")]
+      if (dryRun) args.push("--dry-run")
+      const board = await runBatchOffline(args, {
+        env: { GH_TOKEN: "test-token" },
+        exec: (command) => command === "git" ? "sha" : "",
+        readLedger: () => target,
+        probeWrite: () => ({ ok: true }),
+        readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
+        readWorkflowBodies: () => ({}),
+        runCommand: async (argv) => {
+          const call = argv.slice(2)
+          commands.push(call)
+          if (call[0] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+          if (call[0] === "verify") return { code: 0, stdout: JSON.stringify({ status: "PASS", legs: [] }), stderr: "" }
+          if (call[0] === "card") return { code: 0, stdout: "card: out/card.md", stderr: "" }
+          return { code: 1, stdout: "unexpected batch command", stderr: "" }
+        },
+      })
+
+      assert.equal(board.rows[0].upstreamPr, 18873)
+      assert.equal(board.rows[0].state, "pass")
+      assert.equal(board.rows[0].replayPr, "https://github.com/garnet-labs/alpha/pull/26")
+      assert.deepEqual(commands.find((call) => call[0] === "verify"), ["verify", "https://github.com/garnet-labs/alpha/pull/26", "--json"])
+      assert.ok(commands.some((call) => call[0] === "card"))
+      assert.equal(commands.some((call) => call[0] === "live" || call[0] === "replay"), false)
+    }
+  }
+})
+
+test("an explicit different PR opens a new replay instead of reusing the latest one", async () => {
   const target = {
     slug: "alpha",
     setupPr: null,
     record: { mode: "instrument" },
     workload: null,
-    observations: [
-      { upstreamPr: 19000, gap: { total: 100 }, kind: "other", transition: null, paths: [] },
-      { upstreamPr: 19001, gap: { total: 50 }, kind: "other", transition: null, paths: [] },
-    ],
-    replays: [
-      { upstreamPr: 17270, forkPr: 10, state: "undeterminable" },
-      { upstreamPr: 18873, forkPr: 26, state: "pending", openedAt: "2026-10-23T12:00:00.000Z" },
-    ],
+    observations: [],
+    replays: [{ upstreamPr: 18873, forkPr: 26, state: "undeterminable", openedAt: "2026-10-23T12:00:00.000Z" }],
   }
+  const { board, commands } = await runBatchWithNewReplay({ target, pr: 20000, upstreamPr: 20000, forkPr: 27 })
+  const liveCalls = commands.filter((call) => call[0] === "live")
+  assert.equal(board.rows[0].upstreamPr, 20000)
+  assert.equal(board.rows[0].state, "pass")
+  assert.equal(board.rows[0].replayPr, "https://github.com/garnet-labs/alpha/pull/27")
+  assert.equal(liveCalls.length, 2)
+  assert.ok(liveCalls.every((call) => call[2] === "--pr" && call[3] === "20000"))
+  assert.deepEqual(commands.find((call) => call[0] === "verify"), ["verify", "https://github.com/garnet-labs/alpha/pull/27", "--json"])
+})
 
-  for (const dryRun of [false, true]) {
-    const dir = mkdtempSync(join(tmpdir(), "batch-resume-pending-"))
-    const file = join(dir, "targets.json")
-    writeFileSync(file, JSON.stringify({
-      name: "resume-pending",
-      targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: null, work: "/work/alpha" }],
-    }))
-    const commands = []
-    const args = [file, "--out", join(dir, "out")]
-    if (dryRun) args.push("--dry-run")
-    const board = await runBatchOffline(args, {
-      env: { GH_TOKEN: "test-token" },
-      exec: (command) => command === "git" ? "sha" : "",
-      readLedger: () => target,
-      probeWrite: () => ({ ok: true }),
-      readForkFreshness: () => ({ forkBehind: 0, forkDefault: "main" }),
-      readWorkflowBodies: () => ({}),
-      runCommand: async (argv) => {
-        const call = argv.slice(2)
-        commands.push(call)
-        if (call[0] === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
-        if (call[0] === "verify") return { code: 0, stdout: JSON.stringify({ status: "PASS", legs: [] }), stderr: "" }
-        if (call[0] === "card") return { code: 0, stdout: "card: out/card.md", stderr: "" }
-        return { code: 1, stdout: "unexpected batch command", stderr: "" }
-      },
-    })
-
-    assert.equal(board.rows[0].upstreamPr, 18873)
-    assert.equal(board.rows[0].state, "pass")
-    assert.equal(board.rows[0].replayPr, "https://github.com/garnet-labs/alpha/pull/26")
-    assert.deepEqual(commands.find((call) => call[0] === "verify"), ["verify", "https://github.com/garnet-labs/alpha/pull/26", "--json"])
-    assert.ok(commands.some((call) => call[0] === "card"))
-    assert.equal(commands.some((call) => call[0] === "live" || call[0] === "replay"), false)
+test("an empty replay ledger still runs live for a selected candidate", async () => {
+  const target = {
+    slug: "alpha",
+    setupPr: null,
+    record: { mode: "instrument" },
+    workload: null,
+    observations: [{ upstreamPr: 19000, gap: { total: 100 }, kind: "other", transition: null, paths: [] }],
+    replays: [],
   }
+  const { board, commands } = await runBatchWithNewReplay({ target, pr: null, upstreamPr: 19000, forkPr: 27 })
+  const liveCalls = commands.filter((call) => call[0] === "live")
+  assert.equal(board.rows[0].upstreamPr, 19000)
+  assert.equal(board.rows[0].state, "pass")
+  assert.equal(board.rows[0].replayPr, "https://github.com/garnet-labs/alpha/pull/27")
+  assert.equal(liveCalls.length, 2)
+  assert.ok(liveCalls.every((call) => call[2] === "--pr" && call[3] === "19000"))
 })
 
 test("batch refreshes a stale fork before setup and repins before the live dry-run", async () => {
