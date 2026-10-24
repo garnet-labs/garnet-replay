@@ -5,6 +5,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from "node
 import { join } from "node:path"
 import { homedir } from "node:os"
 import { planPrepared, verifyPreparedPaths, verifyPreparedResume } from "../lib/replay-prepared.mjs"
+import { transitionPhrase } from "../lib/observe.mjs"
 import { executePlan, renderPlan } from "../lib/replay-pr.mjs"
 import { livePr } from "../lib/commands.mjs"
 
@@ -35,12 +36,22 @@ test("prepared: explicit files, identical recorder, and staged publication", () 
   const plan = planPrepared(input)
   assert.equal(plan.scope, "immediate-parent-to-head")
   assert.equal(plan.record, "prepared-workflow")
+  assert.match(plan.body, /Updates `pnpm` from 12\.2\.1 to 12\.3\.0 under the same install conditions\./)
+  assert.match(plan.messages.first, /^ci: record installs with pnpm 12\.2\.1$/)
   assert.match(renderPlan(plan), /identical on commit 2/)
   const ids = plan.steps.map((step) => step.id)
   assert.ok(ids.indexOf("push-first") < ids.indexOf("wait-first-record"))
   assert.ok(ids.indexOf("wait-first-record") < ids.indexOf("push-change"))
   assert.equal(plan.steps.filter((step) => step.writeFileContent?.file.endsWith(WORKFLOW)).length, 1)
   assert.equal(plan.steps.find((step) => step.id === "branch").args.includes("-B"), false)
+})
+
+test("prepared: transition prose omits an absent from version without weakening pair validation", () => {
+  assert.equal(transitionPhrase({ from: null, to: "3.2.12" }), "to 3.2.12")
+  assert.throws(() => planPrepared({
+    ...input,
+    spec: { ...input.spec, transition: { name: "graphql-core", from: null, to: "3.2.12" } },
+  }), /prepared transition needs from/)
 })
 
 test("prepared: can publish against an existing fork-only base branch", () => {
