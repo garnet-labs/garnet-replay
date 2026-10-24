@@ -6,7 +6,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
-import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts } from "../lib/observe.mjs"
+import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts, transitionPhrase } from "../lib/observe.mjs"
 import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
@@ -307,6 +307,41 @@ test("replay --pr: commit 1 and the body name manifests only when every touched 
   assert.equal(replayPlan({ upstreamTitle: "Refresh lockfile", changes: [{ path: "pnpm-lock.yaml", status: "modified", previous: null }] }).branch, "chore/manifests-dx")
   assert.match(plan.body, /^Two commits: the first prepares the branch, the second is the change itself\.\n\n2 files:/)
   for (const text of [plan.body, plan.messages.first]) assertVocabClean(text)
+})
+
+test("transitions without a from version render without inventing one", () => {
+  const transition = { name: "graphql-core", from: null, to: "3.2.12" }
+  assert.equal(transitionPhrase(transition), "to 3.2.12")
+  assert.equal(prBodyText({ transition }), "Bumps `graphql-core` to 3.2.12.\n")
+
+  const installBody = prBodyText({ transition, firstPaths: ["package.json"] })
+  assert.match(installBody, /Bumps `graphql-core` to 3\.2\.12\./)
+  assert.match(installBody, /install script/)
+  assert.doesNotMatch(installBody, /null/)
+
+  assert.match(
+    contextCommitMessage([], { firstPaths: ["package.json"], transition }),
+    /^chore\(deps\): bump graphql-core to 3\.2\.12/,
+  )
+
+  const fromTo = { name: "nbconvert", from: "7.17.1", to: "7.17.2" }
+  assert.equal(transitionPhrase(fromTo), "from 7.17.1 to 7.17.2")
+  assert.equal(prBodyText({ transition: fromTo }), "Bumps `nbconvert` from 7.17.1 to 7.17.2.\n")
+  assert.match(
+    contextCommitMessage([], { firstPaths: ["package.json"], transition: fromTo }),
+    /^chore\(deps\): bump nbconvert from 7\.17\.1 to 7\.17\.2/,
+  )
+
+  const observation = observationFor({
+    number: 18873,
+    title: "Upgrade graphql-core to 3.2.12 and nbconvert to 7.17.2 in the lockfile",
+    author: { login: "dependabot[bot]" },
+    state: "OPEN",
+    files: ["requirements.txt"],
+  })
+  const observeText = renderObserveOutput([observation], { upstream: UPSTREAM })
+  assert.match(observeText, /graphql-core to 3\.2\.12/)
+  assert.doesNotMatch(observeText, /null|\? →/)
 })
 
 test("verify: only PASS exits 0", () => {
@@ -1139,7 +1174,7 @@ test("allow-build plan: skip recorded then allowed, one file, lockfile guarded u
   assert.match(plan.body, /19\.0\.0 and 24\.40\.0 ship an install script/)
   for (const text of [plan.branch, plan.title, plan.body, plan.messages.first, plan.messages.change]) assert.doesNotMatch(text, /PostHog\/posthog|github\.com|#\d|garnet|demo|test/i)
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
-  assert.match(renderPlan(plan), /transition plan · posthog · puppeteer 19\.0\.0 and 24\.40\.0, build script skipped → 19\.0\.0 and 24\.40\.0, build script allowed/)
+  assert.match(renderPlan(plan), /transition plan · posthog · puppeteer from 19\.0\.0 and 24\.40\.0, build script skipped to 19\.0\.0 and 24\.40\.0, build script allowed/)
   assert.match(allowBuildPlan({ versions: ["24.40.0"] }).body, /24\.40\.0 ships an install script/)
   assert.throws(() => allowBuildPlan({ versions: [] }), /lockfile versions/)
   assert.throws(() => allowBuildPlan({ allowlistFile: ".npmrc" }), /allowlist must live/)
@@ -1199,7 +1234,7 @@ test("transition plan: bump then allow, lockfile resolved without scripts, fork-
   assert.match(plan.body, /allowlist/)
   for (const text of [plan.branch, plan.title, plan.body, plan.messages.first, plan.messages.change]) assert.doesNotMatch(text, /PostHog\/posthog|github\.com|#\d/)
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
-  assert.match(renderPlan(plan), /transition plan · posthog · puppeteer 24\.40\.0 → 25\.9\.0/)
+  assert.match(renderPlan(plan), /transition plan · posthog · puppeteer from 24\.40\.0 to 25\.9\.0/)
   assert.match(renderPlan(plan), /compares: commit 1 → commit 2/)
   assert.throws(() => transitionPlan({ to: "24.40.0" }), /two different versions/)
   assert.throws(() => transitionPlan({ allowlistFile: ".npmrc" }), /allowlist must live/)
@@ -1260,12 +1295,22 @@ test("card: head-bound record renders the finding, pair, scope, chains and link;
   assert.match(card, /new outbound connection/)
   assert.match(card, /- head: `bbbbbbb`/)
   assert.match(card, /- compared with: `ccccccc`/)
-  assert.match(card, /`puppeteer` 24\.40\.0 → 25\.9\.0/)
+  assert.match(card, /`puppeteer` from 24\.40\.0 to 25\.9\.0/)
   assert.match(card, /immediate parent → head/)
   assert.match(card, /storage\.googleapis\.com:443/)
   assert.match(card, /app\.garnet\.ai\/public\/runs\/123/)
   assert.match(card, /Would this have helped the review\?/)
   assert.doesNotMatch(card, /Execution Diff/)
+
+  const missingFrom = renderCard(buildModel({
+    slug: "posthog",
+    forkPr: 77,
+    headSha: SHA_B,
+    comment,
+    replay: { scope: "immediate-parent-to-head", transition: { name: "graphql-core", from: null, to: "3.2.12" } },
+  }))
+  assert.match(missingFrom, /- version transition: `graphql-core` to 3\.2\.12/)
+  assert.doesNotMatch(missingFrom, /from null/)
 
   assert.equal(classify({ comment: null, headSha: SHA_B }).reason, "pending")
   assert.equal(classify({ comment, headSha: SHA_C }).reason, "stale")
