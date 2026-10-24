@@ -5,15 +5,16 @@ on:
     - cron: "17 6 * * *"
   workflow_dispatch:
 
+concurrency:
+  group: action-pin
+  cancel-in-progress: false
+
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -36,21 +37,18 @@ jobs:
       - name: Update source pin
         if: steps.pin.outputs.status == '1'
         run: node bin/replay.mjs pin --update
-      - name: Push update and open pull request
+      - name: Test updated pin
+        if: steps.pin.outputs.status == '1'
+        run: |
+          npm test
+          node bin/replay.mjs --help
+      - name: Commit and push pin update
         if: steps.pin.outputs.status == '1'
         env:
           PIN_TAG: ${{ steps.pin.outputs.tag }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout --force -B action-pin/update
-          git add -- lib/replay-pr.mjs AGENTS.md
-          git commit -m "chore: move action pin to $PIN_TAG"
-          git push --force origin action-pin/update
-          title="chore: move action pin to $PIN_TAG"
-          body="Updates the harness action pin to release $PIN_TAG."
-          if gh pr view action-pin/update --json number >/dev/null 2>&1; then
-            gh pr edit action-pin/update --title "$title" --body "$body"
-          else
-            gh pr create --base main --head action-pin/update --title "$title" --body "$body"
-          fi
+          git add -- lib/replay-pr.mjs AGENTS.md README.md docs/plan.md live/templates/garnet-record.yml live/templates/garnet-dependency-replay.yml
+          git commit -am "chore: move action pin to $PIN_TAG"
+          git push origin HEAD:main

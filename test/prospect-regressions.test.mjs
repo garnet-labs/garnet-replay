@@ -4,7 +4,7 @@ import test from "node:test"
 import { buildModel, classify, extractChains, recordedEvidence, renderCard } from "../lib/card.mjs"
 import { livePr } from "../lib/commands.mjs"
 import { publicProfile } from "../lib/gh.mjs"
-import { detectEcosystem, planReplay } from "../lib/replay-pr.mjs"
+import { detectEcosystem, GARNET_ACTION_PIN, planReplay } from "../lib/replay-pr.mjs"
 import { evaluateExhibit, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
 
 const HEAD = "a".repeat(40)
@@ -80,7 +80,7 @@ test("public JSON is fetched anonymously from only the supported selector", asyn
   await assert.rejects(publicProfile(LINK, { fetchImpl: async () => ({ ok: true, json: async () => { throw new SyntaxError("invalid JSON") } }) }), /invalid JSON/)
 })
 
-const ACTION_STEP = { name: "Run garnet-org/action@8cccc85403e4ac4e05fb7822c994d3c199f9aa57", conclusion: "success" }
+const ACTION_STEP = { name: `Run garnet-org/action@${GARNET_ACTION_PIN}`, conclusion: "success" }
 const START_FAILURE = "##[warning]Jibril did not start: setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error). The workflow continues without runtime monitoring for this job."
 
 function fetchExhibit(run, body = record(), logs = ["Garnet Run Profile report: ok"]) {

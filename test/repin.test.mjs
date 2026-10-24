@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 
-import { GARNET_ACTION_PIN, GARNET_ACTION_PIN_LABEL, planRepin, renderRepinPlan, repinActionRef } from "../lib/replay-pr.mjs"
+import { GARNET_ACTION_PIN, GARNET_ACTION_PIN_LABEL, isExcludedRepinPath, planRepin, renderRepinPlan, repinActionRef } from "../lib/replay-pr.mjs"
 
 const OLD = "e546567a72e4fede11ec39d6e9f75b539adef22c"
 const body = [
@@ -55,6 +55,8 @@ test("planRepin leaves excluded recording workflows on their own pin", () => {
   }
   const plan = planRepin({ fork: "garnet-labs/example", defaultBranch: "main", work: "/tmp/w", workflows })
   assert.deepEqual(plan.excludedPaths, Object.keys(workflows).slice(0, 3))
+  assert.ok(Object.keys(workflows).slice(0, 3).every(isExcludedRepinPath))
+  assert.equal(isExcludedRepinPath(".github/workflows/ci.yml"), false)
   assert.deepEqual(plan.changes.map((change) => change.path), [".github/workflows/ci.yml"])
   const rendered = renderRepinPlan(plan)
   assert.match(rendered, /left on their own pin: .*garnet-dependabot-record\.yml/)
