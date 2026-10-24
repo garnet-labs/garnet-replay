@@ -35,6 +35,32 @@ test("repinActionRef handles tags, quotes, with: blocks and leaves the pin alone
   assert.equal(again.body, out)
 })
 
+test("repinActionRef leaves the Jibril version input unchanged", () => {
+  const workflow = [
+    `      - uses: garnet-org/action@${OLD}`,
+    "        with:",
+    "          jibril_version: 1.2.3",
+  ].join("\n")
+  const { body: out } = repinActionRef(workflow)
+  assert.match(out, /jibril_version: 1\.2\.3/)
+  assert.match(out, new RegExp(`uses: garnet-org/action@${GARNET_ACTION_PIN}`))
+})
+
+test("planRepin leaves excluded recording workflows on their own pin", () => {
+  const workflows = {
+    ".github/workflows/garnet-dependabot-record.yml": body,
+    ".github/workflows/garnet-oidc-canary.yml": body,
+    ".github/workflows/garnet-jibril-release-gate-check.yml": body,
+    ".github/workflows/ci.yml": body,
+  }
+  const plan = planRepin({ fork: "garnet-labs/example", defaultBranch: "main", work: "/tmp/w", workflows })
+  assert.deepEqual(plan.excludedPaths, Object.keys(workflows).slice(0, 3))
+  assert.deepEqual(plan.changes.map((change) => change.path), [".github/workflows/ci.yml"])
+  const rendered = renderRepinPlan(plan)
+  assert.match(rendered, /left on their own pin: .*garnet-dependabot-record\.yml/)
+  assert.doesNotMatch(rendered, /garnet-dependabot-record\.yml: .* →/)
+})
+
 test("planRepin writes one routine commit to the fork default branch and nothing when already pinned", () => {
   const plan = planRepin({ fork: "garnet-labs/example", defaultBranch: "main", work: "/tmp/w", workflows: { ".github/workflows/garnet-record.yml": body } })
   assert.equal(plan.mode, "repin")
@@ -46,7 +72,7 @@ test("planRepin writes one routine commit to the fork default branch and nothing
   assert.deepEqual(remote[0].args.slice(-3), ["push", "origin", "main:refs/heads/main"])
   const edit = plan.steps.find((step) => step.editFile !== undefined)
   assert.equal(edit.editFile.transform(body), repinActionRef(body).body)
-  assert.match(renderRepinPlan(plan), /garnet-record\.yml: e546567a72e4fede11ec39d6e9f75b539adef22c → 245ad6be82de3200c205109c8ca7ac816dc692ea/)
+  assert.match(renderRepinPlan(plan), new RegExp(`garnet-record\\.yml: e546567a72e4fede11ec39d6e9f75b539adef22c → ${GARNET_ACTION_PIN}`))
 
   const pinned = planRepin({ fork: "garnet-labs/example", defaultBranch: "main", work: "/tmp/w", workflows: { ".github/workflows/garnet-record.yml": repinActionRef(body).body } })
   assert.deepEqual(pinned.steps, [])

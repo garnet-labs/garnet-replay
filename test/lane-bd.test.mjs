@@ -95,7 +95,7 @@ test("live replay supports package subdirectories and dependency adds", async ()
 
 test("live replay workflow uses GitHub OIDC by default", async () => {
   const workflow = await readFile("live/templates/garnet-dependency-replay.yml", "utf8")
-  assert.match(workflow, /garnet-org\/action@245ad6be82de3200c205109c8ca7ac816dc692ea/)
+  assert.match(workflow, /garnet-org\/action@8cccc85403e4ac4e05fb7822c994d3c199f9aa57/)
   assert.match(workflow, /^concurrency:\n  group: garnet-dependency-replay-\$\{\{ github\.event\.pull_request\.number \}\}\n  cancel-in-progress: true$/m)
   assert.match(workflow, /^permissions: \{\}$/m)
   assert.match(workflow, /^  record:[\s\S]*?^      id-token: write$/m)

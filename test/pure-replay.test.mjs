@@ -49,7 +49,7 @@ test("prepared replay identity distinguishes exact file contents", () => {
   const workflow = ".github/workflows/record.yml"
   const baseSpec = {
     baseline: {
-      [workflow]: "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n",
+      [workflow]: "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@8cccc85403e4ac4e05fb7822c994d3c199f9aa57\n",
       "package.json": "{\"dependencies\":{\"example\":\"1.0.0\"}}\n",
     },
     change: { "package.json": "{\"dependencies\":{\"example\":\"2.0.0\"}}\n" },
@@ -328,7 +328,7 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
 
 // ---------------------------------------------------------------- livePr: refusal and pure mode
 
-const RECORDING_BODY = "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@245ad6be82de3200c205109c8ca7ac816dc692ea\n"
+const RECORDING_BODY = "on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@8cccc85403e4ac4e05fb7822c994d3c199f9aa57\n"
 
 function liveExec({ recording, openPrs = [], recentPrs = [], commits = [
   { sha: SHA_C, commit: { message: "feat: earlier upstream push\n\nbody" } },
