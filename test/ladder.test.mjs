@@ -1643,6 +1643,20 @@ test("verify: an App comment (v6.10 contract) passes on its summary pair and the
   const pendingBody = appBody.replace("garnet-control-plane-pr-comment:v1", "garnet-control-plane-pending-pr-comment:v1").replace(/<!-- garnet:summary .*-->\n/, "")
   const pending = evaluateExhibit({ pr, comments: [{ user: "garnet-runtime-review[bot]", body: pendingBody }], checks: [recorded], permalinkStatus: 200 })
   assert.match(pending.reasons.join("\n"), /comment finalized: placeholder text present/)
+  assert.deepEqual(pending.receipt, { commentPresent: true, pending: true, finalized: false, noProfile: false })
+
+  const notRecordedBody = `<!-- garnet-runtime-review -->
+<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->
+<!-- garnet:commit ${SHA_B} -->
+Execution Profiles were not recorded for this run.
+`
+  const notRecorded = evaluateExhibit({
+    pr,
+    comments: [{ user: "garnet-runtime-review[bot]", body: notRecordedBody }],
+    checks: [],
+    permalinkStatus: null,
+  })
+  assert.deepEqual(notRecorded.receipt, { commentPresent: true, pending: false, finalized: false, noProfile: true })
 })
 
 test("verify: paginates comments and check runs before evaluating the recording check", async () => {
