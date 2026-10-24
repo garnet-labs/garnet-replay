@@ -1,3 +1,5 @@
 node_modules/
 tmp/
 out/
+targets/*.lock
+targets/*.tmp
