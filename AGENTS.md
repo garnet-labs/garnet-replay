@@ -22,8 +22,9 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - Missing, partial, stale, or unbound evidence is `undeterminable`. Never write
   "unchanged", "no change", or "clean" over incomplete evidence.
 - Require declared complete capture and exact public repository/run/profile/head
-  identity. A merge-ref SHA cannot stand in for the replay head without verified
-  executed-source linkage. Keep workload success, capture, hypothesis, reviewer
+  identity. A merge-ref SHA can stand in for the replay head only when it is
+  this PR's merge ref, the head is a recorded parent, and both commits have an
+  identical non-empty tree. Keep workload success, capture, hypothesis, reviewer
   value, agent consumption, and attribution separate in batch reports.
 - Cards preserve every recorded job, workload row, background row, and job link.
   State the measured command and omitted workloads in the evidence manifest.
