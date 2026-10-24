@@ -3,6 +3,14 @@
 One row per requirement. A row is done only when its artifact exists and was
 checked live; "implemented" is not done.
 
+## October 24 batch checkpoint
+
+`replay batch` over the litellm dependents (harness `d347487`, driver `ee26fac`):
+pilot OpenHands blocked before any write. The fork push returns 403 because the
+Devin App lacks repository access. databricks-agents and the npm IOC set are
+blocked, the other targets did not start, and outreach is gated. See
+[docs/batch-2026-10-24.md](batch-2026-10-24.md).
+
 ## September 24 batch checkpoint
 
 Action v2.3.0 (`245ad6be`) through harness `821b1e0`: five fork PRs, five
