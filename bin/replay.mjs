@@ -395,7 +395,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     replay of an upstream pull request on the fork: one commit once the fork is
                                                                     onboarded (replay setup); --first-commit <sha> compares two upstream
                                                                     PR commits instead of the PR base and head
-  live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
+  live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--api-url https://...] [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
   setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
                                                                     one-time onboarding: recording as a ready pull request on the fork; merge it,

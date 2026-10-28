@@ -111,6 +111,14 @@ residue.
 Ecosystem is detected from the touched manifests: npm, pnpm, Yarn, Cargo, Ruby,
 uv, Go. An unsupported ecosystem stops the run before any write and says so.
 
+With `--record instrument --job <workflow-file>/<job>`, a change to that workflow
+is instrumented independently at the base and head. The selected job must exist
+and run on pull requests in both states; the head's path filters must include the
+change. Recording is preserved without replacing the workflow's version changes.
+Use `--api-url https://dev-api.garnet.ai` to send both instrumented states to the
+development backend using OIDC, without an API token. App installation and project
+linking are separate prerequisites; a successful upload does not establish them.
+
 ## 1b. Author a transition on the fork (pnpm)
 
 When no real pull request carries the transition you want to show:

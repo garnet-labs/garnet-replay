@@ -32,7 +32,7 @@ jobs:
 
       # OIDC exchange; pull requests from other repositories receive no token
       # and the action falls back to a local, best-effort record.
-      - uses: garnet-org/action@8cccc85403e4ac4e05fb7822c994d3c199f9aa57 # v2.4.0
+      - uses: garnet-org/action@96e9f81ec0f59f2322e8c67b43c4d4017d932ad3 # v2.4.1
 
       - name: Install dependencies (lifecycle scripts execute here)
         run: {{INSTALL_COMMAND}}
