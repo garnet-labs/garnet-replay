@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { kitResponse } from "./fixtures/grounding.mjs"
 import { spawnSync } from "node:child_process"
 import test from "node:test"
 import { buildModel, classify, extractChains, recordedEvidence, renderCard } from "../lib/card.mjs"
@@ -107,15 +108,15 @@ function fetchExhibit(run, body = record(), logs = ["Garnet Run Profile report: 
 
 test("live verification rejects HTTP 200 with merge-ref or missing identity", async () => {
   const url = "https://github.com/garnet-labs/example/pull/1"
-  const good = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN) })
+  const good = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN), exec: (_cmd, args) => kitResponse(args) })
   assert.equal(good.status, "PASS")
   for (const run of [{ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }, undefined]) {
-    const result = await verifyExhibit(url, { fetchImpl: fetchExhibit(run) })
+    const result = await verifyExhibit(url, { fetchImpl: fetchExhibit(run), exec: (_cmd, args) => kitResponse(args) })
     assert.equal(result.status, "FAIL")
     assert.equal(result.legs.find((entry) => entry.name === "public permalink").ok, true)
     assert.equal(result.legs.find((entry) => entry.name === "public profile identity").ok, false)
   }
-  const missing = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record("complete", "https://app.garnet.ai")) })
+  const missing = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record("complete", "https://app.garnet.ai")), exec: (_cmd, args) => kitResponse(args) })
   assert.equal(missing.status, "FAIL")
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))
 })
@@ -143,7 +144,7 @@ test("partial and absent captures remain undeterminable while retaining recorded
     assert.match(card, /Capture is incomplete/)
     assert.equal((card.match(/○ registry/g) ?? []).length, 9)
     assert.match(card, new RegExp(PREVIOUS))
-    const verified = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", { fetchImpl: fetchExhibit(RUN, body) })
+    const verified = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", { fetchImpl: fetchExhibit(RUN, body), exec: (_cmd, args) => kitResponse(args) })
     assert.equal(verified.status, "FAIL")
     assert.equal(verified.legs.find((entry) => entry.name === "capture completeness").ok, false)
   }
@@ -194,6 +195,8 @@ test("injected replay preserves Dependabot policy at its selected base and check
     const exec = (command, args) => {
       assert.equal(command, "gh")
       reads.push(args)
+      const kit = kitResponse(args)
+      if (kit !== null) return kit
       if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
       if (args[0] === "pr") return "[]"
       if (args.includes("repos/garnet-labs/posthog/pulls?state=open&per_page=100")) return "[[]]"
@@ -222,7 +225,7 @@ test("injected replay preserves Dependabot policy at its selected base and check
 
 test("sensor coverage fails when any instrumented job's sensor did not start", async () => {
   const url = "https://github.com/garnet-labs/example/pull/1"
-  const partial = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record(), ["Garnet Run Profile report: ok", START_FAILURE]) })
+  const partial = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record(), ["Garnet Run Profile report: ok", START_FAILURE]), exec: (_cmd, args) => kitResponse(args) })
   assert.equal(partial.status, "FAIL")
   const coverage = partial.legs.find((entry) => entry.name === "sensor coverage")
   assert.equal(coverage.ok, false)

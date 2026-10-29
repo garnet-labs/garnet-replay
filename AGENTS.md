@@ -8,6 +8,21 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 
 ## Operating rules (enforced by `lib/guards.mjs`; do not relax them)
 
+- Every Garnet-instrumented `garnet-labs` repository must carry the canonical
+  reviewer kit on its default branch, whether recording is manual or made by
+  this harness. New repositories get it at creation, before their first run.
+  Use `replay ground <slug>|--all --dry-run`; retain upstream policy with safe
+  Markdown/JSON merges, or resolve `conflict-manual` without dropping its keys.
+  Exact kit bytes or the canonical paragraph ground each file; CodeRabbit also
+  requires enabled MCP usage. Merge grounding before replaying. All live
+  entrypoints enforce admission, and prepared/upstream-based plans carry approved
+  guidance onto the head. Merge changes to reviewer policy separately from replays.
+  `--allow-ungrounded` is explicit exceptional admission/carry bypass only;
+  it does not bypass the `verify` grounding check.
+- `live/templates/reviewers/` is SHA-pinned, byte-for-byte source from the
+  Runtime Review MCP reviewer kit. Do not edit its files; re-vendor with
+  `node bin/vendor-reviewers.mjs <source-checkout> <full-SHA>`.
+
 - The fork is the only write target. Never push, comment, label, or open a pull
   request on the upstream repository. Never add a link to the upstream
   repository, its pull requests, or `owner/repo#N` on the fork.

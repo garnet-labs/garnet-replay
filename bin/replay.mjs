@@ -17,6 +17,7 @@ import { decideExitCode } from "../lib/decide.mjs"
 import { run } from "../lib/gh.mjs"
 import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
+import { ground, requireGrounding } from "../lib/ground.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -236,7 +237,7 @@ async function pair(args) {
 
 function repoParts(value) {
   try {
-    const url = new URL(value)
+    const url = new URL(value.replace(/^git@github\.com:/, "https://github.com/"))
     const parts = url.pathname.replace(/\.git$/, "").split("/").filter(Boolean)
     if (url.hostname !== "github.com" || parts.length !== 2) return null
     return { owner: parts[0], repo: parts[1], url: `https://github.com/${parts[0]}/${parts[1]}.git` }
@@ -323,6 +324,8 @@ async function live(args) {
   const repoUrl = repoParts(target)
   const localPath = repoUrl === null ? resolve(target) : null
   const context = await repositoryContext(repoUrl, token, localPath, packageDir)
+  const grounding = requireGrounding(context.repository, { allowUngrounded: args.includes("--allow-ungrounded") })
+  const reviewerFiles = grounding.grounded ? grounding.current : {}
   let repoDir = localPath
   if (repoUrl !== null || localPath !== null) {
     repoDir = await cloneForReplay(repoUrl === null ? { repoDir: localPath } : { cloneUrl: repoUrl.url }, join(process.env.HOME ?? ROOT, ".cache", "garnet-replay"))
@@ -365,7 +368,7 @@ async function live(args) {
     return
   }
   const packageManager = detectPackageManager(context.files)
-  const plan = planReplay({ repoDir, packageDir, dependency, from, to, packageManager })
+  const plan = planReplay({ repoDir, packageDir, dependency, from, to, packageManager, reviewerFiles })
   if (args.includes("--dry-run")) {
     console.log(`Live replay plan: ${dependency} ${from} to ${to} using ${packageManager}`)
     console.log(`package dir: ${plan.packageDir}`)
@@ -373,7 +376,7 @@ async function live(args) {
     console.log(`checkout: ${repoDir}`)
     return
   }
-  const result = createReplayBranch({ repoDir, packageDir, dependency, from, to, packageManager })
+  const result = createReplayBranch({ repoDir, packageDir, dependency, from, to, packageManager, reviewerFiles })
   console.log(`created replay branch ${result.branch}`)
   console.log(result.ghCommand)
 }
@@ -397,6 +400,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     PR commits instead of the PR base and head
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--api-url https://...] [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
+  ground <slug>|--all [--dry-run]                                  reviewer kit: add / identical / grounded / merge / conflict-manual
+    live requires default-branch grounding; --allow-ungrounded explicitly overrides admission, not verify
   setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
                                                                     one-time onboarding: recording as a ready pull request on the fork; merge it,
                                                                     then replays carry only the change
@@ -452,6 +457,7 @@ async function main(args) {
     if (args[1] === "--check" && result.status === "behind") process.exitCode = 1
     return result
   }
+  if (command === "ground") return ground(args.slice(1))
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))

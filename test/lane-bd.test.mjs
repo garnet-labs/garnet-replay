@@ -11,6 +11,7 @@ import { createReplayBranch } from "../live/replay-branch.mjs"
 import { renderComparison, repostPrComment } from "../renderer/compare.mjs"
 import { validate } from "../lib/validate.mjs"
 import { GARNET_ACTION_PIN } from "../lib/replay-pr.mjs"
+import { reviewerKit } from "../lib/ground.mjs"
 
 const schema = JSON.parse(await readFile(new URL("../schema/execution-diff.schema.json", import.meta.url), "utf8"))
 const seeds = JSON.parse(await readFile(new URL("../seeds/seeds.json", import.meta.url), "utf8"))
@@ -58,12 +59,16 @@ test("live replay supports package subdirectories and dependency adds", async ()
       from: "none",
       to: "file:../vendor/chart-helpers-1.0.0.tgz",
       packageManager: "npm",
+      reviewerFiles: reviewerKit(),
     })
     const baseline = JSON.parse(execFileSync("git", ["-C", repoDir, "show", `${result.baselineCommit}:sub/app/package.json`], { encoding: "utf8" }))
     const update = JSON.parse(execFileSync("git", ["-C", repoDir, "show", `${result.updateCommit}:sub/app/package.json`], { encoding: "utf8" }))
     assert.deepEqual(baseline, { name: "x", dependencies: {} })
     assert.equal(update.dependencies["chart-helpers"], "file:../vendor/chart-helpers-1.0.0.tgz")
     assert.notEqual(result.baselineCommit, result.updateCommit)
+    for (const [path, content] of Object.entries(reviewerKit())) {
+      for (const commit of [result.baselineCommit, result.updateCommit]) assert.equal(execFileSync("git", ["-C", repoDir, "show", `${commit}:${path}`], { encoding: "utf8" }), content)
+    }
     assert.equal(execFileSync("git", ["-C", repoDir, "rev-list", "--count", result.updateCommit], { encoding: "utf8" }).trim(), "3")
     assert.match(await readFile(join(repoDir, ".github", "garnet-replay", "install.sh"), "utf8"), /cd "sub\/app"\nnpm install/)
     assert.equal(JSON.parse(await readFile(join(repoDir, ".github", "garnet-replay", "replay.json"), "utf8")).packageDir, "sub/app")
