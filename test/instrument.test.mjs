@@ -321,6 +321,10 @@ test("instrument mode keeps the same recording step across a workflow version bu
   assert.throws(() => instrumentWorkflow(after.replace("  test:", "  renamed:"), options), /has no job test/)
   assert.throws(() => instrumentWorkflow(after.replace("pull_request:", "workflow_dispatch:"), options), /does not run on pull_request/)
   assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", "  pull_request:\n    paths: [unrelated/**]") } }), /excludes the replay paths/)
+  for (const filter of ["paths-ignore: ['**']", "paths-ignore:\n      - '**'", "paths-ignore: [.github/**]"]) {
+    assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", `  pull_request:\n    ${filter}`) } }), /excludes the replay paths/)
+  }
+  assert.doesNotThrow(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", "  pull_request:\n    paths-ignore: [docs/**]") } }))
   assert.throws(() => planReplay({ ...input, firstPaths: [input.instrument.path] }), /--first cannot include the selected recording workflow/)
   assert.doesNotThrow(() => planReplay({ ...input, changes: [...input.changes, { path: "package.json", previous: null }], firstPaths: ["package.json"] }))
   for (const trigger of ["  pull_request:\n    types: [opened]", "  pull_request:\n    types:\n      - opened", "  pull_request: { types: [opened] }", "  pull_request:\n    types: []"]) {

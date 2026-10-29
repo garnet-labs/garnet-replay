@@ -503,9 +503,21 @@ permissions:
 `
   assert.deepEqual(pullRequestPathFilter(recorder), ["package.json", "pnpm-lock.yaml", ".github/workflows/garnet-ci.yml"])
   assert.deepEqual(pullRequestPathFilter("on:\n  pull_request:\n    paths: [package.json, 'pnpm-lock.yaml', \"**/Cargo.lock\"] # flow form\njobs: {}\n"), ["package.json", "pnpm-lock.yaml", "**/Cargo.lock"])
-  assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    paths: []\njobs: {}\n"), null)
+  assert.deepEqual(pullRequestPathFilter("on:\n  pull_request:\n    paths: []\njobs: {}\n"), [])
   assert.equal(pullRequestPathFilter("on:\n  pull_request:\n    branches: [main]\njobs: {}\n"), null)
   assert.equal(pullRequestPathFilter("on: [push]\n"), null)
+
+  for (const filter of ["paths-ignore: ['**']", "paths-ignore:\n      - '**'", "paths-ignore: # exclude all\n\n      # comment\n      - '**'"]) {
+    const ignored = pullRequestPathFilter(`on:\n  pull_request: # defaults\n    ${filter}\njobs: {}\n`)
+    assert.deepEqual(ignored, ["**", "!**"])
+    assert.equal(recordsAnyPath({ "ci.yml": ignored }, ["package.json", ".github/workflows/ci.yml"]), false)
+  }
+  const partial = pullRequestPathFilter("on:\n  pull_request:\n    paths-ignore: [docs/**, '*.md']\njobs: {}\n")
+  assert.equal(recordsAnyPath({ "ci.yml": partial }, ["docs/readme.md", "README.md"]), false)
+  assert.equal(recordsAnyPath({ "ci.yml": partial }, ["docs/readme.md", "src/main.js"]), true)
+  assert.deepEqual(pullRequestPathFilter("on:\n  pull_request:\n    paths-ignore: []\njobs: {}\n"), ["**"])
+  assert.throws(() => pullRequestPathFilter("on:\n  pull_request:\n    paths-ignore: *ignored\njobs: {}\n"), /cannot read pull_request path filters/)
+  assert.throws(() => pullRequestPathFilter("on:\n  pull_request: { paths-ignore: ['**'] }\njobs: {}\n"), /expand inline pull_request path filters/)
 
   // Several recorders: commit 2 has to reach at least one; each filter is kept whole so its negations mean what they mean. One unfiltered recorder means no filter.
   const paths = { ".github/workflows/a.yml": ["package.json"], ".github/workflows/b.yml": ["Cargo.lock", "package.json"], ".github/workflows/all.yml": null, ".github/workflows/src.yml": ["**", "!docs/**"] }
