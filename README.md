@@ -281,7 +281,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 ## Status
 
 The recording workflow template pins `garnet-org/action` to commit
-`8cccc85403e4ac4e05fb7822c994d3c199f9aa57` (release v2.4.0). `replay repin <slug>`
+`96e9f81ec0f59f2322e8c67b43c4d4017d932ad3` (release v2.4.1). `replay repin <slug>`
 moves an existing fork's recording workflows to that pin with one routine commit
 on the fork default branch (`--dry-run` prints the plan). Pull requests from other repositories receive
 neither secrets nor OIDC tokens, so a fork-origin run degrades to a local,

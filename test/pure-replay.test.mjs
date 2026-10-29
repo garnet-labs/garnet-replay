@@ -371,6 +371,32 @@ test("livePr: refuses without onboarding and points at setup", async () => {
   )
 })
 
+test("livePr: a changed recording workflow uses the upstream base even when the fork already has the head", async () => {
+  for (const mode of [[], ["--base-branch", "review/base"], ["--sync-fork"]]) {
+    const reads = []
+    const originalExec = liveExec({ recording: false })
+    const before = "on:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: bun-1.2.12 test\n"
+    const after = before.replace("1.2.12", "1.4.4")
+    const exec = (command, args) => {
+      const path = args[1]
+      if (path?.endsWith("/pulls/501/files")) return JSON.stringify([{ filename: ".github/workflows/ci.yml", status: "modified" }])
+      if (path?.includes("/contents/.github/workflows/ci.yml")) {
+        reads.push(path)
+        return path === `repos/${UPSTREAM}/contents/.github/workflows/ci.yml?ref=${SHA_A}` ? before : after
+      }
+      return originalExec(command, args)
+    }
+    const result = await livePr(["posthog", "--pr", "501", "--record", "instrument", "--job", "ci.yml/test", "--ecosystem", "npm", "--dry-run", ...mode], { exec, log: () => {}, save: () => assert.fail("dry run must not save") })
+    assert.equal(result.executed, false)
+    assert.ok(reads.includes(`repos/${UPSTREAM}/contents/.github/workflows/ci.yml?ref=${SHA_A}`))
+    assert.ok(reads.includes(`repos/${UPSTREAM}/contents/.github/workflows/ci.yml?ref=${SHA_B}`))
+    const baseline = result.plan.steps.find((step) => step.writeFileContent?.content.includes("bun-1.2.12"))
+    const changed = result.plan.steps.find((step) => step.id === "change-instrument")
+    assert.ok(baseline, "commit 1 must preserve the upstream base workflow, not the fork default")
+    assert.match(changed.writeFileContent.content, /bun-1\.4\.4 test/)
+  }
+})
+
 test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   const result = await livePr(["posthog", "--pr", "501", "--dry-run"], { exec: liveExec({ recording: true }), log: () => {}, save: () => assert.fail("dry run must not save") })
   assert.equal(result.executed, false)

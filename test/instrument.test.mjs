@@ -297,6 +297,55 @@ test("instrumentWorkflow handles scalar and flow permissions", () => {
   assert.match(flow.content, /permissions:\n      contents: read\n      packages: write\n      id-token: write/)
 })
 
+test("instrument mode keeps the same recording step across a workflow version bump", () => {
+  const before = "on:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: oven-sh/setup-bun@v2\n        with:\n          bun-version: 1.2.12\n      - run: bun install && bun test\n"
+  const after = before.replace("bun-version: 1.2.12", "bun-version: 1.4.4")
+  const options = { job: "test", apiUrl: "https://dev-api.garnet.ai" }
+  const baseline = instrumentWorkflow(before, options)
+  const changed = instrumentWorkflow(after, options)
+  assert.equal(changed.content, baseline.content.replace("bun-version: 1.2.12", "bun-version: 1.4.4"))
+  const input = {
+    slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
+    baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: ".github/workflows/ci.yml", previous: null }],
+    work: "/tmp/demo", record: "instrument", ecosystem: "bun", dependabotConfigured: true,
+    instrument: { path: ".github/workflows/ci.yml", job: "test", content: baseline.content, headContent: changed.content, changes: baseline.changes },
+  }
+  const plan = planReplay(input)
+  const first = plan.steps.find((step) => step.id === "first-instrument")
+  const head = plan.steps.find((step) => step.id === "change-instrument")
+  assert.equal(first.writeFileContent.content, baseline.content)
+  assert.equal(head.writeFileContent.content, changed.content)
+  assert.ok(plan.steps.indexOf(head) > plan.steps.findIndex((step) => step.id === "change-head"))
+  assert.ok(plan.steps.indexOf(head) < plan.steps.findIndex((step) => step.id === "change-add"))
+  assert.match(head.writeFileContent.content, /api_url: "https:\/\/dev-api.garnet.ai"/)
+  assert.throws(() => instrumentWorkflow(after.replace("  test:", "  renamed:"), options), /has no job test/)
+  assert.throws(() => instrumentWorkflow(after.replace("pull_request:", "workflow_dispatch:"), options), /does not run on pull_request/)
+  assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", "  pull_request:\n    paths: [unrelated/**]") } }), /excludes the replay paths/)
+  for (const filter of ["paths-ignore: ['**']", "paths-ignore:\n      - '**'", "paths-ignore: [.github/**]"]) {
+    assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", `  pull_request:\n    ${filter}`) } }), /excludes the replay paths/)
+  }
+  assert.doesNotThrow(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", "  pull_request:\n    paths-ignore: [docs/**]") } }))
+  assert.throws(() => planReplay({ ...input, firstPaths: [input.instrument.path] }), /--first cannot include the selected recording workflow/)
+  assert.doesNotThrow(() => planReplay({ ...input, changes: [...input.changes, { path: "package.json", previous: null }], firstPaths: ["package.json"] }))
+  for (const trigger of ["  pull_request:\n    types: [opened]", "  pull_request:\n    types:\n      - opened", "  pull_request: { types: [opened] }", "  pull_request:\n    types: []"]) {
+    assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", trigger) } }), /must run on pull_request synchronize/)
+  }
+  for (const trigger of ["  pull_request: # default events", "  pull_request:\n    types: [opened, synchronize]", "  pull_request:\n    types:\n      - opened\n      - synchronize", "  pull_request: { types: [synchronize] }", "  pull_request:\n    types: ['synchronize'] # updates"]) {
+    assert.doesNotThrow(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: changed.content.replace("  pull_request:", trigger) } }))
+  }
+})
+
+test("instrumentWorkflow dev API input is tokenless and rejects unsafe URL values", async () => {
+  const body = await fixture("continuedev_continue-cli-pr-checks.yml")
+  const result = instrumentWorkflow(body, { job: "test", apiUrl: "https://dev-api.garnet.ai" })
+  assert.match(result.content, /job_index: \$\{\{ strategy.job-index \}\}/)
+  assert.match(result.content, /api_url: "https:\/\/dev-api.garnet.ai"/)
+  assert.doesNotMatch(result.content, /api_token:/)
+  for (const apiUrl of ["http://dev-api.garnet.ai", "https://user:pass@dev-api.garnet.ai", "https://dev-api.garnet.ai?key=value", "https://dev-api.garnet.ai#fragment", "bad\ninput"]) {
+    assert.throws(() => instrumentWorkflow(body, { job: "test", apiUrl }))
+  }
+})
+
 test("instrumentWorkflow rejects reusable workflow callers", () => {
   const body = "on:\n  pull_request:\njobs:\n  test:\n    uses: ./.github/workflows/reusable.yml\n"
   assert.throws(

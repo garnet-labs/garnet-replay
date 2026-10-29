@@ -1,0 +1,191 @@
+{
+  "slug": "claude-code-action",
+  "upstream": "anthropics/claude-code-action",
+  "fork": "garnet-labs/claude-code-action",
+  "record": {
+    "mode": "instrument",
+    "job": "ci.yml/test"
+  },
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 1939,
+      "title": "feat: add opt-in cache_claude_code input to reuse the Claude Code binary across runs",
+      "author": "dolphin9712",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-28T14:10:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "action.yml",
+        "docs/configuration.md",
+        "docs/usage.md",
+        "test/claude-code-cache.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-28T22:10:39.988Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 1938,
+      "title": "fix: build trigger regex once and drop no-op ternary",
+      "author": "mangeshraut712",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-28T08:58:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "src/github/validation/trigger.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-28T22:10:39.988Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 1934,
+      "title": "fix: restore AGENTS.md from the PR base branch",
+      "author": "mangeshraut712",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-27T06:24:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/github/operations/restore-config.ts",
+        "test/restore-config.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-28T22:10:39.988Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 1933,
+      "title": "docs: state that display_report defaults to false",
+      "author": "mmporong",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-10-27T01:29:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "action.yml",
+        "docs/usage.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-10-28T22:10:39.988Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 1936,
+      "title": "[Withdrawn] fix: retry transient apt index update failures",
+      "author": "harupy",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-27T13:00:51Z",
+      "kind": "undeterminable",
+      "transition": null,
+      "files": 0,
+      "paths": [],
+      "gap": {
+        "total": 1,
+        "reasons": [
+          {
+            "id": "undeterminable-surface",
+            "points": 1,
+            "reason": "change surface undeterminable from metadata"
+          }
+        ]
+      },
+      "observedAt": "2026-10-28T22:10:39.988Z"
+    }
+  ],
+  "replays": [
+    {
+      "upstreamPr": 1916,
+      "forkPr": 2,
+      "branch": "deps/bun-1.4.4",
+      "scope": "pr-base-to-head",
+      "mode": "replay",
+      "baseSha": "16f9f71ab9c490faf367f94dd294897edc25be33",
+      "headSha": "a50f8c3c4c8b5de467e017f03c28912cc2ab9c5e",
+      "forkHeadSha": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
+      "firstSha": "8a1ec2e26c46e834b37f7ad4819919b1b31a5bf3",
+      "firstCommitSha": null,
+      "transition": {
+        "name": "Bun",
+        "from": null,
+        "to": "1.4.4"
+      },
+      "record": "instrument",
+      "ecosystem": "bun",
+      "packageDir": null,
+      "logicalId": "9b10dd4f2a4d3f15ea1c7a3966cdbd9a0cb970b4f2fe16fb4883a8882fd9f425",
+      "attemptId": "0917a65e1d7ecfb43821f263b3aadf64ee69eb3eb01041002c27c5a811ca775c",
+      "state": "undeterminable",
+      "openedAt": "2026-10-28T22:18:26.755Z"
+    }
+  ],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0,
+  "setupPr": 1
+}
