@@ -510,7 +510,7 @@ test("setup: already-onboarded fork inventories the identical kit without writes
   const lines = []
   const result = await setup(["posthog", "--dry-run"], { exec: liveExec({ recording: true }), log: (line) => lines.push(line), save: () => assert.fail("must not save") })
   assert.equal(result[0].grounded, true)
-  assert.ok(lines.some((line) => /garnet-labs\/posthog \| 0 \| 5 \| 0/.test(line)))
+  assert.ok(lines.some((line) => /garnet-labs\/posthog \| 0 \| 5 \| 0 \| 0 \| 0/.test(line)))
 })
 
 test("setup: plans a single onboarding commit via dry run", async () => {

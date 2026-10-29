@@ -1,14 +1,14 @@
 {
   "repository": "garnet-labs/garnet-runtime-review-mcp",
-  "sha": "60d290ce9580492df64488e157f21b9b0d808211",
+  "sha": "3dac9c38ab090dcfeed5aa165db5e65710abd1cb",
   "files": {
     ".coderabbit.yaml": {
       "source": "examples/reviewers/.coderabbit.yaml",
-      "sha256": "08b60688316e600f3d6eb55859e67a16a5a50fb61bae16b96722cccea06f892f"
+      "sha256": "cdb3a6e926cbec33afeb952de92d12e7085666cc03cec4a909b1f12c8c87cff6"
     },
     ".pr_agent.toml": {
       "source": "examples/reviewers/.pr_agent.toml",
-      "sha256": "c7dfc0b264f25116340c4a01cc4866ca89ee796d6cc8c155b788de87eec0b94e"
+      "sha256": "3b4fefd3232a38b2c530c452ccf21d92271526a45feab203370be27c2ab28604"
     },
     "greptile.json": {
       "source": "examples/reviewers/greptile.json",

@@ -14,13 +14,16 @@ a local checkout of the fork (`--work`). Read `AGENTS.md` for the rules.
 repository (manual runs, harness replays, or newly created repositories) carries
 the standard kit on its default branch; new repositories get it at creation.
 Run `replay ground <slug> --dry-run` (or `--all` for the organization).
-Merge its one-commit onboarding PR before replaying. Custom reviewer files and
-`.greptile/` are conflicts needing manual resolution, not permission to
-overwrite. `setup` includes missing kit files in its onboarding commit.
-`live` refuses missing/conflicting grounding unless explicitly admitted with
+Merge its one-commit onboarding PR before replaying. Custom files containing the
+canonical paragraph count as grounded; CodeRabbit additionally requires enabled
+MCP usage. Markdown and valid Greptile JSON receive additive merges; YAML, TOML
+and legacy `.greptile/` need manual resolution without overwriting policy.
+`setup` includes missing kit files and safe merges in its onboarding commit.
+All `live` entrypoints refuse missing/conflicting grounding unless admitted with
 `--allow-ungrounded`; `verify` still fails without default-branch grounding.
-Ordinary replay heads inherit the fork default branch; upstream-based and
-prepared paths must preserve/carry the kit on the head for CodeRabbit as well.
+Ordinary replay heads inherit the fork default branch; upstream-based, prepared
+and local-checkout baselines carry approved guidance onto the head for CodeRabbit.
+Policy-changing replay paths are refused; merge reviewer policy separately.
 See README for source provenance, re-vendoring, and reviewer MCP provisioning.
 
 0. **Upstream first.** If the upstream's CI already runs `garnet-org/action`, run `replay upstream <owner/repo> --pr <N>` for each candidate before any replay. Read the job table (a green job with "skipped: no authentication" recorded nothing) and the binding column: a merge-ref profile is an observation, never exact-head evidence, and a destination seen on a docs-only control PR is baseline, not the change. If that answers the review question, stop there; replay only for an exact-head before/after pair.

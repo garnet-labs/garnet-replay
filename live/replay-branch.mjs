@@ -1,7 +1,8 @@
 import { execFileSync } from "node:child_process"
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { copyFileSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { basename, dirname, isAbsolute, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { KIT_PATHS } from "../lib/ground.mjs"
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)))
 const WORKFLOW = join(ROOT, "live", "templates", "garnet-dependency-replay.yml")
@@ -89,6 +90,10 @@ export function planReplay(input) {
   if (typeof to !== "string" || to === "") throw new Error("to is required")
   if (!["npm", "pnpm", "yarn"].includes(packageManager)) throw new Error("unsupported package manager")
   const packageDir = packageDirectory(requestedPackageDir)
+  const reviewerFiles = input.reviewerFiles ?? {}
+  for (const [path, content] of Object.entries(reviewerFiles)) {
+    if (!KIT_PATHS.includes(path) || typeof content !== "string") throw new Error("invalid reviewer guidance path or content")
+  }
   const replayModules = collectReplayModules()
   const branch = `garnet-replay/${branchPart(dependency)}-${branchPart(to)}-${Date.now().toString(36).slice(-8)}`
   return {
@@ -99,6 +104,7 @@ export function planReplay(input) {
     from,
     to,
     packageManager,
+    reviewerFiles,
     files: [
       ".github/DEPENDENCY_REPLAY.md",
       ".github/workflows/garnet-dependency-replay.yml",
@@ -107,6 +113,7 @@ export function planReplay(input) {
       ".github/garnet-replay/review.mjs",
       ...[...replayModules.values()].map((targetName) => `.github/garnet-replay/${targetName}`),
       ".github/garnet-replay/replay.json",
+      ...Object.keys(reviewerFiles),
     ],
   }
 }
@@ -148,7 +155,19 @@ function replaceDependencyVersion(repoDir, packageDir, dependency, from, to) {
 export function createReplayBranch(input) {
   const plan = planReplay(input)
   const branch = input.branch ?? plan.branch
+  for (const path of Object.keys(plan.reviewerFiles)) {
+    for (const [index] of path.split("/").entries()) {
+      const prefix = path.split("/").slice(0, index + 1).join("/")
+      try {
+        if (lstatSync(join(plan.repoDir, prefix)).isSymbolicLink()) throw new Error("reviewer guidance must not traverse symlinks")
+      } catch (error) { if (error.code !== "ENOENT") throw error }
+    }
+  }
   git(plan.repoDir, ["switch", "-c", branch])
+  for (const [path, content] of Object.entries(plan.reviewerFiles)) {
+    mkdirSync(dirname(join(plan.repoDir, path)), { recursive: true })
+    writeFileSync(join(plan.repoDir, path), content)
+  }
   const replayDir = join(plan.repoDir, ".github", "garnet-replay")
   mkdirSync(join(plan.repoDir, ".github", "workflows"), { recursive: true })
   mkdirSync(replayDir, { recursive: true })

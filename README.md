@@ -25,33 +25,51 @@ node bin/replay.mjs ground <slug> --dry-run
 node bin/replay.mjs ground <slug>    # one onboarding PR; merge it first
 ```
 
-`--all` discovers every non-archived organization repository whose default-branch
-workflows use `garnet-org/action`, including repositories without target ledgers.
-Each row counts files to add, identical files, and conflicts. Existing custom
-CodeRabbit, Qodo, Greptile, REVIEW.md, skill files, or a legacy `.greptile/`
-directory are never overwritten: a conflict blocks the entire repository's PR
-and needs a manual merge. An identical kit produces no PR. Non-dry runs record
-the observed state through `saveTarget` when a target exists; a proposed PR is
-pending, not grounded until its default-branch files match.
+`--all` discovers non-archived organization repositories with a default-branch
+`pull_request` workflow that uses `garnet-org/action`, directly or through a local
+reusable workflow. It includes private and newly created non-fork repositories,
+including ones without target ledgers. The inventory lists private repositories
+and excludes action users without a PR recorder. This is static PR capability,
+not proof a job ran: path filters, labels and job conditions still apply.
+Each row counts `add`, `identical`, `grounded` (custom policy already carrying the
+canonical paragraph), `merge`, and `conflict-manual`.
 
-`setup` includes the kit in its one onboarding commit. `live` displays and
+Custom policy is retained. Markdown receives an appended section; valid
+`greptile.json` receives an additional `customContext.other` entry while retaining
+existing keys. YAML and TOML edits are `conflict-manual`: this dependency-free
+harness cannot validate arbitrary YAML/TOML and will not risk dropping keys.
+A legacy `.greptile/` directory is also manual; its rules format is not assumed
+to be the current root `greptile.json` format. A manual conflict blocks the
+entire repository's PR; no partial kit is written. An already-grounded kit
+produces no PR. Non-dry runs record state through `saveTarget` when a target
+exists; a proposed PR is pending until merged onto the default branch.
+
+`setup` includes missing files and safe merges in its one onboarding commit. All
+`live` entrypoints (slug, URL and local checkout) display and
 requires default-branch grounding (emergency opt-out: `--allow-ungrounded`);
 `verify` fails if that kit is missing, conflicting, or unreadable. The override
-does not bypass verification. A manually merged configuration still differing
-from the pinned kit remains a conflict requiring operator resolution.
+does not bypass verification. Each file may be the pinned bytes or contain the
+canonical paragraph verbatim. CodeRabbit also needs
+`knowledge_base.mcp.usage: enabled` (ordinary block YAML or JSON syntax).
+Unsupported/ambiguous MCP syntax needs manual resolution; account-level MCP
+installation is separate.
 
 CodeRabbit reads configuration from the PR head. Ordinary onboarded replays
 branch from the fork default branch and preserve its files while applying only
 the selected change paths, so they inherit the kit unless that change edits it.
-An upstream-based `--base-branch`, a prepared baseline that replaces these files,
-or a change touching the kit must explicitly carry/preserve the kit on the head
-as well; default-branch grounding alone does not establish head grounding.
+Upstream-based plans carry the approved fork guidance onto their base or first
+commit; prepared and URL/local-checkout baselines include it on both states.
+Repository-owned paragraph-grounded guidance is copied as-is, not replaced by
+the kit. Replay changes touching these files are refused: merge reviewer policy
+separately. `--allow-ungrounded` is an exceptional bypass of admission and this
+automatic carry, not proof of head grounding.
 Configure the hosted MCP connection in each reviewer's service where required;
 the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
 Private repositories use comment markers and inline guidance, not hosted MCP.
 
 The source is `garnet-labs/garnet-runtime-review-mcp` at
-`60d290ce9580492df64488e157f21b9b0d808211`. The four files under
+`3dac9c38ab090dcfeed5aa165db5e65710abd1cb` (reviewer-paragraph branch; merge
+that source change before this harness change). The four files under
 `examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
 byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
 and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
@@ -61,9 +79,8 @@ node bin/vendor-reviewers.mjs /path/to/garnet-runtime-review-mcp <full-source-SH
 npm test
 ```
 
-At this pin, `docs/reviewers.md` uses “Recording runtime behavior” / “capture
-incomplete”; CodeRabbit's example still uses “Recording…” / “incomplete record”.
-The kit preserves the source bytes rather than silently normalizing this drift.
+At this pin all reviewer paragraphs match `docs/reviewers.md` exactly, including
+“Recording runtime behavior” / “capture incomplete”. The kit preserves source bytes.
 Stage 2 reuses the kit for overlapping reviewer adapters and REVIEW.md; its
 optional evidence mirror and gate remain opt-in, not part of basic grounding.
 
