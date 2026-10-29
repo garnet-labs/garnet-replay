@@ -16,6 +16,7 @@ import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mj
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
 import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
+import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
@@ -1747,7 +1748,7 @@ test("verify: paginates comments and check runs before evaluating the recording 
     throw new Error(`unexpected fetch: ${url}`)
   }
 
-  const result = await verifyExhibit("https://github.com/o/r/pull/77", { fetchImpl })
+  const result = await verifyExhibit("https://github.com/o/r/pull/77", { fetchImpl, exec: () => { throw new Error("no kit") } })
   assert.equal(result.legs.find((entry) => entry.name === "check settled")?.ok, true)
   assert.ok(calls.some((url) => url.includes("/check-runs?per_page=100&page=2")))
 })
@@ -1808,10 +1809,10 @@ test("stage 2: the mirror re-requests the targeted reviewers once per head, afte
   assert.match(mirror, /garnet-evidence-mirror\.mjs[\s\S]*garnet-rereview\.mjs/, "re-review runs after the mirror step")
   assert.doesNotMatch(mirror, /\{\{[A-Z_]+\}\}/, "no unfilled template placeholders")
   assert.equal(typeof plan.files[".github/scripts/garnet-rereview.mjs"], "string")
-  assert.deepEqual(plan.adapters, [".agents/skills/garnet-runtime-review/SKILL.md", ".coderabbit.yaml", ".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(plan.adapters, [".agents/skills/garnet-runtime-review/SKILL.md", ".coderabbit.yaml", "greptile.json"])
   assert.deepEqual(plan.keptAdapters, [])
-  for (const path of plan.adapters) assert.match(plan.files[path], /REVIEW\.md/, `${path} points at REVIEW.md`)
-  JSON.parse(plan.files[".greptile/config.json"])
+  for (const path of plan.adapters) assert.equal(plan.files[path], reviewerKit()[path])
+  JSON.parse(plan.files["greptile.json"])
   assert.match(plan.body, /re-review|requests the configured reviewers/)
   assert.match(plan.body, /repository secret named in the mirror workflow/)
   assert.doesNotMatch(plan.body.toLowerCase(), /devin/, "outbound text carries no reviewer vendor names (residue guard)")
@@ -1830,7 +1831,7 @@ test("stage 2: reviewer selection is explicit and adapters already in the fork a
   assert.throws(() => parseReviewers("sonar"), /unknown reviewer 'sonar'/)
   assert.throws(() => planStage2({ ...STAGE2_INPUT, reviewers: "" }), /at least one reviewer/)
   const kept = planStage2({ ...STAGE2_INPUT, reviewers: "coderabbit,greptile", existing: [".coderabbit.yaml"] })
-  assert.deepEqual(kept.adapters, [".greptile/config.json", ".greptile/rules.md"])
+  assert.deepEqual(kept.adapters, ["greptile.json"])
   assert.deepEqual(kept.keptAdapters, [".coderabbit.yaml"])
   assert.equal(kept.files[".coderabbit.yaml"], undefined)
   assert.match(kept.body, /kept as they are: `\.coderabbit\.yaml`/)

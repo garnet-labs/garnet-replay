@@ -1,0 +1,26 @@
+{
+  "repository": "garnet-labs/garnet-runtime-review-mcp",
+  "sha": "60d290ce9580492df64488e157f21b9b0d808211",
+  "files": {
+    ".coderabbit.yaml": {
+      "source": "examples/reviewers/.coderabbit.yaml",
+      "sha256": "08b60688316e600f3d6eb55859e67a16a5a50fb61bae16b96722cccea06f892f"
+    },
+    ".pr_agent.toml": {
+      "source": "examples/reviewers/.pr_agent.toml",
+      "sha256": "c7dfc0b264f25116340c4a01cc4866ca89ee796d6cc8c155b788de87eec0b94e"
+    },
+    "greptile.json": {
+      "source": "examples/reviewers/greptile.json",
+      "sha256": "f371aa235e999c932980f9d713f4b2106010474fd6dd1631b52a1c513db7aaf5"
+    },
+    "REVIEW.md": {
+      "source": "examples/reviewers/REVIEW.md",
+      "sha256": "35bd2e04367092373137fa90a2bcaba73f6de57865942ec7545b42b9d446c280"
+    },
+    "SKILL.md": {
+      "source": "skills/garnet-runtime-review/SKILL.md",
+      "sha256": "6103c76d62887e9f4625dfa1607fca9d0cdc005f889c2a0e2de0e86ae43a254f"
+    }
+  }
+}

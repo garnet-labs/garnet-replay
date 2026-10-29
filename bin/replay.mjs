@@ -17,6 +17,7 @@ import { decideExitCode } from "../lib/decide.mjs"
 import { run } from "../lib/gh.mjs"
 import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
+import { ground } from "../lib/ground.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -397,6 +398,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     PR commits instead of the PR base and head
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--api-url https://...] [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
+  ground <slug>|--all [--dry-run]                                  reviewer kit: add / identical / conflict
+    live requires default-branch grounding; --allow-ungrounded explicitly overrides admission, not verify
   setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
                                                                     one-time onboarding: recording as a ready pull request on the fork; merge it,
                                                                     then replays carry only the change
@@ -452,6 +455,7 @@ async function main(args) {
     if (args[1] === "--check" && result.status === "behind") process.exitCode = 1
     return result
   }
+  if (command === "ground") return ground(args.slice(1))
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))

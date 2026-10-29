@@ -7,6 +7,7 @@ import {
   replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity,
 } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
+import { kitResponse } from "./fixtures/grounding.mjs"
 
 const SHA_A = "a".repeat(40)
 const SHA_B = "b".repeat(40)
@@ -336,6 +337,8 @@ function liveExec({ recording, openPrs = [], recentPrs = [], commits = [
 ] }) {
   return (command, args) => {
     assert.equal(command, "gh")
+    const kit = kitResponse(args)
+    if (kit !== null) return kit
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
     if (args[0] === "pr" && args[1] === "list" && args.includes("number,title,body,url,author,createdAt,state,labels,files,headRefName,baseRefName,isDraft")) {
       return JSON.stringify(recentPrs.map((pr) => ({ state: "OPEN", ...pr })))
@@ -503,18 +506,18 @@ test("livePr: explicit --record inject still bundles on an onboarded fork", asyn
 
 // ---------------------------------------------------------------- setup command
 
-test("setup: already-onboarded fork reports nothing to do", async () => {
+test("setup: already-onboarded fork inventories the identical kit without writes", async () => {
   const lines = []
   const result = await setup(["posthog", "--dry-run"], { exec: liveExec({ recording: true }), log: (line) => lines.push(line), save: () => assert.fail("must not save") })
-  assert.equal(result.executed, false)
-  assert.equal(result.plan, null)
-  assert.ok(lines.some((line) => /nothing to onboard/.test(line)))
+  assert.equal(result[0].grounded, true)
+  assert.ok(lines.some((line) => /garnet-labs\/posthog \| 0 \| 5 \| 0/.test(line)))
 })
 
 test("setup: plans a single onboarding commit via dry run", async () => {
   const lines = []
   const exec = (command, args) => {
     assert.equal(command, "gh")
+    if (args[1] === "repos/garnet-labs/posthog") return '{"default_branch":"main"}'
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
     if (args[1]?.includes(":.github/workflows")) return JSON.stringify({ tree: [] })
     if (args[1]?.includes("/git/trees/")) return JSON.stringify({ tree: [{ path: "pnpm-lock.yaml", type: "blob" }] })

@@ -11,6 +11,62 @@ record is missing, partial, or stale.
 Requirements: Node 20+, `gh` logged in (`gh auth status`), Linux for live runs.
 No dependencies to install.
 
+## Reviewer grounding (required)
+
+Every Garnet-instrumented repository in `garnet-labs` carries the standard
+reviewer kit on its default branch: manually recorded forks, harness replays,
+and newly created repositories alike. Add it at creation, before the first
+recorded pull request. This configures instructions, not reviewer installation
+or proof that a reviewer consumed evidence.
+
+```sh
+node bin/replay.mjs ground --all --dry-run
+node bin/replay.mjs ground <slug> --dry-run
+node bin/replay.mjs ground <slug>    # one onboarding PR; merge it first
+```
+
+`--all` discovers every non-archived organization repository whose default-branch
+workflows use `garnet-org/action`, including repositories without target ledgers.
+Each row counts files to add, identical files, and conflicts. Existing custom
+CodeRabbit, Qodo, Greptile, REVIEW.md, skill files, or a legacy `.greptile/`
+directory are never overwritten: a conflict blocks the entire repository's PR
+and needs a manual merge. An identical kit produces no PR. Non-dry runs record
+the observed state through `saveTarget` when a target exists; a proposed PR is
+pending, not grounded until its default-branch files match.
+
+`setup` includes the kit in its one onboarding commit. `live` displays and
+requires default-branch grounding (emergency opt-out: `--allow-ungrounded`);
+`verify` fails if that kit is missing, conflicting, or unreadable. The override
+does not bypass verification. A manually merged configuration still differing
+from the pinned kit remains a conflict requiring operator resolution.
+
+CodeRabbit reads configuration from the PR head. Ordinary onboarded replays
+branch from the fork default branch and preserve its files while applying only
+the selected change paths, so they inherit the kit unless that change edits it.
+An upstream-based `--base-branch`, a prepared baseline that replaces these files,
+or a change touching the kit must explicitly carry/preserve the kit on the head
+as well; default-branch grounding alone does not establish head grounding.
+Configure the hosted MCP connection in each reviewer's service where required;
+the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
+Private repositories use comment markers and inline guidance, not hosted MCP.
+
+The source is `garnet-labs/garnet-runtime-review-mcp` at
+`60d290ce9580492df64488e157f21b9b0d808211`. The four files under
+`examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
+byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
+and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
+
+```sh
+node bin/vendor-reviewers.mjs /path/to/garnet-runtime-review-mcp <full-source-SHA>
+npm test
+```
+
+At this pin, `docs/reviewers.md` uses “Recording runtime behavior” / “capture
+incomplete”; CodeRabbit's example still uses “Recording…” / “incomplete record”.
+The kit preserves the source bytes rather than silently normalizing this drift.
+Stage 2 reuses the kit for overlapping reviewer adapters and REVIEW.md; its
+optional evidence mirror and gate remain opt-in, not part of basic grounding.
+
 ```sh
 git clone https://github.com/garnet-labs/garnet-replay && cd garnet-replay
 npm test                      # offline regression suite

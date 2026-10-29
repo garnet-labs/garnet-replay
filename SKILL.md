@@ -10,6 +10,19 @@ a local checkout of the fork (`--work`). Read `AGENTS.md` for the rules.
 
 ## Procedure
 
+**Reviewer grounding is mandatory.** Every Garnet-instrumented `garnet-labs`
+repository (manual runs, harness replays, or newly created repositories) carries
+the standard kit on its default branch; new repositories get it at creation.
+Run `replay ground <slug> --dry-run` (or `--all` for the organization).
+Merge its one-commit onboarding PR before replaying. Custom reviewer files and
+`.greptile/` are conflicts needing manual resolution, not permission to
+overwrite. `setup` includes missing kit files in its onboarding commit.
+`live` refuses missing/conflicting grounding unless explicitly admitted with
+`--allow-ungrounded`; `verify` still fails without default-branch grounding.
+Ordinary replay heads inherit the fork default branch; upstream-based and
+prepared paths must preserve/carry the kit on the head for CodeRabbit as well.
+See README for source provenance, re-vendoring, and reviewer MCP provisioning.
+
 0. **Upstream first.** If the upstream's CI already runs `garnet-org/action`, run `replay upstream <owner/repo> --pr <N>` for each candidate before any replay. Read the job table (a green job with "skipped: no authentication" recorded nothing) and the binding column: a merge-ref profile is an observation, never exact-head evidence, and a destination seen on a docs-only control PR is baseline, not the change. If that answers the review question, stop there; replay only for an exact-head before/after pair.
 1. **Target.** `targets/<slug>.json` exists or `replay find … --slug <slug> --fork garnet-labs/<name>` creates it. Confirm the fork exists and belongs to `garnet-labs`; never create a new fork without an explicit decision. Declare how the target records once, at find time: `--record-mode instrument --record-job <workflow-file>/<job>` records inside the project's own CI job (later `live` runs need no `--record` flags), and `--workload-name <name> --workload-paths <glob,..>` names the behavior under test so candidates touching those paths rank up. `--paths <glob,..>` filters the ranked list to matching pull requests without persisting anything.
 2. **Candidate.** `replay find <owner/repo> --slug <slug> --fork <fork> --author 'app/dependabot' --limit 40`. Read the reasons, not only the total. Name a review question the measured command can answer; install scripts and native binaries are useful leads. When the target declares a workload (`--workload-name/--workload-paths`), candidates touching those paths rank up with a `workload-surface` reason and the recommendation prefers them. A major version bump alone is insufficient, and installation cannot answer application compatibility. Skip merge-queue batches and anything that cannot install on Linux CI. State that this is candidate evidence.
