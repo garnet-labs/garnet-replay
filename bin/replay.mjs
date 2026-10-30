@@ -18,6 +18,7 @@ import { run } from "../lib/gh.mjs"
 import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
 import { ground, requireGrounding } from "../lib/ground.mjs"
+import { fleet, fleetExitCode } from "../lib/fleet.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -408,6 +409,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   fork <owner/repo> [--org garnet-labs]                             create the matching garnet-labs fork
   refresh <slug> [--work dir] [--dry-run]                            refresh a stale fork default branch from upstream
   repin <slug> [--work dir] [--dry-run]                              move the fork's recording workflows to the harness action pin (one routine commit on the default branch)
+  fleet [--apply] [--json]                                          every target fork: action pin, reviewer kit, gate health; --apply repins and grounds drift
   pin --check [--json] | --update                                    check the latest release or update the harness pin
   live <slug> --dependency x --to v [--package-dir d] [--work dir] [--wait-minutes N|--no-wait] [--dry-run]
                                                                     two-commit transition authored on the fork: bump, then allow build scripts (pnpm)
@@ -458,6 +460,11 @@ async function main(args) {
     return result
   }
   if (command === "ground") return ground(args.slice(1))
+  if (command === "fleet") {
+    const rows = await fleet(args.slice(1))
+    process.exitCode = fleetExitCode(rows)
+    return rows
+  }
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))

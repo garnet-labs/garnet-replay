@@ -31,7 +31,13 @@ test("grounding plans missing, identical, custom files and legacy Greptile witho
     assert.equal(state.rows.find((row) => row.path === path).status, mergeable ? "merge" : "conflict-manual")
     if (!mergeable) assert.equal(state.files[path], undefined)
   }
-  assert.equal(planGrounding({ ...kit, ".greptile": null }).conflict, true)
+  const dir = planGrounding({ ...kit, ".greptile": null })
+  assert.equal(dir.conflict, false)
+  assert.match(dir.files[".greptile/rules.md"], /The Runtime Review comment is the record/)
+  const rules = planGrounding({ ...kit, ".greptile": null, ".greptile/rules.md": "# Upstream rules\n" })
+  assert.match(rules.files[".greptile/rules.md"], /^# Upstream rules\n[\s\S]*## Runtime Review/)
+  assert.equal(planGrounding({ ...kit, ".greptile": null, ".greptile/rules.md": rules.files[".greptile/rules.md"] }).grounded, true)
+  assert.equal(planGrounding({ ...kit, ".greptile": "file" }).conflict, true)
   assert.equal(planGrounding({}, {}).grounded, true)
 })
 
@@ -79,7 +85,7 @@ test("merge plans append Markdown, preserve Greptile keys, and leave unparseable
   assert.deepEqual(result.customContext.other[0], config.customContext.other[0])
   assert.equal(result.customContext.other[1].content, canonicalParagraph())
   assert.equal(planGrounding({ ...kit, ...state.files }).grounded, true)
-  for (const [path, body] of [[".coderabbit.yaml", "reviews: {}"], [".pr_agent.toml", "[review_agent]"], ["greptile.json", "{"], ["greptile.json", "[]"], ["greptile.json", '{"customContext":{"other":false}}'], [".greptile", null]]) {
+  for (const [path, body] of [[".coderabbit.yaml", "reviews: {}"], [".pr_agent.toml", "[review_agent]"], ["greptile.json", "{"], ["greptile.json", "[]"], ["greptile.json", '{"customContext":{"other":false}}'], [".greptile", "file"]]) {
     assert.equal(mergeReviewer(path, body), null)
     assert.equal(planGrounding({ ...kit, [path]: body }).conflict, true)
   }
@@ -189,8 +195,8 @@ test("ground dry-run is read-only and reports conflicts instead of writing parti
     return '{"default_branch":"main"}'
   }
   const rows = await ground(["posthog", "--dry-run"], { exec, log: (line) => lines.push(line), save: () => assert.fail("dry-run wrote ledger") })
-  assert.equal(rows[0].conflict, true)
-  assert.match(lines.join("\n"), /5 \| 0 \| 0 \| 0 \| 1/)
+  assert.equal(rows[0].conflict, false)
+  assert.match(lines.join("\n"), /6 \| 0 \| 0 \| 0 \| 0/)
   await assert.rejects(ground([], { log: () => {} }), /requires/)
   await assert.rejects(ground(["posthog", "--dry-run"], { exec: () => { throw new Error("HTTP 500") }, log: () => {} }), /HTTP 500/)
 })

@@ -67,7 +67,7 @@ test("planRepin writes one routine commit to the fork default branch and nothing
   const plan = planRepin({ fork: "garnet-labs/example", defaultBranch: "main", work: "/tmp/w", workflows: { ".github/workflows/garnet-record.yml": body } })
   assert.equal(plan.mode, "repin")
   assert.deepEqual(plan.changes, [{ path: ".github/workflows/garnet-record.yml", before: [OLD] }])
-  assert.equal(plan.message, `ci: update garnet-org/action to ${GARNET_ACTION_PIN_LABEL}`)
+  assert.equal(plan.message, `ci: update garnet-org/action to ${GARNET_ACTION_PIN_LABEL} [skip ci]`)
   const remote = plan.steps.filter((step) => step.kind === "write-remote")
   assert.equal(remote.length, 1)
   assert.equal(remote[0].target, "garnet-labs/example")
