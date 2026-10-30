@@ -16,8 +16,9 @@ the standard kit on its default branch; new repositories get it at creation.
 Run `replay ground <slug> --dry-run` (or `--all` for the organization).
 Merge its one-commit onboarding PR before replaying. Custom files containing the
 canonical paragraph count as grounded; CodeRabbit additionally requires enabled
-MCP usage. Markdown and valid Greptile JSON receive additive merges; YAML, TOML
-and legacy `.greptile/` need manual resolution without overwriting policy.
+MCP usage. Markdown and valid Greptile JSON receive additive merges; a `.greptile/`
+directory is grounded through `.greptile/rules.md`; YAML and TOML need manual
+resolution without overwriting policy.
 `setup` includes missing kit files and safe merges in its onboarding commit.
 All `live` entrypoints refuse missing/conflicting grounding unless admitted with
 `--allow-ungrounded`; `verify` still fails without default-branch grounding.
