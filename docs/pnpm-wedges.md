@@ -439,3 +439,11 @@ instrument.
 4. **Watch, automated:** the demand-signal section of the daily sweep automation
    (`auto-b12b7e03bde14b2ba0866457aa151980`) now reads his previous day's pnpm activity
    against this ledger and nudges only on a new or flipped signal.
+
+## Signal read — 2026-10-30
+
+- **Pull request:** [`pnpm/pnpm#17502`](https://github.com/pnpm/pnpm/pull/17502) (open, zkochan), closing issue [`#17500`](https://github.com/pnpm/pnpm/issues/17500).
+- **Bucket:** PULL (contract request).
+- **The question:** did 12.8.0 stat each store blob once per linked file, and does the fix bring the count back to one stat per distinct blob? The reporter answered it with a hand-rolled tracer (`strace -f -c` and `strace -f -e trace=%stat,%lstat,%fstat`): 120,939 vs 53,887 `statx` calls, +13–15 % system CPU, across three GitHub-hosted runner CPUs. zkochan shipped the fix with "Not measured locally with strace on the vitest fixture"; only a unit test proves the second link skips the check.
+- **Missing contract field:** `runtime-review-public/v3` has no file-access or syscall record (stat-family calls per path) and no CPU field. Not answerable today.
+- **Ranking change:** none. It reinforces wedge 3 (benchmark witness), which stays capability-blocked. File-access counts become a second named data class, after `#16411`'s process-exec attributes. Footprint unchanged: the open [`#17506`](https://github.com/pnpm/pnpm/pull/17506) bumps the action pin v2.4.0 → v2.4.1 on the same legs, which is routine dependency surface.
