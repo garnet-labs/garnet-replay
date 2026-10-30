@@ -1,0 +1,48 @@
+name: fleet
+
+on:
+  schedule:
+    - cron: "47 6 * * *"
+  workflow_run:
+    workflows: ["action pin"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: fleet
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  fleet:
+    runs-on: ubuntu-latest
+    env:
+      FLEET_TOKEN: ${{ secrets.FLEET_GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      # Writing to forks needs a token with contents and workflows write on garnet-labs;
+      # without it the job only reports, and fails while any fork drifts.
+      - name: Repair or report every fork
+        env:
+          GH_TOKEN: ${{ secrets.FLEET_GITHUB_TOKEN || github.token }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$FLEET_TOKEN" ]; then
+            git config --global url."https://x-access-token:${FLEET_TOKEN}@github.com/".insteadOf "https://github.com/"
+            node bin/replay.mjs fleet --apply | tee fleet.txt
+          else
+            echo "::warning::FLEET_GITHUB_TOKEN is not set; reporting only"
+            node bin/replay.mjs fleet | tee fleet.txt
+          fi
+      - name: Summary
+        if: always()
+        run: |
+          { echo '```'; cat fleet.txt 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
