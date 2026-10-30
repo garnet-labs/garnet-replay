@@ -30,13 +30,14 @@ jobs:
       # Writing to forks needs a token with contents and workflows write on garnet-labs;
       # without it the job only reports, and fails while any fork drifts.
       - name: Repair or report every fork
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.FLEET_GITHUB_TOKEN || github.token }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -n "$FLEET_TOKEN" ]; then
-            git config --global url."https://x-access-token:${FLEET_TOKEN}@github.com/".insteadOf "https://github.com/"
+            gh auth setup-git
             node bin/replay.mjs fleet --apply | tee fleet.txt
           else
             echo "::warning::FLEET_GITHUB_TOKEN is not set; reporting only"

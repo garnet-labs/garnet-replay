@@ -202,7 +202,7 @@ test("ground dry-run is read-only and reports conflicts instead of writing parti
 })
 
 test("kit onboarding uses one commit, fork-only writes, and refuses unrelated root paths", () => {
-  const input = { slug: "posthog", upstream: "PostHog/posthog", fork: "garnet-labs/posthog", defaultBranch: "main", work: "/unused", mode: "inject", files: reviewerKit(), message: "ci: configure reviewer guidance", body: "Adds repository reviewer instructions.", branch: "onboarding/reviewer-guidance" }
+  const input = { slug: "posthog", upstream: "PostHog/posthog", fork: "garnet-labs/posthog", defaultBranch: "main", work: "/unused", mode: "inject", files: reviewerKit(), message: "ci: configure reviewer guidance", body: "Adds repository reviewer instructions.", branch: "reviewer-guidance" }
   const plan = planSetup(input)
   assert.equal(plan.steps.filter((step) => step.cmd === "git" && step.args.includes("commit")).length, 1)
   assert.equal(plan.steps.filter((step) => step.cmd === "gh" && step.args.includes("create")).length, 1)

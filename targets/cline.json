@@ -1634,5 +1634,12 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 0,
+  "grounding": {
+    "state": "pending",
+    "source": "3dac9c38ab090dcfeed5aa165db5e65710abd1cb",
+    "defaultBranch": "main",
+    "checkedSha": "6c87681534b913959900ac98fa628b504d51567b",
+    "pr": 31
+  }
 }

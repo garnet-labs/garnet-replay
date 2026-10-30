@@ -26,6 +26,7 @@ test("fleetDrift separates what the job repairs from what needs a person", () =>
   assert.equal(drift.repair.length, 2)
   assert.deepEqual(drift.manual, ["merge-gate.yml last run failure"])
   assert.deepEqual(fleetDrift({ pinBehind: [], kit: "conflict", gates: {} }).manual, ["reviewer kit conflicts with upstream config"])
+  assert.deepEqual(fleetDrift({ pinBehind: [], kit: "grounded", gates: { "merge-gate.yml": "timed_out", "garnet-evidence-gate.yml": "unreadable" } }).manual, ["merge-gate.yml last run timed_out", "garnet-evidence-gate.yml last run unreadable"])
 })
 
 test("fleetExitCode is clean only when no fork has drift", () => {
