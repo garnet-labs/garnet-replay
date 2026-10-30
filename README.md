@@ -38,8 +38,9 @@ Custom policy is retained. Markdown receives an appended section; valid
 `greptile.json` receives an additional `customContext.other` entry while retaining
 existing keys. YAML and TOML edits are `conflict-manual`: this dependency-free
 harness cannot validate arbitrary YAML/TOML and will not risk dropping keys.
-A legacy `.greptile/` directory is also manual; its rules format is not assumed
-to be the current root `greptile.json` format. A manual conflict blocks the
+A `.greptile/` directory is grounded through `.greptile/rules.md`: the file is
+added, or the canonical paragraph is appended to it. A `.greptile` path that is
+not a directory is `conflict-manual`. A manual conflict blocks the
 entire repository's PR; no partial kit is written. An already-grounded kit
 produces no PR. Non-dry runs record state through `saveTarget` when a target
 exists; a proposed PR is pending until merged onto the default branch.
