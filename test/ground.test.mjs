@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 import { createHash } from "node:crypto"
 import { readFileSync } from "node:fs"
-import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
+import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
 import { carryReviewerGuidance, GARNET_ACTION_PIN, planPureReplay, planReplay, planSetup } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { livePr } from "../lib/commands.mjs"
@@ -11,7 +11,7 @@ import { kitResponse } from "./fixtures/grounding.mjs"
 
 test("vendored reviewer files preserve pinned source bytes", () => {
   assert.equal(KIT_SOURCE.repository, "garnet-labs/garnet-runtime-review-mcp")
-  assert.equal(KIT_SOURCE.sha, "3dac9c38ab090dcfeed5aa165db5e65710abd1cb")
+  assert.equal(KIT_SOURCE.sha, "cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654")
   for (const [file, metadata] of Object.entries(KIT_SOURCE.files)) {
     const body = readFileSync(new URL(`../live/templates/reviewers/${file}`, import.meta.url))
     assert.equal(createHash("sha256").update(body).digest("hex"), metadata.sha256, file)
@@ -89,6 +89,92 @@ test("merge plans append Markdown, preserve Greptile keys, and leave unparseable
     assert.equal(mergeReviewer(path, body), null)
     assert.equal(planGrounding({ ...kit, [path]: body }).conflict, true)
   }
+})
+
+test("grounding updates only the exact prior reviewer paragraph in config files", () => {
+  const kit = reviewerKit()
+  const codeRabbit = `knowledge_base:
+  mcp:
+    usage: enabled
+reviews:
+  path_instructions:
+    - path: "**"
+      instructions: |
+        ${PREVIOUS_CANONICAL_PARAGRAPH}
+`
+  const prAgent = `[review_agent]
+override_effort = "standard"
+issues_user_guidelines = """
+${PREVIOUS_CANONICAL_PARAGRAPH}
+"""
+`
+  for (const [path, body] of [[".coderabbit.yaml", codeRabbit], [".pr_agent.toml", prAgent]]) {
+    const state = planGrounding({ ...kit, [path]: body })
+    assert.equal(state.conflict, false, path)
+    assert.equal(state.rows.find((row) => row.path === path).status, "merge", path)
+    assert.equal(state.files[path], body.replace(PREVIOUS_CANONICAL_PARAGRAPH, canonicalParagraph()), path)
+    assert.equal(planGrounding({ ...kit, ...state.files }).grounded, true, path)
+  }
+  assert.equal(mergeReviewer(".coderabbit.yaml", codeRabbit.replace("usage: enabled", "usage: disabled")), null)
+  assert.equal(mergeReviewer(".pr_agent.toml", `${prAgent}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
+})
+
+test("grounding replaces prior kit bytes and paragraphs without retaining legacy guidance", () => {
+  const kit = reviewerKit()
+  const oldReview = readFileSync(new URL("./fixtures/previous-reviewer-REVIEW.md", import.meta.url), "utf8")
+  const exact = planGrounding({ ...kit, "REVIEW.md": oldReview })
+  assert.equal(exact.rows.find((row) => row.path === "REVIEW.md").status, "merge")
+  assert.equal(exact.files["REVIEW.md"], kit["REVIEW.md"])
+
+  const markdown = `# Local policy\n\nKeep this rule.\n\n## Runtime Review\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const markdownBody = mergeReviewer("REVIEW.md", markdown)
+  assert.match(markdownBody, /Keep this rule\./)
+  assert.equal(markdownBody.match(/## Runtime Review/g).length, 1)
+  assert.equal(markdownBody.includes(PREVIOUS_CANONICAL_PARAGRAPH), false)
+  const mixed = planGrounding({ ...kit, "REVIEW.md": `${markdown}\n${canonicalParagraph()}` })
+  assert.equal(mixed.rows.find((row) => row.path === "REVIEW.md").status, "merge")
+  assert.equal(mixed.files["REVIEW.md"].includes(PREVIOUS_CANONICAL_PARAGRAPH), false)
+
+  const greptile = {
+    instructions: "Keep these instructions.",
+    customContext: {
+      rules: ["Keep this rule."],
+      other: [{ scope: ["src/**"], content: PREVIOUS_CANONICAL_PARAGRAPH }],
+    },
+    labels: ["upstream"],
+  }
+  const greptileBody = JSON.parse(mergeReviewer("greptile.json", JSON.stringify(greptile)))
+  assert.deepEqual(greptileBody.labels, greptile.labels)
+  assert.equal(greptileBody.instructions, greptile.instructions)
+  assert.deepEqual(greptileBody.customContext.rules, greptile.customContext.rules)
+  assert.equal(greptileBody.customContext.other[0].content, canonicalParagraph())
+
+  const codeRabbit = `knowledge_base:\n  mcp:\n    usage: enabled\nreviews:\n  path_instructions:\n    - path: "**"\n      instructions: |\n        ${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const prAgent = `[review_agent]\nissues_user_guidelines = """\n${PREVIOUS_CANONICAL_PARAGRAPH}\n"""\n`
+  const markdownSkill = `# Local skill policy\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const rules = `# Local Greptile policy\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const all = planGrounding({
+    ...kit,
+    ".coderabbit.yaml": codeRabbit,
+    ".pr_agent.toml": prAgent,
+    "greptile.json": JSON.stringify(greptile),
+    "REVIEW.md": markdown,
+    ".agents/skills/garnet-runtime-review/SKILL.md": markdownSkill,
+    ".greptile": null,
+    ".greptile/rules.md": rules,
+  })
+  assert.equal(all.conflict, false)
+  for (const body of Object.values(all.files)) {
+    assert.doesNotMatch(body, /get_runtime_review|get_execution_profile|garnet-runtime-review-mcp\.vercel\.app/)
+  }
+  assert.equal(mergeReviewer("REVIEW.md", `${markdown}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
+  assert.equal(mergeReviewer("greptile.json", JSON.stringify({ first: PREVIOUS_CANONICAL_PARAGRAPH, second: PREVIOUS_CANONICAL_PARAGRAPH })), null)
+  const ambiguousRules = planGrounding({
+    ...kit,
+    ".greptile": null,
+    ".greptile/rules.md": `${PREVIOUS_CANONICAL_PARAGRAPH}\n${PREVIOUS_CANONICAL_PARAGRAPH}`,
+  })
+  assert.equal(ambiguousRules.rows.find((row) => row.path === ".greptile/rules.md").status, "conflict-manual")
 })
 
 test("shared URL/local admission refuses missing guidance, allows explicit override, and fails closed on API errors", () => {

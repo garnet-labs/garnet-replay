@@ -12,7 +12,8 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
   reviewer kit on its default branch, whether recording is manual or made by
   this harness. New repositories get it at creation, before their first run.
   Use `replay ground <slug>|--all --dry-run`; retain upstream policy with safe
-  Markdown/JSON merges, or resolve `conflict-manual` without dropping its keys.
+  Markdown/JSON merges and exact prior-paragraph replacements, or resolve
+  `conflict-manual` without dropping its keys.
   Exact kit bytes or the canonical paragraph ground each file; CodeRabbit also
   requires enabled MCP usage. Merge grounding before replaying. All live
   entrypoints enforce admission, and prepared/upstream-based plans carry approved

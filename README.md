@@ -34,13 +34,15 @@ not proof a job ran: path filters, labels and job conditions still apply.
 Each row counts `add`, `identical`, `grounded` (custom policy already carrying the
 canonical paragraph), `merge`, and `conflict-manual`.
 
-Custom policy is retained. Markdown receives an appended section; valid
-`greptile.json` receives an additional `customContext.other` entry while retaining
-existing keys. YAML and TOML edits are `conflict-manual`: this dependency-free
-harness cannot validate arbitrary YAML/TOML and will not risk dropping keys.
+Custom policy is retained. Exact previous kit bytes are replaced with the
+current kit. In customized files, one exact prior reviewer paragraph is replaced
+in Markdown, CodeRabbit YAML, PR Agent TOML, or Greptile JSON; Markdown and JSON
+without the paragraph use the existing safe append behavior. Ambiguous changes
+and other YAML/TOML edits remain `conflict-manual`.
 A `.greptile/` directory is grounded through `.greptile/rules.md`: the file is
-added, or the canonical paragraph is appended to it. A `.greptile` path that is
-not a directory is `conflict-manual`. A manual conflict blocks the
+added, the prior paragraph is replaced in place, or the canonical paragraph is
+appended when no prior paragraph exists. A `.greptile` path that is not a
+directory is `conflict-manual`. A manual conflict blocks the
 entire repository's PR; no partial kit is written. An already-grounded kit
 produces no PR. Non-dry runs record state through `saveTarget` when a target
 exists; a proposed PR is pending until merged onto the default branch.
@@ -69,8 +71,7 @@ the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
 Private repositories use comment markers and inline guidance, not hosted MCP.
 
 The source is `garnet-labs/garnet-runtime-review-mcp` at
-`3dac9c38ab090dcfeed5aa165db5e65710abd1cb` (reviewer-paragraph branch; merge
-that source change before this harness change). The four files under
+`cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654`. The four files under
 `examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
 byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
 and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
