@@ -34,15 +34,15 @@ not proof a job ran: path filters, labels and job conditions still apply.
 Each row counts `add`, `identical`, `grounded` (custom policy already carrying the
 canonical paragraph), `merge`, and `conflict-manual`.
 
-Custom policy is retained. Markdown receives an appended section; valid
-`greptile.json` receives an additional `customContext.other` entry while retaining
-existing keys. The exact previous reviewer-kit paragraph in CodeRabbit YAML and
-PR Agent TOML can be replaced in place without rewriting surrounding config.
-Other YAML/TOML edits are `conflict-manual`: this dependency-free harness cannot
-validate arbitrary YAML/TOML and will not risk dropping keys.
+Custom policy is retained. Exact previous kit bytes are replaced with the
+current kit. In customized files, one exact prior reviewer paragraph is replaced
+in Markdown, CodeRabbit YAML, PR Agent TOML, or Greptile JSON; Markdown and JSON
+without the paragraph use the existing safe append behavior. Ambiguous changes
+and other YAML/TOML edits remain `conflict-manual`.
 A `.greptile/` directory is grounded through `.greptile/rules.md`: the file is
-added, or the canonical paragraph is appended to it. A `.greptile` path that is
-not a directory is `conflict-manual`. A manual conflict blocks the
+added, the prior paragraph is replaced in place, or the canonical paragraph is
+appended when no prior paragraph exists. A `.greptile` path that is not a
+directory is `conflict-manual`. A manual conflict blocks the
 entire repository's PR; no partial kit is written. An already-grounded kit
 produces no PR. Non-dry runs record state through `saveTarget` when a target
 exists; a proposed PR is pending until merged onto the default branch.

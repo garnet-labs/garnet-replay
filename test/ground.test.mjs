@@ -119,6 +119,64 @@ ${PREVIOUS_CANONICAL_PARAGRAPH}
   assert.equal(mergeReviewer(".pr_agent.toml", `${prAgent}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
 })
 
+test("grounding replaces prior kit bytes and paragraphs without retaining legacy guidance", () => {
+  const kit = reviewerKit()
+  const oldReview = readFileSync(new URL("./fixtures/previous-reviewer-REVIEW.md", import.meta.url), "utf8")
+  const exact = planGrounding({ ...kit, "REVIEW.md": oldReview })
+  assert.equal(exact.rows.find((row) => row.path === "REVIEW.md").status, "merge")
+  assert.equal(exact.files["REVIEW.md"], kit["REVIEW.md"])
+
+  const markdown = `# Local policy\n\nKeep this rule.\n\n## Runtime Review\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const markdownBody = mergeReviewer("REVIEW.md", markdown)
+  assert.match(markdownBody, /Keep this rule\./)
+  assert.equal(markdownBody.match(/## Runtime Review/g).length, 1)
+  assert.equal(markdownBody.includes(PREVIOUS_CANONICAL_PARAGRAPH), false)
+  const mixed = planGrounding({ ...kit, "REVIEW.md": `${markdown}\n${canonicalParagraph()}` })
+  assert.equal(mixed.rows.find((row) => row.path === "REVIEW.md").status, "merge")
+  assert.equal(mixed.files["REVIEW.md"].includes(PREVIOUS_CANONICAL_PARAGRAPH), false)
+
+  const greptile = {
+    instructions: "Keep these instructions.",
+    customContext: {
+      rules: ["Keep this rule."],
+      other: [{ scope: ["src/**"], content: PREVIOUS_CANONICAL_PARAGRAPH }],
+    },
+    labels: ["upstream"],
+  }
+  const greptileBody = JSON.parse(mergeReviewer("greptile.json", JSON.stringify(greptile)))
+  assert.deepEqual(greptileBody.labels, greptile.labels)
+  assert.equal(greptileBody.instructions, greptile.instructions)
+  assert.deepEqual(greptileBody.customContext.rules, greptile.customContext.rules)
+  assert.equal(greptileBody.customContext.other[0].content, canonicalParagraph())
+
+  const codeRabbit = `knowledge_base:\n  mcp:\n    usage: enabled\nreviews:\n  path_instructions:\n    - path: "**"\n      instructions: |\n        ${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const prAgent = `[review_agent]\nissues_user_guidelines = """\n${PREVIOUS_CANONICAL_PARAGRAPH}\n"""\n`
+  const markdownSkill = `# Local skill policy\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const rules = `# Local Greptile policy\n\n${PREVIOUS_CANONICAL_PARAGRAPH}\n`
+  const all = planGrounding({
+    ...kit,
+    ".coderabbit.yaml": codeRabbit,
+    ".pr_agent.toml": prAgent,
+    "greptile.json": JSON.stringify(greptile),
+    "REVIEW.md": markdown,
+    ".agents/skills/garnet-runtime-review/SKILL.md": markdownSkill,
+    ".greptile": null,
+    ".greptile/rules.md": rules,
+  })
+  assert.equal(all.conflict, false)
+  for (const body of Object.values(all.files)) {
+    assert.doesNotMatch(body, /get_runtime_review|get_execution_profile|garnet-runtime-review-mcp\.vercel\.app/)
+  }
+  assert.equal(mergeReviewer("REVIEW.md", `${markdown}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
+  assert.equal(mergeReviewer("greptile.json", JSON.stringify({ first: PREVIOUS_CANONICAL_PARAGRAPH, second: PREVIOUS_CANONICAL_PARAGRAPH })), null)
+  const ambiguousRules = planGrounding({
+    ...kit,
+    ".greptile": null,
+    ".greptile/rules.md": `${PREVIOUS_CANONICAL_PARAGRAPH}\n${PREVIOUS_CANONICAL_PARAGRAPH}`,
+  })
+  assert.equal(ambiguousRules.rows.find((row) => row.path === ".greptile/rules.md").status, "conflict-manual")
+})
+
 test("shared URL/local admission refuses missing guidance, allows explicit override, and fails closed on API errors", () => {
   const missing = (_cmd, args) => args[1].includes("/git/trees/") ? '{"tree":[]}' : '{"default_branch":"main"}'
   assert.throws(() => requireGrounding("garnet-labs/example", { exec: missing, log: () => {} }), /--allow-ungrounded/)
