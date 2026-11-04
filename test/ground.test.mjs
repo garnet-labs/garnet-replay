@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 import { createHash } from "node:crypto"
 import { readFileSync } from "node:fs"
-import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
+import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
 import { carryReviewerGuidance, GARNET_ACTION_PIN, planPureReplay, planReplay, planSetup } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { livePr } from "../lib/commands.mjs"
@@ -11,7 +11,7 @@ import { kitResponse } from "./fixtures/grounding.mjs"
 
 test("vendored reviewer files preserve pinned source bytes", () => {
   assert.equal(KIT_SOURCE.repository, "garnet-labs/garnet-runtime-review-mcp")
-  assert.equal(KIT_SOURCE.sha, "3dac9c38ab090dcfeed5aa165db5e65710abd1cb")
+  assert.equal(KIT_SOURCE.sha, "cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654")
   for (const [file, metadata] of Object.entries(KIT_SOURCE.files)) {
     const body = readFileSync(new URL(`../live/templates/reviewers/${file}`, import.meta.url))
     assert.equal(createHash("sha256").update(body).digest("hex"), metadata.sha256, file)
@@ -89,6 +89,34 @@ test("merge plans append Markdown, preserve Greptile keys, and leave unparseable
     assert.equal(mergeReviewer(path, body), null)
     assert.equal(planGrounding({ ...kit, [path]: body }).conflict, true)
   }
+})
+
+test("grounding updates only the exact prior reviewer paragraph in config files", () => {
+  const kit = reviewerKit()
+  const codeRabbit = `knowledge_base:
+  mcp:
+    usage: enabled
+reviews:
+  path_instructions:
+    - path: "**"
+      instructions: |
+        ${PREVIOUS_CANONICAL_PARAGRAPH}
+`
+  const prAgent = `[review_agent]
+override_effort = "standard"
+issues_user_guidelines = """
+${PREVIOUS_CANONICAL_PARAGRAPH}
+"""
+`
+  for (const [path, body] of [[".coderabbit.yaml", codeRabbit], [".pr_agent.toml", prAgent]]) {
+    const state = planGrounding({ ...kit, [path]: body })
+    assert.equal(state.conflict, false, path)
+    assert.equal(state.rows.find((row) => row.path === path).status, "merge", path)
+    assert.equal(state.files[path], body.replace(PREVIOUS_CANONICAL_PARAGRAPH, canonicalParagraph()), path)
+    assert.equal(planGrounding({ ...kit, ...state.files }).grounded, true, path)
+  }
+  assert.equal(mergeReviewer(".coderabbit.yaml", codeRabbit.replace("usage: enabled", "usage: disabled")), null)
+  assert.equal(mergeReviewer(".pr_agent.toml", `${prAgent}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
 })
 
 test("shared URL/local admission refuses missing guidance, allows explicit override, and fails closed on API errors", () => {

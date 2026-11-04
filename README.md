@@ -36,8 +36,10 @@ canonical paragraph), `merge`, and `conflict-manual`.
 
 Custom policy is retained. Markdown receives an appended section; valid
 `greptile.json` receives an additional `customContext.other` entry while retaining
-existing keys. YAML and TOML edits are `conflict-manual`: this dependency-free
-harness cannot validate arbitrary YAML/TOML and will not risk dropping keys.
+existing keys. The exact previous reviewer-kit paragraph in CodeRabbit YAML and
+PR Agent TOML can be replaced in place without rewriting surrounding config.
+Other YAML/TOML edits are `conflict-manual`: this dependency-free harness cannot
+validate arbitrary YAML/TOML and will not risk dropping keys.
 A `.greptile/` directory is grounded through `.greptile/rules.md`: the file is
 added, or the canonical paragraph is appended to it. A `.greptile` path that is
 not a directory is `conflict-manual`. A manual conflict blocks the
@@ -69,8 +71,7 @@ the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
 Private repositories use comment markers and inline guidance, not hosted MCP.
 
 The source is `garnet-labs/garnet-runtime-review-mcp` at
-`3dac9c38ab090dcfeed5aa165db5e65710abd1cb` (reviewer-paragraph branch; merge
-that source change before this harness change). The four files under
+`cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654`. The four files under
 `examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
 byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
 and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
