@@ -69,6 +69,9 @@ test("rendered execution diff keeps the known evidence line shapes", () => {
   for (const prefix of ["receipt_id:", "head:", "compared with previous recorded head:"]) {
     assert.equal(actual.find((line) => line.startsWith(prefix)), expected.find((line) => line.startsWith(prefix)))
   }
+  const base = renderExecutionDiffText(buildExecutionDiff({ ...pr, garnet_summary: { ...pr.garnet_summary, scope: "pr-base" } })).split("\n")
+  assert.equal(base.some((line) => line.startsWith("compared with previous recorded head:")), false)
+  assert.ok(base.some((line) => line.startsWith("compared with the App's last recorded runs on the base branch: ")))
 })
 
 test("validator rejects a document with a bad required field and extra property", () => {
