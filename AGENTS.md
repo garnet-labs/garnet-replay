@@ -52,6 +52,11 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
   target are safe; never restore rows by hand.
 - Run `replay verify <pr-url>` before any pull request or card is shown to anyone.
   FAIL means not shareable.
+- Read the App result as the App states it: best-effort `changed` stays changed,
+  best-effort `nothing new` stays that scoped result, and a removed job is not a
+  change. Apply a reviewer label only after the head's record is finalized.
+- Third-party forks are replayed through the hosted `replay` workflow, not a local
+  `--work` checkout. Current state: `docs/state-2026-11-05.md`.
 - Do not change `garnet-org/action`, `garnet-org/control-plane`, or
   `garnet-org/jibril`. Do not publish anything outside `garnet-labs`.
 

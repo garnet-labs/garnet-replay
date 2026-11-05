@@ -114,6 +114,9 @@ the question needs an exact-head before/after pair. The pnpm result:
 
 ## Current status
 
+Latest state and the exact operator commands: [docs/state-2026-11-05.md](docs/state-2026-11-05.md).
+Use the hosted `replay` workflow (GitHub-hosted runner) for third-party forks; the local `--work` paths are for Garnet-authored repositories only.
+
 - Harness: all seven ladder commands, the `verify` share gate, identity and
   duplicate-admission guards, and the offline suite (`npm test`) are in place.
 - Evidence: recorded batches ([prospects](docs/prospect-batch.md),
@@ -336,6 +339,8 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 `seed-from-corpus` and `seed-constructed` maintain `seeds/`.
 
 ## Docs
+
+- [docs/state-2026-11-05.md](docs/state-2026-11-05.md): what works, what is scoped, exact operator commands.
 
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence
