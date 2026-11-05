@@ -7,4 +7,7 @@ equals the pull request head; otherwise the runtime evidence is absent or stale
 for this head, not clean. Prefix each runtime-grounded statement exactly with
 `Runtime evidence (Garnet, head <sha7>): ` and name the execution chain,
 destination and workflow/job. Never repeat verdicts or safety judgments from
-the record; judge the diff yourself.
+the record; judge the diff yourself. When the Garnet MCP
+(`https://api.garnet.ai/api/v2/mcp`) is enabled for Bugbot, use its `profiles`
+tool only for job detail, and only a profile whose
+`data.scenarios.github.head_sha` equals the pull request head.

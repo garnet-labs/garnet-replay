@@ -4,16 +4,21 @@ import { pathToFileURL } from "node:url";
  * Requests reviews again once a finalized Garnet Runtime Review record is bound
  * to the pull request head. Reviewers run on PR open, before the recorder has
  * finished; this step makes them run once more with the evidence present.
+ * A best-effort record fails `garnet/evidence` but is still the record:
+ * reviewers are requested once the check settled either way, and the mirror
+ * carries the capture qualifier. A pending or absent check requests nothing.
  *
  * Contract: one request per head (a marker comment is the lock), only after the
  * `garnet/evidence` check on that head concluded success and a finalized record
  * from a trusted author is bound to the exact head, only for the reviewers
  * listed in GARNET_REVIEWERS. API requests go out before the lock comment so a
  * failed request leaves no lock and the next run retries. Nothing here judges
- * the pull request.
+ * the pull request. Cursor Bugbot ignores `bugbot run` posted by a bot, so it
+ * is requested through Cursor's Bugbot API with a repository secret.
  * Required environment: GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
  * GARNET_REVIEWERS (comma-separated).
- * Optional environment: GITHUB_API_URL, DEVIN_API_TOKEN, DEVIN_API_URL.
+ * Optional environment: GITHUB_API_URL, DEVIN_API_TOKEN, DEVIN_API_URL,
+ * CURSOR_API_KEY, CURSOR_API_URL.
  */
 const RUNTIME_REVIEW_MARKER = "<!-- garnet-runtime-review -->"
 const PENDING_MARKER = "garnet-control-plane-pending-pr-comment"
@@ -32,13 +37,12 @@ const CHECK_ATTEMPTS = 16
 export const MENTIONS = Object.freeze({
   coderabbit: "@coderabbitai review",
   greptile: "@greptileai review",
-  bugbot: "bugbot run",
   codex: "@codex review",
   qodo: "/review",
 })
 
 /** Reviewers requested through an API instead of a comment. */
-export const API_REVIEWERS = Object.freeze(["copilot", "devin"])
+export const API_REVIEWERS = Object.freeze(["copilot", "devin", "bugbot"])
 
 const api = process.env.GITHUB_API_URL || "https://api.github.com"
 const repo = process.env.GITHUB_REPOSITORY
@@ -196,6 +200,34 @@ async function requestDevin(prUrl) {
   return true
 }
 
+async function requestBugbot(prUrl) {
+  const key = process.env.CURSOR_API_KEY
+  if (typeof key !== "string" || key === "") {
+    console.log("bugbot: CURSOR_API_KEY is not set; a Bugbot review was not requested (repository secret required).")
+    return false
+  }
+  // Cursor reviews the pull request's current head; the caller checked it equals HEAD_SHA just before.
+  const base = process.env.CURSOR_API_URL || "https://api.cursor.com"
+  const res = await fetch(`${base}/bugbot/review`, {
+    method: "POST",
+    headers: { Authorization: `Basic ${Buffer.from(`${key}:`).toString("base64")}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ prUrl }),
+  })
+  if (!res.ok) throw new Error(`bugbot: POST /bugbot/review: ${res.status}`)
+  console.log(`requested Bugbot review on ${prUrl}`)
+  return true
+}
+
+/**
+ * Whether the `garnet/evidence` state lets reviews be requested: any settled
+ * check. A failed check over a finalized record is a qualified record, not none.
+ * @param {"success"|"pending"|"failed"|"absent"} state
+ * @returns {boolean}
+ */
+export function evidenceSettled(state) {
+  return state === "success" || state === "failed"
+}
+
 async function main() {
   if (!process.env.GITHUB_TOKEN || !repo || !prNumber || !headSha) {
     throw new Error("GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER and HEAD_SHA are required")
@@ -220,8 +252,8 @@ async function main() {
     return
   }
   const check = await awaitEvidenceCheck(headSha)
-  if (check !== "success") {
-    console.log(`${EVIDENCE_CHECK} is ${check} for head ${headSha.slice(0, 7)}; reviews are requested only after it passes.`)
+  if (!evidenceSettled(check)) {
+    console.log(`${EVIDENCE_CHECK} is ${check} for head ${headSha.slice(0, 7)}; reviews are requested only after it settles.`)
     return
   }
   const current = await github(`/repos/${repo}/pulls/${prNumber}`)
@@ -236,6 +268,7 @@ async function main() {
   const requested = []
   if (reviewers.includes("copilot") && await requestCopilot(pr.html_url)) requested.push("copilot")
   if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
+  if (reviewers.includes("bugbot") && await requestBugbot(pr.html_url)) requested.push("bugbot")
   const body = renderRequestComment(reviewers, headSha, requested)
   await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
   const mentioned = reviewers.filter((name) => name in MENTIONS)

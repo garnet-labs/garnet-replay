@@ -53,7 +53,7 @@ Six layers; Garnet owns 1, 2, 5 and 6, the user's repository carries 3 and 4.
 | 1 evidence | Garnet action + recorder | head-bound record comment, `<!-- garnet:commit <sha> -->` marker | yes |
 | 2 delivery | privileged mirror workflow | copy the record into the PR description between `<!-- garnet:evidence:begin/end -->`; `garnet/evidence` check on the head | yes (required check) |
 | 3 instruction | repository | one canonical `REVIEW.md` + thin per-tool adapters that point at it | no (prose) |
-| 4 timing | mirror workflow | after `garnet/evidence` succeeds, request the review again (`/devin review`, `@coderabbitai review`, `@greptileai`, `bugbot run`, `@codex review`, `/agentic_review`, Copilot re-request) deduplicated per head | n/a |
+| 4 timing | mirror workflow | after `garnet/evidence` succeeds, request the review again (`/devin review`, `@coderabbitai review`, `@greptileai`, Bugbot API, `@codex review`, `/agentic_review`, Copilot re-request) deduplicated per head | n/a |
 | 5 measurement | `replay consume` / `harvest` | tiered receipts (utterance, citation, observation, mention); `consumed` only for head-bound utterance/citation | strict |
 | 6 enforcement | branch protection | `garnet/evidence` required; reviewer output never gates | yes |
 
@@ -67,7 +67,7 @@ The reviewer's grounding line is the **user-facing** output; `garnet/evidence` i
 | Devin Review | undocumented for auto review; sessions read anything | no (auto) | no (auto) | root `REVIEW.md` (+ `.agents/skills/garnet-runtime-review/SKILL.md` for sessions) | `/devin review` comment or REST API | partial; skill path is more deterministic | yes (only tool with observed utterances) |
 | CodeRabbit | yes | yes | yes, incl. failed CI logs | `.coderabbit.yaml` (`tone_instructions`, path instructions, custom pre-merge check) + `AGENTS.md` import | `@coderabbitai review` / `full review` | partial | yes |
 | Greptile | yes | yes (mentions) | no | `.greptile/config.json` + `.greptile/rules.md` (`greptile onboard` imports AGENTS/CLAUDE once) | `@greptileai` comment | partial | yes |
-| Cursor Bugbot | yes | top-level + inline | no | `.cursor/BUGBOT.md` (root + nested); set PR summary to comment, disable incremental review | `bugbot run` / Enterprise API | partial | next |
+| Cursor Bugbot | yes | top-level + inline | no | `.cursor/BUGBOT.md` (root + nested); set PR summary to comment, disable incremental review | Bugbot API (`POST /bugbot/review`, Enterprise, `CURSOR_API_KEY`); `bugbot run` from a bot is ignored | partial | next |
 | GitHub Copilot | metadata (inferred) | no | via GitHub MCP if instructed | `.github/copilot-instructions.md` + `.github/skills/garnet-runtime-review/SKILL.md`; instructions read from head branch | re-request reviewer via API | partial | next |
 | Qodo | yes (raw, HTML incl.) | only when addressed | failing checks only | `.pr_agent.toml` guidelines + `REVIEW.md` (portal toggle) | `/agentic_review` (bot mentions may be filtered) | low | later |
 | Codex cloud review | unknown | no | no | `AGENTS.md` `## Code Review Rules` | `@codex review` | low; no check run at all | later; use `openai/codex-action` in a workflow if deterministic output is needed |
