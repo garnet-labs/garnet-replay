@@ -1,10 +1,10 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
-import { appJobs, appResult, appResultLine, parseReceipt } from "../lib/receipt.mjs"
+import { appJobs, appResult, appResultLine, headBoundAppResult, parseReceipt } from "../lib/receipt.mjs"
 import { buildModel, classify, renderCard } from "../lib/card.mjs"
 import { VERDICTS } from "../lib/evidence.mjs"
-import { renderDecision } from "../lib/decide.mjs"
+import { decideMergeSafety, renderDecision } from "../lib/decide.mjs"
 
 const body = (n) => readFileSync(new URL(`./fixtures/app/posthog-${n}.pr-comment.md`, import.meta.url), "utf8")
 const HEAD_246 = "304f116cfbea6fc11dbd42d2130121b8808ecd87"
@@ -70,4 +70,31 @@ test("decide renders without tripping the vocabulary guard and names the App res
     app: appResult(parseReceipt(body(249)).summary, body(249)),
   }, "https://github.com/garnet-labs/posthog/pull/249")
   assert.match(text, /App result: changed · 1 of 6 recorded jobs changed/)
+})
+
+test("a stale App comment never reaches the decision, in JSON or text", () => {
+  const body = readFileSync(new URL("./fixtures/app/posthog-249.pr-comment.md", import.meta.url), "utf8")
+  const summary = parseReceipt(body).summary
+  const stale = headBoundAppResult({ garnet_exact_head: false, garnet_summary: summary, garnet_comment_body: body })
+  assert.equal(stale, null)
+  const result = { ...decideMergeSafety(null, {}), app: stale }
+  assert.equal(JSON.parse(JSON.stringify(result)).app, null)
+  assert.doesNotMatch(renderDecision(result, "https://github.com/garnet-labs/posthog/pull/249"), /App result/)
+  assert.equal(headBoundAppResult({ garnet_exact_head: true, garnet_summary: summary, garnet_comment_body: body }).result, "changed")
+})
+
+test("observed names with contract words render in the card without tripping the guard", () => {
+  const body = readFileSync(new URL("./fixtures/app/posthog-246.pr-comment.md", import.meta.url), "utf8")
+    .replace("Vendored packages / install", "Vendored packages / monitoring").replace(/runs on `master`/, "runs on `monitoring`")
+  const app = appResult(parseReceipt(body).summary, body)
+  assert.deepEqual(app.removedJobs, ["Vendored packages / monitoring"])
+  assert.equal(app.baseline, "last 10 runs on monitoring")
+  const card = renderCard(buildModel({ slug: "posthog", forkPr: 246, headSha: HEAD_246, comment: { body } }))
+  assert.match(card, /removed job: `Vendored packages \/ monitoring`/)
+  assert.match(card, /App comparison: last 10 runs on monitoring/)
+})
+
+test("finalized complete capture with zero changes and no outcome reads nothing new", () => {
+  assert.equal(appResult({ status: "finalized", capture_quality: "complete", jobs: 3, changed: 0 }).result, "nothing new")
+  assert.equal(appResult({ status: "finalized", capture_quality: "best-effort", jobs: 3, changed: 0 }).result, "capture incomplete")
 })
