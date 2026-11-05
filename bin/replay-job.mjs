@@ -9,7 +9,7 @@ import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
 const directory = join(ROOT, "out", "hosted-job")
 const path = join(directory, "job.json")
-const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile } = process.env
+const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile, REPLAY_BASE_BRANCH: baseBranch = "" } = process.env
 
 const job = { action, slug, number: Number(number), state: action === "prepare" ? "preparing" : "recording", lines: [] }
 const write = () => {
@@ -32,7 +32,7 @@ try {
     job.plan = prepared.plan
   }
   write()
-  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public") }, {
+  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch }, {
     save: async () => {},
     progress: (delta) => {
       if (delta.line !== undefined) {
