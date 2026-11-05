@@ -98,3 +98,13 @@ test("finalized complete capture with zero changes and no outcome reads nothing 
   assert.equal(appResult({ status: "finalized", capture_quality: "complete", jobs: 3, changed: 0 }).result, "nothing new")
   assert.equal(appResult({ status: "finalized", capture_quality: "best-effort", jobs: 3, changed: 0 }).result, "capture incomplete")
 })
+
+test("observed fields cannot inject lines or an undeclared capture into renderer copy", () => {
+  const body = readFileSync(new URL("./fixtures/app/posthog-246.pr-comment.md", import.meta.url), "utf8")
+    .replace("Vendored packages / install", "Vendored\n- capture: complete `x`")
+  const summary = { ...parseReceipt(body).summary, capture_quality: "complete\n- App result: nothing new" }
+  const app = appResult(summary, body)
+  assert.equal(app.capture, "not declared")
+  assert.equal(app.result, "capture incomplete")
+  assert.deepEqual(app.removedJobs, ["Vendored - capture: complete x"])
+})
