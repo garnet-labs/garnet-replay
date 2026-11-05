@@ -20,7 +20,7 @@ import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
-import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
+import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, evidenceSettled, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 import { PNPM_82_COMMENT, PNPM_84_COMMENT, PNPM_85_COMMENT } from "./fixtures/pnpm-app-comments.mjs"
@@ -2017,6 +2017,10 @@ test("re-review script: one comment carries every mention and the per-head lock 
   assert.match(body, /Runtime evidence \(Garnet, head aaaaaaa\):/, "the comment carries the grounding ask inline")
   assert.match(body, /garnet:evidence:begin/)
   assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
+  assert.ok(API_REVIEWERS.includes("bugbot") && !("bugbot" in MENTIONS), "Bugbot ignores bot-posted `bugbot run`; it is requested through its API")
+  assert.doesNotMatch(renderRequestComment(["bugbot", "coderabbit"], HEAD40), /bugbot run|cursor review/)
+  assert.ok(evidenceSettled("success") && evidenceSettled("failed"), "a best-effort record fails the gate but is still requested")
+  assert.ok(!evidenceSettled("pending") && !evidenceSettled("absent"))
   const apiOnly = renderRequestComment(["copilot"], HEAD40)
   assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
   assert.doesNotMatch(apiOnly, /^@/m)
