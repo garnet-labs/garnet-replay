@@ -82,3 +82,12 @@ test("hours open to merge", () => {
   assert.equal(hoursOpen("2026-11-01T00:00:00Z", "2026-11-01T20:30:00Z"), 20.5)
   assert.equal(hoursOpen("2026-11-01T00:00:00Z", null), null)
 })
+
+test("a reviewer comment on an older head attests nothing for the current head", () => {
+  const r = buildRow({
+    entry: { fork: "https://github.com/garnet-labs/posthog/pull/246" },
+    pr: { html_url: "https://github.com/garnet-labs/posthog/pull/246", head: { sha: "b".repeat(40) }, user: { type: "Bot" } },
+    files: [], comments: [{ user: { login: "github-actions[bot]" }, body: read("posthog-246.stamphog.md") }], proof: null,
+  })
+  assert.deepEqual([r.attestation.attested, r.attestation.files, r.reviewer.verdict, r.reviewer.current], [false, [], "APPROVED", false])
+})
