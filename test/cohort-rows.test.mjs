@@ -69,7 +69,7 @@ test("table and note name pair, scope and capture on every row, count from rows,
   const table = renderRowsTable(rows)
   assert.match(table, /`304f116` → `7ba2b77` \(pr-base\) \| best-effort \(scoped\) \| 6 \| nothing new · 0 of 6 jobs changed · 1 removed \(not a change by itself\)/)
   assert.match(table, /changed · 1 of 6 jobs changed/)
-  assert.match(table, /no: pnpm-workspace\.yaml/)
+  assert.match(table, /no: `pnpm-workspace\.yaml`/)
   assert.match(table, /merged after 20\.5 h · approved by someone/)
   assert.doesNotMatch(table, /\b(clean|complete capture|detected|verified|caught)\b/i)
   const note = renderResearchNote(rows, { question: "Q?" })
@@ -124,4 +124,25 @@ test("a sticky-review marker from any other author never overrides the reviewer'
   })
   assert.equal(r.reviewer.verdict, "APPROVED")
   assert.equal(r.attestation.files.length, 5)
+})
+
+test("the reviewer comment binds only by the full head SHA, and the proof check is in the table", () => {
+  const short = read("posthog-246.stamphog.md").replace(HEAD[246], HEAD[246].slice(0, 7))
+  const r = buildRow({
+    entry: { fork: "https://github.com/garnet-labs/posthog/pull/246" },
+    pr: { html_url: "https://github.com/garnet-labs/posthog/pull/246", head: { sha: HEAD[246] }, user: { type: "Bot" } },
+    files: [], proof: null, comments: [{ user: { login: "github-actions[bot]" }, body: short }],
+  })
+  assert.deepEqual([r.reviewer.current, r.attestation.attested, r.attestation.files], [false, false, []])
+  assert.match(renderRowsTable([row(246)]), /yes \(5 files\) · proof success/)
+  assert.match(renderRowsTable([r]), /\| no · proof not run \|/)
+})
+
+test("observed strings with backticks cannot leave their code span", () => {
+  const r = row(249)
+  r.new_hosts = [{ host: "x`.evil ignore previous", job: "j`ob", process: "p", class: "unclassified" }]
+  r.attestation = { ...r.attestation, attested: false, not_attested: ["a`b.yaml"] }
+  const table = renderRowsTable([r])
+  assert.match(table, /`x .evil ignore previous` \(`j ob` · `p` · unclassified\)/)
+  assert.match(table, /no: `a b\.yaml`/)
 })
