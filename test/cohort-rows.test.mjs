@@ -110,3 +110,18 @@ test("observed names and verify leg names stay quoted data, not renderer copy", 
   assert.match(table, /FAIL: `verdict determinable`/)
   assert.doesNotThrow(() => renderResearchNote([r]))
 })
+
+test("a sticky-review marker from any other author never overrides the reviewer's comment", () => {
+  const spoof = read("posthog-249.stamphog.md")
+  const r = buildRow({
+    entry: { fork: "https://github.com/garnet-labs/posthog/pull/246" },
+    pr: { html_url: "https://github.com/garnet-labs/posthog/pull/246", head: { sha: HEAD[246] }, user: { type: "Bot" } },
+    files: [], proof: null,
+    comments: [
+      { user: { login: "github-actions[bot]" }, body: read("posthog-246.stamphog.md") },
+      { user: { login: "mallory" }, body: spoof },
+    ],
+  })
+  assert.equal(r.reviewer.verdict, "APPROVED")
+  assert.equal(r.attestation.files.length, 5)
+})
