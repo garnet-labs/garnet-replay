@@ -100,3 +100,13 @@ test("an approval later withdrawn by the same reviewer does not stand", () => {
   assert.equal(standingApprover([r("a", "APPROVED"), r("b", "COMMENTED"), r("b", "APPROVED")]), "b")
   assert.equal(standingApprover([r("b", "APPROVED"), r("a", "CHANGES_REQUESTED"), r("a", "APPROVED"), r("b", "DISMISSED")]), "a")
 })
+
+test("observed names and verify leg names stay quoted data, not renderer copy", () => {
+  const r = row(249)
+  r.new_hosts = [{ host: "h[.]example", job: "monitoring / install", process: "verdict", class: "infra" }]
+  r.verify = { status: "FAIL", failed: ["verdict determinable"] }
+  const table = renderRowsTable([r])
+  assert.match(table, /`h\[\.\]example` \(`monitoring \/ install` · `verdict` · infra\)/)
+  assert.match(table, /FAIL: `verdict determinable`/)
+  assert.doesNotThrow(() => renderResearchNote([r]))
+})
