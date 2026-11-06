@@ -10,6 +10,7 @@ on:
   workflow_run:
     workflows: ["CI", "test"]
     types: [completed]
+    branches-ignore: [main]
   status:
   workflow_dispatch:
     inputs:
@@ -28,6 +29,14 @@ jobs:
   auto-merge:
     name: auto-merge
     runs-on: ubuntu-latest
+    # A status on the default branch (a merge just landed) has no open pull
+    # request to evaluate, and a pending status cannot change the decision.
+    # check_suite stays: it is the only event an app check run (Devin, Cursor)
+    # fires when it finishes, and GitHub never emits it for Actions' own
+    # suites, so it cannot re-trigger this workflow.
+    if: >-
+      github.event_name != 'status' ||
+      (github.event.state != 'pending' && !contains(github.event.branches.*.name, github.event.repository.default_branch))
     concurrency:
       group: auto-merge-${{ github.event.pull_request.number || inputs.pr || github.event.check_suite.head_sha || github.event.workflow_run.head_sha || github.event.sha || github.run_id }}
       cancel-in-progress: false
