@@ -146,3 +146,17 @@ test("observed strings with backticks cannot leave their code span", () => {
   assert.match(table, /`x .evil ignore previous` \(`j ob` · `p` · unclassified\)/)
   assert.match(table, /no: `a b\.yaml`/)
 })
+
+test("a second sticky comment from the same login makes the reviewer ambiguous and attests nothing", () => {
+  const r = buildRow({
+    entry: { fork: "https://github.com/garnet-labs/posthog/pull/246" },
+    pr: { html_url: "https://github.com/garnet-labs/posthog/pull/246", head: { sha: HEAD[246] }, user: { type: "Bot" } },
+    files: [], proof: null,
+    comments: [
+      { user: { login: "github-actions[bot]" }, body: read("posthog-249.stamphog.md") },
+      { user: { login: "github-actions[bot]" }, body: read("posthog-246.stamphog.md") },
+    ],
+  })
+  assert.deepEqual([r.reviewer.verdict, r.reviewer.ambiguous, r.attestation.attested], [null, 2, false])
+  assert.match(renderRowsTable([r]), /ambiguous: 2 sticky comments/)
+})
