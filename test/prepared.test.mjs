@@ -81,7 +81,9 @@ test("prepared: rejects ambiguous states, absent recorders, and path escapes", (
   assert.throws(() => planPrepared({ ...input, spec: { ...input.spec, baseline: { ...input.spec.baseline, [WORKFLOW]: workflow.replace("fixture/**", "other/**") } } }), /none of/)
   const gated = workflow.replace("    runs-on:", "    if: contains(github.event.pull_request.labels.*.name, 'run-install')\n    runs-on:")
   assert.throws(() => planPrepared({ ...input, spec: { ...input.spec, baseline: { ...input.spec.baseline, [WORKFLOW]: gated } } }), /requires --label/)
-  assert.doesNotThrow(() => planPrepared({ ...input, label: "run-install", spec: { ...input.spec, baseline: { ...input.spec.baseline, [WORKFLOW]: gated } } }))
+  const gatedIds = planPrepared({ ...input, label: "run-install", spec: { ...input.spec, baseline: { ...input.spec.baseline, [WORKFLOW]: gated } } }).steps.map((s) => s.id)
+  assert.ok(gatedIds.indexOf("pr-label") < gatedIds.indexOf("wait-first-record"), "a label that starts the prepared recorder goes on before the first record is awaited")
+  assert.equal(gatedIds.includes("wait-head-record"), false)
 })
 
 test("prepared CLI refuses no-wait and competing modes before planning", async () => {

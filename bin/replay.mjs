@@ -418,6 +418,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     script as skipped, then allow it; the lockfile stays as it is (pnpm)
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
+  rows <manifest.json> [--out dir] [--no-verify] [--question q] [--hypothesis h]
+                                                                    read-only cohort rows, table and research note from fork PR URLs
   verify <pr-url> [--label real|constructed] [--json]                 share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
   batch <targets.json> [--out dir] [--concurrency 2] [--only slug,..] [--dry-run] [--wait-minutes N]
   decide <fork-pr-url> [--json]                                     merge-safety decision from the head-bound record: merge | hold | undeterminable; exits 0/1/2
@@ -468,6 +470,23 @@ async function main(args) {
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
+  if (command === "rows") {
+    const { collectRow, renderResearchNote, renderRowsTable } = await import("../lib/cohort-rows.mjs")
+    const manifest = JSON.parse(await readFile(resolve(args[1] ?? ""), "utf8"))
+    if (!Array.isArray(manifest) || manifest.some((e) => typeof e?.fork !== "string")) throw new Error("rows needs a JSON array of {fork, upstream?, authorClass?, chained?, classification?}")
+    const opt = (name) => { const i = args.indexOf(name); return i === -1 ? null : args[i + 1] ?? null }
+    const token = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN ?? null
+    const rows = []
+    for (const entry of manifest) rows.push(await collectRow(entry, { token, withVerify: !args.includes("--no-verify") }))
+    const out = resolve(opt("--out") ?? join(ROOT, "out", "rows"))
+    await mkdir(out, { recursive: true })
+    await writeFile(join(out, "rows.json"), `${JSON.stringify(rows, null, 2)}\n`)
+    await writeFile(join(out, "table.md"), `${renderRowsTable(rows)}\n`)
+    await writeFile(join(out, "note.md"), renderResearchNote(rows, { question: opt("--question") ?? undefined, hypothesis: opt("--hypothesis") ?? undefined }))
+    console.log(renderRowsTable(rows))
+    console.log(`\nwrote ${join(out, "rows.json")}, table.md, note.md`)
+    return rows
+  }
   if (command === "verify") {
     const result = await ladder.verify(args.slice(1))
     process.exitCode = verifyExitCode(result)
