@@ -23,6 +23,7 @@ try {
   assertSlug(slug)
   if (!/^[1-9]\d*$/.test(number ?? "")) throw new Error("The pull request number is invalid.")
   let signature
+  let base = baseBranch
   if (action === "start") {
     const prepared = JSON.parse(readFileSync(planFile, "utf8"))
     if (prepared.state !== "prepared" || prepared.slug !== slug || prepared.number !== job.number || !/^[0-9a-f]{64}$/.test(prepared.signature ?? "")) {
@@ -30,9 +31,12 @@ try {
     }
     signature = prepared.signature
     job.plan = prepared.plan
+    const planned = typeof prepared.baseBranch === "string" ? prepared.baseBranch : ""
+    if (baseBranch !== "" && baseBranch !== planned) throw new Error("The base branch differs from the prepared plan's. Prepare it again.")
+    base = planned
   }
   write()
-  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch }, {
+  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base }, {
     save: async () => {},
     progress: (delta) => {
       if (delta.line !== undefined) {

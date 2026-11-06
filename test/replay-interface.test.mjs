@@ -249,4 +249,7 @@ test("execution stops on moved plans and verifies the recorded head before savin
   await executeReplayJob({ ...input, baseBranch: "base/uv-21570" }, { ...seams, live: async (args, opts) => { liveArgs = args; return seams.live(args, opts) } })
   assert.equal(liveArgs[liveArgs.indexOf("--base-branch") + 1], "base/uv-21570")
   await assert.rejects(executeReplayJob({ ...input, baseBranch: "x; rm -rf" }, seams), /plain branch name/)
+  const prepared = await executeReplayJob({ ...input, action: "prepare", baseBranch: "base/uv-21570" }, seams)
+  assert.equal(prepared.state, "prepared")
+  assert.equal(prepared.baseBranch, "base/uv-21570")
 })
