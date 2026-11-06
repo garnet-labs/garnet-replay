@@ -5,6 +5,8 @@ on:
     types: [ready_for_review, synchronize, reopened, labeled, unlabeled]
   pull_request_review:
     types: [submitted]
+  check_suite:
+    types: [completed]
   workflow_run:
     workflows: ["CI", "test"]
     types: [completed]
@@ -28,9 +30,10 @@ jobs:
     name: auto-merge
     runs-on: ubuntu-latest
     # A status on the default branch (a merge just landed) has no open pull
-    # request to evaluate; a pending status cannot change the decision. The
-    # check_suite trigger is gone: this workflow's own completed suite fired
-    # it again, so every merge queued a chain of no-op runs on main.
+    # request to evaluate, and a pending status cannot change the decision.
+    # check_suite stays: it is the only event an app check run (Devin, Cursor)
+    # fires when it finishes, and GitHub never emits it for Actions' own
+    # suites, so it cannot re-trigger this workflow.
     if: >-
       github.event_name != 'status' ||
       (github.event.state != 'pending' && !contains(github.event.branches.*.name, github.event.repository.default_branch))
