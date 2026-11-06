@@ -7,6 +7,7 @@ import { join } from "node:path"
 import { CAPTURE_STATUS, CLAIM_CLASSES, VERDICTS, assessCapture, assessSupersession, buildClaims, decideVerdict, pairRecord, stableAcrossRepetitions } from "../lib/evidence.mjs"
 import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits, assertVocabClean, assertForkTarget } from "../lib/guards.mjs"
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts, transitionPhrase } from "../lib/observe.mjs"
+import { publishSteps as publishTwo, publishSingleSteps as publishOne } from "../lib/replay-pr.mjs"
 import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
 import { recordState } from "../lib/wait.mjs"
@@ -424,7 +425,8 @@ test("replay --pr: --label puts the fork's label on the pull request after it op
   assert.equal(step.kind, "write-remote")
   assert.equal(step.target, FORK)
   assert.deepEqual(step.args, ["pr", "edit", plan.branch, "--repo", FORK, "--add-label", "release-testing"])
-  assert.ok(ids.indexOf("pr-create") < ids.indexOf("pr-label") && ids.indexOf("pr-label") < ids.indexOf("wait-first-record"))
+  assert.ok(ids.indexOf("push-change") < ids.indexOf("wait-head-record") && ids.indexOf("wait-head-record") === ids.indexOf("pr-label") - 1)
+  assert.equal(plan.steps.find((s) => s.id === "wait-head-record").sha, "forkHeadSha")
   assert.match(renderPlan(plan), /^label: release-testing$/m)
   assert.equal(replayPlan().steps.some((s) => s.id === "pr-label"), false)
   assert.throws(() => replayPlan({ label: " " }), /--label needs a label name/)
@@ -2074,4 +2076,16 @@ test("saveTarget keeps rows a concurrent command added and drops rows this proce
   assert.deepEqual(merged.replays.map((row) => row.branch), ["a", "b", "c"])
   assert.equal(merged.replays[0].state, "recorded")
   assert.equal(mergeConcurrentRows(mine, null, seen), mine)
+})
+
+test("a label that starts the fork's recorder goes on when the pull request opens; a reviewer label waits for the record", () => {
+  const base = { fork: "garnet-labs/x", branch: "b", defaultBranch: "main", baseRef: "main", bodyFile: "/tmp/b", body: "", title: "t", draft: true, work: "/w", label: "record" }
+  const two = publishTwo({ ...base, labelStartsRecording: true }).map((s) => s.id)
+  assert.ok(two.indexOf("pr-create") < two.indexOf("pr-label") && two.indexOf("pr-label") < two.indexOf("wait-first-record"))
+  assert.equal(two.includes("wait-head-record"), false)
+  const one = publishOne({ ...base, labelStartsRecording: true })
+  assert.equal(one.some((s) => s.id === "wait-head-record"), false)
+  assert.equal(one.find((s) => s.id === "pr-label").skipIf, undefined)
+  const reviewer = publishTwo({ ...base, labelStartsRecording: false }).map((s) => s.id)
+  assert.ok(reviewer.indexOf("push-change") < reviewer.indexOf("wait-head-record") && reviewer.indexOf("wait-head-record") === reviewer.indexOf("pr-label") - 1)
 })
