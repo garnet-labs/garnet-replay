@@ -88,6 +88,14 @@ changes.
 
 ## Knowledge this repo depends on
 
+Operator conventions (not guard checks):
+
+- Read the App result as the App states it: best-effort `changed` stays changed,
+  best-effort `nothing new` stays that scoped result, and a removed job is not a
+  change. Apply a reviewer label only after the head's record is finalized.
+- Third-party forks are replayed through the hosted `replay` workflow, not a local
+  `--work` checkout. Current state: `docs/state-2026-11-05.md`.
+
 - Garnet action auth: OIDC jobs need `contents: read` and `id-token: write` and
   no `api_token`; explicit-token jobs need `api_token` and no `id-token`. Pull
   requests from other repositories receive neither and degrade to a local
