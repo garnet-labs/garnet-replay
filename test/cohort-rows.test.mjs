@@ -1,7 +1,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
-import { buildRow, hoursOpen, renderResearchNote, renderRowsTable, reviewerResult } from "../lib/cohort-rows.mjs"
+import { buildRow, hoursOpen, renderResearchNote, renderRowsTable, reviewerResult, standingApprover } from "../lib/cohort-rows.mjs"
 
 const read = (name) => readFileSync(new URL(`./fixtures/app/${name}`, import.meta.url), "utf8")
 const HEAD = { 246: "304f116cfbea6fc11dbd42d2130121b8808ecd87", 249: "71ab5eebb5f279f0771fa2795e765ae02846f24a" }
@@ -76,6 +76,8 @@ test("table and note name pair, scope and capture on every row, count from rows,
   for (const h of ["Question", "Hypothesis", "Method", "Sample", "Results", "Findings", "Limitations", "Conclusion"]) assert.match(note, new RegExp(`^## ${h}$`, "m"))
   assert.match(note, /App results: 1 changed, 1 nothing new, 0 capture incomplete\. Strict `replay verify`: 0 of 2 PASS\./)
   assert.match(note, /unclassified: 1\./)
+  assert.match(note, /Strict public profile identity fails on 2 of 2 rows/)
+  assert.doesNotMatch(note, /replayed as one commit/)
 })
 
 test("hours open to merge", () => {
@@ -90,4 +92,11 @@ test("a reviewer comment on an older head attests nothing for the current head",
     files: [], comments: [{ user: { login: "github-actions[bot]" }, body: read("posthog-246.stamphog.md") }], proof: null,
   })
   assert.deepEqual([r.attestation.attested, r.attestation.files, r.reviewer.verdict, r.reviewer.current], [false, [], "APPROVED", false])
+})
+
+test("an approval later withdrawn by the same reviewer does not stand", () => {
+  const r = (login, state) => ({ user: { login }, state })
+  assert.equal(standingApprover([r("a", "APPROVED"), r("a", "CHANGES_REQUESTED")]), null)
+  assert.equal(standingApprover([r("a", "APPROVED"), r("b", "COMMENTED"), r("b", "APPROVED")]), "b")
+  assert.equal(standingApprover([r("b", "APPROVED"), r("a", "CHANGES_REQUESTED"), r("a", "APPROVED"), r("b", "DISMISSED")]), "a")
 })
