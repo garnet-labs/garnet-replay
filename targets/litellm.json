@@ -1,0 +1,1496 @@
+{
+  "slug": "litellm",
+  "upstream": "BerriAI/litellm",
+  "fork": "garnet-labs/litellm",
+  "record": {
+    "mode": "instrument",
+    "job": "test-vscode-extension.yml/vscode-extension"
+  },
+  "workload": {
+    "name": "vscode-extension",
+    "paths": [
+      "vscode-extension/**"
+    ]
+  },
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50327,
+      "title": "feat: add Monty sandbox adapter for workflow Python and If nodes",
+      "author": "ishaan-j-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:05:49Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 20,
+      "paths": [
+        ".github/scripts/assert_ci_coverage.py",
+        ".github/workflows/test-integration.yml",
+        ".github/workflows/test-unit.yml",
+        "litellm/proxy/workflows/monty/AGENTS.md",
+        "litellm/proxy/workflows/monty/_validator_worker.py",
+        "litellm/proxy/workflows/monty/compiler.py",
+        "litellm/proxy/workflows/monty/models.py",
+        "litellm/proxy/workflows/monty/runtime.py",
+        "litellm/proxy/workflows/monty/validation.py",
+        "pyproject.toml",
+        "tests/code_coverage_tests/recursive_detector.py",
+        "tests/integration/AGENTS.md",
+        "tests/integration/README.md",
+        "tests/integration/run.py",
+        "tests/integration/sandbox/test_monty_runtime.py",
+        "tests/unit/proxy/workflows/__init__.py",
+        "tests/unit/proxy/workflows/monty/__init__.py",
+        "tests/unit/proxy/workflows/monty/test_compiler.py",
+        "tests/unit/proxy/workflows/monty/test_models.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50338,
+      "title": "feat(decisions): add Butler as a decisions provider",
+      "author": "etymologiae",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:29:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 22,
+      "paths": [
+        ".github/workflows/test-unit.yml",
+        "README.md",
+        "litellm/__init__.py",
+        "litellm/_lazy_imports_registry.py",
+        "litellm/llms/butler/decisions/transformation.py",
+        "litellm/llms/openai_like/providers.json",
+        "litellm/model_prices_and_context_window_backup.json",
+        "litellm/provider_endpoints_support_backup.json",
+        "litellm/proxy/public_endpoints/provider_create_fields.json",
+        "litellm/types/utils.py",
+        "litellm/utils.py",
+        "model_prices_and_context_window.json",
+        "provider_endpoints_support.json",
+        "tests/unit/decisions/test_main.py",
+        "tests/unit/llms/butler/__init__.py",
+        "tests/unit/llms/butler/decisions/__init__.py",
+        "tests/unit/llms/butler/decisions/test_butler_decisions_transformation.py",
+        "tests/unit/llms/openai_like/test_butler_provider.py",
+        "tests/unit/proxy/public_endpoints/test_public_endpoints.py",
+        "ui/litellm-dashboard/public/assets/logos/butler.png",
+        "ui/litellm-dashboard/src/components/provider_info_helpers.test.tsx",
+        "ui/litellm-dashboard/src/components/provider_info_helpers.tsx"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50330,
+      "title": "feat(docker): FIPS 140-3 image, brought up to today's main",
+      "author": "yucheng-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:25:23Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".github/ci-coverage-allowlist.yml",
+        "docker/Dockerfile.fips",
+        "docker/fips_elf_inventory.txt",
+        "docker/scan_bundled_crypto.sh"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50326,
+      "title": "fix(backport): bring #50132, #50218, #50274 and #50276 onto lts/1.108.x",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:03:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 25,
+      "paths": [
+        "litellm/integrations/custom_logger.py",
+        "litellm/litellm_core_utils/litellm_logging.py",
+        "litellm/llms/openai/openai.py",
+        "litellm/proxy/db/db_transaction_queue/tool_discovery_queue.py",
+        "litellm/proxy/db/exception_handler.py",
+        "litellm/proxy/db/tool_registry_writer.py",
+        "litellm/proxy/utils.py",
+        "litellm/router_utils/pre_call_checks/prompt_caching_deployment_check.py",
+        "litellm/types/utils.py",
+        "tests/integration/_support/redaction_probe.py",
+        "tests/integration/authorization/test_responses_lifecycle_during_call_guardrail.py",
+        "tests/integration/conftest.py",
+        "tests/integration/routing/test_prompt_cache_pin_with_message_logging_off.py",
+        "tests/unit/llms/azure/test_azure_common_utils.py",
+        "tests/unit/llms/openai/test_openai.py",
+        "tests/unit/proxy/db/db_transaction_queue/test_tool_discovery_queue.py",
+        "tests/unit/proxy/db/test_exception_handler.py",
+        "tests/unit/proxy/db/test_tool_registry_writer.py",
+        "tests/unit/proxy/guardrails/guardrail_hooks/unified_guardrails/test_unified_guardrail.py",
+        "tests/unit/proxy/utils/prisma_and_spend/test_spend_functions.py",
+        "tests/unit/router_utils/pre_call_checks/test_prompt_caching_deployment_check.py",
+        "tests/unit/test_utils.py",
+        "tests/unit/types/test_utils.py",
+        "ui/litellm-dashboard/src/lib/http/schema.d.ts",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50333,
+      "title": "feat(proxy): key-level disallowed_models to exclude models from a key's access",
+      "author": "jesus-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T04:14:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 27,
+      "paths": [
+        "litellm-proxy-extras/litellm_proxy_extras/migrations/20261106000000_add_key_disallowed_models/migration.sql",
+        "litellm-proxy-extras/litellm_proxy_extras/schema.prisma",
+        "litellm/models/verification_token.py",
+        "litellm/proxy/auth/auth_checks.py",
+        "litellm/proxy/auth/key_disallowed_models.py",
+        "litellm/proxy/auth/user_api_key_auth.py",
+        "litellm/proxy/management_endpoints/key_management_endpoints.py",
+        "litellm/proxy/proxy_server.py",
+        "litellm/proxy/schema.prisma",
+        "litellm/proxy/utils.py",
+        "litellm/types/proxy/management_endpoints/key_requests.py",
+        "schema.prisma",
+        "tests/integration/authorization/test_key_disallowed_models.py",
+        "tests/unit/proxy/auth/test_key_disallowed_models.py",
+        "ui/litellm-dashboard/src/components/key_team_helpers/key_list.tsx",
+        "ui/litellm-dashboard/src/components/organisms/createKeyPayload.test.ts",
+        "ui/litellm-dashboard/src/components/organisms/createKeyPayload.ts",
+        "ui/litellm-dashboard/src/components/organisms/create_key_button.integration.test.tsx",
+        "ui/litellm-dashboard/src/components/organisms/create_key_button.tsx",
+        "ui/litellm-dashboard/src/components/templates/keyEditFormValues.test.ts",
+        "ui/litellm-dashboard/src/components/templates/keyEditFormValues.ts",
+        "ui/litellm-dashboard/src/components/templates/key_edit_view.integration.test.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_edit_view.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_info_view.test.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_info_view.tsx",
+        "ui/litellm-dashboard/src/i18n/locales/en.json",
+        "ui/litellm-dashboard/src/lib/http/schema.d.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50329,
+      "title": "fix(audio-transcription): backport #50137 to rc/1.109.0",
+      "author": "mateo-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:22:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 28,
+      "paths": [
+        "litellm/litellm_core_utils/llm_response_utils/convert_dict_to_response.py",
+        "litellm/llms/deepgram/audio_transcription/transformation.py",
+        "litellm/llms/elevenlabs/audio_transcription/transformation.py",
+        "litellm/llms/gemini/audio_transcription/transformation.py",
+        "litellm/llms/mistral/audio_transcription/transformation.py",
+        "litellm/llms/openai/transcriptions/whisper_transformation.py",
+        "litellm/llms/ovhcloud/audio_transcription/transformation.py",
+        "litellm/llms/scaleway/audio_transcription/transformation.py",
+        "litellm/llms/vertex_ai/audio_transcription/gemini_transcribe_transformation.py",
+        "litellm/llms/vertex_ai/audio_transcription/transformation.py",
+        "litellm/llms/watsonx/audio_transcription/transformation.py",
+        "litellm/llms/xai/audio_transcription/transformation.py",
+        "litellm/types/llms/gemini_audio_transcription.py",
+        "litellm/types/llms/vertex_ai_gemini_transcription.py",
+        "litellm/types/llms/vertex_ai_speech_to_text.py",
+        "litellm/types/utils.py",
+        "tests/unit/litellm_core_utils/llm_response_utils/test_convert_dict_to_response.py",
+        "tests/unit/llms/deepgram/audio_transcription/test_deepgram_audio_transcription_transformation.py",
+        "tests/unit/llms/elevenlabs/audio_transcription/test_transformation.py",
+        "tests/unit/llms/gemini/audio_transcription/test_gemini_audio_transcription_transformation.py",
+        "tests/unit/llms/mistral/audio_transcription/test_mistral_audio_transcription_transformation.py",
+        "tests/unit/llms/openai/transcriptions/test_whisper_transformation.py",
+        "tests/unit/llms/ovhcloud/test_ovhcloud_audio_transcription_transformation.py",
+        "tests/unit/llms/scaleway/test_scaleway_audio_transcription_transformation.py",
+        "tests/unit/llms/vertex_ai/audio_transcription/test_vertex_ai_audio_transcription_transformation.py",
+        "tests/unit/llms/vertex_ai/audio_transcription/test_vertex_ai_gemini_transcribe_transformation.py",
+        "tests/unit/llms/watsonx/audio_transcription/test_watsonx_audio_transcription_transformation.py",
+        "tests/unit/llms/xai/test_xai_audio_transcription_transformation.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50325,
+      "title": "fix(audio-transcription): backport #50137 to lts/1.108.x",
+      "author": "mateo-berri",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T02:54:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 28,
+      "paths": [
+        "litellm/litellm_core_utils/llm_response_utils/convert_dict_to_response.py",
+        "litellm/llms/deepgram/audio_transcription/transformation.py",
+        "litellm/llms/elevenlabs/audio_transcription/transformation.py",
+        "litellm/llms/gemini/audio_transcription/transformation.py",
+        "litellm/llms/mistral/audio_transcription/transformation.py",
+        "litellm/llms/openai/transcriptions/whisper_transformation.py",
+        "litellm/llms/ovhcloud/audio_transcription/transformation.py",
+        "litellm/llms/scaleway/audio_transcription/transformation.py",
+        "litellm/llms/vertex_ai/audio_transcription/gemini_transcribe_transformation.py",
+        "litellm/llms/vertex_ai/audio_transcription/transformation.py",
+        "litellm/llms/watsonx/audio_transcription/transformation.py",
+        "litellm/llms/xai/audio_transcription/transformation.py",
+        "litellm/types/llms/gemini_audio_transcription.py",
+        "litellm/types/llms/vertex_ai_gemini_transcription.py",
+        "litellm/types/llms/vertex_ai_speech_to_text.py",
+        "litellm/types/utils.py",
+        "tests/unit/litellm_core_utils/llm_response_utils/test_convert_dict_to_response.py",
+        "tests/unit/llms/deepgram/audio_transcription/test_deepgram_audio_transcription_transformation.py",
+        "tests/unit/llms/elevenlabs/audio_transcription/test_transformation.py",
+        "tests/unit/llms/gemini/audio_transcription/test_gemini_audio_transcription_transformation.py",
+        "tests/unit/llms/mistral/audio_transcription/test_mistral_audio_transcription_transformation.py",
+        "tests/unit/llms/openai/transcriptions/test_whisper_transformation.py",
+        "tests/unit/llms/ovhcloud/test_ovhcloud_audio_transcription_transformation.py",
+        "tests/unit/llms/scaleway/test_scaleway_audio_transcription_transformation.py",
+        "tests/unit/llms/vertex_ai/audio_transcription/test_vertex_ai_audio_transcription_transformation.py",
+        "tests/unit/llms/vertex_ai/audio_transcription/test_vertex_ai_gemini_transcribe_transformation.py",
+        "tests/unit/llms/watsonx/audio_transcription/test_watsonx_audio_transcription_transformation.py",
+        "tests/unit/llms/xai/test_xai_audio_transcription_transformation.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50319,
+      "title": "feat(videos): add first-class OpenRouter video request fields",
+      "author": "mateo-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:18:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 24,
+      "paths": [
+        "litellm/llms/base_llm/videos/async_task_utils.py",
+        "litellm/llms/dashscope/videos/transformation.py",
+        "litellm/llms/edenai/videos/transformation.py",
+        "litellm/llms/fal_ai/videos/transformation.py",
+        "litellm/llms/gemini/videos/transformation.py",
+        "litellm/llms/minimax/videos/transformation.py",
+        "litellm/llms/openai/videos/transformation.py",
+        "litellm/llms/runwayml/videos/transformation.py",
+        "litellm/llms/vertex_ai/videos/transformation.py",
+        "litellm/llms/volcengine/videos/transformation.py",
+        "litellm/types/videos/main.py",
+        "litellm/videos/utils.py",
+        "tests/unit/llms/dashscope/test_dashscope_video_transformation.py",
+        "tests/unit/llms/edenai/videos/test_edenai_video_transformation.py",
+        "tests/unit/llms/fal_ai/videos/test_fal_ai_video_transformation.py",
+        "tests/unit/llms/gemini/videos/test_gemini_video_transformation.py",
+        "tests/unit/llms/minimax/videos/test_minimax_video_transformation.py",
+        "tests/unit/llms/openai/videos/test_openai_video_transformation.py",
+        "tests/unit/llms/runwayml/videos/test_runway_video_transformation.py",
+        "tests/unit/llms/vertex_ai/videos/test_vertex_video_transformation.py",
+        "tests/unit/llms/volcengine/test_volcengine_video_transformation.py",
+        "tests/unit/proxy/video_endpoints/test_endpoints.py",
+        "tests/unit/videos/test_main.py",
+        "tests/unit/videos/test_utils.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50312,
+      "title": "refactor(ui): move remaining outlier text onto i18n",
+      "author": "yuneng-berri",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T01:43:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 26,
+      "paths": [
+        "ui/litellm-dashboard/src/app/(dashboard)/access-groups/_components/access-group-create/schema.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/budgets/_components/BudgetFormFields.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/guardrails/_components/guardrail_info_helpers.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/model-insights/_components/ModelInsightsView.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/playground/components/systemOneUI/lib/schemas.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/policies/_components/PolicyTable.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/projects/_components/ProjectModals/projectFormSchema.ts",
+        "ui/litellm-dashboard/src/components/EntityUsageExport/EntityUsageExportModal.tsx",
+        "ui/litellm-dashboard/src/components/Navbar/NotificationsBell/NotificationsBell.tsx",
+        "ui/litellm-dashboard/src/components/chat_ui/ResponseMetrics.tsx",
+        "ui/litellm-dashboard/src/components/common_components/ModelAliasManager.test.tsx",
+        "ui/litellm-dashboard/src/components/common_components/ModelAliasManager.tsx",
+        "ui/litellm-dashboard/src/components/edit_auto_router/editAutoRouterFormSchema.ts",
+        "ui/litellm-dashboard/src/components/email_events/email_event_settings.tsx",
+        "ui/litellm-dashboard/src/components/email_settings.tsx",
+        "ui/litellm-dashboard/src/components/liteadmin/answerExport.ts",
+        "ui/litellm-dashboard/src/components/logs/audit/AuditLogDrawer/AuditLogDrawer.tsx",
+        "ui/litellm-dashboard/src/components/logs/detail/prettyMessagesUtils.ts",
+        "ui/litellm-dashboard/src/components/logs/detail/sections/GuardrailViewer/BedrockGuardrailDetails.tsx",
+        "ui/litellm-dashboard/src/components/logs/detail/useKeyboardNavigation.ts",
+        "ui/litellm-dashboard/src/components/page_utils.ts",
+        "ui/litellm-dashboard/src/components/shared/Inspector.tsx",
+        "ui/litellm-dashboard/src/components/shared/charts/chart_tooltip.tsx",
+        "ui/litellm-dashboard/src/data/compliancePrompts.ts",
+        "ui/litellm-dashboard/src/i18n/locales/en.json",
+        "ui/litellm-dashboard/src/utils/ptuValidation.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50346,
+      "title": "fix(messages): bill a native stream the client abandoned like python does",
+      "author": "narmstrong-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:45:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "litellm-rust/crates/callbacks-legacy-python/python_contract.json",
+        "litellm-rust/crates/callbacks-legacy-python/src/adapter.rs",
+        "litellm-rust/crates/callbacks-legacy-python/src/test_support.rs",
+        "litellm/rust_bridge/host/callbacks_legacy_python.py",
+        "tests/test_litellm_rust/messages/test_streaming.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50345,
+      "title": "fix(proxy): acquire MODEL_RECONCILE_LOCK during credential CRUD",
+      "author": "shaiknaziya20",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:42:57Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/proxy/credential_endpoints/endpoints.py",
+        "tests/unit/proxy/credential_endpoints/test_endpoints.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50344,
+      "title": "test(bedrock_mantle): expect the generic unsupported-param 400 for temperature on fixed-sampling Claude",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T05:39:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "tests/integration/providers/test_bedrock_mantle_claude_chat_wire.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50343,
+      "title": "test(bedrock): expect native output on Opus 4.8 profiles after #50222",
+      "author": "mateo-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:38:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "tests/integration/providers/test_bedrock_batch_files_wire.py",
+        "tests/integration/providers/test_bedrock_native_structured_output_wire.py",
+        "tests/integration/providers/test_vertex_anthropic_structured_output_wire.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50342,
+      "title": "test(proxy): resolve proxy_logging_obj at fixture time in db metrics span tests",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:37:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "tests/unit/proxy/db/test_log_db_metrics_service_spans.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50341,
+      "title": "fix(messages): stamp timeout and num_retries on native messages failures",
+      "author": "narmstrong-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:36:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/messages/dispatch.py",
+        "tests/test_litellm_rust/messages/test_dispatch.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50340,
+      "title": "fix(proxy): mint a fresh DB token when a respawned worker connects",
+      "author": "akkupratap323",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:35:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/proxy/db/prisma_client.py",
+        "tests/unit/proxy/db/test_prisma_client.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50339,
+      "title": "fix(messages): surface a cut native stream as the transport error python raises",
+      "author": "narmstrong-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:30:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "litellm-rust/crates/http/src/error.rs",
+        "litellm-rust/crates/http/src/lib.rs",
+        "litellm-rust/crates/inference-messages/src/handler.rs",
+        "litellm-rust/crates/inference/src/error.rs",
+        "litellm-rust/crates/llms/src/error.rs",
+        "litellm-rust/crates/python-bridge/src/errors.rs",
+        "litellm/rust_bridge/host/callbacks_legacy_python.py",
+        "litellm/rust_bridge/host/routes/messages.py",
+        "tests/unit/rust_bridge/host/routes/test_messages.py",
+        "tests/unit/rust_bridge/host/test_callbacks_legacy_python.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50337,
+      "title": "fix(proxy): release parked native success logs for every call type",
+      "author": "narmstrong-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:24:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/proxy/common_request_processing.py",
+        "tests/unit/proxy/guardrails/test_deferred_guardrail_logging.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50336,
+      "title": "fix(responses): map streamed flex_unavailable errors to 429 not 500",
+      "author": "mrinal-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T05:21:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/responses/streaming_iterator.py",
+        "tests/unit/responses/test_streaming_iterator_error_events.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50335,
+      "title": "fix(messages): let proxy /v1/messages requests run on the rust path",
+      "author": "narmstrong-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T04:26:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "litellm/messages/dispatch.py",
+        "litellm/rust_bridge/messages/detectors.py",
+        "tests/test_litellm_rust/messages/test_dispatch.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50334,
+      "title": "chore(cost-map): source fireworks deprecations and replacement models",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T04:15:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/model_prices_and_context_window_backup.json",
+        "model_prices_and_context_window.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50332,
+      "title": "Add TokenHub Hy4 model pricing",
+      "author": "coderwangke",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:37:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "litellm/model_prices_and_context_window_backup.json",
+        "model_prices_and_context_window.json",
+        "tests/unit/test_model_prices_and_context_window.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50331,
+      "title": "feat(proxy): per-customer tpm and rpm limits on a key, settable from the Admin UI",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-06T03:36:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "litellm/proxy/_types.py",
+        "litellm/proxy/auth/auth_utils.py",
+        "litellm/proxy/hooks/parallel_request_limiter_v3.py",
+        "litellm/proxy/management_endpoints/internal_user_endpoints.py",
+        "litellm/proxy/management_endpoints/key_management_endpoints.py",
+        "litellm/types/proxy/management_endpoints/request_base.py",
+        "tests/unit/proxy/hooks/test_parallel_request_limiter_v3.py",
+        "tests/unit/proxy/management_endpoints/test_key_management_endpoints.py",
+        "ui/litellm-dashboard/src/components/key_team_helpers/CustomerRateLimitEditor.test.tsx",
+        "ui/litellm-dashboard/src/components/key_team_helpers/CustomerRateLimitEditor.tsx",
+        "ui/litellm-dashboard/src/components/organisms/createKeyPayload.test.ts",
+        "ui/litellm-dashboard/src/components/organisms/createKeyPayload.ts",
+        "ui/litellm-dashboard/src/components/organisms/create_key_button.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_edit_view.integration.test.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_edit_view.tsx",
+        "ui/litellm-dashboard/src/components/templates/key_info_view.tsx",
+        "ui/litellm-dashboard/src/i18n/locales/en.json",
+        "ui/litellm-dashboard/src/lib/http/schema.d.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50328,
+      "title": "fix(responses): keep overlong system prompts in input on the chat to …",
+      "author": "shadowmodder",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T03:12:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "litellm/completion_extras/litellm_responses_transformation/transformation.py",
+        "tests/unit/completion_extras/litellm_responses_transformation/test_completion_extras_litellm_responses_transformation_transformation.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50324,
+      "title": "fix(proxy): stop /tag/update 500 when the body carries the tag's budget_id",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:54:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "litellm/proxy/management_helpers/utils.py",
+        "tests/integration/management/test_tag_budget_update.py",
+        "tests/unit/proxy/management_helpers/test_management_helpers_utils.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50323,
+      "title": "feat(tags): reset a tag's spend through /tag/update",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:54:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "litellm/proxy/management_endpoints/key_management_endpoints.py",
+        "litellm/proxy/management_endpoints/tag_management_endpoints.py",
+        "litellm/proxy/proxy_server.py",
+        "litellm/types/tag_management.py",
+        "tests/integration/spend/test_tag_spend_reset.py",
+        "tests/unit/proxy/management_endpoints/test_tag_management_endpoints.py",
+        "ui/litellm-dashboard/src/lib/http/schema.d.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50322,
+      "title": "fix(terraform): refresh tag per-model budgets from proxy",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-06T02:44:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "terraform/provider/litellm/resource_tag.go",
+        "terraform/provider/litellm/resource_tag_test.go",
+        "terraform/provider/tests/integration/AGENTS.md",
+        "terraform/provider/tests/integration/tag_budget_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50321,
+      "title": "fix(router): pin /v1/responses requests for prompt caching affinity",
+      "author": "tessellark",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:39:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "litellm/responses/litellm_completion_transformation/transformation.py",
+        "litellm/router_utils/pre_call_checks/prompt_caching_deployment_check.py",
+        "litellm/router_utils/prompt_caching_cache.py",
+        "tests/integration/routing/test_prompt_caching_affinity_tool_call_marks.py",
+        "tests/unit/router_utils/pre_call_checks/test_prompt_caching_deployment_check.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50320,
+      "title": "fix(router): count a deployment's rpm and tpm once for usage-based-routing-v2 and enforce_model_rate_limits",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:25:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        "litellm/router_rust/core.py",
+        "litellm/router_rust/invoke/endpoints.py",
+        "litellm/router_rust/steps/callbacks.py",
+        "litellm/router_rust/steps/selection.py",
+        "litellm/router_rust/surface/legacy_members.py",
+        "litellm/router_strategy/lowest_tpm_rpm_v2.py",
+        "litellm/router_utils/deployment_usage_counter.py",
+        "litellm/router_utils/pre_call_checks/model_rate_limit_check.py",
+        "tests/integration/routing/test_enforce_model_rate_limits_routing_groups.py",
+        "tests/unit/caching/test_request_redis_batch_post_call.py",
+        "tests/unit/router_strategy/test_lowest_tpm_rpm_v2.py",
+        "tests/unit/router_strategy/test_router_routing_groups.py",
+        "tests/unit/router_utils/test_deployment_usage_counter.py",
+        "tests/unit/test_router/core/test_gaps_l8400_precall.py",
+        "tests/unit/test_router/test_enforce_model_rate_limits.py",
+        "tests/unit/test_router/test_io_token_rate_limits.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50318,
+      "title": "feat(proxy): serve Codex its own release's model catalog, fetched from GitHub",
+      "author": "ryan-crabbe-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:17:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "litellm/proxy/common_utils/codex_catalog_source.py",
+        "litellm/proxy/common_utils/codex_model_catalog.py",
+        "litellm/proxy/proxy_server.py",
+        "litellm/types/llms/custom_http.py",
+        "tests/integration/compatibility/test_codex_model_catalog.py",
+        "tests/integration/configuration/test_codex_catalog_boot.py",
+        "tests/unit/proxy/common_utils/test_codex_catalog_source.py",
+        "tests/unit/proxy/common_utils/test_codex_model_catalog.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50316,
+      "title": "fix(router): bound retries and Retry-After sleeps by the caller's timeout",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T02:06:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "litellm/router_rust/core.py",
+        "litellm/router_rust/invoke/shaping.py",
+        "tests/integration/routing/test_fallback_retry_header_contracts.py",
+        "tests/unit/test_router/test_io_token_rate_limits.py",
+        "tests/unit/test_router/test_router.py",
+        "tests/unit/test_router/test_router_timeout.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50315,
+      "title": "feat: add OpenRouter-style -latest model aliases for first-party providers",
+      "author": "moe-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T01:57:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "litellm/litellm_core_utils/get_llm_provider_logic.py",
+        "litellm/litellm_core_utils/model_latest_aliases.py",
+        "litellm/model_latest_aliases.json",
+        "litellm/proxy/hooks/model_max_budget_limiter.py",
+        "litellm/proxy/hooks/parallel_request_limiter_v3.py",
+        "litellm/rust_bridge/chat_completions/detectors.py",
+        "tests/unit/litellm_core_utils/test_get_llm_provider_logic.py",
+        "tests/unit/litellm_core_utils/test_model_latest_aliases.py",
+        "tests/unit/llms/moonshot/test_moonshot_chat_transformation.py",
+        "tests/unit/proxy/hooks/test_model_max_budget_limiter.py",
+        "tests/unit/proxy/hooks/test_parallel_request_limiter_v3.py",
+        "tests/unit/rust_bridge/test_detectors.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50314,
+      "title": "feat(ui): set tpm_limit and rpm_limit on tags from the Admin UI",
+      "author": "kerry-berri",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T01:54:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/components/CreateTagModal.test.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/components/CreateTagModal.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/index.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/tagTableColumns.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/tag_info.integration.test.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/tag-management/_components/tag_info.tsx",
+        "ui/litellm-dashboard/src/components/tag_management/types.tsx",
+        "ui/litellm-dashboard/src/i18n/locales/en.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50313,
+      "title": "fix(vertex_ai): cache the conversation prefix and honour tool-block cache_control breakpoints",
+      "author": "kalavt",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T01:45:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "litellm/llms/vertex_ai/context_caching/transformation.py",
+        "litellm/utils.py",
+        "tests/unit/llms/vertex_ai/gemini/test_vertex_and_google_ai_studio_gemini.py",
+        "tests/unit/test_utils.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50311,
+      "title": "fix(router): keep retries, backoff sleeps and fallbacks inside the caller's timeout",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-06T01:34:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "litellm/litellm_core_utils/get_litellm_params.py",
+        "litellm/proxy/litellm_pre_call_utils.py",
+        "litellm/router_rust/core.py",
+        "litellm/router_rust/invoke/deadline.py",
+        "litellm/router_rust/invoke/shaping.py",
+        "litellm/types/litellm_params.py",
+        "tests/integration/routing/test_caller_timeout_bounds_retries.py",
+        "tests/unit/proxy/pass_through_endpoints/test_pass_through_endpoints.py",
+        "tests/unit/proxy/test_litellm_pre_call_utils.py",
+        "tests/unit/router_rust/invoke/__init__.py",
+        "tests/unit/router_rust/invoke/test_deadline.py",
+        "tests/unit/types/test_litellm_params.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50310,
+      "title": "fix(otel): emit a span for every failed retry and fallback attempt",
+      "author": "shivamrawat1",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T01:27:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "litellm/integrations/custom_logger.py",
+        "litellm/integrations/opentelemetry.py",
+        "litellm/integrations/otel/emitter.py",
+        "litellm/integrations/otel/logger.py",
+        "litellm/litellm_core_utils/litellm_logging.py",
+        "litellm/router_utils/fallback_event_handlers.py",
+        "tests/unit/integrations/otel/test_otel_v2_logger.py",
+        "tests/unit/integrations/test_opentelemetry.py",
+        "tests/unit/litellm_core_utils/test_litellm_logging.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50309,
+      "title": "feat(ui): add a beta language setting to the account menu",
+      "author": "yuneng-berri",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T01:20:04Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "ui/litellm-dashboard/src/components/SidebarAccountMenu/LanguageField.test.tsx",
+        "ui/litellm-dashboard/src/components/SidebarAccountMenu/LanguageField.tsx",
+        "ui/litellm-dashboard/src/components/SidebarAccountMenu/SidebarAccountMenu.tsx",
+        "ui/litellm-dashboard/src/i18n/I18nProvider.test.tsx",
+        "ui/litellm-dashboard/src/i18n/I18nProvider.tsx",
+        "ui/litellm-dashboard/src/i18n/languages.test.ts",
+        "ui/litellm-dashboard/src/i18n/languages.ts",
+        "ui/litellm-dashboard/src/i18n/locales/en.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50308,
+      "title": "fix(spend): keep response reads from claiming creation spend rows",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T01:15:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "litellm/proxy/db/db_spend_update_writer.py",
+        "tests/integration/spend/test_responses_stream_spend_row_id.py",
+        "tests/unit/proxy/db/test_db_spend_update_writer.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50307,
+      "title": "test(copilot): seed direct access tokens in Copilot wire fixtures",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T01:15:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "tests/integration/_support/device_login.py",
+        "tests/integration/messages_endpoint/providers/anthropic/test_anthropic_safeguards_beta_wire.py",
+        "tests/integration/providers/test_responses_minted_reasoning_replay_chaos.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 50306,
+      "title": "feat(ui): add the custom headers auth type to the MCP server forms",
+      "author": "shrey-berri",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T01:12:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/CreateMCPServer.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/CustomHeadersFields.test.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/CustomHeadersFields.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/createServerPayload.test.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/createServerPayload.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/editServerPayload.differential.cases.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/editServerPayload.differential.test.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/editServerPayload.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/editToolPreview.test.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/editToolPreview.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/mcpFormStore.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/mcp_server_edit.tsx",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/mountedServerFields.test.ts",
+        "ui/litellm-dashboard/src/app/(dashboard)/mcp-servers/_components/mountedServerFields.ts",
+        "ui/litellm-dashboard/src/components/mcp_tools/types.test.tsx",
+        "ui/litellm-dashboard/src/components/mcp_tools/types.tsx",
+        "ui/litellm-dashboard/src/hooks/useTestMCPConnection.test.tsx",
+        "ui/litellm-dashboard/src/hooks/useTestMCPConnection.tsx",
+        "ui/litellm-dashboard/src/i18n/locales/en.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-06T06:03:44.069Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
