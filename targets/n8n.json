@@ -1,0 +1,345 @@
+{
+  "slug": "n8n",
+  "upstream": "n8n-io/n8n",
+  "fork": "garnet-labs/n8n",
+  "record": null,
+  "workload": {
+    "name": "deploy-build",
+    "paths": [
+      "scripts/build-n8n.mjs",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      "packages/nodes-base/package.json"
+    ]
+  },
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43111,
+      "title": "chore: Update e2e impact map",
+      "author": "app/n8n-assistant",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-07T02:28:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/test-metrics/e2e-impact-map.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43110,
+      "title": "feat(OpenRouter Chat Model Node): Add server tools option",
+      "author": "mehlis",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T21:20:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/@n8n/nodes-langchain/nodes/llms/LmChatOpenRouter/LmChatOpenRouter.node.ts",
+        "packages/@n8n/nodes-langchain/nodes/llms/LmChatOpenRouter/test/LmChatOpenRouter.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43108,
+      "title": "feat: Attribute OpenRouter requests to n8n in OpenRouter app rankings",
+      "author": "mehlis",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T18:44:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "packages/@n8n/agents/src/runtime/__tests__/model-factory.test.ts",
+        "packages/@n8n/agents/src/runtime/model/__tests__/openrouter.test.ts",
+        "packages/@n8n/agents/src/runtime/model/model-factory.ts",
+        "packages/@n8n/ai-utilities/src/model-discovery/__tests__/model-discovery.test.ts",
+        "packages/@n8n/ai-utilities/src/model-discovery/providers/openrouter.ts",
+        "packages/@n8n/ai-utilities/src/model-discovery/request.ts",
+        "packages/@n8n/nodes-langchain/credentials/OpenRouterApi.credentials.ts",
+        "packages/@n8n/nodes-langchain/nodes/llms/LmChatOpenRouter/LmChatOpenRouter.node.ts",
+        "packages/@n8n/nodes-langchain/nodes/llms/LmChatOpenRouter/test/LmChatOpenRouter.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43107,
+      "title": "feat(Anthropic Chat Model Node): Add Strict Tool Use option",
+      "author": "sinehypernova-0718",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T17:44:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/@n8n/nodes-langchain/nodes/llms/LMChatAnthropic/LmChatAnthropic.node.ts",
+        "packages/@n8n/nodes-langchain/nodes/llms/LMChatAnthropic/test/LmChatAnthropic.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43105,
+      "title": "fix(core): Keep retry backoff when a trigger fails right after reactivation",
+      "author": "ivov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T15:57:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/cli/src/__tests__/active-workflow-manager.test.ts",
+        "packages/cli/src/active-workflow-manager.ts",
+        "packages/cli/src/constants.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43104,
+      "title": "fix: Let Agent v3 run the legacy HTTP Request Tool and Call n8n Workflow Tool v1",
+      "author": "abhiramshaji-cyber",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T15:51:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "packages/@n8n/nodes-langchain/nodes/agents/Agent/test/integration/agent-v3.workflow.test.ts",
+        "packages/@n8n/nodes-langchain/nodes/agents/Agent/test/integration/workflows/agent-v3-with-legacy-http-tool.json",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolHttpRequest/ToolHttpRequest.node.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolHttpRequest/test/ToolHttpRequest.execute.test.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolHttpRequest/test/ToolHttpRequest.node.test.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolHttpRequest/utils.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolWorkflow/ToolWorkflow.node.test.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolWorkflow/v1/ToolWorkflowV1.node.ts",
+        "packages/@n8n/nodes-langchain/nodes/tools/ToolWorkflow/v1/toolInput.ts",
+        "packages/@n8n/nodes-langchain/utils/N8nTool.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43102,
+      "title": "refactor(core): Move the knowledge retrieval commands and schemas into the knowledge module and add the sandbox provider adapter",
+      "author": "MiloradFilipovic",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T13:35:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        "packages/cli/src/modules/agents/__tests__/agents.module.test.ts",
+        "packages/cli/src/modules/agents/__tests__/knowledge-sandbox-provider.adapter.test.ts",
+        "packages/cli/src/modules/agents/agent-knowledge-mirror.service.ts",
+        "packages/cli/src/modules/agents/agents.module.ts",
+        "packages/cli/src/modules/agents/knowledge-sandbox-provider.adapter.ts",
+        "packages/cli/src/modules/agents/register-knowledge-sandbox-provider.ts",
+        "packages/cli/src/modules/agents/tools/knowledge/search-knowledge.tool.ts",
+        "packages/cli/src/modules/knowledge/AGENTS.md",
+        "packages/cli/src/modules/knowledge/__tests__/knowledge-sandbox-provider-registry.test.ts",
+        "packages/cli/src/modules/knowledge/knowledge-retriever.ts",
+        "packages/cli/src/modules/knowledge/knowledge-sandbox-provider-registry.ts",
+        "packages/cli/src/modules/knowledge/retrieval/__tests__/commands.test.ts",
+        "packages/cli/src/modules/knowledge/retrieval/commands.ts",
+        "packages/cli/src/modules/knowledge/retrieval/retrieval-schemas.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43101,
+      "title": "fix(core): Only allow users who can edit a workflow to own its migration findings (backport to release-candidate/2.47.x)",
+      "author": "app/n8n-assistant",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T13:26:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/@n8n/backend-services/src/services/__tests__/workflow-sharing.service.test.ts",
+        "packages/@n8n/backend-services/src/services/workflow-sharing.service.ts",
+        "packages/cli/src/modules/breaking-changes/owners/__tests__/migration-owner-assignment.service.test.ts",
+        "packages/cli/src/modules/breaking-changes/owners/migration-owner-assignment.service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43100,
+      "title": "refactor(core): Move the knowledge file service and upload middleware behind the agents facade",
+      "author": "MiloradFilipovic",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-06T12:24:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "packages/cli/src/modules/agents/__tests__/agent-knowledge.service.test.ts",
+        "packages/cli/src/modules/agents/__tests__/agent-modification-telemetry.service.test.ts",
+        "packages/cli/src/modules/agents/agent-knowledge-telemetry.ts",
+        "packages/cli/src/modules/agents/agent-knowledge.controller.ts",
+        "packages/cli/src/modules/agents/agent-knowledge.service.ts",
+        "packages/cli/src/modules/knowledge/AGENTS.md",
+        "packages/cli/src/modules/knowledge/files/__tests__/knowledge-file.service.test.ts",
+        "packages/cli/src/modules/knowledge/files/__tests__/knowledge-upload.middleware.test.ts",
+        "packages/cli/src/modules/knowledge/files/knowledge-file.service.ts",
+        "packages/cli/src/modules/knowledge/files/knowledge-upload.middleware.ts",
+        "packages/cli/src/modules/knowledge/files/pdf-text.ts",
+        "packages/cli/src/modules/knowledge/telemetry/helpers.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 43099,
+      "title": "refactor(core): Check for a cancelled pass in the reaper retire loop condition (no-changelog) (backport to release-candidate/2.47.x)",
+      "author": "app/n8n-assistant",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-06T11:37:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/@n8n/scheduler/src/core/reaper/reap.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-07T06:22:43.764Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
