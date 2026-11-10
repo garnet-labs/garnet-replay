@@ -163,6 +163,23 @@ test("live verification rejects HTTP 200 with merge-ref or missing identity", as
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))
 })
 
+test("sensor coverage distinguishes log authentication failures from other read failures", async () => {
+  for (const status of [401, 403, 500]) {
+    const fetchFixture = fetchExhibit(RUN)
+    const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
+      fetchImpl: (url, options) => url.endsWith("/logs")
+        ? Promise.resolve({ ok: false, status }) : fetchFixture(url, options),
+      exec: (_cmd, args) => kitResponse(args),
+    })
+    const coverage = result.legs.find((entry) => entry.name === "sensor coverage")
+    assert.equal(result.status, "FAIL")
+    assert.equal(coverage.ok, false)
+    assert.equal(coverage.detail, status === 500
+      ? "E2E 0: log unreadable; 0 of 1 jobs covered"
+      : `E2E 0: job log not readable (HTTP ${status}); set GH_TOKEN or GITHUB_TOKEN`)
+  }
+})
+
 test("cards preserve every unchanged workload row and owning job, without teaching examples", () => {
   const body = record()
   const model = buildModel({ slug: "example", forkPr: 1, headSha: HEAD, comment: { body }, replay: { scope: "pr-base-to-head", firstSha: PREVIOUS } })
