@@ -272,8 +272,11 @@ Three layers, and only one of them is tied to a package manager:
 | Layer | Scope | Where |
 |---|---|---|
 | Harness (`find`, `live --pr`, `card`, `verify`, `consume`, `status`, guards, evidence contract) | any language; reads commits, comments, and check runs | `lib/` |
-| Injected recording workflow | npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go; one install command each | `INSTALL_COMMANDS` in `lib/replay-pr.mjs`, `live/templates/garnet-record.yml` |
+| Injected recording workflow | Bun, npm, pnpm, Yarn, Cargo, Ruby (Bundler), uv, Go; one install command each | `INSTALL_COMMANDS` in `lib/replay-pr.mjs`, `live/templates/garnet-record.yml` |
 | Constructed transitions (`--dependency … --to …`, `--allow-build …`) | pnpm only | `lib/replay-transition.mjs` |
+
+Bun setup requires a root `package.json` with a pinned `packageManager` such as
+`"bun@1.4.4"`; it records `bun install --frozen-lockfile`.
 
 The transitions are pnpm only because they encode pnpm 10's build-script trust
 decision (`ignoredBuiltDependencies` → `onlyBuiltDependencies`), which is what
