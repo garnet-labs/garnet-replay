@@ -30,8 +30,6 @@ const TRUSTED_AUTHORS = new Set([
   "garnet-ai[bot]",
 ])
 export const EVIDENCE_CHECK = "garnet/evidence"
-/** Label `garnet-review-hold.yml` sets on a pull request it returned to draft. */
-export const HOLD_LABEL = "garnet-review-hold"
 /** The App edits its comment again seconds after finalizing; wait this long after the last edit. */
 export const SETTLE_MS = 30_000
 const CHECK_WAIT_MS = 30_000
@@ -194,23 +192,17 @@ async function requestDevin(prUrl) {
   }
   // The API reviews the pull request's current head; the caller checked it equals HEAD_SHA just before.
   const base = process.env.DEVIN_API_URL || "https://api.devin.ai"
-  const res = await fetch(`${base}/v3/enterprise/pr-reviews`, {
+  // Organization service-user keys use the organization route; enterprise keys the enterprise route.
+  const org = process.env.DEVIN_ORG_ID
+  const route = typeof org === "string" && org !== "" ? `/v3/organizations/${encodeURIComponent(org)}/pr-reviews` : "/v3/enterprise/pr-reviews"
+  const res = await fetch(`${base}${route}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ pr_url: prUrl }),
   })
-  if (!res.ok) throw new Error(`devin: POST /v3/enterprise/pr-reviews: ${res.status}`)
+  if (!res.ok) throw new Error(`devin: POST ${route}: ${res.status}`)
   console.log(`requested Devin review on ${prUrl}`)
   return true
-}
-
-/**
- * Whether the hold workflow put this pull request in draft (and so may release it).
- * @param {{draft?: boolean, labels?: {name?: string}[]}} pr
- * @returns {boolean}
- */
-export function heldForRecord(pr) {
-  return pr?.draft === true && Array.isArray(pr?.labels) && pr.labels.some((label) => label?.name === HOLD_LABEL)
 }
 
 /**
@@ -222,17 +214,6 @@ export function heldForRecord(pr) {
 export function settleWaitMs(records, now) {
   const last = Math.max(...records.map((c) => Date.parse(c?.updated_at ?? c?.created_at ?? "") || 0), 0)
   return Math.max(0, last + SETTLE_MS - now)
-}
-
-async function releaseHold(pr) {
-  const res = await github("/graphql", {
-    method: "POST",
-    body: JSON.stringify({ query: "mutation($id: ID!) { markPullRequestReadyForReview(input: {pullRequestId: $id}) { pullRequest { isDraft } } }", variables: { id: pr.node_id } }),
-  })
-  if (Array.isArray(res?.errors) && res.errors.length > 0) throw new Error(`markPullRequestReadyForReview: ${res.errors.map((e) => e.message).join("; ")}`)
-  await github(`/repos/${repo}/issues/${prNumber}/labels/${HOLD_LABEL}`, { method: "DELETE" })
-  console.log(`marked ${pr.html_url} Ready: the record for head ${headSha.slice(0, 7)} is final, so Devin Review runs with it present`)
-  return true
 }
 
 async function requestBugbot(prUrl) {
@@ -306,9 +287,7 @@ async function main() {
     await new Promise((resolve) => setTimeout(resolve, wait))
   }
   const requested = []
-  if (reviewers.includes("devin") && heldForRecord(current)) {
-    if (await releaseHold(current)) requested.push("devin")
-  } else if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
+  if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
   if (reviewers.includes("copilot") && await requestCopilot(pr.html_url)) requested.push("copilot")
   if (reviewers.includes("bugbot") && await requestBugbot(pr.html_url)) requested.push("bugbot")
   const body = renderRequestComment(reviewers, headSha, requested)

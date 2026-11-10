@@ -49,6 +49,7 @@ jobs:
       GARNET_REVIEWERS: "{{REVIEWERS}}"
       GARNET_RECORD_WORKFLOWS: '{{RECORD_WORKFLOWS_JSON}}'
       DEVIN_API_TOKEN: ${{ secrets.DEVIN_API_TOKEN }}
+      DEVIN_ORG_ID: ${{ vars.DEVIN_ORG_ID }}
       CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -95,7 +96,7 @@ jobs:
         run: |
           set -uo pipefail
           for pr_number in ${PRS}; do
-            PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-gate.mjs || echo "no head-bound record yet for #${pr_number}; reviews are not requested"
+            PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-gate.mjs || echo "garnet/evidence for #${pr_number} is not success (pending, absent, or best-effort capture); the next step decides whether to request reviews"
           done
       - name: Request reviews once the record is bound (once per head)
         if: steps.head.outputs.sha != '' && steps.head.outputs.prs != ''
