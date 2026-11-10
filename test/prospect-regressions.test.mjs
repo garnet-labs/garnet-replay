@@ -6,7 +6,7 @@ import { buildModel, classify, extractChains, recordedEvidence, renderCard } fro
 import { livePr } from "../lib/commands.mjs"
 import { publicProfile } from "../lib/gh.mjs"
 import { detectEcosystem, GARNET_ACTION_PIN, planReplay } from "../lib/replay-pr.mjs"
-import { evaluateExhibit, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
+import { evaluateExhibit, findResidue, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
 
 const HEAD = "a".repeat(40)
 const PREVIOUS = "b".repeat(40)
@@ -95,6 +95,15 @@ test("residue exempts only Devin Review comments by author, never the PR body", 
   assert.equal(residue("Routine change", null, "Reviewed by Devin").ok, false)
   assert.equal(residue("Written by Devin", "devin-ai-integration[bot]", "Review complete").ok, false)
   assert.equal(residue("Routine change", "someone-else", "Review complete").ok, true)
+})
+
+test("residue ignores only complete marked review badges in the PR body", () => {
+  const badge = "<!-- devin-review-badge-begin -->\nDevin Review: https://app.devin.ai/review\n<!-- devin-review-badge-end -->"
+  assert.equal(findResidue(`Routine change\n${badge}`, []), null)
+  assert.equal(findResidue(`${badge}\nLink to Devin session`, []), "Devin")
+  assert.equal(findResidue(`Open in Devin Desktop\n${badge}`, []), "Devin")
+  assert.equal(findResidue("<!-- devin-review-badge-begin -->\nDevin Review", []), "devin")
+  assert.equal(findResidue("Routine change", [badge]), "devin")
 })
 
 test("public JSON is fetched anonymously from only the supported selector", async () => {
