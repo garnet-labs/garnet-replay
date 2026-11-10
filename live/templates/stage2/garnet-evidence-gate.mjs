@@ -197,21 +197,47 @@ export function checkRunPayload(reading, head, detailsUrl) {
     head_sha: head,
     ...(detailsUrl !== null ? { details_url: detailsUrl } : {}),
     ...(reading.state === "pending" ? { status: "in_progress" } : { status: "completed", conclusion: reading.state }),
-    output: { title: titles[reading.state], summary: reading.summary },
+    output: { title: reading.title ?? titles[reading.state], summary: reading.summary },
   }
 }
 
 /**
- * Whether a reading is published as a check run at all. A pending reading is not:
- * the workflow token files `garnet/evidence` in the recorder's own check suite,
- * so an unfinished run there is counted by the App as a recorded job it waits
- * for, while the run waits for the App's record. A required check that is
- * absent still blocks merge, so staying silent while pending is fail-closed.
+ * The newest `garnet/evidence` check run, which is what the pull request shows.
+ * @param {{name?: string, id?: number}[]} checkRuns
+ */
+function newestEvidenceRun(checkRuns) {
+  const runs = (Array.isArray(checkRuns) ? checkRuns : []).filter((run) => run?.name === EVIDENCE_CHECK)
+  return runs.reduce((best, run) => (typeof run.id === "number" && (best === null || run.id > best.id) ? run : best), null)
+}
+
+/**
+ * Whether a reading is published as a check run at all. A pending reading
+ * normally is not: the workflow token files `garnet/evidence` in the
+ * recorder's own check suite, so an unfinished run there is counted by the App
+ * as a recorded job it waits for, while the run waits for the App's record. A
+ * required check that is absent still blocks merge. The exception is a head
+ * whose newest check already reads success (a recorder rerun): silence would
+ * leave that success standing, so the reading is published, as completed.
  * @param {{state: "success"|"pending"|"failure"}} reading
+ * @param {{name?: string, id?: number, status?: string, conclusion?: string|null}[]} [checkRuns] existing runs on the head
  * @returns {boolean}
  */
-export function publishesCheck(reading) {
-  return reading.state !== "pending"
+export function publishesCheck(reading, checkRuns = []) {
+  if (reading.state !== "pending") return true
+  const latest = newestEvidenceRun(checkRuns)
+  return latest !== null && latest.status === "completed" && latest.conclusion === "success"
+}
+
+/**
+ * The reading as published. Pending is never published as `in_progress` (see
+ * `publishesCheck`); when it must be published it withdraws the earlier success
+ * as a completed failure until the record settles again.
+ * @param {ReturnType<typeof evidenceStateFor>} reading
+ * @returns {ReturnType<typeof evidenceStateFor> & {title?: string}}
+ */
+export function publishedReading(reading) {
+  if (reading.state !== "pending") return reading
+  return { ...reading, state: "failure", title: "Record being rewritten", summary: `${reading.summary} An earlier success on this head no longer holds until the record settles.` }
 }
 
 /**
@@ -221,9 +247,7 @@ export function publishesCheck(reading) {
  * @returns {boolean}
  */
 export function alreadyPublished(checkRuns, payload) {
-  const runs = (Array.isArray(checkRuns) ? checkRuns : []).filter((run) => run?.name === EVIDENCE_CHECK)
-  if (runs.length === 0) return false
-  const latest = runs.reduce((best, run) => (typeof run.id === "number" && (best === null || run.id > best.id) ? run : best), null)
+  const latest = newestEvidenceRun(checkRuns)
   if (latest === null) return false
   const conclusion = payload.status === "completed" ? payload.conclusion : null
   return latest.status === payload.status && (latest.conclusion ?? null) === conclusion && latest.output?.summary === payload.output.summary
@@ -247,12 +271,12 @@ async function main() {
   const reading = withRecorderCompleteness(evidenceStateFor(await listComments(), headSha), unsettledRecorders(runsPage?.workflow_runs, recorders), headSha)
   const server = process.env.GITHUB_SERVER_URL || "https://github.com"
   const detailsUrl = process.env.GITHUB_RUN_ID ? `${server}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}` : null
-  if (!publishesCheck(reading)) {
+  const existing = await github(`/repos/${repo}/commits/${headSha}/check-runs?check_name=${encodeURIComponent(EVIDENCE_CHECK)}&per_page=100`)
+  if (!publishesCheck(reading, existing?.check_runs)) {
     console.log(`${EVIDENCE_CHECK} on ${headSha.slice(0, 7)} is pending (${reading.summary}); publishing nothing until the record settles.`)
     return
   }
-  const payload = checkRunPayload(reading, headSha, detailsUrl)
-  const existing = await github(`/repos/${repo}/commits/${headSha}/check-runs?check_name=${encodeURIComponent(EVIDENCE_CHECK)}&per_page=100`)
+  const payload = checkRunPayload(publishedReading(reading), headSha, detailsUrl)
   if (alreadyPublished(existing?.check_runs, payload)) {
     console.log(`${EVIDENCE_CHECK} on ${headSha.slice(0, 7)} already reads ${reading.state}; nothing to do.`)
   } else {

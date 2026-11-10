@@ -20,7 +20,7 @@ import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../
 import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
-import { alreadyPublished, checkRunPayload, publishesCheck, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
+import { alreadyPublished, checkRunPayload, publishesCheck, publishedReading, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
 import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, SETTLE_MS, settleWaitMs, alreadyRequestedFor, evidenceCheckState, evidenceSettled, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
@@ -2070,6 +2070,15 @@ test("stage2 gate: a finalized record stays pending while any listened recorder 
   assert.equal(held.jobs, 2, "what the record said is kept")
   assert.equal(publishesCheck(held), false, "an in_progress run in the recorder's suite would be counted as a job the App waits on")
   assert.equal(publishesCheck(success), true)
+  const greenRun = { id: 5, name: EVIDENCE_CHECK, status: "completed", conclusion: "success" }
+  assert.equal(publishesCheck(held, [{ id: 4, name: EVIDENCE_CHECK, status: "completed", conclusion: "failure" }]), false)
+  assert.equal(publishesCheck(held, [greenRun]), true, "a recorder rerun must not leave an earlier success standing")
+  assert.equal(publishesCheck(held, [greenRun, { id: 6, name: EVIDENCE_CHECK, status: "completed", conclusion: "failure" }]), false, "only the newest run counts")
+  const withdrawn = checkRunPayload(publishedReading(held), HEAD40, null)
+  assert.equal(withdrawn.status, "completed", "never in_progress in the recorder's suite")
+  assert.equal(withdrawn.conclusion, "failure")
+  assert.equal(withdrawn.output.title, "Record being rewritten")
+  assert.deepEqual(publishedReading(success), success)
   assert.deepEqual(withRecorderCompleteness(success, [], HEAD40), success)
   const failure = { state: "failure", summary: "none", recorded: null, jobs: null }
   assert.deepEqual(withRecorderCompleteness(failure, ["Prettier"], HEAD40), failure, "a missing record is failure regardless of running recorders")
