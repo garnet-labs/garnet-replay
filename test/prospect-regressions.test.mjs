@@ -64,6 +64,39 @@ test("public report identity requires repository, run, profile and the exact hea
   assert.match(profileCheck({ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }).detail, /refs\/pull\/1\/merge/)
 })
 
+test("recorded PR head binds merge-ref profiles without relabeling the merge SHA", () => {
+  const merge = { ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }
+  const bound = profileCheck({ ...merge, head_sha: HEAD })
+  assert.equal(bound.ok, true)
+  assert.match(bound.detail, new RegExp(`recorded head_sha ${HEAD}`))
+  assert.equal(profileCheck(merge).ok, false)
+  assert.equal(profileCheck({ ...merge, commit_sha: HEAD }).ok, false)
+  for (const head_sha of [PREVIOUS, "", null, HEAD.slice(0, 7)]) {
+    assert.equal(profileCheck({ ...RUN, head_sha }).ok, false)
+  }
+  assert.equal(profileCheck().ok, true)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD, repository: "other/repo" }).ok, false)
+})
+
+test("residue exempts only Devin Review comments by author, never the PR body", () => {
+  function residue(body, user, text) {
+    return evaluateExhibit({
+      pr: { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body },
+      comments: [
+        { user: "garnet-runtime-review[bot]", body: record() },
+        { user, body: text },
+      ],
+      checks: [],
+      permalinkStatus: 200,
+    }).legs.find((entry) => entry.name === "no session residue")
+  }
+  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, true)
+  assert.equal(residue("Routine change", "someone-else", "Devin Review: app.devin.ai/review").ok, false)
+  assert.equal(residue("Routine change", null, "Reviewed by Devin").ok, false)
+  assert.equal(residue("Written by Devin", "devin-ai-integration[bot]", "Review complete").ok, false)
+  assert.equal(residue("Routine change", "someone-else", "Review complete").ok, true)
+})
+
 test("public JSON is fetched anonymously from only the supported selector", async () => {
   const calls = []
   const selected = await publicProfile(`${LINK}&utm_source=github`, { fetchImpl: async (url, options) => {
