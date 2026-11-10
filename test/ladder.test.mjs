@@ -477,6 +477,20 @@ test("replay --pr: an injected recorder also covers Dependabot; a fork without d
   assert.equal(resolvedFirstMessage([".github/dependabot.yml", ".github/workflows/garnet-record.yml"], "chore(deps): sync"), "ci: record dependency installs on pull requests\n\n- .github/dependabot.yml\n- .github/workflows/garnet-record.yml")
 })
 
+test("Bun recorder installs the packageManager toolchain before measuring the frozen install", () => {
+  const workflow = recordWorkflow("bun", "dev")
+  assert.equal(INSTALL_COMMANDS.bun, "bun install --frozen-lockfile")
+  assert.match(workflow, /uses: oven-sh\/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2\n        with:\n          bun-version-file: package\.json/)
+  assert.ok(workflow.indexOf("ref: ${{ github.event.pull_request.head.sha }}") < workflow.indexOf("oven-sh/setup-bun@"))
+  assert.ok(workflow.indexOf("oven-sh/setup-bun@") < workflow.indexOf("garnet-org/action@"))
+  assert.ok(workflow.indexOf("garnet-org/action@") < workflow.indexOf("run: bun install --frozen-lockfile"))
+  assert.match(workflow, /branches: \['dev'\]\n  pull_request:/)
+  assert.doesNotMatch(workflow, /\{\{[A-Z_]+\}\}/)
+  assert.doesNotMatch(recordWorkflow("npm", "main"), /setup-bun|TOOLCHAIN_SETUP/)
+  assert.throws(() => recordWorkflow("bun", ""), /invalid default branch/)
+  assert.throws(() => recordWorkflow("", "main"), /no install command/)
+})
+
 test("recording workflows: a pull_request workflow that calls a local reusable workflow running the action counts; the reusable file alone does not", () => {
   const bodies = {
     "ci.yml": "name: CI\non:\n  pull_request:\n  push:\njobs:\n  test:\n    uses: $/.github/workflows/test.yml\n    with:\n      garnet: true\n",
@@ -791,8 +805,10 @@ test("replay --pr: ecosystem detection covers every install command and degrades
   assert.equal(detectEcosystem(["go.sum"]), "go")
   assert.equal(detectEcosystem(["yarn.lock"]), "yarn")
   assert.equal(detectEcosystem(["package-lock.json"]), "npm")
+  assert.equal(detectEcosystem(["bun.lock"]), "bun")
+  assert.equal(detectEcosystem(["bun.lockb"]), "bun")
   assert.equal(detectEcosystem(["WORKSPACE"]), null)
-  assert.deepEqual(Object.keys(INSTALL_COMMANDS).sort(), ["cargo", "go", "npm", "pnpm", "ruby", "uv", "yarn"])
+  assert.deepEqual(Object.keys(INSTALL_COMMANDS).sort(), ["bun", "cargo", "go", "npm", "pnpm", "ruby", "uv", "yarn"])
 })
 
 function fakeExec(responses) {
