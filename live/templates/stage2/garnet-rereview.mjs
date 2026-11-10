@@ -194,12 +194,15 @@ async function requestDevin(prUrl) {
   }
   // The API reviews the pull request's current head; the caller checked it equals HEAD_SHA just before.
   const base = process.env.DEVIN_API_URL || "https://api.devin.ai"
-  const res = await fetch(`${base}/v3/enterprise/pr-reviews`, {
+  // Organization service-user keys use the organization route; enterprise keys the enterprise route.
+  const org = process.env.DEVIN_ORG_ID
+  const route = typeof org === "string" && org !== "" ? `/v3/organizations/${encodeURIComponent(org)}/pr-reviews` : "/v3/enterprise/pr-reviews"
+  const res = await fetch(`${base}${route}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ pr_url: prUrl }),
   })
-  if (!res.ok) throw new Error(`devin: POST /v3/enterprise/pr-reviews: ${res.status}`)
+  if (!res.ok) throw new Error(`devin: POST ${route}: ${res.status}`)
   console.log(`requested Devin review on ${prUrl}`)
   return true
 }
