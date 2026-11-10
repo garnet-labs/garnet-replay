@@ -30,6 +30,10 @@ const TRUSTED_AUTHORS = new Set([
   "garnet-ai[bot]",
 ])
 export const EVIDENCE_CHECK = "garnet/evidence"
+/** Label `garnet-review-hold.yml` sets on a pull request it returned to draft. */
+export const HOLD_LABEL = "garnet-review-hold"
+/** The App edits its comment again seconds after finalizing; wait this long after the last edit. */
+export const SETTLE_MS = 30_000
 const CHECK_WAIT_MS = 30_000
 const CHECK_ATTEMPTS = 16
 
@@ -200,6 +204,37 @@ async function requestDevin(prUrl) {
   return true
 }
 
+/**
+ * Whether the hold workflow put this pull request in draft (and so may release it).
+ * @param {{draft?: boolean, labels?: {name?: string}[]}} pr
+ * @returns {boolean}
+ */
+export function heldForRecord(pr) {
+  return pr?.draft === true && Array.isArray(pr?.labels) && pr.labels.some((label) => label?.name === HOLD_LABEL)
+}
+
+/**
+ * Milliseconds to wait before the head's finalized record has gone SETTLE_MS without an edit.
+ * @param {{updated_at?: string, created_at?: string}[]} records finalized records bound to the head
+ * @param {number} now epoch ms
+ * @returns {number}
+ */
+export function settleWaitMs(records, now) {
+  const last = Math.max(...records.map((c) => Date.parse(c?.updated_at ?? c?.created_at ?? "") || 0), 0)
+  return Math.max(0, last + SETTLE_MS - now)
+}
+
+async function releaseHold(pr) {
+  const res = await github("/graphql", {
+    method: "POST",
+    body: JSON.stringify({ query: "mutation($id: ID!) { markPullRequestReadyForReview(input: {pullRequestId: $id}) { pullRequest { isDraft } } }", variables: { id: pr.node_id } }),
+  })
+  if (Array.isArray(res?.errors) && res.errors.length > 0) throw new Error(`markPullRequestReadyForReview: ${res.errors.map((e) => e.message).join("; ")}`)
+  await github(`/repos/${repo}/issues/${prNumber}/labels/${HOLD_LABEL}`, { method: "DELETE" })
+  console.log(`marked ${pr.html_url} Ready: the record for head ${headSha.slice(0, 7)} is final, so Devin Review runs with it present`)
+  return true
+}
+
 async function requestBugbot(prUrl) {
   const key = process.env.CURSOR_API_KEY
   if (typeof key !== "string" || key === "") {
@@ -265,9 +300,16 @@ async function main() {
     console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
     return
   }
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const wait = settleWaitMs((await listComments()).filter((comment) => isFinalizedRecordFor(comment, headSha)), Date.now())
+    if (wait === 0) break
+    await new Promise((resolve) => setTimeout(resolve, wait))
+  }
   const requested = []
+  if (reviewers.includes("devin") && heldForRecord(current)) {
+    if (await releaseHold(current)) requested.push("devin")
+  } else if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
   if (reviewers.includes("copilot") && await requestCopilot(pr.html_url)) requested.push("copilot")
-  if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
   if (reviewers.includes("bugbot") && await requestBugbot(pr.html_url)) requested.push("bugbot")
   const body = renderRequestComment(reviewers, headSha, requested)
   await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })

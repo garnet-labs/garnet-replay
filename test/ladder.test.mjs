@@ -21,7 +21,7 @@ import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
 import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
-import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, alreadyRequestedFor, evidenceCheckState, evidenceSettled, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
+import { API_REVIEWERS, EVIDENCE_CHECK, HOLD_LABEL, MENTIONS, SETTLE_MS, heldForRecord, settleWaitMs, alreadyRequestedFor, evidenceCheckState, evidenceSettled, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 import { PNPM_82_COMMENT, PNPM_84_COMMENT, PNPM_85_COMMENT } from "./fixtures/pnpm-app-comments.mjs"
@@ -2088,4 +2088,23 @@ test("a label that starts the fork's recorder goes on when the pull request open
   assert.equal(one.find((s) => s.id === "pr-label").skipIf, undefined)
   const reviewer = publishTwo({ ...base, labelStartsRecording: false }).map((s) => s.id)
   assert.ok(reviewer.indexOf("push-change") < reviewer.indexOf("wait-head-record") && reviewer.indexOf("wait-head-record") === reviewer.indexOf("pr-label") - 1)
+})
+
+test("stage 2: Devin Review starts after the record — hold in draft until final, release only the hold's own draft", () => {
+  const plan = planStage2(STAGE2_INPUT)
+  const hold = plan.files[".github/workflows/garnet-review-hold.yml"]
+  assert.equal(typeof hold, "string", "devin among reviewers ships the hold workflow")
+  assert.match(hold, /pull_request_target:\n\s+types: \[opened, reopened, synchronize, ready_for_review\]/)
+  assert.match(hold, /convertPullRequestToDraft/)
+  assert.match(hold, new RegExp(`LABEL: ${HOLD_LABEL}`))
+  assert.doesNotMatch(hold, /actions\/checkout/, "never checks out pull request code")
+  assert.match(plan.body, /Garnet review hold/)
+  const none = planStage2({ ...STAGE2_INPUT, reviewers: ["coderabbit"] })
+  assert.equal(none.files[".github/workflows/garnet-review-hold.yml"], undefined)
+  assert.equal(heldForRecord({ draft: true, labels: [{ name: HOLD_LABEL }] }), true)
+  assert.equal(heldForRecord({ draft: true, labels: [] }), false, "a person's draft is never released")
+  assert.equal(heldForRecord({ draft: false, labels: [{ name: HOLD_LABEL }] }), false)
+  const now = Date.parse("2026-11-10T17:00:00Z")
+  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:00Z" }], now), 0)
+  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:50Z" }], now), SETTLE_MS - 10_000, "the App edits its comment again seconds after finalizing")
 })
