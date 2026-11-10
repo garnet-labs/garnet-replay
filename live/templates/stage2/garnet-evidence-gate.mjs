@@ -202,6 +202,19 @@ export function checkRunPayload(reading, head, detailsUrl) {
 }
 
 /**
+ * Whether a reading is published as a check run at all. A pending reading is not:
+ * the workflow token files `garnet/evidence` in the recorder's own check suite,
+ * so an unfinished run there is counted by the App as a recorded job it waits
+ * for, while the run waits for the App's record. A required check that is
+ * absent still blocks merge, so staying silent while pending is fail-closed.
+ * @param {{state: "success"|"pending"|"failure"}} reading
+ * @returns {boolean}
+ */
+export function publishesCheck(reading) {
+  return reading.state !== "pending"
+}
+
+/**
  * Whether the newest existing `garnet/evidence` check run already says this.
  * @param {{name?: string, id?: number, status?: string, conclusion?: string|null, output?: {summary?: string}}[]} checkRuns
  * @param {Record<string, unknown>} payload
@@ -234,6 +247,10 @@ async function main() {
   const reading = withRecorderCompleteness(evidenceStateFor(await listComments(), headSha), unsettledRecorders(runsPage?.workflow_runs, recorders), headSha)
   const server = process.env.GITHUB_SERVER_URL || "https://github.com"
   const detailsUrl = process.env.GITHUB_RUN_ID ? `${server}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}` : null
+  if (!publishesCheck(reading)) {
+    console.log(`${EVIDENCE_CHECK} on ${headSha.slice(0, 7)} is pending (${reading.summary}); publishing nothing until the record settles.`)
+    return
+  }
   const payload = checkRunPayload(reading, headSha, detailsUrl)
   const existing = await github(`/repos/${repo}/commits/${headSha}/check-runs?check_name=${encodeURIComponent(EVIDENCE_CHECK)}&per_page=100`)
   if (alreadyPublished(existing?.check_runs, payload)) {
