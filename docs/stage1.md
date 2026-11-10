@@ -108,8 +108,10 @@ pull request. Override with `--first-message`, `--change-message`, `--title`,
 `--body`. Guards refuse any upstream URL, `owner/repo#N`, bare `#N`, or tool
 residue.
 
-Ecosystem is detected from the touched manifests: npm, pnpm, Yarn, Cargo, Ruby,
-uv, Go. An unsupported ecosystem stops the run before any write and says so.
+Ecosystem is detected from the touched manifests: Bun, npm, pnpm, Yarn, Cargo,
+Ruby, uv, Go. An unsupported ecosystem stops the run before any write and says so.
+Bun setup requires root `package.json` to pin `packageManager` (for example,
+`"bun@1.4.4"`) and records `bun install --frozen-lockfile`.
 
 With `--record instrument --job <workflow-file>/<job>`, a change to that workflow
 is instrumented independently at the exact upstream base and head, even when the

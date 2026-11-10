@@ -506,6 +506,43 @@ test("livePr: explicit --record inject still bundles on an onboarded fork", asyn
 
 // ---------------------------------------------------------------- setup command
 
+function bunSetupExec(manifest) {
+  const fallback = liveExec({ recording: false })
+  return (command, args) => {
+    if (args[1] === `repos/${FORK}/contents/package.json?ref=main`) {
+      assert.equal(command, "gh")
+      assert.ok(args.includes("Accept: application/vnd.github.raw"))
+      return JSON.stringify(manifest)
+    }
+    if (args[1] === `repos/${FORK}/git/trees/main`) return JSON.stringify({ tree: [{ path: "bun.lock", type: "blob" }] })
+    return fallback(command, args)
+  }
+}
+
+test("setup: Bun validates the root packageManager before planning its recorder", async () => {
+  const result = await setup(["posthog", "--dry-run"], {
+    exec: bunSetupExec({ packageManager: "bun@1.4.4" }), log: () => {}, save: () => assert.fail("dry run must not save"),
+  })
+  assert.equal(result.executed, false)
+  const workflow = result.plan.steps.find((step) => step.writeFileContent?.file.endsWith("garnet-record.yml")).writeFileContent.content
+  assert.match(workflow, /bun-version-file: package.json/)
+  assert.match(workflow, /run: bun install --frozen-lockfile/)
+})
+
+test("setup: Bun rejects a missing packageManager without producing a plan", async () => {
+  await assert.rejects(setup(["posthog", "--ecosystem", "bun", "--dry-run"], {
+    exec: bunSetupExec({}), log: () => assert.fail("must not emit a plan"), save: () => assert.fail("must not save"),
+  }), /Bun recording requires root package.json.*packageManager.*bun@<version>/)
+})
+
+test("setup: Bun rejects malformed packageManager values without producing a plan", async () => {
+  for (const packageManager of ["", "bun@latest", "bun@1.4", "npm@1.4.4", 144, null]) {
+    await assert.rejects(setup(["posthog", "--ecosystem", "bun", "--dry-run"], {
+      exec: bunSetupExec({ packageManager }), log: () => assert.fail("must not emit a plan"), save: () => assert.fail("must not save"),
+    }), /Bun recording requires root package.json.*packageManager.*bun@<version>/)
+  }
+})
+
 test("setup: already-onboarded fork inventories the identical kit without writes", async () => {
   const lines = []
   const result = await setup(["posthog", "--dry-run"], { exec: liveExec({ recording: true }), log: (line) => lines.push(line), save: () => assert.fail("must not save") })
