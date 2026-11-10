@@ -96,7 +96,7 @@ jobs:
         run: |
           set -uo pipefail
           for pr_number in ${PRS}; do
-            PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-gate.mjs || echo "no head-bound record yet for #${pr_number}; reviews are not requested"
+            PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-gate.mjs || echo "garnet/evidence for #${pr_number} is not success (pending, absent, or best-effort capture); the next step decides whether to request reviews"
           done
       - name: Request reviews once the record is bound (once per head)
         if: steps.head.outputs.sha != '' && steps.head.outputs.prs != ''
