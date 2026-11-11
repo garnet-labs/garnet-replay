@@ -27,6 +27,8 @@ const TRUSTED_AUTHORS = new Set([
   "garnet-runtime-review-dev[bot]",
   "garnet-ai[bot]",
 ])
+/** The App edits its comment again seconds after finalizing; wait this long after the last edit. */
+export const SETTLE_MS = 30_000
 
 /** Mention-triggered reviewers: the exact comment line each one documents. */
 export const MENTIONS = Object.freeze({
@@ -221,9 +223,24 @@ export async function main() {
     console.log(`PR head moved before requesting reviews (${current.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
     return
   }
-  const latestComments = await listComments()
+  let latestComments = await listComments()
   if (alreadyRequestedFor(latestComments, headSha)) {
     console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run; nothing to do.`)
+    return
+  }
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const wait = settleWaitMs((await listComments()).filter((comment) => isFinalizedRecordFor(comment, headSha)), Date.now())
+    if (wait === 0) break
+    await new Promise((resolve) => setTimeout(resolve, wait))
+  }
+  const settled = await github(`/repos/${repo}/pulls/${prNumber}`)
+  if (settled.head?.sha !== headSha) {
+    console.log(`PR head moved while waiting (${settled.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
+    return
+  }
+  latestComments = await listComments()
+  if (alreadyRequestedFor(latestComments, headSha)) {
+    console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
     return
   }
   if (!latestComments.some((comment) => isFinalizedRecordFor(comment, headSha))) {
@@ -238,6 +255,17 @@ export async function main() {
   await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
   const mentioned = reviewers.filter((name) => name in MENTIONS)
   console.log(`posted one re-review request for head ${headSha.slice(0, 7)}: mentioned ${mentioned.join(", ") || "none"}; API requested ${requested.join(", ") || "none"}`)
+}
+
+/**
+ * Milliseconds to wait before the head's finalized record has gone SETTLE_MS without an edit.
+ * @param {{updated_at?: string, created_at?: string}[]} records finalized records bound to the head
+ * @param {number} now epoch ms
+ * @returns {number}
+ */
+export function settleWaitMs(records, now) {
+  const last = Math.max(...records.map((c) => Date.parse(c?.updated_at ?? c?.created_at ?? "") || 0), 0)
+  return Math.max(0, last + SETTLE_MS - now)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main()

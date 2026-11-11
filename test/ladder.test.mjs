@@ -20,7 +20,7 @@ import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../
 import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
-import { API_REVIEWERS, MENTIONS, alreadyRequestedFor, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
+import { API_REVIEWERS, MENTIONS, SETTLE_MS, settleWaitMs, alreadyRequestedFor, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 import { PNPM_82_COMMENT, PNPM_84_COMMENT, PNPM_85_COMMENT } from "./fixtures/pnpm-app-comments.mjs"
@@ -1784,7 +1784,7 @@ test("stage 2: mirror + merge-safety ride the default branch, never run fork cod
   assert.match(mirror, /Garnet Runtime Visibility/)
   assert.doesNotMatch(mirror, /actions\/checkout@[^\n]*\n[^\n]*head\.sha|ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/)
   assert.doesNotMatch(mirror, /garnet\/evidence|garnet-evidence-gate|checks: write/)
-  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /check-runs|setTimeout/)
+  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /check-runs/)
   assert.doesNotMatch(plan.body, /garnet\/evidence/)
   assert.match(mirror, /issue_comment:\n\s+types: \[created, edited\]/)
   assert.doesNotMatch(mirror, /--slurp/)
@@ -1941,23 +1941,31 @@ function recordComment(body, login = "garnet-runtime-review[bot]") {
 }
 const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
 
-function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40, HEAD40], latestComments = comments, failRequest = false } = {}) {
+function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40, HEAD40], latestComments = comments, afterWaitComments = latestComments, failRequest = false } = {}) {
   const script = `
     const comments = ${JSON.stringify(comments)};
     const latestComments = ${JSON.stringify(latestComments)};
+    const afterWaitComments = ${JSON.stringify(afterWaitComments)};
     const heads = ${JSON.stringify(heads)};
     const calls = [];
     let headRead = 0;
     let commentRead = 0;
+    let now = Date.parse("2026-11-10T17:00:00Z");
+    Date.now = () => now;
+    globalThis.setTimeout = (resolve, ms) => {
+      calls.push({ method: "WAIT", ms });
+      now += ms;
+      resolve();
+    };
     globalThis.fetch = async (url, init = {}) => {
       const path = new URL(url).pathname;
       const method = init.method ?? "GET";
       calls.push({ path, method, body: init.body === undefined ? null : JSON.parse(init.body) });
       if (path === "/repos/o/r/pulls/1" && method === "GET") {
-        return { ok: true, status: 200, json: async () => ({ head: { sha: heads[headRead++] }, html_url: "https://github.com/o/r/pull/1" }) };
+        return { ok: true, status: 200, json: async () => ({ head: { sha: heads[headRead++] ?? heads.at(-1) }, html_url: "https://github.com/o/r/pull/1" }) };
       }
       if (path === "/repos/o/r/issues/1/comments") {
-        if (method === "GET") return { ok: true, status: 200, json: async () => commentRead++ === 0 ? comments : latestComments };
+        if (method === "GET") return { ok: true, status: 200, json: async () => calls.some((call) => call.method === "WAIT") ? afterWaitComments : commentRead++ === 0 ? comments : latestComments };
         if (method === "POST") return { ok: ${!failRequest}, status: ${failRequest ? 503 : 201}, json: async () => ({}), text: async () => "unavailable" };
       }
       throw new Error("Unexpected request: " + method + " " + path);
@@ -1974,7 +1982,7 @@ function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40
   return JSON.parse(output.trim().split("\n").at(-1))
 }
 
-test("re-review: a finalized exact-head record requests without a check run or polling", () => {
+test("re-review: a finalized exact-head record requests without a check run or check polling", () => {
   const calls = runRereview()
   const posted = calls.filter((call) => call.method === "POST")
   assert.equal(posted.length, 1)
@@ -2018,6 +2026,31 @@ test("re-review: an existing per-head lock prevents duplicate requests", () => {
 test("re-review: a record that becomes pending before the request requests nothing", () => {
   const latestComments = [recordComment(FINAL_RECORD.replace("finalized", "pending"))]
   assert.ok(runRereview({ latestComments }).every((call) => call.method === "GET"))
+})
+
+test("re-review: a recently edited finalized comment settles before the request", () => {
+  const comments = [{ ...recordComment(FINAL_RECORD), updated_at: "2026-11-10T16:59:50Z" }]
+  const calls = runRereview({ comments })
+  assert.deepEqual(calls.filter((call) => call.method === "WAIT"), [{ method: "WAIT", ms: SETTLE_MS - 10_000 }])
+  assert.equal(calls.filter((call) => call.method === "POST").length, 1)
+  assert.ok(calls.findIndex((call) => call.method === "WAIT") < calls.findIndex((call) => call.method === "POST"))
+})
+
+test("re-review: a record that becomes pending during the settle wait requests nothing", () => {
+  const comments = [{ ...recordComment(FINAL_RECORD), updated_at: "2026-11-10T16:59:50Z" }]
+  const afterWaitComments = [recordComment(FINAL_RECORD.replace("finalized", "pending"))]
+  const calls = runRereview({ comments, afterWaitComments })
+  assert.ok(calls.some((call) => call.method === "WAIT"))
+  assert.ok(!calls.some((call) => call.method === "POST"))
+})
+
+test("re-review: a moved head or a lock posted during the settle wait requests nothing", () => {
+  const comments = [{ ...recordComment(FINAL_RECORD), updated_at: "2026-11-10T16:59:50Z" }]
+  for (const options of [{ heads: [HEAD40, HEAD40, OTHER40] }, { afterWaitComments: [...comments, { body: rereviewMarker(HEAD40) }] }]) {
+    const calls = runRereview({ comments, ...options })
+    assert.ok(calls.some((call) => call.method === "WAIT"))
+    assert.ok(!calls.some((call) => call.method === "POST"))
+  }
 })
 
 test("re-review: request errors are surfaced", () => {
@@ -2106,8 +2139,12 @@ test("a label that starts the fork's recorder goes on when the pull request open
   assert.ok(reviewer.indexOf("push-change") < reviewer.indexOf("wait-head-record") && reviewer.indexOf("wait-head-record") === reviewer.indexOf("pr-label") - 1)
 })
 
-test("stage 2: no draft hold or polling; reviews follow finalized App comments", () => {
+test("stage 2: no draft hold; reviews wait for the finalized App comment to settle", () => {
   const plan = planStage2(STAGE2_INPUT)
   assert.equal(plan.files[".github/workflows/garnet-review-hold.yml"], undefined)
-  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /setTimeout|check-runs/)
+  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /check-runs/)
+  const now = Date.parse("2026-11-10T17:00:00Z")
+  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:00Z" }], now), 0)
+  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:50Z" }], now), SETTLE_MS - 10_000, "the App edits its comment again seconds after finalizing")
+  assert.equal(settleWaitMs([], now), 0)
 })
