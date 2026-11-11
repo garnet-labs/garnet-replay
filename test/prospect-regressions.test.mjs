@@ -39,8 +39,8 @@ example
 </details>`
 }
 
-function profileCheck(run = RUN) {
-  return publicProfileIdentity({ profile: { run }, permalink: LINK, repository: RUN.repository, headSha: HEAD })
+function profileCheck(run = RUN, mergeParents = null) {
+  return publicProfileIdentity({ profile: { run }, permalink: LINK, repository: RUN.repository, headSha: HEAD, mergeParents })
 }
 
 test("card scope follows the recorded pair when the ledger identifies commit 1", () => {
@@ -66,9 +66,12 @@ test("public report identity requires repository, run, profile and the exact hea
 
 test("recorded PR head binds merge-ref profiles without relabeling the merge SHA", () => {
   const merge = { ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }
-  const bound = profileCheck({ ...merge, head_sha: HEAD })
+  const bound = profileCheck({ ...merge, head_sha: HEAD }, [PREVIOUS, HEAD])
   assert.equal(bound.ok, true)
   assert.match(bound.detail, new RegExp(`recorded head_sha ${HEAD}`))
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD }).ok, false)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD }, [PREVIOUS]).ok, false)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD }, []).ok, false)
   assert.equal(profileCheck(merge).ok, false)
   assert.equal(profileCheck({ ...merge, commit_sha: HEAD }).ok, false)
   for (const head_sha of [PREVIOUS, "", null, HEAD.slice(0, 7)]) {
@@ -78,7 +81,7 @@ test("recorded PR head binds merge-ref profiles without relabeling the merge SHA
   assert.equal(profileCheck({ ...merge, head_sha: HEAD, repository: "other/repo" }).ok, false)
 })
 
-test("residue exempts only marked Devin Review bot comments, never the PR body", () => {
+test("residue scans Devin bot comments even with review markers", () => {
   function residue(body, user, text) {
     return evaluateExhibit({
       pr: { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body },
@@ -94,7 +97,7 @@ test("residue exempts only marked Devin Review bot comments, never the PR body",
   assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, false)
   for (const marker of ["<!-- devin-pr-monitoring-controls -->", "<!-- devin-review-session-triaged -->"]) {
     const review = `${marker}\nDevin Review: app.devin.ai/review`
-    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, true)
+    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, false)
     assert.equal(residue("Routine change", "someone-else", review).ok, false)
     assert.equal(residue("Routine change", null, review).ok, false)
     assert.equal(residue(`Written by Devin\n${marker}`, "devin-ai-integration[bot]", review).ok, false)
@@ -169,6 +172,27 @@ test("live verification rejects HTTP 200 with merge-ref or missing identity", as
   const missing = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record("complete", "https://app.garnet.ai")), exec: (_cmd, args) => kitResponse(args) })
   assert.equal(missing.status, "FAIL")
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))
+})
+
+test("live merge-ref identity requires readable commit parents containing the expected head", async () => {
+  const merge = { ...RUN, ref: "refs/pull/1/merge", commit_sha: PREVIOUS, head_sha: HEAD }
+  for (const parents of [[PREVIOUS, HEAD], [PREVIOUS], [], null, "malformed"]) {
+    const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
+      fetchImpl: fetchExhibit(merge),
+      exec: (command, args) => {
+        if (args[0] === "api" && args[1] === `repos/${RUN.repository}/commits/${PREVIOUS}`) {
+          assert.equal(command, "gh")
+          if (parents === null) throw new Error("lookup unavailable")
+          return JSON.stringify({ parents: Array.isArray(parents) ? parents.map((sha) => ({ sha })) : parents })
+        }
+        return kitResponse(args)
+      },
+    })
+    const identity = result.legs.find((entry) => entry.name === "public profile identity")
+    assert.equal(identity.ok, Array.isArray(parents) && parents.includes(HEAD))
+    if (parents === null || parents === "malformed") assert.match(identity.detail, /merge commit parents unreadable/)
+    else if (!parents.includes(HEAD)) assert.match(identity.detail, /parents do not include expected head/)
+  }
 })
 
 test("sensor coverage distinguishes log authentication failures from other read failures", async () => {
