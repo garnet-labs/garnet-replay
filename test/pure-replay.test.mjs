@@ -4,7 +4,7 @@ import test from "node:test"
 import { assertOneCommit } from "../lib/guards.mjs"
 import { livePr, setup } from "../lib/commands.mjs"
 import {
-  GARNET_ACTION_PIN, executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
+  GARNET_ACTION_PIN, executePlan, planPureReplay, planReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
   replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity, workflowCarryPaths,
 } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
@@ -513,6 +513,26 @@ test("executePlan: setup refuses when an onboarding pull request is already open
 
 // ---------------------------------------------------------------- executePlan: ensure-base
 
+test("two-commit replay: recorder checkout and execution are bound to the planned fork SHA", async () => {
+  const input = { ...purePlan({ baseBranch: "review/base" }), changes: CHANGES }
+  const plan = planReplay(input)
+  const guard = plan.steps.find((step) => step.kind === "verify-fork-default")
+  const checkout = plan.steps.find((step) => step.id === "first-fork-record")
+  assert.equal(plan.forkDefaultSha, SHA_C)
+  assert.deepEqual(checkout.args.slice(-3), [SHA_C, "--", RECORDERS[0]])
+  assert.ok(plan.steps.indexOf(guard) < plan.steps.findIndex((step) => step.kind === "write-remote"))
+  const pinned = { ...plan, steps: [guard, checkout] }
+  const matching = fakeExec([[/gh api .*\/commits\/main/, JSON.stringify({ sha: SHA_C })]])
+  await executePlan(pinned, { exec: matching.exec, io: memoryIo(), log: () => {} })
+  assert.ok(matching.calls.includes(`git -C ${plan.work} checkout ${SHA_C} -- ${RECORDERS[0]}`))
+  const moved = fakeExec([[/gh api .*\/commits\/main/, JSON.stringify({ sha: SHA_A })]])
+  await assert.rejects(executePlan(pinned, { exec: moved.exec, io: memoryIo(), log: () => {} }), /default branch .* moved: planned .* current .*prepare a new replay plan/)
+  assert.equal(moved.calls.length, 1)
+  for (const forkDefaultSha of [undefined, null, "", "main"]) {
+    assert.throws(() => planReplay({ ...input, forkDefaultSha }), /fork default-branch SHA unresolved/)
+  }
+})
+
 test("executePlan: a moved default branch refuses before base checkout or publication", async () => {
   for (const options of [{}, { baseBranch: "review/base" }, { syncFork: true }]) {
     const plan = purePlan(options)
@@ -745,6 +765,8 @@ test("livePr: resolves an earlier upstream commit and plans its comparison scope
     save: () => assert.fail("dry run must not save"),
   })
   assert.equal(result.plan.firstCommitSha, SHA_C)
+  assert.equal(result.plan.forkDefaultSha, SHA_C)
+  assert.ok(result.plan.steps.some((step) => step.kind === "verify-fork-default"))
   assert.equal(result.plan.scope, "previous-recorded-head-to-head")
   assert.equal(result.plan.messages.first, "feat: earlier upstream push")
   assert.equal(result.plan.firstStages, "first-commit")
