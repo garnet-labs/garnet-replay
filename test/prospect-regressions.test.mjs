@@ -236,6 +236,27 @@ test("cards preserve every unchanged workload row and owning job, without teachi
   assert.equal(buildModel({ slug: "example", forkPr: 1, headSha: HEAD, comment: { body } }).scope, "previous-recorded-head-to-head")
 })
 
+test("explicit best-effort capture passes with its label, but incomplete or non-final records do not", async () => {
+  const bestEffort = record("best-effort")
+  for (const [body, passes] of [
+    [bestEffort, true],
+    [bestEffort.replace(',"capture_quality":"best-effort"', ""), false],
+    [record("unknown"), false],
+    [record("partial"), false],
+    [bestEffort.replace('"status":"finalized"', '"status":"pending"'), false],
+    [bestEffort.replace('"status":"finalized",', ""), false],
+    [record().replace('"status":"finalized",', ""), false],
+    [bestEffort.replace('"changed":0', '"incomplete":1,"changed":0'), false],
+    [record().replace('"changed":0', '"incomplete":1,"changed":0'), false],
+  ]) {
+    const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
+      fetchImpl: fetchExhibit(RUN, body), exec: (_cmd, args) => kitResponse(args),
+    })
+    assert.equal(result.status, passes ? "PASS" : "FAIL", result.reasons.join("; "))
+    if (passes) assert.match(result.legs.find((entry) => entry.name === "capture completeness").detail, /best-effort capture/)
+  }
+})
+
 test("partial and absent captures remain undeterminable while retaining recorded rows", async () => {
   for (const capture of ["partial", "none", "not-declared", null]) {
     const body = record(capture)
