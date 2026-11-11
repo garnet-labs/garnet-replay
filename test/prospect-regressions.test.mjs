@@ -78,7 +78,7 @@ test("recorded PR head binds merge-ref profiles without relabeling the merge SHA
   assert.equal(profileCheck({ ...merge, head_sha: HEAD, repository: "other/repo" }).ok, false)
 })
 
-test("residue exempts only Devin Review comments by author, never the PR body", () => {
+test("residue exempts only marked Devin Review bot comments, never the PR body", () => {
   function residue(body, user, text) {
     return evaluateExhibit({
       pr: { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body },
@@ -90,7 +90,15 @@ test("residue exempts only Devin Review comments by author, never the PR body", 
       permalinkStatus: 200,
     }).legs.find((entry) => entry.name === "no session residue")
   }
-  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, true)
+  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Written by Devin").ok, false)
+  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, false)
+  for (const marker of ["<!-- devin-pr-monitoring-controls -->", "<!-- devin-review-session-triaged -->"]) {
+    const review = `${marker}\nDevin Review: app.devin.ai/review`
+    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, true)
+    assert.equal(residue("Routine change", "someone-else", review).ok, false)
+    assert.equal(residue("Routine change", null, review).ok, false)
+    assert.equal(residue(`Written by Devin\n${marker}`, "devin-ai-integration[bot]", review).ok, false)
+  }
   assert.equal(residue("Routine change", "someone-else", "Devin Review: app.devin.ai/review").ok, false)
   assert.equal(residue("Routine change", null, "Reviewed by Devin").ok, false)
   assert.equal(residue("Written by Devin", "devin-ai-integration[bot]", "Review complete").ok, false)
