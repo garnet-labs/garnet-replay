@@ -385,4 +385,9 @@ pull-request branch filters. It does not rewrite or enable the caller.
 When a pure replay uses `--base-branch`, it carries the recorder callers and all
 their local reusable workflows, transitively, from the fork's default branch.
 These copies replace upstream callees or add them when absent upstream; shared
-callees are carried only once. External reusable workflows are not copied.
+callees are carried only once. Cycles, remote job-level reusable calls, and
+local reusable calls pinned with `@ref` are rejected; step-level actions remain
+allowed. Reusable-callee instrumentation requires a carried caller that reaches
+the callee, runs on pull-request synchronization for the replay base, and grants
+OIDC on the calling job or at workflow level. Its local support workflows are
+carried into the baseline commit and preserved across the change.

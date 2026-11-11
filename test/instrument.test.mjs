@@ -57,12 +57,51 @@ test("instrument mode preserves recording when a reusable callee changes", () =>
     slug: "demo", upstream: "owner/demo", fork: "garnet-labs/demo", defaultBranch: "main", upstreamPr: 1,
     baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: ".github/workflows/tests.yml", previous: null }],
     work: "/tmp/demo", record: "instrument", ecosystem: "pip", dependabotConfigured: true,
-    instrument: { path: ".github/workflows/tests.yml", job: "test", content: baseline.content, headContent: head.content, changes: baseline.changes },
+    instrument: {
+      path: ".github/workflows/tests.yml", job: "test", content: baseline.content, headContent: head.content, changes: baseline.changes,
+      workflowBodies: { ".github/workflows/caller.yml": "on:\n  pull_request:\npermissions:\n  id-token: write\njobs:\n  tests:\n    uses: ./.github/workflows/tests.yml\n" },
+    },
   }
   const plan = planReplay(input)
   assert.equal(plan.steps.find((step) => step.id === "first-instrument").writeFileContent.content, baseline.content)
   assert.equal(plan.steps.find((step) => step.id === "change-instrument").writeFileContent.content, head.content)
+  assert.equal(plan.steps.find((step) => step.id === "first-caller-0").writeFileContent.content, input.instrument.workflowBodies[".github/workflows/caller.yml"])
+  assert.ok(plan.contextPaths.includes(".github/workflows/caller.yml"))
   assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, headContent: head.content.replace("workflow_call:", "workflow_dispatch:") } }), /must run on pull_request synchronize/)
+  const caller = input.instrument.workflowBodies[".github/workflows/caller.yml"]
+  function withCaller(body, extra = {}) {
+    return { ...input, instrument: { ...input.instrument, workflowBodies: { ".github/workflows/caller.yml": body, ...extra } } }
+  }
+  for (const trigger of ["pull_request:\n    types: [opened]", "pull_request:\n    types: []", "workflow_dispatch:"]) {
+    assert.throws(() => planReplay(withCaller(caller.replace("pull_request:", trigger))), /carried caller on pull_request synchronize with id-token: write/)
+  }
+  for (const permissions of ["", "permissions: read-all\n", "permissions:\n  id-token: read\n", "permissions: {}\n", "permissions:\n  # id-token: write\n  contents: read # id-token: write\n"]) {
+    assert.throws(() => planReplay(withCaller(caller.replace("permissions:\n  id-token: write\n", permissions))), /carried caller on pull_request synchronize with id-token: write/)
+  }
+  assert.throws(() => planReplay({ ...input, instrument: { ...input.instrument, workflowBodies: {} } }), /carried caller on pull_request synchronize with id-token: write/)
+  assert.throws(() => planReplay({ ...input, instrument: {
+    ...input.instrument,
+    headContent: `${head.content}  remote:\n    uses: owner/repo/.github/workflows/extra.yml@main\n`,
+  } }), /reusable uses must be local and unpinned/)
+  for (const trigger of ["pull_request:", "pull_request:\n    types: [opened, synchronize]", "pull_request:\n    types:\n      - synchronize", "pull_request: { types: [synchronize] }"]) {
+    assert.doesNotThrow(() => planReplay(withCaller(caller.replace("pull_request:", trigger))))
+  }
+  const jobPermissions = caller.replace("permissions:\n  id-token: write\n", "").replace("    uses:", "    permissions: { contents: read, id-token: write }\n    uses:")
+  assert.doesNotThrow(() => planReplay(withCaller(jobPermissions)))
+  assert.throws(() => planReplay(withCaller(caller.replace("    uses:", "    permissions: { contents: read }\n    uses:"))), /carried caller on pull_request synchronize with id-token: write/)
+  assert.throws(() => planReplay(withCaller(caller.replace("pull_request:", "pull_request:\n    branches: [release]"))), /carried caller on pull_request synchronize with id-token: write/)
+  assert.doesNotThrow(() => planReplay(withCaller(caller.replace("pull_request:", "pull_request:\n    branches: [main]"))))
+  assert.throws(() => planReplay(withCaller(caller.replace("pull_request:", "pull_request:\n    paths: [unrelated/**]"))), /carried caller on pull_request synchronize with id-token: write/)
+  assert.throws(() => planReplay({ ...input, changes: [...input.changes, { path: ".github/workflows/caller.yml", previous: null }] }), /change edits a carried reusable caller/)
+
+  const nested = "on:\n  workflow_call:\njobs:\n  tests:\n    uses: ./.github/workflows/tests.yml\n"
+  const nestedCaller = caller.replace("workflows/tests.yml", "workflows/nested.yml")
+  const nestedInput = withCaller(nestedCaller, { ".github/workflows/nested.yml": nested })
+  const nestedPlan = planReplay(nestedInput)
+  assert.equal(nestedPlan.steps.find((step) => step.id === "first-caller-1").writeFileContent.content, nested)
+  assert.throws(() => planReplay(withCaller(nestedCaller, {
+    ".github/workflows/nested.yml": nested.replace("  workflow_call:", "  workflow_call:\npermissions:\n  contents: read"),
+  })), /carried caller on pull_request synchronize with id-token: write/)
 })
 
 test("instrumentWorkflow adds the sensor after checkout with matrix gating and permissions", async () => {

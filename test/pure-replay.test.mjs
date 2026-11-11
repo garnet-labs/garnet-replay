@@ -177,22 +177,38 @@ test("workflowCarryPaths: carries nested callees transitively", () => {
   }), [CALLER, CALLEE, NESTED_CALLEE])
 })
 
-test("workflowCarryPaths: deduplicates callers, shared callees and cycles", () => {
+test("workflowCarryPaths: deduplicates callers and diamond dependencies", () => {
   assert.deepEqual(workflowCarryPaths([CALLER, CALLER, NESTED_CALLEE], {
-    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(CALLER), [NESTED_CALLEE]: callsWorkflow(CALLEE),
-  }), [CALLER, NESTED_CALLEE, CALLEE])
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "on: workflow_call\n", [NESTED_CALLEE]: callsWorkflow(CALLEE),
+  }), [CALLER, CALLEE, NESTED_CALLEE])
 })
 
-test("workflowCarryPaths: ignores non-local uses and commented references", () => {
-  const body = `jobs:
-  external:
-    uses: owner/repo/.github/workflows/tests.yml@main
-  other:
-    uses: ./actions/build
-  pinned:
-    uses: ./.github/workflows/tests.yml@main
-  # uses: ./.github/workflows/commented.yml
-`
+test("workflowCarryPaths: rejects cycles and self references", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(CALLER),
+  }), /cyclic reusable workflows/)
+  assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: callsWorkflow(CALLER) }), /cyclic reusable workflows/)
+})
+
+test("workflowCarryPaths: rejects remote and pinned local job-level reusable calls", () => {
+  for (const uses of ["owner/repo/.github/workflows/tests.yml@main", "./.github/workflows/tests.yml@main", "./actions/build"]) {
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    uses: ${uses}\n`,
+    }), /reusable uses must be local and unpinned/)
+  }
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "jobs:\n  nested:\n    uses: owner/repo/.github/workflows/tests.yml@main\n",
+  }), /reusable uses must be local and unpinned/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "jobs:\n  remote: { uses: owner/repo/.github/workflows/tests.yml@main }\n",
+  }), /expand inline or unsupported job mappings/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "jobs: { remote: { uses: owner/repo/.github/workflows/tests.yml@main } }\n",
+  }), /expand inline or unsupported job mappings/)
+})
+
+test("workflowCarryPaths: allows step-level action uses and ignores comments and run text", () => {
+  const body = `jobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Record\n        uses: garnet-org/action@abc\n      - run: |\n          uses: owner/repo/.github/workflows/tests.yml@main\n    # uses: ./.github/workflows/commented.yml\n`
   assert.deepEqual(workflowCarryPaths([CALLER], { [CALLER]: body }), [CALLER])
   assert.deepEqual(workflowCarryPaths([], {}), [])
 })
