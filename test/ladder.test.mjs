@@ -1803,6 +1803,27 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.match(record, /cargo fetch --locked/)
 })
 
+test("stage 2 gate labels explicit best-effort capture and rejects missing, unknown, incomplete or non-final records", () => {
+  const summary = { status: "finalized", capture_quality: "best-effort", incomplete: 0 }
+  const read = (data) => evidenceStateFor([{
+    user: { login: "garnet-runtime-review[bot]" },
+    body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary ${JSON.stringify(data)} -->`,
+  }], HEAD40)
+  const labelled = read(summary)
+  assert.equal(labelled.state, "success")
+  assert.match(labelled.summary, /best-effort capture/)
+  assert.equal(labelled.capture, "best-effort")
+  for (const capture_quality of [undefined, "unknown", "partial", null]) {
+    assert.equal(read({ ...summary, capture_quality }).state, "failure")
+  }
+  for (const capture_quality of ["complete", "best-effort"]) {
+    assert.equal(read({ ...summary, capture_quality, incomplete: 1 }).state, "failure")
+  }
+  for (const status of [undefined, "pending", "unknown"]) {
+    assert.notEqual(read({ ...summary, status }).state, "success")
+  }
+})
+
 test("stage 2 gate fails closed for finalized production records whose contract lacks capture accounting", () => {
   const head = "08429365f5"
   const fullHead = `${head}${"0".repeat(30)}`
