@@ -20,8 +20,7 @@ import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../
 import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
 import { isTrustedEvidenceComment, recordStamp, renderEvidenceSection } from "../live/templates/stage2/garnet-evidence-mirror.mjs"
-import { alreadyPublished, checkRunPayload, evidenceStateFor, parseRecorderNames, unsettledRecorders, withRecorderCompleteness } from "../live/templates/stage2/garnet-evidence-gate.mjs"
-import { API_REVIEWERS, EVIDENCE_CHECK, MENTIONS, SETTLE_MS, settleWaitMs, alreadyRequestedFor, evidenceCheckState, evidenceSettled, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
+import { API_REVIEWERS, MENTIONS, alreadyRequestedFor, isFinalizedRecordFor, parseReviewers as parseWorkflowReviewers, renderRequestComment, rereviewMarker } from "../live/templates/stage2/garnet-rereview.mjs"
 import { STAGES, ensureTarget, mergeConcurrentRows } from "../lib/ledger.mjs"
 import { keepUat, resolveConsumeTarget, uat } from "../lib/commands.mjs"
 import { PNPM_82_COMMENT, PNPM_84_COMMENT, PNPM_85_COMMENT } from "./fixtures/pnpm-app-comments.mjs"
@@ -1388,17 +1387,17 @@ test("status: ladder marks stages done only from their own artifact; next comman
 
 // ---------------------------------------------------------------- consume
 
-test("consume: only a head-bound citation by a non-Garnet reviewer counts as consumption", () => {
+test("consume: a head-bound citation counts with a recording check and no Actions evidence check", () => {
   const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: `x\n<!-- garnet:evidence:begin -->\nRuntime evidence (head \`${SHA_B.slice(0, 7)}\`)\n<!-- garnet:evidence:end -->` }
   const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY }
-  const none = evaluateConsumption({ pr, comments: [record], reviews: [], checks: [{ name: "garnet/evidence", status: "completed", conclusion: "success" }] })
+  const none = evaluateConsumption({ pr, comments: [record], reviews: [], checks: [{ name: "Garnet Runtime Visibility", status: "completed", conclusion: "success" }] })
   assert.equal(none.recordBound, true)
   assert.equal(none.mirror, true)
   assert.equal(none.consumed, false)
   const cited = evaluateConsumption({
     pr, comments: [record],
     reviews: [{ user: { login: "reviewer" }, state: "APPROVED", commit_id: SHA_B, body: `**Runtime grounding** (head \`${SHA_B.slice(0, 7)}\`): one new outbound connection, from the record.` }],
-    checks: [{ name: "garnet/evidence", status: "completed", conclusion: "success" }],
+    checks: [{ name: "Garnet Runtime Visibility", status: "completed", conclusion: "success" }],
   })
   assert.equal(cited.consumed, true)
   assert.deepEqual(cited.consumers, ["reviewer (review approved)"])
@@ -1773,28 +1772,25 @@ test("verify: paginates comments and check runs before evaluating the recording 
 
 // ---------------------------------------------------------------- stage 2
 
-test("stage 2: mirror + gate ride the default branch, never run fork code, and reuse the fork's recording workflow", () => {
+test("stage 2: mirror + merge-safety ride the default branch, never run fork code, and reuse the fork's recording workflow", () => {
   const plan = planStage2({ slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", recording: { present: true, workflows: [".github/workflows/garnet.yml"], name: "Garnet Runtime Visibility" }, workExists: true })
   const files = Object.keys(plan.files)
   assert.ok(files.some((f) => f.includes("garnet-evidence-mirror.yml")))
-  assert.ok(files.some((f) => f.includes("garnet-evidence-gate.yml")))
+  assert.ok(files.some((f) => f.includes("garnet-merge-safety.yml")))
+  assert.ok(!files.some((f) => f.includes("garnet-evidence-gate")))
   assert.ok(!files.some((f) => f.endsWith("garnet-record.yml")))
   const mirror = Object.entries(plan.files).find(([f]) => f.endsWith("garnet-evidence-mirror.yml"))[1]
   assert.match(mirror, /workflow_run/)
   assert.match(mirror, /Garnet Runtime Visibility/)
   assert.doesNotMatch(mirror, /actions\/checkout@[^\n]*\n[^\n]*head\.sha|ref:\s*\$\{\{\s*github\.event\.workflow_run\.head_sha/)
-  const gate = Object.entries(plan.files).find(([f]) => f.endsWith("garnet-evidence-gate.yml"))[1]
-  assert.match(gate, /head_sha|headRefOid|head\.sha/)
-  assert.doesNotMatch(gate, /--slurp/, "gh api rejects --slurp together with --jq on the runner")
-  assert.match(gate, /checks: write/, "the check run is published on the pull request head, not left to the workflow_run job")
-  assert.match(gate, /issue_comment:\n\s+types: \[created, edited\]/, "re-reads the record each time the App edits its comment")
-  assert.match(gate, /garnet-evidence-gate\.mjs/)
-  assert.doesNotMatch(gate, /name: garnet\/evidence/, "the job is not named after the check; the job's own check lands on the default-branch commit")
-  assert.equal(typeof plan.files[".github/scripts/garnet-evidence-gate.mjs"], "string")
+  assert.doesNotMatch(mirror, /garnet\/evidence|garnet-evidence-gate|checks: write/)
+  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /check-runs|setTimeout/)
+  assert.doesNotMatch(plan.body, /garnet\/evidence/)
   assert.match(mirror, /issue_comment:\n\s+types: \[created, edited\]/)
   assert.doesNotMatch(mirror, /--slurp/)
   for (const step of plan.steps.filter((s) => s.kind === "write-remote")) assert.equal(step.target, FORK)
-  assert.match(renderStage2Plan(plan), /garnet\/evidence/)
+  assert.match(renderStage2Plan(plan), /after merge: mark the check `garnet\/merge-safety` required/)
+  assert.doesNotMatch(renderStage2Plan(plan), /garnet\/evidence/)
   assert.throws(() => planStage2({ slug: "x", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", recording: { present: false, workflows: [] } }), /--ecosystem/)
   const injected = planStage2({ slug: "x", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", ecosystem: "cargo", recording: { present: false, workflows: [] } })
   const record = Object.entries(injected.files).find(([f]) => f.endsWith("garnet-record.yml"))[1]
@@ -1803,39 +1799,7 @@ test("stage 2: mirror + gate ride the default branch, never run fork code, and r
   assert.match(record, /cargo fetch --locked/)
 })
 
-test("stage 2 gate labels explicit best-effort capture and rejects missing, unknown, incomplete or non-final records", () => {
-  const summary = { status: "finalized", capture_quality: "best-effort", incomplete: 0 }
-  const read = (data) => evidenceStateFor([{
-    user: { login: "garnet-runtime-review[bot]" },
-    body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary ${JSON.stringify(data)} -->`,
-  }], HEAD40)
-  const labelled = read(summary)
-  assert.equal(labelled.state, "success")
-  assert.match(labelled.summary, /best-effort capture/)
-  assert.equal(labelled.capture, "best-effort")
-  for (const capture_quality of [undefined, "unknown", "partial", null]) {
-    assert.equal(read({ ...summary, capture_quality }).state, "failure")
-  }
-  for (const capture_quality of ["complete", "best-effort"]) {
-    assert.equal(read({ ...summary, capture_quality, incomplete: 1 }).state, "failure")
-  }
-  for (const status of [undefined, "pending", "unknown"]) {
-    assert.notEqual(read({ ...summary, status }).state, "success")
-  }
-})
 
-test("stage 2 gate fails closed for finalized production records whose contract lacks capture accounting", () => {
-  const head = "08429365f5"
-  const fullHead = `${head}${"0".repeat(30)}`
-  const comments = [{
-    user: { login: "garnet-runtime-review[bot]" },
-    body: `<!-- garnet:commit ${fullHead} -->\n<!-- garnet:summary {"contract":"6.10.0","githubMeta":"2026-08-08","commit":"${fullHead}","previous":"035f95b19e0000000000000000000000000000000000","jobs":1,"changed":1,"unchanged":0,"noOutbound":0,"vanished":0,"added":1,"removed":1,"backgroundAdded":0,"backgroundRemoved":0,"vanishedDestinations":0,"chains":10,"destinations":6,"recorded":"2026-09-08 21:00:53 UTC","kinds":["network"]} -->\n<!-- garnet-runtime-review -->`,
-  }]
-  const result = evidenceStateFor(comments, fullHead, { state: "ready", pending: [] })
-  assert.equal(result.state, "failure")
-  assert.match(result.summary, /is finalized, but its contract does not declare capture completeness, so the evidence is undeterminable/)
-  assert.doesNotMatch(result.summary, /Partial evidence is not success/)
-})
 
 const STAGE2_INPUT = { slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", recording: { present: true, workflows: [".github/workflows/garnet.yml"], name: "Garnet Runtime Visibility" }, workExists: true }
 
@@ -1896,9 +1860,8 @@ test("stage 2: every recorder that can run on a dependency change is listened to
   const plan = planStage2({ ...STAGE2_INPUT, recording })
   assert.deepEqual(plan.recordNames, names)
   assert.match(plan.files[".github/workflows/garnet-evidence-mirror.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
-  assert.match(plan.files[".github/workflows/garnet-evidence-gate.yml"], /workflows: \["Vendored packages","Garnet sentiment dependency visibility"\]/)
   assert.match(renderStage2Plan(plan), /not listened to: \.github\/workflows\/garnet-self\.yml · pull_request\.paths covers only \.github\/workflows\/garnet-self\.yml/)
-  assert.match(plan.body, /Both workflows listen to every recording workflow/)
+  assert.match(plan.body, /The mirror listens to every recording workflow/)
 
   const one = planStage2({ ...STAGE2_INPUT, recording, recordWorkflow: ".github/workflows/garnet-self.yml" })
   assert.deepEqual(one.recordNames, ["Garnet Browser Use CI"], "--record-workflow overrides the path-filter reading")
@@ -1912,7 +1875,8 @@ test("stage 2: every recorder that can run on a dependency change is listened to
   assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, addRecord: true }), /--add-record needs --ecosystem/)
 
   assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"] }), /files at the mirror paths: \.github\/scripts\/garnet-evidence-mirror\.mjs;[\s\S]*unrelated workflow[\s\S]*--replace-mirror/)
-  assert.throws(() => planStage2({ ...STAGE2_INPUT, recording, existing: [".github/workflows/garnet-evidence-gate.yml"] }), /--replace-mirror/, "a foreign workflow at the gate path stops the plan too")
+  const legacy = planStage2({ ...STAGE2_INPUT, recording, existing: [".github/workflows/garnet-evidence-gate.yml", ".github/scripts/garnet-evidence-gate.mjs"] })
+  assert.ok(!legacy.paths.some((path) => path.includes("garnet-evidence-gate")), "legacy gate files are neither installed nor overwritten")
   const replaced = planStage2({ ...STAGE2_INPUT, recording, existing: [".github/scripts/garnet-evidence-mirror.mjs", "REVIEW.md"], replaceMirror: true })
   assert.deepEqual(replaced.replacedMirror, [".github/scripts/garnet-evidence-mirror.mjs"])
   assert.equal(replaced.files["REVIEW.md"], undefined, "an existing REVIEW.md is kept like an adapter")
@@ -1928,39 +1892,6 @@ test("stage 2: every recorder that can run on a dependency change is listened to
   assert.deepEqual(planStage2({ ...STAGE2_INPUT, recording: { ...competing, listenerWrites: writes } }).recordNames, names, "read-only listeners do not stop the plan")
 })
 
-test("stage 2: the gate reads the App's comments fail-closed and publishes garnet/evidence on the exact head", () => {
-  const app = { login: "garnet-runtime-review[bot]" }
-  const record = (body, user = app) => ({ user, body })
-  const final = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":2,"recorded":"2026-09-22 20:51:04 UTC","capture_quality":"complete"} -->\nRuntime Review`
-  assert.equal(evidenceStateFor([], HEAD40).state, "failure")
-  assert.equal(evidenceStateFor([record(final, { login: "github-actions[bot]" })], HEAD40).state, "failure", "the workflow token is not the Garnet App")
-  assert.equal(evidenceStateFor([record(final.replace(HEAD40, "b".repeat(40)))], HEAD40).state, "failure", "a record for another head is not evidence for this one")
-  assert.equal(evidenceStateFor([record(`<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet-control-plane-pending-pr-comment -->`)], HEAD40).state, "pending")
-  assert.equal(evidenceStateFor([record(final.replace("finalized", "pending"))], HEAD40).state, "pending")
-  const ok = evidenceStateFor([record(final)], HEAD40)
-  assert.equal(ok.state, "success")
-  assert.equal(ok.jobs, 2)
-  assert.match(ok.summary, /2 jobs · recorded 2026-09-22 20:51:04 UTC/)
-  assert.equal(withRecorderCompleteness(ok, [], HEAD40).state, "success", "complete capture with settled recorders succeeds")
-  const queued = withRecorderCompleteness(ok, ["Install"], HEAD40)
-  assert.equal(queued.state, "pending", "a queued recorder keeps the gate from succeeding")
-  assert.equal(evidenceStateFor([record(final.replace('"complete"', '"partial"'))], HEAD40).state, "failure")
-  const legacy = evidenceStateFor([record(final.replace(',"capture_quality":"complete"', ""))], HEAD40)
-  assert.equal(legacy.state, "failure")
-  assert.match(legacy.summary, /contract does not declare capture completeness, so the evidence is undeterminable/)
-  const payload = checkRunPayload(ok, HEAD40, "https://github.com/o/r/actions/runs/1")
-  assert.equal(payload.name, EVIDENCE_CHECK)
-  assert.equal(payload.head_sha, HEAD40)
-  assert.equal(payload.conclusion, "success")
-  assert.equal(checkRunPayload(evidenceStateFor([], HEAD40), HEAD40, null).conclusion, "failure")
-  const pending = checkRunPayload({ state: "pending", summary: "s" }, HEAD40, null)
-  assert.equal(pending.status, "in_progress")
-  assert.equal(pending.conclusion, undefined)
-  assert.equal(alreadyPublished([], payload), false)
-  assert.equal(alreadyPublished([{ id: 1, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), true)
-  assert.equal(alreadyPublished([{ id: 2, name: EVIDENCE_CHECK, status: "completed", conclusion: "success", output: { summary: ok.summary } }, { id: 3, name: EVIDENCE_CHECK, status: "completed", conclusion: "failure", output: { summary: "x" } }], payload), false, "the newest run is what the pull request shows")
-  assert.equal(alreadyPublished([{ id: 1, name: "other", status: "completed", conclusion: "success", output: { summary: ok.summary } }], payload), false)
-})
 
 test("stage 2: the mirror names what it copied and renders the citation placeholder as code", () => {
   const body = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","jobs":3,"recorded":"2026-09-22 20:49:55 UTC"} -->\nRuntime Review`
@@ -2010,6 +1941,89 @@ function recordComment(body, login = "garnet-runtime-review[bot]") {
 }
 const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
 
+function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40, HEAD40], latestComments = comments, failRequest = false } = {}) {
+  const script = `
+    const comments = ${JSON.stringify(comments)};
+    const latestComments = ${JSON.stringify(latestComments)};
+    const heads = ${JSON.stringify(heads)};
+    const calls = [];
+    let headRead = 0;
+    let commentRead = 0;
+    globalThis.fetch = async (url, init = {}) => {
+      const path = new URL(url).pathname;
+      const method = init.method ?? "GET";
+      calls.push({ path, method, body: init.body === undefined ? null : JSON.parse(init.body) });
+      if (path === "/repos/o/r/pulls/1" && method === "GET") {
+        return { ok: true, status: 200, json: async () => ({ head: { sha: heads[headRead++] }, html_url: "https://github.com/o/r/pull/1" }) };
+      }
+      if (path === "/repos/o/r/issues/1/comments") {
+        if (method === "GET") return { ok: true, status: 200, json: async () => commentRead++ === 0 ? comments : latestComments };
+        if (method === "POST") return { ok: ${!failRequest}, status: ${failRequest ? 503 : 201}, json: async () => ({}), text: async () => "unavailable" };
+      }
+      throw new Error("Unexpected request: " + method + " " + path);
+    };
+    const { main } = await import(${JSON.stringify(new URL("../live/templates/stage2/garnet-rereview.mjs", import.meta.url).href)});
+    await main();
+    console.log(JSON.stringify(calls));
+  `
+  const output = execFileSync(process.execPath, ["--input-type=module", "--eval", script], {
+    encoding: "utf8",
+    env: { ...process.env, GITHUB_TOKEN: "test-token", GITHUB_REPOSITORY: "o/r", PR_NUMBER: "1", HEAD_SHA: HEAD40, GARNET_REVIEWERS: "coderabbit", GITHUB_API_URL: "https://api.github.com" },
+    stdio: ["ignore", "pipe", "pipe"],
+  })
+  return JSON.parse(output.trim().split("\n").at(-1))
+}
+
+test("re-review: a finalized exact-head record requests without a check run or polling", () => {
+  const calls = runRereview()
+  const posted = calls.filter((call) => call.method === "POST")
+  assert.equal(posted.length, 1)
+  assert.match(posted[0].body.body, /@coderabbitai review/)
+  assert.match(posted[0].body.body, new RegExp(rereviewMarker(HEAD40)))
+  assert.ok(!calls.some((call) => call.path.includes("check-runs")))
+})
+
+test("re-review: a finalized best-effort record still requests", () => {
+  const record = FINAL_RECORD.replace('"chains":2', '"chains":2,"capture_quality":"best-effort"')
+  assert.equal(runRereview({ comments: [recordComment(record)] }).filter((call) => call.method === "POST").length, 1)
+})
+
+test("re-review: a pending record requests nothing", () => {
+  const comments = [recordComment(FINAL_RECORD.replace("finalized", "pending"))]
+  assert.ok(runRereview({ comments }).every((call) => call.method === "GET"))
+})
+
+test("re-review: an absent record requests nothing", () => {
+  assert.ok(runRereview({ comments: [] }).every((call) => call.method === "GET"))
+})
+
+test("re-review: a moved head requests nothing", () => {
+  for (const heads of [[OTHER40], [HEAD40, OTHER40]]) {
+    assert.ok(runRereview({ heads }).every((call) => call.method === "GET"))
+  }
+})
+
+test("re-review: stale or untrusted records request nothing", () => {
+  for (const comments of [[recordComment(FINAL_RECORD.replace(HEAD40, OTHER40))], [recordComment(FINAL_RECORD, "github-actions[bot]")]]) {
+    assert.ok(runRereview({ comments }).every((call) => call.method === "GET"))
+  }
+})
+
+test("re-review: an existing per-head lock prevents duplicate requests", () => {
+  const comments = [recordComment(FINAL_RECORD), { body: rereviewMarker(HEAD40) }]
+  assert.ok(runRereview({ comments }).every((call) => call.method === "GET"))
+  assert.ok(runRereview({ latestComments: comments }).every((call) => call.method === "GET"))
+})
+
+test("re-review: a record that becomes pending before the request requests nothing", () => {
+  const latestComments = [recordComment(FINAL_RECORD.replace("finalized", "pending"))]
+  assert.ok(runRereview({ latestComments }).every((call) => call.method === "GET"))
+})
+
+test("re-review: request errors are surfaced", () => {
+  assert.throws(() => runRereview({ failRequest: true }), /POST .*503 unavailable/)
+})
+
 test("re-review script: requests only for a finalized, trusted, exact-head record and only once per head", () => {
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), HEAD40), true)
   assert.equal(isFinalizedRecordFor(recordComment(FINAL_RECORD), OTHER40), false, "a record for another head is not evidence for this one")
@@ -2030,17 +2044,6 @@ test("re-review script: requests only for a finalized, trusted, exact-head recor
   assert.equal(alreadyRequestedFor([{ body: 7 }], HEAD40), false)
 })
 
-test("re-review script: the garnet/evidence check must have passed; absent, pending and failed checks request nothing", () => {
-  assert.equal(EVIDENCE_CHECK, "garnet/evidence")
-  const run = (status, conclusion, name = EVIDENCE_CHECK) => ({ name, status, conclusion })
-  assert.equal(evidenceCheckState([]), "absent")
-  assert.equal(evidenceCheckState(undefined), "absent")
-  assert.equal(evidenceCheckState([run("completed", "success", "ci/other")]), "absent", "another check's success is not evidence")
-  assert.equal(evidenceCheckState([run("in_progress", null)]), "pending")
-  assert.equal(evidenceCheckState([run("completed", "failure")]), "failed")
-  assert.equal(evidenceCheckState([run("completed", "failure"), run("completed", "success")]), "success", "a rerun that passed counts")
-  assert.equal(evidenceCheckState([run("completed", "failure"), run("queued", null)]), "pending")
-})
 
 test("re-review script: one comment carries every mention and the per-head lock without API reviewer residue", () => {
   assert.deepEqual(parseWorkflowReviewers("devin, coderabbit,greptile,devin"), ["devin", "coderabbit", "greptile"])
@@ -2058,8 +2061,6 @@ test("re-review script: one comment carries every mention and the per-head lock 
   assert.doesNotMatch(body, /approve|LGTM|safe|clean/i, "the request never judges the pull request")
   assert.ok(API_REVIEWERS.includes("bugbot") && !("bugbot" in MENTIONS), "Bugbot ignores bot-posted `bugbot run`; it is requested through its API")
   assert.doesNotMatch(renderRequestComment(["bugbot", "coderabbit"], HEAD40), /bugbot run|cursor review/)
-  assert.ok(evidenceSettled("success") && evidenceSettled("failed"), "a best-effort record fails the gate but is still requested")
-  assert.ok(!evidenceSettled("pending") && !evidenceSettled("absent"))
   const apiOnly = renderRequestComment(["copilot"], HEAD40)
   assert.ok(apiOnly.startsWith(rereviewMarker(HEAD40)), "API-only reviewers still get the lock comment")
   assert.doesNotMatch(apiOnly, /^@/m)
@@ -2075,28 +2076,6 @@ test("consume: a URL without a matching target requires an explicit slug", () =>
   assert.deepEqual(resolveConsumeTarget("https://github.com/garnet-labs/widgets/pull/7", [...targets, { slug: "widgets-copy", fork: "garnet-labs/widgets" }]), { target: null, reason: "ambiguous" })
 })
 
-test("stage2 gate: a finalized record stays pending while any listened recorder run on the head is unfinished", () => {
-  const recorders = ["Install", "Prettier"]
-  const runs = [
-    { name: "Install", status: "completed" },
-    { name: "Prettier", status: "in_progress" },
-    { name: "Lint", status: "queued" },
-  ]
-  assert.deepEqual(unsettledRecorders(runs, recorders), ["Prettier"], "non-recorder workflows do not count")
-  assert.deepEqual(unsettledRecorders(runs, []), [])
-  const success = { state: "success", summary: "ok", recorded: "2026-09-20T12:00:00Z", jobs: 2 }
-  const held = withRecorderCompleteness(success, ["Prettier"], HEAD40)
-  assert.equal(held.state, "pending")
-  assert.match(held.summary, /1 recorder run is still running \(Prettier\)/)
-  assert.equal(held.jobs, 2, "what the record said is kept")
-  assert.equal(checkRunPayload(held, HEAD40, null).status, "in_progress")
-  assert.deepEqual(withRecorderCompleteness(success, [], HEAD40), success)
-  const failure = { state: "failure", summary: "none", recorded: null, jobs: null }
-  assert.deepEqual(withRecorderCompleteness(failure, ["Prettier"], HEAD40), failure, "a missing record is failure regardless of running recorders")
-  assert.deepEqual(parseRecorderNames('["Install","Prettier"]'), recorders)
-  assert.deepEqual(parseRecorderNames(undefined), [])
-  assert.throws(() => parseRecorderNames('{"a":1}'), /JSON array/)
-})
 
 test("verify: the fork's re-review lock comment is not session residue, other comments still are", () => {
   const lock = `<!-- garnet:rereview ${SHA_B} -->\n@greptileai review\nNot requested (repository secret absent): devin.`
@@ -2127,10 +2106,8 @@ test("a label that starts the fork's recorder goes on when the pull request open
   assert.ok(reviewer.indexOf("push-change") < reviewer.indexOf("wait-head-record") && reviewer.indexOf("wait-head-record") === reviewer.indexOf("pr-label") - 1)
 })
 
-test("stage 2: no draft hold (the workflow token cannot change draft state); reviews wait for the record to settle", () => {
+test("stage 2: no draft hold or polling; reviews follow finalized App comments", () => {
   const plan = planStage2(STAGE2_INPUT)
   assert.equal(plan.files[".github/workflows/garnet-review-hold.yml"], undefined)
-  const now = Date.parse("2026-11-10T17:00:00Z")
-  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:00Z" }], now), 0)
-  assert.equal(settleWaitMs([{ updated_at: "2026-11-10T16:59:50Z" }], now), SETTLE_MS - 10_000, "the App edits its comment again seconds after finalizing")
+  assert.doesNotMatch(plan.files[".github/scripts/garnet-rereview.mjs"], /setTimeout|check-runs/)
 })
