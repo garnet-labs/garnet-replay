@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { readFile } from "node:fs/promises"
 import test from "node:test"
 import { assertOneCommit } from "../lib/guards.mjs"
 import { livePr, setup } from "../lib/commands.mjs"
@@ -250,6 +251,82 @@ test("workflowCarryPaths: refuses unreadable default-branch callers and callees"
   assert.throws(() => workflowCarryPaths([CALLER], {}), /cannot carry workflow .*ci.yml: missing from the fork's default branch/)
   assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: callsWorkflow(CALLEE) }), /cannot carry workflow .*tests.yml: missing from the fork's default branch/)
 })
+
+for (const indent of [1, 2]) {
+  test(`workflowCarryPaths: rejects workflows uniformly indented ${indent} spaces`, () => {
+    const body = "on:\n  pull_request:\njobs:\n  t:\n    uses: owner/r/.github/workflows/x.yml@main\n"
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: body.split("\n").map((line) => " ".repeat(indent) + line).join("\n"),
+    }), /must start at column 0/)
+  })
+}
+
+test("workflowCarryPaths: rejects indented content after leading comments", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "# workflow\n\n  on: pull_request\n  jobs:\n    t:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  }), /must start at column 0/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "on:\n  pull_request:\n  jobs:\n    t:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  }), /jobs must start at column 0/)
+})
+
+test("workflowCarryPaths: rejects duplicate uses regardless of value order", () => {
+  for (const uses of [
+    ["owner/r/.github/workflows/x.yml@main", `./${CALLEE}`],
+    [`./${CALLEE}`, "owner/r/.github/workflows/x.yml@main"],
+  ]) {
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  t:\n    uses: ${uses[0]}\n    uses: ${uses[1]}\n`, [CALLEE]: "on: workflow_call\n",
+    }), /duplicate workflow mapping key uses/)
+  }
+})
+
+test("workflowCarryPaths: rejects duplicate workflow keys, job ids, and job properties", () => {
+  for (const body of [
+    "on: pull_request\non: workflow_call\n",
+    "jobs:\n  t:\n    steps: []\njobs:\n  t:\n    steps: []\n",
+    "jobs:\n  t:\n    steps: []\n  t:\n    steps: []\n",
+    "jobs:\n  t:\n    permissions: {}\n    permissions: write-all\n",
+  ]) assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /duplicate workflow mapping key/)
+})
+
+test("workflowCarryPaths: rejects inconsistent job and job-property indentation", () => {
+  for (const body of [
+    "jobs:\n  t:\n    steps: []\n   other:\n     uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    steps: []\n    other:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    name: Test\n      uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    name: Test\n   uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    steps: []\n  other:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  ]) assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /indentation|unsupported (?:job property|nested workflow content)/)
+})
+
+test("workflowCarryPaths: accepts canonical CRLF workflows with leading comments", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: `# caller\r\n\r\n${callsWorkflow(CALLEE).replace(/\n/g, "\r\n")}`, [CALLEE]: "on: workflow_call\r\n",
+  }), [CALLER, CALLEE])
+})
+
+test("workflowCarryPaths: rejects alias, anchored, and folded reusable uses", () => {
+  for (const value of ["*remote", "&remote owner/r/.github/workflows/x.yml@main", ">-\n      owner/r/.github/workflows/x.yml@main"]) {
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: `jobs:\n  t:\n    uses: ${value}\n` }), /reusable uses must be local and unpinned/)
+  }
+})
+
+for (const [fork, ref, caller, callee, support] of [
+  ["litellm", "2d48a1f", "test-unit-core-utils.yml", "_test-unit-base.yml", []],
+  ["code-interpreter", "b7514ab", "pull_request.yml", "charts_tests.yml", ["build_test_template.yml", "js_tests.yml", "python_tests.yml", "performance_tests.yml", "cleanup_build_template.yml"]],
+]) {
+  test(`workflowCarryPaths: real garnet-labs/${fork}@${ref} caller and callee parse`, async () => {
+    const prefix = ".github/workflows/"
+    const bodies = Object.fromEntries(support.map((file) => [prefix + file, "on: workflow_call\n"]))
+    for (const file of [caller, callee]) {
+      bodies[prefix + file] = await readFile(`test/fixtures/workflows/garnet-labs_${fork}-${ref}-${file}`, "utf8")
+    }
+    const carried = workflowCarryPaths([prefix + caller], bodies)
+    assert.deepEqual(new Set(carried), new Set([caller, callee, ...support].map((file) => prefix + file)))
+    assert.deepEqual(workflowCarryPaths([prefix + callee], bodies), [prefix + callee])
+  })
+}
 
 test("planPureReplay: exactly one commit, no wait, no scaffolding", () => {
   const plan = purePlan()

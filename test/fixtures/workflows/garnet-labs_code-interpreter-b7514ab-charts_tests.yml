@@ -1,0 +1,53 @@
+name: Test Python SDK
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    defaults:
+      run:
+        working-directory: ./chart_data_extractor
+    name: Chart Data Extractor - Build and test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: garnet-org/action@673a06d87748bec49e4d8df22d371b2a3420aba4 # v2.5.2
+        with:
+          jibril_version: v2.18.0-rc.2
+
+      - name: Parse .tool-versions
+        uses: wistia/parse-tool-versions@v2.1.1
+        with:
+          filename: '.tool-versions'
+          uppercase: 'true'
+          prefix: 'tool_version_'
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '${{ env.TOOL_VERSION_PYTHON }}'
+
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: '${{ env.TOOL_VERSION_POETRY }}'
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Test build
+        run: poetry build
+
+      - name: Run tests
+        run: poetry run pytest --verbose -x
