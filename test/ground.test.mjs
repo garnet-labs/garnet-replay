@@ -188,7 +188,7 @@ test("shared URL/local admission refuses missing guidance, allows explicit overr
 test("upstream-based plans carry approved guidance onto the base and two-commit replay", () => {
   const input = { slug: "example", fork: "garnet-labs/example", upstream: "upstream/example", defaultBranch: "main", upstreamPr: 1, upstreamTitle: "fix: update source", baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: "src/a.js", status: "modified", previous: null }], baseBranch: "review/base", recordWorkflows: [".github/workflows/ci.yml"], work: "/unused" }
   const grounding = { current: reviewerKit(), sha: "c".repeat(40) }
-  const pure = carryReviewerGuidance(planPureReplay(input), grounding)
+  const pure = carryReviewerGuidance(planPureReplay({ ...input, forkDefaultSha: grounding.sha }), grounding)
   const base = pure.steps.find((step) => step.kind === "ensure-base")
   assert.deepEqual(base.reviewerPaths, Object.keys(reviewerKit()))
   assert.equal(base.reviewerFrom, grounding.sha)
@@ -339,6 +339,7 @@ test("live refuses ungrounded default branches before any write, with explicit o
   const exec = (cmd, args) => {
     assert.equal(cmd, "gh")
     if (args[0] === "repo") return '{"defaultBranchRef":{"name":"main"}}'
+    if (args[1] === "repos/garnet-labs/posthog/commits/main") return JSON.stringify({ sha: "c".repeat(40) })
     if (args[1].includes("/git/trees/")) return '{"tree":[]}'
     if (args[1] === "repos/garnet-labs/posthog") return '{"default_branch":"main"}'
     assert.fail(args.join(" "))

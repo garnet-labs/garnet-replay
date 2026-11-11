@@ -8,6 +8,8 @@ import {
   replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity, workflowCarryPaths,
 } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
+import { planDetails, planSignature } from "../lib/replay-runner.mjs"
+import { branchHeadSha } from "../lib/gh.mjs"
 import { kitResponse } from "./fixtures/grounding.mjs"
 
 const SHA_A = "a".repeat(40)
@@ -26,7 +28,7 @@ function purePlan(overrides = {}) {
   return planPureReplay({
     slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", upstreamPr: 501,
     upstreamTitle: "feat: add thing", baseSha: SHA_A, headSha: SHA_B, changes: CHANGES,
-    work: "/tmp/work", recordWorkflows: RECORDERS, ...overrides,
+    work: "/tmp/work", forkDefaultSha: SHA_C, recordWorkflows: RECORDERS, ...overrides,
   })
 }
 
@@ -366,11 +368,43 @@ test("planPureReplay: --base-branch carries the recorder via ensure-base", () =>
   assert.ok(ensure, "ensure-base step present")
   assert.equal(ensure.target, FORK)
   assert.deepEqual(ensure.carry, RECORDERS)
-  assert.equal(ensure.carryFrom, "origin/main")
+  assert.equal(ensure.carryFrom, SHA_C)
   assert.equal(plan.baseRef, "review/base")
   assert.match(ensure.message, /carry the fork's recording workflow/)
   const rendered = renderPlan(plan)
   assert.match(rendered, /set review\/base on the fork/)
+})
+
+test("planPureReplay: records the exact default SHA in CLI and hosted plans and pins checkout", () => {
+  const plan = purePlan()
+  assert.equal(plan.forkDefaultSha, SHA_C)
+  assert.equal(planDetails(plan).forkDefaultSha, SHA_C)
+  assert.ok(renderPlan(plan).includes(`fork default snapshot: main@${SHA_C}`))
+  assert.ok(renderPlan(plan).includes(`refuse a moved default branch`))
+  assert.equal(plan.steps.find((step) => step.id === "branch").args.at(-1), SHA_C)
+  assert.notEqual(planSignature(plan), planSignature(purePlan({ forkDefaultSha: SHA_A })))
+  for (const options of [{ baseBranch: "review/base" }, { syncFork: true }]) {
+    const variant = purePlan(options)
+    const guard = variant.steps.findIndex((step) => step.kind === "verify-fork-default")
+    assert.ok(guard >= 0)
+    assert.ok(guard < variant.steps.findIndex((step) => step.kind === "ensure-base" || step.id === "sync-fork"))
+  }
+  for (const forkDefaultSha of [undefined, null, "", "main", "a".repeat(39)]) {
+    assert.throws(() => purePlan({ forkDefaultSha }), /fork default-branch SHA unresolved/)
+  }
+})
+
+test("branchHeadSha: validates API data and preserves read failures", () => {
+  const exec = (command, args) => {
+    assert.equal(command, "gh")
+    assert.deepEqual(args, ["api", `repos/${FORK}/commits/release%2Fstable`])
+    return JSON.stringify({ sha: SHA_C })
+  }
+  assert.equal(branchHeadSha(FORK, "release/stable", { exec }), SHA_C)
+  for (const result of [null, {}, { sha: "" }, { sha: "main" }]) {
+    assert.throws(() => branchHeadSha(FORK, "main", { exec: () => JSON.stringify(result) }), /could not resolve the commit SHA/)
+  }
+  assert.throws(() => branchHeadSha(FORK, "main", { exec: () => { throw new Error("HTTP 403") } }), /HTTP 403/)
 })
 
 test("planPureReplay: refuses unonboarded forks, clobbered recorders, filtered-out changes", () => {
@@ -479,12 +513,31 @@ test("executePlan: setup refuses when an onboarding pull request is already open
 
 // ---------------------------------------------------------------- executePlan: ensure-base
 
+test("executePlan: a moved default branch refuses before base checkout or publication", async () => {
+  for (const options of [{}, { baseBranch: "review/base" }, { syncFork: true }]) {
+    const plan = purePlan(options)
+    const guard = plan.steps.findIndex((step) => step.kind === "verify-fork-default")
+    const { exec, calls } = fakeExec([[/gh api .*\/commits\/main/, JSON.stringify({ sha: SHA_A })]])
+    await assert.rejects(executePlan({ ...plan, steps: plan.steps.slice(guard) }, { exec, io: memoryIo(), log: () => {} }),
+      new RegExp(`default branch ${FORK}@main moved: planned ${SHA_C}, current ${SHA_A}; prepare a new replay plan`))
+    assert.equal(calls.length, 1, "no checkout or push after the snapshot mismatch")
+  }
+})
+
+test("executePlan: missing default-branch head fails closed before checkout", async () => {
+  const plan = purePlan({ baseBranch: "review/base" })
+  const guard = plan.steps.findIndex((step) => step.kind === "verify-fork-default")
+  const { exec, calls } = fakeExec([[/gh api .*\/commits\/main/, "{}"]])
+  await assert.rejects(executePlan({ ...plan, steps: plan.steps.slice(guard) }, { exec, io: memoryIo(), log: () => {} }), /could not resolve the commit SHA/)
+  assert.equal(calls.length, 1)
+})
+
 test("executePlan: ensure-base skips when the fork branch already carries the recording", async () => {
   const plan = {
     mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work",
     steps: [{
       id: "ensure-base", kind: "ensure-base", target: FORK, baseBranch: "review/base", baseSha: SHA_A,
-      carryFrom: "origin/main", carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
+      carryFrom: SHA_C, carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
     }],
   }
   const { exec, calls } = fakeExec([
@@ -501,7 +554,7 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
     mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work",
     steps: [{
       id: "ensure-base", kind: "ensure-base", target: FORK, baseBranch: "review/base", baseSha: SHA_A,
-      carryFrom: "origin/main", carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
+      carryFrom: SHA_C, carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
     }],
   }
   const { exec } = fakeExec([
@@ -524,6 +577,7 @@ function liveExec({ recording, openPrs = [], recentPrs = [], commits = [
     const kit = kitResponse(args)
     if (kit !== null) return kit
     if (args[0] === "repo") return JSON.stringify({ defaultBranchRef: { name: "main" } })
+    if (args[1] === `repos/${FORK}/commits/main`) return JSON.stringify({ sha: SHA_C })
     if (args[0] === "pr" && args[1] === "list" && args.includes("number,title,body,url,author,createdAt,state,labels,files,headRefName,baseRefName,isDraft")) {
       return JSON.stringify(recentPrs.map((pr) => ({ state: "OPEN", ...pr })))
     }
@@ -594,6 +648,31 @@ test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   assert.doesNotMatch(result.plan.body, NO_UPSTREAM)
 })
 
+test("livePr: default-branch instrument bodies and inventory use the one planned SHA", async () => {
+  const fallback = liveExec({ recording: true })
+  const reads = []
+  let snapshotReads = 0
+  const exec = (command, args) => {
+    const path = args[1] ?? ""
+    if (path === `repos/${FORK}/commits/main`) snapshotReads += 1
+    if (path.startsWith(`repos/${FORK}/`) && (path.includes(":.github/workflows") || path.includes("/contents/.github/workflows/"))) {
+      reads.push(path)
+      assert.ok(path.includes(`/git/trees/${SHA_C}:`) || path.endsWith(`?ref=${SHA_C}`), path)
+    }
+    if (path.includes("/contents/.github/workflows/ci.yml")) {
+      return "on:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm test\n"
+    }
+    return fallback(command, args)
+  }
+  const result = await livePr(["posthog", "--pr", "501", "--record", "instrument", "--job", "ci.yml/test", "--ecosystem", "npm", "--dry-run"], {
+    exec, log: () => {}, save: () => assert.fail("dry run must not save"),
+  })
+  assert.equal(result.plan.record, "instrument")
+  assert.equal(snapshotReads, 1)
+  assert.ok(reads.includes(`repos/${FORK}/contents/.github/workflows/ci.yml?ref=${SHA_C}`))
+  assert.ok(reads.filter((path) => path.includes(`/git/trees/${SHA_C}:`)).length >= 2, "recorder discovery and inventory both use the snapshot")
+})
+
 test("livePr: pure replay carries default-branch callees over upstream copies or absent upstream files", async () => {
   for (const upstreamHasCallee of [true, false]) {
     const fallback = liveExec({ recording: true })
@@ -603,9 +682,12 @@ test("livePr: pure replay carries default-branch callees over upstream copies or
       [NESTED_CALLEE]: "on: workflow_call\n",
     }
     const reads = []
+    let snapshotReads = 0
     const exec = (command, args) => {
       const path = args[1] ?? ""
+      if (path === `repos/${FORK}/commits/main`) snapshotReads += 1
       if (path.includes(":.github/workflows")) {
+        if (path.startsWith(`repos/${FORK}/`)) assert.ok(path.includes(`/git/trees/${SHA_C}:`))
         const paths = path.startsWith(`repos/${FORK}/`)
           ? Object.keys(bodies)
           : upstreamHasCallee ? [CALLEE] : []
@@ -614,7 +696,7 @@ test("livePr: pure replay carries default-branch callees over upstream copies or
       if (path.includes("/contents/.github/workflows/")) {
         reads.push(path)
         if (path.startsWith(`repos/${FORK}/`)) {
-          assert.ok(path.endsWith("?ref=main"))
+          assert.ok(path.endsWith(`?ref=${SHA_C}`))
           return bodies[path.split("/contents/")[1].split("?")[0]]
         }
         assert.ok(upstreamHasCallee, "absent upstream callees must not be read")
@@ -626,17 +708,21 @@ test("livePr: pure replay carries default-branch callees over upstream copies or
       exec, log: () => {}, save: () => assert.fail("dry run must not save"),
     })
     assert.equal(result.plan.mode, "pure-replay")
+    assert.equal(snapshotReads, 1)
+    assert.equal(result.plan.forkDefaultSha, SHA_C)
     const ensure = result.plan.steps.find((step) => step.kind === "ensure-base")
     assert.deepEqual(ensure.carry, [CALLER, CALLEE, NESTED_CALLEE])
-    assert.equal(ensure.carryFrom, "origin/main")
-    assert.ok(reads.includes(`repos/${FORK}/contents/${CALLEE}?ref=main`))
+    assert.equal(ensure.carryFrom, SHA_C)
+    assert.ok(reads.includes(`repos/${FORK}/contents/${CALLEE}?ref=${SHA_C}`))
     const execution = fakeExec([
+      [/gh api .*\/commits\/main/, JSON.stringify({ sha: SHA_C })],
       [/rev-parse --verify/, () => { throw new Error("ref absent") }],
       [/write-tree/, "tree-with-callees"],
       [/diff --cached --name-only/, ensure.carry.join("\n")],
     ])
-    await executePlan({ ...result.plan, steps: [ensure] }, { exec: execution.exec, io: memoryIo(), log: () => {} })
-    assert.ok(execution.calls.includes(`git -C ${result.plan.work} checkout origin/main -- ${ensure.carry.join(" ")}`))
+    const guard = result.plan.steps.find((step) => step.kind === "verify-fork-default")
+    await executePlan({ ...result.plan, steps: [guard, ensure] }, { exec: execution.exec, io: memoryIo(), log: () => {} })
+    assert.ok(execution.calls.includes(`git -C ${result.plan.work} checkout ${SHA_C} -- ${ensure.carry.join(" ")}`))
     assert.ok(execution.calls.some((call) => call.includes("push --set-upstream origin HEAD:refs/heads/review/base")))
   }
 })
