@@ -4,12 +4,15 @@
   "fork": "garnet-labs/litellm",
   "record": {
     "mode": "instrument",
-    "job": "test-vscode-extension.yml/vscode-extension"
+    "job": "_test-unit-base.yml/run"
   },
   "workload": {
-    "name": "vscode-extension",
+    "name": "core-utils",
     "paths": [
-      "vscode-extension/**"
+      "litellm/litellm_core_utils/**",
+      "tests/test_litellm/litellm_core_utils/**",
+      "pyproject.toml",
+      "poetry.lock"
     ]
   },
   "notes": [],

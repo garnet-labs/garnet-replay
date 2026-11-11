@@ -376,3 +376,9 @@ when its fork has fallen behind upstream. Choose `--record instrument --job
 workflow.yml/job` when the project already has a pull-request workflow and its
 own install steps should be recorded; choose injected recording when a separate
 recording workflow is clearer or the project has no suitable job.
+
+For a reusable test workflow, select its callee job (for example
+`--job _test-unit-base.yml/run` or `--job charts_tests.yml/publish`), not the
+caller's `uses` job. Instrumentation preserves `workflow_call` and the test
+commands; the caller must already grant OIDC and include the replay base in its
+pull-request branch filters. It does not rewrite or enable the caller.
