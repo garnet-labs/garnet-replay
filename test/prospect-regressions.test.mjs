@@ -6,7 +6,7 @@ import { buildModel, classify, extractChains, recordedEvidence, renderCard } fro
 import { livePr } from "../lib/commands.mjs"
 import { publicProfile } from "../lib/gh.mjs"
 import { detectEcosystem, GARNET_ACTION_PIN, planReplay } from "../lib/replay-pr.mjs"
-import { evaluateExhibit, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
+import { evaluateExhibit, findResidue, publicProfileIdentity, sensorCoverage, verifyExhibit } from "../lib/verify.mjs"
 
 const HEAD = "a".repeat(40)
 const PREVIOUS = "b".repeat(40)
@@ -64,6 +64,56 @@ test("public report identity requires repository, run, profile and the exact hea
   assert.match(profileCheck({ ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }).detail, /refs\/pull\/1\/merge/)
 })
 
+test("recorded PR head binds merge-ref profiles without relabeling the merge SHA", () => {
+  const merge = { ...RUN, commit_sha: PREVIOUS, ref: "refs/pull/1/merge" }
+  const bound = profileCheck({ ...merge, head_sha: HEAD })
+  assert.equal(bound.ok, true)
+  assert.match(bound.detail, new RegExp(`recorded head_sha ${HEAD}`))
+  assert.equal(profileCheck(merge).ok, false)
+  assert.equal(profileCheck({ ...merge, commit_sha: HEAD }).ok, false)
+  for (const head_sha of [PREVIOUS, "", null, HEAD.slice(0, 7)]) {
+    assert.equal(profileCheck({ ...RUN, head_sha }).ok, false)
+  }
+  assert.equal(profileCheck().ok, true)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD, repository: "other/repo" }).ok, false)
+})
+
+test("residue exempts only marked Devin Review bot comments, never the PR body", () => {
+  function residue(body, user, text) {
+    return evaluateExhibit({
+      pr: { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body },
+      comments: [
+        { user: "garnet-runtime-review[bot]", body: record() },
+        { user, body: text },
+      ],
+      checks: [],
+      permalinkStatus: 200,
+    }).legs.find((entry) => entry.name === "no session residue")
+  }
+  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Written by Devin").ok, false)
+  assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, false)
+  for (const marker of ["<!-- devin-pr-monitoring-controls -->", "<!-- devin-review-session-triaged -->"]) {
+    const review = `${marker}\nDevin Review: app.devin.ai/review`
+    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, true)
+    assert.equal(residue("Routine change", "someone-else", review).ok, false)
+    assert.equal(residue("Routine change", null, review).ok, false)
+    assert.equal(residue(`Written by Devin\n${marker}`, "devin-ai-integration[bot]", review).ok, false)
+  }
+  assert.equal(residue("Routine change", "someone-else", "Devin Review: app.devin.ai/review").ok, false)
+  assert.equal(residue("Routine change", null, "Reviewed by Devin").ok, false)
+  assert.equal(residue("Written by Devin", "devin-ai-integration[bot]", "Review complete").ok, false)
+  assert.equal(residue("Routine change", "someone-else", "Review complete").ok, true)
+})
+
+test("residue ignores only complete marked review badges in the PR body", () => {
+  const badge = "<!-- devin-review-badge-begin -->\nDevin Review: https://app.devin.ai/review\n<!-- devin-review-badge-end -->"
+  assert.equal(findResidue(`Routine change\n${badge}`, []), null)
+  assert.equal(findResidue(`${badge}\nLink to Devin session`, []), "Devin")
+  assert.equal(findResidue(`Open in Devin Desktop\n${badge}`, []), "Devin")
+  assert.equal(findResidue("<!-- devin-review-badge-begin -->\nDevin Review", []), "devin")
+  assert.equal(findResidue("Routine change", [badge]), "devin")
+})
+
 test("public JSON is fetched anonymously from only the supported selector", async () => {
   const calls = []
   const selected = await publicProfile(`${LINK}&utm_source=github`, { fetchImpl: async (url, options) => {
@@ -119,6 +169,23 @@ test("live verification rejects HTTP 200 with merge-ref or missing identity", as
   const missing = await verifyExhibit(url, { fetchImpl: fetchExhibit(RUN, record("complete", "https://app.garnet.ai")), exec: (_cmd, args) => kitResponse(args) })
   assert.equal(missing.status, "FAIL")
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))
+})
+
+test("sensor coverage distinguishes log authentication failures from other read failures", async () => {
+  for (const status of [401, 403, 500]) {
+    const fetchFixture = fetchExhibit(RUN)
+    const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
+      fetchImpl: (url, options) => url.endsWith("/logs")
+        ? Promise.resolve({ ok: false, status }) : fetchFixture(url, options),
+      exec: (_cmd, args) => kitResponse(args),
+    })
+    const coverage = result.legs.find((entry) => entry.name === "sensor coverage")
+    assert.equal(result.status, "FAIL")
+    assert.equal(coverage.ok, false)
+    assert.equal(coverage.detail, status === 500
+      ? "E2E 0: log unreadable; 0 of 1 jobs covered"
+      : `E2E 0: job log not readable (HTTP ${status}); set GH_TOKEN or GITHUB_TOKEN`)
+  }
 })
 
 test("cards preserve every unchanged workload row and owning job, without teaching examples", () => {
