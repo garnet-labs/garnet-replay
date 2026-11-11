@@ -382,3 +382,7 @@ For a reusable test workflow, select its callee job (for example
 caller's `uses` job. Instrumentation preserves `workflow_call` and the test
 commands; the caller must already grant OIDC and include the replay base in its
 pull-request branch filters. It does not rewrite or enable the caller.
+When a pure replay uses `--base-branch`, it carries the recorder callers and all
+their local reusable workflows, transitively, from the fork's default branch.
+These copies replace upstream callees or add them when absent upstream; shared
+callees are carried only once. External reusable workflows are not copied.

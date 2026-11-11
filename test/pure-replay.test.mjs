@@ -4,7 +4,7 @@ import { assertOneCommit } from "../lib/guards.mjs"
 import { livePr, setup } from "../lib/commands.mjs"
 import {
   GARNET_ACTION_PIN, executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
-  replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity,
+  replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity, workflowCarryPaths,
 } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { kitResponse } from "./fixtures/grounding.mjs"
@@ -156,6 +156,59 @@ test("setupPrBodyText: routine CI wording, no upstream reference", () => {
 })
 
 // ---------------------------------------------------------------- planPureReplay
+
+const CALLER = ".github/workflows/ci.yml"
+const CALLEE = ".github/workflows/tests.yml"
+const NESTED_CALLEE = ".github/workflows/build.yml"
+
+function callsWorkflow(path) {
+  return `on:\n  workflow_call:\njobs:\n  test:\n    uses: ./${path}\n`
+}
+
+test("workflowCarryPaths: carries a caller and its local callee", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "on: workflow_call\n",
+  }), [CALLER, CALLEE])
+})
+
+test("workflowCarryPaths: carries nested callees transitively", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(NESTED_CALLEE), [NESTED_CALLEE]: "on: workflow_call\n",
+  }), [CALLER, CALLEE, NESTED_CALLEE])
+})
+
+test("workflowCarryPaths: deduplicates callers, shared callees and cycles", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER, CALLER, NESTED_CALLEE], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(CALLER), [NESTED_CALLEE]: callsWorkflow(CALLEE),
+  }), [CALLER, NESTED_CALLEE, CALLEE])
+})
+
+test("workflowCarryPaths: ignores non-local uses and commented references", () => {
+  const body = `jobs:
+  external:
+    uses: owner/repo/.github/workflows/tests.yml@main
+  other:
+    uses: ./actions/build
+  pinned:
+    uses: ./.github/workflows/tests.yml@main
+  # uses: ./.github/workflows/commented.yml
+`
+  assert.deepEqual(workflowCarryPaths([CALLER], { [CALLER]: body }), [CALLER])
+  assert.deepEqual(workflowCarryPaths([], {}), [])
+})
+
+test("workflowCarryPaths: accepts quoted references with trailing comments", () => {
+  for (const quote of ['"', "'"]) {
+    assert.deepEqual(workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    uses: ${quote}./${CALLEE}${quote} # reusable\n`, [CALLEE]: "on: workflow_call\n",
+    }), [CALLER, CALLEE])
+  }
+})
+
+test("workflowCarryPaths: refuses unreadable default-branch callers and callees", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {}), /cannot carry workflow .*ci.yml: missing from the fork's default branch/)
+  assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: callsWorkflow(CALLEE) }), /cannot carry workflow .*tests.yml: missing from the fork's default branch/)
+})
 
 test("planPureReplay: exactly one commit, no wait, no scaffolding", () => {
   const plan = purePlan()
@@ -408,6 +461,53 @@ test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   assert.equal(result.plan.record, "fork-workflow")
   assert.match(result.plan.body, /<!-- change-id:[0-9a-f]{64} attempt:[0-9a-f]{64} -->/)
   assert.doesNotMatch(result.plan.body, NO_UPSTREAM)
+})
+
+test("livePr: pure replay carries default-branch callees over upstream copies or absent upstream files", async () => {
+  for (const upstreamHasCallee of [true, false]) {
+    const fallback = liveExec({ recording: true })
+    const bodies = {
+      [CALLER]: callsWorkflow(CALLEE).replace("workflow_call", "pull_request"),
+      [CALLEE]: `${callsWorkflow(NESTED_CALLEE)}  record:\n    steps:\n      - uses: garnet-org/action@${GARNET_ACTION_PIN}\n`,
+      [NESTED_CALLEE]: "on: workflow_call\n",
+    }
+    const reads = []
+    const exec = (command, args) => {
+      const path = args[1] ?? ""
+      if (path.includes(":.github/workflows")) {
+        const paths = path.startsWith(`repos/${FORK}/`)
+          ? Object.keys(bodies)
+          : upstreamHasCallee ? [CALLEE] : []
+        return JSON.stringify({ tree: paths.map((file) => ({ path: file.split("/").at(-1), type: "blob" })) })
+      }
+      if (path.includes("/contents/.github/workflows/")) {
+        reads.push(path)
+        if (path.startsWith(`repos/${FORK}/`)) {
+          assert.ok(path.endsWith("?ref=main"))
+          return bodies[path.split("/contents/")[1].split("?")[0]]
+        }
+        assert.ok(upstreamHasCallee, "absent upstream callees must not be read")
+        return "on: workflow_call\n"
+      }
+      return fallback(command, args)
+    }
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run"], {
+      exec, log: () => {}, save: () => assert.fail("dry run must not save"),
+    })
+    assert.equal(result.plan.mode, "pure-replay")
+    const ensure = result.plan.steps.find((step) => step.kind === "ensure-base")
+    assert.deepEqual(ensure.carry, [CALLER, CALLEE, NESTED_CALLEE])
+    assert.equal(ensure.carryFrom, "origin/main")
+    assert.ok(reads.includes(`repos/${FORK}/contents/${CALLEE}?ref=main`))
+    const execution = fakeExec([
+      [/rev-parse --verify/, () => { throw new Error("ref absent") }],
+      [/write-tree/, "tree-with-callees"],
+      [/diff --cached --name-only/, ensure.carry.join("\n")],
+    ])
+    await executePlan({ ...result.plan, steps: [ensure] }, { exec: execution.exec, io: memoryIo(), log: () => {} })
+    assert.ok(execution.calls.includes(`git -C ${result.plan.work} checkout origin/main -- ${ensure.carry.join(" ")}`))
+    assert.ok(execution.calls.some((call) => call.includes("push --set-upstream origin HEAD:refs/heads/review/base")))
+  }
 })
 
 test("livePr: refuses a recorder overlay when the change's base records itself", async () => {
