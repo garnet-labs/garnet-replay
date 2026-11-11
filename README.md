@@ -376,3 +376,18 @@ when its fork has fallen behind upstream. Choose `--record instrument --job
 workflow.yml/job` when the project already has a pull-request workflow and its
 own install steps should be recorded; choose injected recording when a separate
 recording workflow is clearer or the project has no suitable job.
+
+For a reusable test workflow, select its callee job (for example
+`--job _test-unit-base.yml/run` or `--job charts_tests.yml/publish`), not the
+caller's `uses` job. Instrumentation preserves `workflow_call` and the test
+commands; the caller must already grant OIDC and include the replay base in its
+pull-request branch filters. It does not rewrite or enable the caller.
+When a pure replay uses `--base-branch`, it carries the recorder callers and all
+their local reusable workflows, transitively, from the fork's default branch.
+These copies replace upstream callees or add them when absent upstream; shared
+callees are carried only once. Cycles, remote job-level reusable calls, and
+local reusable calls pinned with `@ref` are rejected; step-level actions remain
+allowed. Reusable-callee instrumentation requires a carried caller that reaches
+the callee, runs on pull-request synchronization for the replay base, and grants
+OIDC on the calling job or at workflow level. Its local support workflows are
+carried into the baseline commit and preserved across the change.

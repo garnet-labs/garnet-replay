@@ -1,0 +1,37 @@
+{
+  "slug": "code-interpreter",
+  "upstream": "e2b-dev/code-interpreter",
+  "fork": "garnet-labs/code-interpreter",
+  "record": {
+    "mode": "instrument",
+    "job": "charts_tests.yml/publish"
+  },
+  "workload": {
+    "name": "chart-data-extractor",
+    "paths": [
+      "chart_data_extractor/**",
+      ".github/workflows/charts_tests.yml"
+    ]
+  },
+  "notes": [],
+  "observations": [],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": -1
+}

@@ -1,0 +1,67 @@
+name: Pull Request
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'rb/**'
+
+jobs:
+  build-template:
+    # Replay bases run charts only; E2B credentials stay out of replay workloads.
+    if: ${{ !startsWith(github.base_ref, 'rb/') }}
+    uses: ./.github/workflows/build_test_template.yml
+    secrets:
+      E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
+    with:
+      E2B_DOMAIN: ${{ vars.E2B_DOMAIN }}
+  js-sdk:
+    # Replay bases run charts only; E2B credentials stay out of replay workloads.
+    if: ${{ !startsWith(github.base_ref, 'rb/') }}
+    uses: ./.github/workflows/js_tests.yml
+    needs: build-template
+    secrets:
+      E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
+    with:
+      E2B_DOMAIN: ${{ vars.E2B_DOMAIN }}
+      E2B_TESTS_TEMPLATE: ${{ needs.build-template.outputs.template_id }}
+  python-sdk:
+    # Replay bases run charts only; E2B credentials stay out of replay workloads.
+    if: ${{ !startsWith(github.base_ref, 'rb/') }}
+    uses: ./.github/workflows/python_tests.yml
+    needs: build-template
+    secrets:
+      E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
+    with:
+      E2B_DOMAIN: ${{ vars.E2B_DOMAIN }}
+      E2B_TESTS_TEMPLATE: ${{ needs.build-template.outputs.template_id }}
+  performance-tests:
+    # Replay bases run charts only; E2B credentials stay out of replay workloads.
+    if: ${{ !startsWith(github.base_ref, 'rb/') }}
+    uses: ./.github/workflows/performance_tests.yml
+    needs: build-template
+    secrets:
+      E2B_API_KEY: ${{ secrets.E2B_API_KEY }}
+    with:
+      E2B_DOMAIN: ${{ vars.E2B_DOMAIN }}
+      E2B_TESTS_TEMPLATE: ${{ needs.build-template.outputs.template_id }}
+  cleanup-build-template:
+    uses: ./.github/workflows/cleanup_build_template.yml
+    needs: [build-template, js-sdk, python-sdk, performance-tests]
+    # No E2B template exists on charts-only replay bases.
+    if: always() && !startsWith(github.base_ref, 'rb/') && !contains(needs.build-template.result, 'failure') && !contains(needs.build-template.result, 'cancelled')
+    secrets:
+      E2B_TESTS_ACCESS_TOKEN: ${{ secrets.E2B_TESTS_ACCESS_TOKEN }}
+    with:
+      E2B_DOMAIN: ${{ vars.E2B_DOMAIN }}
+      E2B_TESTS_TEMPLATE: ${{ needs.build-template.outputs.template_id }}
+  charts-tests:
+    uses: ./.github/workflows/charts_tests.yml

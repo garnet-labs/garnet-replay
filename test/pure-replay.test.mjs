@@ -1,10 +1,11 @@
 import assert from "node:assert/strict"
+import { readFile } from "node:fs/promises"
 import test from "node:test"
 import { assertOneCommit } from "../lib/guards.mjs"
 import { livePr, setup } from "../lib/commands.mjs"
 import {
   GARNET_ACTION_PIN, executePlan, planPureReplay, planSetup, renderPlan, renderSetupPlan, replayAdmissionConflict, replayIdentity,
-  replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity,
+  replayIdentityFromBody, setupPrBodyText, SETUP_BRANCH, withReplayIdentity, workflowCarryPaths,
 } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { kitResponse } from "./fixtures/grounding.mjs"
@@ -156,6 +157,189 @@ test("setupPrBodyText: routine CI wording, no upstream reference", () => {
 })
 
 // ---------------------------------------------------------------- planPureReplay
+
+const CALLER = ".github/workflows/ci.yml"
+const CALLEE = ".github/workflows/tests.yml"
+const NESTED_CALLEE = ".github/workflows/build.yml"
+
+function callsWorkflow(path) {
+  return `on:\n  workflow_call:\njobs:\n  test:\n    uses: ./${path}\n`
+}
+
+test("workflowCarryPaths: carries a caller and its local callee", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "on: workflow_call\n",
+  }), [CALLER, CALLEE])
+})
+
+test("workflowCarryPaths: carries nested callees transitively", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(NESTED_CALLEE), [NESTED_CALLEE]: "on: workflow_call\n",
+  }), [CALLER, CALLEE, NESTED_CALLEE])
+})
+
+test("workflowCarryPaths: deduplicates callers and diamond dependencies", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER, CALLER, NESTED_CALLEE], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "on: workflow_call\n", [NESTED_CALLEE]: callsWorkflow(CALLEE),
+  }), [CALLER, CALLEE, NESTED_CALLEE])
+})
+
+test("workflowCarryPaths: rejects cycles and self references", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: callsWorkflow(CALLER),
+  }), /cyclic reusable workflows/)
+  assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: callsWorkflow(CALLER) }), /cyclic reusable workflows/)
+})
+
+test("workflowCarryPaths: rejects remote and pinned local job-level reusable calls", () => {
+  for (const uses of ["owner/repo/.github/workflows/tests.yml@main", "./.github/workflows/tests.yml@main", "./actions/build"]) {
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    uses: ${uses}\n`,
+    }), /reusable uses must be local and unpinned/)
+  }
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: callsWorkflow(CALLEE), [CALLEE]: "jobs:\n  nested:\n    uses: owner/repo/.github/workflows/tests.yml@main\n",
+  }), /reusable uses must be local and unpinned/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "jobs:\n  remote: { uses: owner/repo/.github/workflows/tests.yml@main }\n",
+  }), /expand inline or unsupported job mappings/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "jobs: { remote: { uses: owner/repo/.github/workflows/tests.yml@main } }\n",
+  }), /expand inline or unsupported job mappings/)
+})
+
+test("workflowCarryPaths: allows step-level action uses and ignores comments and run text", () => {
+  const body = `jobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Record\n        uses: garnet-org/action@abc\n      - run: |\n          uses: owner/repo/.github/workflows/tests.yml@main\n    # uses: ./.github/workflows/commented.yml\n`
+  assert.deepEqual(workflowCarryPaths([CALLER], { [CALLER]: body }), [CALLER])
+  assert.deepEqual(workflowCarryPaths([], {}), [])
+})
+
+for (const key of ['"uses":', "'uses':", "<<:", "? uses"]) {
+  test(`workflowCarryPaths: rejects unsupported job property ${key}`, () => {
+    const property = key === "<<:" ? "<<: *anchor" : key === "? uses" ? "? uses\n    : owner/r/.github/workflows/x.yml@main" : `${key} owner/r/.github/workflows/x.yml@main`
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    ${property}\n`,
+    }), /unsupported workflow mapping key/)
+  })
+}
+
+test("workflowCarryPaths: rejects unsupported keys at workflow and jobs map levels", () => {
+  for (const body of [
+    '"jobs":\n  test:\n    uses: owner/r/.github/workflows/x.yml@main\n',
+    "'jobs':\n  test:\n    uses: owner/r/.github/workflows/x.yml@main\n",
+    "<<: *anchor\njobs:\n  test:\n    steps: []\n",
+    "? jobs\n: *anchor\n",
+    'jobs:\n  "test":\n    uses: owner/r/.github/workflows/x.yml@main\n',
+    "jobs:\n  <<: *anchor\n",
+    "jobs:\n  ? test\n  : *anchor\n",
+    "jobs:\n  test:\n    : *anchor\n",
+    "jobs:\n  test:\n    uses : owner/r/.github/workflows/x.yml@main\n",
+  ]) {
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /unsupported (?:workflow mapping key|job mappings)/)
+  }
+})
+
+test("workflowCarryPaths: accepts quoted references with trailing comments", () => {
+  for (const quote of ['"', "'"]) {
+    assert.deepEqual(workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    uses: ${quote}./${CALLEE}${quote} # reusable\n`, [CALLEE]: "on: workflow_call\n",
+    }), [CALLER, CALLEE])
+  }
+})
+
+test("workflowCarryPaths: refuses unreadable default-branch callers and callees", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {}), /cannot carry workflow .*ci.yml: missing from the fork's default branch/)
+  assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: callsWorkflow(CALLEE) }), /cannot carry workflow .*tests.yml: missing from the fork's default branch/)
+})
+
+for (const indent of [1, 2]) {
+  test(`workflowCarryPaths: rejects workflows uniformly indented ${indent} spaces`, () => {
+    const body = "on:\n  pull_request:\njobs:\n  t:\n    uses: owner/r/.github/workflows/x.yml@main\n"
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: body.split("\n").map((line) => " ".repeat(indent) + line).join("\n"),
+    }), /must start at column 0/)
+  })
+}
+
+test("workflowCarryPaths: rejects indented content after leading comments", () => {
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "# workflow\n\n  on: pull_request\n  jobs:\n    t:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  }), /must start at column 0/)
+  assert.throws(() => workflowCarryPaths([CALLER], {
+    [CALLER]: "on:\n  pull_request:\n  jobs:\n    t:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  }), /jobs must start at column 0/)
+})
+
+test("workflowCarryPaths: rejects duplicate uses regardless of value order", () => {
+  for (const uses of [
+    ["owner/r/.github/workflows/x.yml@main", `./${CALLEE}`],
+    [`./${CALLEE}`, "owner/r/.github/workflows/x.yml@main"],
+  ]) {
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  t:\n    uses: ${uses[0]}\n    uses: ${uses[1]}\n`, [CALLEE]: "on: workflow_call\n",
+    }), /duplicate workflow mapping key uses/)
+  }
+})
+
+test("workflowCarryPaths: rejects duplicate workflow keys, job ids, and job properties", () => {
+  for (const body of [
+    "on: pull_request\non: workflow_call\n",
+    "jobs:\n  t:\n    steps: []\njobs:\n  t:\n    steps: []\n",
+    "jobs:\n  t:\n    steps: []\n  t:\n    steps: []\n",
+    "jobs:\n  t:\n    permissions: {}\n    permissions: write-all\n",
+  ]) assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /duplicate workflow mapping key/)
+})
+
+test("workflowCarryPaths: rejects inconsistent job and job-property indentation", () => {
+  for (const body of [
+    "jobs:\n  t:\n    steps: []\n   other:\n     uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    steps: []\n    other:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    name: Test\n      uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    name: Test\n   uses: owner/r/.github/workflows/x.yml@main\n",
+    "jobs:\n  t:\n    steps: []\n  other:\n      uses: owner/r/.github/workflows/x.yml@main\n",
+  ]) assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /indentation|unsupported (?:job property|nested workflow content)/)
+})
+
+test("workflowCarryPaths: accepts canonical CRLF workflows with leading comments", () => {
+  assert.deepEqual(workflowCarryPaths([CALLER], {
+    [CALLER]: `# caller\r\n\r\n${callsWorkflow(CALLEE).replace(/\n/g, "\r\n")}`, [CALLEE]: "on: workflow_call\r\n",
+  }), [CALLER, CALLEE])
+})
+
+for (const [name, character] of [
+  ["NEL", "\u0085"], ["line separator", "\u2028"], ["paragraph separator", "\u2029"],
+  ["bare CR", "\r"], ["BOM", "\uFEFF"], ["NBSP", "\u00A0"], ["NUL", "\0"], ["DEL", "\x7F"],
+]) {
+  test(`workflowCarryPaths: rejects ${name} before interpreting workflow structure`, () => {
+    const body = `jobs:\n  t:\n    name: x${character}    uses: owner/r/.github/workflows/x.yml@main\n`
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /unsupported workflow character/)
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: callsWorkflow(CALLEE), [CALLEE]: body,
+    }), /unsupported workflow character/)
+  })
+}
+
+test("workflowCarryPaths: rejects alias, anchored, and folded reusable uses", () => {
+  for (const value of ["*remote", "&remote owner/r/.github/workflows/x.yml@main", ">-\n      owner/r/.github/workflows/x.yml@main"]) {
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: `jobs:\n  t:\n    uses: ${value}\n` }), /reusable uses must be local and unpinned/)
+  }
+})
+
+for (const [fork, ref, caller, callee, support] of [
+  ["litellm", "2d48a1f", "test-unit-core-utils.yml", "_test-unit-base.yml", []],
+  ["code-interpreter", "b7514ab", "pull_request.yml", "charts_tests.yml", ["build_test_template.yml", "js_tests.yml", "python_tests.yml", "performance_tests.yml", "cleanup_build_template.yml"]],
+]) {
+  test(`workflowCarryPaths: real garnet-labs/${fork}@${ref} caller and callee parse`, async () => {
+    const prefix = ".github/workflows/"
+    const bodies = Object.fromEntries(support.map((file) => [prefix + file, "on: workflow_call\n"]))
+    for (const file of [caller, callee]) {
+      bodies[prefix + file] = await readFile(`test/fixtures/workflows/garnet-labs_${fork}-${ref}-${file}`, "utf8")
+    }
+    const carried = workflowCarryPaths([prefix + caller], bodies)
+    assert.deepEqual(new Set(carried), new Set([caller, callee, ...support].map((file) => prefix + file)))
+    assert.deepEqual(workflowCarryPaths([prefix + callee], bodies), [prefix + callee])
+  })
+}
 
 test("planPureReplay: exactly one commit, no wait, no scaffolding", () => {
   const plan = purePlan()
@@ -408,6 +592,53 @@ test("livePr: onboarded fork plans a pure single-commit replay", async () => {
   assert.equal(result.plan.record, "fork-workflow")
   assert.match(result.plan.body, /<!-- change-id:[0-9a-f]{64} attempt:[0-9a-f]{64} -->/)
   assert.doesNotMatch(result.plan.body, NO_UPSTREAM)
+})
+
+test("livePr: pure replay carries default-branch callees over upstream copies or absent upstream files", async () => {
+  for (const upstreamHasCallee of [true, false]) {
+    const fallback = liveExec({ recording: true })
+    const bodies = {
+      [CALLER]: callsWorkflow(CALLEE).replace("workflow_call", "pull_request"),
+      [CALLEE]: `${callsWorkflow(NESTED_CALLEE)}  record:\n    steps:\n      - uses: garnet-org/action@${GARNET_ACTION_PIN}\n`,
+      [NESTED_CALLEE]: "on: workflow_call\n",
+    }
+    const reads = []
+    const exec = (command, args) => {
+      const path = args[1] ?? ""
+      if (path.includes(":.github/workflows")) {
+        const paths = path.startsWith(`repos/${FORK}/`)
+          ? Object.keys(bodies)
+          : upstreamHasCallee ? [CALLEE] : []
+        return JSON.stringify({ tree: paths.map((file) => ({ path: file.split("/").at(-1), type: "blob" })) })
+      }
+      if (path.includes("/contents/.github/workflows/")) {
+        reads.push(path)
+        if (path.startsWith(`repos/${FORK}/`)) {
+          assert.ok(path.endsWith("?ref=main"))
+          return bodies[path.split("/contents/")[1].split("?")[0]]
+        }
+        assert.ok(upstreamHasCallee, "absent upstream callees must not be read")
+        return "on: workflow_call\n"
+      }
+      return fallback(command, args)
+    }
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run"], {
+      exec, log: () => {}, save: () => assert.fail("dry run must not save"),
+    })
+    assert.equal(result.plan.mode, "pure-replay")
+    const ensure = result.plan.steps.find((step) => step.kind === "ensure-base")
+    assert.deepEqual(ensure.carry, [CALLER, CALLEE, NESTED_CALLEE])
+    assert.equal(ensure.carryFrom, "origin/main")
+    assert.ok(reads.includes(`repos/${FORK}/contents/${CALLEE}?ref=main`))
+    const execution = fakeExec([
+      [/rev-parse --verify/, () => { throw new Error("ref absent") }],
+      [/write-tree/, "tree-with-callees"],
+      [/diff --cached --name-only/, ensure.carry.join("\n")],
+    ])
+    await executePlan({ ...result.plan, steps: [ensure] }, { exec: execution.exec, io: memoryIo(), log: () => {} })
+    assert.ok(execution.calls.includes(`git -C ${result.plan.work} checkout origin/main -- ${ensure.carry.join(" ")}`))
+    assert.ok(execution.calls.some((call) => call.includes("push --set-upstream origin HEAD:refs/heads/review/base")))
+  }
 })
 
 test("livePr: refuses a recorder overlay when the change's base records itself", async () => {
