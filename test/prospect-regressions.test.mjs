@@ -72,6 +72,8 @@ test("recorded PR head binds merge-ref profiles without relabeling the merge SHA
   assert.equal(profileCheck({ ...merge, head_sha: HEAD }).ok, false)
   assert.equal(profileCheck({ ...merge, head_sha: HEAD }, [PREVIOUS]).ok, false)
   assert.equal(profileCheck({ ...merge, head_sha: HEAD }, []).ok, false)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD }, [HEAD]).ok, false)
+  assert.equal(profileCheck({ ...merge, head_sha: HEAD }, [HEAD, PREVIOUS]).ok, false)
   assert.equal(profileCheck(merge).ok, false)
   assert.equal(profileCheck({ ...merge, commit_sha: HEAD }).ok, false)
   for (const head_sha of [PREVIOUS, "", null, HEAD.slice(0, 7)]) {
@@ -79,6 +81,12 @@ test("recorded PR head binds merge-ref profiles without relabeling the merge SHA
   }
   assert.equal(profileCheck().ok, true)
   assert.equal(profileCheck({ ...merge, head_sha: HEAD, repository: "other/repo" }).ok, false)
+})
+
+test("branch-ref identity requires both the recorded commit and any recorded head to match", () => {
+  assert.equal(profileCheck({ ...RUN, head_sha: HEAD }).ok, true)
+  assert.equal(profileCheck({ ...RUN, commit_sha: PREVIOUS, head_sha: HEAD }).ok, false)
+  assert.equal(profileCheck({ ...RUN, head_sha: PREVIOUS }).ok, false)
 })
 
 test("residue scans Devin bot comments even with review markers", () => {
@@ -174,9 +182,9 @@ test("live verification rejects HTTP 200 with merge-ref or missing identity", as
   assert.ok(missing.reasons.some((reason) => reason.includes("no exact public")))
 })
 
-test("live merge-ref identity requires readable commit parents containing the expected head", async () => {
+test("live merge-ref identity requires exactly two readable parents with expected head second", async () => {
   const merge = { ...RUN, ref: "refs/pull/1/merge", commit_sha: PREVIOUS, head_sha: HEAD }
-  for (const parents of [[PREVIOUS, HEAD], [PREVIOUS], [], null, "malformed"]) {
+  for (const parents of [[PREVIOUS, HEAD], [HEAD], [HEAD, PREVIOUS], [PREVIOUS], [], null, "malformed"]) {
     const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
       fetchImpl: fetchExhibit(merge),
       exec: (command, args) => {
@@ -189,9 +197,10 @@ test("live merge-ref identity requires readable commit parents containing the ex
       },
     })
     const identity = result.legs.find((entry) => entry.name === "public profile identity")
-    assert.equal(identity.ok, Array.isArray(parents) && parents.includes(HEAD))
+    const matches = Array.isArray(parents) && parents.length === 2 && parents[1] === HEAD
+    assert.equal(identity.ok, matches)
     if (parents === null || parents === "malformed") assert.match(identity.detail, /merge commit parents unreadable/)
-    else if (!parents.includes(HEAD)) assert.match(identity.detail, /parents do not include expected head/)
+    else if (!matches) assert.match(identity.detail, /must have exactly two parents with expected head second/)
   }
 })
 
