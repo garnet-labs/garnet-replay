@@ -213,6 +213,31 @@ test("workflowCarryPaths: allows step-level action uses and ignores comments and
   assert.deepEqual(workflowCarryPaths([], {}), [])
 })
 
+for (const key of ['"uses":', "'uses':", "<<:", "? uses"]) {
+  test(`workflowCarryPaths: rejects unsupported job property ${key}`, () => {
+    const property = key === "<<:" ? "<<: *anchor" : key === "? uses" ? "? uses\n    : owner/r/.github/workflows/x.yml@main" : `${key} owner/r/.github/workflows/x.yml@main`
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: `jobs:\n  test:\n    ${property}\n`,
+    }), /unsupported workflow mapping key/)
+  })
+}
+
+test("workflowCarryPaths: rejects unsupported keys at workflow and jobs map levels", () => {
+  for (const body of [
+    '"jobs":\n  test:\n    uses: owner/r/.github/workflows/x.yml@main\n',
+    "'jobs':\n  test:\n    uses: owner/r/.github/workflows/x.yml@main\n",
+    "<<: *anchor\njobs:\n  test:\n    steps: []\n",
+    "? jobs\n: *anchor\n",
+    'jobs:\n  "test":\n    uses: owner/r/.github/workflows/x.yml@main\n',
+    "jobs:\n  <<: *anchor\n",
+    "jobs:\n  ? test\n  : *anchor\n",
+    "jobs:\n  test:\n    : *anchor\n",
+    "jobs:\n  test:\n    uses : owner/r/.github/workflows/x.yml@main\n",
+  ]) {
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /unsupported (?:workflow mapping key|job mappings)/)
+  }
+})
+
 test("workflowCarryPaths: accepts quoted references with trailing comments", () => {
   for (const quote of ['"', "'"]) {
     assert.deepEqual(workflowCarryPaths([CALLER], {
