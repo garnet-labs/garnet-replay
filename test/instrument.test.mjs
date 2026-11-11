@@ -72,6 +72,10 @@ test("instrument mode preserves recording when a reusable callee changes", () =>
   function withCaller(body, extra = {}) {
     return { ...input, instrument: { ...input.instrument, workflowBodies: { ".github/workflows/caller.yml": body, ...extra } } }
   }
+  for (const character of ["\u0085", "\u2028", "\r"]) {
+    assert.throws(() => planReplay(withCaller(`name: x${character}hidden\n${caller}`)), /unsupported workflow character/)
+  }
+  assert.doesNotThrow(() => planReplay(withCaller(caller.replace(/\n/g, "\r\n"))))
   for (const trigger of ["pull_request:\n    types: [opened]", "pull_request:\n    types: []", "workflow_dispatch:"]) {
     assert.throws(() => planReplay(withCaller(caller.replace("pull_request:", trigger))), /carried caller on pull_request synchronize with id-token: write/)
   }

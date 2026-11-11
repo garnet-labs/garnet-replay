@@ -306,6 +306,19 @@ test("workflowCarryPaths: accepts canonical CRLF workflows with leading comments
   }), [CALLER, CALLEE])
 })
 
+for (const [name, character] of [
+  ["NEL", "\u0085"], ["line separator", "\u2028"], ["paragraph separator", "\u2029"],
+  ["bare CR", "\r"], ["BOM", "\uFEFF"], ["NBSP", "\u00A0"], ["NUL", "\0"], ["DEL", "\x7F"],
+]) {
+  test(`workflowCarryPaths: rejects ${name} before interpreting workflow structure`, () => {
+    const body = `jobs:\n  t:\n    name: x${character}    uses: owner/r/.github/workflows/x.yml@main\n`
+    assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: body }), /unsupported workflow character/)
+    assert.throws(() => workflowCarryPaths([CALLER], {
+      [CALLER]: callsWorkflow(CALLEE), [CALLEE]: body,
+    }), /unsupported workflow character/)
+  })
+}
+
 test("workflowCarryPaths: rejects alias, anchored, and folded reusable uses", () => {
   for (const value of ["*remote", "&remote owner/r/.github/workflows/x.yml@main", ">-\n      owner/r/.github/workflows/x.yml@main"]) {
     assert.throws(() => workflowCarryPaths([CALLER], { [CALLER]: `jobs:\n  t:\n    uses: ${value}\n` }), /reusable uses must be local and unpinned/)
