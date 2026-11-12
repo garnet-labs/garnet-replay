@@ -55,7 +55,7 @@ Items 1, 2, 5, 6, 7, 8, 9, 10, 12 and 13 are independent of each other. Item 11 
 **pnpm send** goes when all of these hold:
 1. A `garnet-runtime-review[bot]` comment is finalized on a new pnpm/pnpm same-repo PR. This is already observed on #17602.
 2. `no_bad_egress_domain` no longer reads ATTENTION on a fresh pnpm public profile, or assertions are absent from the public projection.
-3. Farrukh has chosen the framing (item 10). The send uses only the claims under "What is not shown" in `docs/pnpm-proof.md`.
+3. Farrukh has chosen the framing (item 10). The send claims only what "What the profiles show today" in `docs/pnpm-proof.md` supports, and claims nothing listed under "What is not shown".
 
 **Any send** also requires: the docs quickstart pin equals garnet.ai/pins, and every link in the message returns 200 logged out.
 
