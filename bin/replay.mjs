@@ -428,7 +428,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   uat <slug> --pr N [--cold-read 0..5] [--decision-impact r] ...     score one checked pull request by hand: cold read, decision impact,
                                                                     attribution, value hypothesis (supported|not-supported|unknown) + --note
   status [<slug>]                                                   ladder board and the next command
-  stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, garnet/evidence gate, REVIEW.md, re-review + adapters
+  stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, merge-safety gate, REVIEW.md, re-review + adapters
                                                                     reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
                                                                     --record-workflow <path> listens to one recorder; --add-record adds the harness recorder; --replace-mirror overwrites mirror files
 

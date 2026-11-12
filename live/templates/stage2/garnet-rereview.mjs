@@ -4,14 +4,12 @@ import { pathToFileURL } from "node:url";
  * Requests reviews again once a finalized Garnet Runtime Review record is bound
  * to the pull request head. Reviewers run on PR open, before the recorder has
  * finished; this step makes them run once more with the evidence present.
- * A best-effort record fails `garnet/evidence` but is still the record:
- * reviewers are requested once the check settled either way, and the mirror
- * carries the capture qualifier. A pending or absent check requests nothing.
+ * A finalized best-effort record still triggers reviews, and the mirror carries
+ * the capture qualifier. A pending or absent record requests nothing.
  *
- * Contract: one request per head (a marker comment is the lock), only after the
- * `garnet/evidence` check on that head concluded success and a finalized record
- * from a trusted author is bound to the exact head, only for the reviewers
- * listed in GARNET_REVIEWERS. API requests go out before the lock comment so a
+ * Contract: one request per head (a marker comment is the lock), only after a
+ * finalized record from a trusted author is bound to the exact head, only for
+ * the reviewers listed in GARNET_REVIEWERS. API requests go out before the lock comment so a
  * failed request leaves no lock and the next run retries. Nothing here judges
  * the pull request. Cursor Bugbot ignores `bugbot run` posted by a bot, so it
  * is requested through Cursor's Bugbot API with a repository secret.
@@ -29,11 +27,8 @@ const TRUSTED_AUTHORS = new Set([
   "garnet-runtime-review-dev[bot]",
   "garnet-ai[bot]",
 ])
-export const EVIDENCE_CHECK = "garnet/evidence"
 /** The App edits its comment again seconds after finalizing; wait this long after the last edit. */
 export const SETTLE_MS = 30_000
-const CHECK_WAIT_MS = 30_000
-const CHECK_ATTEMPTS = 16
 
 /** Mention-triggered reviewers: the exact comment line each one documents. */
 export const MENTIONS = Object.freeze({
@@ -123,30 +118,6 @@ export function isFinalizedRecordFor(comment, head) {
 }
 
 /**
- * State of the `garnet/evidence` check for one head from its check runs.
- * @param {{name?: string, status?: string, conclusion?: string|null}[]} checkRuns
- * @returns {"success"|"pending"|"failed"|"absent"}
- */
-export function evidenceCheckState(checkRuns) {
-  const runs = (Array.isArray(checkRuns) ? checkRuns : []).filter((run) => run?.name === EVIDENCE_CHECK)
-  if (runs.length === 0) return "absent"
-  if (runs.some((run) => run.status === "completed" && run.conclusion === "success")) return "success"
-  if (runs.some((run) => run.status !== "completed")) return "pending"
-  return "failed"
-}
-
-async function awaitEvidenceCheck(head) {
-  let state = "absent"
-  for (let attempt = 0; attempt < CHECK_ATTEMPTS; attempt += 1) {
-    const page = await github(`/repos/${repo}/commits/${head}/check-runs?check_name=${encodeURIComponent(EVIDENCE_CHECK)}&per_page=100`)
-    state = evidenceCheckState(page?.check_runs)
-    if (state === "success" || state === "failed") return state
-    await new Promise((resolve) => setTimeout(resolve, CHECK_WAIT_MS))
-  }
-  return state
-}
-
-/**
  * @param {{user?: {login?: string}, body?: string}[]} comments
  * @param {string} head
  * @returns {boolean}
@@ -205,17 +176,6 @@ async function requestDevin(prUrl) {
   return true
 }
 
-/**
- * Milliseconds to wait before the head's finalized record has gone SETTLE_MS without an edit.
- * @param {{updated_at?: string, created_at?: string}[]} records finalized records bound to the head
- * @param {number} now epoch ms
- * @returns {number}
- */
-export function settleWaitMs(records, now) {
-  const last = Math.max(...records.map((c) => Date.parse(c?.updated_at ?? c?.created_at ?? "") || 0), 0)
-  return Math.max(0, last + SETTLE_MS - now)
-}
-
 async function requestBugbot(prUrl) {
   const key = process.env.CURSOR_API_KEY
   if (typeof key !== "string" || key === "") {
@@ -234,17 +194,8 @@ async function requestBugbot(prUrl) {
   return true
 }
 
-/**
- * Whether the `garnet/evidence` state lets reviews be requested: any settled
- * check. A failed check over a finalized record is a qualified record, not none.
- * @param {"success"|"pending"|"failed"|"absent"} state
- * @returns {boolean}
- */
-export function evidenceSettled(state) {
-  return state === "success" || state === "failed"
-}
-
-async function main() {
+/** Request configured reviews once for a finalized, current-head App record. */
+export async function main() {
   if (!process.env.GITHUB_TOKEN || !repo || !prNumber || !headSha) {
     throw new Error("GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER and HEAD_SHA are required")
   }
@@ -267,24 +218,34 @@ async function main() {
     console.log(`No finalized record bound to head ${headSha.slice(0, 7)}; reviews are not requested without evidence.`)
     return
   }
-  const check = await awaitEvidenceCheck(headSha)
-  if (!evidenceSettled(check)) {
-    console.log(`${EVIDENCE_CHECK} is ${check} for head ${headSha.slice(0, 7)}; reviews are requested only after it settles.`)
-    return
-  }
   const current = await github(`/repos/${repo}/pulls/${prNumber}`)
   if (current.head?.sha !== headSha) {
-    console.log(`PR head moved while waiting (${current.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
+    console.log(`PR head moved before requesting reviews (${current.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
     return
   }
-  if (alreadyRequestedFor(await listComments(), headSha)) {
-    console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
+  let latestComments = await listComments()
+  if (alreadyRequestedFor(latestComments, headSha)) {
+    console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run; nothing to do.`)
     return
   }
   for (let attempt = 0; attempt < 6; attempt += 1) {
     const wait = settleWaitMs((await listComments()).filter((comment) => isFinalizedRecordFor(comment, headSha)), Date.now())
     if (wait === 0) break
     await new Promise((resolve) => setTimeout(resolve, wait))
+  }
+  const settled = await github(`/repos/${repo}/pulls/${prNumber}`)
+  if (settled.head?.sha !== headSha) {
+    console.log(`PR head moved while waiting (${settled.head?.sha?.slice(0, 7)} != ${headSha.slice(0, 7)}); not requesting reviews for a stale record.`)
+    return
+  }
+  latestComments = await listComments()
+  if (alreadyRequestedFor(latestComments, headSha)) {
+    console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
+    return
+  }
+  if (!latestComments.some((comment) => isFinalizedRecordFor(comment, headSha))) {
+    console.log(`No finalized record bound to head ${headSha.slice(0, 7)}; reviews are not requested without evidence.`)
+    return
   }
   const requested = []
   if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
@@ -294,6 +255,17 @@ async function main() {
   await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
   const mentioned = reviewers.filter((name) => name in MENTIONS)
   console.log(`posted one re-review request for head ${headSha.slice(0, 7)}: mentioned ${mentioned.join(", ") || "none"}; API requested ${requested.join(", ") || "none"}`)
+}
+
+/**
+ * Milliseconds to wait before the head's finalized record has gone SETTLE_MS without an edit.
+ * @param {{updated_at?: string, created_at?: string}[]} records finalized records bound to the head
+ * @param {number} now epoch ms
+ * @returns {number}
+ */
+export function settleWaitMs(records, now) {
+  const last = Math.max(...records.map((c) => Date.parse(c?.updated_at ?? c?.created_at ?? "") || 0), 0)
+  return Math.max(0, last + SETTLE_MS - now)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main()

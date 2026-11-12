@@ -1,7 +1,6 @@
 # Mirrors the head-bound Garnet Runtime Review comment into the pull request
 # description so reviewers and agents that read only the description see the
-# same bytes, publishes the `garnet/evidence` check on the head from the same
-# reading, then requests the configured reviewers once per head so they review
+# same bytes, then requests the configured reviewers once per head so they review
 # with the record present. Runs from the default branch with the
 # repository token after a recording workflow completes and again each time the
 # Garnet App posts or edits its comment (the App adds jobs to one comment as
@@ -39,7 +38,6 @@ jobs:
     permissions:
       contents: read
       actions: read
-      checks: write
       pull-requests: write
     env:
       GH_TOKEN: ${{ github.token }}
@@ -86,17 +84,6 @@ jobs:
           set -euo pipefail
           for pr_number in ${PRS}; do
             PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-mirror.mjs
-          done
-      - name: Publish garnet/evidence on the head before asking for reviews
-        if: steps.head.outputs.sha != '' && steps.head.outputs.prs != ''
-        shell: bash
-        env:
-          HEAD_SHA: ${{ steps.head.outputs.sha }}
-          PRS: ${{ steps.head.outputs.prs }}
-        run: |
-          set -uo pipefail
-          for pr_number in ${PRS}; do
-            PR_NUMBER="${pr_number}" node .github/scripts/garnet-evidence-gate.mjs || echo "garnet/evidence for #${pr_number} is not success (pending, absent, or best-effort capture); the next step decides whether to request reviews"
           done
       - name: Request reviews once the record is bound (once per head)
         if: steps.head.outputs.sha != '' && steps.head.outputs.prs != ''
