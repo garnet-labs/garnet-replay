@@ -799,3 +799,23 @@ test("setup: plans a single onboarding commit via dry run", async () => {
   assert.ok(result.plan.files.includes(".github/dependabot.yml"), "adds Dependabot when the fork lacks it")
   assert.match(lines.join("\n"), /setup plan/)
 })
+
+test("carried fork workflow paths skip the vocabulary gate but keep leak and residue checks", () => {
+  const recordWorkflows = [".github/workflows/pull_request.yml", ".github/workflows/cleanup_build_template.yml"]
+  const plan = purePlan({ baseBranch: "rb/replay-501", recordWorkflows })
+  assert.ok(plan.steps.some((step) => JSON.stringify(step).includes("cleanup_build_template.yml")))
+  for (const path of [".github/workflows/PostHog/posthog.yml", ".github/workflows/x.yml\n\nclean approved prose\n- .github/workflows/y.yml", "src/x.yml"]) {
+    assert.throws(() => purePlan({ baseBranch: "rb/replay-501", recordWorkflows: [path] }), /unsupported workflow path/)
+  }
+})
+
+test("a banned word in the carry message prose still throws", () => {
+  assert.throws(
+    () => purePlan({
+      baseBranch: "rb/replay-501",
+      recordWorkflows: [".github/workflows/cleanup_build_template.yml"],
+      messages: { carry: "ci: carry a clean recorder onto the replay base" },
+    }),
+    /banned vocabulary 'clean'/,
+  )
+})
