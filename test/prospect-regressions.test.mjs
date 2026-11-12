@@ -322,12 +322,13 @@ test("injected replay preserves Dependabot policy at its selected base and check
       if (args[0] === "pr") return "[]"
       if (args.includes("repos/garnet-labs/posthog/pulls?state=open&per_page=100")) return "[[]]"
       const path = args[1]
+      if (path === "repos/garnet-labs/posthog/commits/main") return JSON.stringify({ sha: HEAD })
       if (path.includes("/git/trees/")) return '{"tree":[]}'
       if (path.endsWith("/pulls/1/files")) return '[{"filename":"package.json","status":"modified"}]'
       if (path.endsWith("/pulls/1")) return JSON.stringify({ title: "Refresh dependencies", base: { sha: PREVIOUS }, head: { sha: HEAD } })
       if (path.includes("/contents/.github/dependabot.yml")) {
         const repo = mode.length === 0 ? "garnet-labs/posthog" : "PostHog/posthog"
-        const ref = mode.length === 0 ? "main" : PREVIOUS
+        const ref = mode.length === 0 ? HEAD : PREVIOUS
         assert.equal(path, `repos/${repo}/contents/.github/dependabot.yml?ref=${ref}`)
         return '{"type":"file"}'
       }

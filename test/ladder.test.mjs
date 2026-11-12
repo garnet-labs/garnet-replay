@@ -167,7 +167,7 @@ const changes = [
 
 function replayPlan(overrides = {}) {
   return planReplay({
-    slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", upstreamPr: 501,
+    slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", forkDefaultSha: SHA_A, upstreamPr: 501,
     upstreamTitle: depPr.title, baseSha: SHA_A, headSha: SHA_B, changes, firstPaths: ["pnpm-lock.yaml"], work: "/tmp/work", workExists: true, ...overrides,
   })
 }
@@ -384,7 +384,7 @@ test("replay --pr: --base-branch opens against a fork branch set to the base and
   assert.deepEqual(set.args.slice(-3), ["push", "origin", `${SHA_A}:refs/heads/sync/abc1234`])
   assert.deepEqual(plan.steps.find((s) => s.id === "branch").args.slice(-2), [plan.branch, "origin/sync/abc1234"])
   const carried = plan.steps.find((s) => s.id === "first-fork-record")
-  assert.deepEqual(carried.args.slice(-3), ["origin/master", "--", recorder])
+  assert.deepEqual(carried.args.slice(-3), [SHA_A, "--", recorder])
   assert.ok(ids.indexOf("first-fork-record") < ids.indexOf("first-check"))
   assert.deepEqual(plan.steps.find((s) => s.id === "verify-commits").args.slice(-1), ["origin/sync/abc1234..HEAD"])
   const create = plan.steps.find((s) => s.id === "pr-create")
@@ -815,6 +815,7 @@ function fakeExec(responses) {
   const exec = (cmd, args, options = {}) => {
     calls.push([cmd, ...args].join(" "))
     for (const [pattern, out] of responses) if (pattern.test(calls.at(-1))) return typeof out === "function" ? out(options) : out
+    if (cmd === "gh" && args[1] === `repos/${FORK}/commits/master`) return JSON.stringify({ sha: SHA_A })
     return ""
   }
   return { exec, calls }
