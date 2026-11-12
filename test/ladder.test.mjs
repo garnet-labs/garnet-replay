@@ -10,7 +10,7 @@ import { isMergeQueue, observationFor, rankObservations, recommend, renderObserv
 import { publishSteps as publishTwo, publishSingleSteps as publishOne } from "../lib/replay-pr.mjs"
 import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
 import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
-import { recordState } from "../lib/wait.mjs"
+import { recordState, waitForRecord } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
@@ -834,7 +834,7 @@ const replayResponses = [
   [/gh api repos\/\S+\/issues\/77\/comments/, recordedFirst],
   [/check-runs/, JSON.stringify({ check_runs: [] })],
 ]
-const noWait = { pollMs: 0, sleep: async () => {}, timeoutMs: 1000 }
+const noWait = { pollMs: 0, sleep: async () => {}, timeoutMs: 1000, failedGraceMs: 0 }
 
 function memoryIo(files = {}) {
   const store = { ...files }
@@ -1055,6 +1055,55 @@ test("replay --pr: commit 2 is not pushed while commit 1 is unrecorded or its ch
   assert.equal(recordState({ comments: [{ body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${SHA_C} -->` }], checks: [], sha: SHA_C }).state, "pending")
   const finalized = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n<!-- garnet:summary {"contract":"6.10.0","commit":"${SHA_C}","jobs":1,"changed":0} -->`
   assert.equal(recordState({ comments: [{ body: finalized }], checks: [], sha: SHA_C }).state, "recorded")
+})
+
+test("wait: with no comment while jobs record, a failed Garnet check does not end the wait before the record can post", async () => {
+  const failedCheck = { name: "Garnet Runtime Visibility / unit", status: "completed", conclusion: "failure" }
+  const runningCheck = { name: "Garnet Runtime Visibility / e2e", status: "in_progress", conclusion: null }
+  const doneCheck = { ...runningCheck, status: "completed", conclusion: "success" }
+  const stillRecording = recordState({ comments: [], checks: [failedCheck, runningCheck], sha: SHA_C })
+  assert.equal(stillRecording.state, "pending")
+  assert.match(stillRecording.detail, /checks running: Garnet Runtime Visibility \/ e2e/)
+  assert.equal(recordState({ comments: [], checks: [failedCheck, doneCheck], sha: SHA_C }).state, "failed")
+  assert.equal(recordState({ comments: [], checks: [], sha: SHA_C }).state, "pending")
+
+  const finalized = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n<!-- garnet:summary {"contract":"11.0.0","commit":"${SHA_C}","status":"finalized","jobs":2} -->`
+  // Poll 1: one job failed, one still runs. Poll 2: both done, no comment yet. Poll 3: the App has posted.
+  const timeline = [
+    { comments: [], checks: [failedCheck, runningCheck] },
+    { comments: [], checks: [failedCheck, doneCheck] },
+    { comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: finalized }], checks: [failedCheck, doneCheck] },
+  ]
+  const poller = (frames) => {
+    let clock = 0
+    let poll = -1
+    const frame = () => frames[Math.min(poll, frames.length - 1)]
+    return {
+      exec: (cmd, args) => {
+        const call = [cmd, ...args].join(" ")
+        if (/issues\/77\/comments/.test(call)) { poll += 1; return JSON.stringify(frame().comments) }
+        if (/check-runs/.test(call)) return JSON.stringify({ check_runs: frame().checks })
+        return ""
+      },
+      sleep: async (ms) => { clock += ms },
+      now: () => clock,
+    }
+  }
+  const posted = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller(timeline) })
+  assert.equal(posted.state, "recorded")
+  assert.equal(posted.polls, 3)
+
+  // No record ever posts: the failure is reported, but only after the grace, and well inside the wait budget.
+  const missed = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller(timeline.slice(0, 2)) })
+  assert.equal(missed.state, "failed")
+  assert.match(missed.detail, /concluded failure/)
+  assert.equal(missed.polls, 12)
+
+  // No Garnet-named check at all and no comment: keep waiting for the whole budget, past the App's 30 minute window.
+  const silent = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller([{ comments: [], checks: [] }]) })
+  assert.equal(silent.state, "pending")
+  assert.match(silent.detail, /no record for .* yet; gave up after 45 min/)
+  assert.equal(silent.polls, 91)
 })
 
 test("replay --pr: guards stop execution on wrong origin, empty commit, or wrong commit count", async () => {
