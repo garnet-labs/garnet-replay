@@ -1682,6 +1682,27 @@ test("verify: the share gate fails on pending checks, stale heads, residue; pass
   assert.equal(evaluateExhibit({ pr, comments: [], checks: [], permalinkStatus: null }).status, "FAIL")
 })
 
+test("verify: no comment while jobs record is a failed gate, never a pass, however green the checks are", () => {
+  const pr = { head_sha: SHA_B, base_sha: SHA_C, state: "open", body: "Bumps `puppeteer` from 24.40.0 to 25.9.0." }
+  const green = [{ name: "garnet/runtime-evidence", status: "completed", conclusion: "success" }]
+  for (const requireCompleteCapture of [false, true]) {
+    const held = evaluateExhibit({ pr, comments: [], checks: green, permalinkStatus: 200, requireCompleteCapture })
+    assert.equal(held.status, "FAIL")
+    assert.equal(verifyExitCode(held), 1)
+    assert.deepEqual(held.receipt, { commentPresent: false, pending: false, finalized: false, noProfile: false })
+    const failed = held.legs.filter((entry) => !entry.ok).map((entry) => entry.name)
+    for (const name of ["comment present", "head-bound", "comment finalized", "verdict determinable"]) {
+      assert.ok(failed.includes(name), `${name} must fail without a record`)
+    }
+  }
+  // The comment left from the previous head while the new head records is not this head's record.
+  const earlier = evaluateExhibit({
+    pr: { ...pr, head_sha: SHA_A }, comments: [{ user: "garnet-runtime-review[bot]", body: RECORD_BODY }], checks: green, permalinkStatus: 200,
+  })
+  assert.equal(earlier.status, "FAIL")
+  assert.match(earlier.reasons.join("\n"), /head-bound: .*head moved/)
+})
+
 test("verify: an App comment (v6.10 contract) passes on its summary pair and the recording run's own check", () => {
   const pr = { head_sha: SHA_B, base_sha: SHA_A, state: "open", body: "Retry ranged downloads." }
   const appBody = `<!-- garnet-runtime-review -->
