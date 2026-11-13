@@ -9,8 +9,8 @@ import { assertNoResidue, assertNoUpstreamLeak, assertOutbound, assertTwoCommits
 import { isMergeQueue, observationFor, rankObservations, recommend, renderObserveOutput, scoreGap, prFacts, transitionPhrase } from "../lib/observe.mjs"
 import { publishSteps as publishTwo, publishSingleSteps as publishOne } from "../lib/replay-pr.mjs"
 import { INSTALL_COMMANDS, RECORD_WORKFLOW_PATH, allManifests, contextCommitMessage, dependabotConfig, describeRecorders, eligibleRecorders, existingPaths, firstStagesMismatch, hasDependabotConfig, manifestDirectories, prBodyText, detectEcosystem, executePlan, forkHoldsBase, recordingWorkflowFiles, recordWorkflow, matchesPathFilter, planReplay, publicationState, pullRequestPathFilter, reconcileState, recordsAnyPath, renderPlan, requiredLabel, resolvedFirstMessage, selectedPathFilters, upsertReplay, workflowJobs, workflowName, workflowOnlyFirstPaths, workflowOnlyPathFilter, workflowRunWorkflows, writesPullRequests } from "../lib/replay-pr.mjs"
-import { describeHealth, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
-import { recordState } from "../lib/wait.mjs"
+import { describeHealth, FINALIZE_MARGIN_MINUTES, FINALIZE_WINDOW_MINUTES, observeMissingRecord, observeRecord, recorderHealth, recorderVerdict } from "../lib/recorder-health.mjs"
+import { recordState, waitForRecord } from "../lib/wait.mjs"
 import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planAllowBuild, planTransition, removeBuildScript, resolvedVersion } from "../lib/replay-transition.mjs"
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
@@ -732,6 +732,87 @@ test("recorder health: a batch's own in-flight pull requests are not a stalled r
   assert.equal(old.fresh, 0)
 })
 
+test("recorder health: a head with no comment after its Garnet runs finished is a stall, past the App's finalize window", () => {
+  const now = Date.parse("2026-11-12T12:00:00Z")
+  const minutesAgo = (minutes) => new Date(now - minutes * 60_000).toISOString()
+  const past = FINALIZE_WINDOW_MINUTES + FINALIZE_MARGIN_MINUTES + 1
+  const recordRun = (minutes, extra = {}) => ({ path: ".github/workflows/garnet-record.yml", status: "completed", conclusion: "success", updated_at: minutesAgo(minutes), ...extra })
+  const otherRun = (minutes, extra = {}) => ({ path: ".github/workflows/ci.yml", status: "completed", conclusion: "success", updated_at: minutesAgo(minutes), ...extra })
+  const recordingWorkflows = ["garnet-record.yml"]
+
+  assert.deepEqual(observeMissingRecord(70, { runs: [recordRun(past)], recordingWorkflows, now }), { pr: 70, state: "missing", updatedAt: minutesAgo(past) })
+  assert.equal(observeMissingRecord(70, { runs: [recordRun(past - 2)], recordingWorkflows, now }), null, "inside the finalize window plus margin the App may still post")
+  assert.equal(observeMissingRecord(70, { runs: [recordRun(past), otherRun(5, { status: "in_progress", conclusion: null })], recordingWorkflows, now }), null, "a run still going on the head is in flight")
+  assert.equal(observeMissingRecord(70, { runs: [otherRun(past)], recordingWorkflows, now }), null, "no Garnet job ran, so no comment is expected")
+  assert.equal(observeMissingRecord(70, { runs: [recordRun(past, { conclusion: "skipped" })], recordingWorkflows, now }), null, "a skipped recording run recorded nothing")
+  assert.equal(observeMissingRecord(70, { runs: [], recordingWorkflows, now }), null)
+  assert.equal(observeMissingRecord(70, { runs: [otherRun(past)], checks: [{ name: "Garnet Runtime Review / record", status: "completed", conclusion: "success" }], now })?.state, "missing", "a finished Garnet check counts as a Garnet job")
+  assert.equal(observeMissingRecord(70, { runs: [otherRun(past)], checks: [{ name: "Garnet Runtime Review / record", status: "completed", conclusion: "skipped" }], now }), null)
+
+  const missing = { pr: 70, state: "missing", updatedAt: minutesAgo(past) }
+  const final = { pr: 69, state: "final", updatedAt: "2026-11-10T10:00:00Z" }
+  assert.equal(recorderVerdict([missing, final]).verdict, "stalled", "one head left without a comment is enough: nothing else reports a lost run completion")
+  assert.equal(recorderVerdict([final, missing]).verdict, "ok", "a newer finalized record shows the recorder working again")
+  assert.equal(recorderVerdict([missing]).verdict, "stalled")
+  assert.match(describeHealth(recorderVerdict([missing, final]), 8), /^recorder health: stalled · last finalized record on pull request 69 \(2026-11-10\); no comment for the head of 70 \(runs finished 2026-11-12\) · 8 recent pull requests read$/)
+
+  // Through gh. 72: no comment at all. 71: comment still bound to the commit before the head. 70: finalized for its head.
+  const bot = { login: "garnet-runtime-review[bot]" }
+  const finalComment = (sha) => ({ user: bot, updated_at: "2026-11-10T10:00:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${sha} -->\n<!-- garnet:summary {"status":"finalized","changed":0} -->\nRuntime Review` })
+  const state = {
+    comments: { 72: [], 71: [finalComment(SHA_A)], 70: [finalComment(SHA_C)] },
+    runs: { [SHA_A]: [recordRun(past)], [SHA_B]: [recordRun(past), otherRun(past + 3)] },
+  }
+  const calls = []
+  const exec = (cmd, args) => {
+    calls.push(args.join(" "))
+    const comments = /issues\/(\d+)\/comments/.exec(args[1] ?? "")
+    if (comments !== null) return JSON.stringify(state.comments[Number(comments[1])])
+    const runs = /actions\/runs\?head_sha=([0-9a-f]+)/.exec(args[1] ?? "")
+    if (runs !== null) return JSON.stringify({ workflow_runs: state.runs[runs[1]] ?? [] })
+    if (args.some((arg) => /\/check-runs/.test(arg))) return JSON.stringify([{ check_runs: [] }])
+    throw new Error(`unexpected ${args.join(" ")}`)
+  }
+  const old = "2026-11-11T09:00:00Z"
+  const prs = [
+    { number: 72, createdAt: old, headRefOid: SHA_A },
+    { number: 71, createdAt: old, headRefOid: SHA_B },
+    { number: 70, createdAt: old, headRefOid: SHA_C },
+  ]
+  const health = recorderHealth(FORK, { exec, prs, now, recordingWorkflows })
+  assert.equal(health.verdict, "stalled")
+  assert.deepEqual(health.missing.map((row) => row.pr), [72, 71])
+  assert.equal(health.lastFinal.pr, 70)
+  assert.equal(calls.some((call) => call.includes(`head_sha=${SHA_C}`)), false, "a head with its own finalized comment needs no run lookup")
+
+  // The same pull requests while the runs are still inside the window: in flight, not a stall.
+  state.runs = { [SHA_A]: [recordRun(10)], [SHA_B]: [recordRun(10)] }
+  const inside = recorderHealth(FORK, { exec, prs, now, recordingWorkflows })
+  assert.equal(inside.verdict, "ok")
+  assert.deepEqual(inside.missing, [])
+
+  // No Garnet job on either head (paths filter): the missing comment is expected.
+  state.runs = { [SHA_A]: [otherRun(past)], [SHA_B]: [otherRun(past)] }
+  assert.equal(recorderHealth(FORK, { exec, prs, now, recordingWorkflows }).verdict, "ok")
+
+  // Contract 10 placeholders bound to their heads still read as pending, and two of them as a stall, with no run lookup.
+  const placeholder = (sha) => ({ user: bot, updated_at: "2026-11-11T09:30:00Z", body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pending-pr-comment: ${sha} -->\n<!-- garnet:commit ${sha} -->\n⏳ recording` })
+  state.comments = { 72: [placeholder(SHA_A)], 71: [placeholder(SHA_B)], 70: [finalComment(SHA_C)] }
+  state.runs = { [SHA_A]: [recordRun(past)], [SHA_B]: [recordRun(past)] }
+  const lookups = calls.length
+  const placeholders = recorderHealth(FORK, { exec, prs, now, recordingWorkflows })
+  assert.equal(placeholders.verdict, "stalled")
+  assert.deepEqual(placeholders.pending.map((row) => row.pr), [72, 71])
+  assert.deepEqual(placeholders.missing, [])
+  assert.equal(calls.slice(lookups).some((call) => call.includes("actions/runs")), false)
+  state.comments = { 72: [], 71: [finalComment(SHA_A)], 70: [finalComment(SHA_C)] }
+
+  // Without a head SHA on the listing nothing new is read, so contract 10 behaviour is unchanged.
+  const before = calls.length
+  recorderHealth(FORK, { exec, prs: prs.map(({ headRefOid, ...rest }) => rest), now, recordingWorkflows })
+  assert.equal(calls.slice(before).some((call) => call.includes("actions/runs")), false)
+})
+
 test("replay --pr: commit 1's message describes what it stages, not what the plan assumed", () => {
   const planned = "chore(deps): sync dependency manifests before update\n\n- Cargo.lock"
   assert.equal(resolvedFirstMessage(["Cargo.lock", RECORD_WORKFLOW_PATH], planned), planned)
@@ -834,7 +915,7 @@ const replayResponses = [
   [/gh api repos\/\S+\/issues\/77\/comments/, recordedFirst],
   [/check-runs/, JSON.stringify({ check_runs: [] })],
 ]
-const noWait = { pollMs: 0, sleep: async () => {}, timeoutMs: 1000 }
+const noWait = { pollMs: 0, sleep: async () => {}, timeoutMs: 1000, failedGraceMs: 0 }
 
 function memoryIo(files = {}) {
   const store = { ...files }
@@ -1055,6 +1136,55 @@ test("replay --pr: commit 2 is not pushed while commit 1 is unrecorded or its ch
   assert.equal(recordState({ comments: [{ body: `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${SHA_C} -->` }], checks: [], sha: SHA_C }).state, "pending")
   const finalized = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n<!-- garnet:summary {"contract":"6.10.0","commit":"${SHA_C}","jobs":1,"changed":0} -->`
   assert.equal(recordState({ comments: [{ body: finalized }], checks: [], sha: SHA_C }).state, "recorded")
+})
+
+test("wait: with no comment while jobs record, a failed Garnet check does not end the wait before the record can post", async () => {
+  const failedCheck = { name: "Garnet Runtime Visibility / unit", status: "completed", conclusion: "failure" }
+  const runningCheck = { name: "Garnet Runtime Visibility / e2e", status: "in_progress", conclusion: null }
+  const doneCheck = { ...runningCheck, status: "completed", conclusion: "success" }
+  const stillRecording = recordState({ comments: [], checks: [failedCheck, runningCheck], sha: SHA_C })
+  assert.equal(stillRecording.state, "pending")
+  assert.match(stillRecording.detail, /checks running: Garnet Runtime Visibility \/ e2e/)
+  assert.equal(recordState({ comments: [], checks: [failedCheck, doneCheck], sha: SHA_C }).state, "failed")
+  assert.equal(recordState({ comments: [], checks: [], sha: SHA_C }).state, "pending")
+
+  const finalized = `<!-- garnet-runtime-review -->\n<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->\n<!-- garnet:commit ${SHA_C} -->\n<!-- garnet:summary {"contract":"11.0.0","commit":"${SHA_C}","status":"finalized","jobs":2} -->`
+  // Poll 1: one job failed, one still runs. Poll 2: both done, no comment yet. Poll 3: the App has posted.
+  const timeline = [
+    { comments: [], checks: [failedCheck, runningCheck] },
+    { comments: [], checks: [failedCheck, doneCheck] },
+    { comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: finalized }], checks: [failedCheck, doneCheck] },
+  ]
+  const poller = (frames) => {
+    let clock = 0
+    let poll = -1
+    const frame = () => frames[Math.min(poll, frames.length - 1)]
+    return {
+      exec: (cmd, args) => {
+        const call = [cmd, ...args].join(" ")
+        if (/issues\/77\/comments/.test(call)) { poll += 1; return JSON.stringify(frame().comments) }
+        if (/check-runs/.test(call)) return JSON.stringify({ check_runs: frame().checks })
+        return ""
+      },
+      sleep: async (ms) => { clock += ms },
+      now: () => clock,
+    }
+  }
+  const posted = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller(timeline) })
+  assert.equal(posted.state, "recorded")
+  assert.equal(posted.polls, 3)
+
+  // No record ever posts: the failure is reported, but only after the grace, and well inside the wait budget.
+  const missed = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller(timeline.slice(0, 2)) })
+  assert.equal(missed.state, "failed")
+  assert.match(missed.detail, /concluded failure/)
+  assert.equal(missed.polls, 12)
+
+  // No Garnet-named check at all and no comment: keep waiting for the whole budget, past the App's 30 minute window.
+  const silent = await waitForRecord({ fork: FORK, forkPr: 77, sha: SHA_C, pollMs: 30_000, ...poller([{ comments: [], checks: [] }]) })
+  assert.equal(silent.state, "pending")
+  assert.match(silent.detail, /no record for .* yet; gave up after 45 min/)
+  assert.equal(silent.polls, 91)
 })
 
 test("replay --pr: guards stop execution on wrong origin, empty commit, or wrong commit count", async () => {
@@ -1680,6 +1810,27 @@ test("verify: the share gate fails on pending checks, stale heads, residue; pass
   const residue = evaluateExhibit({ pr: { ...pr, body: "opened by the replay harness in a devin session" }, comments, checks: [], permalinkStatus: 200 })
   assert.match(residue.reasons.join("\n"), /residue/)
   assert.equal(evaluateExhibit({ pr, comments: [], checks: [], permalinkStatus: null }).status, "FAIL")
+})
+
+test("verify: no comment while jobs record is a failed gate, never a pass, however green the checks are", () => {
+  const pr = { head_sha: SHA_B, base_sha: SHA_C, state: "open", body: "Bumps `puppeteer` from 24.40.0 to 25.9.0." }
+  const green = [{ name: "garnet/runtime-evidence", status: "completed", conclusion: "success" }]
+  for (const requireCompleteCapture of [false, true]) {
+    const held = evaluateExhibit({ pr, comments: [], checks: green, permalinkStatus: 200, requireCompleteCapture })
+    assert.equal(held.status, "FAIL")
+    assert.equal(verifyExitCode(held), 1)
+    assert.deepEqual(held.receipt, { commentPresent: false, pending: false, finalized: false, noProfile: false })
+    const failed = held.legs.filter((entry) => !entry.ok).map((entry) => entry.name)
+    for (const name of ["comment present", "head-bound", "comment finalized", "verdict determinable"]) {
+      assert.ok(failed.includes(name), `${name} must fail without a record`)
+    }
+  }
+  // The comment left from the previous head while the new head records is not this head's record.
+  const earlier = evaluateExhibit({
+    pr: { ...pr, head_sha: SHA_A }, comments: [{ user: "garnet-runtime-review[bot]", body: RECORD_BODY }], checks: green, permalinkStatus: 200,
+  })
+  assert.equal(earlier.status, "FAIL")
+  assert.match(earlier.reasons.join("\n"), /head-bound: .*head moved/)
 })
 
 test("verify: an App comment (v6.10 contract) passes on its summary pair and the recording run's own check", () => {
