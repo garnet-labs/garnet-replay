@@ -71,7 +71,7 @@ the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
 Private repositories use comment markers and inline guidance, not hosted MCP.
 
 The source is `garnet-labs/garnet-runtime-review-mcp` at
-`cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654`. The four files under
+`4253b0e490582e6f77c7ca368bb6006abd5beb7d`. The four files under
 `examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
 byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
 and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
