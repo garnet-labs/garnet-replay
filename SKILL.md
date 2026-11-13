@@ -17,8 +17,11 @@ Run `replay ground <slug> --dry-run` (or `--all` for the organization).
 Merge its one-commit onboarding PR before replaying. Custom files containing the
 canonical paragraph count as grounded; CodeRabbit additionally requires enabled
 MCP usage. Markdown and valid Greptile JSON receive additive merges; a `.greptile/`
-directory is grounded through `.greptile/rules.md`; YAML and TOML need manual
-resolution without overwriting policy.
+directory is grounded through `.greptile/rules.md`; a PR Agent TOML gains the
+paragraph inside its one `[review_agent]` `issues_user_guidelines` multi-line
+string; other YAML and TOML need manual resolution without overwriting policy.
+`ground` writes through the GitHub API and never clones the fork; pass
+`--branch <name>` when `reviewer-guidance` already exists there.
 `setup` includes missing kit files and safe merges in its onboarding commit.
 All `live` entrypoints refuse missing/conflicting grounding unless admitted with
 `--allow-ungrounded`; `verify` still fails without default-branch grounding.

@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 import { createHash } from "node:crypto"
 import { readFileSync } from "node:fs"
-import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, PREVIOUS_CANONICAL_PARAGRAPHS, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
+import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, PREVIOUS_CANONICAL_PARAGRAPHS, requireGrounding, writeGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
 import { carryReviewerGuidance, GARNET_ACTION_PIN, planPureReplay, planReplay, planSetup } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { livePr } from "../lib/commands.mjs"
@@ -348,16 +348,17 @@ test("ground proposes one guarded onboarding PR and saves pending, not grounded"
     : '{"default_branch":"main","parent":{"full_name":"PostHog/posthog"}}'
   await ground(["posthog"], {
     exec, log: () => {}, save: (target) => saved.push(target),
-    execute: async (plan) => { plans.push(plan); return { forkPr: 99 } },
+    write: (request) => { plans.push(request); return { forkPr: 99, createdPrUrl: "https://github.com/garnet-labs/posthog/pull/99", setupSha: "c".repeat(40) } },
   })
   assert.equal(plans.length, 1)
-  assert.equal(plans[0].files.length, 5)
-  assert.ok(plans[0].steps.find((step) => step.id === "ground-snapshot").args.includes("snapshot-tree"))
+  assert.equal(Object.keys(plans[0].files).length, 5)
+  assert.equal(plans[0].snapshot, "snapshot-tree")
+  assert.equal(plans[0].branch, "reviewer-guidance")
   assert.equal(saved[0].grounding.state, "pending")
   assert.equal(saved[0].grounding.pr, 99)
   await ground(["posthog"], {
     exec: (_cmd, args) => kitResponse(args), log: () => {},
-    save: (target) => saved.push(target), execute: () => assert.fail("identical kit opened a PR"),
+    save: (target) => saved.push(target), write: () => assert.fail("identical kit opened a PR"),
   })
   assert.equal(saved.at(-1).grounding.state, "grounded")
 })
@@ -367,15 +368,93 @@ test("ground executes safe merges but refuses an entire mixed plan with a manual
     ? JSON.stringify({ encoding: "base64", content: Buffer.from("Existing review policy").toString("base64") })
     : kitResponse(args)
   const plans = []
-  await ground(["posthog"], { exec, log: () => {}, save: () => {}, execute: async (plan) => { plans.push(plan); return {} } })
+  await ground(["posthog", "--branch", "reviewer-guidance-2"], { exec, log: () => {}, save: () => {}, write: (request) => { plans.push(request); return { forkPr: 1, createdPrUrl: "url", setupSha: "c".repeat(40) } } })
   assert.equal(plans.length, 1)
-  assert.deepEqual(plans[0].files, ["REVIEW.md"])
-  assert.ok(plans[0].steps.find((step) => step.id === "setup-write-REVIEW.md").writeFileContent.content.startsWith("Existing review policy"))
+  assert.deepEqual(Object.keys(plans[0].files), ["REVIEW.md"])
+  assert.ok(plans[0].files["REVIEW.md"].startsWith("Existing review policy"))
+  assert.equal(plans[0].branch, "reviewer-guidance-2")
   const mixed = (_cmd, args) => args.at(-1).endsWith("/git/blobs/0")
     ? JSON.stringify({ encoding: "base64", content: Buffer.from("reviews: {}").toString("base64") })
     : exec(_cmd, args)
-  const rows = await ground(["posthog"], { exec: mixed, log: () => {}, save: () => {}, execute: () => assert.fail("manual conflict opened a PR") })
+  const rows = await ground(["posthog"], { exec: mixed, log: () => {}, save: () => {}, write: () => assert.fail("manual conflict opened a PR") })
   assert.equal(rows[0].conflict, true)
+})
+
+test("grounding is written through the API as one commit on a new branch, never a clone", () => {
+  const head = "a".repeat(40)
+  const calls = []
+  const exec = (cmd, args, options = {}) => {
+    calls.push({ cmd, args, payload: options.input === undefined ? null : JSON.parse(options.input) })
+    const path = args.at(-1) === "-" ? args[3] : args.at(-1)
+    if (path.endsWith("/commits/main")) return JSON.stringify({ sha: head, commit: { tree: { sha: "snapshot-tree" } } })
+    if (path.includes("/git/matching-refs/")) return JSON.stringify([{ ref: "refs/heads/reviewer-guidance-old" }])
+    if (path.endsWith("/git/blobs")) return JSON.stringify({ sha: "b".repeat(40) })
+    if (path.endsWith("/git/trees")) return JSON.stringify({ sha: "d".repeat(40) })
+    if (path.endsWith("/git/commits")) return JSON.stringify({ sha: "c".repeat(40) })
+    if (path.endsWith("/git/refs")) return "{}"
+    if (path.endsWith("/pulls")) return JSON.stringify({ number: 7, html_url: "https://github.com/garnet-labs/posthog/pull/7" })
+    throw new Error(`unexpected ${path}`)
+  }
+  const request = {
+    repo: "garnet-labs/posthog", upstream: "PostHog/posthog", defaultBranch: "main", snapshot: "snapshot-tree",
+    files: { "REVIEW.md": "policy", ".pr_agent.toml": "[review_agent]\n" }, modes: { "REVIEW.md": "100755" },
+    branch: "reviewer-guidance", message: "ci: configure reviewer guidance [skip ci]", body: "Adds repository reviewer instructions.",
+  }
+  assert.deepEqual(writeGrounding(request, { exec }), { forkPr: 7, createdPrUrl: "https://github.com/garnet-labs/posthog/pull/7", setupSha: "c".repeat(40) })
+  assert.ok(calls.every((call) => call.cmd === "gh" && call.args[0] === "api" && call.args.every((arg) => !arg.includes("PostHog/posthog"))))
+  const writes = calls.filter((call) => call.payload !== null)
+  assert.deepEqual(writes.map((call) => call.args[3].split("/").slice(3).join("/")), ["git/blobs", "git/blobs", "git/trees", "git/commits", "git/refs", "pulls"])
+  assert.equal(Buffer.from(writes[0].payload.content, "base64").toString("utf8"), "policy")
+  assert.deepEqual(writes[2].payload, { base_tree: "snapshot-tree", tree: [
+    { path: "REVIEW.md", type: "blob", mode: "100755", sha: "b".repeat(40) },
+    { path: ".pr_agent.toml", type: "blob", mode: "100644", sha: "b".repeat(40) },
+  ] })
+  assert.deepEqual(writes[3].payload, { message: request.message, tree: "d".repeat(40), parents: [head] })
+  assert.deepEqual(writes[4].payload, { ref: "refs/heads/reviewer-guidance", sha: "c".repeat(40) })
+  assert.deepEqual(writes[5].payload, { title: request.message, body: request.body, head: "reviewer-guidance", base: "main" })
+
+  for (const [override, responses, pattern] of [
+    [{ files: { "package.json": "{}" } }, {}, /refusing package\.json/],
+    [{ files: { ".github/workflows/ci.yml": "on: push" } }, {}, /refusing/],
+    [{ repo: "PostHog/posthog" }, {}, /restricted to garnet-labs/],
+    [{ branch: "main" }, {}, /own branch/],
+    [{ body: "See PostHog/posthog#1" }, {}, /upstream/i],
+    [{}, { "/commits/main": JSON.stringify({ sha: head, commit: { tree: { sha: "moved" } } }) }, /moved since planning/],
+    [{}, { "/git/matching-refs/": JSON.stringify([{ ref: "refs/heads/reviewer-guidance" }]) }, /already has a branch/],
+  ]) {
+    const written = []
+    const guarded = (cmd, args, options = {}) => {
+      if (options.input !== undefined) written.push(args[3])
+      const match = Object.entries(responses).find(([part]) => args.at(-1).includes(part))
+      return match === undefined ? exec(cmd, args, options) : match[1]
+    }
+    assert.throws(() => writeGrounding({ ...request, ...override }, { exec: guarded }), pattern)
+    assert.deepEqual(written, [])
+  }
+})
+
+test("an upstream-owned PR Agent file gains the paragraph inside its own guidelines; other shapes stay manual", () => {
+  const owned = [
+    "[config]", 'model = "x"', "", "[review_agent]", "# keep the bar high", 'comments_location_policy = "both"',
+    'issues_user_guidelines = """', "Apply the review guide.", '"""', 'compliance_user_guidelines = """', "Enforce the contracts.", '"""', "",
+  ].join("\n")
+  const merged = mergeReviewer(".pr_agent.toml", owned)
+  assert.equal(merged, owned.replace('Apply the review guide.\n"""', `Apply the review guide.\n\n${canonicalParagraph()}\n"""`))
+  assert.equal(planGrounding({ ".pr_agent.toml": owned }).rows.find((row) => row.path === ".pr_agent.toml").status, "merge")
+  assert.equal(planGrounding({ ".pr_agent.toml": merged }).rows.find((row) => row.path === ".pr_agent.toml").status, "grounded")
+  for (const manual of [
+    owned.replace("[review_agent]", "[other_agent]"),
+    owned.replace('issues_user_guidelines = """\nApply the review guide.\n"""', 'issues_user_guidelines = "Apply the review guide."'),
+    owned.replace('issues_user_guidelines = """', "issues_user_guidelines = '''").replace('Apply the review guide.\n"""', "Apply the review guide.\n'''"),
+    `${owned}[pr_reviewer]\nissues_user_guidelines = """\nSecond.\n"""\n`,
+    owned.replace("Apply the review guide.", 'Apply the """ guide.'),
+    owned.replace("Apply the review guide.", "Apply the review guide.\\"),
+    owned.replace("# keep the bar high", 'note = """\n[review_agent]\nissues_user_guidelines = """'),
+    "[review_agent]\nenable = true\n",
+  ]) {
+    assert.equal(mergeReviewer(".pr_agent.toml", manual), null)
+    assert.equal(planGrounding({ ".pr_agent.toml": manual }).rows.find((row) => row.path === ".pr_agent.toml").status, "conflict-manual")
+  }
 })
 
 test("live refuses ungrounded default branches before any write, with explicit override hint", async () => {

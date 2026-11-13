@@ -401,7 +401,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
                                                                     PR commits instead of the PR base and head
   live <slug> --pr <N> --record instrument --job <workflow-file>/<job> [--api-url https://...] [--runs-on label] [--drop-job a,b] [--work dir] [--dry-run]
                                                                     record inside the project's own pull request workflow
-  ground <slug>|--all [--dry-run]                                  reviewer kit: add / identical / grounded / merge / conflict-manual
+  ground <slug>|--all [--dry-run] [--branch <name>]                reviewer kit: add / identical / grounded / merge / conflict-manual
     live requires default-branch grounding; --allow-ungrounded explicitly overrides admission, not verify
   setup <slug> [--job <workflow-file>/<job>] [--runs-on label] [--drop-job a,b] [--ecosystem e] [--work dir] [--dry-run]
                                                                     one-time onboarding: recording as a ready pull request on the fork; merge it,
