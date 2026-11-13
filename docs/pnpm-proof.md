@@ -89,6 +89,9 @@ same-repo PR carrying `<!-- garnet-control-plane-pr-comment:v1:app.garnet.ai -->
 1. Calibrate `no_bad_egress_domain` so the docs-only control does not raise
    ATTENTION (owner: control-plane; gated, protected repo; closes when a fresh
    pnpm profile shows it passing or absent).
-2. Decide whether the outreach shows the egress baseline (supportable today) or
-   waits for head-bound, complete records so a per-PR diff can be claimed
-   (owner: Farrukh).
+2. Decided by Farrukh on 2026-11-13: the send uses the egress-baseline framing
+   supported by "What the profiles show today": which test processes reach
+   which live registries/download hosts, per job, with links. It claims nothing
+   listed under "What is not shown" (not causal, not exact-head, not complete,
+   etc.) and makes no per-PR behavior-change claim. Waiting for items 3 and 4
+   in `docs/readiness-2026-11-03.md` for a per-PR claim was not chosen.

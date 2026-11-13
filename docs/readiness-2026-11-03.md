@@ -4,7 +4,7 @@ Probed 2026-11-03 15:00–17:00 UTC. Harness: garnet-replay `a9a1f4e` (main). Re
 
 **Verdict: NO-GO. Outreach stays gated.** No first-wave exhibit passes `replay verify`. Two legs, capture completeness and comment finalized, cannot pass on any App record today, because the control plane never declares a capture complete. The stated gate is also unmet: action #192 was closed unmerged and folded into the still-open action #198, and control-plane #745 is a draft with changes requested.
 
-pnpm is the exception. It is the one ask that does not depend on verify: the App is live on pnpm/pnpm and posting there, and profile delivery is 343/343. It is held back only by item 6 (ATTENTION on the public profile) and item 10 (Farrukh's framing call).
+pnpm is the exception. It is the one ask that does not depend on verify: the App is live on pnpm/pnpm and posting there, and profile delivery is 343/343. It is held back only by item 6 (ATTENTION on the public profile). Item 10's egress-baseline framing was decided on 2026-11-13.
 
 ## (a) Status per surface
 
@@ -37,7 +37,7 @@ pnpm is the exception. It is the one ask that does not depend on verify: the App
 | 7 | Land docs comment-lock alignment. | garnet-org/garnet-documentation · [#102](https://github.com/garnet-org/garnet-documentation/pull/102) (draft, base main; supersedes #100/#101) | Farrukh | docs match the live comment |
 | 8 | Land the website exhibits on the final comment. | garnet-org/garnet-website-2026 · [#184](https://github.com/garnet-org/garnet-website-2026/pull/184) / [#183](https://github.com/garnet-org/garnet-website-2026/pull/183) / [#182](https://github.com/garnet-org/garnet-website-2026/pull/182) | Farrukh | site matches the live comment |
 | 9 | Land the public report and onboarding. | garnet-org/garnet-ui · [#324](https://github.com/garnet-org/garnet-ui/pull/324), [#323](https://github.com/garnet-org/garnet-ui/pull/323), [#329](https://github.com/garnet-org/garnet-ui/pull/329) (base dev) | Nicolás → Farrukh promote dev→main | first-viewer report and install path |
-| 10 | Pick the pnpm framing: the egress baseline that is supportable today, or wait for items 3 and 4 so a per-PR claim can be made. | garnet-labs/garnet-replay · `docs/pnpm-proof.md` "Before sending" #2 | Farrukh | pnpm send |
+| 10 | Decided 2026-11-13: use the egress baseline supportable today, per "What the profiles show today"; the send claims nothing under "What is not shown". No per-PR behavior-change claim; waiting for items 3 and 4 was not chosen. | garnet-labs/garnet-replay · `docs/pnpm-proof.md` "Before sending" #2 | Farrukh (decided) | pnpm send |
 | 11 | After 1, 3 and 4: repin the forks to the release that carries #198 (v2.4.2 per item 1; `replay repin`), re-record them, run verify and redo the cold read. Retire or re-run the hero's `garnet/runtime-evidence` status, which has been pending since 2026-09-10 ([reference#31](https://github.com/garnet-labs/garnet-runtime-review-reference/pull/31)). | garnet-labs forks · this harness | Devin (harness) | first-wave sends |
 | 12 | Fork hygiene on the first-wave forks: drop or secret `claude-review` on skyvern; stop the `.pr/` notice bot and keep `garnet-dependabot-record.yml` out of replay heads on OpenHands; re-pick dspy with a candidate the recorded job installs. | garnet-labs/skyvern, OpenHands, dspy · `targets/*.json` | Devin (harness) | first-wave cold read |
 | 13 | Fix the copy that puts `No record for <job>` next to a recorded fold of the same job name, for example by naming the matrix leg. | garnet-org/control-plane · `githubapp/render` | Nicolás | cold read |
@@ -55,7 +55,7 @@ Items 1, 2, 5, 6, 7, 8, 9, 10, 12 and 13 are independent of each other. Item 11 
 **pnpm send** goes when all of these hold:
 1. A `garnet-runtime-review[bot]` comment is finalized on a new pnpm/pnpm same-repo PR. This is already observed on #17602.
 2. `no_bad_egress_domain` no longer reads ATTENTION on a fresh pnpm public profile, or assertions are absent from the public projection.
-3. Farrukh has chosen the framing (item 10). The send claims only what "What the profiles show today" in `docs/pnpm-proof.md` supports, and claims nothing listed under "What is not shown".
+3. Framing decided by Farrukh on 2026-11-13 (item 10): the egress baseline. The send claims only what "What the profiles show today" in `docs/pnpm-proof.md` supports, and claims nothing listed under "What is not shown". No per-PR behavior-change claim.
 
 **Any send** also requires: the docs quickstart pin equals garnet.ai/pins, and every link in the message returns 200 logged out.
 
@@ -144,7 +144,7 @@ pnpm/pnpm is active, with no SILENT, DROP, COVERAGE or EMPTY flags. Compared wit
 - [#17602](https://github.com/pnpm/pnpm/pull/17602) is finalized: contract 10.0.0, `### Nothing new recorded`, `0 of 1 recorded job changed`, "Garnet records 1 of 19 TS CI jobs". It compares with the last 10 recorded runs on `main`, best-effort capture, and has a [public profile](https://app.garnet.ai/public/runs/41644836982?profile=01a1a1aa-1b83-72be-9408-4304cd1d8c5a).
 - [#17620](https://github.com/pnpm/pnpm/pull/17620) was pending at probe time ("0 of 5 jobs finished so far"). Recording now spans five cells, including Windows legs.
 - **`no_bad_egress_domain` is still ATTENTION.** The public JSON for the #17602 profile (`/api/public/runs/41644836982`) carries `"no_bad_egress_domain","result":"ATTENTION"`. The PR comment itself shows no assertion. No calibration change was found in control-plane, where the assertion only appears in `service/firehose/slack.go`. The assertion lives in garnet-org/jibril (`internal/assertions`). Item 6.
-- `docs/pnpm-proof.md` caveats still hold: not causal, not exact-head (merge ref), not complete, and fork PRs record nothing. Its framing decision is still open (item 10).
+- `docs/pnpm-proof.md` caveats still hold: not causal, not exact-head (merge ref), not complete, and fork PRs record nothing. Its egress-baseline framing was decided on 2026-11-13 (item 10); only item 6 still holds pnpm.
 
 ## 6. Other surfaces (first external viewer)
 
