@@ -154,7 +154,8 @@ Each stage answers one question and leaves one artifact in the target ledger
 | 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
 
 `replay verify <pr-url>` is the evidence gate at any stage. It requires declared
-complete capture and an anonymous public report naming the exact repository,
+complete capture, or a finalized App record labelled `best-effort`, with no
+incomplete jobs, and an anonymous public report naming the exact repository,
 run, profile, and PR head. A final comment or HTTP 200 alone is insufficient.
 After the gate accepts the evidence, an independent cold read establishes whether the result helps a
 reviewer. `replay status` shows local artifacts and the next command; it does

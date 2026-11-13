@@ -37,8 +37,10 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
 - Every artifact names its pair (head, compared commit, transition, scope).
 - Missing, partial, stale, or unbound evidence is `undeterminable`. Never write
   "unchanged", "no change", or "clean" over incomplete evidence.
-- Require declared complete capture and exact public repository/run/profile/head
-  identity. A merge-ref SHA cannot stand in for the replay head without verified
+- Require accepted capture and exact public repository/run/profile/head
+  identity. Accepted capture is declared complete, or a finalized App record
+  labelled `best-effort`, with no incomplete jobs. Best-effort stays a scoped
+  result; never report it as complete. A merge-ref SHA cannot stand in for the replay head without verified
   executed-source linkage. Keep workload success, capture, hypothesis, reviewer
   value, agent consumption, and attribution separate in batch reports.
 - Cards preserve every recorded job, workload row, background row, and job link.
