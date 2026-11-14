@@ -1,0 +1,1131 @@
+{
+  "slug": "e2b",
+  "upstream": "e2b-dev/E2B",
+  "fork": "garnet-labs/E2B",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2113,
+      "title": "chore(deps): override transitive glob/minimatch to patched versions (GHSA-3g3m-2fjr-6pw4, GHSA-g3hv-75wg-m249)",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-09T15:50:07Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2128,
+      "title": "refactor(cli): type the workspace-api client with openapi-typescript + openapi-fetch",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T12:49:58Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 25,
+      "paths": [
+        "CLAUDE.md",
+        "Makefile",
+        "copy.bara.sky",
+        "package.json",
+        "packages/cli/.prettierignore",
+        "packages/cli/package.json",
+        "packages/cli/src/workspace-api/schema.gen.ts",
+        "packages/cli/src/workspaces.ts",
+        "packages/cli/tests/auth.test.ts",
+        "packages/cli/tests/commands/project.test.ts",
+        "packages/cli/tests/workspaces.test.ts",
+        "packages/js-sdk/src/volume/schema.gen.ts",
+        "packages/python-sdk/e2b/volume/client/api/volumes/delete_volumecontent_volume_id_path.py",
+        "packages/python-sdk/e2b/volume/client/api/volumes/get_volumecontent_volume_id_dir.py",
+        "packages/python-sdk/e2b/volume/client/api/volumes/get_volumecontent_volume_id_file.py",
+        "packages/python-sdk/e2b/volume/client/api/volumes/get_volumecontent_volume_id_path.py",
+        "packages/python-sdk/e2b/volume/client/api/volumes/patch_volumecontent_volume_id_path.py",
+        "packages/python-sdk/e2b/volume/client/api/volumes/post_volumecontent_volume_id_dir.py",
+        "pnpm-lock.yaml",
+        "redocly.yaml",
+        "scripts/fetch-spec.sh",
+        "spec/README.md",
+        "spec/belt-ref",
+        "spec/openapi-volumecontent.yml",
+        "spec/openapi-workspace.yml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2126,
+      "title": "feat(cli): replace Inquirer prompts with @clack/prompts",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T12:37:45Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".changeset/cli-clack-prompts.md",
+        "packages/cli/package.json",
+        "packages/cli/src/commands/template/delete.ts",
+        "packages/cli/src/commands/template/init.ts",
+        "packages/cli/src/commands/template/migrate.ts",
+        "packages/cli/src/commands/template/publish.ts",
+        "packages/cli/src/utils/confirm.ts",
+        "packages/cli/src/utils/prompts.ts",
+        "packages/cli/src/workspaces.ts",
+        "packages/cli/tests/commands/project.test.ts",
+        "packages/cli/tests/utils/prompts.test.ts",
+        "packages/cli/tests/workspaces.test.ts",
+        "packages/cli/tsdown.config.ts",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2125,
+      "title": "feat(cli): authenticate with E2B_ACCESS_TOKEN",
+      "author": "mishushakov",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T10:12:53Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        ".changeset/cli-access-token-env.md",
+        "packages/cli/package.json",
+        "packages/cli/src/api.ts",
+        "packages/cli/src/commands/auth/configure.ts",
+        "packages/cli/src/commands/auth/info.ts",
+        "packages/cli/src/commands/project/index.ts",
+        "packages/cli/src/utils/token-refresh.ts",
+        "packages/cli/tests/auth.test.ts",
+        "packages/cli/tests/commands/project.test.ts",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2111,
+      "title": "chore(deps): scheduled patch/minor dependency updates for js-sdk / cli / python-sdk",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-09T07:07:16Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/sdk-deps-connectrpc-glob.md",
+        "codegen.Dockerfile",
+        "packages/js-sdk/package.json",
+        "packages/python-sdk/uv.lock",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2143,
+      "title": "chore(deps): bump the uv group across 3 directories with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-14T04:19:37Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/code-interpreter-python/uv.lock",
+        "packages/desktop-python/uv.lock",
+        "packages/python-sdk/uv.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2116,
+      "title": "ci(sdk-tests): run each SDK suite only when its own package changes",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-10T14:21:00Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/sdk_tests.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2142,
+      "title": "test: prune and rewrite SDK tests flagged by the current-main audit rerun",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-13T21:15:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 30,
+      "paths": [
+        "packages/js-sdk/tests/api/snapshot.test.ts",
+        "packages/js-sdk/tests/paginator.test.ts",
+        "packages/js-sdk/tests/sandbox/commands/connect.test.ts",
+        "packages/js-sdk/tests/sandbox/commands/retainOutput.test-d.ts",
+        "packages/js-sdk/tests/sandbox/commands/run.test.ts",
+        "packages/js-sdk/tests/sandbox/commands/sendStdin.test.ts",
+        "packages/js-sdk/tests/sandbox/snapshot-api.test.ts",
+        "packages/js-sdk/tests/template/apiDefaults.test.ts",
+        "packages/js-sdk/tests/template/boundOpts.test.ts",
+        "packages/js-sdk/tests/template/utils/getAllFilesInPath.test.ts",
+        "packages/js-sdk/tsconfig.typecheck.json",
+        "packages/js-sdk/vitest.config.mts",
+        "packages/python-sdk/tests/async/sandbox_async/test_config_propagation.py",
+        "packages/python-sdk/tests/async/sandbox_async/test_snapshot_api.py",
+        "packages/python-sdk/tests/async/sandbox_async/test_timeout.py",
+        "packages/python-sdk/tests/async/template_async/test_bound_api_params.py",
+        "packages/python-sdk/tests/shared/sandbox/test_api_defaults.py",
+        "packages/python-sdk/tests/shared/sandbox/test_on_resume_request.py",
+        "packages/python-sdk/tests/shared/template/utils/test_get_all_files_in_path.py",
+        "packages/python-sdk/tests/shared/template/utils/test_normalize_build_arguments.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/commands/test_stream_input.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/test_config_propagation.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/test_snapshot_api.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/test_timeout.py",
+        "packages/python-sdk/tests/sync/template_sync/test_bound_api_params.py",
+        "packages/python-sdk/tests/test_envd_interceptors.py",
+        "packages/python-sdk/tests/test_envd_stream_request_timeout.py",
+        "packages/python-sdk/tests/test_filesystem_models.py",
+        "packages/python-sdk/tests/test_stream_input_sync.py",
+        "packages/python-sdk/tests/test_volume_connection_config.py"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2117,
+      "title": "feat(sdk,cli): resizable templates",
+      "author": "alsrdn",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-10T14:23:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        ".changeset/resizable-templates.md",
+        "packages/cli/src/commands/template/list.ts",
+        "packages/cli/tests/commands/template/list_table.test.ts",
+        "packages/js-sdk/src/api/schema.gen.ts",
+        "packages/js-sdk/src/sandbox/sandboxApi.ts",
+        "packages/js-sdk/src/template/buildApi.ts",
+        "packages/js-sdk/src/template/index.ts",
+        "packages/js-sdk/src/template/types.ts",
+        "packages/js-sdk/tests/sandbox/apiDefaults.test.ts",
+        "packages/js-sdk/tests/template/apiDefaults.test.ts",
+        "packages/js-sdk/tests/template/boundOpts.test.ts",
+        "packages/python-sdk/e2b/api/client/api/sandboxes/get_unstable_sandboxes_sandbox_id_record.py",
+        "packages/python-sdk/e2b/api/client/models/__init__.py",
+        "packages/python-sdk/e2b/api/client/models/new_sandbox.py",
+        "packages/python-sdk/e2b/api/client/models/new_sandbox_v2.py",
+        "packages/python-sdk/e2b/api/client/models/resumed_sandbox.py",
+        "packages/python-sdk/e2b/api/client/models/sandbox_record.py",
+        "packages/python-sdk/e2b/api/client/models/template.py",
+        "packages/python-sdk/e2b/api/client/models/template_build.py",
+        "packages/python-sdk/e2b/api/client/models/template_build_request_v3.py",
+        "packages/python-sdk/e2b/api/client/models/template_with_builds.py",
+        "packages/python-sdk/e2b/sandbox/sandbox_api.py",
+        "packages/python-sdk/e2b/sandbox_async/main.py",
+        "packages/python-sdk/e2b/sandbox_async/sandbox_api.py",
+        "packages/python-sdk/e2b/sandbox_sync/main.py",
+        "packages/python-sdk/e2b/sandbox_sync/sandbox_api.py",
+        "packages/python-sdk/e2b/template_async/build_api.py",
+        "packages/python-sdk/e2b/template_async/main.py",
+        "packages/python-sdk/e2b/template_sync/build_api.py",
+        "packages/python-sdk/e2b/template_sync/main.py",
+        "packages/python-sdk/tests/async/template_async/test_bound_api_params.py",
+        "packages/python-sdk/tests/async/template_async/test_stacktrace.py",
+        "packages/python-sdk/tests/shared/sandbox/test_api_defaults.py",
+        "packages/python-sdk/tests/shared/template/test_api_defaults.py",
+        "packages/python-sdk/tests/sync/template_sync/test_bound_api_params.py",
+        "packages/python-sdk/tests/sync/template_sync/test_stacktrace.py",
+        "spec/openapi.yml",
+        "spec/runtime-ref"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2141,
+      "title": "test(cli): remove duplicate, dead-code and vacuous CLI tests",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T21:13:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "packages/cli/src/commands/sandbox/exec_helpers.ts",
+        "packages/cli/tests/commands/sandbox/backend_integration.test.ts",
+        "packages/cli/tests/commands/sandbox/create_lifecycle.test.ts",
+        "packages/cli/tests/commands/sandbox/exec_helpers.test.ts",
+        "packages/cli/tests/commands/sandbox/exec_pipe.test.ts",
+        "packages/cli/tests/commands/sandbox/fork.test.ts",
+        "packages/cli/tests/commands/sandbox/list.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2140,
+      "title": "test(python-sdk): drop E2B_ACCESS_TOKEN from volume tests",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T15:42:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/python-sdk/tests/test_volume_client.py",
+        "packages/python-sdk/tests/test_volume_connection_config.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2139,
+      "title": "fix(dockerfile-utils): keep Python digit classes ASCII-only",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T15:28:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        ".changeset/dockerignore-ascii-digit-class.md",
+        ".changeset/dockerignore-ascii-whitespace-class.md",
+        "packages/dockerfile-utils-js/src/dockerignore.ts",
+        "packages/dockerfile-utils-js/tests/dockerignore.test.ts",
+        "packages/dockerfile-utils-python/e2b_dockerfile_utils/dockerignore.py",
+        "packages/dockerfile-utils-python/tests/test_dockerignore.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2138,
+      "title": "feat(sdk): add shell option to commands.run",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T15:10:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/commands-shell.md",
+        "packages/js-sdk/src/sandbox/commands/index.ts",
+        "packages/js-sdk/tests/sandbox/commands/run.test.ts",
+        "packages/python-sdk/e2b/sandbox/commands/main.py",
+        "packages/python-sdk/e2b/sandbox_async/commands/command.py",
+        "packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+        "packages/python-sdk/tests/async/sandbox_async/commands/test_run.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/commands/test_run.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2137,
+      "title": "fix(sdk): resolve directory symlinks in template copies",
+      "author": "Elon-Jiang",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-13T10:55:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/resolved-directory-symlinks.md",
+        "packages/js-sdk/src/template/utils.ts",
+        "packages/js-sdk/tests/template/directorySymlinks.test.ts",
+        "packages/python-sdk/e2b/template/utils.py",
+        "packages/python-sdk/tests/shared/template/test_directory_symlinks.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2135,
+      "title": "fix(template): preserve millisecond readiness waits",
+      "author": "Elon-Jiang",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-13T08:37:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/ready-timeout-milliseconds.md",
+        "packages/js-sdk/src/template/readycmd.ts",
+        "packages/js-sdk/tests/template/utils/readycmd.test.ts",
+        "packages/python-sdk/e2b/template/readycmd.py",
+        "packages/python-sdk/tests/shared/template/test_readycmd.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2133,
+      "title": "feat(sdk): allow commands to skip shell startup files",
+      "author": "DennisSFO",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-13T00:38:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".changeset/violet-zebras-jog.md",
+        "packages/js-sdk/src/sandbox/commands/index.ts",
+        "packages/js-sdk/tests/sandbox/commands/shellStartup.test.ts",
+        "packages/python-sdk/e2b/sandbox_async/commands/command.py",
+        "packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+        "packages/python-sdk/tests/async/sandbox_async/commands/test_shell_startup.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/commands/test_shell_startup.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2132,
+      "title": "fix(dockerfile-utils): keep Python digit classes ASCII-only",
+      "author": "fhgffy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T22:07:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/dockerignore-ascii-digit-class.md",
+        "packages/dockerfile-utils-python/e2b_dockerfile_utils/dockerignore.py",
+        "packages/dockerfile-utils-python/tests/test_dockerignore.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2131,
+      "title": "fix(cli): remove workspace kind from the picker and workspace list",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T18:33:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/cli/src/commands/workspace/index.ts",
+        "packages/cli/src/workspaces.ts",
+        "packages/cli/tests/commands/project.test.ts",
+        "packages/cli/tests/workspaces.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2130,
+      "title": "Add the new-package skill: 0.0.0 placeholder publish and OIDC trusted publisher setup",
+      "author": "mishushakov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-12T17:30:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".claude/skills/new-package/SKILL.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2129,
+      "title": "test: stabilize auto-resume pause and CLI template pagination tests",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T15:38:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/cli/tests/commands/template/list.test.ts",
+        "packages/js-sdk/tests/sandbox/lifecyclePayload.test.ts",
+        "packages/python-sdk/tests/async/sandbox_async/test_create.py",
+        "packages/python-sdk/tests/sync/sandbox_sync/test_create.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2127,
+      "title": "feat(cli): use SDK Template.list and Template.delete in template commands",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T12:43:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        ".changeset/cli-native-template-list-delete.md",
+        "packages/cli/src/commands/template/delete.ts",
+        "packages/cli/src/commands/template/list.ts",
+        "packages/cli/src/utils/templateSort.ts",
+        "packages/cli/tests/commands/template/delete.test.ts",
+        "packages/cli/tests/commands/template/list.test.ts",
+        "packages/cli/tests/commands/template/list_table.test.ts",
+        "packages/js-sdk/src/template/types.ts",
+        "packages/js-sdk/tests/template/list.test.ts",
+        "packages/python-sdk/e2b/template/types.py",
+        "packages/python-sdk/tests/async/template_async/test_list.py",
+        "packages/python-sdk/tests/sync/template_sync/test_list.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2124,
+      "title": "feat(cli): show the project ID in sandbox, snapshot and template lists",
+      "author": "mishushakov",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-12T09:41:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/cli-list-project-ids.md",
+        "packages/cli/src/api.ts",
+        "packages/cli/src/commands/sandbox/list.ts",
+        "packages/cli/src/commands/sandbox/snapshot.ts",
+        "packages/cli/src/commands/template/list.ts",
+        "packages/cli/src/workspaces.ts",
+        "packages/cli/tests/commands/list_project_id.test.ts",
+        "packages/cli/tests/workspaces.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2121,
+      "title": "fix(desktop): return an empty list when no application window matches",
+      "author": "yjjnls",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-11T00:57:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/desktop-empty-window-list.md",
+        "packages/desktop-js/src/sandbox.ts",
+        "packages/desktop-js/tests/applicationWindows.test.ts",
+        "packages/desktop-python/e2b_desktop/main.py",
+        "packages/desktop-python/tests/test_application_windows.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2120,
+      "title": "fix(desktop): honor click coordinates at 0 and validate lone coordinates",
+      "author": "yjjnls",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-11T00:55:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/desktop-click-coordinates.md",
+        "packages/desktop-js/src/sandbox.ts",
+        "packages/desktop-js/tests/clickCoordinates.test.ts",
+        "packages/desktop-python/e2b_desktop/main.py",
+        "packages/desktop-python/tests/test_click_coordinates.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2119,
+      "title": "fix(code-interpreter): enforce run_code timeout at the requested deadline",
+      "author": "yjjnls",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-11T00:43:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/code-interpreter-python-request-deadline.md",
+        "packages/code-interpreter-python/e2b_code_interpreter/_timeouts.py",
+        "packages/code-interpreter-python/e2b_code_interpreter/code_interpreter_async.py",
+        "packages/code-interpreter-python/e2b_code_interpreter/code_interpreter_sync.py",
+        "packages/code-interpreter-python/tests/test_execute_timeout.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2118,
+      "title": "fix(python-sdk): reject absolute copy() sources on every platform",
+      "author": "DZH166",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-10T18:51:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/python-sdk/e2b/template/utils.py",
+        "packages/python-sdk/tests/shared/template/utils/test_validate_relative_path.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2114,
+      "title": "fix(code-interpreter): serialize execution details as objects",
+      "author": "GPT-AGI",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-09T18:08:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/python-execution-json-objects.md",
+        "packages/code-interpreter-python/e2b_code_interpreter/models.py",
+        "packages/code-interpreter-python/tests/test_serialization.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2112,
+      "title": "refactor(sdk): share CLI template file writing and drop useless spread in egress proxy mapping",
+      "author": "app/devin-ai-integration",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-09T07:11:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/cli/src/commands/template/generators/template-generator.ts",
+        "packages/js-sdk/src/sandbox/sandboxApi.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2110,
+      "title": "fix(sdk): snapshot core E2B client header maps",
+      "author": "peterolkhov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-08T22:13:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        ".changeset/wicked-buses-remain.md",
+        "packages/js-sdk/src/client.ts",
+        "packages/js-sdk/tests/client.test.ts",
+        "packages/python-sdk/e2b/client.py",
+        "packages/python-sdk/tests/test_client.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 2106,
+      "title": "feat(cli): show the project ID in sandbox, snapshot and template lists",
+      "author": "mishushakov",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-06T18:11:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".changeset/cli-list-project-ids.md",
+        "packages/cli/src/api.ts",
+        "packages/cli/src/commands/sandbox/list.ts",
+        "packages/cli/src/commands/sandbox/snapshot.ts",
+        "packages/cli/src/commands/template/list.ts",
+        "packages/cli/src/workspaces.ts",
+        "packages/cli/tests/commands/list_project_id.test.ts",
+        "packages/cli/tests/workspaces.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-14T05:33:40.474Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0,
+  "grounding": {
+    "state": "grounded",
+    "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
+    "defaultBranch": "main",
+    "checkedSha": "715496cfae277acf708a04d22f45c7ddbade0d8b",
+    "pr": 89
+  }
+}
