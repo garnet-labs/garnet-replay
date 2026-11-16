@@ -679,6 +679,31 @@ test("recorder health: the fork's newest pull requests say whether Runtime Revie
   assert.ok(calls.some((c) => c.startsWith("pr list") && c.includes(FORK)), calls.join("\n"))
 })
 
+test("recorder health: closed-unmerged pull requests are ignored, but open and merged heads still count", () => {
+  const now = Date.parse("2026-11-12T12:00:00Z")
+  for (const state of ["CLOSED", "OPEN", "MERGED"]) {
+    for (const supplied of [false, true]) {
+      const prs = [{ number: 138, state, headRefOid: SHA_A, createdAt: "2026-11-10T10:00:00Z" }]
+      const calls = []
+      const exec = (cmd, args) => {
+        calls.push(args.join(" "))
+        if (args[0] === "pr" && args[1] === "list") return JSON.stringify(prs)
+        if (args[1] === `repos/${FORK}/issues/138/comments`) return JSON.stringify([])
+        if (args[1]?.includes("actions/runs?head_sha=")) return JSON.stringify({ workflow_runs: [{
+          path: ".github/workflows/garnet-record.yml", status: "completed", conclusion: "success", updated_at: "2026-11-11T10:00:00Z",
+        }] })
+        if (args.some((arg) => arg.includes("/check-runs"))) return JSON.stringify([{ check_runs: [] }])
+        throw new Error(`unexpected ${args.join(" ")}`)
+      }
+      const health = recorderHealth(FORK, { exec, ...(supplied ? { prs } : {}), now, recordingWorkflows: [".github/workflows/garnet-record.yml"] })
+      assert.equal(health.verdict, state === "CLOSED" ? "none" : "stalled")
+      assert.equal(health.scanned, state === "CLOSED" ? 0 : 1)
+      assert.deepEqual(health.missing.map((row) => row.pr), state === "CLOSED" ? [] : [138])
+      if (state === "CLOSED") assert.equal(calls.some((call) => call.startsWith("api ")), false)
+    }
+  }
+})
+
 test("recorder health: pnpm App markers distinguish final, terminal no-profile, and pending comments", () => {
   const bot = { login: "garnet-runtime-review[bot]" }
   const final = { user: bot, created_at: "2026-10-02T01:58:31Z", updated_at: "2026-10-02T01:58:31Z", body: PNPM_85_COMMENT }
