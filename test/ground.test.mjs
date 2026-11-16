@@ -221,6 +221,73 @@ test("grounding upgrades the cbc0ebe kit: exact bytes are replaced and its parag
   assert.equal(mergeReviewer("greptile.json", JSON.stringify({ first: paragraph, second: PREVIOUS_CANONICAL_PARAGRAPH })), null)
 })
 
+test("unrecognized hosted-MCP guidance stays manual even alongside the current paragraph", () => {
+  const kit = reviewerKit()
+  const legacy = PREVIOUS_CANONICAL_PARAGRAPH.replace("A pending comment", "Capture not declared in the marker is `undeterminable`, whatever the counts. A pending comment")
+  assert.equal(legacy.length, 857)
+  assert.equal(PREVIOUS_CANONICAL_PARAGRAPHS.includes(legacy), false)
+  for (const path of [...Object.keys(kit), ".greptile/rules.md"]) {
+    for (const content of [legacy, `${legacy}\n\n${canonicalParagraph()}`]) {
+      const body = path === "greptile.json"
+        ? JSON.stringify({ customContext: { other: [{ scope: ["**"], content }] }, instructions: "Keep this policy." })
+        : path === ".coderabbit.yaml" ? `knowledge_base:\n  mcp:\n    usage: enabled\n# Keep this policy.\n${content}` : `Keep this policy.\n${content}`
+      const current = { ...kit, [path]: body, ...(path === ".greptile/rules.md" ? { ".greptile": null } : {}) }
+      const state = planGrounding(current)
+      assert.equal(reviewerGrounded(path, body), false, path)
+      assert.equal(mergeReviewer(path, body), null, path)
+      assert.equal(state.grounded, false, path)
+      assert.equal(state.conflict, true, path)
+      assert.equal(state.rows.find((row) => row.path === path).status, "conflict-manual", path)
+      assert.equal(state.files[path], undefined, path)
+      assert.equal(current[path], body, path)
+    }
+  }
+})
+
+test("retired MCP references cannot survive a known paragraph upgrade or a generic merge", () => {
+  const kit = reviewerKit()
+  for (const retired of ["get_runtime_review", "get_execution_profile", "https://garnet-runtime-review-mcp.vercel.app/mcp"]) {
+    for (const content of ["Local policy", canonicalParagraph(), PREVIOUS_CANONICAL_PARAGRAPH, PREVIOUS_CANONICAL_PARAGRAPHS[1]]) {
+      for (const path of [...Object.keys(kit), ".greptile/rules.md"]) {
+        const body = path === "greptile.json" ? JSON.stringify({ instructions: `${content}\n${retired}` }) : `${content}\n${retired}`
+        const state = planGrounding({ ...kit, [path]: body, ...(path === ".greptile/rules.md" ? { ".greptile": null } : {}) })
+        assert.equal(reviewerGrounded(path, body), false, path)
+        assert.equal(mergeReviewer(path, body), null, path)
+        assert.equal(state.grounded, false, path)
+        assert.equal(state.rows.find((row) => row.path === path).status, "conflict-manual", path)
+        assert.equal(state.files[path], undefined, path)
+      }
+    }
+  }
+})
+
+test("Greptile JSON escapes cannot hide retired MCP references", () => {
+  for (const retired of ["get_runtime_review", "get_execution_profile", "garnet-runtime-review-mcp.vercel.app"]) {
+    const body = JSON.stringify({ customContext: { other: [{ content: canonicalParagraph() }, { content: retired }] } }).replace(retired, `\\u${retired.charCodeAt(0).toString(16).padStart(4, "0")}${retired.slice(1)}`)
+    const state = planGrounding({ ...reviewerKit(), "greptile.json": body })
+    assert.equal(body.includes(retired), false)
+    assert.equal(reviewerGrounded("greptile.json", body), false)
+    assert.equal(mergeReviewer("greptile.json", body), null)
+    assert.equal(state.grounded, false)
+    assert.equal(state.rows.find((row) => row.path === "greptile.json").status, "conflict-manual")
+    assert.equal(state.files["greptile.json"], undefined)
+  }
+})
+
+test("API grounding and shared admission reject current guidance mixed with retired tools", () => {
+  const exec = (_cmd, args) => {
+    if (args[1].endsWith("/git/blobs/3")) {
+      return JSON.stringify({ encoding: "base64", content: Buffer.from(`${reviewerKit()["REVIEW.md"]}\nLegacy variant: get_runtime_review`).toString("base64") })
+    }
+    return kitResponse(args)
+  }
+  const state = groundingAt("garnet-labs/example", null, { exec })
+  assert.equal(state.grounded, false)
+  assert.equal(state.conflict, true)
+  assert.equal(state.rows.find((row) => row.path === "REVIEW.md").status, "conflict-manual")
+  assert.throws(() => requireGrounding("garnet-labs/example", { exec, log: () => {} }), /--allow-ungrounded/)
+})
+
 test("shared URL/local admission refuses missing guidance, allows explicit override, and fails closed on API errors", () => {
   const missing = (_cmd, args) => args[1].includes("/git/trees/") ? '{"tree":[]}' : '{"default_branch":"main"}'
   assert.throws(() => requireGrounding("garnet-labs/example", { exec: missing, log: () => {} }), /--allow-ungrounded/)
