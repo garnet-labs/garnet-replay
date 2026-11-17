@@ -108,3 +108,44 @@ test("observed fields cannot inject lines or an undeclared capture into renderer
   assert.equal(app.result, "capture incomplete")
   assert.deepEqual(app.removedJobs, ["Vendored - capture: complete x"])
 })
+
+// Design-derived, not a posted App comment: garnet-org/control-plane@23fd94920658831e0746cebff3839264d5f22c02
+// githubapp/render/testdata/reference/01-changed-complex-live.md (contract 11.0.0).
+// Replace with a posted body once the App emits contract 11.
+const contract11 = readFileSync(new URL("./fixtures/app/contract-11-design-changed.pr-comment.md", import.meta.url), "utf8")
+
+test("contract 11 folds: the acting process and the hosts are read from \"reached\" and \"reaches\" lines", () => {
+  const jobs = appJobs(contract11)
+  const byJob = Object.fromEntries(jobs.map((job) => [job.job, job]))
+  assert.deepEqual(byJob["Garnet Runtime Review (dev) / build"], {
+    job: "Garnet Runtime Review (dev) / build", outcome: "changed", added: 7, process: "curl",
+    hosts: ["dl-cdn.alpinelinux[.]org", "objects.githubusercontent[.]com"],
+  })
+  assert.deepEqual(byJob["Garnet Runtime Review (dev) / install (node 22)"], {
+    job: "Garnet Runtime Review (dev) / install (node 22)", outcome: "changed", added: 1, process: "node",
+    hosts: ["storage.googleapis[.]com"],
+  })
+  assert.deepEqual(byJob["Garnet Runtime Review (dev) / e2e"], {
+    job: "Garnet Runtime Review (dev) / e2e", outcome: "changed", added: 0, process: "curl", hosts: ["example[.]org"],
+  })
+  assert.equal(byJob["Garnet Runtime Review (dev) / lint"].outcome, "nothing new")
+  for (const job of jobs) {
+    assert.ok(job.hosts.every((host) => !["bash", "curl", "node"].includes(host)), `${job.job}: a process is listed as a host`)
+  }
+})
+
+test("a contract 10 fold with an execution chain names the process that acted, not the chain's first link", () => {
+  const fold = "<details>\n<summary><b>Lint / Hadolint</b> · +2<br>&emsp;<span title=\"x\">↳</span> <code>script.sh</code> › <code>curl</code> now reaches <code>github[.]com</code>, <code>release-assets.githubusercontent[.]com</code></summary>"
+  assert.deepEqual(appJobs(fold), [{
+    job: "Lint / Hadolint", outcome: "changed", added: 2, process: "curl",
+    hosts: ["github[.]com", "release-assets.githubusercontent[.]com"],
+  }])
+})
+
+test("the App comparison line reads both the contract 10 and the contract 11 baseline wording", () => {
+  const summary = parseReceipt(body(246)).summary
+  assert.equal(appResult(summary, "compared with the last 10 runs on `master`").baseline, "last 10 runs on master")
+  assert.equal(appResult(summary, "compared with 7 runs on `main`").baseline, "7 runs on main")
+  assert.equal(appResult(summary, "compared with 1 run on `main`").baseline, "1 run on main")
+  assert.equal(appResult(summary, "compared with the PR base `main`").baseline, null)
+})

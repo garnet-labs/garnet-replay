@@ -38,10 +38,10 @@ test("reusable instrumentation rejects empty and dispatch-only workflows", () =>
   assert.throws(() => instrumentWorkflow("on:\n  workflow_call:\njobs:\n  test:\n    uses: ./.github/workflows/other.yml\n", { job: "test" }), /reusable workflow caller/)
 })
 
-test("demo targets select the reusable core-utils and chart-data-extractor jobs", async () => {
+test("demo targets select the fork recorder and reusable chart-data-extractor job", async () => {
   const litellm = JSON.parse(await readFile("targets/litellm.json", "utf8"))
   const interpreter = JSON.parse(await readFile("targets/code-interpreter.json", "utf8"))
-  assert.deepEqual(litellm.record, { mode: "instrument", job: "_test-unit-base.yml/run" })
+  assert.deepEqual(litellm.record, { mode: "fork-workflow" })
   assert.deepEqual(interpreter.record, { mode: "instrument", job: "charts_tests.yml/publish" })
   assert.equal(interpreter.upstream, "e2b-dev/code-interpreter")
   assert.equal(interpreter.fork, "garnet-labs/code-interpreter")

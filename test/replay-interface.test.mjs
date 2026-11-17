@@ -252,4 +252,21 @@ test("execution stops on moved plans and verifies the recorded head before savin
   const prepared = await executeReplayJob({ ...input, action: "prepare", baseBranch: "base/uv-21570" }, seams)
   assert.equal(prepared.state, "prepared")
   assert.equal(prepared.baseBranch, "base/uv-21570")
+  await executeReplayJob({ ...input, branch: "deps/uv-21570" }, { ...seams, live: async (args, opts) => { liveArgs = args; return seams.live(args, opts) } })
+  assert.equal(liveArgs[liveArgs.indexOf("--branch") + 1], "deps/uv-21570")
+  await assert.rejects(executeReplayJob({ ...input, branch: "x; rm -rf" }, seams), /plain branch name/)
+  assert.equal((await executeReplayJob({ ...input, branch: "deps/uv-21570" }, seams)).branch, "deps/uv-21570")
+  for (const two_commit of [false, true]) {
+    const forwarding = { ...seams, live: async (args, opts) => { liveArgs = args; return seams.live(args, opts) } }
+    const prepared = await executeReplayJob({ ...input, two_commit }, forwarding)
+    assert.equal(prepared.two_commit, two_commit)
+    assert.equal(liveArgs.includes("--two-commit"), two_commit)
+    await executeReplayJob({ ...input, action: "start", signature: prepared.signature, two_commit }, forwarding)
+    assert.equal(liveArgs.includes("--two-commit"), two_commit)
+  }
+  for (const two_commit of ["true", "false", "", 1, null]) {
+    await assert.rejects(executeReplayJob({ ...input, two_commit }, seams), /must be a boolean/)
+  }
+  await assert.rejects(executeReplayJob({ ...input, action: "start", two_commit: true, preparedTwoCommit: false }, seams), /differs from the prepared plan/)
+  await assert.rejects(executeReplayJob({ ...input, action: "start", two_commit: false, preparedTwoCommit: true }, seams), /differs from the prepared plan/)
 })

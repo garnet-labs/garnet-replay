@@ -1,26 +1,26 @@
 {
   "repository": "garnet-labs/garnet-runtime-review-mcp",
-  "sha": "cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654",
+  "sha": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
   "files": {
     ".coderabbit.yaml": {
       "source": "examples/reviewers/.coderabbit.yaml",
-      "sha256": "dab6fc839c4f080b94949d8231239a5056173c684c3f9bc6b35c985524777e84"
+      "sha256": "dd637f0834292abda3fe77e7845e08162d7304a3aa0c960f3cb547919b020c15"
     },
     ".pr_agent.toml": {
       "source": "examples/reviewers/.pr_agent.toml",
-      "sha256": "41c90099eda6cdf5efc8d0666f289f7d71e70b94756f80d7a7bb747e80d68c78"
+      "sha256": "a65ff52d987bd6516223963ee0dda95df54785a94ea46eb8854ab016806d02f0"
     },
     "greptile.json": {
       "source": "examples/reviewers/greptile.json",
-      "sha256": "9b067c459548cb1eaf1a2a40c813f7cd27a5efd95f30b366b08d5e704fcfbac7"
+      "sha256": "d1bf00feeb51a40cca9651b7bb98bb9ed929e20be51ecb74601271e0534390b2"
     },
     "REVIEW.md": {
       "source": "examples/reviewers/REVIEW.md",
-      "sha256": "01800d7707954f61317647af0ea67d7a5dae43d30e8005629aeea73a713f49e5"
+      "sha256": "995adacdd28b89e4b1f62588c4bec210504098cdc846a2a9410ae7acd0c6b4dd"
     },
     "SKILL.md": {
       "source": "skills/garnet-runtime-review/SKILL.md",
-      "sha256": "dba7dd0a014776220a98527556d1ce619f8499be355f3763ec21ba060e58ddc3"
+      "sha256": "138032144b560d730ffbfc01fda0868efa6d0083a2acf1f97084e1866f24d18f"
     }
   }
 }
