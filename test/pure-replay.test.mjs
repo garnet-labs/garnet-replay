@@ -791,6 +791,45 @@ test("livePr: pure replay carries default-branch callees over upstream copies or
   }
 })
 
+test("livePr: two-commit flag selects the existing two-state publisher", async () => {
+  const fallback = liveExec({ recording: true })
+  const exec = (command, args) => args[1]?.startsWith(`repos/${UPSTREAM}/git/trees/`) && args[1].includes(":.github/workflows")
+    ? JSON.stringify({ tree: [] }) : fallback(command, args)
+  for (const twoCommit of [false, true]) {
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit"] : [])], {
+      exec, log: () => {}, save: () => assert.fail("dry run must not save"),
+    })
+    assert.equal(result.plan.singleCommit === true, !twoCommit)
+    if (twoCommit) assert.deepEqual(result.plan.steps.filter((step) => ["push-first", "pr-create", "wait-first-record", "push-change"].includes(step.id)).map((step) => step.id), ["push-first", "pr-create", "wait-first-record", "push-change"])
+  }
+})
+
+test("planReplay: code-interpreter carries one root and its six support workflows", async () => {
+  const prefix = ".github/workflows/"
+  const files = ["pull_request.yml", "charts_tests.yml", "build_test_template.yml", "js_tests.yml", "python_tests.yml", "performance_tests.yml", "cleanup_build_template.yml"]
+  const workflowBodies = Object.fromEntries(files.map((file) => [prefix + file, "on: workflow_call\n"]))
+  for (const file of files.slice(0, 2)) workflowBodies[prefix + file] = await readFile(`test/fixtures/workflows/garnet-labs_code-interpreter-b7514ab-${file}`, "utf8")
+  const input = {
+    slug: "code-interpreter", upstream: "e2b-dev/code-interpreter", fork: "garnet-labs/code-interpreter", defaultBranch: "main",
+    forkDefaultSha: SHA_C, upstreamPr: 248, upstreamTitle: "Update package", baseSha: SHA_A, headSha: SHA_B,
+    changes: [{ path: "chart_data_extractor/poetry.lock", status: "modified", previous: null }],
+    record: "fork-workflow", baseBranch: "rb/code-interpreter-248", recordWorkflows: [prefix + files[0]], workflowBodies,
+  }
+  const plan = planReplay(input)
+  const carry = plan.steps.find((step) => step.id === "first-fork-record")
+  assert.deepEqual(new Set(carry.args.slice(carry.args.indexOf("--") + 1)), new Set(files.map((file) => prefix + file)))
+  assert.ok(carry.args.includes(SHA_C))
+  assert.ok(plan.steps.some((step) => step.kind === "verify-fork-default"))
+  assert.deepEqual(plan.steps.filter((step) => ["push-first", "pr-create", "wait-first-record", "push-change"].includes(step.id)).map((step) => step.id), ["push-first", "pr-create", "wait-first-record", "push-change"])
+  assert.throws(() => planReplay({ ...input, recordWorkflows: [prefix + files[0], prefix + files[1]] }), /commit 1 carries one/)
+  assert.throws(() => planReplay({ ...input, workflowBodies: { ...workflowBodies, [prefix + files[1]]: "on: workflow_call\njobs:\n  remote:\n    uses: owner/repo/.github/workflows/run.yml@main\n" } }), /reusable uses must be local and unpinned/)
+  assert.throws(() => planReplay({ ...input, messages: { first: "clean the workflow" } }), /banned vocabulary/)
+  assert.throws(() => planReplay({ ...input, workflowBodies: { ...workflowBodies, [prefix + files[1]]: undefined } }), /workflow/)
+  console.log("TWO-COMMIT STEPS:", plan.steps.filter((step) => ["push-first", "pr-create", "wait-first-record", "push-change"].includes(step.id)).map((step) => step.id).join(" → "))
+  console.log("COMMIT-1 MESSAGE:", plan.messages.first)
+  console.log("COMMIT-1 FILES:\n" + plan.recordWorkflows.join("\n"))
+})
+
 test("livePr: refuses a recorder overlay when the change's base records itself", async () => {
   await assert.rejects(
     livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--record-workflow", ".github/workflows/ci.yml", "--dry-run"], {

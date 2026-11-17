@@ -21,6 +21,10 @@ on:
         description: Run ID of the prepare job whose plan this start must match
         type: string
         default: ""
+      two_commit:
+        description: Record a first commit before pushing the change
+        type: boolean
+        default: false
       base_branch:
         description: Fork branch to open the pull request against (never the default branch); empty uses the default branch
         type: string
@@ -63,6 +67,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.REPLAY_FORK_TOKEN }}
           REPLAY_ACTION: ${{ inputs.action }}
+          REPLAY_TWO_COMMIT: ${{ inputs.two_commit }}
           REPLAY_SLUG: ${{ inputs.slug }}
           REPLAY_NUMBER: ${{ inputs.number }}
           REPLAY_BASE_BRANCH: ${{ inputs.base_branch }}
