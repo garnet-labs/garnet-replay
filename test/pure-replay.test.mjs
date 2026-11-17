@@ -513,6 +513,50 @@ test("executePlan: setup refuses when an onboarding pull request is already open
 
 // ---------------------------------------------------------------- executePlan: ensure-base
 
+test("executePlan: code-interpreter's carried workflow list passes the base commit guard", async () => {
+  const recordWorkflows = [
+    "pull_request.yml", "build_test_template.yml", "js_tests.yml", "python_tests.yml",
+    "performance_tests.yml", "cleanup_build_template.yml", "charts_tests.yml",
+  ].map((file) => `.github/workflows/${file}`)
+  const plan = purePlan({
+    slug: "code-interpreter", upstream: "e2b-dev/code-interpreter", fork: "garnet-labs/code-interpreter",
+    baseBranch: "rb/code-interpreter-248", recordWorkflows,
+  })
+  const step = plan.steps.find((step) => step.kind === "ensure-base")
+  const { exec, calls } = fakeExec([[/write-tree/, "tree-carried"], [/diff --cached --name-only/, recordWorkflows.join("\n")]])
+  await executePlan({ ...plan, steps: [step] }, { exec, io: memoryIo(), log: () => {} })
+  assert.ok(calls.some((call) => call.includes(`commit -q -m ${step.message}`)))
+  assert.ok(calls.some((call) => call.includes("push --set-upstream origin HEAD:refs/heads/rb/code-interpreter-248")))
+})
+
+test("executePlan: the base commit guard still rejects banned prose and invalid carried paths", async () => {
+  const plan = purePlan({ baseBranch: "review/base", recordWorkflows: [".github/workflows/cleanup_build_template.yml"] })
+  const step = plan.steps.find((step) => step.kind === "ensure-base")
+  for (const [modified, error] of [
+    [{ ...step, message: `ci: clean recorder\n\n- ${step.carry[0]}` }, /banned vocabulary 'clean'/],
+    [{ ...step, carry: ["src/cleanup.yml"] }, /unsupported workflow path/],
+    [{ ...step, carry: [".github/workflows/PostHog/posthog.yml"] }, /unsupported workflow path/],
+    [{ ...step, carry: [".github/workflows/devin.yml"] }, /residue/],
+    [{ ...step, message: `${step.message}\n\nclean` }, /banned vocabulary 'clean'/],
+  ]) {
+    const { exec, calls } = fakeExec([[/write-tree/, "tree-carried"], [/diff --cached --name-only/, "workflow.yml"]])
+    await assert.rejects(executePlan({ ...plan, steps: [modified] }, { exec, io: memoryIo(), log: () => {} }), error)
+    assert.ok(!calls.some((call) => call.includes("commit -q") || call.includes("push")))
+  }
+})
+
+test("two-commit replay: carried paths bypass vocabulary only in verbatim message lines", async () => {
+  const path = ".github/workflows/cleanup_build_template.yml"
+  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), changes: CHANGES })
+  const check = plan.steps.find((step) => step.id === "first-check")
+  const commit = plan.steps.find((step) => step.id === "first-commit")
+  const { exec, calls } = fakeExec([[/diff --cached --name-only/, path]])
+  await executePlan({ ...plan, steps: [check, commit] }, { exec, io: memoryIo(), log: () => {} })
+  assert.ok(calls.some((call) => call.includes(`commit -q -m ci: record dependency installs on pull requests\n\n- ${path}`)))
+  assert.throws(() => planReplay({ ...plan, changes: CHANGES, messages: { first: `ci: clean recorder\n\n- ${path}` } }), /banned vocabulary 'clean'/)
+  assert.throws(() => planReplay({ ...plan, changes: CHANGES, messages: { body: `clean\n\n- ${path}` } }), /banned vocabulary 'clean'/)
+})
+
 test("two-commit replay: recorder checkout and execution are bound to the planned fork SHA", async () => {
   const input = { ...purePlan({ baseBranch: "review/base" }), changes: CHANGES }
   const plan = planReplay(input)
