@@ -163,6 +163,34 @@ not certify either gate.
 
 ## Runbook
 
+### Sort recorded changes before sharing
+
+```sh
+node bin/replay.mjs triage docs/triage-manifest.json --saved public/replays --out out/triage
+node bin/replay.mjs card airbyte --pr 35 --assessments docs/triage-manifest.json
+```
+
+`triage` writes `rows.json` and `triage.md`, keeping the App result beside the
+review classification. Changed hosts start as `needs-review`. An assessment of
+`finding`, `noise`, or `constructed` names its reason and baseline/source links,
+and binds to the head, compared commit, scope, and SHA-256 of the entire App
+receipt. A same-head rerun invalidates that assessment when its receipt changes.
+There is no hostname allowlist: a registry alias on one execution path says
+nothing about a connection to that host from another process.
+
+Finalized, current-head `nothing new` jobs can be `quiet-control`; best-effort
+stays scoped. First records and job-coverage changes remain `recorded`, not
+controls. Missing, partial, trimmed, stale, or unbound evidence is
+`undeterminable`. Saved snapshots are inventoried in that category until a live
+receipt revalidates them; authored teaching records stay `constructed`.
+
+`--no-verify` is for research only and leaves every row unshareable. The default
+runs the existing share gate; findings and controls need its acceptance to be shareable.
+Cards keep every quoted job and background row. The harness annotates its own
+reports; the App's comment and comparison headline remain untouched.
+
+See [the dated audit](docs/triage-2026-11-17.md) for the reviewed cases and limits.
+
 ```sh
 export GH_TOKEN=$(gh auth token)
 R="node bin/replay.mjs"

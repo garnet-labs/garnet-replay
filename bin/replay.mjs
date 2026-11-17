@@ -19,6 +19,7 @@ import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
 import { ground, requireGrounding } from "../lib/ground.mjs"
 import { fleet, fleetExitCode } from "../lib/fleet.mjs"
+import { renderTriage, triageSnapshot } from "../lib/triage.mjs"
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -419,6 +420,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   card <slug> --pr <forkPr> | card <fork-pr-url>                    evidence card from the head-bound record
   cohort <slug> --prs 1,2,3 | --from-observations [--limit N]       rates over many fork pull requests
   rows <manifest.json> [--out dir] [--no-verify] [--question q] [--hypothesis h]
+  triage <manifest.json> [--saved public/replays] [--out dir] [--no-verify]  classify exact receipts, retaining App results
                                                                     read-only cohort rows, table and research note from fork PR URLs
   verify <pr-url> [--label real|constructed] [--json]                 share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
   batch <targets.json> [--out dir] [--concurrency 2] [--only slug,..] [--dry-run] [--wait-minutes N]
@@ -470,17 +472,49 @@ async function main(args) {
   if (command === "setup") return ladder.setup(args.slice(1))
   if (command === "card") return ladder.card(args.slice(1))
   if (command === "cohort") return ladder.cohort(args.slice(1))
-  if (command === "rows") {
+  if (command === "rows" || command === "triage") {
     const { collectRow, renderResearchNote, renderRowsTable } = await import("../lib/cohort-rows.mjs")
     const manifest = JSON.parse(await readFile(resolve(args[1] ?? ""), "utf8"))
     if (!Array.isArray(manifest) || manifest.some((e) => typeof e?.fork !== "string")) throw new Error("rows needs a JSON array of {fork, upstream?, authorClass?, chained?, classification?}")
     const opt = (name) => { const i = args.indexOf(name); return i === -1 ? null : args[i + 1] ?? null }
     const token = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN ?? null
+    if (new Set(manifest.map((entry) => entry.fork.toLowerCase().replace(/\/$/, ""))).size !== manifest.length) throw new Error("duplicate pull request in manifest")
     const rows = []
-    for (const entry of manifest) rows.push(await collectRow(entry, { token, withVerify: !args.includes("--no-verify") }))
-    const out = resolve(opt("--out") ?? join(ROOT, "out", "rows"))
+    for (const entry of manifest) {
+      try {
+        rows.push(await collectRow(entry, { token, withVerify: !args.includes("--no-verify") }))
+      } catch (error) {
+        if (command !== "triage") throw error
+        rows.push({ fork_pr: entry.fork, links: {}, verify: null, triage: {
+          classification: "undeterminable", reason: "Live record could not be read; rerun triage.",
+          capture: "not declared", app_result: null, shareable: false, evidence: [],
+        } })
+        console.error(`unreadable record: ${entry.fork}`)
+      }
+    }
+    if (command === "triage" && opt("--saved") !== null) {
+      const directory = resolve(opt("--saved"))
+      const entries = await readdir(directory, { recursive: true })
+      for (const path of entries.filter((path) => path.endsWith(".json")).sort()) {
+        const diff = JSON.parse(await readFile(join(directory, path), "utf8"))
+        if (typeof diff.pull_request?.url !== "string") throw new Error(`saved record has no pull request URL: ${path}`)
+        if (rows.some((row) => row.fork_pr === diff.pull_request.url)) continue
+        rows.push({
+          fork_pr: diff.pull_request.url, head_sha: diff.head?.sha ?? null,
+          compared_sha: diff.base?.sha ?? null, scope: diff.pair?.scope ?? null,
+          archive_path: join(directory, path), links: { app_comment: null }, verify: null,
+          triage: triageSnapshot(diff),
+        })
+      }
+    }
+    const out = resolve(opt("--out") ?? join(ROOT, "out", command))
     await mkdir(out, { recursive: true })
     await writeFile(join(out, "rows.json"), `${JSON.stringify(rows, null, 2)}\n`)
+    if (command === "triage") {
+      await writeFile(join(out, "triage.md"), renderTriage(rows))
+      console.log(`wrote ${join(out, "triage.md")} (${rows.length} records)`)
+      return rows
+    }
     await writeFile(join(out, "table.md"), `${renderRowsTable(rows)}\n`)
     await writeFile(join(out, "note.md"), renderResearchNote(rows, { question: opt("--question") ?? undefined, hypothesis: opt("--hypothesis") ?? undefined }))
     console.log(renderRowsTable(rows))
