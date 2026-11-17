@@ -2,7 +2,9 @@
   "slug": "e2b",
   "upstream": "e2b-dev/E2B",
   "fork": "garnet-labs/E2B",
-  "record": null,
+  "record": {
+    "mode": "fork-workflow"
+  },
   "workload": null,
   "notes": [],
   "observations": [
@@ -1125,7 +1127,7 @@
     "state": "grounded",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
-    "checkedSha": "715496cfae277acf708a04d22f45c7ddbade0d8b",
-    "pr": 89
+    "checkedSha": "959d08090db964058af45fdf998d22d355eb1c57",
+    "pr": 96
   }
 }
