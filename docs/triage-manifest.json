@@ -1,0 +1,145 @@
+[
+  {
+    "fork": "https://github.com/garnet-labs/E2B/pull/93",
+    "assessment": {
+      "classification": "finding",
+      "head": "00f23022bc634bc0fdddc04d7c1754595cd99be7",
+      "previous": "80594f50bbcd487b0f6a40caab0b4b6e56c7a66e",
+      "scope": "pr-base",
+      "fingerprint": "f7de0dc0d4b46184e3fd5db979ab09c1d85e430bcadeeea5f79125b79b563435",
+      "reason": "The newly added generate:api step executes Redocly through node › dash › node and reaches otel.cloud.redocly[.]com; the PR base lacks this action. Scoped best-effort telemetry finding.",
+      "evidence": [
+        "https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452",
+        "https://github.com/garnet-labs/E2B/compare/80594f50bbcd487b0f6a40caab0b4b6e56c7a66e...00f23022bc634bc0fdddc04d7c1754595cd99be7",
+        "https://app.garnet.ai/public/runs/44001036865?profile=01a1e74a-f62e-75e6-b130-fa930f04bd87"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/E2B/pull/95"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/litellm/pull/147",
+    "assessment": {
+      "classification": "noise",
+      "head": "0c9ac0e1d2e7f1549221c7acbf3015ab9aa095b7",
+      "previous": "4adfa4bf169e8eaebafa654d0b1c06036edbf896",
+      "scope": "pr-base",
+      "fingerprint": "64454185c7f9ec1bb23b314d27f82873ea07747943ec82f037724ed4179d7485",
+      "reason": "The dashboard-only Next.js bump leaves the Python install source unchanged. The only changed job adds the Python/Fastly download alias under python3.14; no new dashboard workload action is established. This assessment applies only to this receipt.",
+      "evidence": [
+        "https://github.com/garnet-labs/litellm/pull/147#issuecomment-6939432893",
+        "https://github.com/garnet-labs/litellm/compare/4adfa4bf169e8eaebafa654d0b1c06036edbf896...0c9ac0e1d2e7f1549221c7acbf3015ab9aa095b7",
+        "https://app.garnet.ai/public/runs/44023787555?profile=01a1e7fb-1482-7bc1-be16-f8eb13ffb396"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/litellm/pull/149"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/litellm/pull/139"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/litellm/pull/142"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/airbyte/pull/35",
+    "assessment": {
+      "classification": "noise",
+      "head": "b01e9ebbe79b66e6416c05b099f216d70f365468",
+      "previous": "878e3b0dc930a85271ac0ca0dd5eb962c8ae2446",
+      "scope": "pr-base",
+      "fingerprint": "8701606dc4003e2b7971d0251dddc00740cd943101b051c07d5229a6ab8ca6ba",
+      "reason": "The compared podman image-pull tree swaps CloudFront for the Docker registry S3 backend while auth.docker.io and registry-1.docker.io remain. Registry transport variation, not a new connector execution path.",
+      "evidence": [
+        "https://github.com/garnet-labs/airbyte/pull/35#issuecomment-6940773932",
+        "https://github.com/garnet-labs/airbyte/compare/878e3b0dc930a85271ac0ca0dd5eb962c8ae2446...b01e9ebbe79b66e6416c05b099f216d70f365468",
+        "https://app.garnet.ai/public/runs/44032498685?profile=01a1e83a-2b18-7661-b422-b80afb7bbc65"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/airbyte/pull/27",
+    "assessment": {
+      "classification": "noise",
+      "head": "7303375af9240606e359be315cb25e557e5c9a6e",
+      "previous": "27a87ab4760a7e09af3554a907882b0b60f95477",
+      "scope": "pr-base",
+      "fingerprint": "05b2605b0288ee7dfefd629c83231bbb9a123a84d8dbd1f8a7f3bae4ae27ac74",
+      "reason": "The compared podman image-pull tree swaps the Docker registry S3 backend for CloudFront while auth.docker.io and registry-1.docker.io remain. Registry transport variation, not a new connector execution path.",
+      "evidence": [
+        "https://github.com/garnet-labs/airbyte/pull/27#issuecomment-6938525243",
+        "https://github.com/garnet-labs/airbyte/compare/27a87ab4760a7e09af3554a907882b0b60f95477...7303375af9240606e359be315cb25e557e5c9a6e",
+        "https://app.garnet.ai/public/runs/44018593473?profile=01a1e7ce-0a97-7f95-9487-d8011bb6bb97"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/code-interpreter/pull/24",
+    "assessment": {
+      "classification": "noise",
+      "head": "f8f6a88548eb794162cada3bea93fea89f90cea4",
+      "previous": "ac281f9f3524c5396e8ffa05eece064fc9ff2c9a",
+      "scope": "previous-push",
+      "fingerprint": "6e65ed27571ad1173f7ab19dfbd640e91f870ceab66e44b5626f6e6657bba844",
+      "reason": "All changed rows are rooted in systemd and hosted-compute provisioner or runner-network processes. The bash/Python and node workload trees have no changed rows; the App still counts the runner tree as a changed job.",
+      "evidence": [
+        "https://github.com/garnet-labs/code-interpreter/pull/24#issuecomment-6957625563",
+        "https://github.com/garnet-labs/code-interpreter/compare/ac281f9f3524c5396e8ffa05eece064fc9ff2c9a...f8f6a88548eb794162cada3bea93fea89f90cea4",
+        "https://app.garnet.ai/public/runs/44151974028?profile=01a1ead8-8487-7f9e-ba9e-94a124afbb9e"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/2"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/4",
+    "assessment": {
+      "classification": "finding",
+      "head": "97edaf78b7df919b944d709552c5370ef376b8bd",
+      "previous": "b097a03d6cb2a6749e2ca2b39b7ceb40aba8b590",
+      "scope": "pr-base",
+      "fingerprint": "4645fa5791caf10614fc7ff13ce6f4113c341d1f915efcf0b7d996be85c2254f",
+      "reason": "The Snyk dependency bump adds a nested dash › node install action reaching a1912.dscd.akamai.net, not just a renamed destination on an existing action. The package.json and package-lock.json blobs match across pulls 2, 3 and 4; all three record the same added action. Capture remains best-effort.",
+      "evidence": [
+        "https://github.com/garnet-labs/nodejs-goof/pull/4#issuecomment-6930464777",
+        "https://github.com/garnet-labs/nodejs-goof/compare/b097a03d6cb2a6749e2ca2b39b7ceb40aba8b590...97edaf78b7df919b944d709552c5370ef376b8bd",
+        "https://github.com/garnet-labs/nodejs-goof/pull/2",
+        "https://github.com/garnet-labs/nodejs-goof/pull/3",
+        "https://github.com/garnet-labs/nodejs-goof/actions/runs/43964206578/job/133639222894"
+      ]
+    }
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/5"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/6"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/7"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/8"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/9"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/nodejs-goof/pull/10"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/cline/pull/34"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/cline/pull/35"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/cline/pull/36"
+  },
+  {
+    "fork": "https://github.com/garnet-labs/litellm/pull/153"
+  }
+]

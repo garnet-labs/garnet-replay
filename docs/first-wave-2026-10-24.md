@@ -24,6 +24,19 @@ Harness: garnet-replay `22be09e` (main, after PR 66) for OpenHands, dspy and the
 5. Hostname truncation in the rendered tree.
 At phone width (390px) the tree scrolls horizontally inside the code block, which is readable.
 
+### Correction to item 1 (2026-11-12)
+Item 1 no longer reproduces. The original Oct 24 records, read back through the Garnet MCP and rendered with the control-plane renderer at control-plane PR 777 (`3227389`), give:
+
+| exhibit | headline on Oct 24 | cause | headline now, same records |
+| --- | --- | --- | --- |
+| OpenHands#26 | `+1 −1 destinations` | Azure blob host rotation counted as workload | `Nothing new recorded · 0 of 1 recorded job changed` |
+| dspy#2 | `1 job changed +1 −1` | GitHub results-host churn counted as workload | `Nothing new recorded · 0 of 1 recorded job changed` |
+| skyvern#2 | `+2 −4 destinations` | Azure blob and GitHub host rotation counted as workload | `Nothing new recorded · 0 of 1 recorded job changed` |
+
+- Those hosts now render under "Runner & GitHub's own traffic". That attribution is already in production; PR 777 does not change it.
+- dspy#2 was re-run on Nov 3 and that record reads `Runtime behavior changed · +1`: `bash › uv › git › git › git → github.com`, absent from the three base runs. That is recorded traffic of the run, most likely a cold `uv` cache, and is not runner churn.
+- Items 2 to 5 are unchanged.
+
 ## Fleet repin
 
 | fork | file | before → after | jibril_version | excluded | repin commit |

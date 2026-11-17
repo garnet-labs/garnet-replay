@@ -1,9 +1,186 @@
 # Worked examples
 
-## Current verification gate
+## Receipt-bound review classification (2026-11-17)
 
-The [five-prospect report](prospect-batch.md) supersedes older PASS examples as
-evidence of the current gate. At 2026-09-11 18:00 UTC the new verifier reported:
+Real output from the trusted, finalized E2B pull 93 record. The review assessment is separate from the App result; the card retains its recorded job and background rows. Run verify again before sharing.
+
+<!-- garnet:card slug=E2B pr=93 state=new-behavior -->
+### What ran, and what changed · pull request 93
+
+> The recorded comparison is shown below.
+
+Review classification: **finding**
+
+The newly added generate:api step executes Redocly through node › dash › node and reaches otel.cloud.redocly[.]com; the PR base lacks this action. Scoped best-effort telemetry finding.
+
+Assessment evidence: [source 1](https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452) · [source 2](https://github.com/garnet-labs/E2B/compare/80594f50bbcd487b0f6a40caab0b4b6e56c7a66e...00f23022bc634bc0fdddc04d7c1754595cd99be7) · [source 3](https://app.garnet.ai/public/runs/44001036865?profile=01a1e74a-f62e-75e6-b130-fa930f04bd87)
+
+Result: **new behavior recorded** (best-effort) · comparison-result
+
+**Comparison pair**
+
+- head: `00f2302` · `00f23022bc634bc0fdddc04d7c1754595cd99be7`
+- record bound to: `00f2302`
+- compared with: `80594f5` · `80594f50bbcd487b0f6a40caab0b4b6e56c7a66e`
+- version transition: not derivable from the record
+- scope: the App's last recorded runs on the base branch → head
+- capture: best-effort (scoped result, not complete capture)
+- App result: changed · 1 of 1 recorded jobs changed
+
+Run verification and assess reviewer value before sharing.
+
+**Execution chains** · quoted from the record · observed-runtime-behavior
+
+### Runtime behavior changed
+
+1 of 1 recorded job changed · compared with the PR base `rb/base-742148dee6-with`
+
+<details>
+<summary><b>Dependency install and test (recorded) / Install and test (recorded)</b> · +1<br>&emsp;<span title="Open the job for everything recorded: workload tree, runner and GitHub traffic">↳</span> <code>node</code> now reaches <code>otel.cloud.redocly[.]com</code></summary>
+
+<blockquote>
+
+<sub>Workload · <a href="https://github.com/garnet-labs/E2B/commit/80594f50bbcd487b0f6a40caab0b4b6e56c7a66e"><code>80594f5</code></a> → <a href="https://github.com/garnet-labs/E2B/pull/93/commits/00f23022bc634bc0fdddc04d7c1754595cd99be7"><code>00f2302</code></a></sub>
+
+```diff
+  bash
+  ├─ bash › node
+  │  └─ registry.npmjs[.]org
++ ├─ node › dash › node
++ │  └─ otel.cloud.redocly[.]com
+  ├─ timeout › docker › docker-buildx
+  │  └─ auth.docker[.]io
+  └─ uv
+     └─ dualstack.python.map.fastly[.]net
+
+  node
+  ├─ github[.]com
+  └─ release-assets.githubusercontent[.]com
+```
+
+<sub>Runner &amp; GitHub's own traffic · <code>ubuntu-latest</code> · Linux x86_64</sub>
+
+```diff
+  node
+  ├─ productionresultssa3.blob.core.windows[.]net (github infra)
+  └─ results-receiver.actions[.]githubusercontent (github infra)
+
+  systemd
+  ├─ Daemon › ExtHandler
+  │  ├─ python3
+  │  │  ├─ 168.63.129[.]16
+  │  │  └─ 169.254.169[.]254 (Cloud IMDS)
+  │  ├─ 168.63.129[.]16
+  │  └─ 169.254.169[.]254 (Cloud IMDS)
++ ├─ chronyd-starter › chronyd
++ │  ├─ 169[.]254[.]169[.]123
++ │  ├─ 185.125.190[.]122
++ │  ├─ 185.125.190[.]123
++ │  ├─ 91.189.91[.]111
++ │  ├─ 91.189.91[.]112
++ │  └─ 91.189.91[.]113
+  ├─ dockerd
+  │  ├─ runc
+  │  │  ├─ curl
+  │  │  │  ├─ 10.0.0[.]2
+  │  │  │  ├─ 168.63.129[.]16
+  │  │  │  └─ nodejs[.]org
+  │  │  ├─ go
+  │  │  │  ├─ 10.0.0[.]2
+  │  │  │  ├─ 168.63.129[.]16
+  │  │  │  ├─ proxy.golang[.]org
+  │  │  │  ├─ storage.googleapis[.]com
+  │  │  │  └─ sum.golang[.]org
+  │  │  ├─ node
+  │  │  │  ├─ 10.0.0[.]2
+  │  │  │  ├─ 168.63.129[.]16
+  │  │  │  └─ registry.npmjs[.]org
+  │  │  └─ pip3
+  │  │     ├─ 10.0.0[.]2
+  │  │     ├─ 168.63.129[.]16
+  │  │     ├─ dualstack.python.map.fastly[.]net
+  │  │     └─ files.pythonhosted[.]org
+  │  ├─ d3ipk8a4rcghwr.cloudfront[.]net
+  │  ├─ production.cloudfront.docker[.]com
+  │  └─ registry-1.docker[.]io
+  ├─ hosted-compute-
+  │  ├─ sudo › sudo
+  │  │  ├─ 140.82.112[.]23
+  │  │  └─ 20.75.202[.]224
+  │  ├─ 140.82.112[.]23
+  │  ├─ 140.82.113[.]24
+  │  ├─ 140.82.114[.]23
+  │  ├─ 20.75.202[.]224
+  │  └─ hosted-compute-request-orchestrator-prod-iad-02 (github infra)
+  ├─ systemd-resolve
+  │  ├─ 10.0.0[.]2
+  │  └─ 168.63.129[.]16
+  └─ systemd-network
+     └─ ip6-allrouters
+```
+
+<sub><a href="https://github.com/garnet-labs/E2B/actions/runs/44001036865/job/133764845979?utm_source=github&amp;utm_medium=pr_comment&amp;utm_campaign=garnet-labs-E2B-pr93&amp;utm_content=job">Job log</a> · <a href="https://app.garnet.ai/public/runs/44001036865?profile=01a1e74a-f62e-75e6-b130-fa930f04bd87&amp;utm_source=github&amp;utm_medium=pr_comment&amp;utm_campaign=garnet-labs-E2B-pr93&amp;utm_content=execution_profile&amp;utm_term=changed">Full record in Garnet ↗</a></sub>
+</blockquote>
+</details>
+
+**Would this have helped the review?**
+
+Reviewer outcome: not recorded on this card.
+Assess the recorded workload scope and action attribution before sharing.
+
+
+## Receipt-bound triage report
+
+Selected live and historical rows; archive status remains unshareable.
+
+# Record triage
+
+2 records: 1 finding, 1 undeterminable.
+
+Review assessments retain the App result and capture limits. Re-run verify before sharing a finding or control.
+
+<details>
+<summary><b>E2B pull 93</b> · finding</summary>
+
+[App record](https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452)
+
+**App:** Runtime behavior changed · 1 of 1 recorded job changed<br>
+**Capture:** best-effort · **Verify:** PASS
+
+The newly added generate:api step executes Redocly through node › dash › node and reaches otel.cloud.redocly[.]com; the PR base lacks this action. Scoped best-effort telemetry finding.
+
+- Head: `00f23022bc634bc0fdddc04d7c1754595cd99be7`
+- Compared: `80594f50bbcd487b0f6a40caab0b4b6e56c7a66e`
+- Transition: not derivable from the record
+- Scope: pr-base
+- [Assessment source 1](https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452)
+- [Assessment source 2](https://github.com/garnet-labs/E2B/compare/80594f50bbcd487b0f6a40caab0b4b6e56c7a66e...00f23022bc634bc0fdddc04d7c1754595cd99be7)
+- [Assessment source 3](https://app.garnet.ai/public/runs/44001036865?profile=01a1e74a-f62e-75e6-b130-fa930f04bd87)
+
+</details>
+
+<details>
+<summary><b>continue pull 5</b> · undeterminable</summary>
+
+[App record](https://github.com/garnet-labs/continue/pull/5)
+
+**App:** new-behavior<br>
+**Capture:** not-declared · **Verify:** not run
+
+Saved snapshot; current head and capture have not been revalidated.
+
+- Head: `df338ea7d1b2888b19319f49aad5479b291f8d7e`
+- Compared: `d522cd12e3a7b75523cf910c0ad8f772f53b9fe6`
+- Transition: form-data 4.0.4 → 4.0.6
+- Scope: previous-recorded-head-to-head
+
+</details>
+
+
+## Historical verification gate
+
+The [five-prospect report](prospect-batch.md) records the gate as observed on
+2026-09-11, not the current state of those exhibits. At 18:00 UTC it reported:
 
 ```text
 verify https://github.com/garnet-labs/OpenHands/pull/10 · FAIL
