@@ -2,12 +2,13 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import { triageRecord, triageSnapshot, triageCounts, renderTriage, receiptFingerprint } from "../lib/triage.mjs"
-import { buildRow } from "../lib/cohort-rows.mjs"
+import { buildRow, collectRow } from "../lib/cohort-rows.mjs"
 import { buildModel, renderCard } from "../lib/card.mjs"
+import { evaluateExhibit } from "../lib/verify.mjs"
 
 const fixtures = JSON.parse(readFileSync(new URL("./fixtures/triage-receipts.json", import.meta.url), "utf8"))
 const find = (repo, n) => structuredClone(fixtures.find((row) => row.fork === `https://github.com/garnet-labs/${repo}/pull/${n}`))
-const pass = (row) => ({ status: "PASS", head: row.headSha, pr_url: row.fork, legs: [] })
+const pass = (row) => ({ status: "PASS", head: row.headSha, pr_url: row.fork, receipt_fingerprint: receiptFingerprint(row.comment.body), legs: [] })
 
 function alterSummary(row, changes) {
   row.comment.body = row.comment.body.replace(/(<!-- garnet:summary )(.*?)( -->)/, (_, a, json, b) => `${a}${JSON.stringify({ ...JSON.parse(json), ...changes })}${b}`)
@@ -33,6 +34,42 @@ test("Fastly, registry swaps in both directions, and runner churn stay App chang
     assert.deepEqual([assessed.classification, assessed.app_result, assessed.shareable], ["noise", "changed", false])
     assert.equal(triageRecord({ ...row, assessment: null }).classification, "needs-review")
     assert.equal(assessed.fingerprint, receiptFingerprint(row.comment.body))
+  }
+})
+
+test("verification identifies the exact receipt it evaluated, not just its head", () => {
+  const row = find("E2B", 93)
+  const evaluate = (body) => evaluateExhibit({
+    pr: { head_sha: row.headSha, base_sha: row.assessment.previous, state: "open", body: "Adds API generation." },
+    comments: [{ user: row.comment.user.login, body }],
+    checks: [{ name: "garnet/runtime-evidence", status: "completed", conclusion: "success" }],
+    permalinkStatus: 200,
+  })
+  const original = evaluate(row.comment.body)
+  const updated = evaluate(row.comment.body + "\n")
+  assert.equal(original.status, "PASS", original.reasons.join("; "))
+  assert.equal(updated.status, "PASS", updated.reasons.join("; "))
+  assert.equal(original.receipt_fingerprint, row.assessment.fingerprint)
+  assert.notEqual(updated.receipt_fingerprint, original.receipt_fingerprint)
+})
+
+test("a same-head update between collection and verification never shares the old finding or control", async () => {
+  for (const [repo, number] of [["E2B", 93], ["nodejs-goof", 5]]) {
+    const row = find(repo, number)
+    const entry = { fork: row.fork, assessment: row.assessment }
+    const exec = (_command, args) => {
+      const path = args.at(-1)
+      if (path.endsWith(`/pulls/${number}`)) return JSON.stringify({ html_url: row.fork, head: { sha: row.headSha } })
+      if (path.includes("/files?")) return "[[]]"
+      if (path.includes("/comments?")) return JSON.stringify([[row.comment]])
+      if (path.includes("/check-runs?")) return '[{"check_runs":[]}]'
+      throw new Error(`unexpected request ${path}`)
+    }
+    const exact = pass(row)
+    const rerecorded = { ...exact, receipt_fingerprint: receiptFingerprint(row.comment.body + "\n") }
+    assert.equal((await collectRow(entry, { exec, verifyImpl: async () => exact })).triage.shareable, true)
+    assert.equal((await collectRow(entry, { exec, verifyImpl: async () => rerecorded })).triage.shareable, false)
+    assert.equal(triageRecord({ ...row, verification: { ...exact, receipt_fingerprint: undefined } }).shareable, false)
   }
 })
 

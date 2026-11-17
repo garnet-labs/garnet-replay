@@ -186,6 +186,8 @@ receipt revalidates them; authored teaching records stay `constructed`.
 
 `--no-verify` is for research only and leaves every row unshareable. The default
 runs the existing share gate; findings and controls need its acceptance to be shareable.
+That acceptance must fingerprint the same receipt as the assessment; an update
+between collection and verification leaves the older report unshareable.
 Cards keep every quoted job and background row. The harness annotates its own
 reports; the App's comment and comparison headline remain untouched.
 
