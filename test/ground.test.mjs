@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 import { createHash } from "node:crypto"
 import { readFileSync } from "node:fs"
-import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
+import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, PREVIOUS_CANONICAL_PARAGRAPHS, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
 import { carryReviewerGuidance, GARNET_ACTION_PIN, planPureReplay, planReplay, planSetup } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
 import { livePr } from "../lib/commands.mjs"
@@ -11,7 +11,7 @@ import { kitResponse } from "./fixtures/grounding.mjs"
 
 test("vendored reviewer files preserve pinned source bytes", () => {
   assert.equal(KIT_SOURCE.repository, "garnet-labs/garnet-runtime-review-mcp")
-  assert.equal(KIT_SOURCE.sha, "cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654")
+  assert.equal(KIT_SOURCE.sha, "4253b0e490582e6f77c7ca368bb6006abd5beb7d")
   for (const [file, metadata] of Object.entries(KIT_SOURCE.files)) {
     const body = readFileSync(new URL(`../live/templates/reviewers/${file}`, import.meta.url))
     assert.equal(createHash("sha256").update(body).digest("hex"), metadata.sha256, file)
@@ -175,6 +175,50 @@ test("grounding replaces prior kit bytes and paragraphs without retaining legacy
     ".greptile/rules.md": `${PREVIOUS_CANONICAL_PARAGRAPH}\n${PREVIOUS_CANONICAL_PARAGRAPH}`,
   })
   assert.equal(ambiguousRules.rows.find((row) => row.path === ".greptile/rules.md").status, "conflict-manual")
+})
+
+test("grounding upgrades the cbc0ebe kit: exact bytes are replaced and its paragraph is swapped in place", () => {
+  const kit = reviewerKit()
+  const paragraph = PREVIOUS_CANONICAL_PARAGRAPHS[1]
+  assert.notEqual(paragraph, PREVIOUS_CANONICAL_PARAGRAPH)
+  assert.notEqual(paragraph, canonicalParagraph())
+  assert.match(canonicalParagraph(), /Don't wait for Garnet: if no finalized `garnet:summary` is bound to the current head, review without it and say the runtime record isn't available yet\. Never poll or sleep for it\./)
+  assert.doesNotMatch(paragraph, /Don't wait for Garnet/)
+
+  const oldReview = readFileSync(new URL("./fixtures/cbc0ebe-reviewer-REVIEW.md", import.meta.url), "utf8")
+  assert.equal(oldReview.includes(paragraph), true)
+  assert.equal(reviewerGrounded("REVIEW.md", oldReview), false)
+  const exact = planGrounding({ ...kit, "REVIEW.md": oldReview })
+  assert.equal(exact.rows.find((row) => row.path === "REVIEW.md").status, "merge")
+  assert.equal(exact.files["REVIEW.md"], kit["REVIEW.md"])
+
+  const markdown = `# Local policy\n\nKeep this rule.\n\n## Runtime Review\n\n${paragraph}\n`
+  const codeRabbit = `knowledge_base:\n  mcp:\n    usage: enabled\nreviews:\n  path_instructions:\n    - path: "**"\n      instructions: |\n        ${paragraph}\n`
+  const prAgent = `[review_agent]\nissues_user_guidelines = """\n${paragraph}\n"""\n`
+  const greptile = { instructions: "Keep these instructions.", customContext: { other: [{ scope: ["src/**"], content: paragraph }] } }
+  const state = planGrounding({
+    ...kit,
+    ".coderabbit.yaml": codeRabbit,
+    ".pr_agent.toml": prAgent,
+    "greptile.json": JSON.stringify(greptile),
+    "REVIEW.md": markdown,
+    ".agents/skills/garnet-runtime-review/SKILL.md": `# Local skill policy\n\n${paragraph}\n`,
+    ".greptile": null,
+    ".greptile/rules.md": `# Local Greptile policy\n\n${paragraph}\n`,
+  })
+  assert.equal(state.conflict, false)
+  assert.equal(state.files[".coderabbit.yaml"], codeRabbit.replace(paragraph, canonicalParagraph()))
+  assert.equal(state.files[".pr_agent.toml"], prAgent.replace(paragraph, canonicalParagraph()))
+  assert.equal(state.files["REVIEW.md"], markdown.replace(paragraph, canonicalParagraph()))
+  assert.equal(JSON.parse(state.files["greptile.json"]).instructions, greptile.instructions)
+  for (const body of Object.values(state.files)) {
+    assert.equal(body.includes(paragraph), false)
+    assert.equal(body.split(canonicalParagraph()).length - 1, 1)
+  }
+  assert.equal(planGrounding({ ...kit, ...state.files, ".greptile": null }).grounded, true)
+
+  assert.equal(mergeReviewer("REVIEW.md", `${markdown}${PREVIOUS_CANONICAL_PARAGRAPH}`), null)
+  assert.equal(mergeReviewer("greptile.json", JSON.stringify({ first: paragraph, second: PREVIOUS_CANONICAL_PARAGRAPH })), null)
 })
 
 test("shared URL/local admission refuses missing guidance, allows explicit override, and fails closed on API errors", () => {

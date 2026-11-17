@@ -592,6 +592,44 @@ test("pending verification awaits a record and keeps an undeterminable verdict",
   assert.equal(commands.includes("live"), false)
 })
 
+test("no comment while jobs record awaits a record: not a failed specimen, not a pass, no card", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "batch-"))
+  const file = join(dir, "targets.json")
+  writeFileSync(file, JSON.stringify({ name: "held", targets: [{ slug: "alpha", upstream: "source/alpha", fork: "garnet-labs/alpha", pr: 1 }] }))
+  const commands = []
+  const board = await runBatchOffline([file, "--out", join(dir, "out")], {
+    env: { GH_TOKEN: "test-token" },
+    exec: (command) => command === "git" ? "sha" : "",
+    readLedger: () => ({ slug: "alpha", setupPr: null, observations: [], replays: [{ upstreamPr: 1, forkPr: 3 }] }),
+    probeFork: () => true,
+    probeWrite: () => ({ ok: true }),
+    runCommand: async (argv) => {
+      const command = argv[2]
+      commands.push(command)
+      if (command === "setup") return { code: 0, stdout: "nothing to onboard", stderr: "" }
+      if (command === "verify") return {
+        code: 1,
+        stdout: JSON.stringify({
+          status: "FAIL",
+          legs: [
+            { name: "comment present", ok: false, detail: "no Garnet comment" },
+            { name: "head-bound", ok: false, detail: "no record to bind" },
+            { name: "comment finalized", ok: false, detail: "no record" },
+            { name: "verdict determinable", ok: false, detail: "no record" },
+          ],
+          receipt: { commentPresent: false, pending: false, finalized: false, noProfile: false },
+        }),
+        stderr: "",
+      }
+      if (command === "card") throw new Error("card must not run")
+      return { code: 0, stdout: "", stderr: "" }
+    },
+  })
+  assert.equal(board.rows[0].state, "awaiting-record")
+  assert.equal(board.rows[0].verdict, "undeterminable")
+  assert.equal(commands.includes("live"), false)
+})
+
 test("a final not-recorded receipt is terminal and never awaiting or shareable", async () => {
   const dir = mkdtempSync(join(tmpdir(), "batch-"))
   const file = join(dir, "targets.json")

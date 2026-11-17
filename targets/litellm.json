@@ -3,8 +3,7 @@
   "upstream": "BerriAI/litellm",
   "fork": "garnet-labs/litellm",
   "record": {
-    "mode": "instrument",
-    "job": "_test-unit-base.yml/run"
+    "mode": "fork-workflow"
   },
   "workload": {
     "name": "core-utils",
@@ -1495,5 +1494,12 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 0,
+  "grounding": {
+    "state": "grounded",
+    "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
+    "defaultBranch": "main",
+    "checkedSha": "b391f7a8f494e1f2a532a8a3dc4e68c7b3388ba3",
+    "pr": 143
+  }
 }

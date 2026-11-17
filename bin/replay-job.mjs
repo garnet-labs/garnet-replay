@@ -9,7 +9,7 @@ import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
 const directory = join(ROOT, "out", "hosted-job")
 const path = join(directory, "job.json")
-const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile, REPLAY_BASE_BRANCH: baseBranch = "" } = process.env
+const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile, REPLAY_BASE_BRANCH: baseBranch = "", REPLAY_BRANCH: headBranch = "" } = process.env
 
 const job = { action, slug, number: Number(number), state: action === "prepare" ? "preparing" : "recording", lines: [] }
 const write = () => {
@@ -24,6 +24,7 @@ try {
   if (!/^[1-9]\d*$/.test(number ?? "")) throw new Error("The pull request number is invalid.")
   let signature
   let base = baseBranch
+  let branch = headBranch
   if (action === "start") {
     const prepared = JSON.parse(readFileSync(planFile, "utf8"))
     if (prepared.state !== "prepared" || prepared.slug !== slug || prepared.number !== job.number || !/^[0-9a-f]{64}$/.test(prepared.signature ?? "")) {
@@ -34,9 +35,12 @@ try {
     const planned = typeof prepared.baseBranch === "string" ? prepared.baseBranch : ""
     if (baseBranch !== "" && baseBranch !== planned) throw new Error("The base branch differs from the prepared plan's. Prepare it again.")
     base = planned
+    const plannedBranch = typeof prepared.branch === "string" ? prepared.branch : ""
+    if (headBranch !== "" && headBranch !== plannedBranch) throw new Error("The branch differs from the prepared plan's. Prepare it again.")
+    branch = plannedBranch
   }
   write()
-  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base }, {
+  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base, branch }, {
     save: async () => {},
     progress: (delta) => {
       if (delta.line !== undefined) {

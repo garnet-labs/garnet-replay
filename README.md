@@ -71,7 +71,7 @@ the vendored CodeRabbit file enables MCP usage, not account-level provisioning.
 Private repositories use comment markers and inline guidance, not hosted MCP.
 
 The source is `garnet-labs/garnet-runtime-review-mcp` at
-`cbc0ebe8cc04986dd4c21c6e1c18e3dd69778654`. The four files under
+`4253b0e490582e6f77c7ca368bb6006abd5beb7d`. The four files under
 `examples/reviewers/` plus `skills/garnet-runtime-review/SKILL.md` are vendored
 byte-for-byte in `live/templates/reviewers/`; `source.json` records source paths
 and SHA-256 hashes checked by the offline suite. Re-vendor intentionally:
@@ -154,7 +154,8 @@ Each stage answers one question and leaves one artifact in the target ledger
 | 6 | production | ledger-tracked | Do base→head records and policy run without an operator? |
 
 `replay verify <pr-url>` is the evidence gate at any stage. It requires declared
-complete capture and an anonymous public report naming the exact repository,
+complete capture, or a finalized App record labelled `best-effort`, with no
+incomplete jobs, and an anonymous public report naming the exact repository,
 run, profile, and PR head. A final comment or HTTP 200 alone is insufficient.
 After the gate accepts the evidence, an independent cold read establishes whether the result helps a
 reviewer. `replay status` shows local artifacts and the next command; it does
