@@ -10,6 +10,18 @@ const body = (n) => readFileSync(new URL(`./fixtures/app/posthog-${n}.pr-comment
 const HEAD_246 = "304f116cfbea6fc11dbd42d2130121b8808ecd87"
 const HEAD_249 = "71ab5eebb5f279f0771fa2795e765ae02846f24a"
 
+test("legacy dspy and mixed PostHog folds read the same jobs as span arrows", () => {
+  for (const name of ["dspy-4", "dspy-5", "posthog-240"]) {
+    const receipt = readFileSync(new URL(`./fixtures/app/${name}.pr-comment.md`, import.meta.url), "utf8")
+    const jobs = appJobs(receipt)
+    assert.equal(jobs.length, 1, name)
+    assert.ok(jobs.some((job) => job.added > 0), name)
+    assert.deepEqual(jobs, appJobs(receipt.replace(/&emsp;↳/g, '&emsp;<span title="x">↳</span>')), name)
+  }
+  assert.deepEqual(appJobs(""), [])
+  assert.deepEqual(appJobs("<details><summary>Unreadable job</summary></details>"), [])
+})
+
 test("App result reads nothing new 0 of 6 from the 246 markers and keeps best-effort", () => {
   const app = appResult(parseReceipt(body(246)).summary, body(246))
   assert.equal(app.result, "nothing new")
