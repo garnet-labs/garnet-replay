@@ -10,6 +10,42 @@ const body = (n) => readFileSync(new URL(`./fixtures/app/posthog-${n}.pr-comment
 const HEAD_246 = "304f116cfbea6fc11dbd42d2130121b8808ecd87"
 const HEAD_249 = "71ab5eebb5f279f0771fa2795e765ae02846f24a"
 
+test("legacy dspy and mixed PostHog folds read the same jobs as span arrows", () => {
+  for (const name of ["dspy-4", "dspy-5", "posthog-240"]) {
+    const receipt = readFileSync(new URL(`./fixtures/app/${name}.pr-comment.md`, import.meta.url), "utf8")
+    const jobs = appJobs(receipt)
+    assert.equal(jobs.length, 1, name)
+    assert.ok(jobs.some((job) => job.added > 0), name)
+    assert.deepEqual(jobs, appJobs(receipt.replace(/&emsp;↳/g, '&emsp;<span title="x">↳</span>')), name)
+  }
+  assert.deepEqual(appJobs(""), [])
+  assert.deepEqual(appJobs("<details><summary>Unreadable job</summary></details>"), [])
+})
+
+test("legacy removal lines do not add destinations or process names", () => {
+  const receipt = readFileSync(new URL("./fixtures/app/dspy-4.pr-comment.md", import.meta.url), "utf8")
+  assert.deepEqual(appJobs(receipt)[0].connections, [
+    { host: "dualstack.python.map.fastly[.]net", process: "uv" },
+  ])
+  assert.deepEqual(appJobs(receipt)[0].hosts, ["dualstack.python.map.fastly[.]net"])
+})
+
+test("multi-process legacy and span folds retain each host's acting process", () => {
+  const receipt = readFileSync(new URL("./fixtures/app/dspy-5.pr-comment.md", import.meta.url), "utf8")
+  const expected = [
+    { host: "169.254.169[.]254", process: "python3" },
+    { host: "dualstack.python.map.fastly[.]net", process: "uv" },
+  ]
+  for (const text of [receipt, receipt.replace(/&emsp;↳/g, '&emsp;<span title="x">↳</span>')]) {
+    const job = appJobs(text)[0]
+    assert.deepEqual(job.connections, expected)
+    assert.equal(job.process, null)
+  }
+  const fold = '<details><summary><b>Install</b> · +1 −1<br>&emsp;↳ <code>bash</code> › <code>uv</code> no longer reaches <code>pypi[.]org</code><br>&emsp;↳ <code>node</code> now reaches <code>example[.]org</code></summary></details>'
+  assert.deepEqual(appJobs(fold)[0].connections, [{ host: "example[.]org", process: "node" }])
+  assert.deepEqual(appJobs(fold.replace('now reaches', 'unknown action'))[0].connections, [])
+})
+
 test("App result reads nothing new 0 of 6 from the 246 markers and keeps best-effort", () => {
   const app = appResult(parseReceipt(body(246)).summary, body(246))
   assert.equal(app.result, "nothing new")
@@ -30,6 +66,10 @@ test("App result reads changed 1 of 6 with the two new hosts and the acting proc
   assert.deepEqual(changed, [{
     job: "Garnet Runtime Visibility / Dependency install", outcome: "changed", added: 2, process: "MainThread",
     hosts: ["2832391.fs1.hubspotusercontent-eu1[.]net", "f.hubspotusercontent40[.]net"],
+    connections: [
+      { host: "2832391.fs1.hubspotusercontent-eu1[.]net", process: "MainThread" },
+      { host: "f.hubspotusercontent40[.]net", process: "MainThread" },
+    ],
   }])
 })
 
@@ -120,13 +160,19 @@ test("contract 11 folds: the acting process and the hosts are read from \"reache
   assert.deepEqual(byJob["Garnet Runtime Review (dev) / build"], {
     job: "Garnet Runtime Review (dev) / build", outcome: "changed", added: 7, process: "curl",
     hosts: ["dl-cdn.alpinelinux[.]org", "objects.githubusercontent[.]com"],
+    connections: [
+      { host: "dl-cdn.alpinelinux[.]org", process: "curl" },
+      { host: "objects.githubusercontent[.]com", process: "curl" },
+    ],
   })
   assert.deepEqual(byJob["Garnet Runtime Review (dev) / install (node 22)"], {
     job: "Garnet Runtime Review (dev) / install (node 22)", outcome: "changed", added: 1, process: "node",
     hosts: ["storage.googleapis[.]com"],
+    connections: [{ host: "storage.googleapis[.]com", process: "node" }],
   })
   assert.deepEqual(byJob["Garnet Runtime Review (dev) / e2e"], {
     job: "Garnet Runtime Review (dev) / e2e", outcome: "changed", added: 0, process: "curl", hosts: ["example[.]org"],
+    connections: [{ host: "example[.]org", process: "curl" }],
   })
   assert.equal(byJob["Garnet Runtime Review (dev) / lint"].outcome, "nothing new")
   for (const job of jobs) {
@@ -139,6 +185,10 @@ test("a contract 10 fold with an execution chain names the process that acted, n
   assert.deepEqual(appJobs(fold), [{
     job: "Lint / Hadolint", outcome: "changed", added: 2, process: "curl",
     hosts: ["github[.]com", "release-assets.githubusercontent[.]com"],
+    connections: [
+      { host: "github[.]com", process: "curl" },
+      { host: "release-assets.githubusercontent[.]com", process: "curl" },
+    ],
   }])
 })
 

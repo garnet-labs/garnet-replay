@@ -55,6 +55,24 @@ test("249 row: changed 1 of 6 on the two HubSpot hosts with job and process, no 
   assert.equal(r.reviewer.verdict, "REFUSED")
 })
 
+test("legacy multi-process folds keep per-host attribution in cohort rows", () => {
+  const body = read("dspy-5.pr-comment.md")
+  const head = "35c5227c1509f6324c4522289bd3020d02cac9f5"
+  for (const text of [body, body.replace(/&emsp;↳/g, '&emsp;<span title="x">↳</span>')]) {
+    const r = buildRow({
+      entry: { fork: "https://github.com/garnet-labs/dspy/pull/5" },
+      pr: { html_url: "https://github.com/garnet-labs/dspy/pull/5", head: { sha: head } },
+      files: [], proof: null,
+      comments: [{ user: { login: "garnet-runtime-review[bot]" }, body: text }],
+    })
+    assert.deepEqual(r.new_hosts.map(({ host, process }) => ({ host, process })), [
+      { host: "169.254.169[.]254", process: "python3" },
+      { host: "dualstack.python.map.fastly[.]net", process: "uv" },
+    ])
+    assert.deepEqual(r.per_job[0].connections, r.new_hosts.map(({ host, process }) => ({ host, process })))
+  }
+})
+
 test("a comment bound to another head yields capture incomplete with no compared commit", () => {
   const r = buildRow({
     entry: { fork: "https://github.com/garnet-labs/posthog/pull/246" },
