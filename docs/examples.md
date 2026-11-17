@@ -129,6 +129,54 @@ Reviewer outcome: not recorded on this card.
 Assess the recorded workload scope and action attribution before sharing.
 
 
+## Receipt-bound triage report
+
+Selected live and historical rows; archive status remains unshareable.
+
+# Record triage
+
+2 records: 1 finding, 1 undeterminable.
+
+Review assessments retain the App result and capture limits. Re-run verify before sharing a finding or control.
+
+<details>
+<summary><b>E2B pull 93</b> · finding</summary>
+
+[App record](https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452)
+
+**App:** Runtime behavior changed · 1 of 1 recorded job changed<br>
+**Capture:** best-effort · **Verify:** PASS
+
+The newly added generate:api step executes Redocly through node › dash › node and reaches otel.cloud.redocly[.]com; the PR base lacks this action. Scoped best-effort telemetry finding.
+
+- Head: `00f23022bc634bc0fdddc04d7c1754595cd99be7`
+- Compared: `80594f50bbcd487b0f6a40caab0b4b6e56c7a66e`
+- Transition: not derivable from the record
+- Scope: pr-base
+- [Assessment source 1](https://github.com/garnet-labs/E2B/pull/93#issuecomment-6935783452)
+- [Assessment source 2](https://github.com/garnet-labs/E2B/compare/80594f50bbcd487b0f6a40caab0b4b6e56c7a66e...00f23022bc634bc0fdddc04d7c1754595cd99be7)
+- [Assessment source 3](https://app.garnet.ai/public/runs/44001036865?profile=01a1e74a-f62e-75e6-b130-fa930f04bd87)
+
+</details>
+
+<details>
+<summary><b>continue pull 5</b> · undeterminable</summary>
+
+[App record](https://github.com/garnet-labs/continue/pull/5)
+
+**App:** new-behavior<br>
+**Capture:** not-declared · **Verify:** not run
+
+Saved snapshot; current head and capture have not been revalidated.
+
+- Head: `df338ea7d1b2888b19319f49aad5479b291f8d7e`
+- Compared: `d522cd12e3a7b75523cf910c0ad8f772f53b9fe6`
+- Transition: form-data 4.0.4 → 4.0.6
+- Scope: previous-recorded-head-to-head
+
+</details>
+
+
 ## Historical verification gate
 
 The [five-prospect report](prospect-batch.md) records the gate as observed on

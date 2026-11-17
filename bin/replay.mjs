@@ -499,11 +499,12 @@ async function main(args) {
         const diff = JSON.parse(await readFile(join(directory, path), "utf8"))
         if (typeof diff.pull_request?.url !== "string") throw new Error(`saved record has no pull request URL: ${path}`)
         if (rows.some((row) => row.fork_pr === diff.pull_request.url)) continue
+        const triage = triageSnapshot(diff)
         rows.push({
           fork_pr: diff.pull_request.url, head_sha: diff.head?.sha ?? null,
           compared_sha: diff.base?.sha ?? null, scope: diff.pair?.scope ?? null,
           archive_path: join(directory, path), links: { app_comment: null }, verify: null,
-          triage: triageSnapshot(diff),
+          transition: triage.transition, triage,
         })
       }
     }

@@ -93,6 +93,35 @@ test("archived records are not promoted using the old real/unchanged labels", ()
   assert.equal(triageSnapshot(null).classification, "undeterminable")
 })
 
+test("shrinking coverage is never a shareable quiet control", () => {
+  const vanished = alterSummary(find("nodejs-goof", 5), { vanished: 1 })
+  assert.equal(triageRecord({ ...vanished, verification: pass(vanished) }).classification, "recorded")
+  assert.equal(triageRecord({ ...vanished, verification: pass(vanished) }).shareable, false)
+  const removed = find("nodejs-goof", 5)
+  removed.comment.body += "\n<details>\n<summary>1 job ran on <code>main</code>, not on this commit</summary>\n<blockquote><code>Old build</code></blockquote>\n</details>"
+  assert.equal(triageRecord({ ...removed, verification: pass(removed) }).classification, "recorded")
+  assert.equal(triageRecord({ ...removed, verification: pass(removed) }).shareable, false)
+})
+
+test("verified PR identity accepts equivalent URLs without accepting another PR", () => {
+  const row = find("E2B", 93)
+  for (const url of [row.fork + "/", row.fork.toLowerCase(), row.fork + "#issuecomment-1"]) {
+    assert.equal(triageRecord({ ...row, verification: { ...pass(row), pr_url: url } }).shareable, true)
+  }
+  for (const url of [null, "not a URL", row.fork.replace("/93", "/94")]) {
+    assert.equal(triageRecord({ ...row, verification: { ...pass(row), pr_url: url } }).shareable, false)
+  }
+})
+
+test("archive and rendered triage retain known transitions and explicitly name unknown ones", () => {
+  const diff = JSON.parse(readFileSync(new URL("../public/replays/github/garnet-labs/continue/5.json", import.meta.url)))
+  const triage = triageSnapshot(diff)
+  assert.equal(triage.transition, diff.pair.transition)
+  const row = { fork_pr: diff.pull_request.url, transition: triage.transition, triage }
+  assert.ok(renderTriage([row]).includes(`- Transition: ${diff.pair.transition}`))
+  assert.ok(renderTriage([{ ...row, transition: null }]).includes("- Transition: not derivable from the record"))
+})
+
 test("inconsistent summary and job rows are not promoted to a finding", () => {
   const row = alterSummary(find("nodejs-goof", 5), { outcome: "changed", changed: 1 })
   assert.equal(triageRecord(row).classification, "undeterminable")
@@ -102,8 +131,9 @@ test("inconsistent summary and job rows are not promoted to a finding", () => {
 
 test("rows and cards keep recorded hosts and full diff while adding the review classification", () => {
   const fixture = find("airbyte", 35)
-  const row = buildRow({ entry: { fork: fixture.fork, assessment: fixture.assessment }, pr: { head: { sha: fixture.headSha } }, files: [], comments: [fixture.comment], proof: null, verification: pass(fixture) })
+  const row = buildRow({ entry: { fork: fixture.fork, assessment: fixture.assessment }, pr: { title: "Bump example from 1.0.0 to 2.0.0", head: { sha: fixture.headSha } }, files: [], comments: [fixture.comment], proof: null, verification: pass(fixture) })
   assert.deepEqual([row.app_result, row.triage.classification], ["changed", "noise"])
+  assert.equal(row.transition, "example from 1.0.0 to 2.0.0 (PR title)")
   assert.ok(row.new_hosts.some((host) => host.host.includes("s3.dualstack")))
   const model = buildModel({ slug: "airbyte", forkPr: 35, ...fixture })
   const card = renderCard(model)
