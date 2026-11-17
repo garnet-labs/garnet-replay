@@ -19,14 +19,20 @@ const write = () => {
 }
 
 try {
+  const rawTwoCommit = process.env.REPLAY_TWO_COMMIT ?? "false"
+  if (!["true", "false"].includes(rawTwoCommit)) throw new Error("two_commit must be true or false.")
+  const two_commit = rawTwoCommit === "true"
   if (action !== "prepare" && action !== "start") throw new Error("The replay action must be prepare or start.")
   assertSlug(slug)
   if (!/^[1-9]\d*$/.test(number ?? "")) throw new Error("The pull request number is invalid.")
   let signature
+  let preparedTwoCommit
   let base = baseBranch
   let branch = headBranch
   if (action === "start") {
     const prepared = JSON.parse(readFileSync(planFile, "utf8"))
+    preparedTwoCommit = prepared.two_commit ?? false
+    if (two_commit !== preparedTwoCommit) throw new Error("two_commit differs from the prepared plan. Prepare it again.")
     if (prepared.state !== "prepared" || prepared.slug !== slug || prepared.number !== job.number || !/^[0-9a-f]{64}$/.test(prepared.signature ?? "")) {
       throw new Error("The prepared plan does not match this replay. Prepare it again.")
     }
@@ -40,7 +46,7 @@ try {
     branch = plannedBranch
   }
   write()
-  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base, branch }, {
+  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base, branch, two_commit, preparedTwoCommit }, {
     save: async () => {},
     progress: (delta) => {
       if (delta.line !== undefined) {
