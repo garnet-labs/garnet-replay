@@ -23,7 +23,12 @@ or proof that a reviewer consumed evidence.
 node bin/replay.mjs ground --all --dry-run
 node bin/replay.mjs ground <slug> --dry-run
 node bin/replay.mjs ground <slug>    # one onboarding PR; merge it first
+node bin/replay.mjs ground <slug> --branch <name>   # when reviewer-guidance already exists on the fork
 ```
+
+`ground` writes through the GitHub API only: blobs, one tree, one commit, a new
+branch and the pull request. It never clones the fork, and it stops before any
+write if the default branch moved since planning or the branch already exists.
 
 `--all` discovers non-archived organization repositories with a default-branch
 `pull_request` workflow that uses `garnet-org/action`, directly or through a local
@@ -37,8 +42,10 @@ canonical paragraph), `merge`, and `conflict-manual`.
 Custom policy is retained. Exact previous kit bytes are replaced with the
 current kit. In customized files, one exact prior reviewer paragraph is replaced
 in Markdown, CodeRabbit YAML, PR Agent TOML, or Greptile JSON; Markdown and JSON
-without the paragraph use the existing safe append behavior. Ambiguous changes
-and other YAML/TOML edits remain `conflict-manual`.
+without the paragraph use the existing safe append behavior. A PR Agent TOML
+without the paragraph gains it inside its one `issues_user_guidelines`
+multi-line string under `[review_agent]`. Ambiguous changes and other YAML/TOML
+edits remain `conflict-manual`.
 A `.greptile/` directory is grounded through `.greptile/rules.md`: the file is
 added, the prior paragraph is replaced in place, or the canonical paragraph is
 appended when no prior paragraph exists. A `.greptile` path that is not a
