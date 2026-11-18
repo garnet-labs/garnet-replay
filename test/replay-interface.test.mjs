@@ -9,7 +9,7 @@ import { readReplayRequest } from "../lib/replay-request.mjs"
 import { createWorkspaceServer } from "../lib/workspace-server.mjs"
 import { workspaceRecord } from "../lib/workspace.mjs"
 import { assertPreparedPlan, createReplayRunner, planSignature, recoverReplayJob } from "../lib/replay-runner.mjs"
-import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
+import { executeReplayJob, execTimeout } from "../lib/replay-runner-worker.mjs"
 
 const root = new URL("../public/", import.meta.url).pathname
 const targetsDir = new URL("../targets/", import.meta.url).pathname
@@ -278,4 +278,12 @@ test("execution stops on moved plans and verifies the recorded head before savin
   for (const recordJob of ["images", "ci.yml/", "x; rm -rf/job", 1, null]) {
     await assert.rejects(executeReplayJob({ ...input, recordJob }, seams), /<workflow-file>\/<job>/)
   }
+})
+
+test("hosted git transfers of large forks get a longer timeout than other commands", () => {
+  assert.equal(execTimeout("git", ["clone", "https://github.com/garnet-labs/posthog.git", "work"]), 1800000)
+  assert.equal(execTimeout("git", ["-C", "work", "fetch", "--no-tags", "upstream"]), 1800000)
+  assert.equal(execTimeout("git", ["-C", "work", "push", "origin", "HEAD"]), 1800000)
+  assert.equal(execTimeout("git", ["-C", "work", "rev-parse", "HEAD"]), 120000)
+  assert.equal(execTimeout("gh", ["clone"]), 120000)
 })
