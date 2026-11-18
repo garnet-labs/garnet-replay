@@ -33,6 +33,10 @@ on:
         description: Fork branch for the pull request head (a fresh pull request when the default branch already has one); empty uses the planned name
         type: string
         default: ""
+      record_job:
+        description: Workflow job to record under the sensor, as <workflow-file>/<job>; empty uses the target's declared record
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -72,6 +76,7 @@ jobs:
           REPLAY_NUMBER: ${{ inputs.number }}
           REPLAY_BASE_BRANCH: ${{ inputs.base_branch }}
           REPLAY_BRANCH: ${{ inputs.branch }}
+          REPLAY_RECORD_JOB: ${{ inputs.record_job }}
           REPLAY_PLAN_FILE: ${{ runner.temp }}/prepared/job.json
           GIT_AUTHOR_NAME: garnet-replay
           GIT_AUTHOR_EMAIL: replay@garnet.ai

@@ -269,4 +269,13 @@ test("execution stops on moved plans and verifies the recorded head before savin
   }
   await assert.rejects(executeReplayJob({ ...input, action: "start", two_commit: true, preparedTwoCommit: false }, seams), /differs from the prepared plan/)
   await assert.rejects(executeReplayJob({ ...input, action: "start", two_commit: false, preparedTwoCommit: true }, seams), /differs from the prepared plan/)
+  const recording = { ...seams, live: async (args, opts) => { liveArgs = args; return seams.live(args, opts) } }
+  const recorded = await executeReplayJob({ ...input, recordJob: "ci-agent-egress.yml/images" }, recording)
+  assert.equal(recorded.recordJob, "ci-agent-egress.yml/images")
+  assert.deepEqual(liveArgs.slice(liveArgs.indexOf("--record"), liveArgs.indexOf("--record") + 4), ["--record", "instrument", "--job", "ci-agent-egress.yml/images"])
+  await executeReplayJob({ ...input }, recording)
+  assert.equal(liveArgs.includes("--record"), false)
+  for (const recordJob of ["images", "ci.yml/", "x; rm -rf/job", 1, null]) {
+    await assert.rejects(executeReplayJob({ ...input, recordJob }, seams), /<workflow-file>\/<job>/)
+  }
 })
