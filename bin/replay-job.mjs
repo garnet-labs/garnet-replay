@@ -9,7 +9,7 @@ import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
 const directory = join(ROOT, "out", "hosted-job")
 const path = join(directory, "job.json")
-const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile, REPLAY_BASE_BRANCH: baseBranch = "", REPLAY_BRANCH: headBranch = "" } = process.env
+const { REPLAY_ACTION: action, REPLAY_SLUG: slug, REPLAY_NUMBER: number, REPLAY_PLAN_FILE: planFile, REPLAY_BASE_BRANCH: baseBranch = "", REPLAY_BRANCH: headBranch = "", REPLAY_RECORD_JOB: recordJob = "" } = process.env
 
 const job = { action, slug, number: Number(number), state: action === "prepare" ? "preparing" : "recording", lines: [] }
 const write = () => {
@@ -44,9 +44,11 @@ try {
     const plannedBranch = typeof prepared.branch === "string" ? prepared.branch : ""
     if (headBranch !== "" && headBranch !== plannedBranch) throw new Error("The branch differs from the prepared plan's. Prepare it again.")
     branch = plannedBranch
+    const plannedRecordJob = typeof prepared.recordJob === "string" ? prepared.recordJob : ""
+    if (recordJob !== plannedRecordJob) throw new Error("The record job differs from the prepared plan's. Prepare it again.")
   }
   write()
-  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base, branch, two_commit, preparedTwoCommit }, {
+  const result = await executeReplayJob({ action, slug, number: job.number, signature, root: join(ROOT, "public"), baseBranch: base, branch, two_commit, preparedTwoCommit, recordJob }, {
     save: async () => {},
     progress: (delta) => {
       if (delta.line !== undefined) {
