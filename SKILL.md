@@ -10,6 +10,10 @@ a local checkout of the fork (`--work`). Read `AGENTS.md` for the rules.
 
 ## Procedure
 
+For proofs specifically about the Devin loop, `replay verify <pr-url> --devin-loop`
+exempts Devin identity terms and hosts only. The residue leg declares the mode;
+all other residue and evidence checks still apply. Do not use it for ordinary PRs.
+
 **Reviewer grounding is mandatory.** Every Garnet-instrumented `garnet-labs`
 repository (manual runs, harness replays, or newly created repositories) carries
 the standard kit on its default branch; new repositories get it at creation.
