@@ -105,7 +105,7 @@ test("residue scans Devin bot comments even with review markers", () => {
   assert.equal(residue("Routine change", "devin-ai-integration[bot]", "Devin Review: app.devin.ai/review").ok, false)
   for (const marker of ["<!-- devin-pr-monitoring-controls -->", "<!-- devin-review-session-triaged -->"]) {
     const review = `${marker}\nDevin Review: app.devin.ai/review`
-    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, false)
+    assert.equal(residue("Routine change", "devin-ai-integration[bot]", review).ok, marker === "<!-- devin-pr-monitoring-controls -->")
     assert.equal(residue("Routine change", "someone-else", review).ok, false)
     assert.equal(residue("Routine change", null, review).ok, false)
     assert.equal(residue(`Written by Devin\n${marker}`, "devin-ai-integration[bot]", review).ok, false)
@@ -123,6 +123,28 @@ test("residue ignores only complete marked review badges in the PR body", () => 
   assert.equal(findResidue(`Open in Devin Desktop\n${badge}`, []), "Devin")
   assert.equal(findResidue("<!-- devin-review-badge-begin -->\nDevin Review", []), "devin")
   assert.equal(findResidue("Routine change", [badge]), "devin")
+})
+
+test("residue ignores only complete exact integration banners in the PR body", () => {
+  const banner = "<!-- devin-bot-banner-begin -->\nDevin: https://app.devin.ai/\n<!-- devin-bot-banner-end -->"
+  assert.equal(findResidue(`Routine change\n${banner}`, []), null)
+  assert.equal(findResidue(`${banner}\nWritten by Devin`, []), "Written by Devin")
+  assert.equal(findResidue("<!-- devin-bot-banner-begin -->\nDevin", []), "devin")
+  assert.equal(findResidue("<!-- devin-bot-banner-begin -->\nDevin\n<!-- devin-review-badge-end -->", []), "devin")
+  assert.equal(findResidue(banner.replace("banner-end", "banner-END"), []), "devin")
+  assert.equal(findResidue("Routine change", [banner]), "devin")
+})
+
+test("monitoring controls require the exact integration author and marker at the start", () => {
+  const marker = "<!-- devin-pr-monitoring-controls -->"
+  const comment = { user: "devin-ai-integration[bot]", body: `${marker}\nDevin controls\nExtra Devin text` }
+  assert.equal(findResidue("Routine change", [comment]), null)
+  assert.equal(findResidue("Routine change", [{ ...comment, user: "someone-else" }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, user: null }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: "Devin controls" }]), "Devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `\n${comment.body}` }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `prefix ${comment.body}` }]), "devin")
+  assert.equal(findResidue("Written by Devin", [comment]), "Written by Devin")
 })
 
 test("public JSON is fetched anonymously from only the supported selector", async () => {
