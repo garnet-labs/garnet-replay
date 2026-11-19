@@ -246,6 +246,11 @@ test("upstream-based plans carry approved guidance onto the base and two-commit 
   assert.ok(two.steps.findIndex((step) => step.id === "head-reviewers") > two.steps.findIndex((step) => step.id === "change-head"))
   assert.ok(two.steps.findIndex((step) => step.id === "head-reviewers") < two.steps.findIndex((step) => step.id === "change-commit"))
   assert.ok(pure.steps.some((step) => step.id === "reviewer-snapshot"))
+  for (const id of ["carry-reviewers-add", "head-reviewers-add"]) {
+    assert.deepEqual(two.steps.find((step) => step.id === id).args, ["-C", input.work, "add", "-f", "--", ...Object.keys(reviewerKit())])
+  }
+  const empty = carryReviewerGuidance(planReplay({ ...input, record: "inject", ecosystem: "npm" }), { current: {}, sha: grounding.sha })
+  assert.deepEqual(empty.reviewerPaths, [])
   assert.throws(() => carryReviewerGuidance({ ...pure, paths: ["REVIEW.md"] }, grounding), /preserve reviewer guidance/)
   assert.throws(() => carryReviewerGuidance({ ...pure, steps: [...pure.steps, { id: "change-remove", args: ["rm", "--", "REVIEW.md"] }] }, grounding), /preserve reviewer guidance/)
 })
@@ -362,6 +367,14 @@ test("setup stages exact ignored reviewer paths without force-adding other onboa
     }
     const staged = execFileSync("git", ["-C", work, "diff", "--cached", "--name-only"], { encoding: "utf8" }).trim().split("\n")
     assert.deepEqual(staged.sort(), Object.keys(files).sort())
+    execFileSync("git", ["-C", work, "rm", "--cached", "-r", "--", "."])
+    const two = carryReviewerGuidance(planReplay({ slug: "example", upstream: "upstream/example", fork: "garnet-labs/example", defaultBranch: "main", work, upstreamPr: 1, baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: "src/a.js", status: "modified", previous: null }], record: "inject", ecosystem: "npm" }), { current: reviewerKit(), sha: "c".repeat(40) })
+    for (const id of ["carry-reviewers-add", "head-reviewers-add"]) {
+      const step = two.steps.find((step) => step.id === id)
+      execFileSync(step.cmd, step.args)
+      const kitStaged = execFileSync("git", ["-C", work, "diff", "--cached", "--name-only"], { encoding: "utf8" }).trim().split("\n")
+      assert.deepEqual(kitStaged.sort(), Object.keys(reviewerKit()).sort())
+    }
   } finally {
     rmSync(work, { recursive: true, force: true })
   }
