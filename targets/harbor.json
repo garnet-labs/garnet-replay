@@ -1,0 +1,232 @@
+{
+  "slug": "harbor",
+  "upstream": "harbor-framework/harbor",
+  "fork": "garnet-labs/harbor",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4384,
+      "title": "Move the CLI to harbor-framework-client 0.2.0 cursor pagination",
+      "author": "scvance",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T01:32:43Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 35,
+      "paths": [
+        "pyproject.toml",
+        "src/harbor/auth/organization_selection.py",
+        "src/harbor/auth/orgs.py",
+        "src/harbor/cli/hub.py",
+        "src/harbor/cli/hub_leaderboards.py",
+        "src/harbor/cli/job_sharing.py",
+        "src/harbor/cli/versions.py",
+        "src/harbor/hosted/secrets.py",
+        "src/harbor/hub/leaderboards.py",
+        "src/harbor/hub/models.py",
+        "tests/unit/artifact_fixtures.py",
+        "tests/unit/auth/test_keys.py",
+        "tests/unit/auth/test_orgs.py",
+        "tests/unit/test_api_client_lifecycle.py",
+        "tests/unit/test_cli_hub_cursors.py",
+        "tests/unit/test_cli_hub_job_trials.py",
+        "tests/unit/test_cli_hub_leaderboard.py",
+        "tests/unit/test_cli_hub_sdk.py",
+        "tests/unit/test_cli_hub_trial_controls.py",
+        "tests/unit/test_cli_registry_validation.py",
+        "tests/unit/test_cli_versions.py",
+        "tests/unit/test_downloader.py",
+        "tests/unit/test_hosted_regrade.py",
+        "tests/unit/test_hosted_secrets.py",
+        "tests/unit/test_hub_generated_sdk.py",
+        "tests/unit/test_hub_models.py",
+        "tests/unit/test_organization_selection.py",
+        "tests/unit/test_package_registry_client.py",
+        "tests/unit/test_registry_api_commands.py",
+        "tests/unit/test_registry_api_round_trip.py",
+        "tests/unit/test_sdk_cli_adapter.py",
+        "tests/unit/test_upload_sdk_contract.py",
+        "tests/unit/test_uploader.py",
+        "tests/unit/viewer/test_auth.py",
+        "uv.lock"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-19T05:14:21.702Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4387,
+      "title": "feat(trial): fail a separate-verifier trial whose artifact directory failed to copy",
+      "author": "praneethprathi",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T04:28:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "docs-mintlify/jobs/artifact-collection.mdx",
+        "docs-mintlify/jobs/error-classification.mdx",
+        "src/harbor/models/trial/error_policy.py",
+        "src/harbor/trial/artifact_handler.py",
+        "src/harbor/trial/errors.py",
+        "src/harbor/trial/trial.py",
+        "tests/unit/test_single_step_trial.py",
+        "tests/unit/test_trial_artifacts.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-19T05:14:21.702Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4386,
+      "title": "tar: faster packing on large trees, skip owner lookups",
+      "author": "paulirish",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T04:18:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/harbor/environments/docker/docker_unix.py",
+        "src/harbor/environments/tar_transfer.py",
+        "tests/unit/environments/test_tar_transfer.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-19T05:14:21.702Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4383,
+      "title": "fix(openclaw): support google/* model names, custom baseUrl api defau…",
+      "author": "k3nnethfrancis",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T01:21:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "src/harbor/agents/installed/openclaw.py",
+        "tests/unit/agents/installed/test_openclaw.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-19T05:14:21.702Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 4382,
+      "title": "fix(opencode-v2): read V2 error messages and survive trajectory conversion errors",
+      "author": "jw-surge",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T23:07:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "src/harbor/agents/installed/opencode.py",
+        "src/harbor/agents/installed/opencode_v2.py",
+        "tests/unit/agents/installed/test_opencode_v2.py"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-19T05:14:21.702Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0,
+  "grounding": {
+    "state": "pending",
+    "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
+    "defaultBranch": "main",
+    "checkedSha": "e26966a026f872925979d8479b7ace236b68303f",
+    "pr": 2
+  }
+}
