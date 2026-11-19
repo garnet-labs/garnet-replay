@@ -161,6 +161,12 @@ After the gate accepts the evidence, an independent cold read establishes whethe
 reviewer. `replay status` shows local artifacts and the next command; it does
 not certify either gate.
 
+For proofs whose subject is the Devin loop itself, explicitly use
+`replay verify <pr-url> --devin-loop`. This exempts only Devin identity terms
+and hosts from residue scanning; all other residue and evidence checks remain.
+The residue leg reports that this opt-in mode was applied. Ordinary PRs use
+the default mode.
+
 ## Runbook
 
 ### Sort recorded changes before sharing

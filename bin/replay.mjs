@@ -422,7 +422,8 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   rows <manifest.json> [--out dir] [--no-verify] [--question q] [--hypothesis h]
   triage <manifest.json> [--saved public/replays] [--out dir] [--no-verify]  classify exact receipts, retaining App results
                                                                     read-only cohort rows, table and research note from fork PR URLs
-  verify <pr-url> [--label real|constructed] [--json]                 share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
+  verify <pr-url> [--label real|constructed] [--devin-loop] [--json]    share gate: finalized, head-bound, permalink, no residue; exits 1 on FAIL
+                                                                    --devin-loop exempts Devin identity terms only for proofs about that loop
   batch <targets.json> [--out dir] [--concurrency 2] [--only slug,..] [--dry-run] [--wait-minutes N]
   decide <fork-pr-url> [--json]                                     merge-safety decision from the head-bound record: merge | hold | undeterminable; exits 0/1/2
   consume <fork-pr-url>                                             did a reviewer or agent cite the head-bound record? keeps every weaker receipt

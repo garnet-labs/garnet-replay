@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
 import { kitResponse } from "./fixtures/grounding.mjs"
 import { spawnSync } from "node:child_process"
 import test from "node:test"
@@ -13,6 +14,38 @@ const PREVIOUS = "b".repeat(40)
 const PROFILE = "00000000-0000-4000-8000-000000000000"
 const LINK = `https://app.garnet.ai/public/runs/123?profile=${PROFILE}`
 const RUN = { repository: "garnet-labs/example", run_id: "123", profile_id: PROFILE, commit_sha: HEAD, ref: "refs/heads/change" }
+
+test("triage-status fixtures require the integration author and exact template", () => {
+  for (const name of ["triage-status-nodejs-goof.md", "triage-status-e2b.md"]) {
+    const body = readFileSync(new URL(`./fixtures/${name}`, import.meta.url), "utf8")
+    const comment = { user: "devin-ai-integration[bot]", body }
+    assert.equal(findResidue("Routine change", [comment]), null)
+    assert.notEqual(findResidue("Routine change", [{ ...comment, user: "someone-else" }]), null)
+    assert.notEqual(findResidue("Routine change", [{ ...comment, body: `${body}\nDevin` }]), null)
+    assert.notEqual(findResidue("Routine change", [{ ...comment, body: body.replace("app.devin.ai", "example.com") }]), null)
+    const fixing = body.replace(/Devin Review found nothing to fix · \[View findings\]\(([^)]+)\)/, "Devin is fixing 2 [findings]($1)")
+    assert.equal(findResidue("Routine change", [{ ...comment, body: fixing }]), null)
+    assert.equal(findResidue("Routine change", [{ ...comment, body: fixing.replace("2 [findings]", "1 [finding]") }]), null)
+  }
+})
+
+test("loop mode exempts identity only and labels the residue leg", () => {
+  const quote = readFileSync(new URL("./fixtures/e2b-record-quote.md", import.meta.url), "utf8")
+  const body = readFileSync(new URL("./fixtures/ghaw-22-body.md", import.meta.url), "utf8")
+  for (const [text, comments] of [["Routine change", [quote]], [body, []]]) {
+    assert.notEqual(findResidue(text, comments), null)
+    assert.equal(findResidue(text, comments, { devinLoop: true }), null)
+  }
+  for (const term of ["harness", "Cognition", "replay scaffold", "DEPENDENCY_REPLAY.md", "<!-- garnet-replay-scaffold -->"]) {
+    assert.notEqual(findResidue(`Devin ${term}`, [], { devinLoop: true }), null)
+    assert.notEqual(findResidue("Routine", [`Devin ${term}`], { devinLoop: true }), null)
+  }
+  assert.equal(findResidue("Written by Devin https://git-manager.devin.ai", [], { devinLoop: true }), null)
+  const result = evaluateExhibit({ pr: { head_sha: HEAD, base_sha: PREVIOUS, state: "open", body: "Devin" }, comments: [], checks: [], permalinkStatus: 200, devinLoop: true })
+  const residue = result.legs.find((entry) => entry.name === "no session residue")
+  assert.equal(residue.ok, true)
+  assert.match(residue.detail, /devin-loop mode applied/)
+})
 
 function record(capture = "complete", link = LINK) {
   return `<!-- garnet-runtime-review -->

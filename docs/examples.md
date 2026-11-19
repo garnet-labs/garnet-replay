@@ -179,6 +179,11 @@ Saved snapshot; current head and capture have not been revalidated.
 
 ## Historical verification gate
 
+Verification examples below use default residue checking. For proofs whose
+subject is the Devin loop itself, `verify <pr-url> --devin-loop` exempts only
+Devin identity terms and hosts, and explicitly labels the residue leg with
+`devin-loop mode applied`. All other legs and non-Devin residue remain enforced.
+
 The [five-prospect report](prospect-batch.md) records the gate as observed on
 2026-09-11, not the current state of those exhibits. At 18:00 UTC it reported:
 
