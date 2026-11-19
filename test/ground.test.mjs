@@ -1,7 +1,10 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 import { createHash } from "node:crypto"
-import { readFileSync } from "node:fs"
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { execFileSync } from "node:child_process"
+import { tmpdir } from "node:os"
+import { dirname, join } from "node:path"
 import { canonicalParagraph, ground, groundingAt, groundingInventory, instrumentedRepos, KIT_SOURCE, mergeReviewer, planGrounding, PREVIOUS_CANONICAL_PARAGRAPH, PREVIOUS_CANONICAL_PARAGRAPHS, requireGrounding, reviewerGrounded, reviewerKit } from "../lib/ground.mjs"
 import { carryReviewerGuidance, GARNET_ACTION_PIN, planPureReplay, planReplay, planSetup } from "../lib/replay-pr.mjs"
 import { planPrepared } from "../lib/replay-prepared.mjs"
@@ -338,6 +341,30 @@ test("kit onboarding uses one commit, fork-only writes, and refuses unrelated ro
   assert.equal(plan.steps.filter((step) => step.cmd === "gh" && step.args.includes("create")).length, 1)
   for (const step of plan.steps.filter((step) => step.kind === "write-remote")) assert.equal(step.target, input.fork)
   assert.throws(() => planSetup({ ...input, files: { "package.json": "{}" } }), /refusing/)
+})
+
+test("setup stages exact ignored reviewer paths without force-adding other onboarding files", () => {
+  const work = mkdtempSync(join(tmpdir(), "ground-ignored-"))
+  try {
+    execFileSync("git", ["init", "-q", work])
+    writeFileSync(join(work, ".gitignore"), ".agents/\n.greptile/\n")
+    const files = { ...reviewerKit(), ".greptile/rules.md": "Review policy", ".github/workflows/check.yml": "name: check" }
+    const plan = planSetup({ slug: "example", upstream: "upstream/example", fork: "garnet-labs/example", defaultBranch: "main", work, mode: "inject", files, message: "ci: configure reviewer guidance", body: "Adds reviewer instructions." })
+    for (const [path, content] of Object.entries(files)) {
+      mkdirSync(dirname(join(work, path)), { recursive: true })
+      writeFileSync(join(work, path), content)
+    }
+    writeFileSync(join(work, ".agents/private.txt"), "unrelated ignored file")
+    for (const step of plan.steps.filter((step) => step.id.startsWith("setup-add-"))) {
+      const path = step.args.at(-1)
+      assert.deepEqual(step.args, ["-C", work, "add", ...(path === ".github/workflows/check.yml" ? [] : ["-f"]), "--", path])
+      execFileSync(step.cmd, step.args)
+    }
+    const staged = execFileSync("git", ["-C", work, "diff", "--cached", "--name-only"], { encoding: "utf8" }).trim().split("\n")
+    assert.deepEqual(staged.sort(), Object.keys(files).sort())
+  } finally {
+    rmSync(work, { recursive: true, force: true })
+  }
 })
 
 test("ground proposes one guarded onboarding PR and saves pending, not grounded", async () => {
