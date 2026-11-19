@@ -125,6 +125,36 @@ test("residue ignores only complete marked review badges in the PR body", () => 
   assert.equal(findResidue("Routine change", [badge]), "devin")
 })
 
+test("residue ignores only complete exact integration banners in the PR body", () => {
+  const banner = "<!-- devin-bot-banner-begin -->\nDevin: https://app.devin.ai/\n<!-- devin-bot-banner-end -->"
+  assert.equal(findResidue(`Routine change\n${banner}`, []), null)
+  assert.equal(findResidue(`${banner}\nWritten by Devin`, []), "Written by Devin")
+  assert.equal(findResidue("<!-- devin-bot-banner-begin -->\nDevin", []), "devin")
+  assert.equal(findResidue("<!-- devin-bot-banner-begin -->\nDevin\n<!-- devin-review-badge-end -->", []), "devin")
+  assert.equal(findResidue(banner.replace("banner-end", "banner-END"), []), "devin")
+  assert.equal(findResidue("Routine change", [banner]), "devin")
+})
+
+test("monitoring controls require the exact integration author and full template", () => {
+  const marker = "<!-- devin-pr-monitoring-controls -->"
+  const explanation = "I'll fix CI failures and address comments from users with write access that start with 'Devin'."
+  const checkbox = "- [ ] Disable automatic comment, CI, and merge conflict monitoring"
+  const comment = { user: "devin-ai-integration[bot]", body: `${marker}\n${explanation}\n\n${checkbox}` }
+  assert.equal(findResidue("Routine change", [comment]), null)
+  assert.equal(findResidue("Routine change", [{ ...comment, user: "someone-else" }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, user: null }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: "Devin controls" }]), "Devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: ` \n${comment.body}\n ` }]), null)
+  assert.equal(findResidue("Routine change", [{ ...comment, body: comment.body.replace("[ ]", "[x]") }]), null)
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `${marker}\r\n \t${explanation}\r\n\t${checkbox}` }]), null)
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `${comment.body}\nExtra Devin text` }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: comment.body.replace("CI failures", "CI errors") }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `${marker}\n${explanation}` }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: comment.body.replace("[ ]", "[X]") }]), "devin")
+  assert.equal(findResidue("Routine change", [{ ...comment, body: `prefix ${comment.body}` }]), "devin")
+  assert.equal(findResidue("Written by Devin", [comment]), "Written by Devin")
+})
+
 test("public JSON is fetched anonymously from only the supported selector", async () => {
   const calls = []
   const selected = await publicProfile(`${LINK}&utm_source=github`, { fetchImpl: async (url, options) => {
