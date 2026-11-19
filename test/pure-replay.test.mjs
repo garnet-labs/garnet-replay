@@ -628,6 +628,25 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
   await assert.rejects(executePlan(plan, { exec, io: memoryIo(), log: () => {} }), /unexpected tree; refusing to overwrite/)
 })
 
+test("executePlan: ensure-base force-stages only the reviewer kit paths", async () => {
+  const reviewerPaths = ["REVIEW.md", ".agents/skills/garnet-runtime-review/SKILL.md"]
+  const plan = {
+    mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work",
+    steps: [{
+      id: "ensure-base", kind: "ensure-base", target: FORK, baseBranch: "review/base", baseSha: SHA_A,
+      carryFrom: SHA_C, carry: RECORDERS, reviewerFrom: SHA_C, reviewerPaths,
+      message: "ci: configure reviewer guidance",
+    }],
+  }
+  const { exec, calls } = fakeExec([
+    [/rev-parse --verify/, "tree-carried\n"],
+    [/write-tree/, "tree-carried\n"],
+  ])
+  await executePlan(plan, { exec, io: memoryIo(), log: () => {} })
+  assert.deepEqual(calls.filter((call) => call.includes(" add -f ")), ["git -C /tmp/work add -f -- REVIEW.md .agents/skills/garnet-runtime-review/SKILL.md"])
+  assert.ok(calls.includes(`git -C /tmp/work add -- ${RECORDERS.join(" ")}`))
+})
+
 // ---------------------------------------------------------------- livePr: refusal and pure mode
 
 const RECORDING_BODY = `on:\n  pull_request:\njobs:\n  record:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: garnet-org/action@${GARNET_ACTION_PIN}\n`
