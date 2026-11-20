@@ -623,7 +623,7 @@ test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
     }],
   }
   const { exec } = fakeExec([
-    [/refs\/remotes\/origin\/replay\/change/, new Error("missing replay branch")],
+    [/refs\/remotes\/origin\/replay\/change/, ""],
     [/rev-parse --verify/, "tree-other\n"],
     [/write-tree/, "tree-carried\n"],
   ])
