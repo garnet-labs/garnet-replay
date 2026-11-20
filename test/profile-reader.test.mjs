@@ -82,6 +82,20 @@ test("actions retain workflow identity even when job names and actions match", (
   }
 })
 
+test("repeated actions retain review requirements in either observation order", () => {
+  const linked = { remote_names: ["example.org"], ancestry: ["Runner.Worker", "node"] }
+  const missing = { ...linked, lineage_recorded: false }
+  const stepLinked = { remote_names: ["example.org"], ancestry: ["bash", "node"], github_step: "Install" }
+  const unlinked = { ...stepLinked, github_step: "99. Runner Processes" }
+  for (const pair of [[linked, missing], [missing, linked], [stepLinked, unlinked], [unlinked, stepLinked]]) {
+    const rows = readProfileTrees({ associations: pair })
+    assert.equal(rows.length, 1)
+    assert.equal(rows[0].needsReview, true)
+    assert.notEqual(rows[0].kind, "step-linked")
+  }
+  assert.equal(readProfileTrees({ associations: [stepLinked] })[0].needsReview, false)
+})
+
 test("empty associations are readable; absent, malformed and empty collections fail closed", () => {
   assert.deepEqual(readProfileTrees({ associations: [] }), [])
   assert.deepEqual(compareProfileTrees({ associations: [] }, { associations: [] }).added, [])
