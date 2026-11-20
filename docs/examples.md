@@ -19,6 +19,22 @@ derivable from the record. PASS means shareable for that scope, not complete
 capture or established attribution. Reverify before use. Operator commands and
 limits: [current state](state-2026-11-20.md).
 
+## Reconciled live-check status
+
+Actual output after `reconcile --all --apply` refreshed this target on
+2026-11-20, from `node bin/replay.mjs status claude-code-action` (selected lines):
+
+```text
+claude-code-action  anthropics/claude-code-action → garnet-labs/claude-code-action
+  current stage: 1 replay
+  live check: 0 shareable, 2 failing, 0 undeterminable / 2 observed PRs · 2026-11-20T06:00:45.444Z
+```
+
+The ladder's recording stage does not establish shareability. `status` reads
+the ledger; it does not re-verify GitHub. The dated `live check` counts describe
+the last reconciliation, not a compared-commit exhibit or current verification.
+Run `verify` for the specific PR's exact pair before sharing it.
+
 ## Outbound attribution reader (2026-11-20)
 
 Read a recorded profile without writing a ledger, dispatching a run, or changing
