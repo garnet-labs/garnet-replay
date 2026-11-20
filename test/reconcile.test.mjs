@@ -97,6 +97,20 @@ test("empty inventory proves no installation, not a cohort or a successful repla
   assert.equal(reconcileTarget(target, { ...snapshot(), paths: [STAGE2_FILES.review] }, checkedAt).stage2.state, "unstarted")
 })
 
+test("pending integration stays in flight only while its observed PR is open", () => {
+  const input = { ...target, stage2: { state: "in-flight", forkPr: 2, branch: "integration/setup" } }
+  const observed = observeTarget(input, { exec: inventoryExec })
+  assert.equal(observed.stage2PrState, "open")
+  for (const stage2PrState of ["open", "closed", null]) {
+    const result = reconcileTarget(input, { ...snapshot(), paths: [], stage2PrState }, checkedAt)
+    assert.equal(result.stage2.state, stage2PrState === "open" ? "in-flight" : "unstarted")
+    assert.equal(result.stage2.forkPr, 2)
+    assert.equal(result.stage2.files.length, 0)
+  }
+  assert.equal(observeTarget({ ...target, stage2: { state: "in-flight", forkPr: 99 } }, { exec: inventoryExec }).stage2PrState, null)
+  assert.equal(observeTarget({ ...target, stage2: { state: "in-flight", branch: "dependency-update" } }, { exec: inventoryExec }).stage2PrState, "open")
+})
+
 test("pending and stale receipts never become recorded", () => {
   for (const body of [comment.body.replace(head, previous), "<!-- garnet-control-plane-pending-pr-comment:1 -->"]) {
     const result = reconcileTarget(target, snapshot([{ ...pr("FAIL"), comments: [{ ...comment, body }] }]), checkedAt)
