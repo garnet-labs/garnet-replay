@@ -3,7 +3,7 @@ import test from "node:test"
 import { mkdtempSync, mkdirSync, existsSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { assertHostedRecorder, assertReplayChanges, checkReplayBudget, rateBudget } from "../lib/replay-preflight.mjs"
+import { assertHostedRecorder, assertReplayChanges, changeAlreadyPresent, checkReplayBudget, rateBudget } from "../lib/replay-preflight.mjs"
 import { executeReplayJob, retryingReplayExec } from "../lib/replay-runner-worker.mjs"
 import { planSignature } from "../lib/replay-runner.mjs"
 import { assertReplayAdmission } from "../lib/replay-pr.mjs"
@@ -161,4 +161,11 @@ test("offline hosted prepare exercises budget and preflight with no writes; star
     ...seams, execute: (command, args) => args[1] === "rate_limit" ? JSON.stringify({ resources: { core: RATE } }) : treeExec(true)(command, args),
   }), { reason: "CHANGE_ALREADY_PRESENT" })
   assert.equal(writes, 0)
+})
+
+test("changeAlreadyPresent is true only when every replayed path matches", () => {
+  assert.equal(changeAlreadyPresent([]), false)
+  assert.equal(changeAlreadyPresent([{ base: "100644:blob:a", head: "100644:blob:a" }]), true)
+  assert.equal(changeAlreadyPresent([{ base: "100644:blob:a", head: "100644:blob:a" }, { base: null, head: "100644:blob:b" }]), false)
+  assert.equal(changeAlreadyPresent([{ base: "100644:blob:a", head: "100755:blob:a" }]), false)
 })
