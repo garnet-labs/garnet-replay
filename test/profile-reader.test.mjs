@@ -95,9 +95,23 @@ test("identical actions are not additions across runs and refs, with or without 
     const report = compareProfileTrees(head, base)
     assert.deepEqual(report.added, [])
     assert.equal(readProfileTrees({ profiles: [base, head] }).length, 8)
-    assert.equal(report.rows[0].workflow, withWorkflow ? ".github/workflows/install.yml" : "")
+    assert.equal(report.rows[0].workflow, withWorkflow ? "garnet-labs/example/.github/workflows/install.yml" : "")
     assertVocabClean(renderProfileTrees(report))
   }
+})
+
+test("workflow references retain repository identity when repository metadata is absent", () => {
+  const base = profile(PREVIOUS)
+  const head = profile(HEAD)
+  delete base.run.repository
+  delete head.run.repository
+  base.run.workflow_ref = "one/repo/.github/workflows/install.yml@refs/heads/main"
+  head.run.workflow_ref = "two/repo/.github/workflows/install.yml@refs/pull/1/merge"
+  assert.equal(readProfileTrees({ profiles: [base, head] }).length, 16)
+  assert.equal(compareProfileTrees(head, base).added.length, 5)
+  assert.equal(readProfileTrees(head)[0].workflow, "two/repo/.github/workflows/install.yml")
+  head.run.workflow_ref = "one/repo/.github/workflows/install.yml@refs/pull/1/merge"
+  assert.deepEqual(compareProfileTrees(head, base).added, [])
 })
 
 test("repeated actions retain review requirements in either observation order", () => {
