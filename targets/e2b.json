@@ -1104,12 +1104,1010 @@
       "observedAt": "2026-11-14T05:33:40.474Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 109,
+      "branch": "devin/1795141271-cf-worker-types-check",
+      "forkHeadSha": "e7f315b1ca7ba032f69a1c9592c68a557fe27372",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "e7f315b1ca7ba032f69a1c9592c68a557fe27372",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "8f7dae55f540df9b1d886d318f7572b900620d63cf7bb14d489585de155f514c"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 108,
+      "branch": "devin/1795067097-session-receipt-plugin",
+      "forkHeadSha": "fe3811b5cd8ce0f362807d50e1508c7ed8fbbfb9",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "fe3811b5cd8ce0f362807d50e1508c7ed8fbbfb9",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"devin\"",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "4070096283819a91be15de30c36c1e98926ed145ece2032572dd04733004ab26"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 107,
+      "branch": "devin/1795066845-js-sdk-chrome-tests",
+      "forkHeadSha": "a4bb6ed1563e2a0395cb7aa7f22e79327978139d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "a4bb6ed1563e2a0395cb7aa7f22e79327978139d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "cf49042e1abf44d1a04877d94c025e793162385193f4ee3057baf7b4ef6539ab"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 106,
+      "branch": "devin/1795066776-garnet-record-ready-gate",
+      "forkHeadSha": "01dcc80affc666634d369c674683e7040ffce863",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "01dcc80affc666634d369c674683e7040ffce863",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "fd0390fc00d97390bf72fd43e706e7957c58be7f91e7f493f0546cc436aa2926"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 105,
+      "branch": "devin/1795032310-api-types-check",
+      "forkHeadSha": "4ce58f9e423ebd726ab8d8097db5f3f95a2a4f46",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "4ce58f9e423ebd726ab8d8097db5f3f95a2a4f46",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Written by Devin\""
+        ],
+        "receiptFingerprint": "bd8931ae84c901035c868f96421d6600f10519ad05558e84a01686d63d4988c9"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 104,
+      "branch": "chore/update-1g2",
+      "forkHeadSha": "981647a0b6a12881c30bd5d101c18234bbab9da9",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "981647a0b6a12881c30bd5d101c18234bbab9da9",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "8be097fe6a8bcccde6c362c02982df3f7b462309c47c147519afcd0167e97d00"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 103,
+      "branch": "chore/update-1hy",
+      "forkHeadSha": "f0207250150f9a7030a63860bc4f43ee351210c4",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f0207250150f9a7030a63860bc4f43ee351210c4",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "eda01380cfad89d913cbc3d3583ade78ff784a3607a05a19f51b660d4b17c8b0"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 102,
+      "branch": "chore/update-1lm",
+      "forkHeadSha": "5dd8034294d8cdc5a2d00e565d73e1fbb346b2ea",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "5dd8034294d8cdc5a2d00e565d73e1fbb346b2ea",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "88f9d235ddf7bfcfd81baaf8c4ac23d6bea6c1486015202e6dafed8a31cd88b8"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 101,
+      "branch": "chore/update-1nq",
+      "forkHeadSha": "8d69d2ba16b711dc578717f89f4fb8f4b1b583d9",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "8d69d2ba16b711dc578717f89f4fb8f4b1b583d9",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "e66f4fc314adc7bc3e0ffb61f733d310ca2d176406469879bda626beb4a1eda6"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 100,
+      "branch": "deps/datamodel-code-generator-0.87.0",
+      "forkHeadSha": "f382cb90c28bef20489979dfff8cc619cb840da1",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f382cb90c28bef20489979dfff8cc619cb840da1",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "7e2cc120022ec9ea5b31a9c457c070cd355ff92548811ed75fa8367eebb570f9"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 99,
+      "branch": "chore/update-1lh",
+      "forkHeadSha": "890b0cdb382a3acc8d6d6689df334eb63e24c329",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "890b0cdb382a3acc8d6d6689df334eb63e24c329",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "dacbc19831d55e028b765ea592b54d3810ad2a7adc59fbde306c85eab1edfe4a"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 98,
+      "branch": "chore/manifests-1mp",
+      "forkHeadSha": "ffa1d0a726cc6f897d3b2910284decc2c64e716d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "ffa1d0a726cc6f897d3b2910284decc2c64e716d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "8887a860dcc423acfceb0055f12452f4b97e1707b9d6cacf02bc216127f55e94"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 97,
+      "branch": "chore/manifests-1nj",
+      "forkHeadSha": "1ef7b2828982a82e678e9bc8d9b70fa28c57982e",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "1ef7b2828982a82e678e9bc8d9b70fa28c57982e",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "04a82bcd04449a0451ae0a68b8b85c26057f9d3d97b422f3b5d8abc4d0177760"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 96,
+      "branch": "devin/1794887589-e2b-reviewer-guidance",
+      "forkHeadSha": "646fbd529c00b5264097f9a7aa90f33eb580e7cd",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "646fbd529c00b5264097f9a7aa90f33eb580e7cd",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"harness\"",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "54feb4fc847dc9a68e242476f59e8784dba18bd83380cfbee83a3f31c4217c65"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 95,
+      "branch": "devin/1794887052-e2b-codegen-record",
+      "forkHeadSha": "99d0f19469827955abb97771afde45aec11933c8",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "99d0f19469827955abb97771afde45aec11933c8",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "e7155483d8a90733c6d91e2dd51053851699cf15c35dd9102d60d3e6906c51b0"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 94,
+      "branch": "devin/1794886780-e2b-sync-onboard",
+      "forkHeadSha": "ce9f0134efec5c6ca8898ec29f8f4b1d9c6e0bde",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "ce9f0134efec5c6ca8898ec29f8f4b1d9c6e0bde",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "pair line: no pair line on the comment",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "b52f7bfe89ac69d1f506548752018f1c5a2cbbb43c56ddf8cdaf6e124eeb25ce"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 93,
+      "branch": "rb/2112b-with",
+      "forkHeadSha": "00f23022bc634bc0fdddc04d7c1754595cd99be7",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "00f23022bc634bc0fdddc04d7c1754595cd99be7",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "f7de0dc0d4b46184e3fd5db979ab09c1d85e430bcadeeea5f79125b79b563435"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 91,
+      "branch": "rb/2112-with",
+      "forkHeadSha": "5757fb2397017b7e6e4b35c9d4fe4f2b6375ef6d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "5757fb2397017b7e6e4b35c9d4fe4f2b6375ef6d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "e8ef80c5562eea2e83f3241b5fbd4b1d0f97d84b0c2327d8d08fe92601c9c366"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 88,
+      "branch": "js-sdk-generated-types-check",
+      "forkHeadSha": "21e47eb9fa13d0dd8bb6b1289b006da4d2a6a9d7",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "21e47eb9fa13d0dd8bb6b1289b006da4d2a6a9d7",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "914229d31ea7e4fcdeb5293fdaaecdec59955b6eda9d3cbe1737300524f0a356"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 87,
+      "branch": "js-sdk-browser-tests",
+      "forkHeadSha": "fbfd7873895a02ac7af7639de4d0735d9c8778d2",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "fbfd7873895a02ac7af7639de4d0735d9c8778d2",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "41acb485a518c638197fad129355fe1f73c135c16ba6318ea4a6526ba9e17181"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 86,
+      "branch": "cursor/security-overrides-specimen-v2-d589",
+      "forkHeadSha": "8e5d23303a6bea196b950115a599ec935c0293ea",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "8e5d23303a6bea196b950115a599ec935c0293ea",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "2fda8e62a4a987531cc919c4719df2a328064c9610edd4b685210cfce5e2ff37"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 85,
+      "branch": "cursor/weekly-deps-specimen-d589",
+      "forkHeadSha": "8f8f9f16802e794cf36612cdd90810ae0b2a55f0",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "8f8f9f16802e794cf36612cdd90810ae0b2a55f0",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "665ddf3a74405d01c4723d2ba5367949783b9259d51103fdcce92695a6d515b6"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 81,
+      "branch": "proof/2079-head",
+      "forkHeadSha": "35e33d8a035f6f1785f0bb62771506b721af8ab7",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "35e33d8a035f6f1785f0bb62771506b721af8ab7",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "9d20b10d16d237da64523145fc1dfb9b78817d02217092a762e895b2c1289a5a"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 69,
+      "branch": "rb/1929-with",
+      "forkHeadSha": "b56c0608f10d2f2bcf0a5cc1326c56eb3b6047fa",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "b56c0608f10d2f2bcf0a5cc1326c56eb3b6047fa",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "6a69fb39da93cfaae01fa64ccf66a8256bb481dea424d812c56685d5f9a592de"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 68,
+      "branch": "rb/1964-with",
+      "forkHeadSha": "6020ba0d9f81dceb98dba1449a4f6083825be4d1",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "6020ba0d9f81dceb98dba1449a4f6083825be4d1",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "575a1a9e3a407737bf308042127c1dd9d034b5a4a526f5f779b0146684640c51"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 67,
+      "branch": "rb/1995-with",
+      "forkHeadSha": "35a35f6cc8c8d17e883a2baa2c98c4a34ccafd9c",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "35a35f6cc8c8d17e883a2baa2c98c4a34ccafd9c",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "9f6f6a0c5edba9f9adcaa8fb0693f7f3d0367fd7c3453318bcdd957d83978c8f"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 66,
+      "branch": "rb/2010-with",
+      "forkHeadSha": "084807c6c39cf261b30ad988dca1e2abcc73993e",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "084807c6c39cf261b30ad988dca1e2abcc73993e",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "23a29a502f5f2e0f073ab0860ec79d0466a4b47d80fa84425c9eafbd4f2db9af"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 65,
+      "branch": "rb/2015-with",
+      "forkHeadSha": "7216ba07cdecf65416b8a7af86088884d2ebce18",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "7216ba07cdecf65416b8a7af86088884d2ebce18",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "4dc29e81873b9792b0d296dd5d756bf5c99b61546fd8eb223657493ce6974805"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 64,
+      "branch": "rb/2016-with",
+      "forkHeadSha": "44f4d7acf1be6413554ea49ddcd7f9efbb56bd79",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "44f4d7acf1be6413554ea49ddcd7f9efbb56bd79",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "23787abfd48462ca82bd40937f07a41f48f0f2dc9259a138e60a1df556dac864"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 63,
+      "branch": "rb/2068-with",
+      "forkHeadSha": "cf1451c759a4a9f6173fd904429845040ce25c41",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "cf1451c759a4a9f6173fd904429845040ce25c41",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "1fdad6f7afed4efbd2132c7998d15af4a18718a55f27813d337725fc2351c1d3"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 62,
+      "branch": "rb/2079-with",
+      "forkHeadSha": "b864c7108c5718ccb36bc0ad1fbb40f0893a7439",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "b864c7108c5718ccb36bc0ad1fbb40f0893a7439",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "5362ecfc4163451b24476b3a7ac2dda3b6ee26ee49a3acc957c4f67ad374e812"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 61,
+      "branch": "rb/2070-with",
+      "forkHeadSha": "d26616b1772f9bdf55a66f0a4cd6d63d942f3b45",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "d26616b1772f9bdf55a66f0a4cd6d63d942f3b45",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "5e88a832e50aa2bef0301f2c188a9701217a0d192ac295fb36077dda9fb7a2e9"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 60,
+      "branch": "rb/2111-with",
+      "forkHeadSha": "896871211255e9923dc6df6bab52ec54cef2ee9b",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "896871211255e9923dc6df6bab52ec54cef2ee9b",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "00c599acd4673ea3f5fac4d9c882bc26382c31038d9c9e1782c15aae4fab7cc5"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 59,
+      "branch": "pr/1924",
+      "forkHeadSha": "97774e8ee1a6f43397f2fd718d243c4be1e2511c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "97774e8ee1a6f43397f2fd718d243c4be1e2511c",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "f03e57ae3d96b4b252ec327c1d8416fc436b3455bc916ee40a09dde9a64175f8"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 58,
+      "branch": "pr/2015",
+      "forkHeadSha": "58868bd8435620231db949da21a46e314fdcb59f",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "58868bd8435620231db949da21a46e314fdcb59f",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "d6e65ba2c1e7eea776029b9efdd3933e02e042049bab6364765a3694606179e4"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 57,
+      "branch": "pr/1936",
+      "forkHeadSha": "8602b59df5ba6bc6d2c3c9b562fda92d4754ae95",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "8602b59df5ba6bc6d2c3c9b562fda92d4754ae95",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "fda171dff178a71bbfff7ce1d90c000e272d47d4d12a1c524c359e138729d360"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 56,
+      "branch": "pr/2079",
+      "forkHeadSha": "db11241266c5ba4be81f35efca078ad956e06c74",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "db11241266c5ba4be81f35efca078ad956e06c74",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "797c05d89627da1df2e4291de98dfbbfe64b41a8aad0b0c6303f73eca9016600"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 55,
+      "branch": "pr/1733",
+      "forkHeadSha": "320c0425f4e19dfe0ea14d8574db9a048ca6a84a",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "320c0425f4e19dfe0ea14d8574db9a048ca6a84a",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\""
+        ],
+        "receiptFingerprint": "fb79bc626742fdba5c9e783c1173e54b3c303674592e88c313a747bd66f05093"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 54,
+      "branch": "ctl/1931",
+      "forkHeadSha": "5be748ac838acfb742197c353cbf3adaae23ec7f",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "5be748ac838acfb742197c353cbf3adaae23ec7f",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "ad4bd9d339db043850b9912f2757c105246a50d970abfb09086895591708325b"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 53,
+      "branch": "pr/2046",
+      "forkHeadSha": "b711977c030ab5445fccf6b0ffef0ba9c68dd3fb",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "b711977c030ab5445fccf6b0ffef0ba9c68dd3fb",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "49273a064ba2ae43171b29330b84297a5c3c30a148a1cafaa191b029ae84d7b5"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 52,
+      "branch": "pr/1953",
+      "forkHeadSha": "98621f543b05ac73f928c1ce25959ccc7556aa6f",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "98621f543b05ac73f928c1ce25959ccc7556aa6f",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "55ee3751ffa1e76298f28fad42dc33074b3e3cc6eca02763f7ea9e0945b6b13a"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 51,
+      "branch": "pr/2045",
+      "forkHeadSha": "071ae1e2dc23b2b382bd89bbadbefc13e26182af",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "071ae1e2dc23b2b382bd89bbadbefc13e26182af",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "a086fd665087a077a0b3c801f8f082644f41d95c178488319ab90c2067567a97"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 50,
+      "branch": "pr/2047",
+      "forkHeadSha": "1e162698008daee044ba7a6369ae1517176cf74b",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "1e162698008daee044ba7a6369ae1517176cf74b",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "fca6fc6bb4396670840407b200c8d06b0d9e5476e568c08de074d6f08e8057c8"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 49,
+      "branch": "pr/2052",
+      "forkHeadSha": "9f4d5fedc4dc2a60e542294ecfb1269fd36b65a2",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "9f4d5fedc4dc2a60e542294ecfb1269fd36b65a2",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "8407220b881825fa8d9bde7a23c6e00ef67ff03e4653f304a217d7d5113eb28d"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 48,
+      "branch": "pr/2068",
+      "forkHeadSha": "56b54ce1d285f8492a7d1ad3503e38c9d0e545be",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "56b54ce1d285f8492a7d1ad3503e38c9d0e545be",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "83e28607cafe5194cd79fda3929dd1e12b0bdf6a1e821126acd55a3222a0056f"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 47,
+      "branch": "pr/1965",
+      "forkHeadSha": "df22b3c280a28025cb252dc8731f6ccf1d0ee26b",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "df22b3c280a28025cb252dc8731f6ccf1d0ee26b",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "6354eb578a0dbcec44e9eaf1a3697fbbf46201b940ceacc905c9076c527f0d62"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 46,
+      "branch": "pr/1994",
+      "forkHeadSha": "f7b8d5ba43e0b2dacf7195a4b7b5b59b2f790a92",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f7b8d5ba43e0b2dacf7195a4b7b5b59b2f790a92",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "564ad56efe93d0ad0ada1a647eff5b87e20b187948b9ff0cd189276e89d71341"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 45,
+      "branch": "pr/2029",
+      "forkHeadSha": "f0ae9bcb5b9109d83a24f165fe6f85d54ee8fec8",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f0ae9bcb5b9109d83a24f165fe6f85d54ee8fec8",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "d21b9e1e80d19bee3158aed0fc015548a99e3d379e582b1d1079cbc5807eff70"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 44,
+      "branch": "pr/1922",
+      "forkHeadSha": "f958645405365a94aeee0efdef152cefd9c03fb8",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f958645405365a94aeee0efdef152cefd9c03fb8",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "b795685b73ee3c5380d245b7e529f1b026d223200091401216c0e45bf15cf9ca"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 43,
+      "branch": "pr/1974",
+      "forkHeadSha": "eb53d8fb0d2f94ef837f90895ac8826c472b97e7",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "eb53d8fb0d2f94ef837f90895ac8826c472b97e7",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "a0ce1ead450317326a09bdf9cbe1f0b4ff7fbf79913f02c4ae5187e81f76d7cd"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 42,
+      "branch": "pr/2010",
+      "forkHeadSha": "420cd91b7b39b33f8758a616144a150d1dc15c46",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "420cd91b7b39b33f8758a616144a150d1dc15c46",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "0855144786768fa33da948ae6b4ac8343f607cb898be9b7f7ad58386f20c97f1"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 41,
+      "branch": "pr/1975",
+      "forkHeadSha": "fe9856c476f6b90f4b26fcabdc586ed284695c5d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "fe9856c476f6b90f4b26fcabdc586ed284695c5d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "592df866d33a6d8f9492e9f450bd737ed276a7b66b4a9cf03af9a8dc5b598a4d"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 40,
+      "branch": "pr/1980",
+      "forkHeadSha": "600e65468c3f5db98aeec71065a96ad0684de2ee",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "600e65468c3f5db98aeec71065a96ad0684de2ee",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "28f441d9c17f9f713ccced02abf47145bd12cce20a41418386c76114f79e985b"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 39,
+      "branch": "pr/1921",
+      "forkHeadSha": "af8b4fc92f9a4ae190560e07989a1e57d8ee517c",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "af8b4fc92f9a4ae190560e07989a1e57d8ee517c",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "1638aa478c8c91512a29efdeac59f5f355aa0a9766ecf8342e188cea2c00c855"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 38,
+      "branch": "pr/2069",
+      "forkHeadSha": "a08a2834398fe16462d7af875f369ca1eb540a3d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "a08a2834398fe16462d7af875f369ca1eb540a3d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "b15fdd0a365c40e86c7b77387f3f7745f2c69bfcef7080b375bdcc2a6560a2af"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 37,
+      "branch": "pr/1967",
+      "forkHeadSha": "e8503e28822feac12ec0c52950c864f8e695ca0b",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "e8503e28822feac12ec0c52950c864f8e695ca0b",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "65b2e7b4d9880826bc387383c8b9654d2ed22964487b2e8290c2e6c41b409698"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 36,
+      "branch": "pr/1951",
+      "forkHeadSha": "956b91575911c2978f3d0f1cdfcda026d761a905",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "956b91575911c2978f3d0f1cdfcda026d761a905",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "3c91a6ab642206e2af7e69a26e4223af8c3da6673e8730637fb886b6e1bb9944"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 35,
+      "branch": "pr/2028",
+      "forkHeadSha": "f2a4f17de92f2b69a0c2ee47c53c6ae6cd3b5270",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f2a4f17de92f2b69a0c2ee47c53c6ae6cd3b5270",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "1e36027f00e37b4d83bc83977f68c9a55f9cec39ef7e083ad5f47e52163446d5"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 34,
+      "branch": "pr/1931",
+      "forkHeadSha": "84afff231fbb85d33ffd86519506742acd10ee4d",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "84afff231fbb85d33ffd86519506742acd10ee4d",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "0186b72601ec6f4a7487afdb58d590531781e655cfdb09e9969b3a588035a1b1"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 33,
+      "branch": "pr/1928",
+      "forkHeadSha": "d7e22cdd3e1e8a5bdaf0da1cf28047270e7ab305",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "d7e22cdd3e1e8a5bdaf0da1cf28047270e7ab305",
+        "checkedAt": "2026-11-20T04:56:49.868Z",
+        "reasons": [],
+        "receiptFingerprint": "1da13deaa547a8e9488c45ea92d63480359cd3fd9f3c1a364e839948d954789f"
+      },
+      "observedAt": "2026-11-20T04:56:49.868Z",
+      "source": "github-reconciliation"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "in-flight",
+    "defaultBranch": "main",
+    "checkedSha": "c50f0d2e82a4d59a24c24aa106d9cb763a6aa056",
+    "checkedAt": "2026-11-20T04:56:49.868Z",
+    "files": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml",
+      "REVIEW.md"
+    ],
+    "missing": [],
+    "note": "5/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1122,12 +2120,1066 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "grounded",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "959d08090db964058af45fdf998d22d355eb1c57",
     "pr": 96
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:56:49.868Z",
+    "defaultBranch": "main",
+    "defaultSha": "c50f0d2e82a4d59a24c24aa106d9cb763a6aa056",
+    "inspectedPrs": 109,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 109,
+        "url": "https://github.com/garnet-labs/E2B/pull/109",
+        "prState": "open",
+        "head": "e7f315b1ca7ba032f69a1c9592c68a557fe27372",
+        "previous": "c50f0d2e82a4d59a24c24aa106d9cb763a6aa056",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8f7dae55f540df9b1d886d318f7572b900620d63cf7bb14d489585de155f514c",
+        "verification": {
+          "status": "PASS",
+          "head": "e7f315b1ca7ba032f69a1c9592c68a557fe27372",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "8f7dae55f540df9b1d886d318f7572b900620d63cf7bb14d489585de155f514c"
+        }
+      },
+      {
+        "forkPr": 108,
+        "url": "https://github.com/garnet-labs/E2B/pull/108",
+        "prState": "merged",
+        "head": "fe3811b5cd8ce0f362807d50e1508c7ed8fbbfb9",
+        "previous": "959d08090db964058af45fdf998d22d355eb1c57",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "4070096283819a91be15de30c36c1e98926ed145ece2032572dd04733004ab26",
+        "verification": {
+          "status": "FAIL",
+          "head": "fe3811b5cd8ce0f362807d50e1508c7ed8fbbfb9",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"devin\"",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "4070096283819a91be15de30c36c1e98926ed145ece2032572dd04733004ab26"
+        }
+      },
+      {
+        "forkPr": 107,
+        "url": "https://github.com/garnet-labs/E2B/pull/107",
+        "prState": "open",
+        "head": "a4bb6ed1563e2a0395cb7aa7f22e79327978139d",
+        "previous": "01dcc80affc666634d369c674683e7040ffce863",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "cf49042e1abf44d1a04877d94c025e793162385193f4ee3057baf7b4ef6539ab",
+        "verification": {
+          "status": "PASS",
+          "head": "a4bb6ed1563e2a0395cb7aa7f22e79327978139d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "cf49042e1abf44d1a04877d94c025e793162385193f4ee3057baf7b4ef6539ab"
+        }
+      },
+      {
+        "forkPr": 106,
+        "url": "https://github.com/garnet-labs/E2B/pull/106",
+        "prState": "open",
+        "head": "01dcc80affc666634d369c674683e7040ffce863",
+        "previous": "959d08090db964058af45fdf998d22d355eb1c57",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "fd0390fc00d97390bf72fd43e706e7957c58be7f91e7f493f0546cc436aa2926",
+        "verification": {
+          "status": "FAIL",
+          "head": "01dcc80affc666634d369c674683e7040ffce863",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "fd0390fc00d97390bf72fd43e706e7957c58be7f91e7f493f0546cc436aa2926"
+        }
+      },
+      {
+        "forkPr": 105,
+        "url": "https://github.com/garnet-labs/E2B/pull/105",
+        "prState": "open",
+        "head": "4ce58f9e423ebd726ab8d8097db5f3f95a2a4f46",
+        "previous": "959d08090db964058af45fdf998d22d355eb1c57",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "bd8931ae84c901035c868f96421d6600f10519ad05558e84a01686d63d4988c9",
+        "verification": {
+          "status": "FAIL",
+          "head": "4ce58f9e423ebd726ab8d8097db5f3f95a2a4f46",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Written by Devin\""
+          ],
+          "receiptFingerprint": "bd8931ae84c901035c868f96421d6600f10519ad05558e84a01686d63d4988c9"
+        }
+      },
+      {
+        "forkPr": 104,
+        "url": "https://github.com/garnet-labs/E2B/pull/104",
+        "prState": "open",
+        "head": "981647a0b6a12881c30bd5d101c18234bbab9da9",
+        "previous": "93ac9a473fe6ab6af79eff1823b3a5ca1ee779a6",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8be097fe6a8bcccde6c362c02982df3f7b462309c47c147519afcd0167e97d00",
+        "verification": {
+          "status": "PASS",
+          "head": "981647a0b6a12881c30bd5d101c18234bbab9da9",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "8be097fe6a8bcccde6c362c02982df3f7b462309c47c147519afcd0167e97d00"
+        }
+      },
+      {
+        "forkPr": 103,
+        "url": "https://github.com/garnet-labs/E2B/pull/103",
+        "prState": "open",
+        "head": "f0207250150f9a7030a63860bc4f43ee351210c4",
+        "previous": "68c60e0cfd25467f0b9744ff26361b89a21bfee7",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "eda01380cfad89d913cbc3d3583ade78ff784a3607a05a19f51b660d4b17c8b0",
+        "verification": {
+          "status": "PASS",
+          "head": "f0207250150f9a7030a63860bc4f43ee351210c4",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "eda01380cfad89d913cbc3d3583ade78ff784a3607a05a19f51b660d4b17c8b0"
+        }
+      },
+      {
+        "forkPr": 102,
+        "url": "https://github.com/garnet-labs/E2B/pull/102",
+        "prState": "open",
+        "head": "5dd8034294d8cdc5a2d00e565d73e1fbb346b2ea",
+        "previous": "8a217920e574b04d7aff1def3260923024d16d9f",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "88f9d235ddf7bfcfd81baaf8c4ac23d6bea6c1486015202e6dafed8a31cd88b8",
+        "verification": {
+          "status": "PASS",
+          "head": "5dd8034294d8cdc5a2d00e565d73e1fbb346b2ea",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "88f9d235ddf7bfcfd81baaf8c4ac23d6bea6c1486015202e6dafed8a31cd88b8"
+        }
+      },
+      {
+        "forkPr": 101,
+        "url": "https://github.com/garnet-labs/E2B/pull/101",
+        "prState": "open",
+        "head": "8d69d2ba16b711dc578717f89f4fb8f4b1b583d9",
+        "previous": "2e41f965e4b5b771b72ce5bf2803dbcf8ac96e2a",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "e66f4fc314adc7bc3e0ffb61f733d310ca2d176406469879bda626beb4a1eda6",
+        "verification": {
+          "status": "PASS",
+          "head": "8d69d2ba16b711dc578717f89f4fb8f4b1b583d9",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "e66f4fc314adc7bc3e0ffb61f733d310ca2d176406469879bda626beb4a1eda6"
+        }
+      },
+      {
+        "forkPr": 100,
+        "url": "https://github.com/garnet-labs/E2B/pull/100",
+        "prState": "open",
+        "head": "f382cb90c28bef20489979dfff8cc619cb840da1",
+        "previous": "4db16bedca917d50c4bc7b9a935712aca7373787",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "7e2cc120022ec9ea5b31a9c457c070cd355ff92548811ed75fa8367eebb570f9",
+        "verification": {
+          "status": "PASS",
+          "head": "f382cb90c28bef20489979dfff8cc619cb840da1",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "7e2cc120022ec9ea5b31a9c457c070cd355ff92548811ed75fa8367eebb570f9"
+        }
+      },
+      {
+        "forkPr": 99,
+        "url": "https://github.com/garnet-labs/E2B/pull/99",
+        "prState": "open",
+        "head": "890b0cdb382a3acc8d6d6689df334eb63e24c329",
+        "previous": "876b2a4222fbc7a79c69e5d81063746116031625",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "dacbc19831d55e028b765ea592b54d3810ad2a7adc59fbde306c85eab1edfe4a",
+        "verification": {
+          "status": "PASS",
+          "head": "890b0cdb382a3acc8d6d6689df334eb63e24c329",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "dacbc19831d55e028b765ea592b54d3810ad2a7adc59fbde306c85eab1edfe4a"
+        }
+      },
+      {
+        "forkPr": 98,
+        "url": "https://github.com/garnet-labs/E2B/pull/98",
+        "prState": "open",
+        "head": "ffa1d0a726cc6f897d3b2910284decc2c64e716d",
+        "previous": "7795b2c049945494300faad6cdb88816c5f07eff",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8887a860dcc423acfceb0055f12452f4b97e1707b9d6cacf02bc216127f55e94",
+        "verification": {
+          "status": "PASS",
+          "head": "ffa1d0a726cc6f897d3b2910284decc2c64e716d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "8887a860dcc423acfceb0055f12452f4b97e1707b9d6cacf02bc216127f55e94"
+        }
+      },
+      {
+        "forkPr": 97,
+        "url": "https://github.com/garnet-labs/E2B/pull/97",
+        "prState": "open",
+        "head": "1ef7b2828982a82e678e9bc8d9b70fa28c57982e",
+        "previous": "6e1782401568a1e213f12da88d6e2d8539234b74",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "04a82bcd04449a0451ae0a68b8b85c26057f9d3d97b422f3b5d8abc4d0177760",
+        "verification": {
+          "status": "PASS",
+          "head": "1ef7b2828982a82e678e9bc8d9b70fa28c57982e",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "04a82bcd04449a0451ae0a68b8b85c26057f9d3d97b422f3b5d8abc4d0177760"
+        }
+      },
+      {
+        "forkPr": 96,
+        "url": "https://github.com/garnet-labs/E2B/pull/96",
+        "prState": "merged",
+        "head": "646fbd529c00b5264097f9a7aa90f33eb580e7cd",
+        "previous": "e8ee1a8f6dba79e17be8257de1b6119d1eb42582",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "54feb4fc847dc9a68e242476f59e8784dba18bd83380cfbee83a3f31c4217c65",
+        "verification": {
+          "status": "FAIL",
+          "head": "646fbd529c00b5264097f9a7aa90f33eb580e7cd",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"harness\"",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "54feb4fc847dc9a68e242476f59e8784dba18bd83380cfbee83a3f31c4217c65"
+        }
+      },
+      {
+        "forkPr": 95,
+        "url": "https://github.com/garnet-labs/E2B/pull/95",
+        "prState": "merged",
+        "head": "99d0f19469827955abb97771afde45aec11933c8",
+        "previous": "5679ac00d7efb86fd6bce838f6be5f970f26f868",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "e7155483d8a90733c6d91e2dd51053851699cf15c35dd9102d60d3e6906c51b0",
+        "verification": {
+          "status": "FAIL",
+          "head": "99d0f19469827955abb97771afde45aec11933c8",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "e7155483d8a90733c6d91e2dd51053851699cf15c35dd9102d60d3e6906c51b0"
+        }
+      },
+      {
+        "forkPr": 94,
+        "url": "https://github.com/garnet-labs/E2B/pull/94",
+        "prState": "merged",
+        "head": "ce9f0134efec5c6ca8898ec29f8f4b1d9c6e0bde",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "b52f7bfe89ac69d1f506548752018f1c5a2cbbb43c56ddf8cdaf6e124eeb25ce",
+        "verification": {
+          "status": "FAIL",
+          "head": "ce9f0134efec5c6ca8898ec29f8f4b1d9c6e0bde",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "pair line: no pair line on the comment",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "b52f7bfe89ac69d1f506548752018f1c5a2cbbb43c56ddf8cdaf6e124eeb25ce"
+        }
+      },
+      {
+        "forkPr": 93,
+        "url": "https://github.com/garnet-labs/E2B/pull/93",
+        "prState": "open",
+        "head": "00f23022bc634bc0fdddc04d7c1754595cd99be7",
+        "previous": "80594f50bbcd487b0f6a40caab0b4b6e56c7a66e",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "f7de0dc0d4b46184e3fd5db979ab09c1d85e430bcadeeea5f79125b79b563435",
+        "verification": {
+          "status": "PASS",
+          "head": "00f23022bc634bc0fdddc04d7c1754595cd99be7",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "f7de0dc0d4b46184e3fd5db979ab09c1d85e430bcadeeea5f79125b79b563435"
+        }
+      },
+      {
+        "forkPr": 91,
+        "url": "https://github.com/garnet-labs/E2B/pull/91",
+        "prState": "open",
+        "head": "5757fb2397017b7e6e4b35c9d4fe4f2b6375ef6d",
+        "previous": "80594f50bbcd487b0f6a40caab0b4b6e56c7a66e",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "e8ef80c5562eea2e83f3241b5fbd4b1d0f97d84b0c2327d8d08fe92601c9c366",
+        "verification": {
+          "status": "PASS",
+          "head": "5757fb2397017b7e6e4b35c9d4fe4f2b6375ef6d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "e8ef80c5562eea2e83f3241b5fbd4b1d0f97d84b0c2327d8d08fe92601c9c366"
+        }
+      },
+      {
+        "forkPr": 88,
+        "url": "https://github.com/garnet-labs/E2B/pull/88",
+        "prState": "open",
+        "head": "21e47eb9fa13d0dd8bb6b1289b006da4d2a6a9d7",
+        "previous": "d433f7b6de7c5cee5b1189822e3b9cff82367b43",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "914229d31ea7e4fcdeb5293fdaaecdec59955b6eda9d3cbe1737300524f0a356",
+        "verification": {
+          "status": "PASS",
+          "head": "21e47eb9fa13d0dd8bb6b1289b006da4d2a6a9d7",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "914229d31ea7e4fcdeb5293fdaaecdec59955b6eda9d3cbe1737300524f0a356"
+        }
+      },
+      {
+        "forkPr": 87,
+        "url": "https://github.com/garnet-labs/E2B/pull/87",
+        "prState": "open",
+        "head": "fbfd7873895a02ac7af7639de4d0735d9c8778d2",
+        "previous": "d433f7b6de7c5cee5b1189822e3b9cff82367b43",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "41acb485a518c638197fad129355fe1f73c135c16ba6318ea4a6526ba9e17181",
+        "verification": {
+          "status": "PASS",
+          "head": "fbfd7873895a02ac7af7639de4d0735d9c8778d2",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "41acb485a518c638197fad129355fe1f73c135c16ba6318ea4a6526ba9e17181"
+        }
+      },
+      {
+        "forkPr": 86,
+        "url": "https://github.com/garnet-labs/E2B/pull/86",
+        "prState": "open",
+        "head": "8e5d23303a6bea196b950115a599ec935c0293ea",
+        "previous": "ac13673722141559c8c66ae7bbfa038f7c5af8c6",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "2fda8e62a4a987531cc919c4719df2a328064c9610edd4b685210cfce5e2ff37",
+        "verification": {
+          "status": "PASS",
+          "head": "8e5d23303a6bea196b950115a599ec935c0293ea",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "2fda8e62a4a987531cc919c4719df2a328064c9610edd4b685210cfce5e2ff37"
+        }
+      },
+      {
+        "forkPr": 85,
+        "url": "https://github.com/garnet-labs/E2B/pull/85",
+        "prState": "open",
+        "head": "8f8f9f16802e794cf36612cdd90810ae0b2a55f0",
+        "previous": "a43d9dfc82cef20d0f3e0a2c1def1977882c5e7a",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "665ddf3a74405d01c4723d2ba5367949783b9259d51103fdcce92695a6d515b6",
+        "verification": {
+          "status": "PASS",
+          "head": "8f8f9f16802e794cf36612cdd90810ae0b2a55f0",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "665ddf3a74405d01c4723d2ba5367949783b9259d51103fdcce92695a6d515b6"
+        }
+      },
+      {
+        "forkPr": 81,
+        "url": "https://github.com/garnet-labs/E2B/pull/81",
+        "prState": "open",
+        "head": "35e33d8a035f6f1785f0bb62771506b721af8ab7",
+        "previous": "d0c03b9b1ee9dd39f4651c58490e992dfa8953ab",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "9d20b10d16d237da64523145fc1dfb9b78817d02217092a762e895b2c1289a5a",
+        "verification": {
+          "status": "PASS",
+          "head": "35e33d8a035f6f1785f0bb62771506b721af8ab7",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "9d20b10d16d237da64523145fc1dfb9b78817d02217092a762e895b2c1289a5a"
+        }
+      },
+      {
+        "forkPr": 69,
+        "url": "https://github.com/garnet-labs/E2B/pull/69",
+        "prState": "open",
+        "head": "b56c0608f10d2f2bcf0a5cc1326c56eb3b6047fa",
+        "previous": "43eeefb720559179bd4238343e0cce0ea8099913",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "6a69fb39da93cfaae01fa64ccf66a8256bb481dea424d812c56685d5f9a592de",
+        "verification": {
+          "status": "PASS",
+          "head": "b56c0608f10d2f2bcf0a5cc1326c56eb3b6047fa",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "6a69fb39da93cfaae01fa64ccf66a8256bb481dea424d812c56685d5f9a592de"
+        }
+      },
+      {
+        "forkPr": 68,
+        "url": "https://github.com/garnet-labs/E2B/pull/68",
+        "prState": "open",
+        "head": "6020ba0d9f81dceb98dba1449a4f6083825be4d1",
+        "previous": "b58b94eccd05426fb4914199310efa298770c363",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "575a1a9e3a407737bf308042127c1dd9d034b5a4a526f5f779b0146684640c51",
+        "verification": {
+          "status": "PASS",
+          "head": "6020ba0d9f81dceb98dba1449a4f6083825be4d1",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "575a1a9e3a407737bf308042127c1dd9d034b5a4a526f5f779b0146684640c51"
+        }
+      },
+      {
+        "forkPr": 67,
+        "url": "https://github.com/garnet-labs/E2B/pull/67",
+        "prState": "open",
+        "head": "35a35f6cc8c8d17e883a2baa2c98c4a34ccafd9c",
+        "previous": "89b167b520e0351f7a8b0aa1dde5efa69774502b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "9f6f6a0c5edba9f9adcaa8fb0693f7f3d0367fd7c3453318bcdd957d83978c8f",
+        "verification": {
+          "status": "PASS",
+          "head": "35a35f6cc8c8d17e883a2baa2c98c4a34ccafd9c",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "9f6f6a0c5edba9f9adcaa8fb0693f7f3d0367fd7c3453318bcdd957d83978c8f"
+        }
+      },
+      {
+        "forkPr": 66,
+        "url": "https://github.com/garnet-labs/E2B/pull/66",
+        "prState": "open",
+        "head": "084807c6c39cf261b30ad988dca1e2abcc73993e",
+        "previous": "7f8025ca52942c4e289afe4d3e74799b429bad67",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "23a29a502f5f2e0f073ab0860ec79d0466a4b47d80fa84425c9eafbd4f2db9af",
+        "verification": {
+          "status": "PASS",
+          "head": "084807c6c39cf261b30ad988dca1e2abcc73993e",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "23a29a502f5f2e0f073ab0860ec79d0466a4b47d80fa84425c9eafbd4f2db9af"
+        }
+      },
+      {
+        "forkPr": 65,
+        "url": "https://github.com/garnet-labs/E2B/pull/65",
+        "prState": "open",
+        "head": "7216ba07cdecf65416b8a7af86088884d2ebce18",
+        "previous": "7f8025ca52942c4e289afe4d3e74799b429bad67",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "4dc29e81873b9792b0d296dd5d756bf5c99b61546fd8eb223657493ce6974805",
+        "verification": {
+          "status": "PASS",
+          "head": "7216ba07cdecf65416b8a7af86088884d2ebce18",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "4dc29e81873b9792b0d296dd5d756bf5c99b61546fd8eb223657493ce6974805"
+        }
+      },
+      {
+        "forkPr": 64,
+        "url": "https://github.com/garnet-labs/E2B/pull/64",
+        "prState": "open",
+        "head": "44f4d7acf1be6413554ea49ddcd7f9efbb56bd79",
+        "previous": "e18fa648b87559d1dfdbf9f038e480ad693d1188",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "23787abfd48462ca82bd40937f07a41f48f0f2dc9259a138e60a1df556dac864",
+        "verification": {
+          "status": "PASS",
+          "head": "44f4d7acf1be6413554ea49ddcd7f9efbb56bd79",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "23787abfd48462ca82bd40937f07a41f48f0f2dc9259a138e60a1df556dac864"
+        }
+      },
+      {
+        "forkPr": 63,
+        "url": "https://github.com/garnet-labs/E2B/pull/63",
+        "prState": "open",
+        "head": "cf1451c759a4a9f6173fd904429845040ce25c41",
+        "previous": "d95b4716e48b7efc0de498f8310c07de355f47da",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "1fdad6f7afed4efbd2132c7998d15af4a18718a55f27813d337725fc2351c1d3",
+        "verification": {
+          "status": "PASS",
+          "head": "cf1451c759a4a9f6173fd904429845040ce25c41",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "1fdad6f7afed4efbd2132c7998d15af4a18718a55f27813d337725fc2351c1d3"
+        }
+      },
+      {
+        "forkPr": 62,
+        "url": "https://github.com/garnet-labs/E2B/pull/62",
+        "prState": "open",
+        "head": "b864c7108c5718ccb36bc0ad1fbb40f0893a7439",
+        "previous": "0c3caa9ceb35bf3df99b59c49aa20cb90454cbd4",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "5362ecfc4163451b24476b3a7ac2dda3b6ee26ee49a3acc957c4f67ad374e812",
+        "verification": {
+          "status": "PASS",
+          "head": "b864c7108c5718ccb36bc0ad1fbb40f0893a7439",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "5362ecfc4163451b24476b3a7ac2dda3b6ee26ee49a3acc957c4f67ad374e812"
+        }
+      },
+      {
+        "forkPr": 61,
+        "url": "https://github.com/garnet-labs/E2B/pull/61",
+        "prState": "open",
+        "head": "d26616b1772f9bdf55a66f0a4cd6d63d942f3b45",
+        "previous": "6fffd57775eca56f1e1dddf8df4fbde867e35217",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "5e88a832e50aa2bef0301f2c188a9701217a0d192ac295fb36077dda9fb7a2e9",
+        "verification": {
+          "status": "PASS",
+          "head": "d26616b1772f9bdf55a66f0a4cd6d63d942f3b45",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "5e88a832e50aa2bef0301f2c188a9701217a0d192ac295fb36077dda9fb7a2e9"
+        }
+      },
+      {
+        "forkPr": 60,
+        "url": "https://github.com/garnet-labs/E2B/pull/60",
+        "prState": "open",
+        "head": "896871211255e9923dc6df6bab52ec54cef2ee9b",
+        "previous": "d433f7b6de7c5cee5b1189822e3b9cff82367b43",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "00c599acd4673ea3f5fac4d9c882bc26382c31038d9c9e1782c15aae4fab7cc5",
+        "verification": {
+          "status": "PASS",
+          "head": "896871211255e9923dc6df6bab52ec54cef2ee9b",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "00c599acd4673ea3f5fac4d9c882bc26382c31038d9c9e1782c15aae4fab7cc5"
+        }
+      },
+      {
+        "forkPr": 59,
+        "url": "https://github.com/garnet-labs/E2B/pull/59",
+        "prState": "open",
+        "head": "97774e8ee1a6f43397f2fd718d243c4be1e2511c",
+        "previous": "3facb96f708ce6969e7387481109e5f16ffc9b23",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "f03e57ae3d96b4b252ec327c1d8416fc436b3455bc916ee40a09dde9a64175f8",
+        "verification": {
+          "status": "FAIL",
+          "head": "97774e8ee1a6f43397f2fd718d243c4be1e2511c",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "f03e57ae3d96b4b252ec327c1d8416fc436b3455bc916ee40a09dde9a64175f8"
+        }
+      },
+      {
+        "forkPr": 58,
+        "url": "https://github.com/garnet-labs/E2B/pull/58",
+        "prState": "open",
+        "head": "58868bd8435620231db949da21a46e314fdcb59f",
+        "previous": "07c621219d1ed6071860a13aa975b8a1b4f3f695",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "d6e65ba2c1e7eea776029b9efdd3933e02e042049bab6364765a3694606179e4",
+        "verification": {
+          "status": "FAIL",
+          "head": "58868bd8435620231db949da21a46e314fdcb59f",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "d6e65ba2c1e7eea776029b9efdd3933e02e042049bab6364765a3694606179e4"
+        }
+      },
+      {
+        "forkPr": 57,
+        "url": "https://github.com/garnet-labs/E2B/pull/57",
+        "prState": "open",
+        "head": "8602b59df5ba6bc6d2c3c9b562fda92d4754ae95",
+        "previous": "2c68fb9b11ae22273fbd8b504538721f61643635",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "fda171dff178a71bbfff7ce1d90c000e272d47d4d12a1c524c359e138729d360",
+        "verification": {
+          "status": "FAIL",
+          "head": "8602b59df5ba6bc6d2c3c9b562fda92d4754ae95",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "fda171dff178a71bbfff7ce1d90c000e272d47d4d12a1c524c359e138729d360"
+        }
+      },
+      {
+        "forkPr": 56,
+        "url": "https://github.com/garnet-labs/E2B/pull/56",
+        "prState": "open",
+        "head": "db11241266c5ba4be81f35efca078ad956e06c74",
+        "previous": "8c066b1d22fc671a68931fcc08a1bc4a31f72399",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "797c05d89627da1df2e4291de98dfbbfe64b41a8aad0b0c6303f73eca9016600",
+        "verification": {
+          "status": "FAIL",
+          "head": "db11241266c5ba4be81f35efca078ad956e06c74",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "797c05d89627da1df2e4291de98dfbbfe64b41a8aad0b0c6303f73eca9016600"
+        }
+      },
+      {
+        "forkPr": 55,
+        "url": "https://github.com/garnet-labs/E2B/pull/55",
+        "prState": "open",
+        "head": "320c0425f4e19dfe0ea14d8574db9a048ca6a84a",
+        "previous": "eddb22a865fecc86eb49e1bdd283be8894dbc3d5",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "fb79bc626742fdba5c9e783c1173e54b3c303674592e88c313a747bd66f05093",
+        "verification": {
+          "status": "FAIL",
+          "head": "320c0425f4e19dfe0ea14d8574db9a048ca6a84a",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\""
+          ],
+          "receiptFingerprint": "fb79bc626742fdba5c9e783c1173e54b3c303674592e88c313a747bd66f05093"
+        }
+      },
+      {
+        "forkPr": 54,
+        "url": "https://github.com/garnet-labs/E2B/pull/54",
+        "prState": "open",
+        "head": "5be748ac838acfb742197c353cbf3adaae23ec7f",
+        "previous": "34a738c2291dd681c27b8bff5f78b3726516ca8c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "ad4bd9d339db043850b9912f2757c105246a50d970abfb09086895591708325b",
+        "verification": {
+          "status": "PASS",
+          "head": "5be748ac838acfb742197c353cbf3adaae23ec7f",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "ad4bd9d339db043850b9912f2757c105246a50d970abfb09086895591708325b"
+        }
+      },
+      {
+        "forkPr": 53,
+        "url": "https://github.com/garnet-labs/E2B/pull/53",
+        "prState": "open",
+        "head": "b711977c030ab5445fccf6b0ffef0ba9c68dd3fb",
+        "previous": "f91a2502adf019f01aebe95c2dadbe8029481407",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "49273a064ba2ae43171b29330b84297a5c3c30a148a1cafaa191b029ae84d7b5",
+        "verification": {
+          "status": "PASS",
+          "head": "b711977c030ab5445fccf6b0ffef0ba9c68dd3fb",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "49273a064ba2ae43171b29330b84297a5c3c30a148a1cafaa191b029ae84d7b5"
+        }
+      },
+      {
+        "forkPr": 52,
+        "url": "https://github.com/garnet-labs/E2B/pull/52",
+        "prState": "open",
+        "head": "98621f543b05ac73f928c1ce25959ccc7556aa6f",
+        "previous": "38cb23740fbc06dc276dd58bf1f0425c5f25c957",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "55ee3751ffa1e76298f28fad42dc33074b3e3cc6eca02763f7ea9e0945b6b13a",
+        "verification": {
+          "status": "PASS",
+          "head": "98621f543b05ac73f928c1ce25959ccc7556aa6f",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "55ee3751ffa1e76298f28fad42dc33074b3e3cc6eca02763f7ea9e0945b6b13a"
+        }
+      },
+      {
+        "forkPr": 51,
+        "url": "https://github.com/garnet-labs/E2B/pull/51",
+        "prState": "open",
+        "head": "071ae1e2dc23b2b382bd89bbadbefc13e26182af",
+        "previous": "b604fd8da098070acf9eb2a4dafbba9e19dd89c6",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "a086fd665087a077a0b3c801f8f082644f41d95c178488319ab90c2067567a97",
+        "verification": {
+          "status": "PASS",
+          "head": "071ae1e2dc23b2b382bd89bbadbefc13e26182af",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "a086fd665087a077a0b3c801f8f082644f41d95c178488319ab90c2067567a97"
+        }
+      },
+      {
+        "forkPr": 50,
+        "url": "https://github.com/garnet-labs/E2B/pull/50",
+        "prState": "open",
+        "head": "1e162698008daee044ba7a6369ae1517176cf74b",
+        "previous": "e2a216c240890d479b6433cfc432275aeefd1fb0",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "fca6fc6bb4396670840407b200c8d06b0d9e5476e568c08de074d6f08e8057c8",
+        "verification": {
+          "status": "PASS",
+          "head": "1e162698008daee044ba7a6369ae1517176cf74b",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "fca6fc6bb4396670840407b200c8d06b0d9e5476e568c08de074d6f08e8057c8"
+        }
+      },
+      {
+        "forkPr": 49,
+        "url": "https://github.com/garnet-labs/E2B/pull/49",
+        "prState": "open",
+        "head": "9f4d5fedc4dc2a60e542294ecfb1269fd36b65a2",
+        "previous": "e0c81f85a892524bd9741d5bfa43c0bba9ee655f",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8407220b881825fa8d9bde7a23c6e00ef67ff03e4653f304a217d7d5113eb28d",
+        "verification": {
+          "status": "PASS",
+          "head": "9f4d5fedc4dc2a60e542294ecfb1269fd36b65a2",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "8407220b881825fa8d9bde7a23c6e00ef67ff03e4653f304a217d7d5113eb28d"
+        }
+      },
+      {
+        "forkPr": 48,
+        "url": "https://github.com/garnet-labs/E2B/pull/48",
+        "prState": "open",
+        "head": "56b54ce1d285f8492a7d1ad3503e38c9d0e545be",
+        "previous": "e7974557b96cfdd2685c4e619295fa235f0d02f3",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "83e28607cafe5194cd79fda3929dd1e12b0bdf6a1e821126acd55a3222a0056f",
+        "verification": {
+          "status": "PASS",
+          "head": "56b54ce1d285f8492a7d1ad3503e38c9d0e545be",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "83e28607cafe5194cd79fda3929dd1e12b0bdf6a1e821126acd55a3222a0056f"
+        }
+      },
+      {
+        "forkPr": 47,
+        "url": "https://github.com/garnet-labs/E2B/pull/47",
+        "prState": "open",
+        "head": "df22b3c280a28025cb252dc8731f6ccf1d0ee26b",
+        "previous": "edbdc7d11184e655208d3c45b78328d47e0b2856",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "6354eb578a0dbcec44e9eaf1a3697fbbf46201b940ceacc905c9076c527f0d62",
+        "verification": {
+          "status": "PASS",
+          "head": "df22b3c280a28025cb252dc8731f6ccf1d0ee26b",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "6354eb578a0dbcec44e9eaf1a3697fbbf46201b940ceacc905c9076c527f0d62"
+        }
+      },
+      {
+        "forkPr": 46,
+        "url": "https://github.com/garnet-labs/E2B/pull/46",
+        "prState": "open",
+        "head": "f7b8d5ba43e0b2dacf7195a4b7b5b59b2f790a92",
+        "previous": "c8db58a61d89d05018e4b291d4d10d7cbc256df6",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "564ad56efe93d0ad0ada1a647eff5b87e20b187948b9ff0cd189276e89d71341",
+        "verification": {
+          "status": "PASS",
+          "head": "f7b8d5ba43e0b2dacf7195a4b7b5b59b2f790a92",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "564ad56efe93d0ad0ada1a647eff5b87e20b187948b9ff0cd189276e89d71341"
+        }
+      },
+      {
+        "forkPr": 45,
+        "url": "https://github.com/garnet-labs/E2B/pull/45",
+        "prState": "open",
+        "head": "f0ae9bcb5b9109d83a24f165fe6f85d54ee8fec8",
+        "previous": "c67692dd02afe0c973cee7110866758b3dccef8a",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "d21b9e1e80d19bee3158aed0fc015548a99e3d379e582b1d1079cbc5807eff70",
+        "verification": {
+          "status": "PASS",
+          "head": "f0ae9bcb5b9109d83a24f165fe6f85d54ee8fec8",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "d21b9e1e80d19bee3158aed0fc015548a99e3d379e582b1d1079cbc5807eff70"
+        }
+      },
+      {
+        "forkPr": 44,
+        "url": "https://github.com/garnet-labs/E2B/pull/44",
+        "prState": "open",
+        "head": "f958645405365a94aeee0efdef152cefd9c03fb8",
+        "previous": "fbb7abd57af5a962531b193af0d2ab58bc54e9dd",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "b795685b73ee3c5380d245b7e529f1b026d223200091401216c0e45bf15cf9ca",
+        "verification": {
+          "status": "PASS",
+          "head": "f958645405365a94aeee0efdef152cefd9c03fb8",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "b795685b73ee3c5380d245b7e529f1b026d223200091401216c0e45bf15cf9ca"
+        }
+      },
+      {
+        "forkPr": 43,
+        "url": "https://github.com/garnet-labs/E2B/pull/43",
+        "prState": "open",
+        "head": "eb53d8fb0d2f94ef837f90895ac8826c472b97e7",
+        "previous": "c544b74c8bbbe019c0d0c206d96669c530f7e0b4",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "a0ce1ead450317326a09bdf9cbe1f0b4ff7fbf79913f02c4ae5187e81f76d7cd",
+        "verification": {
+          "status": "PASS",
+          "head": "eb53d8fb0d2f94ef837f90895ac8826c472b97e7",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "a0ce1ead450317326a09bdf9cbe1f0b4ff7fbf79913f02c4ae5187e81f76d7cd"
+        }
+      },
+      {
+        "forkPr": 42,
+        "url": "https://github.com/garnet-labs/E2B/pull/42",
+        "prState": "open",
+        "head": "420cd91b7b39b33f8758a616144a150d1dc15c46",
+        "previous": "b8cb7b26a78184f7339dbcbfc9659a284b5f685c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "0855144786768fa33da948ae6b4ac8343f607cb898be9b7f7ad58386f20c97f1",
+        "verification": {
+          "status": "PASS",
+          "head": "420cd91b7b39b33f8758a616144a150d1dc15c46",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "0855144786768fa33da948ae6b4ac8343f607cb898be9b7f7ad58386f20c97f1"
+        }
+      },
+      {
+        "forkPr": 41,
+        "url": "https://github.com/garnet-labs/E2B/pull/41",
+        "prState": "open",
+        "head": "fe9856c476f6b90f4b26fcabdc586ed284695c5d",
+        "previous": "b4279608160e879aeec6e527f8e9deedaa6115d7",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "592df866d33a6d8f9492e9f450bd737ed276a7b66b4a9cf03af9a8dc5b598a4d",
+        "verification": {
+          "status": "PASS",
+          "head": "fe9856c476f6b90f4b26fcabdc586ed284695c5d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "592df866d33a6d8f9492e9f450bd737ed276a7b66b4a9cf03af9a8dc5b598a4d"
+        }
+      },
+      {
+        "forkPr": 40,
+        "url": "https://github.com/garnet-labs/E2B/pull/40",
+        "prState": "open",
+        "head": "600e65468c3f5db98aeec71065a96ad0684de2ee",
+        "previous": "21ba5191daed18ff1043271a493cc06ba8c10362",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "28f441d9c17f9f713ccced02abf47145bd12cce20a41418386c76114f79e985b",
+        "verification": {
+          "status": "PASS",
+          "head": "600e65468c3f5db98aeec71065a96ad0684de2ee",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "28f441d9c17f9f713ccced02abf47145bd12cce20a41418386c76114f79e985b"
+        }
+      },
+      {
+        "forkPr": 39,
+        "url": "https://github.com/garnet-labs/E2B/pull/39",
+        "prState": "open",
+        "head": "af8b4fc92f9a4ae190560e07989a1e57d8ee517c",
+        "previous": "938a3a7bffdb7b30ee5051a204d1d6f981e56f66",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "1638aa478c8c91512a29efdeac59f5f355aa0a9766ecf8342e188cea2c00c855",
+        "verification": {
+          "status": "PASS",
+          "head": "af8b4fc92f9a4ae190560e07989a1e57d8ee517c",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "1638aa478c8c91512a29efdeac59f5f355aa0a9766ecf8342e188cea2c00c855"
+        }
+      },
+      {
+        "forkPr": 38,
+        "url": "https://github.com/garnet-labs/E2B/pull/38",
+        "prState": "open",
+        "head": "a08a2834398fe16462d7af875f369ca1eb540a3d",
+        "previous": "432e54c0f6aebc7ff33fc3127952472e8fa0821a",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "b15fdd0a365c40e86c7b77387f3f7745f2c69bfcef7080b375bdcc2a6560a2af",
+        "verification": {
+          "status": "PASS",
+          "head": "a08a2834398fe16462d7af875f369ca1eb540a3d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "b15fdd0a365c40e86c7b77387f3f7745f2c69bfcef7080b375bdcc2a6560a2af"
+        }
+      },
+      {
+        "forkPr": 37,
+        "url": "https://github.com/garnet-labs/E2B/pull/37",
+        "prState": "open",
+        "head": "e8503e28822feac12ec0c52950c864f8e695ca0b",
+        "previous": "922ab62e18d7118404b51a609ccd9fca6c05d6df",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "65b2e7b4d9880826bc387383c8b9654d2ed22964487b2e8290c2e6c41b409698",
+        "verification": {
+          "status": "PASS",
+          "head": "e8503e28822feac12ec0c52950c864f8e695ca0b",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "65b2e7b4d9880826bc387383c8b9654d2ed22964487b2e8290c2e6c41b409698"
+        }
+      },
+      {
+        "forkPr": 36,
+        "url": "https://github.com/garnet-labs/E2B/pull/36",
+        "prState": "open",
+        "head": "956b91575911c2978f3d0f1cdfcda026d761a905",
+        "previous": "906a3ee1fd701706a49fe4b7cf676e67affb26c6",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "3c91a6ab642206e2af7e69a26e4223af8c3da6673e8730637fb886b6e1bb9944",
+        "verification": {
+          "status": "PASS",
+          "head": "956b91575911c2978f3d0f1cdfcda026d761a905",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "3c91a6ab642206e2af7e69a26e4223af8c3da6673e8730637fb886b6e1bb9944"
+        }
+      },
+      {
+        "forkPr": 35,
+        "url": "https://github.com/garnet-labs/E2B/pull/35",
+        "prState": "open",
+        "head": "f2a4f17de92f2b69a0c2ee47c53c6ae6cd3b5270",
+        "previous": "da77218ab31283ebfade4f7b32b6cd76177e1abf",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "1e36027f00e37b4d83bc83977f68c9a55f9cec39ef7e083ad5f47e52163446d5",
+        "verification": {
+          "status": "PASS",
+          "head": "f2a4f17de92f2b69a0c2ee47c53c6ae6cd3b5270",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "1e36027f00e37b4d83bc83977f68c9a55f9cec39ef7e083ad5f47e52163446d5"
+        }
+      },
+      {
+        "forkPr": 34,
+        "url": "https://github.com/garnet-labs/E2B/pull/34",
+        "prState": "open",
+        "head": "84afff231fbb85d33ffd86519506742acd10ee4d",
+        "previous": "34a738c2291dd681c27b8bff5f78b3726516ca8c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "0186b72601ec6f4a7487afdb58d590531781e655cfdb09e9969b3a588035a1b1",
+        "verification": {
+          "status": "PASS",
+          "head": "84afff231fbb85d33ffd86519506742acd10ee4d",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "0186b72601ec6f4a7487afdb58d590531781e655cfdb09e9969b3a588035a1b1"
+        }
+      },
+      {
+        "forkPr": 33,
+        "url": "https://github.com/garnet-labs/E2B/pull/33",
+        "prState": "open",
+        "head": "d7e22cdd3e1e8a5bdaf0da1cf28047270e7ab305",
+        "previous": "d7d07795c90d2eee5559b2b73e5f536910f6b174",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "1da13deaa547a8e9488c45ea92d63480359cd3fd9f3c1a364e839948d954789f",
+        "verification": {
+          "status": "PASS",
+          "head": "d7e22cdd3e1e8a5bdaf0da1cf28047270e7ab305",
+          "checkedAt": "2026-11-20T04:56:49.868Z",
+          "reasons": [],
+          "receiptFingerprint": "1da13deaa547a8e9488c45ea92d63480359cd3fd9f3c1a364e839948d954789f"
+        }
+      }
+    ]
   }
 }

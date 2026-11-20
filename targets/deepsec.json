@@ -1516,8 +1516,406 @@
       "transition": null,
       "record": "fork-workflow",
       "ecosystem": "pnpm",
+      "state": "recorded",
+      "openedAt": "2026-09-24T05:12:59.408Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "44210fc391ada675ed314e809c93212ef7c86a2f",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/deepsec / run 35958963317 / profile 01a0d1d8-5c59-77b9-93fb-a79b365abc3c; recorded 1550399ab364eb3678558a35b8b0e0feea470ed5 (refs/pull/11/merge); expected head 44210fc391ada675ed314e809c93212ef7c86a2f",
+          "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "3d3bb09b6fb961e33a5da17aa5f743ec6835d1eacb6ee56900ba1b18ef33c02b"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 23,
+      "branch": "dependabot/npm_and_yarn/next-16.4.5",
+      "forkHeadSha": "b14921505330c5149be114dde7378b8979e58d47",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "b14921505330c5149be114dde7378b8979e58d47",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "a5f0c217c117ecd4098c5b8c6f3afa37dd18f3296f63df10e9435906b8024a6f"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 21,
+      "branch": "dependabot/npm_and_yarn/hono-4.13.18",
+      "forkHeadSha": "434b50df7a54597db978a58246ca761fbfc9aa8d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "434b50df7a54597db978a58246ca761fbfc9aa8d",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "57dfc709d60c1dd30942991087b2839248e7aae4a504279bfde23b00292eb2c3"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 20,
+      "branch": "onboarding/reviewer-guidance",
+      "forkHeadSha": "701330d8b89cccd08e14f512ffaffd7740d0623c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "701330d8b89cccd08e14f512ffaffd7740d0623c",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "pair line: no pair line on the comment",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "d33043245187a67b3aaff05ac662109042779f5a2b30cf5f30059f006f4cc994"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 19,
+      "branch": "dependabot/npm_and_yarn/hono/node-server-2.1.5",
+      "forkHeadSha": "1a736944201094c26662036f19925ee414d4d47c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "1a736944201094c26662036f19925ee414d4d47c",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "pair line: no pair line on the comment"
+        ],
+        "receiptFingerprint": "1dd1a5786fc34b8fc45469670760079e698729d20890563a0148e33914fa8c4d"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 18,
+      "branch": "dependabot/npm_and_yarn/fast-uri-3.1.9",
+      "forkHeadSha": "34424612cb33b98374b0f5ffd70f28f4f5405030",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "34424612cb33b98374b0f5ffd70f28f4f5405030",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "4846afabde973f2f8605e8912e267b98d2041ea6be773c9d21f2a72c9d03311b"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 16,
+      "branch": "dependabot/npm_and_yarn/proxy-addr-2.0.8",
+      "forkHeadSha": "3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/deepsec / run 39020602908 / profile 01a1492a-19da-7a83-a9ec-d3fceb743485; recorded b4032024b7618b3475cff5f8ae7ba5869157373f (refs/pull/16/merge); expected head 3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+          "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "d7a433f01fed2ba3e0e04298297f3ae9a0bf021d2441a2a9327f0ca68d70241b"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 15,
+      "branch": "chore/core-test-warmup",
+      "forkHeadSha": "3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 38957565675 / profile 01a14645-9fa3-7487-aaaa-8b774e55b441; recorded 47d3488da1cc57d8025dc8d9f99f7d6391f1ce96 (refs/pull/15/merge); expected head 3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+          "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "338ba075aefc07cb231ab6d174e3c891fb8912ef1e51fd50ee11e067f3bca575"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 14,
+      "branch": "chore/contributing-dev-workflow",
+      "forkHeadSha": "34b2f03a848ef94fdf065380110cc231bc978a9d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "34b2f03a848ef94fdf065380110cc231bc978a9d",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 38957536667 / profile 01a14644-0852-7a64-84a4-bded7ba5423d; recorded 7ab6d26e37c0ca801f8bcf1d94fa95dde3d54bfc (refs/pull/14/merge); expected head 34b2f03a848ef94fdf065380110cc231bc978a9d",
+          "sensor coverage: validate (22): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "ec9abcb8bd7050eefcf34c3c0755d9e580ee84f53bc46cb1f5f7e4a3faeef356"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 13,
+      "branch": "dependabot/npm_and_yarn/modelcontextprotocol/sdk-1.32.1",
+      "forkHeadSha": "44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/deepsec / run 38529535203 / profile 01a1395a-c6de-785c-a990-15cd03b504f8; recorded c96b2151194c12f6ad1afeb3b92ee36c3db17ad1 (refs/pull/13/merge); expected head 44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+          "sensor coverage: validate (22): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "0399558b22454ed821681e16f42ef178c6c22b00175673904b11a897bc71d0d6"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 12,
+      "branch": "dependabot/npm_and_yarn/ip-address-10.7.2",
+      "forkHeadSha": "3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/deepsec / run 36527196384 / profile 01a0ebb0-97ad-73fd-a857-3e408d6b14be; recorded 909ce4e118af768f025e97c96d0db8f1f6424676 (refs/pull/12/merge); expected head 3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+          "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "b3384e5e411d20e8ff7cc53e418a93c734d58f7db122f3c128bb9c51236de6e8"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 10,
+      "branch": "dependabot/npm_and_yarn/vitest-4.1.11",
+      "forkHeadSha": "2463522fbdc5ff2145d054eae8ebb332d788892d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "2463522fbdc5ff2145d054eae8ebb332d788892d",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "check settled: validate (22) concluded failure, validate (24) concluded failure",
+          "public profile identity: garnet-labs/deepsec / run 34547314657 / profile 01a08de8-30d5-737f-8271-3cb633e6d84e; recorded ccdd4ce5c6b6ac3c58c07ed4dabd27851291cfb6 (refs/pull/10/merge); expected head 2463522fbdc5ff2145d054eae8ebb332d788892d"
+        ],
+        "receiptFingerprint": "1d3c432542135776e5c9a7daba765e6f280f7eacf6774196d21671ff586e54cb"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 8,
+      "branch": "garnet/deepsec-skip-without-key",
+      "forkHeadSha": "42e90e037bea8f4ab06b324bca827979240a5145",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "42e90e037bea8f4ab06b324bca827979240a5145",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34293717237 / profile 01a08381-f877-7d26-ae43-721d344d55e4; recorded 25192deebea614674c0e82e22b019682ee14f758 (refs/pull/8/merge); expected head 42e90e037bea8f4ab06b324bca827979240a5145"
+        ],
+        "receiptFingerprint": "5f27fadb472ff3939182e1946962375f5a5c8748ec10888b88fbcc84fc98cc39"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 7,
+      "branch": "garnet/replay-tar-pinned-bump",
+      "forkHeadSha": "8d00a0772a02b1856fc200ae5a1b8f8b5909f15a",
       "state": "undeterminable",
-      "openedAt": "2026-09-24T05:12:59.408Z"
+      "verification": {
+        "status": "FAIL",
+        "head": "8d00a0772a02b1856fc200ae5a1b8f8b5909f15a",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "head-bound: head moved: record b983df9, current 8d00a07",
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: pair does not name the current PR commits",
+          "check settled: no check on the head commit belongs to run 34295630551, the run the record names",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34295630551 / profile 01a0839a-4954-7849-834d-736d661599dd; recorded 070ddcc08dd2c7df62292e928eaee098abee4ee4 (refs/pull/7/merge); expected head 8d00a0772a02b1856fc200ae5a1b8f8b5909f15a"
+        ],
+        "receiptFingerprint": "2df4dbe7ad7b57b68133950f391bf79dc0cad64902f23744f50f0e4c7a9035c4"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 6,
+      "branch": "garnet/replay-tar-bump",
+      "forkHeadSha": "4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34294039093 / profile 01a08385-e599-7b7b-a94e-5b353601a4b6; recorded 396d370ed793635b99a9435ac573a452793d51b5 (refs/pull/6/merge); expected head 4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4"
+        ],
+        "receiptFingerprint": "e8ab241736953d214e483082fb8c47ff72863b654405ecdcb07916292a7c8ef0"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 5,
+      "branch": "garnet/replay-website-build",
+      "forkHeadSha": "71e93721161dfd500a62f1f948c325950694dedb",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "71e93721161dfd500a62f1f948c325950694dedb",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34268168259 / profile 01a08277-ea65-7036-bfd9-f4230bf443ee; recorded 775f2d96d73f2bbccd09b793f2a50e23903c86c4 (refs/pull/5/merge); expected head 71e93721161dfd500a62f1f948c325950694dedb"
+        ],
+        "receiptFingerprint": "27bebe5dc885c9c654aea6945ea4005152bf90a15152b64279d58bb6f473ef25"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 4,
+      "branch": "garnet/record-ci",
+      "forkHeadSha": "3a7c765f2f64d324f82ccc571caa9e47f5667d94",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "3a7c765f2f64d324f82ccc571caa9e47f5667d94",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "no session residue: residue: \"Devin\"",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/deepsec / run 34267801948 / profile 01a08274-d907-75bd-bd36-b4edc927dfa3; recorded 3d2eb6b4b92d8a0730abd991ffa5a58ed064b031 (refs/pull/4/merge); expected head 3a7c765f2f64d324f82ccc571caa9e47f5667d94"
+        ],
+        "receiptFingerprint": "9ce1b88a63d8cb24e4ca5f10d786f1e3431023fe993d1600f78c044f0d18079c"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 3,
+      "branch": "garnet/replay-claude-code-pin",
+      "forkHeadSha": "04729331923d8101ab5548e7ec545495d047e3f5",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "04729331923d8101ab5548e7ec545495d047e3f5",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: analyze concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34271097101 / profile 01a08291-aa18-7b17-a23a-eb5286c7722c; recorded af4ffea4a70d10efd95125d411fd7ff1010dd6ee (refs/pull/3/merge); expected head 04729331923d8101ab5548e7ec545495d047e3f5"
+        ],
+        "receiptFingerprint": "cf0c226231082938debee4df24737015d51bfa671a47608f1dd3d3d5b98d83c6"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 1,
+      "branch": "garnet/replay-codex-claude-bump",
+      "forkHeadSha": "6ff2c9083f66d022f7432a46c3287ee0dc79230a",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "6ff2c9083f66d022f7432a46c3287ee0dc79230a",
+        "checkedAt": "2026-11-20T04:53:09.381Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/deepsec / run 34267082427 / profile 01a0826e-0182-78ab-9a4f-b6d0241921ef; recorded 61140f1c35f88da23a8377f853aff3d1de9cafe8 (refs/pull/1/merge); expected head 6ff2c9083f66d022f7432a46c3287ee0dc79230a"
+        ],
+        "receiptFingerprint": "5aafacc4c16e246a2eed09b7f1ad88f3709f7de4ee5ecec1e1d263f50e332d02"
+      },
+      "observedAt": "2026-11-20T04:53:09.381Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [],
@@ -1542,7 +1940,20 @@
     }
   ],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "a78087426a9e68285830c1ee51d8db219c9ee8fb",
+    "checkedAt": "2026-11-20T04:53:09.381Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1555,12 +1966,445 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "df5c1b44014177c04357d162959be6dc323afd02",
     "pr": 22
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:53:09.381Z",
+    "defaultBranch": "main",
+    "defaultSha": "a78087426a9e68285830c1ee51d8db219c9ee8fb",
+    "inspectedPrs": 23,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 23,
+        "url": "https://github.com/garnet-labs/deepsec/pull/23",
+        "prState": "open",
+        "head": "b14921505330c5149be114dde7378b8979e58d47",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "a5f0c217c117ecd4098c5b8c6f3afa37dd18f3296f63df10e9435906b8024a6f",
+        "verification": {
+          "status": "FAIL",
+          "head": "b14921505330c5149be114dde7378b8979e58d47",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "a5f0c217c117ecd4098c5b8c6f3afa37dd18f3296f63df10e9435906b8024a6f"
+        }
+      },
+      {
+        "forkPr": 21,
+        "url": "https://github.com/garnet-labs/deepsec/pull/21",
+        "prState": "open",
+        "head": "434b50df7a54597db978a58246ca761fbfc9aa8d",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "57dfc709d60c1dd30942991087b2839248e7aae4a504279bfde23b00292eb2c3",
+        "verification": {
+          "status": "FAIL",
+          "head": "434b50df7a54597db978a58246ca761fbfc9aa8d",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "57dfc709d60c1dd30942991087b2839248e7aae4a504279bfde23b00292eb2c3"
+        }
+      },
+      {
+        "forkPr": 20,
+        "url": "https://github.com/garnet-labs/deepsec/pull/20",
+        "prState": "merged",
+        "head": "701330d8b89cccd08e14f512ffaffd7740d0623c",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "d33043245187a67b3aaff05ac662109042779f5a2b30cf5f30059f006f4cc994",
+        "verification": {
+          "status": "FAIL",
+          "head": "701330d8b89cccd08e14f512ffaffd7740d0623c",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "pair line: no pair line on the comment",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "d33043245187a67b3aaff05ac662109042779f5a2b30cf5f30059f006f4cc994"
+        }
+      },
+      {
+        "forkPr": 19,
+        "url": "https://github.com/garnet-labs/deepsec/pull/19",
+        "prState": "open",
+        "head": "1a736944201094c26662036f19925ee414d4d47c",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "1dd1a5786fc34b8fc45469670760079e698729d20890563a0148e33914fa8c4d",
+        "verification": {
+          "status": "FAIL",
+          "head": "1a736944201094c26662036f19925ee414d4d47c",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "pair line: no pair line on the comment"
+          ],
+          "receiptFingerprint": "1dd1a5786fc34b8fc45469670760079e698729d20890563a0148e33914fa8c4d"
+        }
+      },
+      {
+        "forkPr": 18,
+        "url": "https://github.com/garnet-labs/deepsec/pull/18",
+        "prState": "open",
+        "head": "34424612cb33b98374b0f5ffd70f28f4f5405030",
+        "previous": "23aece1f7734e069ed7e03ce32c4f12304354e47",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "4846afabde973f2f8605e8912e267b98d2041ea6be773c9d21f2a72c9d03311b",
+        "verification": {
+          "status": "FAIL",
+          "head": "34424612cb33b98374b0f5ffd70f28f4f5405030",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "4846afabde973f2f8605e8912e267b98d2041ea6be773c9d21f2a72c9d03311b"
+        }
+      },
+      {
+        "forkPr": 16,
+        "url": "https://github.com/garnet-labs/deepsec/pull/16",
+        "prState": "open",
+        "head": "3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+        "previous": "319e2fad1fbb37496f882db79e88c76840e0de09",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "d7a433f01fed2ba3e0e04298297f3ae9a0bf021d2441a2a9327f0ca68d70241b",
+        "verification": {
+          "status": "FAIL",
+          "head": "3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/deepsec / run 39020602908 / profile 01a1492a-19da-7a83-a9ec-d3fceb743485; recorded b4032024b7618b3475cff5f8ae7ba5869157373f (refs/pull/16/merge); expected head 3ad3fb4202b8d97c55adc0c3516ee36f018731fb",
+            "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "d7a433f01fed2ba3e0e04298297f3ae9a0bf021d2441a2a9327f0ca68d70241b"
+        }
+      },
+      {
+        "forkPr": 15,
+        "url": "https://github.com/garnet-labs/deepsec/pull/15",
+        "prState": "open",
+        "head": "3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+        "previous": "319e2fad1fbb37496f882db79e88c76840e0de09",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "338ba075aefc07cb231ab6d174e3c891fb8912ef1e51fd50ee11e067f3bca575",
+        "verification": {
+          "status": "FAIL",
+          "head": "3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 38957565675 / profile 01a14645-9fa3-7487-aaaa-8b774e55b441; recorded 47d3488da1cc57d8025dc8d9f99f7d6391f1ce96 (refs/pull/15/merge); expected head 3fda91ac6f4fa28a7cda60a53d8003a700b15e39",
+            "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "338ba075aefc07cb231ab6d174e3c891fb8912ef1e51fd50ee11e067f3bca575"
+        }
+      },
+      {
+        "forkPr": 14,
+        "url": "https://github.com/garnet-labs/deepsec/pull/14",
+        "prState": "open",
+        "head": "34b2f03a848ef94fdf065380110cc231bc978a9d",
+        "previous": "319e2fad1fbb37496f882db79e88c76840e0de09",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "ec9abcb8bd7050eefcf34c3c0755d9e580ee84f53bc46cb1f5f7e4a3faeef356",
+        "verification": {
+          "status": "FAIL",
+          "head": "34b2f03a848ef94fdf065380110cc231bc978a9d",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 38957536667 / profile 01a14644-0852-7a64-84a4-bded7ba5423d; recorded 7ab6d26e37c0ca801f8bcf1d94fa95dde3d54bfc (refs/pull/14/merge); expected head 34b2f03a848ef94fdf065380110cc231bc978a9d",
+            "sensor coverage: validate (22): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "ec9abcb8bd7050eefcf34c3c0755d9e580ee84f53bc46cb1f5f7e4a3faeef356"
+        }
+      },
+      {
+        "forkPr": 13,
+        "url": "https://github.com/garnet-labs/deepsec/pull/13",
+        "prState": "open",
+        "head": "44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+        "previous": "319e2fad1fbb37496f882db79e88c76840e0de09",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "0399558b22454ed821681e16f42ef178c6c22b00175673904b11a897bc71d0d6",
+        "verification": {
+          "status": "FAIL",
+          "head": "44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/deepsec / run 38529535203 / profile 01a1395a-c6de-785c-a990-15cd03b504f8; recorded c96b2151194c12f6ad1afeb3b92ee36c3db17ad1 (refs/pull/13/merge); expected head 44ad0bfe42cf09cbbc70de3d6e55bb3b1b20bc40",
+            "sensor coverage: validate (22): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "0399558b22454ed821681e16f42ef178c6c22b00175673904b11a897bc71d0d6"
+        }
+      },
+      {
+        "forkPr": 12,
+        "url": "https://github.com/garnet-labs/deepsec/pull/12",
+        "prState": "open",
+        "head": "3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "b3384e5e411d20e8ff7cc53e418a93c734d58f7db122f3c128bb9c51236de6e8",
+        "verification": {
+          "status": "FAIL",
+          "head": "3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/deepsec / run 36527196384 / profile 01a0ebb0-97ad-73fd-a857-3e408d6b14be; recorded 909ce4e118af768f025e97c96d0db8f1f6424676 (refs/pull/12/merge); expected head 3d1b8b998ce9fe763f11ad63bdcce9098477dc78",
+            "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "b3384e5e411d20e8ff7cc53e418a93c734d58f7db122f3c128bb9c51236de6e8"
+        }
+      },
+      {
+        "forkPr": 11,
+        "url": "https://github.com/garnet-labs/deepsec/pull/11",
+        "prState": "open",
+        "head": "44210fc391ada675ed314e809c93212ef7c86a2f",
+        "previous": "eb9c3d309d9c27c2f4e773d6ff27c13c26f8bb37",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "3d3bb09b6fb961e33a5da17aa5f743ec6835d1eacb6ee56900ba1b18ef33c02b",
+        "verification": {
+          "status": "FAIL",
+          "head": "44210fc391ada675ed314e809c93212ef7c86a2f",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/deepsec / run 35958963317 / profile 01a0d1d8-5c59-77b9-93fb-a79b365abc3c; recorded 1550399ab364eb3678558a35b8b0e0feea470ed5 (refs/pull/11/merge); expected head 44210fc391ada675ed314e809c93212ef7c86a2f",
+            "sensor coverage: validate (24): sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "3d3bb09b6fb961e33a5da17aa5f743ec6835d1eacb6ee56900ba1b18ef33c02b"
+        }
+      },
+      {
+        "forkPr": 10,
+        "url": "https://github.com/garnet-labs/deepsec/pull/10",
+        "prState": "open",
+        "head": "2463522fbdc5ff2145d054eae8ebb332d788892d",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "1d3c432542135776e5c9a7daba765e6f280f7eacf6774196d21671ff586e54cb",
+        "verification": {
+          "status": "FAIL",
+          "head": "2463522fbdc5ff2145d054eae8ebb332d788892d",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "check settled: validate (22) concluded failure, validate (24) concluded failure",
+            "public profile identity: garnet-labs/deepsec / run 34547314657 / profile 01a08de8-30d5-737f-8271-3cb633e6d84e; recorded ccdd4ce5c6b6ac3c58c07ed4dabd27851291cfb6 (refs/pull/10/merge); expected head 2463522fbdc5ff2145d054eae8ebb332d788892d"
+          ],
+          "receiptFingerprint": "1d3c432542135776e5c9a7daba765e6f280f7eacf6774196d21671ff586e54cb"
+        }
+      },
+      {
+        "forkPr": 8,
+        "url": "https://github.com/garnet-labs/deepsec/pull/8",
+        "prState": "open",
+        "head": "42e90e037bea8f4ab06b324bca827979240a5145",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "5f27fadb472ff3939182e1946962375f5a5c8748ec10888b88fbcc84fc98cc39",
+        "verification": {
+          "status": "FAIL",
+          "head": "42e90e037bea8f4ab06b324bca827979240a5145",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34293717237 / profile 01a08381-f877-7d26-ae43-721d344d55e4; recorded 25192deebea614674c0e82e22b019682ee14f758 (refs/pull/8/merge); expected head 42e90e037bea8f4ab06b324bca827979240a5145"
+          ],
+          "receiptFingerprint": "5f27fadb472ff3939182e1946962375f5a5c8748ec10888b88fbcc84fc98cc39"
+        }
+      },
+      {
+        "forkPr": 7,
+        "url": "https://github.com/garnet-labs/deepsec/pull/7",
+        "prState": "open",
+        "head": "8d00a0772a02b1856fc200ae5a1b8f8b5909f15a",
+        "previous": "773c7603c7fc146a95c7db639c9ba43d624dfc47",
+        "scope": null,
+        "state": "undeterminable",
+        "receiptFingerprint": "2df4dbe7ad7b57b68133950f391bf79dc0cad64902f23744f50f0e4c7a9035c4",
+        "verification": {
+          "status": "FAIL",
+          "head": "8d00a0772a02b1856fc200ae5a1b8f8b5909f15a",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "head-bound: head moved: record b983df9, current 8d00a07",
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: pair does not name the current PR commits",
+            "check settled: no check on the head commit belongs to run 34295630551, the run the record names",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34295630551 / profile 01a0839a-4954-7849-834d-736d661599dd; recorded 070ddcc08dd2c7df62292e928eaee098abee4ee4 (refs/pull/7/merge); expected head 8d00a0772a02b1856fc200ae5a1b8f8b5909f15a"
+          ],
+          "receiptFingerprint": "2df4dbe7ad7b57b68133950f391bf79dc0cad64902f23744f50f0e4c7a9035c4"
+        }
+      },
+      {
+        "forkPr": 6,
+        "url": "https://github.com/garnet-labs/deepsec/pull/6",
+        "prState": "open",
+        "head": "4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4",
+        "previous": "773c7603c7fc146a95c7db639c9ba43d624dfc47",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "e8ab241736953d214e483082fb8c47ff72863b654405ecdcb07916292a7c8ef0",
+        "verification": {
+          "status": "FAIL",
+          "head": "4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34294039093 / profile 01a08385-e599-7b7b-a94e-5b353601a4b6; recorded 396d370ed793635b99a9435ac573a452793d51b5 (refs/pull/6/merge); expected head 4a15cfa09bc81ff59fd6a9f1133335d4fa5d92b4"
+          ],
+          "receiptFingerprint": "e8ab241736953d214e483082fb8c47ff72863b654405ecdcb07916292a7c8ef0"
+        }
+      },
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/deepsec/pull/5",
+        "prState": "open",
+        "head": "71e93721161dfd500a62f1f948c325950694dedb",
+        "previous": "308cb618ae1614b533595f8ce7840913bdfb23de",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "27bebe5dc885c9c654aea6945ea4005152bf90a15152b64279d58bb6f473ef25",
+        "verification": {
+          "status": "FAIL",
+          "head": "71e93721161dfd500a62f1f948c325950694dedb",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34268168259 / profile 01a08277-ea65-7036-bfd9-f4230bf443ee; recorded 775f2d96d73f2bbccd09b793f2a50e23903c86c4 (refs/pull/5/merge); expected head 71e93721161dfd500a62f1f948c325950694dedb"
+          ],
+          "receiptFingerprint": "27bebe5dc885c9c654aea6945ea4005152bf90a15152b64279d58bb6f473ef25"
+        }
+      },
+      {
+        "forkPr": 4,
+        "url": "https://github.com/garnet-labs/deepsec/pull/4",
+        "prState": "merged",
+        "head": "3a7c765f2f64d324f82ccc571caa9e47f5667d94",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "9ce1b88a63d8cb24e4ca5f10d786f1e3431023fe993d1600f78c044f0d18079c",
+        "verification": {
+          "status": "FAIL",
+          "head": "3a7c765f2f64d324f82ccc571caa9e47f5667d94",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "no session residue: residue: \"Devin\"",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/deepsec / run 34267801948 / profile 01a08274-d907-75bd-bd36-b4edc927dfa3; recorded 3d2eb6b4b92d8a0730abd991ffa5a58ed064b031 (refs/pull/4/merge); expected head 3a7c765f2f64d324f82ccc571caa9e47f5667d94"
+          ],
+          "receiptFingerprint": "9ce1b88a63d8cb24e4ca5f10d786f1e3431023fe993d1600f78c044f0d18079c"
+        }
+      },
+      {
+        "forkPr": 3,
+        "url": "https://github.com/garnet-labs/deepsec/pull/3",
+        "prState": "open",
+        "head": "04729331923d8101ab5548e7ec545495d047e3f5",
+        "previous": "8aa8d3974111ae59b6962ee23bc8d939d788ac61",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "cf0c226231082938debee4df24737015d51bfa671a47608f1dd3d3d5b98d83c6",
+        "verification": {
+          "status": "FAIL",
+          "head": "04729331923d8101ab5548e7ec545495d047e3f5",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: analyze concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34271097101 / profile 01a08291-aa18-7b17-a23a-eb5286c7722c; recorded af4ffea4a70d10efd95125d411fd7ff1010dd6ee (refs/pull/3/merge); expected head 04729331923d8101ab5548e7ec545495d047e3f5"
+          ],
+          "receiptFingerprint": "cf0c226231082938debee4df24737015d51bfa671a47608f1dd3d3d5b98d83c6"
+        }
+      },
+      {
+        "forkPr": 1,
+        "url": "https://github.com/garnet-labs/deepsec/pull/1",
+        "prState": "open",
+        "head": "6ff2c9083f66d022f7432a46c3287ee0dc79230a",
+        "previous": "528a00e2d078ba14e4d8a642df9ef988a542c28a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "5aafacc4c16e246a2eed09b7f1ad88f3709f7de4ee5ecec1e1d263f50e332d02",
+        "verification": {
+          "status": "FAIL",
+          "head": "6ff2c9083f66d022f7432a46c3287ee0dc79230a",
+          "checkedAt": "2026-11-20T04:53:09.381Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/deepsec / run 34267082427 / profile 01a0826e-0182-78ab-9a4f-b6d0241921ef; recorded 61140f1c35f88da23a8377f853aff3d1de9cafe8 (refs/pull/1/merge); expected head 6ff2c9083f66d022f7432a46c3287ee0dc79230a"
+          ],
+          "receiptFingerprint": "5aafacc4c16e246a2eed09b7f1ad88f3709f7de4ee5ecec1e1d263f50e332d02"
+        }
+      }
+    ]
   }
 }

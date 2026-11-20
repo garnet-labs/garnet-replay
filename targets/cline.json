@@ -1602,8 +1602,78 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": null,
-      "state": "pending",
-      "openedAt": "2026-09-18T17:03:42.999Z"
+      "state": "recorded",
+      "openedAt": "2026-09-18T17:03:42.999Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "d36728cf6cb869b0700178753e7f3112706850ec",
+        "checkedAt": "2026-11-20T04:51:38.798Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/cline / run 35372118460 / profile 01a0b57d-aadd-7f1b-a899-f75b16c1bea4; recorded 6dfd2fe8544e9a41ae3e7738cae335bbee9f4eff (refs/pull/28/merge); expected head d36728cf6cb869b0700178753e7f3112706850ec"
+        ],
+        "receiptFingerprint": "8892dda1a42bddae3012c49bb3c10b98adbc243e6443c39e01654dc21c00e160"
+      },
+      "observedAt": "2026-11-20T04:51:38.798Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 34,
+      "branch": "chore/update-3n5",
+      "forkHeadSha": "ace43f9f3b83389c95b860cda86daa7512c0bd9f",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "ace43f9f3b83389c95b860cda86daa7512c0bd9f",
+        "checkedAt": "2026-11-20T04:51:38.798Z",
+        "reasons": [],
+        "receiptFingerprint": "0a0e5fdf84a7caeddaa321a0b9aafb626910ecda4c351ca5a152d14f16efa743"
+      },
+      "observedAt": "2026-11-20T04:51:38.798Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 33,
+      "branch": "chore/update-52o",
+      "forkHeadSha": "5afe5cb89e5a725d1d1763d3082d0299b3b53490",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "5afe5cb89e5a725d1d1763d3082d0299b3b53490",
+        "checkedAt": "2026-11-20T04:51:38.798Z",
+        "reasons": [],
+        "receiptFingerprint": "e62b16dade05444e8c98ea52eba6498433be0b9239b1c4569b36f8546e2c6263"
+      },
+      "observedAt": "2026-11-20T04:51:38.798Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 27,
+      "branch": "devin/1783746263-garnet-cline-execution-diff",
+      "forkHeadSha": "c06d767670767053a20628e9dc4655aa8ec3557a",
+      "state": "undeterminable",
+      "verification": {
+        "status": "FAIL",
+        "head": "c06d767670767053a20628e9dc4655aa8ec3557a",
+        "checkedAt": "2026-11-20T04:51:38.798Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: no machine summary on the record",
+          "verdict determinable: no machine summary on the record",
+          "pair line: no pair line on the comment",
+          "no session residue: residue: \"Devin\"",
+          "label: the record carries no real/constructed label",
+          "public profile identity: garnet-labs/cline / run 29937534678 / profile 019f8aa2-5057-7c8b-86c7-8c17ac370045; recorded ee5ed4c0447174520ed6d80fd49403fca1531405 (refs/pull/27/merge); expected head c06d767670767053a20628e9dc4655aa8ec3557a",
+          "sensor coverage: no job in run 29937534678 ran garnet-org/action"
+        ],
+        "receiptFingerprint": "3216e45ab769c545c7b4e34d33966c07860344982c21a15c74ea203f899665d0"
+      },
+      "observedAt": "2026-11-20T04:51:38.798Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -1621,7 +1691,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "9254aec1aa784d1b58d8312f1ba4528fb32208d7",
+    "checkedAt": "2026-11-20T04:51:38.798Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1634,12 +1717,102 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "3dac9c38ab090dcfeed5aa165db5e65710abd1cb",
     "defaultBranch": "main",
     "checkedSha": "6c87681534b913959900ac98fa628b504d51567b",
     "pr": 31
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:51:38.798Z",
+    "defaultBranch": "main",
+    "defaultSha": "9254aec1aa784d1b58d8312f1ba4528fb32208d7",
+    "inspectedPrs": 36,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 34,
+        "url": "https://github.com/garnet-labs/cline/pull/34",
+        "prState": "open",
+        "head": "ace43f9f3b83389c95b860cda86daa7512c0bd9f",
+        "previous": "baf2d548fef76acbb979601e21a1120d188a43b0",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "0a0e5fdf84a7caeddaa321a0b9aafb626910ecda4c351ca5a152d14f16efa743",
+        "verification": {
+          "status": "PASS",
+          "head": "ace43f9f3b83389c95b860cda86daa7512c0bd9f",
+          "checkedAt": "2026-11-20T04:51:38.798Z",
+          "reasons": [],
+          "receiptFingerprint": "0a0e5fdf84a7caeddaa321a0b9aafb626910ecda4c351ca5a152d14f16efa743"
+        }
+      },
+      {
+        "forkPr": 33,
+        "url": "https://github.com/garnet-labs/cline/pull/33",
+        "prState": "open",
+        "head": "5afe5cb89e5a725d1d1763d3082d0299b3b53490",
+        "previous": "bc330c33583615e71d47fa0265291fe3c453c80b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "e62b16dade05444e8c98ea52eba6498433be0b9239b1c4569b36f8546e2c6263",
+        "verification": {
+          "status": "PASS",
+          "head": "5afe5cb89e5a725d1d1763d3082d0299b3b53490",
+          "checkedAt": "2026-11-20T04:51:38.798Z",
+          "reasons": [],
+          "receiptFingerprint": "e62b16dade05444e8c98ea52eba6498433be0b9239b1c4569b36f8546e2c6263"
+        }
+      },
+      {
+        "forkPr": 28,
+        "url": "https://github.com/garnet-labs/cline/pull/28",
+        "prState": "open",
+        "head": "d36728cf6cb869b0700178753e7f3112706850ec",
+        "previous": "16d688a73022fdab409bd664e1410e4f9a996652",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "8892dda1a42bddae3012c49bb3c10b98adbc243e6443c39e01654dc21c00e160",
+        "verification": {
+          "status": "FAIL",
+          "head": "d36728cf6cb869b0700178753e7f3112706850ec",
+          "checkedAt": "2026-11-20T04:51:38.798Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/cline / run 35372118460 / profile 01a0b57d-aadd-7f1b-a899-f75b16c1bea4; recorded 6dfd2fe8544e9a41ae3e7738cae335bbee9f4eff (refs/pull/28/merge); expected head d36728cf6cb869b0700178753e7f3112706850ec"
+          ],
+          "receiptFingerprint": "8892dda1a42bddae3012c49bb3c10b98adbc243e6443c39e01654dc21c00e160"
+        }
+      },
+      {
+        "forkPr": 27,
+        "url": "https://github.com/garnet-labs/cline/pull/27",
+        "prState": "open",
+        "head": "c06d767670767053a20628e9dc4655aa8ec3557a",
+        "previous": null,
+        "scope": null,
+        "state": "undeterminable",
+        "receiptFingerprint": "3216e45ab769c545c7b4e34d33966c07860344982c21a15c74ea203f899665d0",
+        "verification": {
+          "status": "FAIL",
+          "head": "c06d767670767053a20628e9dc4655aa8ec3557a",
+          "checkedAt": "2026-11-20T04:51:38.798Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: no machine summary on the record",
+            "verdict determinable: no machine summary on the record",
+            "pair line: no pair line on the comment",
+            "no session residue: residue: \"Devin\"",
+            "label: the record carries no real/constructed label",
+            "public profile identity: garnet-labs/cline / run 29937534678 / profile 019f8aa2-5057-7c8b-86c7-8c17ac370045; recorded ee5ed4c0447174520ed6d80fd49403fca1531405 (refs/pull/27/merge); expected head c06d767670767053a20628e9dc4655aa8ec3557a",
+            "sensor coverage: no job in run 29937534678 ran garnet-org/action"
+          ],
+          "receiptFingerprint": "3216e45ab769c545c7b4e34d33966c07860344982c21a15c74ea203f899665d0"
+        }
+      }
+    ]
   }
 }

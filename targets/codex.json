@@ -1509,8 +1509,741 @@
       "transition": null,
       "record": "fork-workflow",
       "ecosystem": "cargo",
+      "state": "recorded",
+      "openedAt": "2026-09-18T16:57:21.285Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Format / etc concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / cargo shear concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, repo-checks / build-test concluded failure, cargo-deny / cargo-deny concluded failure, Codespell / Check for spelling errors concluded failure, sdk / sdks concluded failure, sdk / python-sdk-installation concluded failure, Garnet Runtime Review concluded failure",
+          "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b575-ab81-7729-8b5e-fe2405631d50; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+          "public profile identity: garnet-labs/codex / run 35371495489 / profile 01a0b574-5385-76e5-ae0f-51fa5f4c8ff0; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+          "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b574-5653-734d-b2b3-6cdc382bd827; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+          "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b574-5322-7a42-a32d-eb6fc3afefac; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce"
+        ],
+        "receiptFingerprint": "65435ae5ad7e9052977a69838215de28fbb3e382b0f90737ecfe06ab7aad3185"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 50,
+      "branch": "maintenance/python-build-backend",
+      "forkHeadSha": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "public profile identity: garnet-labs/codex / run 43330331370 / profile 01a1d21f-b9b5-79cb-a891-6e848434600e; recorded dae851c61d950d41338d7a81aede82865e577212 (refs/pull/50/merge); expected head d68385fcc55586b7db1eeaf585cea294a94bc2b3"
+        ],
+        "receiptFingerprint": "8b4dc4756aadb036ae6c2bbfd3e043171b21f37012faa5bf96d3f47bd38135e6"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 49,
+      "branch": "maintenance/reviewer-guidance",
+      "forkHeadSha": "11d9d0c902ee381acd73124539b87c188a3b896c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "check settled: CI required concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Codespell / Check for spelling errors concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, repo-checks / build-test concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / sdks concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk-installation concluded failure, Blob size policy / Blob size policy concluded failure",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fd-d89e-7736-ae0b-32fefcaa6e19; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
+          "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-8f23-79d6-bc2c-e0f6f9d8398d; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
+          "public profile identity: https://app.garnet.ai/public/runs/43324731954?profile=01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr49&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
+          "sensor coverage: repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); 3 of 5 jobs covered"
+        ],
+        "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 39,
+      "branch": "replay/depi-codex-backdoor",
+      "forkHeadSha": "91bf2cc83246962963fc0ea307212a52abb27993",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "91bf2cc83246962963fc0ea307212a52abb27993",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / cargo shear concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, repo-checks / build-test concluded failure, sdk / python-sdk-installation concluded failure, sdk / sdks concluded failure, cargo-deny / cargo-deny concluded failure, Codespell / Check for spelling errors concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce98-c2e0-7fb3-9967-7e3074afe8ca; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+          "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce97-642d-7aba-a90f-d57bf5c0718a; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+          "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce97-75f1-71b3-a4f9-4136b7bd1022; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+          "sensor coverage: rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); 3 of 9 jobs covered"
+        ],
+        "receiptFingerprint": "cb2cef32cfac3ea3fa668d958df7941853b105205e6da9dd9b40d347d648231b"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 38,
+      "branch": "devin/1794375803-remove-status-publisher",
+      "forkHeadSha": "b7afb15721e35a92727a7bf75285768c4ffe0367",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, cargo-deny / cargo-deny concluded failure, sdk / python-sdk-installation concluded failure, Codespell / Check for spelling errors concluded failure, repo-checks / build-test concluded failure, sdk / sdks concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92c-764c-7c47-8783-c7cd86415d4c; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+          "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92b-1a57-7a4f-946d-68e08d124b88; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+          "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92b-68b9-70db-b94e-8b2092765a66; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+          "sensor coverage: Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); 3 of 9 jobs covered"
+        ],
+        "receiptFingerprint": "1a1aea8806cdca349bf4c125be96047d4f94f20026c11402cf265f5b043b92e9"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 37,
+      "branch": "cursor/repin-garnet-action-v2-5-2-0aec",
+      "forkHeadSha": "334862252c7c14e3af500ccfb10a48e3e175d5be",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint package concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Codespell / Check for spelling errors concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure, sdk / python-sdk-installation concluded failure",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7aa-9a08-7cfc-8629-9b4a0ccc2010; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+          "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7a9-4272-7c48-aa47-bd1db647236b; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+          "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7a9-6c03-77db-8949-704fc1669163; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+          "sensor coverage: rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint package: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); 3 of 10 jobs covered"
+        ],
+        "receiptFingerprint": "ac2834b08aac1349ac89d2a0844489753182ff9e47002ef0f63714841401f3e9"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 36,
+      "branch": "dependabot/cargo/codex-rs/zip-9.0.5",
+      "forkHeadSha": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a82-2602-77e5-a217-9ccdda58ca59; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+          "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-f7aa-780f-b3ad-66b77953a541; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+          "public profile identity: https://app.garnet.ai/public/runs/40987638780?profile=01a18a7f-6a8a-7b17-8798-a990b5489000&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr36&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout"
+        ],
+        "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 35,
+      "branch": "onboarding/reviewer-guidance",
+      "forkHeadSha": "0b95df523b89f013ae8f3103b57a756d716df972",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "0b95df523b89f013ae8f3103b57a756d716df972",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 40987523991 / profile 01a18a7d-f63a-7d3d-a5bc-cf8a06370d63; recorded 652bba14f152e0b77d2c97339cf6846579246d26 (refs/pull/35/merge); expected head 0b95df523b89f013ae8f3103b57a756d716df972",
+          "public profile identity: garnet-labs/codex / run 40987523991 / profile 01a18a7c-b3ce-76bb-bad7-96fb107e0848; recorded 652bba14f152e0b77d2c97339cf6846579246d26 (refs/pull/35/merge); expected head 0b95df523b89f013ae8f3103b57a756d716df972"
+        ],
+        "receiptFingerprint": "ae2b4c931a8941e82ac3fd056047cff4b453d6f6cbb69995bfcfbf6285f9c39c"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 34,
+      "branch": "cursor/sync-parent-garnet-v2-4-0-1755",
+      "forkHeadSha": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 40368694540 / profile 01a17940-e080-7795-beb6-6fe22d079db9; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+          "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17942-3868-758e-a7c8-84b6f14e4a34&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+          "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17940-f9fb-7278-8441-66d8c946ad09; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+          "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17941-3c72-7ed6-ab83-79b228b9a414&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout"
+        ],
+        "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 33,
+      "branch": "dependabot/npm_and_yarn/zod-4.6.6",
+      "forkHeadSha": "71faa4b9034c53c29e16534e9dded2da658b0622",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/codex / run 40370008239 / profile 01a17948-aa2c-71c7-b677-62bc21633f99; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+          "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-e6f9-7045-99c7-6d2af608142b; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+          "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-060c-7ee1-a296-2dd966d938be; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+          "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-3b92-7304-b79d-4a4b65e00c7d; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622"
+        ],
+        "receiptFingerprint": "4ea3c5d3c19a56393002d59b602549c6b206165e4ad0c2ed2fa354a74eea208e"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 32,
+      "branch": "dependabot/uv/sdk/python/black-26.10.1",
+      "forkHeadSha": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/codex / run 40080592134 / profile 01a16d29-51fb-7bcb-9e8d-ea9f293cdc42; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+          "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d2a-9f0d-7a33-9f05-aaf84b0f0045; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+          "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d29-6a6c-7d7d-b45d-a7355fd010e4; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+          "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d29-75d2-7cee-bb41-305ec3d262aa; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e"
+        ],
+        "receiptFingerprint": "23d7b2288783e473c802f59c857735cdcaf1d4fafb9b428b1394410d46967290"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 31,
+      "branch": "dependabot/npm_and_yarn/source-map-js-1.2.2",
+      "forkHeadSha": "7505cf541d1e57c58666f56a24907bed237f3c5a",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 39114388442 / profile 01a14e49-0168-7814-822e-a1fbb0a0f53c; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+          "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e4a-3ca2-7562-af25-72efc263823f; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+          "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e49-2060-7e53-b112-8f4a2479cd0f; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+          "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e49-45b8-79b8-a0fc-f6f517c33b1e; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a"
+        ],
+        "receiptFingerprint": "19791ccad4cd5976c25b5686acc596bf8337324d896a04ef07b03b937560298d"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 29,
+      "branch": "chore/update-10jz",
+      "forkHeadSha": "bbbc0a04039d03d8581947922bb507be8c3087c7",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/codex / run 35790961003 / profile 01a0cb2c-f8dc-7b70-a0b7-900e1d50820e; recorded 56b6fcb0246f707dbc59a2adb51b0aa638ce284d (refs/pull/29/merge); expected head bbbc0a04039d03d8581947922bb507be8c3087c7"
+        ],
+        "receiptFingerprint": "2a73ee4611d866fb38e6e41489474ff816c578416532836f37e7dc99997dffbd"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 28,
+      "branch": "ci/garnet-evidence",
+      "forkHeadSha": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
       "state": "pending",
-      "openedAt": "2026-09-18T16:57:21.285Z"
+      "verification": {
+        "status": "FAIL",
+        "head": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
+          "verdict determinable: no machine summary on the record",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "label: the record carries no real/constructed label",
+          "pull request open: state closed",
+          "public profile identity: no exact public run/profile selector on the record",
+          "sensor coverage: the record names no recording run"
+        ],
+        "receiptFingerprint": "1bdd94de1580292ccedbb67040eb199f356de05c49b8e167d89d141bb4796250"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 27,
+      "branch": "chore/update-zv6",
+      "forkHeadSha": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk-installation concluded failure, repo-checks / build-test concluded failure, sdk / sdks concluded failure, Codespell / Check for spelling errors concluded failure",
+          "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae2-ee78-78ae-b478-faaf909feecf; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+          "public profile identity: garnet-labs/codex / run 35782722157 / profile 01a0cae1-ca3c-7b66-a278-e108a701666f; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+          "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae1-d366-7392-a0b6-fa99ff0881b5; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+          "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae1-ded3-7813-a547-cb56bacddadc; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5"
+        ],
+        "receiptFingerprint": "6ef7378c25b453f5cb467d00ad9dfb958b714452a5fd3bf8d1be78f7654a4c15"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 26,
+      "branch": "ci/garnet-evidence",
+      "forkHeadSha": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+      "state": "undeterminable",
+      "verification": {
+        "status": "FAIL",
+        "head": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "head-bound: head moved: record 86ddb02, current 6b67fe5",
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "check settled: garnet/evidence concluded failure",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 35769390473 / profile 01a0ca71-8e97-7b6a-800c-72845aa88d79; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+          "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca72-cd76-725f-b17f-911ef9f9d843; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+          "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca71-8336-7b08-82c5-9bc7973a02c3; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+          "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca71-b49e-7095-b0dd-f0ac478ff733; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd"
+        ],
+        "receiptFingerprint": "c3997c11d0f1d2d0cac1f2c69ad4fbe451d9264b750eae76bd5b2c1a07690807"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 24,
+      "branch": "dependabot/npm_and_yarn/nanoid-3.3.18",
+      "forkHeadSha": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 33940056246 / profile 01a06f77-3fb5-7774-bfab-a26881ed5748; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+          "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f78-47ad-7ebb-88f9-2624b21a11b7; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+          "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f77-34f7-7d09-bf79-bef21ac3ffa9; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+          "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f77-72fe-7f14-9398-ee30dc63c2ea; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f"
+        ],
+        "receiptFingerprint": "e89cb7949ae76bef84d1505e68b7f6025e07099a137ecf7421a83b2279416aa1"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 23,
+      "branch": "dependabot/cargo/codex-rs/serde_with-3.21.0",
+      "forkHeadSha": "d8c1bc255e2149d313f677f4e329d29d158be70d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 33405396505 / profile 01a05851-99a4-7f45-91c0-0888bc1972d2; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+          "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05852-d232-7aa3-a3de-3ad8332c4ea9; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+          "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05851-a0d5-7d75-8dad-fdaa8f8791d8; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+          "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05851-ed53-7a3e-85fb-7768d75ea5b3; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d"
+        ],
+        "receiptFingerprint": "0169587169b81a75b24dcb707da759d77ac84a7b3d8bf6011d3f91e337732717"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 22,
+      "branch": "demo/fence-policy-evidence",
+      "forkHeadSha": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+          "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ed-9e0e-77b2-8240-c405f48146b6; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "public profile identity: garnet-labs/codex / run 33113746057 / profile 01a044ec-d1a5-7292-8dd2-43b4f9f668be; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "public profile identity: garnet-labs/codex / run 33113745974 / profile 01a044ec-723a-773c-b06c-a12684a8627b; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-8722-76ad-80a7-90ae468a5444; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-e488-7780-a80a-6a6cd2e9c0f2; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8"
+        ],
+        "receiptFingerprint": "8e6efbae6a6ca6a595aee4b652cef9b7cfb39acbbf9f03bd9288fdc3ca9b50c7"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 21,
+      "branch": "devin/1787849970-garnet-ci-evidence",
+      "forkHeadSha": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, sdk / sdks concluded failure, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, repo-checks / build-test concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04489-db91-78f1-ac0b-b09a37ed512f; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+          "public profile identity: garnet-labs/codex / run 33104808842 / profile 01a04488-a505-764a-a0e0-ba1ecd7744e6; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+          "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04488-b76d-7727-af18-1b7b6038e516; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+          "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04488-ecce-7b99-99df-8dae9f61ef02; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec"
+        ],
+        "receiptFingerprint": "c9c11d646a87185e1c50e654e4257d7acfa3eef66f40b58b79299e76ee5ee34a"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 20,
+      "branch": "devin/sensor-start-diag",
+      "forkHeadSha": "512638b2168e021cd7d36559ff706e8314c53d8d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, sdk / sdks concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, cargo-deny / cargo-deny concluded failure, sdk / python-sdk concluded failure, repo-checks / build-test concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/codex / run 33093960872 / profile 01a04415-0ef8-7338-b489-6b236c8b85d2; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+          "public profile identity: garnet-labs/codex / run 33093960872 / profile 01a04414-d365-74c4-b724-71dd402ed4bd; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+          "public profile identity: garnet-labs/codex / run 33093960584 / profile 01a04413-a16e-7505-9835-a9d356cf319e; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+          "public profile identity: garnet-labs/codex / run 33093960584 / profile 01a04414-b1b6-7583-b2f8-208cc24d2c49; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d"
+        ],
+        "receiptFingerprint": "06c5d9a9d355997311dec828643ddd02f01efb699d8a4643a331267474de99ae"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 19,
+      "branch": "devin/1787842967-garnet-operational-package",
+      "forkHeadSha": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, cargo-deny / cargo-deny concluded failure, sdk / python-sdk concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ef-1e63-7cc0-a192-9409a8b68bc8; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+          "public profile identity: garnet-labs/codex / run 33090277195 / profile 01a043ed-b6d4-7aaf-a999-4c03aea1ee99; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+          "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ed-c15b-784e-b356-92155a2df73a; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+          "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ed-ed22-7164-9579-d91cdf9f3382; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced"
+        ],
+        "receiptFingerprint": "5f02062cfe9e65fdc20572a599c5c6a1bddc6337f1ae8d1822741bc7899936a3"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 18,
+      "branch": "dependabot/uv/sdk/python/datamodel-code-generator-0.64.0",
+      "forkHeadSha": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk concluded failure, sdk / sdks concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, repo-checks / build-test concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure",
+          "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04435-6424-7e9e-bf0f-df52c54027ff; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+          "public profile identity: garnet-labs/codex / run 33097020529 / profile 01a04434-2c83-780f-b23f-e8f3552f6000; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+          "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04434-5044-741a-ba8a-870ea37d2930; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+          "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04434-7b9c-7fe2-aa12-1c8f1e19f9ef; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b"
+        ],
+        "receiptFingerprint": "0700a29f4cbb41d8ea9b0c405db06723755134a251691405413b64982598a8d9"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 17,
+      "branch": "proof/dependabot-runtime-value",
+      "forkHeadSha": "ea912deed938e921bf6e535e1609a99e77d8faa4",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+          "public profile identity: https://app.garnet.ai/public/runs/32355306894?profile=01a01e8f-62f2-76db-8d4b-590492570c2e&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+          "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e93-8ed8-734a-a711-2863681f6f78; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
+          "sensor coverage: Garnet dependency runtime proof: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "a1b536810990e9612473402fd26e94edf9882ad57c3deeb246f81c3b3535e6ec"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 16,
+      "branch": "proof/dependabot-garnet",
+      "forkHeadSha": "d60d85dd4e71b3ae56cf3fc27925161922590355",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / sdks concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, repo-checks / build-test concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure",
+          "pull request open: state closed",
+          "public profile identity: garnet-labs/codex / run 32316069926 / profile 01a01c80-6813-7e5b-a225-3bfce3e20faf; recorded 3315defb5dd86c803c17dcc4a72e4dd81ea7b06d (refs/pull/16/merge); expected head d60d85dd4e71b3ae56cf3fc27925161922590355",
+          "public profile identity: garnet-labs/codex / run 32316069926 / profile 01a01c7f-54fb-73b2-8af0-512cdf704405; recorded 3315defb5dd86c803c17dcc4a72e4dd81ea7b06d (refs/pull/16/merge); expected head d60d85dd4e71b3ae56cf3fc27925161922590355",
+          "sensor coverage: Garnet Runtime Review: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "9b3d16301e1c0c877c734ca3ddb7878e7c55d16e8f6bc18cbcd25db9239701e6"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 15,
+      "branch": "review/openssl-grounded",
+      "forkHeadSha": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, cargo-deny / cargo-deny concluded failure",
+          "public profile identity: garnet-labs/codex / run 32343464709 / profile 01a01e0b-8622-72cc-892d-5772d667e698; recorded 68029fd851d25f3bfc28563e3b7102f1b1620b10 (refs/pull/15/merge); expected head 30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+          "public profile identity: garnet-labs/codex / run 32343464709 / profile 01a01e0a-cafd-7667-8067-cf3d94249615; recorded 68029fd851d25f3bfc28563e3b7102f1b1620b10 (refs/pull/15/merge); expected head 30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+          "sensor coverage: Garnet Runtime Review: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+        ],
+        "receiptFingerprint": "e2d6ac6f40ee49d0d5d2d8c1123b7d1daf8f6da151034d3469c513f8ad0c5fe9"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 14,
+      "branch": "review/cargo-deny-base",
+      "forkHeadSha": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/codex / run 32098929337 / profile 01a0131d-b876-7b30-a168-8035c339a39e; recorded 1e4f0953af97c8d26e56e6ff631bc70edc7b2c20 (refs/pull/14/merge); expected head 8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+          "sensor coverage: cargo-deny / cargo-deny: log unreadable; 0 of 1 jobs covered"
+        ],
+        "receiptFingerprint": "9a4a80d5cae4c14475d29d95cb7802bbb3199052918992449db8fb5e1fcc4683"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 9,
+      "branch": "dependabot/cargo/tools/argument-comment-lint/tar-0.4.46",
+      "forkHeadSha": "6807425507b1049ad067437bd7daed537a2669c0",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "6807425507b1049ad067437bd7daed537a2669c0",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, cargo-deny / cargo-deny concluded failure",
+          "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04435-9447-7128-8ccd-b97fa1a5e861; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+          "public profile identity: garnet-labs/codex / run 33097033722 / profile 01a04434-7eec-760c-be58-3a45b59bb789; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+          "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04434-5bde-76c7-8da1-cbde79ac96a7; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+          "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04434-e144-75e6-b5fc-234cf8b4dff6; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0"
+        ],
+        "receiptFingerprint": "00591f5331406388e0ad3a8fc9f10a0e4de9445031e4859226e4addd4e7b16f5"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 8,
+      "branch": "dependabot/cargo/codex-rs/openssl-0.10.80",
+      "forkHeadSha": "de2baab8fb5432c88d3302d2a52317f92cda0638",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 33097349788 / profile 01a04438-5ce5-7300-9366-aebc41eefc7d; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+          "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a0443a-ecae-7864-95b9-ad36f03f11d6; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+          "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a04439-1089-7f0f-a5ce-6dee6417f0ad; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+          "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a04439-111f-75c5-b114-53a973bf5271; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638"
+        ],
+        "receiptFingerprint": "bcb9099601d88345a1794f569c65ba7d9c1da88bc657958e38ffb170f4f489a5"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 5,
+      "branch": "dependabot/cargo/codex-rs/rustls-webpki-0.103.13",
+      "forkHeadSha": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 33097339289 / profile 01a04438-2f8f-79ea-9c1d-0ccda6058cd1; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+          "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a0443a-dcbc-73c5-9416-4e4dcbc2f423; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+          "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a04437-f106-771c-9935-f5e90dba624e; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+          "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a04438-de7b-7291-8d58-49ad2ab15768; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83"
+        ],
+        "receiptFingerprint": "38c8e0f0c0da1fccc33030387b40ff1ef2c1dfb4bfd4f0158c151f3d2f6872d8"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 3,
+      "branch": "dependabot/cargo/codex-rs/actix-http-3.12.1",
+      "forkHeadSha": "59e800f340c74502a80a3a408c30d96fea0d96e2",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
+        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "public profile identity: garnet-labs/codex / run 33097516766 / profile 01a0443a-3be0-79cf-acee-9e1dcc419807; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+          "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443b-d443-7607-ab2a-b10299b6f262; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+          "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443a-8fca-76c8-bcb3-ae2e67ff3dc5; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+          "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443a-9af9-7fee-b7bc-3d3279996025; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2"
+        ],
+        "receiptFingerprint": "d619f45b41074878311f9cd7c9e9d2609b56121302548d23fc03aa1569cc2d75"
+      },
+      "observedAt": "2026-11-20T04:55:32.277Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -1528,7 +2261,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "in-flight",
+    "defaultBranch": "main",
+    "checkedSha": "25b918bba5233aedd45fc12578a2427d7d154168",
+    "checkedAt": "2026-11-20T04:55:32.277Z",
+    "files": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "4/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1541,12 +2287,792 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "cb43c3f7d47a21388ee6736f62ebb882d5e5c2a0",
     "pr": 51
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:55:32.277Z",
+    "defaultBranch": "main",
+    "defaultSha": "25b918bba5233aedd45fc12578a2427d7d154168",
+    "inspectedPrs": 42,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 50,
+        "url": "https://github.com/garnet-labs/codex/pull/50",
+        "prState": "open",
+        "head": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
+        "previous": "f649d0be982e512c480bb02acf11d07c66c75331",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "8b4dc4756aadb036ae6c2bbfd3e043171b21f37012faa5bf96d3f47bd38135e6",
+        "verification": {
+          "status": "FAIL",
+          "head": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "public profile identity: garnet-labs/codex / run 43330331370 / profile 01a1d21f-b9b5-79cb-a891-6e848434600e; recorded dae851c61d950d41338d7a81aede82865e577212 (refs/pull/50/merge); expected head d68385fcc55586b7db1eeaf585cea294a94bc2b3"
+          ],
+          "receiptFingerprint": "8b4dc4756aadb036ae6c2bbfd3e043171b21f37012faa5bf96d3f47bd38135e6"
+        }
+      },
+      {
+        "forkPr": 49,
+        "url": "https://github.com/garnet-labs/codex/pull/49",
+        "prState": "merged",
+        "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
+        "previous": "d7a6199525503a67c9bc83f4f4e9cc0425ec4b24",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50",
+        "verification": {
+          "status": "FAIL",
+          "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "check settled: CI required concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Codespell / Check for spelling errors concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, repo-checks / build-test concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / sdks concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk-installation concluded failure, Blob size policy / Blob size policy concluded failure",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fd-d89e-7736-ae0b-32fefcaa6e19; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
+            "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-8f23-79d6-bc2c-e0f6f9d8398d; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
+            "public profile identity: https://app.garnet.ai/public/runs/43324731954?profile=01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr49&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
+            "sensor coverage: repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); 3 of 5 jobs covered"
+          ],
+          "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50"
+        }
+      },
+      {
+        "forkPr": 39,
+        "url": "https://github.com/garnet-labs/codex/pull/39",
+        "prState": "open",
+        "head": "91bf2cc83246962963fc0ea307212a52abb27993",
+        "previous": "d7a6199525503a67c9bc83f4f4e9cc0425ec4b24",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "cb2cef32cfac3ea3fa668d958df7941853b105205e6da9dd9b40d347d648231b",
+        "verification": {
+          "status": "FAIL",
+          "head": "91bf2cc83246962963fc0ea307212a52abb27993",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / cargo shear concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, repo-checks / build-test concluded failure, sdk / python-sdk-installation concluded failure, sdk / sdks concluded failure, cargo-deny / cargo-deny concluded failure, Codespell / Check for spelling errors concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce98-c2e0-7fb3-9967-7e3074afe8ca; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+            "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce97-642d-7aba-a90f-d57bf5c0718a; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+            "public profile identity: garnet-labs/codex / run 43173129808 / profile 01a1ce97-75f1-71b3-a4f9-4136b7bd1022; recorded 7f5524370572bd7e07e686867f57c3fa6ae280ad (refs/pull/39/merge); expected head 91bf2cc83246962963fc0ea307212a52abb27993",
+            "sensor coverage: rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); 3 of 9 jobs covered"
+          ],
+          "receiptFingerprint": "cb2cef32cfac3ea3fa668d958df7941853b105205e6da9dd9b40d347d648231b"
+        }
+      },
+      {
+        "forkPr": 38,
+        "url": "https://github.com/garnet-labs/codex/pull/38",
+        "prState": "merged",
+        "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
+        "previous": "9f675c8c7cd4aab1e1c6770a4b8fcbd4397b91f2",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "1a1aea8806cdca349bf4c125be96047d4f94f20026c11402cf265f5b043b92e9",
+        "verification": {
+          "status": "FAIL",
+          "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, cargo-deny / cargo-deny concluded failure, sdk / python-sdk-installation concluded failure, Codespell / Check for spelling errors concluded failure, repo-checks / build-test concluded failure, sdk / sdks concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92c-764c-7c47-8783-c7cd86415d4c; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+            "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92b-1a57-7a4f-946d-68e08d124b88; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+            "public profile identity: garnet-labs/codex / run 42968602066 / profile 01a1c92b-68b9-70db-b94e-8b2092765a66; recorded 320858d00a5434e49698219ae153d9825c3e2139 (refs/pull/38/merge); expected head b7afb15721e35a92727a7bf75285768c4ffe0367",
+            "sensor coverage: Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); 3 of 9 jobs covered"
+          ],
+          "receiptFingerprint": "1a1aea8806cdca349bf4c125be96047d4f94f20026c11402cf265f5b043b92e9"
+        }
+      },
+      {
+        "forkPr": 37,
+        "url": "https://github.com/garnet-labs/codex/pull/37",
+        "prState": "merged",
+        "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
+        "previous": "51770588983fa7b87700e5cdf1a2631b757d8be8",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "ac2834b08aac1349ac89d2a0844489753182ff9e47002ef0f63714841401f3e9",
+        "verification": {
+          "status": "FAIL",
+          "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint package concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Codespell / Check for spelling errors concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure, sdk / python-sdk-installation concluded failure",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7aa-9a08-7cfc-8629-9b4a0ccc2010; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+            "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7a9-4272-7c48-aa47-bd1db647236b; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+            "public profile identity: garnet-labs/codex / run 41879849613 / profile 01a1a7a9-6c03-77db-8949-704fc1669163; recorded 49f97e11c769d82e7f65e140e8ea52debb9b88cd (refs/pull/37/merge); expected head 334862252c7c14e3af500ccfb10a48e3e175d5be",
+            "sensor coverage: rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); repo-checks / build-test: sensor did not start (the jibril service failed to start); Blob size policy / Blob size policy: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint package: sensor did not start (the jibril service failed to start); rust-ci / Argument comment lint - Linux: sensor did not start (the jibril service failed to start); rust-ci / Format / etc: sensor did not start (the jibril service failed to start); rust-ci / cargo shear: sensor did not start (the jibril service failed to start); 3 of 10 jobs covered"
+          ],
+          "receiptFingerprint": "ac2834b08aac1349ac89d2a0844489753182ff9e47002ef0f63714841401f3e9"
+        }
+      },
+      {
+        "forkPr": 36,
+        "url": "https://github.com/garnet-labs/codex/pull/36",
+        "prState": "open",
+        "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+        "previous": "51770588983fa7b87700e5cdf1a2631b757d8be8",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3",
+        "verification": {
+          "status": "FAIL",
+          "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a82-2602-77e5-a217-9ccdda58ca59; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+            "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-f7aa-780f-b3ad-66b77953a541; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
+            "public profile identity: https://app.garnet.ai/public/runs/40987638780?profile=01a18a7f-6a8a-7b17-8798-a990b5489000&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr36&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout"
+          ],
+          "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3"
+        }
+      },
+      {
+        "forkPr": 35,
+        "url": "https://github.com/garnet-labs/codex/pull/35",
+        "prState": "merged",
+        "head": "0b95df523b89f013ae8f3103b57a756d716df972",
+        "previous": "2a73d0b1166a046b3a35ddff03231dadea65dc1e",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "ae2b4c931a8941e82ac3fd056047cff4b453d6f6cbb69995bfcfbf6285f9c39c",
+        "verification": {
+          "status": "FAIL",
+          "head": "0b95df523b89f013ae8f3103b57a756d716df972",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 40987523991 / profile 01a18a7d-f63a-7d3d-a5bc-cf8a06370d63; recorded 652bba14f152e0b77d2c97339cf6846579246d26 (refs/pull/35/merge); expected head 0b95df523b89f013ae8f3103b57a756d716df972",
+            "public profile identity: garnet-labs/codex / run 40987523991 / profile 01a18a7c-b3ce-76bb-bad7-96fb107e0848; recorded 652bba14f152e0b77d2c97339cf6846579246d26 (refs/pull/35/merge); expected head 0b95df523b89f013ae8f3103b57a756d716df972"
+          ],
+          "receiptFingerprint": "ae2b4c931a8941e82ac3fd056047cff4b453d6f6cbb69995bfcfbf6285f9c39c"
+        }
+      },
+      {
+        "forkPr": 34,
+        "url": "https://github.com/garnet-labs/codex/pull/34",
+        "prState": "merged",
+        "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+        "previous": "4e0a2820ace562cba22d716c6abd3fcf0ce4c13a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108",
+        "verification": {
+          "status": "FAIL",
+          "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 40368694540 / profile 01a17940-e080-7795-beb6-6fe22d079db9; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+            "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17942-3868-758e-a7c8-84b6f14e4a34&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+            "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17940-f9fb-7278-8441-66d8c946ad09; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
+            "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17941-3c72-7ed6-ab83-79b228b9a414&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout"
+          ],
+          "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108"
+        }
+      },
+      {
+        "forkPr": 33,
+        "url": "https://github.com/garnet-labs/codex/pull/33",
+        "prState": "open",
+        "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
+        "previous": "81160c048981b975bc67c22befe2966a574fa1a0",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "4ea3c5d3c19a56393002d59b602549c6b206165e4ad0c2ed2fa354a74eea208e",
+        "verification": {
+          "status": "FAIL",
+          "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/codex / run 40370008239 / profile 01a17948-aa2c-71c7-b677-62bc21633f99; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+            "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-e6f9-7045-99c7-6d2af608142b; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+            "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-060c-7ee1-a296-2dd966d938be; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622",
+            "public profile identity: garnet-labs/codex / run 40370008784 / profile 01a1794a-3b92-7304-b79d-4a4b65e00c7d; recorded 5e76e05feb8c8f82ed9637fe564b4482a0fd9251 (refs/pull/33/merge); expected head 71faa4b9034c53c29e16534e9dded2da658b0622"
+          ],
+          "receiptFingerprint": "4ea3c5d3c19a56393002d59b602549c6b206165e4ad0c2ed2fa354a74eea208e"
+        }
+      },
+      {
+        "forkPr": 32,
+        "url": "https://github.com/garnet-labs/codex/pull/32",
+        "prState": "open",
+        "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+        "previous": "4e0a2820ace562cba22d716c6abd3fcf0ce4c13a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "23d7b2288783e473c802f59c857735cdcaf1d4fafb9b428b1394410d46967290",
+        "verification": {
+          "status": "FAIL",
+          "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/codex / run 40080592134 / profile 01a16d29-51fb-7bcb-9e8d-ea9f293cdc42; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+            "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d2a-9f0d-7a33-9f05-aaf84b0f0045; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+            "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d29-6a6c-7d7d-b45d-a7355fd010e4; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
+            "public profile identity: garnet-labs/codex / run 40080592193 / profile 01a16d29-75d2-7cee-bb41-305ec3d262aa; recorded 4ef93a26eb6f2a46d017e4ab029ff7a259094d02 (refs/pull/32/merge); expected head c4a00dbd85db285c59ecf7ab970957c9a2acfd6e"
+          ],
+          "receiptFingerprint": "23d7b2288783e473c802f59c857735cdcaf1d4fafb9b428b1394410d46967290"
+        }
+      },
+      {
+        "forkPr": 31,
+        "url": "https://github.com/garnet-labs/codex/pull/31",
+        "prState": "open",
+        "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "19791ccad4cd5976c25b5686acc596bf8337324d896a04ef07b03b937560298d",
+        "verification": {
+          "status": "FAIL",
+          "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 39114388442 / profile 01a14e49-0168-7814-822e-a1fbb0a0f53c; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+            "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e4a-3ca2-7562-af25-72efc263823f; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+            "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e49-2060-7e53-b112-8f4a2479cd0f; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a",
+            "public profile identity: garnet-labs/codex / run 39114388519 / profile 01a14e49-45b8-79b8-a0fc-f6f517c33b1e; recorded a046cf0af70cc8a8be5f78ad8048cfd4ef14384d (refs/pull/31/merge); expected head 7505cf541d1e57c58666f56a24907bed237f3c5a"
+          ],
+          "receiptFingerprint": "19791ccad4cd5976c25b5686acc596bf8337324d896a04ef07b03b937560298d"
+        }
+      },
+      {
+        "forkPr": 29,
+        "url": "https://github.com/garnet-labs/codex/pull/29",
+        "prState": "open",
+        "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
+        "previous": "24f1864bff2b5980572ceb1e95a504e96b2ddccc",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "2a73ee4611d866fb38e6e41489474ff816c578416532836f37e7dc99997dffbd",
+        "verification": {
+          "status": "FAIL",
+          "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/codex / run 35790961003 / profile 01a0cb2c-f8dc-7b70-a0b7-900e1d50820e; recorded 56b6fcb0246f707dbc59a2adb51b0aa638ce284d (refs/pull/29/merge); expected head bbbc0a04039d03d8581947922bb507be8c3087c7"
+          ],
+          "receiptFingerprint": "2a73ee4611d866fb38e6e41489474ff816c578416532836f37e7dc99997dffbd"
+        }
+      },
+      {
+        "forkPr": 28,
+        "url": "https://github.com/garnet-labs/codex/pull/28",
+        "prState": "merged",
+        "head": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
+        "previous": null,
+        "scope": null,
+        "state": "pending",
+        "receiptFingerprint": "1bdd94de1580292ccedbb67040eb199f356de05c49b8e167d89d141bb4796250",
+        "verification": {
+          "status": "FAIL",
+          "head": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
+            "verdict determinable: no machine summary on the record",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "label: the record carries no real/constructed label",
+            "pull request open: state closed",
+            "public profile identity: no exact public run/profile selector on the record",
+            "sensor coverage: the record names no recording run"
+          ],
+          "receiptFingerprint": "1bdd94de1580292ccedbb67040eb199f356de05c49b8e167d89d141bb4796250"
+        }
+      },
+      {
+        "forkPr": 27,
+        "url": "https://github.com/garnet-labs/codex/pull/27",
+        "prState": "open",
+        "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+        "previous": "01703d1fced0b4f09fc649a97d9a710748ff30f8",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "6ef7378c25b453f5cb467d00ad9dfb958b714452a5fd3bf8d1be78f7654a4c15",
+        "verification": {
+          "status": "FAIL",
+          "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / cargo shear concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk-installation concluded failure, repo-checks / build-test concluded failure, sdk / sdks concluded failure, Codespell / Check for spelling errors concluded failure",
+            "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae2-ee78-78ae-b478-faaf909feecf; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+            "public profile identity: garnet-labs/codex / run 35782722157 / profile 01a0cae1-ca3c-7b66-a278-e108a701666f; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+            "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae1-d366-7392-a0b6-fa99ff0881b5; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
+            "public profile identity: garnet-labs/codex / run 35782722493 / profile 01a0cae1-ded3-7813-a547-cb56bacddadc; recorded 3cce7d71a14f1214c788cd6194b81014f737b531 (refs/pull/27/merge); expected head a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5"
+          ],
+          "receiptFingerprint": "6ef7378c25b453f5cb467d00ad9dfb958b714452a5fd3bf8d1be78f7654a4c15"
+        }
+      },
+      {
+        "forkPr": 26,
+        "url": "https://github.com/garnet-labs/codex/pull/26",
+        "prState": "merged",
+        "head": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+        "previous": null,
+        "scope": null,
+        "state": "undeterminable",
+        "receiptFingerprint": "c3997c11d0f1d2d0cac1f2c69ad4fbe451d9264b750eae76bd5b2c1a07690807",
+        "verification": {
+          "status": "FAIL",
+          "head": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "head-bound: head moved: record 86ddb02, current 6b67fe5",
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "check settled: garnet/evidence concluded failure",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 35769390473 / profile 01a0ca71-8e97-7b6a-800c-72845aa88d79; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+            "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca72-cd76-725f-b17f-911ef9f9d843; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+            "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca71-8336-7b08-82c5-9bc7973a02c3; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
+            "public profile identity: garnet-labs/codex / run 35769391945 / profile 01a0ca71-b49e-7095-b0dd-f0ac478ff733; recorded c62c61364e9762134741b153c4b498fd732afd43 (refs/pull/26/merge); expected head 6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd"
+          ],
+          "receiptFingerprint": "c3997c11d0f1d2d0cac1f2c69ad4fbe451d9264b750eae76bd5b2c1a07690807"
+        }
+      },
+      {
+        "forkPr": 25,
+        "url": "https://github.com/garnet-labs/codex/pull/25",
+        "prState": "open",
+        "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+        "previous": "9320fbc0f7a164a9776da161f45e9a72678851d1",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "65435ae5ad7e9052977a69838215de28fbb3e382b0f90737ecfe06ab7aad3185",
+        "verification": {
+          "status": "FAIL",
+          "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Format / etc concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / cargo shear concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, repo-checks / build-test concluded failure, cargo-deny / cargo-deny concluded failure, Codespell / Check for spelling errors concluded failure, sdk / sdks concluded failure, sdk / python-sdk-installation concluded failure, Garnet Runtime Review concluded failure",
+            "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b575-ab81-7729-8b5e-fe2405631d50; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+            "public profile identity: garnet-labs/codex / run 35371495489 / profile 01a0b574-5385-76e5-ae0f-51fa5f4c8ff0; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+            "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b574-5653-734d-b2b3-6cdc382bd827; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce",
+            "public profile identity: garnet-labs/codex / run 35371495692 / profile 01a0b574-5322-7a42-a32d-eb6fc3afefac; recorded 895b05b1b7926a2f51bb0f160190a1b5919654ba (refs/pull/25/merge); expected head 86e52221eb6178093f67db2b5cbb3da98872f2ce"
+          ],
+          "receiptFingerprint": "65435ae5ad7e9052977a69838215de28fbb3e382b0f90737ecfe06ab7aad3185"
+        }
+      },
+      {
+        "forkPr": 24,
+        "url": "https://github.com/garnet-labs/codex/pull/24",
+        "prState": "open",
+        "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "e89cb7949ae76bef84d1505e68b7f6025e07099a137ecf7421a83b2279416aa1",
+        "verification": {
+          "status": "FAIL",
+          "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 33940056246 / profile 01a06f77-3fb5-7774-bfab-a26881ed5748; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+            "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f78-47ad-7ebb-88f9-2624b21a11b7; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+            "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f77-34f7-7d09-bf79-bef21ac3ffa9; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f",
+            "public profile identity: garnet-labs/codex / run 33940056345 / profile 01a06f77-72fe-7f14-9398-ee30dc63c2ea; recorded cc46b205d92a389393af8565c5232fd82cb5f25b (refs/pull/24/merge); expected head 614bc749ef12a8024e05e71f5f9f4801fd11c87f"
+          ],
+          "receiptFingerprint": "e89cb7949ae76bef84d1505e68b7f6025e07099a137ecf7421a83b2279416aa1"
+        }
+      },
+      {
+        "forkPr": 23,
+        "url": "https://github.com/garnet-labs/codex/pull/23",
+        "prState": "open",
+        "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "0169587169b81a75b24dcb707da759d77ac84a7b3d8bf6011d3f91e337732717",
+        "verification": {
+          "status": "FAIL",
+          "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 33405396505 / profile 01a05851-99a4-7f45-91c0-0888bc1972d2; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+            "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05852-d232-7aa3-a3de-3ad8332c4ea9; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+            "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05851-a0d5-7d75-8dad-fdaa8f8791d8; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d",
+            "public profile identity: garnet-labs/codex / run 33405396864 / profile 01a05851-ed53-7a3e-85fb-7768d75ea5b3; recorded b0aff4141e910f8701f4ac7ab2d20341c6e6ad7e (refs/pull/23/merge); expected head d8c1bc255e2149d313f677f4e329d29d158be70d"
+          ],
+          "receiptFingerprint": "0169587169b81a75b24dcb707da759d77ac84a7b3d8bf6011d3f91e337732717"
+        }
+      },
+      {
+        "forkPr": 22,
+        "url": "https://github.com/garnet-labs/codex/pull/22",
+        "prState": "open",
+        "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+        "previous": "c33864052b0255014eeec14988b9d2d8fa44d09f",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "8e6efbae6a6ca6a595aee4b652cef9b7cfb39acbbf9f03bd9288fdc3ca9b50c7",
+        "verification": {
+          "status": "FAIL",
+          "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+            "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ed-9e0e-77b2-8240-c405f48146b6; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+            "public profile identity: garnet-labs/codex / run 33113746057 / profile 01a044ec-d1a5-7292-8dd2-43b4f9f668be; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+            "public profile identity: garnet-labs/codex / run 33113745974 / profile 01a044ec-723a-773c-b06c-a12684a8627b; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+            "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-8722-76ad-80a7-90ae468a5444; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+            "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-e488-7780-a80a-6a6cd2e9c0f2; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8"
+          ],
+          "receiptFingerprint": "8e6efbae6a6ca6a595aee4b652cef9b7cfb39acbbf9f03bd9288fdc3ca9b50c7"
+        }
+      },
+      {
+        "forkPr": 21,
+        "url": "https://github.com/garnet-labs/codex/pull/21",
+        "prState": "open",
+        "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+        "previous": "d81e4bf175d3f410214c4b52cd719d0c8ca24067",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "c9c11d646a87185e1c50e654e4257d7acfa3eef66f40b58b79299e76ee5ee34a",
+        "verification": {
+          "status": "FAIL",
+          "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, sdk / sdks concluded failure, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, repo-checks / build-test concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04489-db91-78f1-ac0b-b09a37ed512f; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+            "public profile identity: garnet-labs/codex / run 33104808842 / profile 01a04488-a505-764a-a0e0-ba1ecd7744e6; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+            "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04488-b76d-7727-af18-1b7b6038e516; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
+            "public profile identity: garnet-labs/codex / run 33104809105 / profile 01a04488-ecce-7b99-99df-8dae9f61ef02; recorded 4fc686d06b52f55c8eb589a431b04d32dd52134d (refs/pull/21/merge); expected head 5dd224167f6d755bf0b2eb50aa7f3120c6e68eec"
+          ],
+          "receiptFingerprint": "c9c11d646a87185e1c50e654e4257d7acfa3eef66f40b58b79299e76ee5ee34a"
+        }
+      },
+      {
+        "forkPr": 20,
+        "url": "https://github.com/garnet-labs/codex/pull/20",
+        "prState": "open",
+        "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "06c5d9a9d355997311dec828643ddd02f01efb699d8a4643a331267474de99ae",
+        "verification": {
+          "status": "FAIL",
+          "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, sdk / sdks concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, cargo-deny / cargo-deny concluded failure, sdk / python-sdk concluded failure, repo-checks / build-test concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/codex / run 33093960872 / profile 01a04415-0ef8-7338-b489-6b236c8b85d2; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+            "public profile identity: garnet-labs/codex / run 33093960872 / profile 01a04414-d365-74c4-b724-71dd402ed4bd; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+            "public profile identity: garnet-labs/codex / run 33093960584 / profile 01a04413-a16e-7505-9835-a9d356cf319e; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d",
+            "public profile identity: garnet-labs/codex / run 33093960584 / profile 01a04414-b1b6-7583-b2f8-208cc24d2c49; recorded 88a33175077257f4eb95997feee2c2fad7e56054 (refs/pull/20/merge); expected head 512638b2168e021cd7d36559ff706e8314c53d8d"
+          ],
+          "receiptFingerprint": "06c5d9a9d355997311dec828643ddd02f01efb699d8a4643a331267474de99ae"
+        }
+      },
+      {
+        "forkPr": 19,
+        "url": "https://github.com/garnet-labs/codex/pull/19",
+        "prState": "merged",
+        "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
+        "previous": "204311d983a0c7e5c7bfb9543b62abe51c6eab3a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "5f02062cfe9e65fdc20572a599c5c6a1bddc6337f1ae8d1822741bc7899936a3",
+        "verification": {
+          "status": "FAIL",
+          "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, cargo-deny / cargo-deny concluded failure, sdk / python-sdk concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ef-1e63-7cc0-a192-9409a8b68bc8; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+            "public profile identity: garnet-labs/codex / run 33090277195 / profile 01a043ed-b6d4-7aaf-a999-4c03aea1ee99; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+            "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ed-c15b-784e-b356-92155a2df73a; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced",
+            "public profile identity: garnet-labs/codex / run 33090277175 / profile 01a043ed-ed22-7164-9579-d91cdf9f3382; recorded a045a11ab886c35f66783970c3cc61c116109c51 (refs/pull/19/merge); expected head 6606be8e74cc5c71655d3076b1bb895d69dcfced"
+          ],
+          "receiptFingerprint": "5f02062cfe9e65fdc20572a599c5c6a1bddc6337f1ae8d1822741bc7899936a3"
+        }
+      },
+      {
+        "forkPr": 18,
+        "url": "https://github.com/garnet-labs/codex/pull/18",
+        "prState": "open",
+        "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+        "previous": "c0f5089d7799c86717971b3abc8dca4cf205f9c5",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "0700a29f4cbb41d8ea9b0c405db06723755134a251691405413b64982598a8d9",
+        "verification": {
+          "status": "FAIL",
+          "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / Argument comment lint - Windows concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk concluded failure, sdk / sdks concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, repo-checks / build-test concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure",
+            "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04435-6424-7e9e-bf0f-df52c54027ff; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+            "public profile identity: garnet-labs/codex / run 33097020529 / profile 01a04434-2c83-780f-b23f-e8f3552f6000; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+            "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04434-5044-741a-ba8a-870ea37d2930; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
+            "public profile identity: garnet-labs/codex / run 33097020653 / profile 01a04434-7b9c-7fe2-aa12-1c8f1e19f9ef; recorded 0390de8349d6a42b3b633339eb68e04731391085 (refs/pull/18/merge); expected head 82bcc051ca4fb62d8d54ae494fad7172ac80d48b"
+          ],
+          "receiptFingerprint": "0700a29f4cbb41d8ea9b0c405db06723755134a251691405413b64982598a8d9"
+        }
+      },
+      {
+        "forkPr": 17,
+        "url": "https://github.com/garnet-labs/codex/pull/17",
+        "prState": "open",
+        "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
+        "previous": "c8e1d967757dbab29c6926f87ee0902f880ecc56",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "a1b536810990e9612473402fd26e94edf9882ad57c3deeb246f81c3b3535e6ec",
+        "verification": {
+          "status": "FAIL",
+          "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
+            "public profile identity: https://app.garnet.ai/public/runs/32355306894?profile=01a01e8f-62f2-76db-8d4b-590492570c2e&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+            "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e93-8ed8-734a-a711-2863681f6f78; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
+            "sensor coverage: Garnet dependency runtime proof: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "a1b536810990e9612473402fd26e94edf9882ad57c3deeb246f81c3b3535e6ec"
+        }
+      },
+      {
+        "forkPr": 16,
+        "url": "https://github.com/garnet-labs/codex/pull/16",
+        "prState": "merged",
+        "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "9b3d16301e1c0c877c734ca3ddb7878e7c55d16e8f6bc18cbcd25db9239701e6",
+        "verification": {
+          "status": "FAIL",
+          "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / sdks concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, repo-checks / build-test concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, sdk / python-sdk concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, cargo-deny / cargo-deny concluded failure",
+            "pull request open: state closed",
+            "public profile identity: garnet-labs/codex / run 32316069926 / profile 01a01c80-6813-7e5b-a225-3bfce3e20faf; recorded 3315defb5dd86c803c17dcc4a72e4dd81ea7b06d (refs/pull/16/merge); expected head d60d85dd4e71b3ae56cf3fc27925161922590355",
+            "public profile identity: garnet-labs/codex / run 32316069926 / profile 01a01c7f-54fb-73b2-8af0-512cdf704405; recorded 3315defb5dd86c803c17dcc4a72e4dd81ea7b06d (refs/pull/16/merge); expected head d60d85dd4e71b3ae56cf3fc27925161922590355",
+            "sensor coverage: Garnet Runtime Review: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "9b3d16301e1c0c877c734ca3ddb7878e7c55d16e8f6bc18cbcd25db9239701e6"
+        }
+      },
+      {
+        "forkPr": 15,
+        "url": "https://github.com/garnet-labs/codex/pull/15",
+        "prState": "open",
+        "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+        "previous": "33a07c211618ce825b33e74729d5b912097e1a7c",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "e2d6ac6f40ee49d0d5d2d8c1123b7d1daf8f6da151034d3469c513f8ad0c5fe9",
+        "verification": {
+          "status": "FAIL",
+          "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, cargo-deny / cargo-deny concluded failure",
+            "public profile identity: garnet-labs/codex / run 32343464709 / profile 01a01e0b-8622-72cc-892d-5772d667e698; recorded 68029fd851d25f3bfc28563e3b7102f1b1620b10 (refs/pull/15/merge); expected head 30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+            "public profile identity: garnet-labs/codex / run 32343464709 / profile 01a01e0a-cafd-7667-8067-cf3d94249615; recorded 68029fd851d25f3bfc28563e3b7102f1b1620b10 (refs/pull/15/merge); expected head 30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
+            "sensor coverage: Garnet Runtime Review: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
+          ],
+          "receiptFingerprint": "e2d6ac6f40ee49d0d5d2d8c1123b7d1daf8f6da151034d3469c513f8ad0c5fe9"
+        }
+      },
+      {
+        "forkPr": 14,
+        "url": "https://github.com/garnet-labs/codex/pull/14",
+        "prState": "open",
+        "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+        "previous": "0df0c69c45c28404f7d759f8b3c9a5f7ff81a5ba",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "9a4a80d5cae4c14475d29d95cb7802bbb3199052918992449db8fb5e1fcc4683",
+        "verification": {
+          "status": "FAIL",
+          "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/codex / run 32098929337 / profile 01a0131d-b876-7b30-a168-8035c339a39e; recorded 1e4f0953af97c8d26e56e6ff631bc70edc7b2c20 (refs/pull/14/merge); expected head 8df7bb5fef52a0447d7f9f920bce27121434ca0f",
+            "sensor coverage: cargo-deny / cargo-deny: log unreadable; 0 of 1 jobs covered"
+          ],
+          "receiptFingerprint": "9a4a80d5cae4c14475d29d95cb7802bbb3199052918992449db8fb5e1fcc4683"
+        }
+      },
+      {
+        "forkPr": 9,
+        "url": "https://github.com/garnet-labs/codex/pull/9",
+        "prState": "open",
+        "head": "6807425507b1049ad067437bd7daed537a2669c0",
+        "previous": "cf24349b947816c3457a09851fe83d70fee75944",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "00591f5331406388e0ad3a8fc9f10a0e4de9445031e4859226e4addd4e7b16f5",
+        "verification": {
+          "status": "FAIL",
+          "head": "6807425507b1049ad067437bd7daed537a2669c0",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, cargo-deny / cargo-deny concluded failure",
+            "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04435-9447-7128-8ccd-b97fa1a5e861; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+            "public profile identity: garnet-labs/codex / run 33097033722 / profile 01a04434-7eec-760c-be58-3a45b59bb789; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+            "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04434-5bde-76c7-8da1-cbde79ac96a7; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0",
+            "public profile identity: garnet-labs/codex / run 33097033941 / profile 01a04434-e144-75e6-b5fc-234cf8b4dff6; recorded b0ad6a5590f88bc1c02f1f945934d265ed41b151 (refs/pull/9/merge); expected head 6807425507b1049ad067437bd7daed537a2669c0"
+          ],
+          "receiptFingerprint": "00591f5331406388e0ad3a8fc9f10a0e4de9445031e4859226e4addd4e7b16f5"
+        }
+      },
+      {
+        "forkPr": 8,
+        "url": "https://github.com/garnet-labs/codex/pull/8",
+        "prState": "open",
+        "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "bcb9099601d88345a1794f569c65ba7d9c1da88bc657958e38ffb170f4f489a5",
+        "verification": {
+          "status": "FAIL",
+          "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 33097349788 / profile 01a04438-5ce5-7300-9366-aebc41eefc7d; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+            "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a0443a-ecae-7864-95b9-ad36f03f11d6; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+            "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a04439-1089-7f0f-a5ce-6dee6417f0ad; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638",
+            "public profile identity: garnet-labs/codex / run 33097349926 / profile 01a04439-111f-75c5-b114-53a973bf5271; recorded 5e60c3620403d30fe49ac514afe358f6ca08b3fb (refs/pull/8/merge); expected head de2baab8fb5432c88d3302d2a52317f92cda0638"
+          ],
+          "receiptFingerprint": "bcb9099601d88345a1794f569c65ba7d9c1da88bc657958e38ffb170f4f489a5"
+        }
+      },
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/codex/pull/5",
+        "prState": "open",
+        "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "38c8e0f0c0da1fccc33030387b40ff1ef2c1dfb4bfd4f0158c151f3d2f6872d8",
+        "verification": {
+          "status": "FAIL",
+          "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 33097339289 / profile 01a04438-2f8f-79ea-9c1d-0ccda6058cd1; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+            "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a0443a-dcbc-73c5-9416-4e4dcbc2f423; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+            "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a04437-f106-771c-9935-f5e90dba624e; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
+            "public profile identity: garnet-labs/codex / run 33097339541 / profile 01a04438-de7b-7291-8d58-49ad2ab15768; recorded fa63b6e1525f35e4e112ed4a5416f4bb39f1bf13 (refs/pull/5/merge); expected head d55ee02e0e97585ef2fb078e3c3ce52034c02b83"
+          ],
+          "receiptFingerprint": "38c8e0f0c0da1fccc33030387b40ff1ef2c1dfb4bfd4f0158c151f3d2f6872d8"
+        }
+      },
+      {
+        "forkPr": 3,
+        "url": "https://github.com/garnet-labs/codex/pull/3",
+        "prState": "open",
+        "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "d619f45b41074878311f9cd7c9e9d2609b56121302548d23fc03aa1569cc2d75",
+        "verification": {
+          "status": "FAIL",
+          "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
+          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "public profile identity: garnet-labs/codex / run 33097516766 / profile 01a0443a-3be0-79cf-acee-9e1dcc419807; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+            "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443b-d443-7607-ab2a-b10299b6f262; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+            "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443a-8fca-76c8-bcb3-ae2e67ff3dc5; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2",
+            "public profile identity: garnet-labs/codex / run 33097517022 / profile 01a0443a-9af9-7fee-b7bc-3d3279996025; recorded 22681399eb4bea7c77382b4cec2fc65f86efbb6b (refs/pull/3/merge); expected head 59e800f340c74502a80a3a408c30d96fea0d96e2"
+          ],
+          "receiptFingerprint": "d619f45b41074878311f9cd7c9e9d2609b56121302548d23fc03aa1569cc2d75"
+        }
+      }
+    ]
   }
 }

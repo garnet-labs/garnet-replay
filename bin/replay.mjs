@@ -433,6 +433,7 @@ ladder (one target ledger per upstream repository, one fork as the only write ta
   uat <slug> --pr N [--cold-read 0..5] [--decision-impact r] ...     score one checked pull request by hand: cold read, decision impact,
                                                                     attribution, value hypothesis (supported|not-supported|unknown) + --note
   status [<slug>]                                                   ladder board and the next command
+  reconcile <slug>|--all [--dry-run|--apply]                         observe fork default-branch stage 2 files and verify open/merged recorded PRs; local ledger writes only with --apply
   stage2 <slug> [--ecosystem x] [--reviewers a,b] [--dry-run]       opt-in: evidence mirror, merge-safety gate, REVIEW.md, re-review + adapters
                                                                     reviewers: devin, coderabbit, greptile (default), bugbot, copilot, qodo, codex; --replace-adapters overwrites fork files
                                                                     --record-workflow <path> listens to one recorder; --add-record adds the harness recorder; --replace-mirror overwrites mirror files
@@ -562,6 +563,7 @@ async function main(args) {
   if (command === "status") return ladder.status(args.slice(1))
   if (command === "upstream") return ladder.upstream(args.slice(1))
   if (command === "stage2") return ladder.stage2(args.slice(1))
+  if (command === "reconcile") return ladder.reconcile(args.slice(1))
   if (command === "known") return known(args.slice(1))
   if (command === "seed-from-corpus") return seed(args.slice(1))
   if (command === "seed-constructed") return seedConstructed(args.slice(1))

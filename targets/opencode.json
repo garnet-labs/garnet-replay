@@ -908,6 +908,113 @@
       "ecosystem": null,
       "state": "pending",
       "openedAt": "2026-09-18T17:22:09.990Z"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 22,
+      "branch": "dependabot/npm_and_yarn/packages/web/astro-7.4.7",
+      "forkHeadSha": "d636c992b6510595d30c8223baa50c1f60008e90",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d636c992b6510595d30c8223baa50c1f60008e90",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [
+          "check settled: Dependency install (recorded) concluded failure"
+        ],
+        "receiptFingerprint": "ec9e395e60d0c6ba76ce092535f30bf65b1de73f8fe1d1e7ad51c0325ac67a5b"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 21,
+      "branch": "dependabot/npm_and_yarn/packages/posts/astro-7.4.7",
+      "forkHeadSha": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [
+          "check settled: Dependency install (recorded) concluded failure"
+        ],
+        "receiptFingerprint": "855730ff75d2052e2f45a2a3cee8d93d76e0fb590f1b28bf7f8d9f5ffc5a3874"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 20,
+      "branch": "dependabot/npm_and_yarn/packages/web/astrojs/solid-js-7.1.2",
+      "forkHeadSha": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [
+          "check settled: Dependency install (recorded) concluded failure"
+        ],
+        "receiptFingerprint": "9d8be362287cb4ae572793b72cbb3001969c635da6873908cb8a7f3997ca194b"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 19,
+      "branch": "cursor/bump-bun-types-599f",
+      "forkHeadSha": "56604849d483c210795e7a79e5cdcca1552563bd",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "56604849d483c210795e7a79e5cdcca1552563bd",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [],
+        "receiptFingerprint": "c445bf0d061817dd179a397cf069f59fd261a29a7922f713660655bc591c67cd"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 18,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [
+          "pair line: no pair line on the comment",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "0c71182955f139479abfc0093eb4cd3afb4d634740e106cceb8fe2a76cf69c05"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 15,
+      "branch": "dependabot/npm_and_yarn/packages/util/glob-14.0.2",
+      "forkHeadSha": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
+        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "reasons": [
+          "check settled: Dependency install (recorded) concluded failure"
+        ],
+        "receiptFingerprint": "a8c0be03f89ecc8e796c632340f1e2d3a7d33c42911a9144e2018e09c8af2e5f"
+      },
+      "observedAt": "2026-11-20T04:58:33.116Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -925,7 +1032,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "dev",
+    "checkedSha": "21f3c7d564605114e3be80c987882d01ba263058",
+    "checkedAt": "2026-11-20T04:58:33.116Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on dev; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -938,12 +1058,134 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "dev",
     "checkedSha": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
     "pr": 23
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:58:33.116Z",
+    "defaultBranch": "dev",
+    "defaultSha": "21f3c7d564605114e3be80c987882d01ba263058",
+    "inspectedPrs": 23,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 22,
+        "url": "https://github.com/garnet-labs/opencode/pull/22",
+        "prState": "open",
+        "head": "d636c992b6510595d30c8223baa50c1f60008e90",
+        "previous": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "ec9e395e60d0c6ba76ce092535f30bf65b1de73f8fe1d1e7ad51c0325ac67a5b",
+        "verification": {
+          "status": "FAIL",
+          "head": "d636c992b6510595d30c8223baa50c1f60008e90",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [
+            "check settled: Dependency install (recorded) concluded failure"
+          ],
+          "receiptFingerprint": "ec9e395e60d0c6ba76ce092535f30bf65b1de73f8fe1d1e7ad51c0325ac67a5b"
+        }
+      },
+      {
+        "forkPr": 21,
+        "url": "https://github.com/garnet-labs/opencode/pull/21",
+        "prState": "open",
+        "head": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
+        "previous": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "855730ff75d2052e2f45a2a3cee8d93d76e0fb590f1b28bf7f8d9f5ffc5a3874",
+        "verification": {
+          "status": "FAIL",
+          "head": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [
+            "check settled: Dependency install (recorded) concluded failure"
+          ],
+          "receiptFingerprint": "855730ff75d2052e2f45a2a3cee8d93d76e0fb590f1b28bf7f8d9f5ffc5a3874"
+        }
+      },
+      {
+        "forkPr": 20,
+        "url": "https://github.com/garnet-labs/opencode/pull/20",
+        "prState": "open",
+        "head": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
+        "previous": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "9d8be362287cb4ae572793b72cbb3001969c635da6873908cb8a7f3997ca194b",
+        "verification": {
+          "status": "FAIL",
+          "head": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [
+            "check settled: Dependency install (recorded) concluded failure"
+          ],
+          "receiptFingerprint": "9d8be362287cb4ae572793b72cbb3001969c635da6873908cb8a7f3997ca194b"
+        }
+      },
+      {
+        "forkPr": 19,
+        "url": "https://github.com/garnet-labs/opencode/pull/19",
+        "prState": "open",
+        "head": "56604849d483c210795e7a79e5cdcca1552563bd",
+        "previous": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "c445bf0d061817dd179a397cf069f59fd261a29a7922f713660655bc591c67cd",
+        "verification": {
+          "status": "PASS",
+          "head": "56604849d483c210795e7a79e5cdcca1552563bd",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [],
+          "receiptFingerprint": "c445bf0d061817dd179a397cf069f59fd261a29a7922f713660655bc591c67cd"
+        }
+      },
+      {
+        "forkPr": 18,
+        "url": "https://github.com/garnet-labs/opencode/pull/18",
+        "prState": "merged",
+        "head": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "0c71182955f139479abfc0093eb4cd3afb4d634740e106cceb8fe2a76cf69c05",
+        "verification": {
+          "status": "FAIL",
+          "head": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [
+            "pair line: no pair line on the comment",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "0c71182955f139479abfc0093eb4cd3afb4d634740e106cceb8fe2a76cf69c05"
+        }
+      },
+      {
+        "forkPr": 15,
+        "url": "https://github.com/garnet-labs/opencode/pull/15",
+        "prState": "open",
+        "head": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
+        "previous": "ca1cf585a2cfe4ae0b31e6438c86ab8a04efd30b",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "a8c0be03f89ecc8e796c632340f1e2d3a7d33c42911a9144e2018e09c8af2e5f",
+        "verification": {
+          "status": "FAIL",
+          "head": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
+          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "reasons": [
+            "check settled: Dependency install (recorded) concluded failure"
+          ],
+          "receiptFingerprint": "a8c0be03f89ecc8e796c632340f1e2d3a7d33c42911a9144e2018e09c8af2e5f"
+        }
+      }
+    ]
   }
 }

@@ -1654,18 +1654,370 @@
       "transition": null,
       "record": "inject",
       "ecosystem": "npm",
-      "state": "undeterminable",
+      "state": "recorded",
       "openedAt": "2026-09-11T17:44:32.194Z",
       "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
       "verification": {
         "status": "FAIL",
         "head": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
-        "observedAt": "2026-09-11T18:00:27.308Z",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
           "public profile identity: garnet-labs/OpenHands / run 34629397391 / profile 01a09193-d3d4-707f-823a-d137810394b9; recorded f96d95f3028a76ff06ffd1e3e13fa6d0881aac84 (refs/pull/10/merge); expected head cc0afe66eae24f448b0a3215354cd18eefcc7562"
-        ]
-      }
+        ],
+        "receiptFingerprint": "a0c20b3332a9e37d0a015be05ce73da4b82d6f70763f2a0c97b58b401e8e2fc7"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 44,
+      "branch": "deps/electron-45.2.3",
+      "forkHeadSha": "baa10bfb97346b113ce5605152e43d94ca322152",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "baa10bfb97346b113ce5605152e43d94ca322152",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "pair line: no pair line on the comment"
+        ],
+        "receiptFingerprint": "76806daf0fbdf71de9dfc4f987501b48f429e1b94d0250d999f9b58ac3600128"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 42,
+      "branch": "ci/garnet-evidence",
+      "forkHeadSha": "5c1c28a275f7ca6cc4dba0d4109f108b2b020bc6",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "5c1c28a275f7ca6cc4dba0d4109f108b2b020bc6",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "0f0b465cb9bcf69439a77112ed3a0e7b2719895a5b8ef15575b10a83f87adc5b"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 41,
+      "branch": "cursor/fix-garnet-action-pins-a1c2",
+      "forkHeadSha": "a862b115c24571c5cd963fa5253025d305d3754b",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "a862b115c24571c5cd963fa5253025d305d3754b",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "8a7f094f8912ffb8691a5f0b6ca6571599f1b8006350b7231f9a42855401e43f"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 40,
+      "branch": "dependabot/npm_and_yarn/follow-redirects-1.16.2",
+      "forkHeadSha": "5e2cf0426c7a7d514eb627c3021d56dedc70e00c",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "5e2cf0426c7a7d514eb627c3021d56dedc70e00c",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [],
+        "receiptFingerprint": "d239c3b898e1c7b8b6cc5d12215a2c810b7d32d1664d898197c8f984f832c3b5"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 39,
+      "branch": "cursor/sync-upstream-garnet-action-8f1f",
+      "forkHeadSha": "c0edc2410a0ae23f96b64139667f3ae11884d977",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "c0edc2410a0ae23f96b64139667f3ae11884d977",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "df736f92371256cf639c01a3e676e64fd291c39d165143d3589b2c1fd0f2aedc"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 37,
+      "branch": "onboarding/reviewer-guidance",
+      "forkHeadSha": "cbb47662cee96969610b5ae51871099498db5cad",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "cbb47662cee96969610b5ae51871099498db5cad",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "public permalink: no public profile link on the comment",
+          "pull request open: state closed",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "434806067c2379665c353fc2c7a104c62fc42d1db707951184fd2d6636dbab6a"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 34,
+      "branch": "cursor/pin-garnet-action-v2-4-0-02d7",
+      "forkHeadSha": "ad5f57bb62af345f2eba513ee451bc0618e32e7d",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "ad5f57bb62af345f2eba513ee451bc0618e32e7d",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "1096977f83a623edd7f510e324d051ee33891bde589add28aabe7135606f87cb"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 33,
+      "branch": "cursor/sync-upstream-garnet-action-02d7",
+      "forkHeadSha": "fa252f7860452abddeac08949b51026cdfd19bda",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "fa252f7860452abddeac08949b51026cdfd19bda",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: test-and-build (ubuntu) concluded cancelled",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "6ffbc95b172a6303f1ae1fc66170bc05142867f3c5d78cbbce66b0dc58f44f67"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 32,
+      "branch": "dependabot/npm_and_yarn/fast-uri-3.1.9",
+      "forkHeadSha": "d2f475caa4d0b6ce38c0c07f57c6b4ad6bf2fa8c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d2f475caa4d0b6ce38c0c07f57c6b4ad6bf2fa8c",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "303585196a5560525d69bafd3ef239e4575d134a4cd7936e9a5080ba2974db69"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 31,
+      "branch": "dependabot/npm_and_yarn/electron-43.8.1",
+      "forkHeadSha": "d2ef29756ce6efad7bcfd56462e7d8c6c1ffeed1",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "d2ef29756ce6efad7bcfd56462e7d8c6c1ffeed1",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "ef3867598cc8aa363ed43bcb10702238189b7459e2a904e6ed920c11aa236e61"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 29,
+      "branch": "dependabot/npm_and_yarn/zod-4.6.7",
+      "forkHeadSha": "79fe3ad2b2ec47d12e44aa4ec2623217761f5adb",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "79fe3ad2b2ec47d12e44aa4ec2623217761f5adb",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "bbf979273864cba0126635a9326c13bf48b3ca4b53fbcbe44b3771206080d25a"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 28,
+      "branch": "dependabot/npm_and_yarn/multi-c74a94eb27",
+      "forkHeadSha": "28dab5977195a85446073a43515111480b5cf6ec",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "28dab5977195a85446073a43515111480b5cf6ec",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "c43993e73f2f606f4b202d3bf460cf9d0b7061f10e0b663b59f0f8af72542a20"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 27,
+      "branch": "chore/update-ejo",
+      "forkHeadSha": "514ae95b265bad3e9df6dac93378d43f2fb0f5b2",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "514ae95b265bad3e9df6dac93378d43f2fb0f5b2",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: test-and-build (ubuntu) concluded cancelled"
+        ],
+        "receiptFingerprint": "f638bdb61575c0423b93e89c9880cb9093a4e6dc6479fe1f3cb7582a9b235efb"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 26,
+      "branch": "chore/update-ek9",
+      "forkHeadSha": "b6176ea8af38306914b5ae5995c79c876ca17435",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "b6176ea8af38306914b5ae5995c79c876ca17435",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs"
+        ],
+        "receiptFingerprint": "6a68657ac7087f7d772d69b737d53541d461d038a63046ff8c8ceddc3a8c0df9"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 25,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "387c9fd8f976a3fde2fa5e6b0f6291eb1a861da6",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "387c9fd8f976a3fde2fa5e6b0f6291eb1a861da6",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "befc5945119b47adbd2a6492b795e90f7e85ed5628ea2a0e325a0c742a34171f"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 13,
+      "branch": "chore/update-db9",
+      "forkHeadSha": "a2e3199063dc1d61705e4f448132f77c0263afe6",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "a2e3199063dc1d61705e4f448132f77c0263afe6",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: test-and-build (ubuntu) concluded failure",
+          "public profile identity: garnet-labs/OpenHands / run 34655678147 / profile 01a092b4-c8eb-7350-ad59-be75cea53558; recorded f9094fffbcd608e5c2cfb44d7971934c65b7664f (refs/pull/13/merge); expected head a2e3199063dc1d61705e4f448132f77c0263afe6"
+        ],
+        "receiptFingerprint": "87e617a6df1393598179c399338af432552dd98c888b8af67994b16a5f634cd0"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 12,
+      "branch": "chore/update-dba",
+      "forkHeadSha": "62b25ee8d11183b9885f3e2600a44621ac2c3c40",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "62b25ee8d11183b9885f3e2600a44621ac2c3c40",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: test-and-build (ubuntu) concluded failure",
+          "public profile identity: garnet-labs/OpenHands / run 34653754893 / profile 01a0929a-2231-75e2-b354-f3051435e90a; recorded 0ac27d5b061fe5dcf25dd19dd8deda961843222f (refs/pull/12/merge); expected head 62b25ee8d11183b9885f3e2600a44621ac2c3c40"
+        ],
+        "receiptFingerprint": "99a0360ba07b4147c47bc73a5848be31fcf612c4a7f7459cba95a7fbe6eb3317"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 1,
+      "branch": "review/electron-runtime",
+      "forkHeadSha": "8b27955ff4bffff810defd4be04b13374f2b1585",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "8b27955ff4bffff810defd4be04b13374f2b1585",
+        "checkedAt": "2026-11-20T04:59:48.754Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: mock-llm-e2e concluded failure",
+          "public profile identity: garnet-labs/OpenHands / run 32078526784 / profile 01a011ff-7ae5-7f14-9efb-9eeb2c488164; recorded d9398c1af960b5219d84dd6f5322c5bf71bff5da (refs/pull/1/merge); expected head 8b27955ff4bffff810defd4be04b13374f2b1585",
+          "sensor coverage: mock-llm-e2e: log unreadable; 0 of 1 jobs covered"
+        ],
+        "receiptFingerprint": "25812b1699914ac68cf6fa29e81fc8f8f5e7c8b3b86f8e032dfa134f545f829d"
+      },
+      "observedAt": "2026-11-20T04:59:48.754Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -1683,7 +2035,19 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "in-flight",
+    "defaultBranch": "main",
+    "checkedSha": "f498e5b7144abf2b622f490a85a89ecb47057105",
+    "checkedAt": "2026-11-20T04:59:48.754Z",
+    "files": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml",
+      "REVIEW.md"
+    ],
+    "missing": [],
+    "note": "5/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1696,6 +2060,402 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
-  "setupPr": 25
+  "stage": 1,
+  "setupPr": 25,
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:59:48.754Z",
+    "defaultBranch": "main",
+    "defaultSha": "f498e5b7144abf2b622f490a85a89ecb47057105",
+    "inspectedPrs": 41,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 44,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/44",
+        "prState": "open",
+        "head": "baa10bfb97346b113ce5605152e43d94ca322152",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "76806daf0fbdf71de9dfc4f987501b48f429e1b94d0250d999f9b58ac3600128",
+        "verification": {
+          "status": "FAIL",
+          "head": "baa10bfb97346b113ce5605152e43d94ca322152",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "pair line: no pair line on the comment"
+          ],
+          "receiptFingerprint": "76806daf0fbdf71de9dfc4f987501b48f429e1b94d0250d999f9b58ac3600128"
+        }
+      },
+      {
+        "forkPr": 42,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/42",
+        "prState": "merged",
+        "head": "5c1c28a275f7ca6cc4dba0d4109f108b2b020bc6",
+        "previous": "4e6d1a80470e9f3c5fd0f009d19f9cc910c56cd5",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "0f0b465cb9bcf69439a77112ed3a0e7b2719895a5b8ef15575b10a83f87adc5b",
+        "verification": {
+          "status": "FAIL",
+          "head": "5c1c28a275f7ca6cc4dba0d4109f108b2b020bc6",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "0f0b465cb9bcf69439a77112ed3a0e7b2719895a5b8ef15575b10a83f87adc5b"
+        }
+      },
+      {
+        "forkPr": 41,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/41",
+        "prState": "merged",
+        "head": "a862b115c24571c5cd963fa5253025d305d3754b",
+        "previous": "d306875498a07d7e110367f6695d365e30f22c63",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8a7f094f8912ffb8691a5f0b6ca6571599f1b8006350b7231f9a42855401e43f",
+        "verification": {
+          "status": "FAIL",
+          "head": "a862b115c24571c5cd963fa5253025d305d3754b",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "8a7f094f8912ffb8691a5f0b6ca6571599f1b8006350b7231f9a42855401e43f"
+        }
+      },
+      {
+        "forkPr": 40,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/40",
+        "prState": "open",
+        "head": "5e2cf0426c7a7d514eb627c3021d56dedc70e00c",
+        "previous": "7af138d557586808aae4ac277bc656a175d3fff3",
+        "scope": "base-ancestor",
+        "state": "recorded",
+        "receiptFingerprint": "d239c3b898e1c7b8b6cc5d12215a2c810b7d32d1664d898197c8f984f832c3b5",
+        "verification": {
+          "status": "PASS",
+          "head": "5e2cf0426c7a7d514eb627c3021d56dedc70e00c",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [],
+          "receiptFingerprint": "d239c3b898e1c7b8b6cc5d12215a2c810b7d32d1664d898197c8f984f832c3b5"
+        }
+      },
+      {
+        "forkPr": 39,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/39",
+        "prState": "merged",
+        "head": "c0edc2410a0ae23f96b64139667f3ae11884d977",
+        "previous": "7af138d557586808aae4ac277bc656a175d3fff3",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "df736f92371256cf639c01a3e676e64fd291c39d165143d3589b2c1fd0f2aedc",
+        "verification": {
+          "status": "FAIL",
+          "head": "c0edc2410a0ae23f96b64139667f3ae11884d977",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "df736f92371256cf639c01a3e676e64fd291c39d165143d3589b2c1fd0f2aedc"
+        }
+      },
+      {
+        "forkPr": 37,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/37",
+        "prState": "merged",
+        "head": "cbb47662cee96969610b5ae51871099498db5cad",
+        "previous": "2ecab3f04488765566a916f13449297d45f9731e",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "434806067c2379665c353fc2c7a104c62fc42d1db707951184fd2d6636dbab6a",
+        "verification": {
+          "status": "FAIL",
+          "head": "cbb47662cee96969610b5ae51871099498db5cad",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "public permalink: no public profile link on the comment",
+            "pull request open: state closed",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "434806067c2379665c353fc2c7a104c62fc42d1db707951184fd2d6636dbab6a"
+        }
+      },
+      {
+        "forkPr": 34,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/34",
+        "prState": "merged",
+        "head": "ad5f57bb62af345f2eba513ee451bc0618e32e7d",
+        "previous": "5f03b71a8c66fc4426fa02f1fcc1b063a88dec79",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "1096977f83a623edd7f510e324d051ee33891bde589add28aabe7135606f87cb",
+        "verification": {
+          "status": "FAIL",
+          "head": "ad5f57bb62af345f2eba513ee451bc0618e32e7d",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "1096977f83a623edd7f510e324d051ee33891bde589add28aabe7135606f87cb"
+        }
+      },
+      {
+        "forkPr": 33,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/33",
+        "prState": "merged",
+        "head": "fa252f7860452abddeac08949b51026cdfd19bda",
+        "previous": "d87dba6d7c1eb5fb5d52b1af0592ec30ac42dc10",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "6ffbc95b172a6303f1ae1fc66170bc05142867f3c5d78cbbce66b0dc58f44f67",
+        "verification": {
+          "status": "FAIL",
+          "head": "fa252f7860452abddeac08949b51026cdfd19bda",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: test-and-build (ubuntu) concluded cancelled",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "6ffbc95b172a6303f1ae1fc66170bc05142867f3c5d78cbbce66b0dc58f44f67"
+        }
+      },
+      {
+        "forkPr": 32,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/32",
+        "prState": "open",
+        "head": "d2f475caa4d0b6ce38c0c07f57c6b4ad6bf2fa8c",
+        "previous": "5f03b71a8c66fc4426fa02f1fcc1b063a88dec79",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "303585196a5560525d69bafd3ef239e4575d134a4cd7936e9a5080ba2974db69",
+        "verification": {
+          "status": "FAIL",
+          "head": "d2f475caa4d0b6ce38c0c07f57c6b4ad6bf2fa8c",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "303585196a5560525d69bafd3ef239e4575d134a4cd7936e9a5080ba2974db69"
+        }
+      },
+      {
+        "forkPr": 31,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/31",
+        "prState": "open",
+        "head": "d2ef29756ce6efad7bcfd56462e7d8c6c1ffeed1",
+        "previous": "5f03b71a8c66fc4426fa02f1fcc1b063a88dec79",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "ef3867598cc8aa363ed43bcb10702238189b7459e2a904e6ed920c11aa236e61",
+        "verification": {
+          "status": "FAIL",
+          "head": "d2ef29756ce6efad7bcfd56462e7d8c6c1ffeed1",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "ef3867598cc8aa363ed43bcb10702238189b7459e2a904e6ed920c11aa236e61"
+        }
+      },
+      {
+        "forkPr": 29,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/29",
+        "prState": "open",
+        "head": "79fe3ad2b2ec47d12e44aa4ec2623217761f5adb",
+        "previous": "71c2b703b5bd344843c857bd9fdf76595543c274",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "bbf979273864cba0126635a9326c13bf48b3ca4b53fbcbe44b3771206080d25a",
+        "verification": {
+          "status": "FAIL",
+          "head": "79fe3ad2b2ec47d12e44aa4ec2623217761f5adb",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "bbf979273864cba0126635a9326c13bf48b3ca4b53fbcbe44b3771206080d25a"
+        }
+      },
+      {
+        "forkPr": 28,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/28",
+        "prState": "open",
+        "head": "28dab5977195a85446073a43515111480b5cf6ec",
+        "previous": "5f03b71a8c66fc4426fa02f1fcc1b063a88dec79",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "c43993e73f2f606f4b202d3bf460cf9d0b7061f10e0b663b59f0f8af72542a20",
+        "verification": {
+          "status": "FAIL",
+          "head": "28dab5977195a85446073a43515111480b5cf6ec",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "c43993e73f2f606f4b202d3bf460cf9d0b7061f10e0b663b59f0f8af72542a20"
+        }
+      },
+      {
+        "forkPr": 27,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/27",
+        "prState": "open",
+        "head": "514ae95b265bad3e9df6dac93378d43f2fb0f5b2",
+        "previous": "1d3dda408776086fb05e3810e6cdb5356e03be0a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "f638bdb61575c0423b93e89c9880cb9093a4e6dc6479fe1f3cb7582a9b235efb",
+        "verification": {
+          "status": "FAIL",
+          "head": "514ae95b265bad3e9df6dac93378d43f2fb0f5b2",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: test-and-build (ubuntu) concluded cancelled"
+          ],
+          "receiptFingerprint": "f638bdb61575c0423b93e89c9880cb9093a4e6dc6479fe1f3cb7582a9b235efb"
+        }
+      },
+      {
+        "forkPr": 26,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/26",
+        "prState": "open",
+        "head": "b6176ea8af38306914b5ae5995c79c876ca17435",
+        "previous": "5f03b71a8c66fc4426fa02f1fcc1b063a88dec79",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "6a68657ac7087f7d772d69b737d53541d461d038a63046ff8c8ceddc3a8c0df9",
+        "verification": {
+          "status": "FAIL",
+          "head": "b6176ea8af38306914b5ae5995c79c876ca17435",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs"
+          ],
+          "receiptFingerprint": "6a68657ac7087f7d772d69b737d53541d461d038a63046ff8c8ceddc3a8c0df9"
+        }
+      },
+      {
+        "forkPr": 25,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/25",
+        "prState": "merged",
+        "head": "387c9fd8f976a3fde2fa5e6b0f6291eb1a861da6",
+        "previous": "4d4b9d32fbae2cbfd5a4b5990550407a5b4ddd2a",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "befc5945119b47adbd2a6492b795e90f7e85ed5628ea2a0e325a0c742a34171f",
+        "verification": {
+          "status": "FAIL",
+          "head": "387c9fd8f976a3fde2fa5e6b0f6291eb1a861da6",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "befc5945119b47adbd2a6492b795e90f7e85ed5628ea2a0e325a0c742a34171f"
+        }
+      },
+      {
+        "forkPr": 13,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/13",
+        "prState": "open",
+        "head": "a2e3199063dc1d61705e4f448132f77c0263afe6",
+        "previous": "2b50044ae5fdbe08e73192255c225549d5926216",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "87e617a6df1393598179c399338af432552dd98c888b8af67994b16a5f634cd0",
+        "verification": {
+          "status": "FAIL",
+          "head": "a2e3199063dc1d61705e4f448132f77c0263afe6",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: test-and-build (ubuntu) concluded failure",
+            "public profile identity: garnet-labs/OpenHands / run 34655678147 / profile 01a092b4-c8eb-7350-ad59-be75cea53558; recorded f9094fffbcd608e5c2cfb44d7971934c65b7664f (refs/pull/13/merge); expected head a2e3199063dc1d61705e4f448132f77c0263afe6"
+          ],
+          "receiptFingerprint": "87e617a6df1393598179c399338af432552dd98c888b8af67994b16a5f634cd0"
+        }
+      },
+      {
+        "forkPr": 12,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/12",
+        "prState": "open",
+        "head": "62b25ee8d11183b9885f3e2600a44621ac2c3c40",
+        "previous": "b03e63a3a3a08b7c45f7012c2c857397eb14e4af",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "99a0360ba07b4147c47bc73a5848be31fcf612c4a7f7459cba95a7fbe6eb3317",
+        "verification": {
+          "status": "FAIL",
+          "head": "62b25ee8d11183b9885f3e2600a44621ac2c3c40",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: test-and-build (ubuntu) concluded failure",
+            "public profile identity: garnet-labs/OpenHands / run 34653754893 / profile 01a0929a-2231-75e2-b354-f3051435e90a; recorded 0ac27d5b061fe5dcf25dd19dd8deda961843222f (refs/pull/12/merge); expected head 62b25ee8d11183b9885f3e2600a44621ac2c3c40"
+          ],
+          "receiptFingerprint": "99a0360ba07b4147c47bc73a5848be31fcf612c4a7f7459cba95a7fbe6eb3317"
+        }
+      },
+      {
+        "forkPr": 10,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/10",
+        "prState": "open",
+        "head": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
+        "previous": "4c1a44a5fb38ffa5f3d8bdc8315d5fe3bd865d41",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "a0c20b3332a9e37d0a015be05ce73da4b82d6f70763f2a0c97b58b401e8e2fc7",
+        "verification": {
+          "status": "FAIL",
+          "head": "cc0afe66eae24f448b0a3215354cd18eefcc7562",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/OpenHands / run 34629397391 / profile 01a09193-d3d4-707f-823a-d137810394b9; recorded f96d95f3028a76ff06ffd1e3e13fa6d0881aac84 (refs/pull/10/merge); expected head cc0afe66eae24f448b0a3215354cd18eefcc7562"
+          ],
+          "receiptFingerprint": "a0c20b3332a9e37d0a015be05ce73da4b82d6f70763f2a0c97b58b401e8e2fc7"
+        }
+      },
+      {
+        "forkPr": 1,
+        "url": "https://github.com/garnet-labs/OpenHands/pull/1",
+        "prState": "open",
+        "head": "8b27955ff4bffff810defd4be04b13374f2b1585",
+        "previous": "1497eb4609b9e985e0f3866008f84d41712707b6",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "25812b1699914ac68cf6fa29e81fc8f8f5e7c8b3b86f8e032dfa134f545f829d",
+        "verification": {
+          "status": "FAIL",
+          "head": "8b27955ff4bffff810defd4be04b13374f2b1585",
+          "checkedAt": "2026-11-20T04:59:48.754Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: mock-llm-e2e concluded failure",
+            "public profile identity: garnet-labs/OpenHands / run 32078526784 / profile 01a011ff-7ae5-7f14-9efb-9eeb2c488164; recorded d9398c1af960b5219d84dd6f5322c5bf71bff5da (refs/pull/1/merge); expected head 8b27955ff4bffff810defd4be04b13374f2b1585",
+            "sensor coverage: mock-llm-e2e: log unreadable; 0 of 1 jobs covered"
+          ],
+          "receiptFingerprint": "25812b1699914ac68cf6fa29e81fc8f8f5e7c8b3b86f8e032dfa134f545f829d"
+        }
+      }
+    ]
+  }
 }

@@ -165,15 +165,61 @@
       "packageDir": null,
       "logicalId": "9b10dd4f2a4d3f15ea1c7a3966cdbd9a0cb970b4f2fe16fb4883a8882fd9f425",
       "attemptId": "0917a65e1d7ecfb43821f263b3aadf64ee69eb3eb01041002c27c5a811ca775c",
-      "state": "undeterminable",
-      "openedAt": "2026-10-28T22:18:26.755Z"
+      "state": "recorded",
+      "openedAt": "2026-10-28T22:18:26.755Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
+        "checkedAt": "2026-11-20T04:51:35.827Z",
+        "reasons": [
+          "check settled: test-structured-output / Summary concluded failure, test-structured-output / Test Basic Type Conversions concluded failure, test-structured-output / Test Execution File Format concluded failure, test-mcp-servers / test-mcp-integration concluded failure, test-mcp-servers / test-mcp-config-flag concluded failure, test-structured-output / Test Edge Cases concluded failure, test-structured-output / Test Output Name Sanitization concluded failure, test-base-action / test-prompt-file concluded failure, test-base-action / test-inline-prompt concluded failure, test-structured-output / Test Arrays and Objects concluded failure, test-settings / test-settings-inline-deny concluded failure, test-settings / test-settings-file-allow concluded failure, test-settings / test-settings-file-deny concluded failure, test-settings / test-settings-inline-allow concluded failure, test-custom-executables / test-custom-executables concluded failure",
+          "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
+        ],
+        "receiptFingerprint": "0262411c284f448fdb77b76af45f360129b7223f0282b122a97bd334a31bd9b7"
+      },
+      "observedAt": "2026-11-20T04:51:35.827Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 1,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
+        "checkedAt": "2026-11-20T04:51:35.827Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
+        ],
+        "receiptFingerprint": "c700fbf1c69bcc73f2c4097e17962a2ad60dce0b9f24eb2996e21f9131f861d1"
+      },
+      "observedAt": "2026-11-20T04:51:35.827Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "a56df619bf41abdea17093d6f63f7e64da83763b",
+    "checkedAt": "2026-11-20T04:51:35.827Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -186,6 +232,57 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
-  "setupPr": 1
+  "stage": 1,
+  "setupPr": 1,
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:51:35.827Z",
+    "defaultBranch": "main",
+    "defaultSha": "a56df619bf41abdea17093d6f63f7e64da83763b",
+    "inspectedPrs": 3,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 2,
+        "url": "https://github.com/garnet-labs/claude-code-action/pull/2",
+        "prState": "open",
+        "head": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
+        "previous": "8a1ec2e26c46e834b37f7ad4819919b1b31a5bf3",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "0262411c284f448fdb77b76af45f360129b7223f0282b122a97bd334a31bd9b7",
+        "verification": {
+          "status": "FAIL",
+          "head": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
+          "checkedAt": "2026-11-20T04:51:35.827Z",
+          "reasons": [
+            "check settled: test-structured-output / Summary concluded failure, test-structured-output / Test Basic Type Conversions concluded failure, test-structured-output / Test Execution File Format concluded failure, test-mcp-servers / test-mcp-integration concluded failure, test-mcp-servers / test-mcp-config-flag concluded failure, test-structured-output / Test Edge Cases concluded failure, test-structured-output / Test Output Name Sanitization concluded failure, test-base-action / test-prompt-file concluded failure, test-base-action / test-inline-prompt concluded failure, test-structured-output / Test Arrays and Objects concluded failure, test-settings / test-settings-inline-deny concluded failure, test-settings / test-settings-file-allow concluded failure, test-settings / test-settings-file-deny concluded failure, test-settings / test-settings-inline-allow concluded failure, test-custom-executables / test-custom-executables concluded failure",
+            "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
+          ],
+          "receiptFingerprint": "0262411c284f448fdb77b76af45f360129b7223f0282b122a97bd334a31bd9b7"
+        }
+      },
+      {
+        "forkPr": 1,
+        "url": "https://github.com/garnet-labs/claude-code-action/pull/1",
+        "prState": "open",
+        "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "c700fbf1c69bcc73f2c4097e17962a2ad60dce0b9f24eb2996e21f9131f861d1",
+        "verification": {
+          "status": "FAIL",
+          "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
+          "checkedAt": "2026-11-20T04:51:35.827Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
+          ],
+          "receiptFingerprint": "c700fbf1c69bcc73f2c4097e17962a2ad60dce0b9f24eb2996e21f9131f861d1"
+        }
+      }
+    ]
+  }
 }

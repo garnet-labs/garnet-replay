@@ -223,6 +223,10 @@ $R stage2 posthog --dry-run                                     # evidence mirro
 $R status posthog
 ```
 
+To compare stored progress with GitHub, use `replay reconcile --all` (dry-run)
+or `replay reconcile <slug> --apply` (local ledgers only). The board shows dated
+shareability separately from recording; see [reconciliation](docs/reconcile.md).
+
 Use `--first-commit <sha>` for a two-commit comparison of an earlier commit in
 the upstream pull request with its head:
 

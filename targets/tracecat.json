@@ -54,12 +54,188 @@
       "observedAt": "2026-11-16T21:28:59.776Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 11,
+      "branch": "cursor/duckdb-legacy-extensions-b5b8",
+      "forkHeadSha": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit-sandbox) concluded failure, test-all (unit) concluded cancelled",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "f1ee57cce9267f1aec09315768f3070032d35b7d4c5afedc31a51d27a52a9bdf"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 10,
+      "branch": "deps/oauthlib-pyasn1",
+      "forkHeadSha": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "a2f87b51610d2fd027bfa791edb2658cd5d2483b93ee0a7530e331e2d493df99"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 8,
+      "branch": "dependabot/npm_and_yarn/frontend/hey-api/openapi-ts-0.97.3",
+      "forkHeadSha": "2105771ccfb47c9061fac8fb090d2041bb849afd",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "4124cf274858a993b4e45563922863a9a31c9af595819fac36d13e2386f6c1d8"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 7,
+      "branch": "dependabot/uv/dnspython-2.9.2",
+      "forkHeadSha": "16c0109f939f5c97a42044741045488e7bef9780",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "16c0109f939f5c97a42044741045488e7bef9780",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit-sandbox) concluded failure, test-all (unit) concluded cancelled",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "8be29bd95030d62953feb6c14b0a05ebe8a679adccb2bd4f6ed6c5fb9a8727cf"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 6,
+      "branch": "dependabot/pip/packages/tracecat-registry/dnspython-2.9.2",
+      "forkHeadSha": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "check settled: test-all (registry) concluded cancelled, test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure, test-all (temporal) concluded cancelled",
+          "sensor coverage: test-all (temporal): log unreadable; test-all (registry): log unreadable; 2 of 4 jobs covered"
+        ],
+        "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 5,
+      "branch": "ci/workflow-input-rc",
+      "forkHeadSha": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit-sandbox) concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "c68ad0ebe07f966e2a7b03aed3f5035ed6a6fc5e21aa15dd81980fc568bdb232"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 3,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "df3635516a0107cb2908573ca60144bde3a7cece",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "df3635516a0107cb2908573ca60144bde3a7cece",
+        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+          "pull request open: state closed",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "06f0acb3d1acf3aae700be2d32181dd0f6757795571cb70025b7f5dd710e4519"
+      },
+      "observedAt": "2026-11-20T05:03:39.977Z",
+      "source": "github-reconciliation"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "133730679fe98349c0e06bf26080dc92a2c4f09b",
+    "checkedAt": "2026-11-20T05:03:39.977Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -72,5 +248,183 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 1,
+  "reconciliation": {
+    "checkedAt": "2026-11-20T05:03:39.977Z",
+    "defaultBranch": "main",
+    "defaultSha": "133730679fe98349c0e06bf26080dc92a2c4f09b",
+    "inspectedPrs": 11,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 11,
+        "url": "https://github.com/garnet-labs/tracecat/pull/11",
+        "prState": "open",
+        "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "f1ee57cce9267f1aec09315768f3070032d35b7d4c5afedc31a51d27a52a9bdf",
+        "verification": {
+          "status": "FAIL",
+          "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit-sandbox) concluded failure, test-all (unit) concluded cancelled",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "f1ee57cce9267f1aec09315768f3070032d35b7d4c5afedc31a51d27a52a9bdf"
+        }
+      },
+      {
+        "forkPr": 10,
+        "url": "https://github.com/garnet-labs/tracecat/pull/10",
+        "prState": "open",
+        "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "a2f87b51610d2fd027bfa791edb2658cd5d2483b93ee0a7530e331e2d493df99",
+        "verification": {
+          "status": "FAIL",
+          "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "a2f87b51610d2fd027bfa791edb2658cd5d2483b93ee0a7530e331e2d493df99"
+        }
+      },
+      {
+        "forkPr": 8,
+        "url": "https://github.com/garnet-labs/tracecat/pull/8",
+        "prState": "open",
+        "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "4124cf274858a993b4e45563922863a9a31c9af595819fac36d13e2386f6c1d8",
+        "verification": {
+          "status": "FAIL",
+          "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "4124cf274858a993b4e45563922863a9a31c9af595819fac36d13e2386f6c1d8"
+        }
+      },
+      {
+        "forkPr": 7,
+        "url": "https://github.com/garnet-labs/tracecat/pull/7",
+        "prState": "open",
+        "head": "16c0109f939f5c97a42044741045488e7bef9780",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "8be29bd95030d62953feb6c14b0a05ebe8a679adccb2bd4f6ed6c5fb9a8727cf",
+        "verification": {
+          "status": "FAIL",
+          "head": "16c0109f939f5c97a42044741045488e7bef9780",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit-sandbox) concluded failure, test-all (unit) concluded cancelled",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "8be29bd95030d62953feb6c14b0a05ebe8a679adccb2bd4f6ed6c5fb9a8727cf"
+        }
+      },
+      {
+        "forkPr": 6,
+        "url": "https://github.com/garnet-labs/tracecat/pull/6",
+        "prState": "open",
+        "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b",
+        "verification": {
+          "status": "FAIL",
+          "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "check settled: test-all (registry) concluded cancelled, test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure, test-all (temporal) concluded cancelled",
+            "sensor coverage: test-all (temporal): log unreadable; test-all (registry): log unreadable; 2 of 4 jobs covered"
+          ],
+          "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b"
+        }
+      },
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/tracecat/pull/5",
+        "prState": "open",
+        "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "c68ad0ebe07f966e2a7b03aed3f5035ed6a6fc5e21aa15dd81980fc568bdb232",
+        "verification": {
+          "status": "FAIL",
+          "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit-sandbox) concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "c68ad0ebe07f966e2a7b03aed3f5035ed6a6fc5e21aa15dd81980fc568bdb232"
+        }
+      },
+      {
+        "forkPr": 3,
+        "url": "https://github.com/garnet-labs/tracecat/pull/3",
+        "prState": "merged",
+        "head": "df3635516a0107cb2908573ca60144bde3a7cece",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "06f0acb3d1acf3aae700be2d32181dd0f6757795571cb70025b7f5dd710e4519",
+        "verification": {
+          "status": "FAIL",
+          "head": "df3635516a0107cb2908573ca60144bde3a7cece",
+          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure",
+            "pull request open: state closed",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "06f0acb3d1acf3aae700be2d32181dd0f6757795571cb70025b7f5dd710e4519"
+        }
+      }
+    ]
+  }
 }
