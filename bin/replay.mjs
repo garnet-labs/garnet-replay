@@ -12,9 +12,11 @@ import { knownEvidence } from "../lib/known-evidence.mjs"
 import { listTargets } from "../lib/ledger.mjs"
 import { createReplayBranch, pickDependencyFromHistory, planReplay } from "../live/replay-branch.mjs"
 import { validate } from "../lib/validate.mjs"
-import { verifyExitCode } from "../lib/verify.mjs"
+import { profileAttributionForComment, verifyExitCode } from "../lib/verify.mjs"
 import { decideExitCode } from "../lib/decide.mjs"
-import { run } from "../lib/gh.mjs"
+import { latestRuntimeReviewComment, prComments, prHeadSha, run } from "../lib/gh.mjs"
+import { parsePrUrl } from "../lib/receipt.mjs"
+import { compareProfileTrees, renderProfileTrees } from "../lib/profile-reader.mjs"
 import { serveWorkspace } from "../lib/workspace-server.mjs"
 import * as ladder from "../lib/commands.mjs"
 import { ground, requireGrounding } from "../lib/ground.mjs"
@@ -441,6 +443,7 @@ records and pages
   pair --base ... --head ...                                        build a replay JSON from two profile files
       [--steps "Run E2E test,Install deps"] [--claim "network:mock.shop:present-before-absent-after:Run E2E test"]...
       [--intent file.json]                                                scope workload rows to recorded steps and check declared runtime claims
+  profile <file.json|pr-url> [--base compared.json] [--json]          read outbound actions and runner-attribution limits (read-only)
   serve [--root public] [--port 8787] [--run-replays] [--origin URL]   URL-to-replay interface and local runner
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `
@@ -456,6 +459,26 @@ async function main(args) {
     return undefined
   }
   if (command === "find") return ladder.find(args.slice(1))
+  if (command === "profile") {
+    const input = args[1]
+    if (typeof input !== "string") throw new Error("profile requires a profile file or GitHub PR URL")
+    const compared = option(args, "--base", null)
+    let report
+    if (/^https:\/\/github\.com\//.test(input)) {
+      if (compared !== null) throw new Error("--base is for profile files; a PR uses its recorded comparison")
+      const { owner, repo, number } = parsePrUrl(input)
+      const repository = `${owner}/${repo}`
+      const comments = prComments(repository, number)
+      report = await profileAttributionForComment({ comment: latestRuntimeReviewComment(comments), comments, headSha: prHeadSha(repository, number), repository })
+    } else {
+      const head = JSON.parse(await readFile(resolve(input), "utf8"))
+      const base = compared === null ? null : JSON.parse(await readFile(resolve(compared), "utf8"))
+      report = compareProfileTrees(head, base)
+    }
+    console.log(args.includes("--json") ? JSON.stringify(report, null, 2) : renderProfileTrees(report))
+    if (report.error !== undefined) process.exitCode = 1
+    return report
+  }
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))
   if (command === "repin") return ladder.repin(args.slice(1))

@@ -1,5 +1,85 @@
 # Worked examples
 
+## Outbound attribution reader (2026-11-20)
+
+Read a recorded profile without writing a ledger, dispatching a run, or changing
+the App result:
+
+```sh
+node bin/replay.mjs profile test/fixtures/demo-profiles/30304258281.json
+node bin/replay.mjs profile head.json --base compared.json --json
+node bin/replay.mjs profile https://github.com/garnet-labs/express/pull/91
+```
+
+File input supports public associations, profile collections, raw network peers,
+and summarized egress. Files are observations supplied by the operator; the file
+reader does not certify capture completeness. PR input requires a finalized,
+head-bound record and the existing exact public repository/run/profile/head
+identity checks, including merge-parent linkage.
+
+The reader shows each outbound destination, its recorded ancestry, ports, and
+job. Ancestry through `Runner.Worker` remains runner-linked. Container roots and
+host-rooted actions outside known runner services need attribution review even
+when their recorded step says `Runner Processes`. Missing ancestry and other
+unlinked roots also need review. Host-rooted Python traffic may be a host service;
+the warning does not claim that the job created it. No destination allowlist
+settles attribution.
+
+Comparison uses the destination, ancestry, ports, protocol, and job, not destination
+equality alone. PR reads use earlier finalized comments bound to the exact compared
+commit when available. If the App has overwritten its only comment, the compared
+profile may be unavailable. The reader then reports the head's attribution limits
+without claiming which actions were added. An unreadable or mismatched profile
+produces an explicit review note, not an empty comparison.
+
+### Real card excerpt: Express pull 91
+
+Generated from the current public profile and App comment after
+`replay verify https://github.com/garnet-labs/express/pull/91`. Verification returned
+`PASS` for the existing verification legs, with a separate attribution review
+note. This does not resolve job origin. The excerpt below ends before the quoted
+execution sections; the full card still retains every recorded job, workload row,
+background row, and job link. Existing App results and review classifications are
+preserved, not upgraded by the reader. Re-run verification before sharing.
+
+<!-- garnet:card slug=express pr=91 state=undeterminable -->
+### What ran, and what changed · pull request 91
+
+> Capture is best-effort; the App result is scoped to the recorded jobs.
+
+**Attribution review**
+
+Head: <code>188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b</code> · Compared: <code>811e189dae5d3abc3633d41b05aa0bdae2051188</code> (profile unavailable)
+
+Scope: <code>previous-push</code> · version transition: not derivable from the record.
+
+**Needs review: not attributable to the runner.**
+
+Compared profile unavailable; additions cannot be determined.
+Host-rooted ancestry does not establish job origin.
+
+- <code>systemd › python3.14 › python3.14</code> → <code>168.63.129.16</code> (ports <code>32526, 80 (http)</code>) · detached-root · job <code>install</code>
+- <code>systemd › python3.14 › python3.14</code> → <code>169.254.169.254</code> (ports <code>80 (http)</code>) · detached-root · job <code>install</code>
+- <code>systemd › systemd › curl</code> → <code>sfrclak.com</code> (ports <code>8000</code>) · detached-root · job <code>install</code>
+
+Review classification: **quiet-control**
+
+Nothing new in the recorded jobs; capture remains best-effort.
+
+Result: **undeterminable** (best-effort) · comparison-result
+
+**Comparison pair**
+
+- head: `188c0e0` · `188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b`
+- record bound to: `188c0e0`
+- compared with: `811e189` · `811e189dae5d3abc3633d41b05aa0bdae2051188`
+- version transition: not derivable from the record
+- scope: previous recorded head → head
+- capture: best-effort (scoped result, not complete capture)
+- App result: nothing new · 0 of 1 recorded jobs changed
+
+Run verification and assess reviewer value before sharing.
+
 ## Receipt-bound review classification (2026-11-17)
 
 Real output from the trusted, finalized E2B pull 93 record. The review assessment is separate from the App result; the card retains its recorded job and background rows. Run verify again before sharing.
