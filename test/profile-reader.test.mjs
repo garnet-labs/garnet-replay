@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import { spawnSync } from "node:child_process"
 import test from "node:test"
-import { attributionKind, compareProfileTrees, readProfileTrees, renderProfileTrees } from "../lib/profile-reader.mjs"
+import { attributionKind, captureAllowsComparison, compareProfileTrees, readProfileTrees, renderProfileTrees } from "../lib/profile-reader.mjs"
 import { buildModel, cardForPr, renderCard } from "../lib/card.mjs"
 import { assertVocabClean } from "../lib/guards.mjs"
 import { profileAttributionForComment, renderVerifyReport, verifyExhibit } from "../lib/verify.mjs"
@@ -232,6 +232,29 @@ test("CursorPage input rejects empty or malformed items instead of dropping them
   assert.throws(() => readProfileTrees({ items: [{}] }), /no readable outbound associations/)
   assert.throws(() => readProfileTrees({ profiles: { items: null } }), /no readable outbound associations/)
   assert.equal(attributionKind(["systemd", "devin-remote", "dockerd", "node"]), "container-rooted")
+})
+
+test("CursorPages with further pages withhold additions and explain the missing pages", () => {
+  const receipt = JSON.parse(readFileSync(new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url), "utf8"))
+  assert.equal(captureAllowsComparison(receipt), true)
+  for (const pagination of [
+    { has_more: true }, { next_cursor: "next-page" }, { nextCursor: "next-page" },
+    { pageInfo: { hasNextPage: true } }, { pageInfo: { nextCursor: "next-page" } },
+    { page_info: { has_more: true } },
+  ]) {
+    const incomplete = structuredClone(receipt)
+    Object.assign(incomplete.profiles, pagination)
+    assert.equal(captureAllowsComparison(incomplete), false)
+    for (const [head, base] of [[incomplete, receipt], [receipt, incomplete], [incomplete, null]]) {
+      const report = compareProfileTrees(head, base)
+      assert.equal(report.added, null)
+      assert.equal(report.rows.length, 4)
+      assert.match(renderProfileTrees(report), /Profile pages are missing; additions cannot be determined/)
+      assertVocabClean(renderProfileTrees(report))
+    }
+  }
+  assert.equal(captureAllowsComparison({ ...receipt, has_more: true }), false)
+  assert.equal(captureAllowsComparison({ ...receipt, pageInfo: { hasNextPage: false, endCursor: "last-item" } }), true)
 })
 
 test("finalized PR profile fetching reuses exact selectors and binds both comparison sides", async () => {

@@ -18,6 +18,10 @@ reader does not certify capture completeness. PR input requires a finalized,
 head-bound record and the existing exact public repository/run/profile/head
 identity checks, including merge-parent linkage.
 
+The reader processes supplied CursorPage items without fetching more pages.
+If a page declares more items or a next cursor, it reports missing pages and
+cannot determine additions, even when capture otherwise declares complete.
+
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
 job, with the workflow path or name beside it when recorded.
 Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
