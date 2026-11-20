@@ -28,9 +28,10 @@ unlinked roots also need review. Host-rooted Python traffic may be a host servic
 the warning does not claim that the job created it. No destination allowlist
 settles attribution.
 
-Comparison uses the repository, workflow (or fallback run), destination, ancestry,
+Comparison uses the repository, workflow identity when recorded, destination, ancestry,
 ports, protocol, and job, not destination
-equality alone. PR reads use earlier finalized comments bound to the exact compared
+equality alone. Run IDs and refs do not distinguish actions; workflow references
+are normalized to their path. PR reads use earlier finalized comments bound to the exact compared
 commit from the same App author when available. Declared capture other than complete,
 or incomplete jobs on either side, prevents additions from being determined.
 If the App has overwritten its only comment, the compared

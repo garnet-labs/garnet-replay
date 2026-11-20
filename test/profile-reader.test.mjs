@@ -70,7 +70,7 @@ test("actions retain workflow identity even when job names and actions match", (
   assert.deepEqual(compareProfileTrees(first, rerun).added, [])
   delete first.run.workflow_path
   delete rerun.run.workflow_path
-  assert.equal(readProfileTrees({ profiles: [first, rerun] }).length, 16)
+  assert.equal(readProfileTrees({ profiles: [first, rerun] }).length, 8)
   for (const metadata of ["github", "scenarios"]) {
     const a = metadata === "github" ? { github: { workflow: "install", job: "job" } } : { scenarios: { github: { workflow: "install", job: "job" } } }
     const b = structuredClone(a)
@@ -79,6 +79,24 @@ test("actions retain workflow identity even when job names and actions match", (
     a.egress = [{ name: "example.org", ancestry: ["init", "curl"] }]
     b.egress = a.egress
     assert.equal(readProfileTrees({ profiles: [a, b] }).length, 2)
+  }
+})
+
+test("identical actions are not additions across runs and refs, with or without workflow metadata", () => {
+  for (const withWorkflow of [true, false]) {
+    const head = profile(HEAD)
+    const base = profile(PREVIOUS)
+    head.run.ref = "refs/pull/1/merge"
+    base.run.ref = "refs/heads/main"
+    if (withWorkflow) {
+      head.run.workflow_ref = "garnet-labs/example/.github/workflows/install.yml@refs/pull/1/merge"
+      base.run.workflow_ref = "garnet-labs/example/.github/workflows/install.yml@refs/heads/main"
+    }
+    const report = compareProfileTrees(head, base)
+    assert.deepEqual(report.added, [])
+    assert.equal(readProfileTrees({ profiles: [base, head] }).length, 8)
+    assert.equal(report.rows[0].workflow, withWorkflow ? ".github/workflows/install.yml" : "")
+    assertVocabClean(renderProfileTrees(report))
   }
 })
 
