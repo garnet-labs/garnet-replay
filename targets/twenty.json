@@ -1,0 +1,282 @@
+{
+  "slug": "twenty",
+  "upstream": "twentyhq/twenty",
+  "fork": "garnet-labs/twenty",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22117,
+      "title": "chore(deps): bump @ai-sdk/mistral from 3.0.39 to 3.0.40",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-06-24T16:19:11Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@ai-sdk/mistral",
+        "from": "3.0.39",
+        "to": "3.0.40"
+      },
+      "files": 1,
+      "paths": [
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22116,
+      "title": "chore(deps-dev): bump @electron-forge/plugin-fuses from 7.11.1 to 7.11.2",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-06-24T16:04:07Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@electron-forge/plugin-fuses",
+        "from": "7.11.1",
+        "to": "7.11.2"
+      },
+      "files": 1,
+      "paths": [
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22115,
+      "title": "chore(deps): bump @scalar/api-reference-react from 0.9.46 to 0.9.48",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-06-24T16:03:37Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@scalar/api-reference-react",
+        "from": "0.9.46",
+        "to": "0.9.48"
+      },
+      "files": 1,
+      "paths": [
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22112,
+      "title": "chore(deps): bump @nestjs/schedule from 6.1.0 to 6.1.3",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-06-24T15:46:46Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@nestjs/schedule",
+        "from": "6.1.0",
+        "to": "6.1.3"
+      },
+      "files": 1,
+      "paths": [
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22111,
+      "title": "chore(deps): bump @sentry/react from 10.51.0 to 10.60.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-06-24T15:46:15Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@sentry/react",
+        "from": "10.51.0",
+        "to": "10.60.0"
+      },
+      "files": 1,
+      "paths": [
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 22110,
+      "title": "chore(deps-dev): bump @storybook/addon-docs from 10.3.4 to 10.4.6",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-06-24T15:45:35Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@storybook/addon-docs",
+        "from": "10.3.4",
+        "to": "10.4.6"
+      },
+      "files": 4,
+      "paths": [
+        "packages/twenty-front-component-renderer/package.json",
+        "packages/twenty-front/package.json",
+        "packages/twenty-ui/package.json",
+        "yarn.lock"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:29:44.096Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
