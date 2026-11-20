@@ -1,0 +1,1068 @@
+{
+  "slug": "cal-diy",
+  "upstream": "calcom/cal.diy",
+  "fork": "garnet-labs/cal.diy",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30601,
+      "title": "fix: make clean script cross-platform with rimraf",
+      "author": "pavankumargp6",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T15:57:22Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30600,
+      "title": "fix: make clean script cross-platform with rimraf",
+      "author": "pavankumargp6",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T15:57:00Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30604,
+      "title": "fix: make clean script cross-platform using portable node script (#30576)",
+      "author": "TassioSales",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:38:34Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "package.json",
+        "scripts/clean.js"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30596,
+      "title": "Dm dev",
+      "author": "Dajus",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T12:40:36Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".dockerignore",
+        ".env.dev.example",
+        ".env.example",
+        ".gitignore",
+        "Dockerfile",
+        "README.dev.md",
+        "README.md",
+        "apps/api/v2/src/lib/roles/constants.ts",
+        "apps/api/v2/src/modules/auth/auth.module.ts",
+        "apps/api/v2/src/modules/auth/guards/permissions/permissions.guard.ts",
+        "apps/api/v2/src/modules/auth/strategies/api-auth/api-auth.strategy.ts",
+        "apps/api/v2/src/platform/bookings/2024-04-15/bookings.module.ts",
+        "apps/api/v2/src/platform/bookings/2024-04-15/controllers/bookings.controller.ts",
+        "apps/api/v2/src/platform/bookings/2024-08-13/controllers/bookings.controller.ts",
+        "apps/api/v2/src/platform/bookings/2024-08-13/controllers/e2e/booking-access-auth.e2e-spec.ts",
+        "apps/api/v2/src/platform/bookings/2024-08-13/controllers/e2e/emails/confirm-emails.e2e-spec.ts",
+        "apps/api/v2/src/platform/bookings/2024-08-13/guards/booking-pbac.guard.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_04_15/controllers/event-types.controller.e2e-spec.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_04_15/controllers/event-types.controller.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_04_15/event-types.module.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_06_14/controllers/event-types.controller.e2e-spec.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_06_14/controllers/event-types.controller.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_06_14/event-types.module.ts",
+        "apps/api/v2/test-results/junit.xml",
+        "apps/web/app/(booking-page-wrapper)/[user]/[type]/embed/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/[user]/[type]/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/[user]/embed/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/[user]/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/booking/[uid]/embed/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/booking/[uid]/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/d/[link]/[slug]/page.tsx",
+        "apps/web/app/(booking-page-wrapper)/layout.tsx",
+        "apps/web/app/(booking-page-wrapper)/werko-theme.css",
+        "apps/web/app/(use-page-wrapper)/(main-nav)/booking/[uid]/logs/page.tsx",
+        "apps/web/app/(use-page-wrapper)/(main-nav)/bookings/[status]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/(main-nav)/event-types/loading.tsx",
+        "apps/web/app/(use-page-wrapper)/(main-nav)/event-types/page.tsx",
+        "apps/web/app/(use-page-wrapper)/(main-nav)/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/(homepage)/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/[slug]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/[slug]/setup/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/categories/[category]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/categories/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/installation/[[...step]]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/installed/[category]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/apps/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/forgot-password/[id]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/forgot-password/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/login/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/logout/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/setup/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/signin/page.tsx",
+        "apps/web/app/(use-page-wrapper)/auth/verify-email-change/page.tsx",
+        "apps/web/app/(use-page-wrapper)/availability/[schedule]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/availability/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/enterprise/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/event-types/[type]/loading.tsx",
+        "apps/web/app/(use-page-wrapper)/event-types/[type]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/event-types/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/getting-started/[[...step]]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/getting-started/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/more/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/more/page.tsx",
+        "apps/web/app/(use-page-wrapper)/onboarding/getting-started/page.tsx",
+        "apps/web/app/(use-page-wrapper)/onboarding/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/onboarding/personal/calendar/page.tsx",
+        "apps/web/app/(use-page-wrapper)/onboarding/personal/profile/page.tsx",
+        "apps/web/app/(use-page-wrapper)/onboarding/personal/settings/page.tsx",
+        "apps/web/app/(use-page-wrapper)/payment/[uid]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/refer/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/refer/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/apps/[category]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/flags/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/lockedSMS/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/oauth/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/playground/date-range-filter/DateRangeFilterPlayground.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/playground/date-range-filter/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/playground/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/users/[id]/edit/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/users/add/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/admin/users/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(admin-layout)/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/api-keys/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/oauth/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/webhooks/(with-loader)/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/webhooks/[id]/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/developer/webhooks/new/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/appearance/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/calendars/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/conferencing/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/general/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/out-of-office/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/profile/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/my-account/push-notifications/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/security/password/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/security/two-factor-auth/page.tsx",
+        "apps/web/app/(use-page-wrapper)/settings/layout.tsx",
+        "apps/web/app/(use-page-wrapper)/signup/page.tsx"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30602,
+      "title": "fix(docker): ship the Next.js standalone output in the runtime image",
+      "author": "lucasff",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T16:49:49Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "Dockerfile",
+        "scripts/start.sh"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30581,
+      "title": "chore(i18n): remove unused Cal.ai voice agent and phone strings",
+      "author": "aasavchauhan",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-17T18:32:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        "i18n.lock",
+        "packages/i18n/locales/ar/common.json",
+        "packages/i18n/locales/az/common.json",
+        "packages/i18n/locales/bg/common.json",
+        "packages/i18n/locales/bn/common.json",
+        "packages/i18n/locales/ca/common.json",
+        "packages/i18n/locales/cs/common.json",
+        "packages/i18n/locales/da/common.json",
+        "packages/i18n/locales/de/common.json",
+        "packages/i18n/locales/el/common.json",
+        "packages/i18n/locales/en/common.json",
+        "packages/i18n/locales/es-419/common.json",
+        "packages/i18n/locales/es/common.json",
+        "packages/i18n/locales/et/common.json",
+        "packages/i18n/locales/eu/common.json",
+        "packages/i18n/locales/fi/common.json",
+        "packages/i18n/locales/fr/common.json",
+        "packages/i18n/locales/he/common.json",
+        "packages/i18n/locales/hu/common.json",
+        "packages/i18n/locales/it/common.json",
+        "packages/i18n/locales/ja/common.json",
+        "packages/i18n/locales/km/common.json",
+        "packages/i18n/locales/ko/common.json",
+        "packages/i18n/locales/nl/common.json",
+        "packages/i18n/locales/no/common.json",
+        "packages/i18n/locales/pl/common.json",
+        "packages/i18n/locales/pt-BR/common.json",
+        "packages/i18n/locales/pt/common.json",
+        "packages/i18n/locales/ro/common.json",
+        "packages/i18n/locales/ru/common.json",
+        "packages/i18n/locales/sk-SK/common.json",
+        "packages/i18n/locales/sr/common.json",
+        "packages/i18n/locales/sv/common.json",
+        "packages/i18n/locales/tr/common.json",
+        "packages/i18n/locales/uk/common.json",
+        "packages/i18n/locales/vi/common.json",
+        "packages/i18n/locales/zh-CN/common.json",
+        "packages/i18n/locales/zh-TW/common.json"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30614,
+      "title": "fix(ics-feed): convert events from every zone a feed names without defining",
+      "author": "cgmuniz",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T22:19:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/app-store/ics-feedcalendar/lib/CalendarService.ts",
+        "packages/app-store/ics-feedcalendar/lib/feedTimezones.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30613,
+      "title": "feat(form-builder): add a \"date\" booking field type",
+      "author": "mamisoa",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T16:58:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 20,
+      "paths": [
+        "apps/api/v2/src/platform/event-types/event-types_2024_06_14/transformers/api-to-internal/booking-fields.ts",
+        "apps/api/v2/src/platform/event-types/event-types_2024_06_14/transformers/internal-to-api/booking-fields.ts",
+        "apps/web/modules/event-types/components/tabs/advanced/FormBuilder.tsx",
+        "apps/web/modules/form-builder/components/Components.tsx",
+        "apps/web/modules/form-builder/components/FormBuilderField.tsx",
+        "packages/features/bookings/lib/getBookingResponsesSchema.test.ts",
+        "packages/features/bookings/lib/getBookingResponsesSchema.ts",
+        "packages/features/form-builder/fieldTypes.ts",
+        "packages/features/form-builder/propsTypes.ts",
+        "packages/features/form-builder/schema.ts",
+        "packages/features/form-builder/utils/dateField.test.ts",
+        "packages/features/form-builder/utils/dateField.ts",
+        "packages/i18n/locales/en/common.json",
+        "packages/i18n/locales/fr/common.json",
+        "packages/i18n/locales/nl/common.json",
+        "packages/platform/enums/event-types/field-type.ts",
+        "packages/platform/types/event-types/event-types_2024_06_14/inputs/booking-fields.input.ts",
+        "packages/prisma/zod-utils.ts",
+        "packages/ui/components/form/datepicker/DatePicker.tsx",
+        "packages/ui/components/form/datepicker/datepicker.test.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30612,
+      "title": "feat(bookings): detect the phone input default country from the browser time zone",
+      "author": "mamisoa",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T16:49:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".env.example",
+        "apps/web/components/phone-input/PhoneInput.tsx",
+        "apps/web/components/phone-input/default-country.test.ts",
+        "apps/web/components/phone-input/default-country.ts",
+        "apps/web/components/phone-input/generate-timezone-countries.mjs",
+        "apps/web/components/phone-input/timezone-countries.generated.ts",
+        "packages/types/environment.d.ts",
+        "turbo.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30611,
+      "title": "fix: prevent external calendar sync failures from wiping user availability (#30592)",
+      "author": "Raksha074",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T09:11:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/features/availability/lib/getUserAvailability.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30610,
+      "title": "fix(eventtypes): use Unicode-aware boundaries in updateHostInEventName",
+      "author": "Till3005",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-20T07:34:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "packages/features/bookings/lib/getLuckyUser.test.ts",
+        "packages/features/bookings/lib/getLuckyUser.ts",
+        "packages/features/bookings/lib/handleNewBooking/test/booking-conflict.test.ts",
+        "packages/features/bookings/lib/service/RegularBookingService.ts",
+        "packages/features/eventtypes/lib/eventNaming.test.ts",
+        "packages/features/eventtypes/lib/eventNaming.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30609,
+      "title": "fix(bookings): compare unshifted end for full-day busy check in round robin",
+      "author": "Till3005",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T23:52:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/features/bookings/lib/getLuckyUser.test.ts",
+        "packages/features/bookings/lib/getLuckyUser.ts",
+        "packages/features/bookings/lib/handleNewBooking/test/booking-conflict.test.ts",
+        "packages/features/bookings/lib/service/RegularBookingService.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30608,
+      "title": "fix(bookings): return 409 booking_conflict_error for unique constraint violations in production",
+      "author": "Till3005",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T22:14:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/features/bookings/lib/handleNewBooking/test/booking-conflict.test.ts",
+        "packages/features/bookings/lib/service/RegularBookingService.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30607,
+      "title": "feat(ics-feed): show saved feed URLs on setup page",
+      "author": "tanishm2005",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:01:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "apps/web/components/apps/ics-feedcalendar/Setup.tsx",
+        "packages/app-store/ics-feedcalendar/api/feeds.ts",
+        "packages/app-store/ics-feedcalendar/api/index.ts",
+        "packages/i18n/locales/en/common.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30606,
+      "title": "fix(office365calendar): fail closed when a batch subrequest fails",
+      "author": "Till3005",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T21:57:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/app-store/office365calendar/lib/CalendarService.ts",
+        "packages/app-store/office365calendar/lib/__tests__/CalendarService.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30605,
+      "title": "fix: stop parseDateTimeWithTimeZone from leaking time format between calls",
+      "author": "Till3005",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T21:50:44Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/lib/parse-dates.test.ts",
+        "packages/lib/parse-dates.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30603,
+      "title": "fix(platform): preserve canonical IANA timezone spelling in normalizeTimezone (#30587)",
+      "author": "TassioSales",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:31:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/api/v2/src/lib/inputs/capitalize-timezone.spec.ts",
+        "packages/platform/types/utils/normalizeTimezone.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30599,
+      "title": "fix(platform): preserve valid IANA timezone casing in normalizeTimezone (#30587)",
+      "author": "ghazy2001",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T14:18:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/api/v2/src/lib/inputs/capitalize-timezone.spec.ts",
+        "packages/platform/types/utils/normalizeTimezone.test.ts",
+        "packages/platform/types/utils/normalizeTimezone.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30598,
+      "title": "fix(platform): preserve canonical IANA timezone casing in normalizeTimezone",
+      "author": "Amanuel-Tesfaye-R",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T12:56:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/api/v2/src/lib/inputs/capitalize-timezone.spec.ts",
+        "packages/platform/types/utils/normalizeTimezone.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30597,
+      "title": "fix(googlecalendar): prevent range tail truncation and guard 90-day freebusy limit",
+      "author": "ghazy2001",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T12:48:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/app-store/googlecalendar/lib/CalendarService.ts",
+        "packages/app-store/googlecalendar/lib/__tests__/CalendarService.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30595,
+      "title": "fix(availability): place booking-period boundaries in their own DST offset",
+      "author": "shafi-VM",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T12:06:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "packages/features/bookings/lib/handleNewBooking/validateBookingTimeIsNotOutOfBounds.ts",
+        "packages/lib/isOutOfBounds.timezone.test.ts",
+        "packages/lib/isOutOfBounds.tsx",
+        "packages/trpc/server/routers/viewer/slots/util.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30594,
+      "title": "fix(booker): respect layout query parameter on load and refresh (#30400)",
+      "author": "Raksha074",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T11:05:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/web/modules/bookings/components/BookerWebWrapper.tsx",
+        "packages/features/bookings/Booker/store.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30591,
+      "title": "fix(platform-types): keep the IANA spelling of time zones in normalizeTimezone",
+      "author": "Sanketmis208",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T10:11:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/api/v2/src/lib/inputs/capitalize-timezone.spec.ts",
+        "packages/platform/types/utils/normalizeTimezone.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30590,
+      "title": "fix(googlecalendar): request free/busy for the whole range when it spans more than 90 days",
+      "author": "Sanketmis208",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T10:11:24Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/app-store/googlecalendar/lib/CalendarService.ts",
+        "packages/app-store/googlecalendar/lib/__tests__/CalendarService.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30589,
+      "title": "fix(timezone): drop the leading zero for half- and quarter-hour offsets too",
+      "author": "Sanketmis208",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T10:11:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/web/modules/timezone/components/TimezoneSelect.test.tsx",
+        "apps/web/test/lib/getTimezone.test.ts",
+        "packages/lib/timezone.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30588,
+      "title": "fix(api-v2): read Cal Video recordings, transcripts and sessions from every room of a booking",
+      "author": "Sanketmis208",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T10:11:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/api/v2/src/platform/bookings/2024-08-13/services/cal-video.service.spec.ts",
+        "apps/api/v2/src/platform/bookings/2024-08-13/services/cal-video.service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30585,
+      "title": "fix(emails): render the disabled app email for event type apps",
+      "author": "farisbasha",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T08:02:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/emails/src/templates/DisabledAppEmail.tsx",
+        "packages/emails/templates/disabled-app-email.test.ts",
+        "packages/emails/templates/disabled-app-email.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30584,
+      "title": "fix(lib): sanitize phone number non-digits when constructing sms email",
+      "author": "Adityakumar626",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-17T21:17:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/lib/contructEmailFromPhoneNumber.test.ts",
+        "packages/lib/contructEmailFromPhoneNumber.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30583,
+      "title": "fix(lib): prevent null from matching isPrismaObj",
+      "author": "Adityakumar626",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-17T20:47:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/web/lib/isPrismaObj.ts",
+        "packages/lib/isPrismaObj.test.ts",
+        "packages/lib/isPrismaObj.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 30582,
+      "title": "fix(availability): fall back to base availability when OOO ranges are…",
+      "author": "nikunj-kohli",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-17T19:07:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/features/availability/lib/getAggregatedAvailability/getAggregatedAvailability.test.ts",
+        "packages/features/availability/lib/getAggregatedAvailability/getAggregatedAvailability.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T23:04:47.960Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
