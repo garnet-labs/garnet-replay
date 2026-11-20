@@ -126,6 +126,19 @@ test("PR reader fails closed on stale, unreadable or identity-mismatched profile
   assert.match(malformed.error, /no readable outbound/)
 })
 
+test("a marker from a different commenter cannot supply the compared receipt", async () => {
+  const forged = { ...comment(PREVIOUS, BASE_LINK), user: { login: "someone-else" } }
+  for (const head of [comment(), { ...comment(), user: "garnet-runtime-review[bot]" }]) {
+    const calls = []
+    const report = await profileAttributionForComment({ comment: head, comments: [forged], headSha: HEAD, repository: "garnet-labs/example" }, {
+      fetchImpl: async (url) => { calls.push(url); return { ok: true, json: async () => ({ profile: profile() }) } },
+    })
+    assert.equal(report.added, null)
+    assert.equal(report.review.length, 5)
+    assert.deepEqual(calls, [LINK.replace("/public/", "/api/public/")])
+  }
+})
+
 test("PR reader explicitly keeps comparison unavailable if the compared record is missing or unreadable", async () => {
   const input = { comment: comment(), comments: [comment(PREVIOUS, BASE_LINK)], headSha: HEAD, repository: "garnet-labs/example" }
   const options = { fetchImpl: async (url) => { if (url.includes("/122?")) throw new Error("missing compared profile"); return { ok: true, json: async () => ({ profile: profile() }) } } }
