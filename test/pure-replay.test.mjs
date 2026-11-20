@@ -616,13 +616,14 @@ test("executePlan: ensure-base skips when the fork branch already carries the re
 
 test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
   const plan = {
-    mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work",
+    mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work", branch: "replay/change",
     steps: [{
       id: "ensure-base", kind: "ensure-base", target: FORK, baseBranch: "review/base", baseSha: SHA_A,
       carryFrom: SHA_C, carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
     }],
   }
   const { exec } = fakeExec([
+    [/refs\/remotes\/origin\/replay\/change/, new Error("missing replay branch")],
     [/rev-parse --verify/, "tree-other\n"],
     [/write-tree/, "tree-carried\n"],
   ])

@@ -398,6 +398,10 @@ test("injected replay preserves Dependabot policy at its selected base and check
       if (path.includes("/contents/package.json")) return '{"sha":"same-blob"}'
       assert.fail(`unexpected command ${args.join(" ")}`)
     }
+    if (mode[0] === "--base-branch") {
+      await assert.rejects(livePr(["posthog", "--pr", "1", "--record", "inject", "--ecosystem", "npm", "--dry-run", ...mode], { exec, log: () => {}, save: () => assert.fail("dry run must not save") }), /commit 1 would be empty/)
+      continue
+    }
     const result = await livePr(["posthog", "--pr", "1", "--record", "inject", "--ecosystem", "npm", "--dry-run", ...mode], { exec, log: () => {}, save: () => assert.fail("dry run must not save") })
     assert.equal(result.executed, false)
     assert.equal(result.health.verdict, "none")
