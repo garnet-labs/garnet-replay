@@ -1,6 +1,676 @@
 {
-  "assumptions": "Pure planner only: assume future fork main matches frozen upstream main plus approved onboarding. Not a hosted prepare receipt; no fork admission, recorder health, base ancestry, or executed-source checks performed. Recorder filters match backend/frontend package.json and package-lock.json plus recorder workflow; 9694 is excluded.",
+  "assumptions": "Offline candidate plans only; no fork admission or hosted prepare/start was run. All nine selected candidates explicitly use baseline/<number> through hosted base_branch, with the PR's own base plus carried recorder and approved grounding. Slot 9694 remains unresolved. Frozen main is only the onboarding-source placeholder, not the historical replay base. Real fork workflow/guidance blobs, recorder health and execution remain unverified.",
   "plans": [
+    {
+      "number": 9436,
+      "hypothetical": true,
+      "branch": "chore/update-7a4",
+      "baseBranch": "baseline/9436",
+      "title": "chore(frontend): add React Doctor and React Scan dev tooling",
+      "message": "chore(frontend): add React Doctor and React Scan dev tooling\n\n- .github/workflows/check-fe-ts-and-lint.yml\n- frontend/AGENTS.md\n- frontend/doctor.config.json\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/dev/reactScan.ts\n- and 1 more",
+      "body": "7 files:\n\n- .github/workflows/check-fe-ts-and-lint.yml\n- frontend/AGENTS.md\n- frontend/doctor.config.json\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/dev/reactScan.ts\n- frontend/vite.config.ts\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 7,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9436",
+        "baseSha": "1d92ce124c207f0fe13885220e502361b333ad35",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9436 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-7a4 from baseline/9436",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-7a4",
+          "origin/baseline/9436"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "132c54f35950d69e2b1e2f6660de04d722c284d2",
+          "--",
+          ".github/workflows/check-fe-ts-and-lint.yml",
+          "frontend/AGENTS.md",
+          "frontend/doctor.config.json",
+          "frontend/package-lock.json",
+          "frontend/package.json",
+          "frontend/src/dev/reactScan.ts",
+          "frontend/vite.config.ts"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9436",
+        "base_branch": "baseline/9436",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9730,
+      "hypothetical": true,
+      "branch": "chore/manifests-7ia",
+      "baseBranch": "baseline/9730",
+      "title": "chore(frontend): pin Cipher v0.1.18",
+      "message": "chore(frontend): pin Cipher v0.1.18\n\n- frontend/package-lock.json\n- frontend/package.json",
+      "body": "2 dependency manifests:\n\n- frontend/package-lock.json\n- frontend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9730",
+        "baseSha": "7e5e7f2e59aef6eb5f528b8daa9b4881dc5277c8",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9730 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/manifests-7ia from baseline/9730",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/manifests-7ia",
+          "origin/baseline/9730"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "28516c0babfaa349bc2980379ae758a00f7a01e9",
+          "--",
+          "frontend/package-lock.json",
+          "frontend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9730",
+        "base_branch": "baseline/9730",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9694,
+      "status": "unfilled",
+      "error": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying."
+    },
+    {
+      "number": 9230,
+      "hypothetical": true,
+      "branch": "chore/update-74e",
+      "baseBranch": "baseline/9230",
+      "title": "chore: replace the Python BDD suite with Go blackbox PKI tests",
+      "message": "chore: replace the Python BDD suite with Go blackbox PKI tests\n\n- .dockerignore\n- .github/workflows/run-backend-bdd-tests.yml\n- .github/workflows/run-blackbox-tests.yml\n- .gitignore\n- AGENTS.md\n- Dockerfile.fips.standalone-infisical\n- and 111 more",
+      "body": "117 files:\n\n- .dockerignore\n- .github/workflows/run-backend-bdd-tests.yml\n- .github/workflows/run-blackbox-tests.yml\n- .gitignore\n- AGENTS.md\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend-go/internal/config/config.go\n- backend/.oxfmtrc.json\n- backend/bdd/.env.example\n- backend/bdd/.python-version\n- backend/bdd/README.md\n- backend/bdd/features/environment.py\n- backend/bdd/features/pki/acme/access-control.feature\n- backend/bdd/features/pki/acme/account.feature\n- backend/bdd/features/pki/acme/auth.feature\n- backend/bdd/features/pki/acme/cert-profile.feature\n- backend/bdd/features/pki/acme/challenge.feature\n- backend/bdd/features/pki/acme/directory.feature\n- backend/bdd/features/pki/acme/external-ca.feature\n- backend/bdd/features/pki/acme/internal-ca.feature\n- backend/bdd/features/pki/acme/nonce.feature\n- backend/bdd/features/pki/acme/order.feature\n- backend/bdd/features/pki/scep/enrollment-failure.feature\n- backend/bdd/features/pki/scep/enrollment.feature\n- backend/bdd/features/pki/scep/getcacaps.feature\n- backend/bdd/features/pki/scep/getcacert.feature\n- backend/bdd/features/pki/scep/renewal.feature\n- backend/bdd/features/steps/pki_acme.py\n- backend/bdd/features/steps/pki_scep.py\n- backend/bdd/features/steps/utils.py\n- backend/bdd/pebble/localhost/cert.pem\n- backend/bdd/pebble/localhost/key.pem\n- backend/bdd/pebble/pebble-config.json\n- backend/bdd/pebble/pebble.minica.key.pem\n- backend/bdd/pebble/pebble.minica.pem\n- backend/bdd/pyproject.toml\n- backend/bdd/uv.lock\n- backend/package-lock.json\n- backend/package.json\n- backend/src/ee/routes/scep/pki-scep-router.ts\n- backend/src/ee/routes/v1/pki-acme-router.ts\n- backend/src/lib/config/env.ts\n- backend/src/server/routes/bdd/bdd-nock-router.dev.ts\n- backend/src/server/routes/bdd/bdd-nock-router.ts\n- backend/src/server/routes/index.ts\n- backend/tsconfig.dev.json\n- backend/tsconfig.json\n- backend/vitest.e2e.config.mts\n- backend/vitest.unit.config.mts\n- docker-compose.bdd.yml\n- docs/contributing/platform/backend/folder-structure.mdx\n- tests/clients/api/api.gen.go\n- tests/clients/api/oapi-codegen.yaml\n- tests/clients/api/overlay.yaml\n- tests/cmd/fakenet/Dockerfile\n- tests/cmd/fakenet/main.go\n- tests/docs/fakes.md\n- tests/fakes/acmeca/controlplane.go\n- tests/fakes/acmeca/events.go\n- tests/fakes/acmeca/fake.go\n- tests/fakes/acmeca/fake_test.go\n- tests/fakes/acmeca/jws.go\n- tests/fakes/acmeca/problem.go\n- tests/fakes/acmeca/state.go\n- tests/fakes/cloudflare/controlplane.go\n- tests/fakes/cloudflare/events.go\n- tests/fakes/cloudflare/fake.go\n- tests/fakes/cloudflare/fake_test.go\n- tests/fakes/cloudflare/state.go\n- tests/fakes/dnsmadeeasy/controlplane.go\n- tests/fakes/dnsmadeeasy/events.go\n- tests/fakes/dnsmadeeasy/fake.go\n- tests/fakes/dnsmadeeasy/fake_test.go\n- tests/fakes/dnsmadeeasy/state.go\n- tests/fakes/website/controlplane.go\n- tests/fakes/website/events.go\n- tests/fakes/website/fake.go\n- tests/fakes/website/fake_test.go\n- tests/fakes/website/state.go\n- tests/fixture/appconnection.go\n- tests/fixture/appconnection_cloudflare.go\n- tests/fixture/appconnection_dnsmadeeasy.go\n- tests/fixture/pki/application.go\n- tests/fixture/pki/ca.go\n- tests/fixture/pki/enrollment.go\n- tests/fixture/pki/policy.go\n- tests/fixture/pki/profile.go\n- tests/fixture/pki/project.go\n- tests/go.mod\n- tests/go.sum\n- tests/infra/fakenet/client.go\n- tests/infra/fakenet/events.go\n- tests/infra/fakenet/fakenet.go\n- tests/suites/pki/acme/access_test.go\n- tests/suites/pki/acme/account_test.go\n- tests/suites/pki/acme/authorization_test.go\n- tests/suites/pki/acme/challenge_test.go\n- tests/suites/pki/acme/client_test.go\n- tests/suites/pki/acme/directory_test.go\n- tests/suites/pki/acme/externalca_test.go\n- tests/suites/pki/acme/finalize_test.go\n- tests/suites/pki/acme/helpers_test.go\n- tests/suites/pki/acme/main_test.go\n- tests/suites/pki/acme/nonce_test.go\n- tests/suites/pki/acme/order_test.go\n- tests/suites/pki/profiles/create_test.go\n- tests/suites/pki/profiles/main_test.go\n- tests/suites/pki/scep/cacert_test.go\n- tests/suites/pki/scep/capabilities_test.go\n- tests/suites/pki/scep/certrep_test.go\n- tests/suites/pki/scep/client_test.go\n- tests/suites/pki/scep/enrollment_test.go\n- tests/suites/pki/scep/main_test.go\n- tests/suites/pki/scep/renewal_test.go\n- tests/suites/secretmanager/approvals/delegated_access_request_test.go\n- tests/suites/user/delete_test.go\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 117,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9230",
+        "baseSha": "23856d04e34590ab46fac0a310b8f1669d599a32",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9230 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-74e from baseline/9230",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-74e",
+          "origin/baseline/9230"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "83ee124c7593606787c91101d0f07c6c333696f1",
+          "--",
+          ".dockerignore",
+          ".github/workflows/run-blackbox-tests.yml",
+          ".gitignore",
+          "AGENTS.md",
+          "Dockerfile.fips.standalone-infisical",
+          "Dockerfile.standalone-infisical",
+          "backend-go/internal/config/config.go",
+          "backend/.oxfmtrc.json",
+          "backend/package-lock.json",
+          "backend/package.json",
+          "backend/src/ee/routes/scep/pki-scep-router.ts",
+          "backend/src/ee/routes/v1/pki-acme-router.ts",
+          "backend/src/lib/config/env.ts",
+          "backend/src/server/routes/index.ts",
+          "backend/tsconfig.json",
+          "backend/vitest.e2e.config.mts",
+          "backend/vitest.unit.config.mts",
+          "docs/contributing/platform/backend/folder-structure.mdx",
+          "tests/clients/api/api.gen.go",
+          "tests/clients/api/oapi-codegen.yaml",
+          "tests/clients/api/overlay.yaml",
+          "tests/cmd/fakenet/Dockerfile",
+          "tests/cmd/fakenet/main.go",
+          "tests/docs/fakes.md",
+          "tests/fakes/acmeca/controlplane.go",
+          "tests/fakes/acmeca/events.go",
+          "tests/fakes/acmeca/fake.go",
+          "tests/fakes/acmeca/fake_test.go",
+          "tests/fakes/acmeca/jws.go",
+          "tests/fakes/acmeca/problem.go",
+          "tests/fakes/acmeca/state.go",
+          "tests/fakes/cloudflare/controlplane.go",
+          "tests/fakes/cloudflare/events.go",
+          "tests/fakes/cloudflare/fake.go",
+          "tests/fakes/cloudflare/fake_test.go",
+          "tests/fakes/cloudflare/state.go",
+          "tests/fakes/dnsmadeeasy/controlplane.go",
+          "tests/fakes/dnsmadeeasy/events.go",
+          "tests/fakes/dnsmadeeasy/fake.go",
+          "tests/fakes/dnsmadeeasy/fake_test.go",
+          "tests/fakes/dnsmadeeasy/state.go",
+          "tests/fakes/website/controlplane.go",
+          "tests/fakes/website/events.go",
+          "tests/fakes/website/fake.go",
+          "tests/fakes/website/fake_test.go",
+          "tests/fakes/website/state.go",
+          "tests/fixture/appconnection.go",
+          "tests/fixture/appconnection_cloudflare.go",
+          "tests/fixture/appconnection_dnsmadeeasy.go",
+          "tests/fixture/pki/application.go",
+          "tests/fixture/pki/ca.go",
+          "tests/fixture/pki/enrollment.go",
+          "tests/fixture/pki/policy.go",
+          "tests/fixture/pki/profile.go",
+          "tests/fixture/pki/project.go",
+          "tests/go.mod",
+          "tests/go.sum",
+          "tests/infra/fakenet/client.go",
+          "tests/infra/fakenet/events.go",
+          "tests/infra/fakenet/fakenet.go",
+          "tests/suites/pki/acme/access_test.go",
+          "tests/suites/pki/acme/account_test.go",
+          "tests/suites/pki/acme/authorization_test.go",
+          "tests/suites/pki/acme/challenge_test.go",
+          "tests/suites/pki/acme/client_test.go",
+          "tests/suites/pki/acme/directory_test.go",
+          "tests/suites/pki/acme/externalca_test.go",
+          "tests/suites/pki/acme/finalize_test.go",
+          "tests/suites/pki/acme/helpers_test.go",
+          "tests/suites/pki/acme/main_test.go",
+          "tests/suites/pki/acme/nonce_test.go",
+          "tests/suites/pki/acme/order_test.go",
+          "tests/suites/pki/profiles/create_test.go",
+          "tests/suites/pki/profiles/main_test.go",
+          "tests/suites/pki/scep/cacert_test.go",
+          "tests/suites/pki/scep/capabilities_test.go",
+          "tests/suites/pki/scep/certrep_test.go",
+          "tests/suites/pki/scep/client_test.go",
+          "tests/suites/pki/scep/enrollment_test.go",
+          "tests/suites/pki/scep/main_test.go",
+          "tests/suites/pki/scep/renewal_test.go",
+          "tests/suites/secretmanager/approvals/delegated_access_request_test.go",
+          "tests/suites/user/delete_test.go"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9230",
+        "base_branch": "baseline/9230",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9157,
+      "hypothetical": true,
+      "branch": "chore/manifests-72d",
+      "baseBranch": "baseline/9157",
+      "title": "chore: bump frontend and backend dependencies",
+      "message": "chore: bump frontend and backend dependencies\n\n- backend-go/go.mod\n- backend-go/go.sum\n- backend/bdd/uv.lock\n- backend/package-lock.json\n- backend/package.json\n- frontend/package-lock.json\n- and 1 more",
+      "body": "7 dependency manifests:\n\n- backend-go/go.mod\n- backend-go/go.sum\n- backend/bdd/uv.lock\n- backend/package-lock.json\n- backend/package.json\n- frontend/package-lock.json\n- frontend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 7,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9157",
+        "baseSha": "3a6fd44b2f569ac18dbadeaff43dc4288bb589f2",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9157 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/manifests-72d from baseline/9157",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/manifests-72d",
+          "origin/baseline/9157"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "89f75f6772d3c86d4fca79b95ffdc47a81a505e7",
+          "--",
+          "backend-go/go.mod",
+          "backend-go/go.sum",
+          "backend/bdd/uv.lock",
+          "backend/package-lock.json",
+          "backend/package.json",
+          "frontend/package-lock.json",
+          "frontend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9157",
+        "base_branch": "baseline/9157",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9158,
+      "hypothetical": true,
+      "branch": "deps/fastify-reply-from-12.8.1",
+      "baseBranch": "baseline/9158",
+      "title": "Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1",
+      "message": "Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1\n\n- backend/package-lock.json\n- backend/package.json",
+      "body": "2 dependency manifests:\n\n- backend/package-lock.json\n- backend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9158",
+        "baseSha": "d194bbfe159116345b1206c7a3c07781beb6b431",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9158 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create deps/fastify-reply-from-12.8.1 from baseline/9158",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "deps/fastify-reply-from-12.8.1",
+          "origin/baseline/9158"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "8cf1d3da74860df5fd4938c2b93eb87b97ae9221",
+          "--",
+          "backend/package-lock.json",
+          "backend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9158",
+        "base_branch": "baseline/9158",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 8984,
+      "hypothetical": true,
+      "branch": "chore/manifests-6xk",
+      "baseBranch": "baseline/8984",
+      "title": "Fix for 6 vulnerabilities",
+      "message": "Fix for 6 vulnerabilities\n\n- backend/package-lock.json\n- backend/package.json",
+      "body": "2 dependency manifests:\n\n- backend/package-lock.json\n- backend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/8984",
+        "baseSha": "f7aefd6f7dad4367c15df71c36e3bee2e9546e25",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/8984 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/manifests-6xk from baseline/8984",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/manifests-6xk",
+          "origin/baseline/8984"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "5ec20d6ae6621cf893624d0bd3a7d97b4fdbddf5",
+          "--",
+          "backend/package-lock.json",
+          "backend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "8984",
+        "base_branch": "baseline/8984",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9599,
+      "hypothetical": true,
+      "branch": "chore/update-7en",
+      "baseBranch": "baseline/9599",
+      "title": "fix(ui): format UTC dates without local offset arithmetic",
+      "message": "fix(ui): format UTC dates without local offset arithmetic\n\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/helpers/datetime.test.ts\n- frontend/src/helpers/datetime.ts",
+      "body": "4 files:\n\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/helpers/datetime.test.ts\n- frontend/src/helpers/datetime.ts\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 4,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9599",
+        "baseSha": "960312a10c5843c3b7d04f7d22810ed24cce095e",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9599 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-7en from baseline/9599",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-7en",
+          "origin/baseline/9599"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "b64de504aac7b92c058131b35042fe4102efa75c",
+          "--",
+          "frontend/package-lock.json",
+          "frontend/package.json",
+          "frontend/src/helpers/datetime.test.ts",
+          "frontend/src/helpers/datetime.ts"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9599",
+        "base_branch": "baseline/9599",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9406,
+      "hypothetical": true,
+      "branch": "chore/update-79a",
+      "baseBranch": "baseline/9406",
+      "title": "fix(security): update minimum node version",
+      "message": "fix(security): update minimum node version\n\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend/Dockerfile\n- backend/Dockerfile.dev\n- backend/Dockerfile.fips-toolchain\n- backend/package-lock.json\n- and 5 more",
+      "body": "11 files:\n\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend/Dockerfile\n- backend/Dockerfile.dev\n- backend/Dockerfile.fips-toolchain\n- backend/package-lock.json\n- backend/package.json\n- docs/Dockerfile\n- frontend/Dockerfile.dev\n- frontend/package-lock.json\n- frontend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 11,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9406",
+        "baseSha": "b99a249a9159ba197554cd76cc4b5b8e3174ff50",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9406 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-79a from baseline/9406",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-79a",
+          "origin/baseline/9406"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "b26657a7544e5968863105f13db32ba4248cf6e5",
+          "--",
+          "Dockerfile.fips.standalone-infisical",
+          "Dockerfile.standalone-infisical",
+          "backend/Dockerfile",
+          "backend/Dockerfile.dev",
+          "backend/Dockerfile.fips-toolchain",
+          "backend/package-lock.json",
+          "backend/package.json",
+          "docs/Dockerfile",
+          "frontend/Dockerfile.dev",
+          "frontend/package-lock.json",
+          "frontend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9406",
+        "base_branch": "baseline/9406",
+        "two_commit": false
+      }
+    },
+    {
+      "number": 9598,
+      "hypothetical": true,
+      "branch": "chore/update-7em",
+      "baseBranch": "baseline/9598",
+      "title": "fix(ui): recover secret sharing lists after last-page deletion",
+      "message": "fix(ui): recover secret sharing lists after last-page deletion\n\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx\n- frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx\n- frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx",
+      "body": "5 files:\n\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx\n- frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx\n- frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 5,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9598",
+        "baseSha": "960312a10c5843c3b7d04f7d22810ed24cce095e",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9598 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-7em from baseline/9598",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-7em",
+          "origin/baseline/9598"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "7ee705d57c641e0ab8b82f9fd866c354e5531b82",
+          "--",
+          "frontend/package-lock.json",
+          "frontend/package.json",
+          "frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx",
+          "frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx",
+          "frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9598",
+        "base_branch": "baseline/9598",
+        "two_commit": false
+      }
+    }
+  ],
+  "originalPlans": [
     {
       "number": 9436,
       "hypothetical": true,
@@ -10,7 +680,15 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 7,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/9436",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9436",
+        "base_branch": "baseline/9436",
+        "two_commit": false
+      }
     },
     {
       "number": 9730,
@@ -21,7 +699,15 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 2,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/9730",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9730",
+        "base_branch": "baseline/9730",
+        "two_commit": false
+      }
     },
     {
       "number": 9694,
@@ -36,7 +722,15 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 117,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/9230",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9230",
+        "base_branch": "baseline/9230",
+        "two_commit": false
+      }
     },
     {
       "number": 9293,
@@ -51,7 +745,15 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 2,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/9158",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9158",
+        "base_branch": "baseline/9158",
+        "two_commit": false
+      }
     },
     {
       "number": 8984,
@@ -62,7 +764,15 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 2,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/8984",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "8984",
+        "base_branch": "baseline/8984",
+        "two_commit": false
+      }
     },
     {
       "number": 8357,
@@ -77,11 +787,58 @@
       "singleCommit": true,
       "scope": "pr-base-to-head",
       "changes": 11,
-      "renames": []
+      "renames": [],
+      "baseBranch": "baseline/9406",
+      "baseMode": "explicit PR-own-base; one replay commit; fork-only baseline carries approved recorder/guidance",
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9406",
+        "base_branch": "baseline/9406",
+        "two_commit": false
+      }
     },
     {
       "number": 8740,
       "error": "upstream leak in outbound text (upstream repository reference 'Infisical/infisical'): \"27 files:\\n\\n- .github/actions/generate-openapi-spec/action.yml\\n- .github/workflows/check-api-for-breaking-changes.yml\\n- .\""
     }
-  ]
+  ],
+  "selectionStatus": "Nine selected candidates; merged slot 9694 unresolved: no screened replacement passed forward patch check on frozen main.",
+  "guardRefusals": [
+    {
+      "original": 9293,
+      "replacement": 9157,
+      "group": "merged",
+      "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    },
+    {
+      "original": 8357,
+      "replacement": 9599,
+      "group": "open",
+      "reason": "Default body lists backend/src/db/schemas/certificate-cleanup-configs.ts; vocabulary matching is substring-based, so cleanup matches banned 'clean'. Hosted worker has no message override input."
+    },
+    {
+      "original": 8740,
+      "replacement": 9598,
+      "group": "open",
+      "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    }
+  ],
+  "unfilled": {
+    "original": 9694,
+    "group": "merged",
+    "reason": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying.",
+    "screened": [
+      9157,
+      9022,
+      8914,
+      8922,
+      8790,
+      9091,
+      7913,
+      7898,
+      7957,
+      6671
+    ],
+    "method": "Unauthenticated public GitHub PR .diff piped to git apply --check against frozen main. Each exited 1; candidate 9157 detailed in rows."
+  }
 }

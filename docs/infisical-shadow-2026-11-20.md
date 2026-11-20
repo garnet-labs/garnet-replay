@@ -20,7 +20,116 @@ manifests/lockfiles. The finder scanned 50 candidates; it did not record them.
 Exact staged files, provenance, credential requirements, and installation
 groups are in [the onboarding bundle](infisical-onboarding/README.md).
 
-## Ten-PR preflight
+## Revised selection — nine candidates, one unresolved slot
+
+The requested ten qualifying selections are **not complete**: no replacement
+for 9694 was found that both belongs to the merged group and forward-applies
+to frozen main. The other three substitutions below passed the unchanged
+pure planner, without custom messages, exceptions, or guard changes.
+
+| Slot / upstream PR | Group | One-line offline status |
+|---|---|---|
+| 9436 | merged | Retained; planner passes with `base_branch=baseline/9436`; frozen-main conflict avoided by explicit own-base replay. |
+| 9730 | merged | Retained; planner passes with `base_branch=baseline/9730`; frozen-main conflict avoided by explicit own-base replay. |
+| 9694 replacement | merged | **Unfilled**: original misses recorder filters; all ten screened merged dependency patches conflict with frozen main. |
+| 9230 | merged | Retained; planner passes with `base_branch=baseline/9230`; frozen-main conflict avoided, but install does not exercise Go/BDD behavior. |
+| 9157 ← 9293 | merged | Selected; dependency manifests/lockfiles in both packages, seven files; own-base planner passes despite frozen-main conflict. |
+| 9158 | open | Retained Snyk change; frozen-main apply succeeds; own-base planner passes. |
+| 8984 | open | Retained Snyk change; frozen-main conflict avoided with `base_branch=baseline/8984`; planner passes. |
+| 9599 ← 8357 | open | Selected; adds `@date-fns/utc` with frontend manifest/lockfile changes; frozen-main apply and own-base planner pass. |
+| 9406 | open | Retained; frozen-main apply and own-base planner pass; recorder still fixes Node 26. |
+| 9598 ← 8740 | open | Selected; adds `jsdom` and `@types/jsdom` with frontend manifest/lockfile changes; frozen-main apply and own-base planner pass. |
+
+The replacements are dependency-bearing changes, not dependency-only changes:
+9599 also changes date formatting and 9598 changes sharing-list pagination.
+The measured install cannot validate those application changes. A search for
+open PRs with Snyk in the title found exactly 8984 and 9158, already selected;
+the `author:snyk-bot` search found zero, so no additional Snyk alternative was
+available from those searches. This is not a claim to exhaust all bot aliases.
+
+### Exact default-wording refusals
+
+- **9293:** its generated full file list contains `tests/harness/infisical/infisical.go`, whose case-insensitive `infisical/infisical` substring trips the upstream owner/repo-reference guard.
+- **8357:** its generated full file list contains `backend/src/db/schemas/certificate-cleanup-configs.ts`; vocabulary matching is substring-based, so `cleanup` trips the banned term `clean`.
+- **8740:** its generated full file list contains the same `tests/harness/infisical/infisical.go` path, tripping the same upstream-reference guard.
+
+The library accepts explicit message overrides, which are not themselves a
+guard bypass, but the current hosted workflow/worker exposes no message/body
+inputs. Thus these three cannot pass the present hosted interface's default
+wording. They were replaced, not silently sanitized through a different path.
+
+### What the hosted workflow actually bases on
+
+It does **not automatically choose the PR's own base**. The workflow's
+`base_branch` input defaults to empty (`.github/workflows/replay.yml:28`), and
+`bin/replay-job.mjs` passes it through to
+`lib/replay-runner-worker.mjs:74` as `--base-branch` only when nonempty.
+With an explicit fresh `baseline/<number>` branch, `livePr`
+(`lib/commands.mjs:430-442`) selects `planPureReplay` on an onboarded fork
+whose upstream base has no recorder. `planPureReplay`
+(`lib/replay-pr.mjs:958-967`) emits `ensure-base` from the exact upstream
+`baseSha`, carrying the recorder from trusted fork main. Approved reviewer
+guidance is carried separately by `carryReviewerGuidance`.
+`executePlan` (`lib/replay-pr.mjs:2440-2482`) checks out that base SHA, stages
+the carried paths, and creates the fork-only baseline; it refuses an existing
+branch with an unexpected tree instead of overwriting it. The PR then has
+one change commit against that baseline. Both prepare and start must preserve
+the same base selection and fingerprint.
+
+Accordingly, the frozen-main conflicts for **9436, 9730, 9230, 9157 and 8984**
+are **not patch failures on this explicitly configured route**: the planner
+does not apply a patch to frozen main. It copies the touched head files and
+removes deleted paths on top of the PR's own base. The excluded **9293, 8357
+and 8740** would likewise avoid the frozen-main patch conflict, but still fail
+the wording guards. With an empty input, the default route uses fork main;
+`forkHoldsBase` selects pure versus two-commit behavior, and divergent touched
+paths can yield a two-commit reconstruction rather than an automatic historical
+base. That is not the requested one-commit replay mode. A textual patch
+conflict alone proves neither that this default route fails nor that it
+faithfully reproduces the original environment.
+
+This reachability analysis assumes the future fork has the staged recorder,
+approved grounding, and healthy finalized records, and that upstream historical
+bases have no existing eligible recorder. Those live admission facts have not
+been checked. No install success or runtime verification is inferred.
+
+There is an additional recording boundary: the staged recorder's push filter
+is `branches: [main]`. Creating `baseline/<number>` does not itself schedule
+a recording on that branch. The own-base plans solve source-base selection,
+not baseline evidence availability. An exact historical baseline capture must
+be arranged and verified before expecting a compared execution-profile pair;
+no App fallback behavior was checked or assumed here. The reported planner
+passes are therefore not claims that hosted runtime verification would pass.
+
+### Remaining merged-slot constraint
+
+Screened merged dependency candidates **9157, 9022, 8914, 8922, 8790, 9091,
+7913, 7898, 7957 and 6671** all returned exit 1 from a forward
+`git apply --check` against frozen main. Public GitHub `.diff` downloads were
+used for this additional screen; new selected rows record this method and a
+SHA-256 of their downloaded diff. Original rows retain the local git-diff
+method. The screened list is not an exhaustive proof that no suitable merged
+PR exists. No zero-byte/invalid-input result was accepted as a patch check.
+
+**Decision needed:** permit a historical own-base merged dependency candidate
+for the remaining slot, or provide/continue searching for a merged candidate
+that forward-applies to frozen main. Until then the cohort remains nine
+selected candidates, not a completed final ten.
+
+`plans.json` now contains all nine explicit own-base plans and hosted input
+values, with 9694 retained only as an unfilled slot. `preflight.json` preserves
+excluded original rows and the three replacement rows. No PAT was used and
+no workflow was dispatched. The earlier harness suite remains applicable
+because no harness source changed; new offline plan/selection checks are
+reported in the handoff.
+
+Follow-up checks: nine own-base plans and three same-group replacements passed
+offline assertions; both open replacements passed frozen-main patch checks;
+the unresolved slot remains explicitly excluded. The relevant existing suites
+(`pure-replay`, `replay-preflight`, `replay-interface`) reported **102 passed,
+0 failed**. `git diff --check` produced no output for this follow-up diff.
+
+## Original requested cohort preflight (historical)
 
 Frozen source main: `f248a380c9032f888296930879d1075d80f12bbf`.
 Upstream base→head pairs below are not fork execution-profile pairs.
@@ -55,14 +164,14 @@ The local git checks above avoid that API diff-size limit. Full file listing
 was paginated. No upstream dependency installation or application code ran
 on this machine.
 
-No substitutions have been chosen or published. Select a merged replacement
+At the initial handoff no substitutions had been chosen or published. Select a merged replacement
 for 9694 that changes backend/frontend dependency files. The default wording
 refusals for 9293, 8357 and 8740 also need a supported routine-wording plan or
 same-group replacement; no guard was bypassed. Seven hypothetical plans
 initially formed before the recorder filter was narrowed; 9694 is now marked
 refused in the saved plan summary, leaving six unrefused hypothetical plans.
 
-## Runtime result table
+## Original requested cohort runtime result table (all still unrecorded)
 
 | Upstream PR | Fork PR | Fork head / compared pair | App result / new destinations | Capture | Verify / first failing leg | StampHog / cited record |
 |---|---|---|---|---|---|---|

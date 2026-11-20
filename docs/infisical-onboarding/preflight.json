@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-20T03:12:34.847Z",
+  "checkedAt": "2026-11-20T03:22:20.602Z",
   "method": "git diff --binary <PR API base SHA> <PR head SHA> -- <all PR API paths>; git apply [--reverse] --check - against frozen main",
   "main": "f248a380c9032f888296930879d1075d80f12bbf",
   "rows": [
@@ -240,6 +240,323 @@
         "backend/package.json"
       ],
       "diffBytes": 1493388
+    },
+    {
+      "number": 9157,
+      "title": "chore: bump frontend and backend dependencies",
+      "state": "closed",
+      "merged": true,
+      "baseRef": "main",
+      "base": "3a6fd44b2f569ac18dbadeaff43dc4288bb589f2",
+      "head": "89f75f6772d3c86d4fca79b95ffdc47a81a505e7",
+      "files": [
+        "backend-go/go.mod",
+        "backend-go/go.sum",
+        "backend/bdd/uv.lock",
+        "backend/package-lock.json",
+        "backend/package.json",
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "diffSha256": "5f03c0f8fb9d444ef6c7c139e7dd54d2a954c8ad7212655219de5f612e6c62c9",
+      "apply": {
+        "ok": false,
+        "error": "error: patch failed: backend-go/go.mod:13\nerror: backend-go/go.mod: patch does not apply\nerror: patch failed: backend-go/go.sum:110\nerror: backend-go/go.sum: patch does not apply\nerror: backend/bdd/uv.lock: No such file or directory\nerror: patch failed: backend/package-lock.json:120\nerror: backend/package-lock.json: patch does not apply\nerror: patch failed: backend/package.json:265\nerror: backend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:68\nerror: frontend/package-lock.json: patch does not apply\nerror: patch failed: frontend/package.json:24\nerror: frontend/package.json: patch does not apply\n"
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: patch failed: frontend/package.json:101\nerror: frontend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:68\nerror: frontend/package-lock.json: patch does not apply\nerror: backend/bdd/uv.lock: No such file or directory\n"
+      },
+      "changes": [
+        {
+          "path": "backend-go/go.mod",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "backend-go/go.sum",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "backend/bdd/uv.lock",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "backend/package-lock.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "backend/package.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/package-lock.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/package.json",
+          "status": "modified",
+          "previous": null
+        }
+      ],
+      "changedFiles": 7,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "workloadTouched": [
+        "backend/package-lock.json",
+        "backend/package.json",
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "recorderTriggered": true,
+      "patchMethod": "public GitHub PR .diff; git apply [--reverse] --check against frozen main"
+    },
+    {
+      "number": 9158,
+      "title": "[Snyk] Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1",
+      "state": "open",
+      "merged": false,
+      "baseRef": "main",
+      "base": "d194bbfe159116345b1206c7a3c07781beb6b431",
+      "head": "8cf1d3da74860df5fd4938c2b93eb87b97ae9221",
+      "files": [
+        "backend/package-lock.json",
+        "backend/package.json"
+      ],
+      "changedFiles": 2,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "apply": {
+        "ok": true
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: patch failed: backend/package.json:180\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:35\nerror: backend/package-lock.json: patch does not apply\n"
+      },
+      "recorderTriggered": true,
+      "workloadTouched": [
+        "backend/package-lock.json",
+        "backend/package.json"
+      ],
+      "diffBytes": 3440
+    },
+    {
+      "number": 8984,
+      "title": "[Snyk] Fix for 6 vulnerabilities",
+      "state": "open",
+      "merged": false,
+      "baseRef": "main",
+      "base": "f7aefd6f7dad4367c15df71c36e3bee2e9546e25",
+      "head": "5ec20d6ae6621cf893624d0bd3a7d97b4fdbddf5",
+      "files": [
+        "backend/package-lock.json",
+        "backend/package.json"
+      ],
+      "changedFiles": 2,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "apply": {
+        "ok": false,
+        "error": "error: patch failed: backend/package-lock.json:119\nerror: backend/package-lock.json: patch does not apply\nerror: patch failed: backend/package.json:266\nerror: backend/package.json: patch does not apply\n"
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: patch failed: backend/package.json:182\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:35\nerror: backend/package-lock.json: patch does not apply\n"
+      },
+      "recorderTriggered": true,
+      "workloadTouched": [
+        "backend/package-lock.json",
+        "backend/package.json"
+      ],
+      "diffBytes": 232529
+    },
+    {
+      "number": 9599,
+      "title": "fix(ui): format UTC dates without local offset arithmetic",
+      "state": "open",
+      "merged": false,
+      "baseRef": "main",
+      "base": "960312a10c5843c3b7d04f7d22810ed24cce095e",
+      "head": "b64de504aac7b92c058131b35042fe4102efa75c",
+      "files": [
+        "frontend/package-lock.json",
+        "frontend/package.json",
+        "frontend/src/helpers/datetime.test.ts",
+        "frontend/src/helpers/datetime.ts"
+      ],
+      "diffSha256": "56044c1529b2fb2ec2cb8fb5e1c4a3243b857ed0086480200a4bf1a747e572fc",
+      "apply": {
+        "ok": true,
+        "error": ""
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: patch failed: frontend/src/helpers/datetime.ts:1\nerror: frontend/src/helpers/datetime.ts: patch does not apply\nerror: frontend/src/helpers/datetime.test.ts: No such file or directory\nerror: patch failed: frontend/package.json:55\nerror: frontend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:22\nerror: frontend/package-lock.json: patch does not apply\n"
+      },
+      "changes": [
+        {
+          "path": "frontend/package-lock.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/package.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/src/helpers/datetime.test.ts",
+          "status": "added",
+          "previous": null
+        },
+        {
+          "path": "frontend/src/helpers/datetime.ts",
+          "status": "modified",
+          "previous": null
+        }
+      ],
+      "changedFiles": 4,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "workloadTouched": [
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "recorderTriggered": true,
+      "patchMethod": "public GitHub PR .diff; git apply [--reverse] --check against frozen main"
+    },
+    {
+      "number": 9406,
+      "title": "fix(security): update minimum node version",
+      "state": "open",
+      "merged": false,
+      "baseRef": "main",
+      "base": "b99a249a9159ba197554cd76cc4b5b8e3174ff50",
+      "head": "b26657a7544e5968863105f13db32ba4248cf6e5",
+      "files": [
+        "Dockerfile.fips.standalone-infisical",
+        "Dockerfile.standalone-infisical",
+        "backend/Dockerfile",
+        "backend/Dockerfile.dev",
+        "backend/Dockerfile.fips-toolchain",
+        "backend/package-lock.json",
+        "backend/package.json",
+        "docs/Dockerfile",
+        "frontend/Dockerfile.dev",
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "changedFiles": 11,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "apply": {
+        "ok": true
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: patch failed: frontend/package.json:4\nerror: frontend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:146\nerror: frontend/package-lock.json: patch does not apply\nerror: patch failed: frontend/Dockerfile.dev:1\nerror: frontend/Dockerfile.dev: patch does not apply\nerror: patch failed: docs/Dockerfile:1\nerror: docs/Dockerfile: patch does not apply\nerror: patch failed: backend/package.json:4\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:206\nerror: backend/package-lock.json: patch does not apply\nerror: patch failed: backend/Dockerfile.fips-toolchain:46\nerror: backend/Dockerfile.fips-toolchain: patch does not apply\nerror: patch failed: backend/Dockerfile.dev:26\nerror: backend/Dockerfile.dev: patch does not apply\nerror: patch failed: backend/Dockerfile:1\nerror: backend/Dockerfile: patch does not apply\nerror: patch failed: Dockerfile.standalone-infisical:4\nerror: Dockerfile.standalone-infisical: patch does not apply\nerror: patch failed: Dockerfile.fips.standalone-infisical:4\nerror: Dockerfile.fips.standalone-infisical: patch does not apply\n"
+      },
+      "recorderTriggered": true,
+      "workloadTouched": [
+        "backend/package-lock.json",
+        "backend/package.json",
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "diffBytes": 6127
+    },
+    {
+      "number": 9598,
+      "title": "fix(ui): recover secret sharing lists after last-page deletion",
+      "state": "open",
+      "merged": false,
+      "baseRef": "main",
+      "base": "960312a10c5843c3b7d04f7d22810ed24cce095e",
+      "head": "7ee705d57c641e0ab8b82f9fd866c354e5531b82",
+      "files": [
+        "frontend/package-lock.json",
+        "frontend/package.json",
+        "frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx",
+        "frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx",
+        "frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx"
+      ],
+      "diffSha256": "8d237eac22178688e44608289085f2fa6f6c5104693ccf88ee34c0dc7457de75",
+      "apply": {
+        "ok": true,
+        "error": ""
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx: No such file or directory\nerror: patch failed: frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx:1\nerror: frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx: patch does not apply\nerror: patch failed: frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx:1\nerror: frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx: patch does not apply\nerror: patch failed: frontend/package.json:156\nerror: frontend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:123\nerror: frontend/package-lock.json: patch does not apply\n"
+      },
+      "changes": [
+        {
+          "path": "frontend/package-lock.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/package.json",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/src/pages/organization/SecretSharingPage/components/RequestSecret/RequestedSecretsTable.tsx",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/src/pages/organization/SecretSharingPage/components/ShareSecret/ShareSecretsTable.tsx",
+          "status": "modified",
+          "previous": null
+        },
+        {
+          "path": "frontend/src/pages/organization/SecretSharingPage/components/secretSharingPagination.test.tsx",
+          "status": "added",
+          "previous": null
+        }
+      ],
+      "changedFiles": 5,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "workloadTouched": [
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "recorderTriggered": true,
+      "patchMethod": "public GitHub PR .diff; git apply [--reverse] --check against frozen main"
+    }
+  ],
+  "excludedRows": [
+    {
+      "number": 9694,
+      "title": "chore(ci): add Cipher visual check for the v4 app",
+      "state": "closed",
+      "merged": true,
+      "baseRef": "design/v4-controls-polish",
+      "base": "1659bfa7d5e99edcc70fdb8fcfcbeeeea4fea27b",
+      "head": "247fedbfc31bf59a60cc1769ba44b076420f7a5f",
+      "files": [
+        ".github/cipher-visual/README.md",
+        ".github/cipher-visual/capture.mjs",
+        ".github/cipher-visual/compare.mjs",
+        ".github/cipher-visual/package-lock.json",
+        ".github/cipher-visual/package.json",
+        ".github/cipher-visual/pages.json",
+        ".github/cipher-visual/scope.mjs",
+        ".github/workflows/cipher-visual.yml"
+      ],
+      "changedFiles": 8,
+      "main": "f248a380c9032f888296930879d1075d80f12bbf",
+      "apply": {
+        "ok": true
+      },
+      "reverse": {
+        "ok": false,
+        "error": "error: .github/workflows/cipher-visual.yml: No such file or directory\nerror: .github/cipher-visual/scope.mjs: No such file or directory\nerror: .github/cipher-visual/pages.json: No such file or directory\nerror: .github/cipher-visual/package.json: No such file or directory\nerror: .github/cipher-visual/package-lock.json: No such file or directory\nerror: .github/cipher-visual/compare.mjs: No such file or directory\nerror: .github/cipher-visual/capture.mjs: No such file or directory\nerror: .github/cipher-visual/README.md: No such file or directory\n"
+      },
+      "recorderTriggered": false,
+      "workloadTouched": [],
+      "diffBytes": 45000
     },
     {
       "number": 9293,
@@ -683,63 +1000,6 @@
         "backend/package.json"
       ],
       "diffBytes": 1705815
-    },
-    {
-      "number": 9158,
-      "title": "[Snyk] Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1",
-      "state": "open",
-      "merged": false,
-      "baseRef": "main",
-      "base": "d194bbfe159116345b1206c7a3c07781beb6b431",
-      "head": "8cf1d3da74860df5fd4938c2b93eb87b97ae9221",
-      "files": [
-        "backend/package-lock.json",
-        "backend/package.json"
-      ],
-      "changedFiles": 2,
-      "main": "f248a380c9032f888296930879d1075d80f12bbf",
-      "apply": {
-        "ok": true
-      },
-      "reverse": {
-        "ok": false,
-        "error": "error: patch failed: backend/package.json:180\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:35\nerror: backend/package-lock.json: patch does not apply\n"
-      },
-      "recorderTriggered": true,
-      "workloadTouched": [
-        "backend/package-lock.json",
-        "backend/package.json"
-      ],
-      "diffBytes": 3440
-    },
-    {
-      "number": 8984,
-      "title": "[Snyk] Fix for 6 vulnerabilities",
-      "state": "open",
-      "merged": false,
-      "baseRef": "main",
-      "base": "f7aefd6f7dad4367c15df71c36e3bee2e9546e25",
-      "head": "5ec20d6ae6621cf893624d0bd3a7d97b4fdbddf5",
-      "files": [
-        "backend/package-lock.json",
-        "backend/package.json"
-      ],
-      "changedFiles": 2,
-      "main": "f248a380c9032f888296930879d1075d80f12bbf",
-      "apply": {
-        "ok": false,
-        "error": "error: patch failed: backend/package-lock.json:119\nerror: backend/package-lock.json: patch does not apply\nerror: patch failed: backend/package.json:266\nerror: backend/package.json: patch does not apply\n"
-      },
-      "reverse": {
-        "ok": false,
-        "error": "error: patch failed: backend/package.json:182\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:35\nerror: backend/package-lock.json: patch does not apply\n"
-      },
-      "recorderTriggered": true,
-      "workloadTouched": [
-        "backend/package-lock.json",
-        "backend/package.json"
-      ],
-      "diffBytes": 232529
     },
     {
       "number": 8357,
@@ -1497,45 +1757,6 @@
       "diffBytes": 1159468
     },
     {
-      "number": 9406,
-      "title": "fix(security): update minimum node version",
-      "state": "open",
-      "merged": false,
-      "baseRef": "main",
-      "base": "b99a249a9159ba197554cd76cc4b5b8e3174ff50",
-      "head": "b26657a7544e5968863105f13db32ba4248cf6e5",
-      "files": [
-        "Dockerfile.fips.standalone-infisical",
-        "Dockerfile.standalone-infisical",
-        "backend/Dockerfile",
-        "backend/Dockerfile.dev",
-        "backend/Dockerfile.fips-toolchain",
-        "backend/package-lock.json",
-        "backend/package.json",
-        "docs/Dockerfile",
-        "frontend/Dockerfile.dev",
-        "frontend/package-lock.json",
-        "frontend/package.json"
-      ],
-      "changedFiles": 11,
-      "main": "f248a380c9032f888296930879d1075d80f12bbf",
-      "apply": {
-        "ok": true
-      },
-      "reverse": {
-        "ok": false,
-        "error": "error: patch failed: frontend/package.json:4\nerror: frontend/package.json: patch does not apply\nerror: patch failed: frontend/package-lock.json:146\nerror: frontend/package-lock.json: patch does not apply\nerror: patch failed: frontend/Dockerfile.dev:1\nerror: frontend/Dockerfile.dev: patch does not apply\nerror: patch failed: docs/Dockerfile:1\nerror: docs/Dockerfile: patch does not apply\nerror: patch failed: backend/package.json:4\nerror: backend/package.json: patch does not apply\nerror: patch failed: backend/package-lock.json:206\nerror: backend/package-lock.json: patch does not apply\nerror: patch failed: backend/Dockerfile.fips-toolchain:46\nerror: backend/Dockerfile.fips-toolchain: patch does not apply\nerror: patch failed: backend/Dockerfile.dev:26\nerror: backend/Dockerfile.dev: patch does not apply\nerror: patch failed: backend/Dockerfile:1\nerror: backend/Dockerfile: patch does not apply\nerror: patch failed: Dockerfile.standalone-infisical:4\nerror: Dockerfile.standalone-infisical: patch does not apply\nerror: patch failed: Dockerfile.fips.standalone-infisical:4\nerror: Dockerfile.fips.standalone-infisical: patch does not apply\n"
-      },
-      "recorderTriggered": true,
-      "workloadTouched": [
-        "backend/package-lock.json",
-        "backend/package.json",
-        "frontend/package-lock.json",
-        "frontend/package.json"
-      ],
-      "diffBytes": 6127
-    },
-    {
       "number": 8740,
       "title": "fix(api): prebuild the OpenAPI spec at build time",
       "state": "open",
@@ -1589,5 +1810,54 @@
       ],
       "diffBytes": 139691
     }
-  ]
+  ],
+  "selectionStatus": "Nine selected candidates; merged slot 9694 unresolved: no screened replacement passed forward patch check on frozen main.",
+  "replacements": [
+    {
+      "original": 9293,
+      "replacement": 9157,
+      "group": "merged",
+      "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    },
+    {
+      "original": 8357,
+      "replacement": 9599,
+      "group": "open",
+      "reason": "Default body lists backend/src/db/schemas/certificate-cleanup-configs.ts; substring vocabulary matching treats cleanup as banned 'clean'. Hosted worker has no message override input."
+    },
+    {
+      "original": 8740,
+      "replacement": 9598,
+      "group": "open",
+      "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    }
+  ],
+  "unfilled": {
+    "original": 9694,
+    "group": "merged",
+    "reason": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying.",
+    "screened": [
+      9157,
+      9022,
+      8914,
+      8922,
+      8790,
+      9091,
+      7913,
+      7898,
+      7957,
+      6671
+    ],
+    "method": "Unauthenticated public GitHub PR .diff piped to git apply --check against frozen main. Each exited 1; candidate 9157 detailed in rows."
+  },
+  "snykSearch": {
+    "query": "repo:Infisical/infisical is:pr is:open in:title Snyk",
+    "total": 2,
+    "numbers": [
+      8984,
+      9158
+    ],
+    "additionalAvailable": false,
+    "note": "No additional title-labelled Snyk PR found; author:snyk-bot search returned zero. New open candidates add dependencies with manifest and lockfile changes but are not dependency-only PRs."
+  }
 }
