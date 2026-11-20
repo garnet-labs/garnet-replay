@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** GitHub Actions entry for hosted replay jobs: one canonical prepare or start, reported as out/hosted-job/job.json. */
-import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs"
+import { appendFileSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { assertSlug } from "../lib/guards.mjs"
@@ -63,8 +63,15 @@ try {
   Object.assign(job, result)
   write()
 } catch (error) {
-  Object.assign(job, { state: "blocked", message: error.message })
+  const reason = typeof error.reason === "string" ? error.reason : "REPLAY_FAILED"
+  Object.assign(job, { state: "blocked", reason, message: error.message })
   write()
-  console.error(error.message)
+  const refusal = `[${reason}] ${error.message}`
+  console.error(refusal)
+  if (typeof process.env.GITHUB_STEP_SUMMARY === "string" && process.env.GITHUB_STEP_SUMMARY !== "") {
+    try { appendFileSync(process.env.GITHUB_STEP_SUMMARY, `\n## Replay blocked: ${reason}\n\n${error.message}\n`) } catch (summaryError) {
+      console.error(`Could not write job summary: ${summaryError.message}`)
+    }
+  }
   process.exitCode = 1
 }
