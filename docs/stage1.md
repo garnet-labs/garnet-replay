@@ -62,12 +62,13 @@ The plan, always printed before anything is written:
    the distance is known to be harmless.
    For alternate-base replays, `ensure-base` carries recorder entry workflows
    with push triggers including the alternate branch, then `wait-base-record`
-   requires successful push runs for every selected recorder at that exact tip
+   requires successful push runs for expected entry recorders at that exact tip
    before publishing the change. Existing successful runs proceed immediately.
    Pending/no runs or unreadable Actions runs stop as `RECORD_PENDING` after at
    most 45 minutes (30-second polling; API errors stop immediately); failed runs
-   stop with an error. When extending a branch-filtered push, any push path
-   filter must explicitly include the workflow itself without later exclusions.
+   stop with an error. The pure plan excludes callees and triggers whose branch
+   or path filters do not provably accept the carry commit. Only rewritten
+   workflow paths are assumed changed; an empty expected set refuses planning.
    Push triggers without branch filters stay as they are; unsupported shapes
    refuse planning. Local and hosted execution use the same plan gate.
    An older alternate base can be upgraded by a normal fast-forward commit only

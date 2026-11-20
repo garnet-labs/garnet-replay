@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
-import { addPushBranch, baseRecordState, canUpgradeBase } from "../lib/base-baseline.mjs"
+import { addPushBranch, baselinePushExpected, baseRecordState, canUpgradeBase } from "../lib/base-baseline.mjs"
 import { waitForBaseRecord } from "../lib/wait.mjs"
 import { executePlan, planPureReplay, planReplay, renderPlan } from "../lib/replay-pr.mjs"
 import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
@@ -39,20 +39,51 @@ test("push rewriting preserves events, appends flow/block branches after exclusi
   }
   assert.match(addPushBranch(body.replace("on:", "'on':"), branch), /node-24-base/)
   const filtered = body.replace("  pull_request:", `    paths:\n      - package.json\n      - ${workflow}\n  pull_request:`)
-  assert.match(addPushBranch(filtered, branch, { workflowPath: workflow }), /node-24-base/)
-  assert.throws(() => addPushBranch(filtered, branch), /push paths must explicitly include/)
-  assert.throws(() => addPushBranch(filtered.replace(`      - ${workflow}`, `        - ${workflow}`), branch, { workflowPath: workflow }), /unsupported filter indentation/)
-  assert.throws(() => addPushBranch(filtered.replace("  pull_request:", "      - '!**'\n  pull_request:"), branch, { workflowPath: workflow }), /push paths must explicitly include/)
+  assert.match(addPushBranch(filtered, branch), /node-24-base/)
+  assert.equal(baselinePushExpected(addPushBranch(filtered, branch), branch, [workflow]), true)
+  assert.equal(baselinePushExpected(addPushBranch(filtered.replace(`      - ${workflow}`, `        - ${workflow}`), branch), branch, [workflow]), false)
+  assert.equal(baselinePushExpected(addPushBranch(filtered.replace("  pull_request:", "      - '!**'\n  pull_request:"), branch), branch, [workflow]), false)
 })
 
 test("push rewriting refuses ambiguous mappings, filters, aliases and invalid branch names", () => {
   for (const original of ["jobs: {}", body.replace("on:", "on: *events"), body.replace("  push:", "  push: {branches: [master]}"),
-    body.replace("branches:", "branches-ignore:"), body.replace("branches:", "tags:"),
     body.replace("['master']", "*branches"), body.replace("['master']", "[*branches]"), body.replace("['master']", "[${{ inputs.branch }}]"),
     body.replace("  pull_request:", "  push:\n  pull_request:"), body.replace("on:", "<<: *events\non:")]) {
     assert.throws(() => addPushBranch(original, branch), /cannot prepare baseline/)
   }
   for (const invalid of ["", "bad'branch", "-option", "../main", "a//b", "main.lock"]) assert.throws(() => addPushBranch(body, invalid), /plain branch/)
+})
+
+test("baseline push selection excludes callees, nonmatching paths and branch exclusions", () => {
+  for (const callee of ["on: workflow_call\n", "on: [workflow_call]\n", "on:\n  workflow_call:\n"]) {
+    assert.equal(addPushBranch(callee, branch), callee)
+    assert.equal(baselinePushExpected(callee, branch, [workflow]), false)
+  }
+  const push = (filters) => `on:\n  push:\n${filters}\n`
+  for (const [filters, expected] of [
+    ["    paths: ['.github/workflows/**']", true], ["    paths: ['src/**']", false],
+    ["    paths: ['**', '!.github/**']", false], ["    paths-ignore: ['src/**']", true],
+    ["    paths-ignore: ['.github/**']", false], ["    branches-ignore: ['deps/**']", false],
+    ["    branches-ignore: ['release/**']", true], ["    branches: ['master']", false],
+    ["    branches: ['deps/**']", true], ["    paths: *unknown", false],
+    ["    paths: ['+(src)/**']", false], ["    tags: ['v*']", false],
+    ["    branches-ignore: ['!master']", false], ["    paths: ['.github/workflows/recor?.yml']", false],
+  ]) assert.equal(baselinePushExpected(push(filters), branch, [workflow]), expected, filters)
+  assert.equal(baselinePushExpected(push("    paths: ['**']"), branch, []), false)
+})
+
+test("pure planning waits only on expected entries in mixed carried sets and refuses an empty set", () => {
+  const excluded = {
+    ".github/workflows/callee.yml": "on: workflow_call\n",
+    ".github/workflows/filtered.yml": "on:\n  push:\n    branches: [master]\n    paths: ['src/**']\n",
+    ".github/workflows/ignored.yml": "on:\n  push:\n    paths-ignore: ['.github/**']\n",
+    ".github/workflows/branch-ignored.yml": "on:\n  push:\n    branches-ignore: ['deps/**']\n",
+  }
+  const workflowBodies = { ...excluded, [workflow]: body }
+  const plan = planPureReplay({ ...input, recordWorkflows: Object.keys(workflowBodies), workflowBodies })
+  assert.deepEqual(plan.steps.find((step) => step.id === "wait-base-record").workflows, [workflow])
+  assert.ok(!renderPlan(plan).split("\n").find((line) => line.includes("wait for successful push recordings")).includes("callee.yml"))
+  assert.throws(() => planPureReplay({ ...input, recordWorkflows: Object.keys(excluded), workflowBodies: excluded }), /no carried entry workflow is expected to run/)
 })
 
 test("base upgrades require ancestry and both carry-only diffs", () => {
