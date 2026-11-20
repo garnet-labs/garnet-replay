@@ -279,6 +279,25 @@ test("real receipt CursorPage data items read through the CLI without manual unw
   assert.throws(() => readProfileTrees({ items: [{ data: null }] }), /Profile must be an object/)
 })
 
+test("resolved IPs group with their host across windows without creating comparison additions", () => {
+  const receipt = JSON.parse(readFileSync(RECEIPT, "utf8"))
+  const rows = readProfileTrees(receipt)
+  const curl = rows.filter((row) => row.kind === "detached-root" && row.job === "devin-install" && row.repository === "")
+  assert.equal(curl.length, 1)
+  assert.equal(curl[0].destination, "example.com")
+  assert.deepEqual(curl[0].ancestry, ["systemd", "sh", "curl"])
+  assert.deepEqual(curl[0].addresses, ["104.20.23.154", "172.66.147.243"])
+  assert.equal(rows.some((row) => row.destination === "104.20.23.154"), false)
+  const base = { associations: [{ ancestry: ["systemd", "sh"], process: "curl", remote_names: ["example.com", "192.0.2.1"], remote_ports: [443] }] }
+  const head = structuredClone(base)
+  head.associations[0].remote_names = ["192.0.2.2", "example.com"]
+  assert.deepEqual(compareProfileTrees(head, base).added, [])
+  assert.deepEqual(readProfileTrees({ profiles: [base, head, base] })[0].addresses, ["192.0.2.1", "192.0.2.2"])
+  head.associations[0].process = "wget"
+  assert.equal(compareProfileTrees(head, base).added.length, 1)
+  assert.equal(readProfileTrees({ profiles: [base, head] }).length, 2)
+})
+
 test("CursorPages with further pages withhold additions and explain the missing pages", () => {
   const receipt = JSON.parse(readFileSync(new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url), "utf8"))
   assert.equal(captureAllowsComparison(receipt), true)
