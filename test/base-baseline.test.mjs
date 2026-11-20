@@ -17,7 +17,8 @@ const body = "name: Record\non:\n  push:\n    branches: ['master'] # keep\n  pul
 const input = { slug: "example", upstream: "upstream/example", fork: "garnet-labs/example", defaultBranch: "master",
   forkDefaultSha: "c".repeat(40), upstreamPr: 1, baseSha: sha, headSha: "b".repeat(40), baseBranch: branch,
   changes: [{ path: "app.js", status: "modified", previous: null }], recordWorkflows: [workflow], workflowBodies: { [workflow]: body } }
-const run = { id: 10, event: "push", head_branch: branch, head_sha: sha, path: workflow, status: "completed", conclusion: "success" }
+const run = { id: 10, event: "push", head_branch: branch, head_sha: sha, path: workflow, status: "completed", conclusion: "success",
+  jobs: [{ name: "Install", status: "completed", conclusion: "success", steps: [{ name: "Run garnet-org/action@pin", status: "completed", conclusion: "success" }] }] }
 
 test("push rewriting preserves events, appends flow/block branches after exclusions, and is idempotent", () => {
   for (const original of [body, body.replace("['master'] # keep", "\n      - master\n      - '!deps/**'"), body.replace("['master']", "['master', '!deps/**']"), body.replaceAll("\n", "\r\n")]) {
@@ -104,6 +105,11 @@ test("baseline state rejects unrelated success and requires every selected workf
   assert.equal(state([run], [workflow, ".github/workflows/other.yml"]).state, "pending")
   assert.equal(state([run, { ...run, id: 11, status: "in_progress", conclusion: null }]).state, "pending")
   assert.throws(() => state([], []), /recording workflow/)
+  assert.equal(state([{ ...run, jobs: [] }]).state, "failed")
+  assert.equal(state([{ ...run, jobs: undefined }]).state, "pending")
+  assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], conclusion: "skipped" }] }]).state, "failed")
+  assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], steps: [{ ...run.jobs[0].steps[0], conclusion: "skipped" }] }] }]).state, "failed")
+  assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], steps: [{ name: "Unrelated successful step", status: "completed", conclusion: "success" }] }] }]).state, "failed")
 })
 
 test("baseline waiting succeeds, skips sleeping for existing success, stops failed, and retains pending on timeout/API errors", async () => {
@@ -115,6 +121,10 @@ test("baseline waiting succeeds, skips sleeping for existing success, stops fail
     const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 60, pollMs: 30, now: () => time,
       sleep: async (ms) => { time += ms; sleeps += 1 }, exec: (command, args) => {
         assert.equal(command, "gh")
+        if (args.at(-1).endsWith("/jobs?per_page=100")) {
+          if (extra.jobError instanceof Error) throw extra.jobError
+          return JSON.stringify([{ jobs: extra.jobs === undefined ? run.jobs : extra.jobs }])
+        }
         assert.deepEqual(args, ["api", "--paginate", "--slurp", query])
         const response = responses[Math.min(calls++, responses.length - 1)]
         if (response instanceof Error) throw response
@@ -135,6 +145,9 @@ test("baseline waiting succeeds, skips sleeping for existing success, stops fail
   assert.match(error.result.detail, /HTTP 403/)
   assert.equal(error.calls, 1)
   assert.equal((await wait([{}])).result.state, "pending")
+  assert.equal((await wait([ready], { jobs: [] })).result.state, "failed")
+  assert.equal((await wait([ready], { jobs: null })).result.state, "pending")
+  assert.match((await wait([ready], { jobError: new Error("HTTP 403 jobs") })).result.detail, /HTTP 403 jobs/)
 })
 
 test("baseline waiting defaults to 45 minutes and 30 seconds with injected clock/sleep", async () => {
@@ -170,7 +183,7 @@ test("executor stops pending or failed baseline waits before creating or publish
     const execution = executePlan({ ...plan, steps }, { io: { mkdirp: () => {}, writeFile: () => {} }, log: () => {}, wait: { timeoutMs: 0, enabled: false },
       exec: (command, args) => {
         calls.push([command, args])
-        if (command === "gh") return JSON.stringify([{ workflow_runs: runs }])
+        if (command === "gh") return JSON.stringify(args.at(-1).endsWith("/jobs?per_page=100") ? [{ jobs: run.jobs }] : [{ workflow_runs: runs }])
         if (args.includes("rev-parse")) return args.at(-1).endsWith("^{tree}") ? "tree" : sha
         if (args.includes("write-tree")) return "tree"
         return ""
