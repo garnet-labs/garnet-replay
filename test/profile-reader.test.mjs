@@ -10,6 +10,7 @@ import { kitResponse } from "./fixtures/grounding.mjs"
 
 const FIXTURE = new URL("./fixtures/demo-profiles/attribution-trees.json", import.meta.url)
 const TREES = JSON.parse(readFileSync(FIXTURE, "utf8"))
+const RECEIPT = new URL("./fixtures/demo-profiles/devin-receipt3.json", import.meta.url)
 const HEAD = "a".repeat(40)
 const PREVIOUS = "b".repeat(40)
 const ID = "00000000-0000-4000-8000-000000000001"
@@ -262,6 +263,20 @@ test("CursorPage input rejects empty or malformed items instead of dropping them
   assert.throws(() => readProfileTrees({ items: [{}] }), /no readable outbound associations/)
   assert.throws(() => readProfileTrees({ profiles: { items: null } }), /no readable outbound associations/)
   assert.equal(attributionKind(["systemd", "devin-remote", "dockerd", "node"]), "container-rooted")
+})
+
+test("real receipt CursorPage data items read through the CLI without manual unwrapping", () => {
+  const receipt = JSON.parse(readFileSync(RECEIPT, "utf8"))
+  assert.equal(receipt.items.length, 11)
+  const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", RECEIPT.pathname, "--json"], { encoding: "utf8" })
+  assert.equal(child.status, 0, child.stderr)
+  const report = JSON.parse(child.stdout)
+  assert.equal(report.rows.some((row) => row.destination === "example.com"), true)
+  assert.equal(report.rows.some((row) => row.destination === "registry.npmjs.org"), true)
+  assert.deepEqual(report.rows, readProfileTrees({ profiles: receipt.items.map((item) => item.data) }))
+  receipt.items[1].data.capture_quality = "partial"
+  assert.equal(captureAllowsComparison(receipt), false)
+  assert.throws(() => readProfileTrees({ items: [{ data: null }] }), /Profile must be an object/)
 })
 
 test("CursorPages with further pages withhold additions and explain the missing pages", () => {
