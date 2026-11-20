@@ -60,7 +60,7 @@ Six layers; Garnet owns 1, 2, 5 and 6, the user's repository carries 3 and 4.
 | 3 instruction | repository | one canonical `REVIEW.md` + thin per-tool adapters that point at it | no (prose) |
 | 4 timing | mirror workflow | after the exact-head App record is finalized, request the review again (`/devin review`, `@coderabbitai review`, `@greptileai`, Bugbot API, `@codex review`, `/agentic_review`, Copilot re-request) deduplicated per head | n/a |
 | 5 measurement | `replay consume` / `harvest` | tiered receipts (utterance, citation, observation, mention); `consumed` only for head-bound utterance/citation | strict |
-| 6 enforcement | merge-safety workflow; branch protection configured separately | `garnet/merge-safety` runs `replay decide`; reviewer output never gates | merge passes; hold and undeterminable fail |
+| 6 enforcement | merge-safety workflow (advisory) | `garnet/merge-safety` runs `replay decide`; reviewer output never gates. It runs from `issue_comment` on the default branch, so its check is not attached to the PR head: do not require it in branch protection | merge passes; hold and undeterminable fail |
 
 The reviewer's grounding line is the **user-facing** output; `garnet/merge-safety`
 is the separate **merge decision** output. Neither replaces `replay verify`.

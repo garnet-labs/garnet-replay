@@ -93,9 +93,12 @@ any variance, the verdict is `undeterminable`.
 
 Live `verify` reads the anonymous API for each job's public run/profile link and
 requires the exact repository, run ID, profile ID, and current PR head SHA.
-Malformed selectors, missing identity, HTTP errors, and merge-ref identities
-fail the gate. This proves identity, not completeness or causality; declared
-complete capture is a separate required leg.
+Malformed selectors, missing identity and HTTP errors fail the gate. A
+merge-ref identity passes only with verified executed-source linkage (two
+parents, the PR head second). This proves identity, not completeness or
+causality. Accepted capture is a separate required leg: declared complete, or a
+finalized App record labelled `best-effort` with no incomplete jobs, which stays
+a scoped result.
 
 Cards quote all recorded job sections, including unchanged workload trees and
 runner background. They expose capture and the actual previous-recorded/head
