@@ -847,7 +847,7 @@ test("livePr: two-commit flag selects the existing two-state publisher", async (
   const exec = (command, args) => args[1]?.startsWith(`repos/${UPSTREAM}/git/trees/`) && args[1].includes(":.github/workflows")
     ? JSON.stringify({ tree: [] }) : fallback(command, args)
   for (const twoCommit of [false, true]) {
-    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit", "--first", "package.json"] : [])], {
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit", "--first", "src/a.ts"] : [])], {
       exec, log: () => {}, save: () => assert.fail("dry run must not save"),
     })
     assert.equal(result.plan.singleCommit === true, !twoCommit)
