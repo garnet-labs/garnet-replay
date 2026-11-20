@@ -1,0 +1,957 @@
+{
+  "slug": "supabase",
+  "upstream": "supabase/supabase",
+  "fork": "garnet-labs/supabase",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53674,
+      "title": "feat(studio): Wire org and users authorized apps list to backend",
+      "author": "djhi",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T14:29:14Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 22,
+      "paths": [
+        "apps/studio/components/interfaces/Account/OAuthApps/GrantDisconnectDialogContent.tsx",
+        "apps/studio/components/interfaces/Account/OAuthApps/GrantProjectsDialogContent.tsx",
+        "apps/studio/components/interfaces/Account/OAuthApps/GrantRow.tsx",
+        "apps/studio/components/interfaces/Account/OAuthApps/OAuthApps.test.tsx",
+        "apps/studio/components/interfaces/Account/OAuthApps/OAuthApps.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthApps.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedList.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedList.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedRow.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsMemberGrantsDialogContent.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsRevokeDialogContent.tsx",
+        "apps/studio/components/layouts/AccountLayout/AccountLayout.tsx",
+        "apps/studio/data/oauth-apps/mocks.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-approvals-query.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-grants-query.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-member-grants-query.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-revoke-grant-mutation.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-revoke-mutation.ts",
+        "apps/studio/data/oauth-apps/types.ts",
+        "apps/studio/package.json",
+        "apps/studio/routes/_app/account/apps.tsx",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53676,
+      "title": "chore: bump pnpm to 12.21.0",
+      "author": "ivasilov",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T15:13:15Z",
+      "kind": "install-surface",
+      "transition": {
+        "name": "pnpm",
+        "from": null,
+        "to": "12.21.0"
+      },
+      "files": 5,
+      "paths": [
+        "AGENTS.md",
+        "apps/studio/Dockerfile",
+        "apps/www/turbo-build.test.ts",
+        "package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53670,
+      "title": "refactor: plan upgrade screen",
+      "author": "kevcodez",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T12:15:31Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "apps/studio/components/interfaces/Billing/Payment/PaymentMethods/NewPaymentMethodElement.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/DueTodayRow.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PaymentMethodSelection.test.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PaymentMethodSelection.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanCard.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanChangeBill.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanChangeNotes.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanChangeSummary.utils.test.ts",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanChangeSummary.utils.ts",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanUpdatePanelShell.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanUpdateSidePanel.test.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/PlanUpdateSidePanel.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/Subscription.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/Subscription/SubscriptionPlanUpdateView.tsx",
+        "apps/studio/package.json",
+        "apps/www/components/Pricing/PricingPlans.tsx",
+        "packages/shared-data/plans.ts",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53705,
+      "title": "feat(studio): preview Trusted Partner access in Authorized Apps",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T02:13:35Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthApps.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedList.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedList.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedPreview.ts",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsAuthorizedRow.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/OAuthAppsRevokeDialogContent.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53704,
+      "title": "fix(studio): match interstitial titles to section headings",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T02:10:41Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/studio/components/layouts/InterstitialLayout.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53703,
+      "title": "Fixes table rendering for metrics and metrics_all",
+      "author": "gaurav-nelson",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T01:58:07Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/queues/pgmq.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53702,
+      "title": "fix(studio): clarify OAuth consent copy and hierarchy",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T00:34:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/AuthorizeSuccessScreen.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/AuthorizingAsCard.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ProjectMultiSelect.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53701,
+      "title": "fix(studio): make OAuth project scope explicit",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T00:34:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ProjectMultiSelect.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53700,
+      "title": "feat(studio): make OAuth permission changes easier to scan",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T00:34:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ScopeGroupCardWithDiff.tsx",
+        "packages/config/css/theme.css"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53699,
+      "title": "fix(studio): clarify OAuth permission labels",
+      "author": "dnywh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T00:34:46Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "apps/design-system/content/docs/components/tooltip.mdx",
+        "apps/design-system/registry/default/example/tooltip-inline-demo.tsx",
+        "apps/design-system/registry/examples.ts",
+        "apps/studio/components/interfaces/Database/Replication/DetailSubtext.tsx",
+        "apps/studio/components/interfaces/Database/Replication/PipelineStatePill.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/OAuthAppsAuthorizeScreen.utils.ts",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ScopeGroupCard.test.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ScopeGroupCard.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ScopeGroupCardItem.tsx",
+        "apps/studio/components/interfaces/Organization/OAuthApps/Consent/ScopeGroupCardWithDiff.tsx",
+        "apps/studio/components/ui/tooltip-styles.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53698,
+      "title": "docs(auth): explain that supabase-js refreshes the session automatically",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:17:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/auth/sessions.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53697,
+      "title": "docs: say where to reset the database password in the connection guide",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:16:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/database/connecting-to-postgres.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53696,
+      "title": "docs(auth): explain how to verify JWTs without reaching the JWKS endpoint",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:15:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/auth/signing-keys.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53695,
+      "title": "docs(auth): explain why the signup trigger must schema-qualify names",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:14:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/auth/managing-user-data.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53694,
+      "title": "docs: add branches to project transfer prerequisites",
+      "author": "app/claude",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:14:14Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/platform/project-transfer.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53692,
+      "title": "docs(auth): note that the Kotlin Auth plugin can't be used with Firebase accessToken",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:12:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/content/guides/auth/third-party/firebase-auth.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53691,
+      "title": "docs: point JavaScript v2 reference contributors to the new reference pipeline",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T22:10:39Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/CONTRIBUTING.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53690,
+      "title": "chore(www): bump MCP server card to 0.18.0",
+      "author": "app/claude",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:04:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/www/public/.well-known/mcp/server-card.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53689,
+      "title": "Add \"Supports AWS PrivateLink\" to Team plan and comparison table on pricing page",
+      "author": "wendeh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:24:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/shared-data/plans.ts",
+        "packages/shared-data/pricing.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53688,
+      "title": "feat(docs): layout toggle",
+      "author": "antlio",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T21:09:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "apps/docs/components/Feedback/Feedback.test.tsx",
+        "apps/docs/components/Feedback/Feedback.tsx",
+        "apps/docs/components/GuidesSidebar.legacy.tsx",
+        "apps/docs/components/GuidesSidebar.tsx",
+        "apps/docs/features/DocsLayout/LayoutSwitchButton.test.tsx",
+        "apps/docs/features/DocsLayout/LayoutSwitchButton.tsx",
+        "apps/docs/features/DocsLayout/LayoutSwitchFeedbackDialog.tsx",
+        "apps/docs/features/IaNav/constants.test.ts",
+        "apps/docs/features/IaNav/constants.ts",
+        "apps/docs/features/IaNav/layoutChoice.ts",
+        "apps/docs/features/IaNav/useIaNavVariant.test.ts",
+        "apps/docs/features/IaNav/useIaNavVariant.ts",
+        "packages/common/constants/local-storage.ts",
+        "packages/common/telemetry-constants.ts",
+        "packages/common/telemetry-event.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53687,
+      "title": "chore: remove public TIA PDF and point to Trust Center",
+      "author": "app/claude",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:50:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/Documents/TIA.tsx",
+        "apps/www/lib/redirects.js",
+        "apps/www/public/downloads/docs/Supabase+TIA+250314.pdf"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53686,
+      "title": "Changes by create-pull-request action",
+      "author": "app/supabase-supabase-autofixer",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:40:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/studio/data/oauth-apps/oauth-apps-approvals-query.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-grants-query.ts",
+        "apps/studio/data/oauth-apps/oauth-apps-member-grants-query.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53683,
+      "title": "chore(www): add infrastructure section to Koodos case study",
+      "author": "shaziyabandukia",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T18:22:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/www/_customers/koodos.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53682,
+      "title": "chore(www): add infrastructure section to Chatbase case study",
+      "author": "shaziyabandukia",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T18:20:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/www/_customers/chatbase.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53681,
+      "title": "chore(www): add infrastructure section to eXp Realty case study",
+      "author": "shaziyabandukia",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T18:18:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/www/_customers/exprealty.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53680,
+      "title": "Adding Adam FitzGerald to humans.txt as per onboarding",
+      "author": "AdamFitzSupa",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T17:49:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/public/humans.txt"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53679,
+      "title": "fix(studio): mobile heading for unified logs",
+      "author": "kemaldotearth",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T17:35:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/studio/components/interfaces/UnifiedLogs/UnifiedLogs.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53678,
+      "title": "fix(docs): correct Python OAuth client and Vector put() examples for supabase-py v2",
+      "author": "pavankumargp6",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T15:51:51Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/docs/spec/supabase_py_v2.yml"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53672,
+      "title": "fix(studio): show the reduced upload size limit in the storage spend cap warning",
+      "author": "app/supabase-vercel-tedd",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T13:37:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/studio/components/interfaces/Storage/StorageSettings/StorageSettings.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 53671,
+      "title": "feat(studio): select a usage project by clicking its name",
+      "author": "drewm",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T13:37:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "apps/studio/components/interfaces/Organization/BillingSettings/BillingBreakdown/BillingMetric.test.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/BillingBreakdown/BillingMetric.tsx",
+        "apps/studio/components/interfaces/Organization/BillingSettings/BillingBreakdown/ComputeMetric.tsx",
+        "apps/studio/components/interfaces/Organization/Usage/TotalUsage.tsx",
+        "apps/studio/components/interfaces/Organization/Usage/Usage.tsx",
+        "apps/studio/components/interfaces/Organization/Usage/Usage.utils.ts",
+        "apps/studio/components/interfaces/Organization/Usage/UsageProjectName.test.tsx",
+        "apps/studio/components/interfaces/Organization/Usage/UsageProjectName.tsx",
+        "apps/studio/components/interfaces/Organization/Usage/UsageSection/DatabaseSizeUsage.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:38.293Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
