@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
@@ -235,6 +235,34 @@ test("hosted worker preserves baseline pending stops and does not verify or save
     execute: () => JSON.stringify({ resources: { core: { remaining: 1000, reset: Math.floor(Date.now() / 1000) + 3600 } } }), live: async () => { throw Object.assign(new Error("base is not ready"), { reason: "RECORD_PENDING" }) },
     verify: async () => assert.fail("must not verify"), save: async () => assert.fail("must not save"),
   }), (error) => error.reason === "RECORD_PENDING")
+})
+
+test("ensure-base refuses source-base and worktree symlinks before writing carried workflows", async (t) => {
+  for (const sourceLink of [true, false]) {
+    const work = mkdtempSync(join(tmpdir(), "base-links-"))
+    t.after(() => rmSync(work, { recursive: true, force: true }))
+    const git = (...args) => execFileSync("git", ["-C", work, ...args], { encoding: "utf8", env: { ...process.env, GIT_AUTHOR_NAME: "Author", GIT_AUTHOR_EMAIL: "author@example.test", GIT_COMMITTER_NAME: "Author", GIT_COMMITTER_EMAIL: "author@example.test" } }).trim()
+    git("init", "-q")
+    mkdirSync(join(work, ".github/workflows"), { recursive: true })
+    writeFileSync(join(work, "outside.yml"), "preserve\n")
+    if (sourceLink) symlinkSync("../../outside.yml", join(work, workflow))
+    else writeFileSync(join(work, workflow), body)
+    git("add", ".")
+    git("commit", "-qm", "Initial source")
+    const baseSha = git("rev-parse", "HEAD")
+    rmSync(join(work, workflow))
+    if (sourceLink) writeFileSync(join(work, workflow), body)
+    else symlinkSync("../../outside.yml", join(work, workflow))
+    const plan = planPureReplay({ ...input, work, baseSha })
+    await assert.rejects(executePlan({ ...plan, steps: plan.steps.filter((step) => step.id === "ensure-base") }, {
+      log: () => {}, exec: (command, args) => {
+        if (args[2] === "fetch") return ""
+        if (args[2] === "push") assert.fail("must not publish")
+        return git(...args.slice(2))
+      },
+    }), /symlinks/)
+    assert.equal(readFileSync(join(work, "outside.yml"), "utf8"), "preserve\n")
+  }
 })
 
 test("runner persists recording pending stops separately from hard failures", async (t) => {
