@@ -222,7 +222,7 @@ test("execution stops on moved plans and verifies the recorded head before savin
   let saved = false
   const events = []
   const seams = {
-    execute: () => "",
+    execute: (command, args) => command === "gh" && args[1] === "rate_limit" ? JSON.stringify({ resources: { core: { remaining: 5000, reset: 2000000000 } } }) : "",
     live: async (args, options) => {
       if (args.includes("--dry-run")) return { plan }
       options.beforeExecute(plan)

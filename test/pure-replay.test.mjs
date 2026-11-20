@@ -695,6 +695,37 @@ test("livePr: refuses without onboarding and points at setup", async () => {
   )
 })
 
+test("livePr: hosted preflight runs after canonical admission but before dry-run return or any execution", async () => {
+  for (const dry of [true, false]) {
+    let checked = false
+    await assert.rejects(livePr(["posthog", "--pr", "501", ...(dry ? ["--dry-run"] : [])], {
+      exec: liveExec({ recording: true }), log: () => {}, save: () => assert.fail("must not save"),
+      preflight: (plan, health, prs) => {
+        checked = true
+        assert.equal(plan.fork, FORK)
+        assert.equal(health.verdict, "none")
+        assert.deepEqual(prs, [])
+        throw Object.assign(new Error("preflight refusal"), { reason: "RECORDER_UNHEALTHY" })
+      },
+      beforeExecute: () => assert.fail("must not execute"),
+    }), { reason: "RECORDER_UNHEALTHY" })
+    assert.equal(checked, true)
+  }
+})
+
+test("livePr: missing fork and ungrounded fork refuse before preflight or execution", async () => {
+  for (const reason of ["FORK_UNAVAILABLE", "GROUNDING_REQUIRED"]) {
+    const base = liveExec({ recording: true })
+    await assert.rejects(livePr(["posthog", "--pr", "501", "--dry-run"], {
+      exec: (command, args) => {
+        if (reason === "FORK_UNAVAILABLE" && args[0] === "repo") throw new Error("HTTP 404")
+        if (reason === "GROUNDING_REQUIRED" && args[1]?.includes("/git/trees/") && !args[1].includes(":.github/workflows")) return JSON.stringify({ tree: [] })
+        return base(command, args)
+      }, log: () => {}, preflight: () => assert.fail("admission must run first"), beforeExecute: () => assert.fail("must not execute"),
+    }), { reason })
+  }
+})
+
 test("livePr: a changed recording workflow uses the upstream base even when the fork already has the head", async () => {
   for (const mode of [[], ["--base-branch", "review/base"], ["--sync-fork"]]) {
     const reads = []

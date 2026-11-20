@@ -91,6 +91,26 @@ uploads the plan as the `replay-job` artifact. **Start replay on fork**
 dispatches `action: start` with the prepare run ID; the job downloads that plan,
 and `live` refuses to write if the recomputed plan's signature differs. It then
 waits for the fork record and runs `verifyExhibit`, as the local runner does.
+
+Prepare and start check the GitHub REST budget before paginated reads: fewer
+than 200 remaining requests waits once when reset is within 60 seconds, then
+rechecks; otherwise it refuses with the reset time. This reserve is an admission
+floor, not a guarantee against concurrent token use exhausting the budget.
+
+Canonical fork existence, grounding and duplicate admission run before writes.
+Hosted jobs also refuse recorder health `none`/`stalled` and compare the changed
+paths (including removals, renames and file modes) against the replay base before
+any base-branch push. An empty change names the planned fork branch and a recent
+PR on it, if present. Unreadable change trees refuse rather than guess.
+
+Refusals carry `reason` and `message` in `job.json`, print `[REASON] message`, and
+appear in the Actions job summary. Git transfer/checkout `ETIMEDOUT` errors retry
+at most twice, after logged 1s/2s backoffs; commits and whole jobs never retry.
+
+A timed-out clone may discard only the new clone directory created by that
+attempt, never a pre-existing checkout. Per-command timeouts are unchanged.
+These checks do not change recording, evidence classification or verification.
+
 The viewer reads job state from the run, its artifact and the fork PR on
 `plan.branch`; on completion it opens the fork PR's live receipt.
 
