@@ -1,6 +1,6 @@
 # Infisical shadow queue
 
-## 09:00Z window — current execution
+## 09:00Z window — stopped with a harness blocker
 
 Results branch: `devin/1795165388-infisical-results`, created from merged
 harness main `18c637f`. New hosted dispatches use ref `main`. All hosted
@@ -32,12 +32,38 @@ At 09:18Z a one-poll read-only invocation of `waitForBaseRecord` returned
 `state: recorded`, naming that exact baseline profile. Direct PAT reads also
 confirmed baseline job logs are readable (HTTP 200), but the hosted start
 remained in progress and no replay PR was visible. The hosted wait's reason
-is not yet known; a token permission failure or invalid baseline profile
-must not be inferred from a long-running job alone.
+was unknown at that point; a token permission failure or invalid baseline
+profile was not inferred from a long-running job alone.
+
+**Final observation, 09:52Z:** start `44707652477` completed with failure at
+09:51:56Z. Its artifact says `state: pending`, `reason: RECORD_PENDING`, and
+that the replay was not published. The exact blocker is:
+
+```text
+baseline profile logs unreadable: Command failed: gh api repos/garnet-labs/infisical/actions/jobs/136192199826/logs
+the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway
+```
+
+The failed log reaches `ensure-base`, then repeatedly reports that error
+from 09:09:46Z until the 45-minute baseline wait expires at 09:51:51Z.
+`lib/wait.mjs` reads those logs through raw `gh api` before extracting the
+profile link. Thus the hosted CLI's escape-sequence refusal prevents the
+baseline gate from inspecting the uploaded profile; the baseline itself is
+not missing. The successful direct log read and one-poll local gate above
+disprove a missing-profile interpretation. This is a harness/CLI
+compatibility blocker, not a comparison result or a budget rerun.
+
+All hosted replay and PAT activity stopped after collecting these failure
+logs/artifact, before 09:55Z. No replay PR was created, no run was cancelled,
+and the other nine were not dispatched. Consequently no App head record,
+compared-baseline check, StampHog dispatch, verify result or card exists for
+this cohort. Next action: repair the narrow baseline-log read compatibility
+on a non-main branch before retrying 9436 in an allowed window. No guards or
+evidence requirements were relaxed. This report is visually unverified.
 
 | Source selection | Fork replay PR | Head | Baseline | App / new destinations | Capture | Compared == baseline | Verify / first failing leg | StampHog / record cited | Hosted prepare / start |
 |---|---|---|---|---|---|---|---|---|---|
-| 9436 | Not yet published | — | `4abdbd5` | Pending | Undeterminable | Pending | Not run | Not dispatched | `44707458702` / `44707652477` in progress |
+| 9436 | Not created | — | `4abdbd5` | No head record | Undeterminable | Not available | Not run: no PR | Not dispatched | `44707458702` succeeded / `44707652477` failed, `RECORD_PENDING` |
 | 9730 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
 | 9022 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
 | 9230 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
