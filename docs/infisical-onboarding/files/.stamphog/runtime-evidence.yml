@@ -1,0 +1,32 @@
+# Garnet runtime-evidence policy (vendored local extension — see
+# tools/pr-approval-agent/README.md). Trusted data: lives in .stamphog/ so
+# every edit is human-reviewed via the stamphog_policy deny category.
+version: 1
+# Only comments authored by these logins are read as runtime evidence.
+trusted_bots:
+    - 'garnet-runtime-review[bot]'
+# Grounding is the execution tree itself: each destination is judged by the
+# process lineage chain that produced it, in the context of the diff, by the
+# LLM reviewer. There is no static egress allowlist. Deterministic signals
+# are integrity (trusted author, head-pinned, parseable, non-empty) and the
+# renderer's comparison against the previously profiled commit (new chains
+# block the bypass).
+# Deny categories that usable runtime evidence may clear (to LLM review,
+# never auto-approve). Mirrors the Migration risk check bypass.
+bypass_categories:
+    - deps_toolchain
+
+# Machine consumer of the comment's `garnet:summary` marker (contract 7.0
+# verdict table — see tools/pr-approval-agent/gate_profile.py and
+# docs/gate-profile.md). It runs alongside the tree parser: a deny is
+# cleared only when both agree, so a renderer change that the tree parser
+# misreads cannot clear anything on its own.
+gate_profile:
+    enabled: true
+    # The one deterministic deny an unchanged workload may clear.
+    clearable_deny: deps_toolchain
+    # Pre-7.0 markers state none of the gate inputs. With this on, the gate
+    # derives them from the counting fields and names every derivation in
+    # its decision record; with it off, a pre-7.0 marker is undeterminable.
+    # On while production renders contract 6.x.
+    pre_contract7_compat: true

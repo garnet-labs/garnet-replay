@@ -1,0 +1,2580 @@
+{
+  "slug": "infisical",
+  "upstream": "Infisical/infisical",
+  "fork": "garnet-labs/infisical",
+  "record": null,
+  "workload": {
+    "name": "Backend and frontend dependency install",
+    "paths": [
+      "backend/package.json",
+      "backend/package-lock.json",
+      "frontend/package.json",
+      "frontend/package-lock.json"
+    ]
+  },
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9730,
+      "title": "chore(frontend): pin Cipher v0.1.18",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T00:19:21Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "gap": {
+        "total": 14,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          },
+          {
+            "id": "workload-surface",
+            "points": 3,
+            "reason": "touches Backend and frontend dependency install workload surface"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9719,
+      "title": "chore(frontend): pin Cipher v0.1.17",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:15:21Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "gap": {
+        "total": 14,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          },
+          {
+            "id": "workload-surface",
+            "points": 3,
+            "reason": "touches Backend and frontend dependency install workload surface"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9692,
+      "title": "chore(frontend): pin Cipher v0.1.16",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T22:58:58Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/package-lock.json",
+        "frontend/package.json"
+      ],
+      "gap": {
+        "total": 14,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          },
+          {
+            "id": "workload-surface",
+            "points": 3,
+            "reason": "touches Backend and frontend dependency install workload surface"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9694,
+      "title": "chore(ci): add Cipher visual check for the v4 app",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T23:16:03Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        ".github/cipher-visual/README.md",
+        ".github/cipher-visual/capture.mjs",
+        ".github/cipher-visual/compare.mjs",
+        ".github/cipher-visual/package-lock.json",
+        ".github/cipher-visual/package.json",
+        ".github/cipher-visual/pages.json",
+        ".github/cipher-visual/scope.mjs",
+        ".github/workflows/cipher-visual.yml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9711,
+      "title": "fix(cipher-visual): skip when a side has no Cipher pin",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T17:03:25Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/cipher-visual.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9755,
+      "title": "feat(pam): stream session activity to audit log streams",
+      "author": "lb-vn",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T02:04:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 53,
+      "paths": [
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/ee/routes/v1/audit-log-stream-routers/audit-log-stream-endpoints.ts",
+        "backend/src/ee/routes/v1/pam-routers/pam-session-chunk-router.ts",
+        "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-dal.ts",
+        "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-service.test.ts",
+        "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-service.ts",
+        "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-types.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-batching.test.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-batching.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-dal.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-fns.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-sanitized-schemas.test.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-schemas.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-service.test.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-service.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-types.ts",
+        "backend/src/ee/services/audit-log/audit-log-types.ts",
+        "backend/src/ee/services/pam-project/pam-project-resolver.ts",
+        "backend/src/ee/services/pam-session-activity/pam-session-activity-fns.test.ts",
+        "backend/src/ee/services/pam-session-activity/pam-session-activity-fns.ts",
+        "backend/src/ee/services/pam-session-activity/pam-session-activity-service.test.ts",
+        "backend/src/ee/services/pam-session-activity/pam-session-activity-service.ts",
+        "backend/src/ee/services/pam-session-activity/pam-session-activity-types.ts",
+        "backend/src/ee/services/pam-session-recording/aws-s3/aws-s3-provider-factory.test.ts",
+        "backend/src/ee/services/pam-session-recording/aws-s3/aws-s3-provider-factory.ts",
+        "backend/src/ee/services/pam-session-recording/pam-recording-chunk-service.ts",
+        "backend/src/ee/services/pam-session-recording/pam-recording-constants.ts",
+        "backend/src/ee/services/pam-session-recording/pam-recording-secrets.test.ts",
+        "backend/src/ee/services/pam-session-recording/pam-recording-secrets.ts",
+        "backend/src/ee/services/pam-session-recording/pam-recording-storage-types.ts",
+        "backend/src/ee/services/pam-session-recording/postgres/postgres-provider-factory.ts",
+        "backend/src/ee/services/pam/AGENTS.md",
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/queue/queue-service.ts",
+        "backend/src/server/routes/index.ts",
+        "docs/docs.json",
+        "docs/documentation/platform/audit-log-streams/audit-log-streams.mdx",
+        "docs/documentation/platform/pam/sessions/activity-streaming.mdx",
+        "docs/documentation/platform/pam/sessions/session-recording.mdx",
+        "frontend/src/hooks/api/auditLogStreams/types/providers/root-provider.ts",
+        "frontend/src/hooks/api/auditLogs/constants.tsx",
+        "frontend/src/hooks/api/auditLogs/enums.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/AuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/AuditLogStreamProductsField.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/AzureProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/CriblProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/CustomProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/DatadogProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/PamSessionActivityField.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/SplunkProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/AuditLogStreamForm/SumoLogicProviderAuditLogStreamForm.tsx",
+        "frontend/src/pages/organization/AuditLogsPage/components/AuditLogStreamTab/components/AuditLogStreamRow.tsx",
+        "tests/suites/auditlog/stream_test.go"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9754,
+      "title": "chore: move the event outbox into the platform events domain",
+      "author": "Thiago-AS",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T01:22:49Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "backend/AGENTS.md",
+        "backend/e2e-test/audit-log-stream-outbox.integration.spec.ts",
+        "backend/e2e-test/event-outbox.spec.ts",
+        "backend/e2e-test/fakes/event-outbox-queue.ts",
+        "backend/e2e-test/fakes/event-outbox-registry.ts",
+        "backend/e2e-test/fakes/events-module.ts",
+        "backend/e2e-test/routes/v1/audit-log-stream-failure-alert.spec.ts",
+        "backend/e2e-test/routes/v1/org-access-reconcile.spec.ts",
+        "backend/e2e-test/routes/v4/secret-events.spec.ts",
+        "backend/e2e-test/testUtils/reminders.ts",
+        "backend/src/db/migrations/20261119230000_event-outbox-require-event-id.ts",
+        "backend/src/db/schemas/event-outbox.ts",
+        "backend/src/domains/AGENTS.md",
+        "backend/src/domains/domains.ts",
+        "backend/src/domains/platform/events/AGENTS.md",
+        "backend/src/domains/platform/events/ce/clients/telemetry/client.ts",
+        "backend/src/domains/platform/events/ce/data-access/outbox-entry-store.integration-test.ts",
+        "backend/src/domains/platform/events/ce/data-access/outbox-entry-store.test.ts",
+        "backend/src/domains/platform/events/ce/data-access/outbox-entry-store.ts",
+        "backend/src/domains/platform/events/ce/models/emitted-event.test.ts",
+        "backend/src/domains/platform/events/ce/models/emitted-event.ts",
+        "backend/src/domains/platform/events/ce/models/event-definition.test.ts",
+        "backend/src/domains/platform/events/ce/models/event-definition.ts",
+        "backend/src/domains/platform/events/ce/models/event-rejection.ts",
+        "backend/src/domains/platform/events/ce/models/outbox-claim.test.ts",
+        "backend/src/domains/platform/events/ce/models/outbox-claim.ts",
+        "backend/src/domains/platform/events/ce/models/outbox-entry.test.ts",
+        "backend/src/domains/platform/events/ce/models/outbox-entry.ts",
+        "backend/src/domains/platform/events/ce/module.test.ts",
+        "backend/src/domains/platform/events/ce/module.ts",
+        "backend/src/domains/platform/events/ce/services/dependencies.ts",
+        "backend/src/domains/platform/events/ce/services/event-delivery/service.test.ts",
+        "backend/src/domains/platform/events/ce/services/event-delivery/service.ts",
+        "backend/src/domains/platform/events/ce/services/event-emitter/service.integration-test.ts",
+        "backend/src/domains/platform/events/ce/services/event-emitter/service.test.ts",
+        "backend/src/domains/platform/events/ce/services/event-emitter/service.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/build-deliveries.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/consume-events.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/consumer-registry.test.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/consumer-registry.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/flush-queue.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/relay-timer.ts",
+        "backend/src/domains/platform/events/ce/services/helpers/with-timeout.ts",
+        "backend/src/domains/platform/events/ce/testing/build-events.ts",
+        "backend/src/domains/platform/events/ce/testing/fake-event-emitter-service.ts",
+        "backend/src/domains/platform/events/ce/testing/fake-events-metrics.ts",
+        "backend/src/domains/platform/events/ce/testing/in-memory-outbox-entry-store.ts",
+        "backend/src/domains/platform/events/ce/testing/outbox-entry-store-contract.ts",
+        "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-service.ts",
+        "backend/src/ee/services/audit-log-stream/audit-log-stream-events.ts",
+        "backend/src/ee/services/github-org-sync/github-org-sync-service.ts",
+        "backend/src/ee/services/group/group-service.ts",
+        "backend/src/ee/services/group/group-types.ts",
+        "backend/src/ee/services/honey-token/honey-token-events.ts",
+        "backend/src/ee/services/honey-token/honey-token-service.ts",
+        "backend/src/ee/services/ldap-config/ldap-config-service.ts",
+        "backend/src/ee/services/oidc/oidc-config-service.ts",
+        "backend/src/ee/services/pam-access-request/pam-access-request-events.ts",
+        "backend/src/ee/services/saml-config/saml-config-service.ts",
+        "backend/src/ee/services/scim/scim-service.ts",
+        "backend/src/ee/services/secret-change-request/secret-change-request-merge-fns.ts",
+        "backend/src/ee/services/secret-change-request/secret-change-request-types.ts",
+        "backend/src/ee/services/secret-replication/secret-replication-service.ts",
+        "backend/src/ee/services/secret-rotation-v2/secret-rotation-v2-events.ts",
+        "backend/src/ee/services/secret-rotation-v2/secret-rotation-v2-service.ts",
+        "backend/src/lib/knex/event-emitter.test.ts",
+        "backend/src/lib/knex/event-emitter.ts",
+        "backend/src/lib/telemetry/metrics.ts",
+        "backend/src/server/routes/index.ts",
+        "backend/src/services/alert/alert-event-consumer.test.ts",
+        "backend/src/services/alert/alert-event-consumer.ts",
+        "backend/src/services/approval-policy/approval-policy-service.ts",
+        "backend/src/services/approval-policy/approval-policy-types.ts",
+        "backend/src/services/certificate/certificate-alert-events.ts",
+        "backend/src/services/delegated-approval-callback/delegated-approval-callback-types.ts",
+        "backend/src/services/delegated-approval-decision/delegated-approval-decision-constants.ts",
+        "backend/src/services/delegated-approval-decision/delegated-approval-decision-consumer.test.ts",
+        "backend/src/services/delegated-approval-decision/delegated-approval-decision-consumer.ts",
+        "backend/src/services/delegated-approval-decision/delegated-approval-decision-service.ts",
+        "backend/src/services/delegated-approval-decision/delegated-approval-decision-types.ts",
+        "backend/src/services/delegated-approval/delegated-approval-events.ts",
+        "backend/src/services/delegated-approval/delegated-approval-service.ts",
+        "backend/src/services/delegated-approval/dispatch/delegated-approval-dispatch-consumer.test.ts",
+        "backend/src/services/delegated-approval/dispatch/delegated-approval-dispatch-consumer.ts",
+        "backend/src/services/event-outbox/AGENTS.md",
+        "backend/src/services/event-outbox/event-definition.test.ts",
+        "backend/src/services/event-outbox/event-definition.ts",
+        "backend/src/services/event-outbox/event-outbox-dal.test.ts",
+        "backend/src/services/event-outbox/event-outbox-dal.ts",
+        "backend/src/services/event-outbox/event-outbox-queue.test.ts",
+        "backend/src/services/event-outbox/event-outbox-queue.ts",
+        "backend/src/services/event-outbox/event-outbox-registry.ts",
+        "backend/src/services/event-outbox/event-outbox-service.test.ts",
+        "backend/src/services/event-outbox/event-outbox-service.ts",
+        "backend/src/services/event-outbox/event-outbox-types.ts",
+        "backend/src/services/external-migration/external-migration-fns/envkey.ts",
+        "backend/src/services/external-migration/external-migration-queue.ts",
+        "backend/src/services/folder-commit/folder-commit-service.ts",
+        "backend/src/services/identity-alicloud-auth/identity-alicloud-auth-service.ts",
+        "backend/src/services/identity-aws-auth/identity-aws-auth-service.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9752,
+      "title": "improvement(v4): adopt the detail page standard on certificate manager pages",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T01:16:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 27,
+      "paths": [
+        "frontend/src/pages/v4/cert-manager/ApplicationDetailsByIDPage/settings-tab.tsx",
+        "frontend/src/pages/v4/cert-manager/ApprovalRequestDetailPage/ApprovalRequestDetailPage.tsx",
+        "frontend/src/pages/v4/cert-manager/ApprovalRequestDetailPage/sections.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/CertAuthDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/cross-signed.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/details-card.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/revocation.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/signing-config.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateAuthoritiesPage/shared.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateDetailsByIDPage/CertificateDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateDetailsByIDPage/certificate-metadata.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificatePolicyDetailsByIDPage/CertificatePolicyDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateProfileDetailsByIDPage/CertificateProfileDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CodeSigningPage/signer-shared.tsx",
+        "frontend/src/pages/v4/cert-manager/DiscoveryDetailsByIDPage/DiscoveryDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/DiscoveryPage/discovery-shared.tsx",
+        "frontend/src/pages/v4/cert-manager/HsmConnectorDetailsByIDPage/HsmConnectorDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/InstallationDetailsByIDPage/InstallationDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/PkiSyncDetailsByIDPage/PkiSyncDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/PkiSyncDetailsByIDPage/certificates-card.tsx",
+        "frontend/src/pages/v4/cert-manager/SignerDetailPage/SignerDetailPage.tsx",
+        "frontend/src/pages/v4/cert-manager/SignerDetailPage/activity-tab.tsx",
+        "frontend/src/pages/v4/cert-manager/SignerDetailPage/certificate-card.tsx",
+        "frontend/src/pages/v4/cert-manager/SigningOperationDetailPage/SigningOperationDetailPage.tsx",
+        "frontend/src/pages/v4/cert-manager/components/approval.tsx",
+        "frontend/src/pages/v4/cert-manager/components/certificate.tsx",
+        "frontend/src/pages/v4/cert-manager/components/pki-syncs/sync-parts.tsx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9731,
+      "title": "feat(pki): require approval before deleting a certificate",
+      "author": "dawson-infisical",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T00:39:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 74,
+      "paths": [
+        "AGENTS.md",
+        "backend/AGENTS.md",
+        "backend/e2e-test/routes/v1/cert-deletion-approval.spec.ts",
+        "backend/e2e-test/routes/v1/cert-revocation-approval.spec.ts",
+        "backend/e2e-test/testUtils/cert-manager.ts",
+        "backend/src/ee/services/audit-log/audit-log-types.ts",
+        "backend/src/ee/services/permission/default-roles.ts",
+        "backend/src/ee/services/permission/resource-permission.ts",
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/server/routes/index.ts",
+        "backend/src/server/routes/v1/approval-policy-routers/approval-policy-endpoints.ts",
+        "backend/src/server/routes/v1/approval-policy-routers/index.ts",
+        "backend/src/server/routes/v1/certificate-delete-response.ts",
+        "backend/src/server/routes/v1/certificate-router.ts",
+        "backend/src/server/routes/v1/deprecated-certificate-router.ts",
+        "backend/src/services/approval-policy/approval-policy-enums.ts",
+        "backend/src/services/approval-policy/approval-policy-service.ts",
+        "backend/src/services/approval-policy/approval-policy-types.ts",
+        "backend/src/services/approval-policy/approval-request-fns.ts",
+        "backend/src/services/approval-policy/cert-deletion/cert-deletion-policy-factory.test.ts",
+        "backend/src/services/approval-policy/cert-deletion/cert-deletion-policy-factory.ts",
+        "backend/src/services/approval-policy/cert-deletion/cert-deletion-policy-schemas.test.ts",
+        "backend/src/services/approval-policy/cert-deletion/cert-deletion-policy-schemas.ts",
+        "backend/src/services/approval-policy/cert-deletion/cert-deletion-policy-types.ts",
+        "backend/src/services/approval-policy/cert-deletion/index.ts",
+        "backend/src/services/approval-policy/cert-revocation/application-approver-checks.ts",
+        "backend/src/services/approval-policy/cert-revocation/cert-revocation-policy-factory.ts",
+        "backend/src/services/approval-policy/cert-revocation/cert-revocation-policy-schemas.ts",
+        "backend/src/services/approval-policy/cert-revocation/cert-revocation-policy-types.ts",
+        "backend/src/services/certificate-common/certificate-permission-fns.ts",
+        "backend/src/services/certificate/AGENTS.md",
+        "backend/src/services/certificate/certificate-dal.ts",
+        "backend/src/services/certificate/certificate-service.test.ts",
+        "backend/src/services/certificate/certificate-service.ts",
+        "backend/src/services/certificate/certificate-types.ts",
+        "docs/documentation/platform/audit-logs.mdx",
+        "docs/documentation/platform/pki/applications/approvals.mdx",
+        "docs/documentation/platform/pki/applications/certificates.mdx",
+        "docs/documentation/platform/pki/applications/overview.mdx",
+        "docs/documentation/platform/pki/concepts/access-control.mdx",
+        "docs/documentation/platform/pki/concepts/reference-architecture.mdx",
+        "frontend/src/components/approvals/PolicyApprovalSteps.tsx",
+        "frontend/src/components/utilities/certificateDisplayUtils.tsx",
+        "frontend/src/hooks/api/approvalPolicies/index.tsx",
+        "frontend/src/hooks/api/approvalPolicies/queries.tsx",
+        "frontend/src/hooks/api/approvalPolicies/types.ts",
+        "frontend/src/hooks/api/approvalRequests/index.tsx",
+        "frontend/src/hooks/api/approvalRequests/mutations.tsx",
+        "frontend/src/hooks/api/approvalRequests/pending-certificate-actions.test.ts",
+        "frontend/src/hooks/api/approvalRequests/pending-certificate-actions.ts",
+        "frontend/src/hooks/api/approvalRequests/queries.tsx",
+        "frontend/src/hooks/api/approvalRequests/types.ts",
+        "frontend/src/hooks/api/auditLogs/constants.tsx",
+        "frontend/src/hooks/api/auditLogs/enums.tsx",
+        "frontend/src/hooks/api/auditLogs/types.tsx",
+        "frontend/src/hooks/api/certificates/mutations.tsx",
+        "frontend/src/hooks/api/certificates/types.ts",
+        "frontend/src/hooks/api/pkiApplications/types.ts",
+        "frontend/src/layouts/OrganizationLayout/components/OrgSidebar/CertManagerNav.tsx",
+        "frontend/src/pages/cert-manager/ApplicationDetailsByIDPage/components/ApplicationSettingsTab.tsx",
+        "frontend/src/pages/cert-manager/ApprovalRequestDetailPage/ApprovalRequestDetailPage.tsx",
+        "frontend/src/pages/cert-manager/ApprovalRequestDetailPage/components/RequestActionsSection.tsx",
+        "frontend/src/pages/cert-manager/ApprovalRequestDetailPage/route.tsx",
+        "frontend/src/pages/cert-manager/ApprovalsPage/components/PolicyTab/components/PolicyModal.tsx",
+        "frontend/src/pages/cert-manager/ApprovalsPage/components/PolicyTab/components/PolicySchema.tsx",
+        "frontend/src/pages/cert-manager/ApprovalsPage/components/PolicyTab/components/PolicySteps/PolicyDetailsStep.tsx",
+        "frontend/src/pages/cert-manager/ApprovalsPage/components/PolicyTab/components/PolicySteps/PolicyReviewStep.tsx",
+        "frontend/src/pages/cert-manager/CertificateDetailsByIDPage/CertificateDetailsByIDPage.tsx",
+        "frontend/src/pages/cert-manager/CertificateDetailsByIDPage/components/CertificateOverviewSection.tsx",
+        "frontend/src/pages/cert-manager/CertificatesPage/components/CertificatesSection.tsx",
+        "frontend/src/pages/cert-manager/CertificatesPage/components/CertificatesTable.tsx",
+        "frontend/src/pages/cert-manager/CertificatesPage/components/CertificatesTable.utils.test.ts",
+        "frontend/src/pages/cert-manager/CertificatesPage/components/CertificatesTable.utils.ts",
+        "frontend/src/pages/cert-manager/RequestsPage/RequestsPage.tsx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9728,
+      "title": "chore(v4): sync main into design/v4-controls-polish",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T23:46:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".infisicalignore",
+        "AGENTS.md",
+        "backend/AGENTS.md",
+        "backend/e2e-test/approval-request-concurrent-approvals.spec.ts",
+        "backend/e2e-test/certificate-dal-pending-approval-requests.spec.ts",
+        "backend/e2e-test/mocks/keystore.ts",
+        "backend/e2e-test/routes/v1/agent-vault.spec.ts",
+        "backend/e2e-test/routes/v1/cert-revocation-approval.spec.ts",
+        "backend/e2e-test/routes/v1/cert-revocation-lifecycle.spec.ts",
+        "backend/e2e-test/routes/v3/auth-mfa.spec.ts",
+        "backend/e2e-test/setup/reset-shared-org-flags.ts",
+        "backend/e2e-test/testUtils/cert-manager.ts",
+        "backend/e2e-test/testUtils/notifications.ts",
+        "backend/e2e-test/testUtils/users.ts",
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/@types/knex.d.ts",
+        "backend/src/db/migrations/20261112190000_secret-scanning-finding-locations.ts",
+        "backend/src/db/migrations/20261112190100_merge-secret-scanning-findings-by-value.ts",
+        "backend/src/db/migrations/20261113170000_agent-vault-session-skills.ts",
+        "backend/src/db/migrations/20261116205636_alert-channel-workflow-integration.ts",
+        "backend/src/db/migrations/20261117092119_add-org-allowed-mfa-methods.ts",
+        "backend/src/db/migrations/20261118120000_agent-vault-oauth-variables.ts",
+        "backend/src/db/migrations/20261118230000_add-projects-active-org-type-index.ts",
+        "backend/src/db/sanitized-schema.yaml",
+        "backend/src/db/schemas/agent-vault-session-skills.ts",
+        "backend/src/db/schemas/agent-vault-skill-versions.ts",
+        "backend/src/db/schemas/agent-vault-skills.ts",
+        "backend/src/db/schemas/agent-vault-variables.ts",
+        "backend/src/db/schemas/alert-channels.ts",
+        "backend/src/db/schemas/index.ts",
+        "backend/src/db/schemas/models.ts",
+        "backend/src/db/schemas/organizations.ts",
+        "backend/src/db/schemas/secret-scanning-finding-locations.ts",
+        "backend/src/db/schemas/secret-scanning-findings.ts",
+        "backend/src/domains/lib/key-store/key-store.ts",
+        "backend/src/domains/lib/key-store/testing/in-memory-key-store.ts",
+        "backend/src/domains/platform/license/AGENTS.md",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.test.ts",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.ts",
+        "backend/src/domains/platform/license/ce/services/dependencies.ts",
+        "backend/src/domains/platform/license/ce/services/license/service-plans.test.ts",
+        "backend/src/domains/platform/license/ce/services/license/service.ts",
+        "backend/src/domains/platform/license/ce/testing/fake-license-service.ts",
+        "backend/src/domains/platform/organizations-projects/ce/data-access/organization-store.ts",
+        "backend/src/domains/platform/organizations-projects/ce/services/organizations-projects/service.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-inline-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-oauth-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-proxy-agent-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-router-fns.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-schemas.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-skill-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-skills-response.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-token-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-skill-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-variable-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-variable-schemas.test.ts",
+        "backend/src/ee/routes/v1/deprecated-secret-approval-policy-router.ts",
+        "backend/src/ee/routes/v2/secret-approval-policy-router.ts",
+        "backend/src/ee/routes/v2/secret-scanning-v2-routers/secret-scanning-v2-router.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.test.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-types.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-credential-write-fns.ts",
+        "backend/src/ee/services/agent-vault-delegation/agent-vault-on-behalf-of-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-client-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-discovery-fns.test.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-discovery-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-service.test.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-service.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-token-dal-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-token-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-types.ts",
+        "backend/src/ee/services/agent-vault-project/agent-vault-project-resolver.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.test.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-types.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-resolve-dal.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-session-services-fns.test.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-session-services-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-skill-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-types.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-bundle-dal.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-fns.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-service.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-types.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-version-dal.ts",
+        "backend/src/ee/services/agent-vault-variable/agent-vault-oauth-variable-fns.test.ts",
+        "backend/src/ee/services/agent-vault-variable/agent-vault-oauth-variable-fns.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9721,
+      "title": "chore(v4): sync main into design/v4-controls-polish",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:37:26Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        ".infisicalignore",
+        "AGENTS.md",
+        "backend/AGENTS.md",
+        "backend/e2e-test/approval-request-concurrent-approvals.spec.ts",
+        "backend/e2e-test/certificate-dal-pending-approval-requests.spec.ts",
+        "backend/e2e-test/mocks/keystore.ts",
+        "backend/e2e-test/routes/v1/agent-vault.spec.ts",
+        "backend/e2e-test/routes/v1/cert-revocation-approval.spec.ts",
+        "backend/e2e-test/routes/v1/cert-revocation-lifecycle.spec.ts",
+        "backend/e2e-test/routes/v3/auth-mfa.spec.ts",
+        "backend/e2e-test/setup/reset-shared-org-flags.ts",
+        "backend/e2e-test/testUtils/cert-manager.ts",
+        "backend/e2e-test/testUtils/notifications.ts",
+        "backend/e2e-test/testUtils/users.ts",
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/@types/knex.d.ts",
+        "backend/src/db/migrations/20261112190000_secret-scanning-finding-locations.ts",
+        "backend/src/db/migrations/20261112190100_merge-secret-scanning-findings-by-value.ts",
+        "backend/src/db/migrations/20261113170000_agent-vault-session-skills.ts",
+        "backend/src/db/migrations/20261116205636_alert-channel-workflow-integration.ts",
+        "backend/src/db/migrations/20261117092119_add-org-allowed-mfa-methods.ts",
+        "backend/src/db/migrations/20261118120000_agent-vault-oauth-variables.ts",
+        "backend/src/db/migrations/20261118230000_add-projects-active-org-type-index.ts",
+        "backend/src/db/sanitized-schema.yaml",
+        "backend/src/db/schemas/agent-vault-session-skills.ts",
+        "backend/src/db/schemas/agent-vault-skill-versions.ts",
+        "backend/src/db/schemas/agent-vault-skills.ts",
+        "backend/src/db/schemas/agent-vault-variables.ts",
+        "backend/src/db/schemas/alert-channels.ts",
+        "backend/src/db/schemas/index.ts",
+        "backend/src/db/schemas/models.ts",
+        "backend/src/db/schemas/organizations.ts",
+        "backend/src/db/schemas/secret-scanning-finding-locations.ts",
+        "backend/src/db/schemas/secret-scanning-findings.ts",
+        "backend/src/domains/lib/key-store/key-store.ts",
+        "backend/src/domains/lib/key-store/testing/in-memory-key-store.ts",
+        "backend/src/domains/platform/license/AGENTS.md",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.test.ts",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.ts",
+        "backend/src/domains/platform/license/ce/services/dependencies.ts",
+        "backend/src/domains/platform/license/ce/services/license/service-plans.test.ts",
+        "backend/src/domains/platform/license/ce/services/license/service.ts",
+        "backend/src/domains/platform/license/ce/testing/fake-license-service.ts",
+        "backend/src/domains/platform/organizations-projects/ce/data-access/organization-store.ts",
+        "backend/src/domains/platform/organizations-projects/ce/services/organizations-projects/service.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-inline-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-oauth-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-proxy-agent-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-router-fns.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-schemas.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-skill-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-skills-response.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-token-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-skill-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-variable-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-variable-schemas.test.ts",
+        "backend/src/ee/routes/v1/deprecated-secret-approval-policy-router.ts",
+        "backend/src/ee/routes/v2/secret-approval-policy-router.ts",
+        "backend/src/ee/routes/v2/secret-scanning-v2-routers/secret-scanning-v2-router.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.test.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-types.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-credential-write-fns.ts",
+        "backend/src/ee/services/agent-vault-delegation/agent-vault-on-behalf-of-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-client-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-discovery-fns.test.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-discovery-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-service.test.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-service.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-token-dal-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-token-fns.ts",
+        "backend/src/ee/services/agent-vault-oauth/agent-vault-oauth-types.ts",
+        "backend/src/ee/services/agent-vault-project/agent-vault-project-resolver.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.test.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-types.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-resolve-dal.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-session-services-fns.test.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-session-services-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-skill-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-types.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-bundle-dal.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-dal.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-fns.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-service.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-types.ts",
+        "backend/src/ee/services/agent-vault-skill/agent-vault-skill-version-dal.ts",
+        "backend/src/ee/services/agent-vault-variable/agent-vault-oauth-variable-fns.test.ts",
+        "backend/src/ee/services/agent-vault-variable/agent-vault-oauth-variable-fns.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9716,
+      "title": "feat(secrets): keep one organization's secret reads from slowing down other organizations",
+      "author": "adilsitos",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:46:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 32,
+      "paths": [
+        "backend/AGENTS.md",
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/domains/platform/license/ce/models/plan.ts",
+        "backend/src/domains/platform/license/ee/services/license-policy/feature-mapping.ts",
+        "backend/src/ee/services/certificate-authority-ocsp/certificate-authority-ocsp-limiter.ts",
+        "backend/src/ee/services/certificate-authority-ocsp/certificate-authority-ocsp-service.ts",
+        "backend/src/lib/concurrency/concurrency-limiter.test.ts",
+        "backend/src/lib/concurrency/concurrency-limiter.ts",
+        "backend/src/lib/config/env.ts",
+        "backend/src/server/config/rateLimiter.ts",
+        "backend/src/server/plugins/inject-rate-limits.test.ts",
+        "backend/src/server/plugins/inject-rate-limits.ts",
+        "backend/src/server/plugins/secret-read-concurrency-limit.test.ts",
+        "backend/src/server/plugins/secret-read-concurrency-limit.ts",
+        "backend/src/server/plugins/secrets-rate-limit.test.ts",
+        "backend/src/server/plugins/secrets-rate-limit.ts",
+        "backend/src/server/routes/index.ts",
+        "backend/src/server/routes/v1/dashboard-router.ts",
+        "backend/src/server/routes/v1/deprecated-secret-import-router.ts",
+        "backend/src/server/routes/v2/secret-import-router.ts",
+        "backend/src/server/routes/v3/deprecated-secret-router.ts",
+        "backend/src/server/routes/v4/secret-router.ts",
+        "backend/src/services/secret-folder/secret-folder-service.ts",
+        "backend/src/services/secret-import/secret-import-service.test.ts",
+        "backend/src/services/secret-import/secret-import-service.ts",
+        "backend/src/services/secret-import/secret-import-types.ts",
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-dal.ts",
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-fns.ts",
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-service.ts",
+        "docs/self-hosting/configuration/envars.mdx",
+        "tests/suites/secretmanager/imports/etag_test.go",
+        "tests/suites/secretmanager/sharing/import_test.go"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9704,
+      "title": "feat(instance-config-core): move the super_admin row into the Instance Config Core domain",
+      "author": "akhilmhdh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T13:52:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "AGENTS.md",
+        "backend/AGENTS.md",
+        "backend/e2e-test/api-run-modes.spec.ts",
+        "backend/e2e-test/audit-log-stream-outbox.integration.spec.ts",
+        "backend/e2e-test/fakes/aws-connection-fns.ts",
+        "backend/e2e-test/routes/v1/access-approval-global-request-lifecycle.spec.ts",
+        "backend/e2e-test/routes/v1/access-approval-policy.spec.ts",
+        "backend/e2e-test/routes/v1/admin.spec.ts",
+        "backend/e2e-test/routes/v1/agent-vault.spec.ts",
+        "backend/e2e-test/routes/v1/auth-token-org-scope.spec.ts",
+        "backend/e2e-test/routes/v1/external-group-org-role-mapping.spec.ts",
+        "backend/e2e-test/routes/v2/secret-folder-rbac.spec.ts",
+        "backend/e2e-test/routes/v2/service-token.spec.ts",
+        "backend/e2e-test/routes/v3/secrets.spec.ts",
+        "backend/e2e-test/secret-scanning-webhooks.spec.ts",
+        "backend/e2e-test/vitest-environment-knex.ts",
+        "backend/scripts/seed-gamma-fixtures.ts",
+        "backend/src/@types/fastify-zod.d.ts",
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/db/migrations/20250210101840_webhook-to-kms.ts",
+        "backend/src/db/migrations/20250210101841_dynamic-secret-root-to-kms.ts",
+        "backend/src/db/migrations/20250210101841_secret-rotation-to-kms.ts",
+        "backend/src/db/migrations/20250210101842_identity-k8-auth-to-kms.ts",
+        "backend/src/db/migrations/20250210101842_identity-oidc-auth-to-kms.ts",
+        "backend/src/db/migrations/20250210101845_directory-config-to-kms.ts",
+        "backend/src/db/migrations/20250513081738_remove-gateway-project-link.ts",
+        "backend/src/db/migrations/20250711005900_github-app-connection-to-environments.ts",
+        "backend/src/db/migrations/20250903191434_audit-log-stream-v2.ts",
+        "backend/src/db/migrations/20260321035221_pam-tls-config-defaults.ts",
+        "backend/src/db/migrations/20260330172252_rename-vault-to-external-migration-config.ts",
+        "backend/src/db/migrations/20260511162539_clean-empty-encrypted-kubernetes-ca-certificate.ts",
+        "backend/src/db/migrations/20260612142201_pam-revamp.ts",
+        "backend/src/db/migrations/20260701120200_add-mfa-recovery-codes.ts",
+        "backend/src/db/migrations/20260908120000_secret-validation-rule-named-constraints.ts",
+        "backend/src/db/migrations/20260918104500_secret-validation-rule-flatten-reuse-prevention.ts",
+        "backend/src/db/migrations/20260929130000_migrate-secret-reminders-to-alerts.ts",
+        "backend/src/db/migrations/20261104120000_add-secret-rotation-failure-alerts.ts",
+        "backend/src/db/migrations/20261110120000_agent-vault-project-services.ts",
+        "backend/src/db/migrations/20261112190000_add-honey-token-trigger-alerts.ts",
+        "backend/src/db/migrations/20261113120000_add-secret-sync-failure-alerts.ts",
+        "backend/src/db/migrations/utils/env-config.ts",
+        "backend/src/db/seed-ldap.ts",
+        "backend/src/db/seed-oidc.ts",
+        "backend/src/db/seed-saml.ts",
+        "backend/src/db/seeds/1-user.ts",
+        "backend/src/db/seeds/3-project.ts",
+        "backend/src/db/seeds/5-machine-identity.ts",
+        "backend/src/domains/AGENTS.md",
+        "backend/src/domains/domains.test.ts",
+        "backend/src/domains/domains.ts",
+        "backend/src/domains/platform/instance-config-core/AGENTS.md",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/instance-config-cache.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/instance-config-cache.ts",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/instance-config-store.integration-test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/instance-config-store.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/instance-config-store.ts",
+        "backend/src/domains/platform/instance-config-core/ce/data-access/resolved-env-cache.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/default-auth-org.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/default-auth-org.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-github-app-credentials.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-github-app-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-microsoft-teams-credentials.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-microsoft-teams-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-slack-credentials.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/encrypted-slack-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/env-overrides.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/env-overrides.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/github-app-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/instance-config.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/instance-config.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/instance-setup.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/instance-setup.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/login-policy.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/login-policy.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/microsoft-teams-app-credentials.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/microsoft-teams-app-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/sign-up-policy.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/sign-up-policy.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/slack-app-credentials.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/models/slack-app-credentials.ts",
+        "backend/src/domains/platform/instance-config-core/ce/module.ts",
+        "backend/src/domains/platform/instance-config-core/ce/services/dependencies.ts",
+        "backend/src/domains/platform/instance-config-core/ce/services/instance-config/instance-config-transaction.ts",
+        "backend/src/domains/platform/instance-config-core/ce/services/instance-config/service.integration-test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/services/instance-config/service.test.ts",
+        "backend/src/domains/platform/instance-config-core/ce/services/instance-config/service.ts",
+        "backend/src/domains/platform/instance-config-core/ce/testing/build-instance-config-core.ts",
+        "backend/src/domains/platform/instance-config-core/ce/testing/fake-instance-config-service.ts",
+        "backend/src/domains/platform/instance-config-core/ce/testing/in-memory-instance-config-store.ts",
+        "backend/src/domains/platform/instance-config-core/ce/testing/in-memory-instance-config-stores.ts",
+        "backend/src/domains/platform/instance-config-core/ce/testing/instance-config-store-contract.ts",
+        "backend/src/domains/platform/kms-core/ce/services/root-key/root-key-loader.ts",
+        "backend/src/ee/services/assume-privilege/assume-privilege-service.test.ts",
+        "backend/src/ee/services/audit-log/audit-log-dal.ts",
+        "backend/src/ee/services/audit-log/audit-log-queue.test.ts",
+        "backend/src/ee/services/audit-log/audit-log-queue.ts",
+        "backend/src/ee/services/audit-log/audit-log-service.test.ts",
+        "backend/src/ee/services/audit-log/audit-log-service.ts",
+        "backend/src/ee/services/dynamic-secret/providers/gcp-iam.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9703,
+      "title": "feat(app-connection): rename the HPE iLO connection to Redfish",
+      "author": "mathnogueira",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T11:50:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 74,
+      "paths": [
+        "backend/src/ee/services/secret-rotation-v2/hp-ilo-rotation/hp-ilo-redfish-client.ts",
+        "backend/src/ee/services/secret-rotation-v2/hp-ilo-rotation/hp-ilo-rotation-fns.ts",
+        "backend/src/ee/services/secret-rotation-v2/hp-ilo-rotation/hp-ilo-rotation-types.ts",
+        "backend/src/ee/services/secret-rotation-v2/secret-rotation-v2-dal.ts",
+        "backend/src/ee/services/secret-rotation-v2/secret-rotation-v2-maps.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-dal.ts",
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/server/routes/v1/app-connection-routers/app-connection-router.ts",
+        "backend/src/server/routes/v1/app-connection-routers/hpe-ilo-connection-router.ts",
+        "backend/src/server/routes/v1/app-connection-routers/index.ts",
+        "backend/src/server/routes/v1/app-connection-routers/redfish-connection-router.ts",
+        "backend/src/services/app-connection/app-connection-dal.ts",
+        "backend/src/services/app-connection/app-connection-enums.ts",
+        "backend/src/services/app-connection/app-connection-fns.ts",
+        "backend/src/services/app-connection/app-connection-maps.ts",
+        "backend/src/services/app-connection/app-connection-service.ts",
+        "backend/src/services/app-connection/app-connection-stored-app.test.ts",
+        "backend/src/services/app-connection/app-connection-stored-app.ts",
+        "backend/src/services/app-connection/app-connection-types.ts",
+        "backend/src/services/app-connection/credential-rotation/app-connection-credential-rotation-dal.ts",
+        "backend/src/services/app-connection/hpe-ilo/hpe-ilo-connection-enums.ts",
+        "backend/src/services/app-connection/hpe-ilo/hpe-ilo-connection-schemas.ts",
+        "backend/src/services/app-connection/hpe-ilo/hpe-ilo-connection-types.ts",
+        "backend/src/services/app-connection/hpe-ilo/index.ts",
+        "backend/src/services/app-connection/redfish/index.ts",
+        "backend/src/services/app-connection/redfish/redfish-connection-enums.ts",
+        "backend/src/services/app-connection/redfish/redfish-connection-fns.ts",
+        "backend/src/services/app-connection/redfish/redfish-connection-schemas.ts",
+        "backend/src/services/app-connection/redfish/redfish-connection-types.ts",
+        "backend/src/services/pki-sync/pki-sync-dal.ts",
+        "backend/src/services/secret-sync/secret-sync-dal.ts",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/available.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/create.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/delete.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/get-by-id.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/get-by-name.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/list.mdx",
+        "docs/api-reference/endpoints/app-connections/hpe-ilo/update.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/available.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/create.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/delete.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/get-by-id.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/get-by-name.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/list.mdx",
+        "docs/api-reference/endpoints/app-connections/redfish/update.mdx",
+        "docs/docs.json",
+        "docs/documentation/platform/secret-rotation/hp-ilo-local-account.mdx",
+        "docs/images/app-connections/hpe-ilo/connection-form.png",
+        "docs/images/app-connections/hpe-ilo/select-connection.png",
+        "docs/images/app-connections/redfish/connection-form.png",
+        "docs/images/app-connections/redfish/select-connection.png",
+        "docs/images/secret-rotations-v2/hp-ilo-local-account/hp-ilo-local-account-configuration.png",
+        "docs/images/secret-rotations-v2/hp-ilo-local-account/hp-ilo-local-account-parameters-redfish.png",
+        "docs/images/secret-rotations-v2/hp-ilo-local-account/select-hp-ilo-local-account-option.png",
+        "docs/integrations/app-connections/hpe-ilo.mdx",
+        "docs/integrations/app-connections/redfish.mdx",
+        "docs/snippets/app-connections/hpe-ilo/form-fields.mdx",
+        "docs/snippets/app-connections/redfish/form-fields.mdx",
+        "docs/snippets/catalogs/app-connections.jsx",
+        "frontend/public/images/integrations/HPE iLO.png",
+        "frontend/public/images/integrations/Redfish.on-light.png",
+        "frontend/public/images/integrations/Redfish.png",
+        "frontend/src/components/secret-rotations-v2/forms/SecretRotationV2ParametersFields/HpIloRotationParametersFields.tsx",
+        "frontend/src/components/secret-rotations-v2/forms/SecretRotationV2ReviewFields/HpIloRotationReviewFields.tsx",
+        "frontend/src/components/v3/platform/ProviderIcon/provider-icon-assets.ts",
+        "frontend/src/helpers/appConnections.ts",
+        "frontend/src/helpers/secretRotationsV2.ts",
+        "frontend/src/hooks/api/appConnections/enums.ts",
+        "frontend/src/hooks/api/appConnections/types/app-options.ts",
+        "frontend/src/hooks/api/appConnections/types/index.ts",
+        "frontend/src/hooks/api/appConnections/types/redfish-connection.ts",
+        "frontend/src/pages/organization/AppConnections/AppConnectionsPage/components/AppConnectionForm/AppConnectionForm.tsx",
+        "frontend/src/pages/organization/AppConnections/AppConnectionsPage/components/AppConnectionForm/RedfishConnectionForm.tsx",
+        "tests/clients/api/api.gen.go"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9697,
+      "title": "feat(agent-vault): hooks as a project resource attached to sessions",
+      "author": "saifsmailbox98",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T00:10:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "backend/e2e-test/routes/v1/agent-vault.spec.ts",
+        "backend/src/@types/fastify.d.ts",
+        "backend/src/@types/knex.d.ts",
+        "backend/src/db/migrations/20261119120000_agent-vault-hooks.ts",
+        "backend/src/db/schemas/agent-vault-hook-services.ts",
+        "backend/src/db/schemas/agent-vault-hooks.ts",
+        "backend/src/db/schemas/agent-vault-sessions.ts",
+        "backend/src/db/schemas/index.ts",
+        "backend/src/db/schemas/models.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-hook-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-inline-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-proxy-agent-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-schemas.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-service-schemas.test.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/agent-vault-session-router.ts",
+        "backend/src/ee/routes/v1/agent-vault-routers/index.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.test.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-service.ts",
+        "backend/src/ee/services/agent-vault-access-bundle/agent-vault-access-bundle-types.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-dal.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-fns.test.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-fns.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-service.test.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-service.ts",
+        "backend/src/ee/services/agent-vault-hook/agent-vault-hook-types.ts",
+        "backend/src/ee/services/agent-vault-project/agent-vault-project-resolver.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.test.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-service.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-proxy-types.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-resolve-dal.ts",
+        "backend/src/ee/services/agent-vault-proxy/agent-vault-session-services-fns.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-dal.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-inline-service-fns.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.test.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-service.ts",
+        "backend/src/ee/services/agent-vault-session/agent-vault-session-types.ts",
+        "backend/src/ee/services/agent-vault/AGENTS.md",
+        "backend/src/ee/services/agent-vault/agent-vault-hook-fns.test.ts",
+        "backend/src/ee/services/agent-vault/agent-vault-hook-fns.ts",
+        "backend/src/ee/services/audit-log/audit-log-types.ts",
+        "backend/src/ee/services/permission/agent-vault-project-roles.test.ts",
+        "backend/src/ee/services/permission/default-roles.ts",
+        "backend/src/ee/services/permission/project-permission.ts",
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/server/routes/index.ts",
+        "docs/api-reference/endpoints/agent-vault-hooks/add-service.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/create.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/delete.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/get.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/list.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/remove-service.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/update-service.mdx",
+        "docs/api-reference/endpoints/agent-vault-hooks/update.mdx",
+        "docs/docs.json",
+        "docs/documentation/platform/agent-vault/access-control.mdx",
+        "docs/documentation/platform/agent-vault/certificate-trust.mdx",
+        "docs/documentation/platform/agent-vault/databases-and-ssh.mdx",
+        "docs/documentation/platform/agent-vault/hooks.mdx",
+        "docs/documentation/platform/agent-vault/http-apis.mdx",
+        "docs/documentation/platform/agent-vault/inline-services.mdx",
+        "docs/documentation/platform/agent-vault/mcp-servers.mdx",
+        "docs/documentation/platform/agent-vault/mysql.mdx",
+        "docs/documentation/platform/agent-vault/postgresql.mdx",
+        "docs/documentation/platform/agent-vault/proxies.mdx",
+        "docs/documentation/platform/agent-vault/services.mdx",
+        "docs/documentation/platform/agent-vault/session-logs.mdx",
+        "docs/documentation/platform/agent-vault/ssh.mdx",
+        "docs/images/platform/agent-vault/service-hook.png",
+        "frontend/src/components/agent-vault/hooks/DeleteHookDialog.tsx",
+        "frontend/src/components/agent-vault/hooks/HookForm.tsx",
+        "frontend/src/components/agent-vault/hooks/HookNarrowingFields.tsx",
+        "frontend/src/components/agent-vault/hooks/HookRulesField.tsx",
+        "frontend/src/components/agent-vault/hooks/HookSheet.tsx",
+        "frontend/src/components/agent-vault/hooks/hookSchema.test.ts",
+        "frontend/src/components/agent-vault/hooks/hookSchema.ts",
+        "frontend/src/components/agent-vault/hooks/useHookCreation.tsx",
+        "frontend/src/components/agent-vault/service-sheet/CredentialFields.tsx",
+        "frontend/src/components/agent-vault/service-sheet/HookFields.tsx",
+        "frontend/src/components/agent-vault/service-sheet/HookLinksFields.tsx",
+        "frontend/src/components/agent-vault/service-sheet/ReviewFields.tsx",
+        "frontend/src/components/agent-vault/service-sheet/ServiceSheet.tsx",
+        "frontend/src/components/agent-vault/service-sheet/serviceRequest.test.ts",
+        "frontend/src/components/agent-vault/service-sheet/serviceRequest.ts",
+        "frontend/src/components/agent-vault/service-sheet/serviceSchema.test.ts",
+        "frontend/src/components/agent-vault/service-sheet/serviceSchema.ts",
+        "frontend/src/components/agent-vault/service-sheet/stepMeta.ts",
+        "frontend/src/components/license/UpgradeGate/index.ts",
+        "frontend/src/components/license/UpgradeGate/upgrade-intents.ts",
+        "frontend/src/components/v3/platform/ProjectPermissionSubjects/ProjectPermissionSubjects.ts",
+        "frontend/src/context/ProjectPermissionContext/index.tsx",
+        "frontend/src/context/ProjectPermissionContext/types.ts",
+        "frontend/src/context/index.tsx",
+        "frontend/src/hooks/api/agentVault/mutations.tsx",
+        "frontend/src/hooks/api/agentVault/queries.tsx",
+        "frontend/src/hooks/api/agentVault/types.ts",
+        "frontend/src/hooks/api/auditLogs/constants.tsx",
+        "frontend/src/hooks/api/auditLogs/enums.tsx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9695,
+      "title": "improvement(v4): adopt Cipher v0.1.16 product, project and concept icons",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T23:43:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 97,
+      "paths": [
+        "frontend/AGENTS.md",
+        "frontend/src/pages/v4/access/org/group-detail.tsx",
+        "frontend/src/pages/v4/access/org/groups.tsx",
+        "frontend/src/pages/v4/access/org/identities.tsx",
+        "frontend/src/pages/v4/access/org/identity-detail.tsx",
+        "frontend/src/pages/v4/access/org/member-detail.tsx",
+        "frontend/src/pages/v4/access/org/project-memberships.tsx",
+        "frontend/src/pages/v4/access/org/roles.tsx",
+        "frontend/src/pages/v4/access/product/agent-vault/delegation-common.tsx",
+        "frontend/src/pages/v4/access/product/agent-vault/identities.tsx",
+        "frontend/src/pages/v4/access/product/pam/groups.tsx",
+        "frontend/src/pages/v4/access/product/pam/identities.tsx",
+        "frontend/src/pages/v4/access/product/pam/members.tsx",
+        "frontend/src/pages/v4/access/project/group-roles.tsx",
+        "frontend/src/pages/v4/access/project/identity-detail.tsx",
+        "frontend/src/pages/v4/access/project/identity-roles.tsx",
+        "frontend/src/pages/v4/access/project/product-scope.tsx",
+        "frontend/src/pages/v4/access/project/roles.tsx",
+        "frontend/src/pages/v4/access/roles/policy-template-sheet.tsx",
+        "frontend/src/pages/v4/access/roles/role-detail.tsx",
+        "frontend/src/pages/v4/access/ui.tsx",
+        "frontend/src/pages/v4/admin/navigation.ts",
+        "frontend/src/pages/v4/agent-vault/AgentVaultAccessBundleDetailPage/AgentVaultAccessBundleDetailPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultAccessBundlesPage/AgentVaultAccessBundlesPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultProxiesPage/AgentVaultProxiesPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultServicesPage/AgentVaultServicesPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultSessionsPage/AgentVaultSessionsPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultSkillsPage/AgentVaultSkillsPage.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultVariablesPage/AgentVaultVariablesPage.tsx",
+        "frontend/src/pages/v4/agent-vault/resources/services-table.tsx",
+        "frontend/src/pages/v4/agent-vault/resources/skills.tsx",
+        "frontend/src/pages/v4/cert-manager/ApplicationDetailsByIDPage/ApplicationDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/ApplicationsPage/ApplicationsPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertAuthDetailsByIDPage/CertAuthDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateAuthoritiesPage/CertificateAuthoritiesPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateDetailsByIDPage/CertificateDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificatePoliciesPage/CertificatePoliciesPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificatePolicyDetailsByIDPage/CertificatePolicyDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CertificateProfilesPage/CertificateProfilesPage.tsx",
+        "frontend/src/pages/v4/cert-manager/CodeSigningPage/CodeSigningPage.tsx",
+        "frontend/src/pages/v4/cert-manager/InventoryPage/InventoryPage.tsx",
+        "frontend/src/pages/v4/cert-manager/SettingsPage/hsm-connectors.tsx",
+        "frontend/src/pages/v4/cert-manager/SignerDetailPage/approvals-tab.tsx",
+        "frontend/src/pages/v4/cert-manager/components/profile-sheet.tsx",
+        "frontend/src/pages/v4/integrations/app-connections-table.tsx",
+        "frontend/src/pages/v4/kms/OverviewPage/OverviewPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/KmipPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/KmipServerDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/KmipServersPage.tsx",
+        "frontend/src/pages/v4/license/CapabilityUpgradeGate.tsx",
+        "frontend/src/pages/v4/license/product-icon.tsx",
+        "frontend/src/pages/v4/organization/AuditLogsPage/streams/streams.tsx",
+        "frontend/src/pages/v4/organization/GatewayDetailsByIDPage/GatewayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/organization/IntegrationsPage/workflow-integrations.tsx",
+        "frontend/src/pages/v4/organization/NetworkingPage/gateways.tsx",
+        "frontend/src/pages/v4/organization/NetworkingPage/pools.tsx",
+        "frontend/src/pages/v4/organization/NetworkingPage/relays.tsx",
+        "frontend/src/pages/v4/organization/OauthApplicationsPage/OauthApplicationsPage.tsx",
+        "frontend/src/pages/v4/organization/ProductSettingsPage/components/template-detail.tsx",
+        "frontend/src/pages/v4/organization/ProductSettingsPage/components/template-roles.tsx",
+        "frontend/src/pages/v4/organization/ProjectsPage/ProjectTypePage/ProjectTypePage.tsx",
+        "frontend/src/pages/v4/organization/ProjectsPage/ProjectsPage.tsx",
+        "frontend/src/pages/v4/organization/RelayDetailsByIDPage/RelayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/duplicated-secrets-card.tsx",
+        "frontend/src/pages/v4/organization/SsoPage/sso/SsoTab.tsx",
+        "frontend/src/pages/v4/organization/SsoPage/sso/email-domains.tsx",
+        "frontend/src/pages/v4/organization/SsoPage/sso/providers.tsx",
+        "frontend/src/pages/v4/pam/PamAccountAccessPage/data-explorer/filter-popover.tsx",
+        "frontend/src/pages/v4/pam/PamAccountsPage/PamAccountsPage.tsx",
+        "frontend/src/pages/v4/pam/PamTemplatesPage/PamTemplatesPage.tsx",
+        "frontend/src/pages/v4/project/AppConnectionsPage/AppConnectionsPage.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/InsightsPage.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/agent-proxy-moved-dialog.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/bulk/bulk-tag-dialog.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/flows/proxied-service-fields.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/import-secrets/csv-column-map.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/overview-cells.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/resource-rows.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/row-actions/access-insights-sheet.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/row-actions/folder-access-sheet.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/row-actions/honey-token-actions.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/row-actions/version-history-sheet.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/secret-references.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/secret-row.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/toolbar.tsx",
+        "frontend/src/pages/v4/secret-manager/SecretApprovalsPage/policies/ApprovalPolicies.tsx",
+        "frontend/src/pages/v4/secret-manager/SettingsPage/environments.tsx",
+        "frontend/src/pages/v4/secret-manager/SettingsPage/policies/cross-project-sharing.tsx",
+        "frontend/src/pages/v4/secret-manager/SettingsPage/tags.tsx",
+        "frontend/src/pages/v4/secret-manager/SettingsPage/webhooks.tsx",
+        "frontend/src/pages/v4/secret-manager/SettingsPage/workflow-integrations/index.tsx",
+        "frontend/src/pages/v4/secret-scanning/SettingsPage/SettingsPage.tsx",
+        "frontend/src/pages/v4/secret-sharing/SecretSharingPage/SecretSharingPage.tsx",
+        "frontend/src/pages/v4/secret-sharing/lists.tsx",
+        "frontend/src/pages/v4/shell/V4Shell.tsx",
+        "frontend/src/pages/v4/shell/command-palette.tsx",
+        "frontend/src/pages/v4/shell/navigation.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9757,
+      "title": "fix(ui): show full text of truncated table cells in a tooltip",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T02:53:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/src/components/v3/generic/Table/Table.stories.tsx",
+        "frontend/src/components/v3/generic/Table/Table.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9756,
+      "title": "chore(v4): sync main into design/v4-controls-polish",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T02:07:22Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "backend/src/ee/routes/v1/secret-approval-request-router.ts",
+        "backend/src/ee/services/secret-change-request/secret-change-request-service.ts",
+        "backend/src/lib/request-context/memo-keys.ts",
+        "backend/src/server/config/rateLimiter.ts",
+        "backend/src/services/approval-policy/approval-request-fns.ts",
+        "docs/cli/reference-agents.mdx",
+        "docs/cli/reference.mdx",
+        "docs/documentation/platform/agent-vault/skills.mdx",
+        "frontend/src/components/v3/generic/Dropdown/Dropdown.tsx",
+        "frontend/src/hooks/api/secretApprovalRequest/mutation.tsx",
+        "frontend/src/hooks/api/secretApprovalRequest/queries.tsx",
+        "frontend/src/pages/secret-manager/SecretApprovalsPage/components/SecretApprovalRequest/SecretApprovalRequest.tsx",
+        "frontend/src/pages/secret-manager/SecretApprovalsPage/components/SecretApprovalRequest/components/BulkReviewChangeRequestsSheet.tsx",
+        "frontend/src/pages/v4/secret-manager/SecretApprovalsPage/change-requests/BulkReviewSheet.tsx",
+        "frontend/src/pages/v4/secret-manager/SecretApprovalsPage/change-requests/ChangeRequests.tsx",
+        "tests/clients/api/api.gen.go",
+        "tests/clients/api/oapi-codegen.yaml",
+        "tests/suites/secretmanager/approvals/batch_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9753,
+      "title": "improvement(v4): adopt the detail page standard on integration and infra pages",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T01:21:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "frontend/src/pages/v4/agent-vault/AgentVaultAccessBundleDetailPage/AgentVaultAccessBundleDetailPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/KmipServerDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/deploy-card.tsx",
+        "frontend/src/pages/v4/networking/health.tsx",
+        "frontend/src/pages/v4/organization/GatewayDetailsByIDPage/GatewayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/organization/GatewayDetailsByIDPage/deploy.tsx",
+        "frontend/src/pages/v4/organization/GatewayDetailsByIDPage/resources.tsx",
+        "frontend/src/pages/v4/organization/RelayDetailsByIDPage/RelayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/secret-manager/IntegrationDetailsByIDPage/IntegrationDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/secret-manager/IntegrationsPage/native-parts.tsx",
+        "frontend/src/pages/v4/secret-manager/IntegrationsPage/secret-syncs/parts.tsx",
+        "frontend/src/pages/v4/secret-manager/SecretSyncDetailsByIDPage/SecretSyncDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/secret-scanning/SecretScanningDataSourceByIdPage/SecretScanningDataSourceByIdPage.tsx",
+        "frontend/src/pages/v4/secret-scanning/SecretScanningDataSourceByIdPage/settings.tsx",
+        "frontend/src/pages/v4/secret-scanning/components/data-source-status.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9751,
+      "title": "feat(v4): deslop the Secret Insights pages",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T01:11:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 13,
+      "paths": [
+        "frontend/src/pages/v4/organization/SecretInsightsPage/SecretInsightsPage.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/access-volume-card.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/auth-methods-card.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/duplicated-secrets-card.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/new-secrets-card.tsx",
+        "frontend/src/pages/v4/organization/SecretInsightsPage/components/projects-insights-card.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/InsightsPage.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/access-volume-card.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/auth-method-card.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/duplicated-secrets-card.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/summary-cards.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/unused-access-card.tsx",
+        "frontend/src/pages/v4/secret-manager/InsightsPage/unused-access.utils.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9750,
+      "title": "improvement(v4): role pages adopt the detail page header and empty state",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T01:10:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "frontend/src/pages/v4/access/roles/role-detail.tsx",
+        "frontend/src/pages/v4/access/roles/rule-table.tsx",
+        "frontend/src/pages/v4/access/ui.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9749,
+      "title": "fix(v4): stack the custom header row on narrow sheets and drop the findings middle dot",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T01:03:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "frontend/src/pages/v4/agent-vault/resources/resources.module.css",
+        "frontend/src/pages/v4/agent-vault/resources/service-headers.tsx",
+        "frontend/src/pages/v4/secret-scanning/components/findings.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9748,
+      "title": "improvement(frontend): adopt detail page standard on v4 access detail pages",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T00:58:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "frontend/src/pages/v4/access/org/group-detail.tsx",
+        "frontend/src/pages/v4/access/org/identity-detail.tsx",
+        "frontend/src/pages/v4/access/org/member-detail.tsx",
+        "frontend/src/pages/v4/access/org/project-memberships.tsx",
+        "frontend/src/pages/v4/access/project/group-detail.tsx",
+        "frontend/src/pages/v4/access/project/group-roles.tsx",
+        "frontend/src/pages/v4/access/project/identity-detail.tsx",
+        "frontend/src/pages/v4/access/project/identity.module.css",
+        "frontend/src/pages/v4/access/project/member-detail.tsx",
+        "frontend/src/pages/v4/access/ui.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9732,
+      "title": "improvement(v4): adopt Cipher v0.1.18 button group text, rail dot and field errors",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-20T00:51:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "frontend/src/pages/v4/agent-vault/AgentVaultSessionsPage/create-session-sheet.tsx",
+        "frontend/src/pages/v4/agent-vault/resources/service-headers.tsx",
+        "frontend/src/pages/v4/agent-vault/setup-checklist/SetupChecklist.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/OverviewPage.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/overview.module.css"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9729,
+      "title": "chore(v4): sync main into design/v4-controls-polish",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T23:47:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "backend/e2e-test/routes/v1/auth-token-org-scope.spec.ts",
+        "backend/src/keystore/keystore.ts",
+        "backend/src/lib/error-codes/database.ts",
+        "backend/src/server/routes/index.ts",
+        "backend/src/server/routes/v1/auth-router.ts",
+        "backend/src/services/auth-token/auth-token-dal.ts",
+        "backend/src/services/auth-token/auth-token-service.test.ts",
+        "backend/src/services/auth-token/auth-token-service.ts",
+        "backend/src/services/oauth-client/oauth-client-service.ts",
+        "backend/src/services/org/org-deletion-service.test.ts",
+        "backend/src/services/org/org-deletion-service.ts",
+        "backend/src/services/secret/secret-fns.ts",
+        "docs/documentation/platform/agent-vault/overview.mdx",
+        "docs/documentation/platform/oauth-applications/authorization-code.mdx",
+        "tests/suites/user/session_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9727,
+      "title": "fix(org): stop a legacy project without a bot from blocking org deletion",
+      "author": "scott-ray-wilson",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T22:52:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "backend/src/server/routes/index.ts",
+        "backend/src/services/org/org-deletion-service.test.ts",
+        "backend/src/services/org/org-deletion-service.ts",
+        "backend/src/services/secret/secret-fns.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9726,
+      "title": "feat(secret-scanning): move notifications to shared alert module",
+      "author": "mathnogueira",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:40:38Z",
+      "kind": "code",
+      "transition": null,
+      "files": 20,
+      "paths": [
+        "backend/AGENTS.md",
+        "backend/src/db/migrations/20261119190000_add-secret-scanning-default-alerts.ts",
+        "backend/src/ee/services/secret-scanning-v2/AGENTS.md",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-dal.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-events.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-queue.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-service.test.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-service.ts",
+        "backend/src/server/routes/index.ts",
+        "backend/src/services/alert/alert-service-types.ts",
+        "backend/src/services/alert/alert-service.ts",
+        "backend/src/services/alert/providers/secret-scanning-alert-dal.ts",
+        "backend/src/services/alert/providers/secret-scanning-alert-provider.test.ts",
+        "backend/src/services/alert/providers/secret-scanning-alert-provider.ts",
+        "docs/documentation/platform/secret-scanning/findings.mdx",
+        "frontend/src/hooks/api/alerts/types.ts",
+        "frontend/src/hooks/api/secretScanningV2/enums.ts",
+        "frontend/src/pages/secret-scanning/SecretScanningDataSourceByIdPage/components/SecretScanningDataSourceSettings.tsx",
+        "frontend/src/views/Alerts/AlertForm.tsx",
+        "frontend/src/views/Alerts/ScanTriggerFilterField.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9725,
+      "title": "fix(secret-sync): reject dot segments in HashiCorp Vault sync and import paths",
+      "author": "Vligai",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:34:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "backend/src/services/app-connection/hc-vault/hc-vault-connection-fns.test.ts",
+        "backend/src/services/app-connection/hc-vault/hc-vault-connection-fns.ts",
+        "backend/src/services/app-connection/hc-vault/hc-vault-path-fns.test.ts",
+        "backend/src/services/app-connection/hc-vault/hc-vault-path-fns.ts",
+        "backend/src/services/app-connection/hc-vault/index.ts",
+        "backend/src/services/secret-sync/hc-vault/hc-vault-sync-fns.test.ts",
+        "backend/src/services/secret-sync/hc-vault/hc-vault-sync-fns.ts",
+        "backend/src/services/secret-sync/hc-vault/hc-vault-sync-schemas.test.ts",
+        "backend/src/services/secret-sync/hc-vault/hc-vault-sync-schemas.ts",
+        "frontend/src/components/secret-syncs/forms/schemas/hc-vault-sync-destination-schema.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9724,
+      "title": "fix(identity): return lockouts and delete protection on project identity membership GET (v4)",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:54:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/server/routes/v1/identity-project-membership-router.ts",
+        "backend/src/services/membership-identity/membership-identity-service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9723,
+      "title": "docs(agent-vault): link the Agent Vault video guide from the overview",
+      "author": "jakehulberg",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T21:45:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/documentation/platform/agent-vault/overview.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9722,
+      "title": "docs(agent-vault): add link to video overview",
+      "author": "adkah",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:42:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/documentation/platform/agent-vault/overview.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9720,
+      "title": "fix(v4): label the add-users create option Invite <email>",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:28:23Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "frontend/src/pages/v4/access/project/member-add-dialog.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9718,
+      "title": "docs: refresh docs link previews",
+      "author": "jaddenki",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T21:14:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "docs/docs.json",
+        "docs/fonts/AllianceNo2-Regular.woff",
+        "docs/images/docs-preview-yellow.png"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9717,
+      "title": "docs(sdk): add go to agent vault and update modal guide",
+      "author": "adkah",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T20:47:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/documentation/platform/agent-vault/guides/modal.mdx",
+        "docs/sdks/languages/go.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9715,
+      "title": "fix(auth): keep refresh-token grace per version so overlapping refreshes do not revoke the session",
+      "author": "victorvhs017",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T20:45:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "backend/e2e-test/routes/v1/auth-token-org-scope.spec.ts",
+        "backend/src/keystore/keystore.ts",
+        "backend/src/lib/error-codes/database.ts",
+        "backend/src/server/routes/v1/auth-router.ts",
+        "backend/src/services/auth-token/auth-token-dal.ts",
+        "backend/src/services/auth-token/auth-token-service.test.ts",
+        "backend/src/services/auth-token/auth-token-service.ts",
+        "backend/src/services/oauth-client/oauth-client-service.ts",
+        "docs/documentation/platform/oauth-applications/authorization-code.mdx",
+        "tests/suites/user/session_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9714,
+      "title": "feat(gateway): show the deployed CLI version on the gateway detail page",
+      "author": "dawson-infisical",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T19:30:36Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "backend/AGENTS.md",
+        "backend/src/db/migrations/20261119120000_gateway-cli-version.ts",
+        "backend/src/db/schemas/gateways-v2.ts",
+        "backend/src/ee/routes/v2/gateway-router.ts",
+        "backend/src/ee/routes/v3/gateway-router.ts",
+        "backend/src/ee/services/gateway-v2/gateway-v2-service.ts",
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/lib/cli-version/cli-version-fns.test.ts",
+        "backend/src/lib/cli-version/cli-version-fns.ts",
+        "docs/documentation/platform/gateways/overview.mdx",
+        "frontend/src/hooks/api/gateways-v2/types.ts",
+        "frontend/src/hooks/api/gateways-v2/utils.ts",
+        "frontend/src/pages/organization/NetworkingPage/GatewayDetailsByIDPage/components/GatewayDetailsCard/GatewayDetailsCard.tsx",
+        "tests/suites/gateway/helpers_test.go",
+        "tests/suites/gateway/version_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9713,
+      "title": "fix(identity): return lockouts and delete protection on project identity membership GET",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T19:18:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "backend/src/lib/api-docs/constants.ts",
+        "backend/src/server/routes/v1/identity-project-membership-router.ts",
+        "backend/src/services/membership-identity/membership-identity-service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9712,
+      "title": "fix(v4): clean up commit detail layout and disclosure",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T17:28:45Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/commit-history-sheet.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/commits-model.ts",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/commits.module.css",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/diff-view.module.css",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/diff-view.tsx",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/commits/resource-change-card.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9710,
+      "title": "fix(v4): restore main's quick-add placeholders on the SM overview",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T17:02:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/overview.module.css",
+        "frontend/src/pages/v4/secret-manager/OverviewPage/secrets/toolbar.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9709,
+      "title": "feature(pam): agent-friendly cli",
+      "author": "bernie-g",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T15:55:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 15,
+      "paths": [
+        "docs/cli/reference-agents.mdx",
+        "docs/cli/reference.mdx",
+        "docs/docs.json",
+        "docs/documentation/platform/identities/overview.mdx",
+        "docs/documentation/platform/pam/access-requests/overview.mdx",
+        "docs/documentation/platform/pam/accounts/connect.mdx",
+        "docs/documentation/platform/pam/ai-agents/instructions.mdx",
+        "docs/documentation/platform/pam/ai-agents/overview.mdx",
+        "docs/documentation/platform/pam/ai-agents/review.mdx",
+        "docs/documentation/platform/pam/ai-agents/run.mdx",
+        "docs/documentation/platform/pam/ai-agents/unattended.mdx",
+        "docs/documentation/platform/pam/concepts/access-control.mdx",
+        "docs/documentation/platform/pam/concepts/session-lifecycle.mdx",
+        "docs/documentation/platform/pam/overview.mdx",
+        "docs/documentation/platform/pam/templates/overview.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9708,
+      "title": "fix(token-auth): paginate access tokens on the server",
+      "author": "PoPo015",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T15:15:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 6,
+      "paths": [
+        "backend/e2e-test/routes/v1/identity-token-auth-tokens.spec.ts",
+        "backend/src/server/routes/v1/identity-token-auth-router.ts",
+        "backend/src/services/identity-token-auth/identity-token-auth-service.ts",
+        "frontend/src/hooks/api/identities/queries.tsx",
+        "frontend/src/views/IdentityAuthMethods/content/IdentityTokenAuthContent.tsx",
+        "frontend/src/views/IdentityAuthMethods/helpers/IdentityTokenAuthTokensTable.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9707,
+      "title": "feat(app-connection): store Redfish connections as redfish",
+      "author": "mathnogueira",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T15:05:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        "backend/src/db/migrations/20261119120000_rename-hpe-ilo-app-connection-to-redfish.ts",
+        "backend/src/ee/services/secret-rotation-v2/secret-rotation-v2-dal.ts",
+        "backend/src/ee/services/secret-scanning-v2/secret-scanning-v2-dal.ts",
+        "backend/src/services/app-connection/app-connection-dal.ts",
+        "backend/src/services/app-connection/app-connection-stored-app.test.ts",
+        "backend/src/services/app-connection/app-connection-stored-app.ts",
+        "backend/src/services/app-connection/credential-rotation/app-connection-credential-rotation-dal.ts",
+        "backend/src/services/pki-sync/pki-sync-dal.ts",
+        "backend/src/services/secret-sync/secret-sync-dal.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9705,
+      "title": "fix(backend): prevent deadlocks during cache invalidation with reciprocal cross-project grants (#9605)",
+      "author": "ghazy2001",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T14:37:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-dal.test.ts",
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-dal.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9702,
+      "title": "feat(dynamic-secrets): add Neon dynamic secret for roles and database branches",
+      "author": "DimitrisStaratzis",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T09:42:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "backend/src/ee/services/dynamic-secret/providers/index.ts",
+        "backend/src/ee/services/dynamic-secret/providers/models.ts",
+        "backend/src/ee/services/dynamic-secret/providers/neon.test.ts",
+        "backend/src/ee/services/dynamic-secret/providers/neon.ts",
+        "backend/src/ee/services/dynamic-secret/providers/redact.ts",
+        "docs/.vale/styles/config/vocabularies/Infisical/canonical/accept.txt",
+        "docs/docs.json",
+        "docs/documentation/platform/dynamic-secrets/neon.mdx",
+        "docs/snippets/catalogs/dynamic-secrets.jsx",
+        "frontend/public/images/integrations/Neon.png",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/neon-payload.test.ts",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/providerDefinitions/managedStores.ts",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/providerDefinitions/managedStoresContract.ts",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/providerDefinitions/neon.tsx",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/providerDefinitions/neonContract.ts",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/registry.ts",
+        "frontend/src/components/dynamic-secrets/DynamicSecretProviderForm/runtimeMetadata.ts",
+        "frontend/src/hooks/api/dynamicSecret/types.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9701,
+      "title": "chore(release): upgrade impact and Helm chart for v0.167.13",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T08:30:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "helm-charts/infisical-standalone-postgres/CHANGELOG.md",
+        "helm-charts/infisical-standalone-postgres/Chart.yaml",
+        "upgrade-impact/data/index.yaml",
+        "upgrade-impact/data/releases/v0.167.13.yaml"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9700,
+      "title": "improvement(permission): look up actor memberships through partial indexes",
+      "author": "victorvhs017",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T03:06:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 12,
+      "paths": [
+        "backend/src/ee/services/permission/permission-dal.integration-test.ts",
+        "backend/src/ee/services/permission/permission-dal.ts",
+        "backend/src/ee/services/permission/permission-service-types.ts",
+        "backend/src/ee/services/permission/permission-service.ts",
+        "backend/src/keystore/keystore.ts",
+        "backend/src/lib/cache/with-cache.test.ts",
+        "backend/src/lib/cache/with-cache.ts",
+        "backend/src/server/app.ts",
+        "backend/src/server/plugins/etag.test.ts",
+        "backend/src/server/plugins/etag.ts",
+        "backend/src/services/secret-v2-bridge/secret-v2-bridge-service.ts",
+        "tests/suites/secretmanager/secrets/list_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9699,
+      "title": "improvement(v4): use the PageHeader breadcrumb for detail-page back navigation",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T02:37:05Z",
+      "kind": "code",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        "frontend/AGENTS.md",
+        "frontend/src/pages/v4/access/org/detail-parts.tsx",
+        "frontend/src/pages/v4/access/org/group-detail.tsx",
+        "frontend/src/pages/v4/access/org/identity-detail.tsx",
+        "frontend/src/pages/v4/access/org/member-detail.tsx",
+        "frontend/src/pages/v4/access/project/group-detail.tsx",
+        "frontend/src/pages/v4/access/project/identity-detail.tsx",
+        "frontend/src/pages/v4/access/roles/role-detail.tsx",
+        "frontend/src/pages/v4/agent-vault/AgentVaultAccessBundleDetailPage/AgentVaultAccessBundleDetailPage.tsx",
+        "frontend/src/pages/v4/kms/kmip/KmipServerDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/organization/GatewayDetailsByIDPage/GatewayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/organization/ProductSettingsPage/components/template-detail.tsx",
+        "frontend/src/pages/v4/organization/RelayDetailsByIDPage/RelayDetailsByIDPage.tsx",
+        "frontend/src/pages/v4/secret-manager/SecretApprovalsPage/change-requests/RequestDetail.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9698,
+      "title": "docs(pki): describe certificate agent retries, check cadence and failure handling",
+      "author": "carlosmonastyrski",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T00:40:37Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/documentation/platform/pki/reference/infisical-agent.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9696,
+      "title": "improvement(license): recount projects without dropping the cached plan",
+      "author": "victorvhs017",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T00:00:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "backend/e2e-test/mocks/keystore.ts",
+        "backend/src/db/migrations/20261118230000_add-projects-active-org-type-index.ts",
+        "backend/src/domains/lib/key-store/key-store.ts",
+        "backend/src/domains/lib/key-store/testing/in-memory-key-store.ts",
+        "backend/src/domains/platform/license/AGENTS.md",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.test.ts",
+        "backend/src/domains/platform/license/ce/data-access/plan-cache.ts",
+        "backend/src/domains/platform/license/ce/services/dependencies.ts",
+        "backend/src/domains/platform/license/ce/services/license/service-plans.test.ts",
+        "backend/src/domains/platform/license/ce/services/license/service.ts",
+        "backend/src/domains/platform/license/ce/testing/fake-license-service.ts",
+        "backend/src/domains/platform/organizations-projects/ce/data-access/organization-store.ts",
+        "backend/src/domains/platform/organizations-projects/ce/services/organizations-projects/service.ts",
+        "backend/src/keystore/keystore.ts",
+        "backend/src/keystore/memory.ts",
+        "backend/src/services/external-migration/external-migration-queue.ts",
+        "backend/src/services/project/project-cleanup-queue.ts",
+        "backend/src/services/project/project-service.ts",
+        "tests/suites/organization/plan_test.go"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 9693,
+      "title": "improvement(billing): nudge for a comment when the cancellation reason is Other",
+      "author": "andrewhuhh",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T23:11:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "frontend/src/pages/organization/BillingPage/components/CancellationFeedbackDialog.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:09:45.047Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}

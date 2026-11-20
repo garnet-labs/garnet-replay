@@ -1,0 +1,54 @@
+# Merge gate (POC)
+# Evaluates the Garnet execution profile on a PR and posts a MERGE / HOLD / AUDIT
+# decision. Fires when garnet-runtime-review[bot] posts a Runtime Review, or when
+# someone comments /merge-gate on a PR. Manual re-runs via workflow_dispatch.
+# Proof of concept only. Garnet reports; the reviewer decides.
+name: Merge gate
+
+on:
+  issue_comment:
+    types: [created, edited]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "PR number to gate"
+        required: true
+        type: string
+      dry_run:
+        description: "Read evidence without posting a comment"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  gate:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.issue.pull_request && (
+        github.event.comment.user.login == 'garnet-runtime-review[bot]' ||
+        contains(github.event.comment.body, '/merge-gate')
+      ))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          sparse-checkout: .github/merge-gate
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run merge gate
+        run: |
+          [[ "$PR" =~ ^[1-9][0-9]*$ ]] || { echo 'invalid PR number'; exit 1; }
+          args=()
+          if [ "$DRY_RUN" = true ]; then args+=(--dry-run); fi
+          python3 .github/merge-gate/gate.py "$GITHUB_REPOSITORY" "$PR" "${args[@]}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ inputs.pr || github.event.issue.number }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}

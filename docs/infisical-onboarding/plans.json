@@ -1,0 +1,87 @@
+{
+  "assumptions": "Pure planner only: assume future fork main matches frozen upstream main plus approved onboarding. Not a hosted prepare receipt; no fork admission, recorder health, base ancestry, or executed-source checks performed. Recorder filters match backend/frontend package.json and package-lock.json plus recorder workflow; 9694 is excluded.",
+  "plans": [
+    {
+      "number": 9436,
+      "hypothetical": true,
+      "branch": "chore/update-7a4",
+      "title": "chore(frontend): add React Doctor and React Scan dev tooling",
+      "message": "chore(frontend): add React Doctor and React Scan dev tooling\n\n- .github/workflows/check-fe-ts-and-lint.yml\n- frontend/AGENTS.md\n- frontend/doctor.config.json\n- frontend/package-lock.json\n- frontend/package.json\n- frontend/src/dev/reactScan.ts\n- and 1 more",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 7,
+      "renames": []
+    },
+    {
+      "number": 9730,
+      "hypothetical": true,
+      "branch": "chore/manifests-7ia",
+      "title": "chore(frontend): pin Cipher v0.1.18",
+      "message": "chore(frontend): pin Cipher v0.1.18\n\n- frontend/package-lock.json\n- frontend/package.json",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": []
+    },
+    {
+      "number": 9694,
+      "error": "Recorder filters only backend/frontend package files; this PR touches none, so the harness refuses admission."
+    },
+    {
+      "number": 9230,
+      "hypothetical": true,
+      "branch": "chore/update-74e",
+      "title": "chore: replace the Python BDD suite with Go blackbox PKI tests",
+      "message": "chore: replace the Python BDD suite with Go blackbox PKI tests\n\n- .dockerignore\n- .github/workflows/run-backend-bdd-tests.yml\n- .github/workflows/run-blackbox-tests.yml\n- .gitignore\n- AGENTS.md\n- Dockerfile.fips.standalone-infisical\n- and 111 more",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 117,
+      "renames": []
+    },
+    {
+      "number": 9293,
+      "error": "upstream leak in outbound text (upstream repository reference 'Infisical/infisical'): \"416 files:\\n\\n- .github/workflows/run-backend-bdd-tests.yml\\n- .github/workflows/run-backend-tests.yml\\n- .greptile/config.j\""
+    },
+    {
+      "number": 9158,
+      "hypothetical": true,
+      "branch": "deps/fastify-reply-from-12.8.1",
+      "title": "Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1",
+      "message": "Security upgrade @fastify/reply-from from 12.6.2 to 12.8.1\n\n- backend/package-lock.json\n- backend/package.json",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": []
+    },
+    {
+      "number": 8984,
+      "hypothetical": true,
+      "branch": "chore/manifests-6xk",
+      "title": "Fix for 6 vulnerabilities",
+      "message": "Fix for 6 vulnerabilities\n\n- backend/package-lock.json\n- backend/package.json",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 2,
+      "renames": []
+    },
+    {
+      "number": 8357,
+      "error": "banned vocabulary 'clean' in renderer-owned copy: \"728 files:\\n\\n- backend/AGENTS.md\\n- backend/CODE_QUALITY.md\\n- backend/package-lock.json\\n- backend/package.json\\n- backend/s\""
+    },
+    {
+      "number": 9406,
+      "hypothetical": true,
+      "branch": "chore/update-79a",
+      "title": "fix(security): update minimum node version",
+      "message": "fix(security): update minimum node version\n\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend/Dockerfile\n- backend/Dockerfile.dev\n- backend/Dockerfile.fips-toolchain\n- backend/package-lock.json\n- and 5 more",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 11,
+      "renames": []
+    },
+    {
+      "number": 8740,
+      "error": "upstream leak in outbound text (upstream repository reference 'Infisical/infisical'): \"27 files:\\n\\n- .github/actions/generate-openapi-spec/action.yml\\n- .github/workflows/check-api-for-breaking-changes.yml\\n- .\""
+    }
+  ]
+}
