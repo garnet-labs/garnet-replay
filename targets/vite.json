@@ -21,17 +21,65 @@
       "record": "inject",
       "ecosystem": "pnpm",
       "openedAt": "2026-09-11T16:51:54Z",
-      "state": "undeterminable",
+      "state": "recorded",
       "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
       "verification": {
         "status": "FAIL",
         "head": "0712550b791322e7b019e22ae0e0be8512368ff6",
-        "observedAt": "2026-09-11T18:00:27.468Z",
+        "checkedAt": "2026-11-20T05:04:43.266Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
           "public profile identity: garnet-labs/vitejs-vite / run 34624634687 / profile 01a09165-9dfe-7f24-af9a-652d6c3d6948; recorded 432510f4220460267bd8c26c71095729781a1fa2 (refs/pull/5/merge); expected head 0712550b791322e7b019e22ae0e0be8512368ff6"
-        ]
-      }
+        ],
+        "receiptFingerprint": "8dbea264a9f0a0ffea2c4245051a98b90b8bb7eb9c38ae26a2a05af6703dae16"
+      },
+      "observedAt": "2026-11-20T05:04:43.266Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 2,
+      "branch": "rc/23226",
+      "forkHeadSha": "681a8667098c1e1f972557ebbf56a5ca835ae00c",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "681a8667098c1e1f972557ebbf56a5ca835ae00c",
+        "checkedAt": "2026-11-20T05:04:43.266Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/vitejs-vite / run 32552816734 / profile 01a027d5-2f4e-7246-9384-c6f36613b8ce; recorded c6b5b982353073258bf06f4054d75001bf77827e (refs/pull/2/merge); expected head 681a8667098c1e1f972557ebbf56a5ca835ae00c",
+          "sensor coverage: pnpm dependency install (recorded): log unreadable; 0 of 1 jobs covered"
+        ],
+        "receiptFingerprint": "d3dd3373bc396a188e337f1e6dba500f9adb3675653dbd5c6af60d9b6db5fc5f"
+      },
+      "observedAt": "2026-11-20T05:04:43.266Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 1,
+      "branch": "rp/23226",
+      "forkHeadSha": "c8bf3e623bad9d8e0692af1bdb53554da185686b",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "c8bf3e623bad9d8e0692af1bdb53554da185686b",
+        "checkedAt": "2026-11-20T05:04:43.266Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "check settled: pnpm dependency install (recorded) concluded failure",
+          "public profile identity: garnet-labs/vitejs-vite / run 32552348356 / profile 01a027c7-dd58-7f48-b95d-18396fc3b9e4; recorded 1dec5e0d30285c2ba5fa37d5ed575cd72535ea4e (refs/pull/1/merge); expected head c8bf3e623bad9d8e0692af1bdb53554da185686b",
+          "sensor coverage: pnpm dependency install (recorded): log unreadable; 0 of 1 jobs covered"
+        ],
+        "receiptFingerprint": "45e4cd2c6b3381a12b700bcd0d1925c2df40e5174d38a4138a824971480305bb"
+      },
+      "observedAt": "2026-11-20T05:04:43.266Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -49,7 +97,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "e130fc56b62c04711ab9311c6ed86da4e8354218",
+    "checkedAt": "2026-11-20T05:04:43.266Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -62,12 +123,88 @@
       "state": "unstarted"
     }
   },
-  "stage": -1,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "aaf391cc4138d5f84f58c454c99a6643679d1835",
     "pr": 7
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T05:04:43.266Z",
+    "defaultBranch": "main",
+    "defaultSha": "e130fc56b62c04711ab9311c6ed86da4e8354218",
+    "inspectedPrs": 7,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/vitejs-vite/pull/5",
+        "prState": "open",
+        "head": "0712550b791322e7b019e22ae0e0be8512368ff6",
+        "previous": "d49352d0d5dbd5434fbd1e361f93cf87a6a08638",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "8dbea264a9f0a0ffea2c4245051a98b90b8bb7eb9c38ae26a2a05af6703dae16",
+        "verification": {
+          "status": "FAIL",
+          "head": "0712550b791322e7b019e22ae0e0be8512368ff6",
+          "checkedAt": "2026-11-20T05:04:43.266Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/vitejs-vite / run 34624634687 / profile 01a09165-9dfe-7f24-af9a-652d6c3d6948; recorded 432510f4220460267bd8c26c71095729781a1fa2 (refs/pull/5/merge); expected head 0712550b791322e7b019e22ae0e0be8512368ff6"
+          ],
+          "receiptFingerprint": "8dbea264a9f0a0ffea2c4245051a98b90b8bb7eb9c38ae26a2a05af6703dae16"
+        }
+      },
+      {
+        "forkPr": 2,
+        "url": "https://github.com/garnet-labs/vitejs-vite/pull/2",
+        "prState": "open",
+        "head": "681a8667098c1e1f972557ebbf56a5ca835ae00c",
+        "previous": "124a93ae2555731b862569729adadb99817712e5",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "d3dd3373bc396a188e337f1e6dba500f9adb3675653dbd5c6af60d9b6db5fc5f",
+        "verification": {
+          "status": "FAIL",
+          "head": "681a8667098c1e1f972557ebbf56a5ca835ae00c",
+          "checkedAt": "2026-11-20T05:04:43.266Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/vitejs-vite / run 32552816734 / profile 01a027d5-2f4e-7246-9384-c6f36613b8ce; recorded c6b5b982353073258bf06f4054d75001bf77827e (refs/pull/2/merge); expected head 681a8667098c1e1f972557ebbf56a5ca835ae00c",
+            "sensor coverage: pnpm dependency install (recorded): log unreadable; 0 of 1 jobs covered"
+          ],
+          "receiptFingerprint": "d3dd3373bc396a188e337f1e6dba500f9adb3675653dbd5c6af60d9b6db5fc5f"
+        }
+      },
+      {
+        "forkPr": 1,
+        "url": "https://github.com/garnet-labs/vitejs-vite/pull/1",
+        "prState": "open",
+        "head": "c8bf3e623bad9d8e0692af1bdb53554da185686b",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "45e4cd2c6b3381a12b700bcd0d1925c2df40e5174d38a4138a824971480305bb",
+        "verification": {
+          "status": "FAIL",
+          "head": "c8bf3e623bad9d8e0692af1bdb53554da185686b",
+          "checkedAt": "2026-11-20T05:04:43.266Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "check settled: pnpm dependency install (recorded) concluded failure",
+            "public profile identity: garnet-labs/vitejs-vite / run 32552348356 / profile 01a027c7-dd58-7f48-b95d-18396fc3b9e4; recorded 1dec5e0d30285c2ba5fa37d5ed575cd72535ea4e (refs/pull/1/merge); expected head c8bf3e623bad9d8e0692af1bdb53554da185686b",
+            "sensor coverage: pnpm dependency install (recorded): log unreadable; 0 of 1 jobs covered"
+          ],
+          "receiptFingerprint": "45e4cd2c6b3381a12b700bcd0d1925c2df40e5174d38a4138a824971480305bb"
+        }
+      }
+    ]
   }
 }

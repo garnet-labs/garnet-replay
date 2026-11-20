@@ -323,12 +323,142 @@
       "observedAt": "2026-11-07T06:22:43.764Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 43,
+      "branch": "chore/chat-sdk-adapters-4-39",
+      "forkHeadSha": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [],
+        "receiptFingerprint": "3fa61b75c8033c96ae207b7a5f2d598b0dd3685236f885d463cb7bb67a0f5ead"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 42,
+      "branch": "onboarding/single-recorder",
+      "forkHeadSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "d39a0380aafe3253fe9913a533091fe1571cf0ecf760ac2d7667a024d5d821bc"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 40,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "296c12727bd9f30228cf3c650a3a0f3c8ebd215b1c526d9f3862c5cee83ee6ac"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 38,
+      "branch": "revert-37-fix/npm-install-all-platforms",
+      "forkHeadSha": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [],
+        "receiptFingerprint": "e71e7c9e3107804aec772c3841a3fe8f3b801d4522ba2af0e7805e4259690d4c"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 37,
+      "branch": "fix/npm-install-all-platforms",
+      "forkHeadSha": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "da30db305da1e9f9c180f44ebccd21050353903e8a5aa7cb5c47a2376b661b7a"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 35,
+      "branch": "devin/1783746264-garnet-n8n-execution-diff",
+      "forkHeadSha": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+      "state": "undeterminable",
+      "verification": {
+        "status": "FAIL",
+        "head": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: no machine summary on the record",
+          "verdict determinable: no machine summary on the record",
+          "pair line: no pair line on the comment",
+          "no session residue: residue: \"Devin\"",
+          "label: the record carries no real/constructed label",
+          "public profile identity: garnet-labs/n8n / run 29937548467 / profile 019f8aa2-0b9d-7247-82da-3b64c53aa892; recorded fe790d10c42de71016cf666a8c67cfd484395320 (refs/pull/35/merge); expected head 2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+          "sensor coverage: no job in run 29937548467 ran garnet-org/action"
+        ],
+        "receiptFingerprint": "ab2d801115089ead42cb4139a30110cadbb1b99b9b07e9d5d0b992620bcb49e4"
+      },
+      "observedAt": "2026-11-20T04:57:14.164Z",
+      "source": "github-reconciliation"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "master",
+    "checkedSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
+    "checkedAt": "2026-11-20T04:57:14.164Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on master; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -341,12 +471,143 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "master",
     "checkedSha": "101030ec791b15c02dfb2e5020316fe8bd8fea16",
     "pr": 39
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:57:14.164Z",
+    "defaultBranch": "master",
+    "defaultSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
+    "inspectedPrs": 43,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 43,
+        "url": "https://github.com/garnet-labs/n8n/pull/43",
+        "prState": "open",
+        "head": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
+        "previous": "bb95fd04d0f3620f27b1dc441955f850786d9256",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "3fa61b75c8033c96ae207b7a5f2d598b0dd3685236f885d463cb7bb67a0f5ead",
+        "verification": {
+          "status": "PASS",
+          "head": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [],
+          "receiptFingerprint": "3fa61b75c8033c96ae207b7a5f2d598b0dd3685236f885d463cb7bb67a0f5ead"
+        }
+      },
+      {
+        "forkPr": 42,
+        "url": "https://github.com/garnet-labs/n8n/pull/42",
+        "prState": "merged",
+        "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
+        "previous": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "d39a0380aafe3253fe9913a533091fe1571cf0ecf760ac2d7667a024d5d821bc",
+        "verification": {
+          "status": "FAIL",
+          "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "d39a0380aafe3253fe9913a533091fe1571cf0ecf760ac2d7667a024d5d821bc"
+        }
+      },
+      {
+        "forkPr": 40,
+        "url": "https://github.com/garnet-labs/n8n/pull/40",
+        "prState": "merged",
+        "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "296c12727bd9f30228cf3c650a3a0f3c8ebd215b1c526d9f3862c5cee83ee6ac",
+        "verification": {
+          "status": "FAIL",
+          "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "296c12727bd9f30228cf3c650a3a0f3c8ebd215b1c526d9f3862c5cee83ee6ac"
+        }
+      },
+      {
+        "forkPr": 38,
+        "url": "https://github.com/garnet-labs/n8n/pull/38",
+        "prState": "open",
+        "head": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
+        "previous": "903dcccbca2ff02f39b081fea7de6c95e3c40010",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "e71e7c9e3107804aec772c3841a3fe8f3b801d4522ba2af0e7805e4259690d4c",
+        "verification": {
+          "status": "PASS",
+          "head": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [],
+          "receiptFingerprint": "e71e7c9e3107804aec772c3841a3fe8f3b801d4522ba2af0e7805e4259690d4c"
+        }
+      },
+      {
+        "forkPr": 37,
+        "url": "https://github.com/garnet-labs/n8n/pull/37",
+        "prState": "merged",
+        "head": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
+        "previous": "4c045829801b2124321b5fc489c8f793637cef21",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "da30db305da1e9f9c180f44ebccd21050353903e8a5aa7cb5c47a2376b661b7a",
+        "verification": {
+          "status": "FAIL",
+          "head": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "da30db305da1e9f9c180f44ebccd21050353903e8a5aa7cb5c47a2376b661b7a"
+        }
+      },
+      {
+        "forkPr": 35,
+        "url": "https://github.com/garnet-labs/n8n/pull/35",
+        "prState": "open",
+        "head": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+        "previous": null,
+        "scope": null,
+        "state": "undeterminable",
+        "receiptFingerprint": "ab2d801115089ead42cb4139a30110cadbb1b99b9b07e9d5d0b992620bcb49e4",
+        "verification": {
+          "status": "FAIL",
+          "head": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: no machine summary on the record",
+            "verdict determinable: no machine summary on the record",
+            "pair line: no pair line on the comment",
+            "no session residue: residue: \"Devin\"",
+            "label: the record carries no real/constructed label",
+            "public profile identity: garnet-labs/n8n / run 29937548467 / profile 019f8aa2-0b9d-7247-82da-3b64c53aa892; recorded fe790d10c42de71016cf666a8c67cfd484395320 (refs/pull/35/merge); expected head 2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
+            "sensor coverage: no job in run 29937548467 ran garnet-org/action"
+          ],
+          "receiptFingerprint": "ab2d801115089ead42cb4139a30110cadbb1b99b9b07e9d5d0b992620bcb49e4"
+        }
+      }
+    ]
   }
 }

@@ -68,18 +68,61 @@
       "transition": null,
       "record": "inject",
       "ecosystem": "pnpm",
-      "state": "undeterminable",
+      "state": "recorded",
       "openedAt": "2026-09-11T17:15:10.961Z",
       "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
       "verification": {
         "status": "FAIL",
         "head": "74a34f98b93159867579d34b448926e5fc94712e",
-        "observedAt": "2026-09-11T18:00:27.973Z",
+        "checkedAt": "2026-11-20T04:58:21.747Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
           "public profile identity: garnet-labs/openai-node / run 34626638779 / profile 01a09178-936c-7b2c-8de7-bcb789f0e574; recorded b32e9bc68345fb422de535e105d80fd87660bbec (refs/pull/43/merge); expected head 74a34f98b93159867579d34b448926e5fc94712e"
-        ]
-      }
+        ],
+        "receiptFingerprint": "3de1cc122322e878d6b1ebe1a135210200995e62bb5448598fa8c8b074838b67"
+      },
+      "observedAt": "2026-11-20T04:58:21.747Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 45,
+      "branch": "chore/update-1jm",
+      "forkHeadSha": "c526007cdf59dea01239a6c665692df97cd7efe3",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "c526007cdf59dea01239a6c665692df97cd7efe3",
+        "checkedAt": "2026-11-20T04:58:21.747Z",
+        "reasons": [],
+        "receiptFingerprint": "8351084c870afb0c9fb41e188d53ebec726a9f3cbf26b6bba4c9cf9dbe529dd9"
+      },
+      "observedAt": "2026-11-20T04:58:21.747Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 42,
+      "branch": "garnet/dependency-audit-runtime-visibility",
+      "forkHeadSha": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+        "checkedAt": "2026-11-20T04:58:21.747Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: lint concluded failure, test concluded failure, ecosystem tests (v20) concluded failure, build concluded failure",
+          "no session residue: residue: \"Devin\"",
+          "public profile identity: garnet-labs/openai-node / run 34261762053 / profile 01a0823a-d0d9-768f-8b7d-9135378e4078; recorded d8e916000a3b71533d355db7342db41010b9c5e0 (refs/pull/42/merge); expected head 410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+          "public profile identity: garnet-labs/openai-node / run 34261762053 / profile 01a0823a-be16-78ea-8000-0378511b048d; recorded d8e916000a3b71533d355db7342db41010b9c5e0 (refs/pull/42/merge); expected head 410740dbcea54f24e17a8cb6393acd7aa3a81e23"
+        ],
+        "receiptFingerprint": "31309bda2d76b4b18da279109390247dc6f902a538513f1e8d173b72d1ef1bd1"
+      },
+      "observedAt": "2026-11-20T04:58:21.747Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -97,7 +140,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "master",
+    "checkedSha": "ee5006a9a3a917df751d908a2c24c8b251a0e99c",
+    "checkedAt": "2026-11-20T04:58:21.747Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on master; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -110,5 +166,76 @@
       "state": "unstarted"
     }
   },
-  "stage": 0
+  "stage": 1,
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:58:21.747Z",
+    "defaultBranch": "master",
+    "defaultSha": "ee5006a9a3a917df751d908a2c24c8b251a0e99c",
+    "inspectedPrs": 46,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 45,
+        "url": "https://github.com/garnet-labs/openai-node/pull/45",
+        "prState": "open",
+        "head": "c526007cdf59dea01239a6c665692df97cd7efe3",
+        "previous": "db17ed94eda1c58278338150ea7e2aea834e8490",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "8351084c870afb0c9fb41e188d53ebec726a9f3cbf26b6bba4c9cf9dbe529dd9",
+        "verification": {
+          "status": "PASS",
+          "head": "c526007cdf59dea01239a6c665692df97cd7efe3",
+          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "reasons": [],
+          "receiptFingerprint": "8351084c870afb0c9fb41e188d53ebec726a9f3cbf26b6bba4c9cf9dbe529dd9"
+        }
+      },
+      {
+        "forkPr": 43,
+        "url": "https://github.com/garnet-labs/openai-node/pull/43",
+        "prState": "open",
+        "head": "74a34f98b93159867579d34b448926e5fc94712e",
+        "previous": "c5dddb15638866f2eb902b54d0975c62b9ca96b4",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "3de1cc122322e878d6b1ebe1a135210200995e62bb5448598fa8c8b074838b67",
+        "verification": {
+          "status": "FAIL",
+          "head": "74a34f98b93159867579d34b448926e5fc94712e",
+          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/openai-node / run 34626638779 / profile 01a09178-936c-7b2c-8de7-bcb789f0e574; recorded b32e9bc68345fb422de535e105d80fd87660bbec (refs/pull/43/merge); expected head 74a34f98b93159867579d34b448926e5fc94712e"
+          ],
+          "receiptFingerprint": "3de1cc122322e878d6b1ebe1a135210200995e62bb5448598fa8c8b074838b67"
+        }
+      },
+      {
+        "forkPr": 42,
+        "url": "https://github.com/garnet-labs/openai-node/pull/42",
+        "prState": "open",
+        "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+        "previous": "eaa26a7b7cd650b4239f8a4c58047bb06be2f88b",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "31309bda2d76b4b18da279109390247dc6f902a538513f1e8d173b72d1ef1bd1",
+        "verification": {
+          "status": "FAIL",
+          "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: lint concluded failure, test concluded failure, ecosystem tests (v20) concluded failure, build concluded failure",
+            "no session residue: residue: \"Devin\"",
+            "public profile identity: garnet-labs/openai-node / run 34261762053 / profile 01a0823a-d0d9-768f-8b7d-9135378e4078; recorded d8e916000a3b71533d355db7342db41010b9c5e0 (refs/pull/42/merge); expected head 410740dbcea54f24e17a8cb6393acd7aa3a81e23",
+            "public profile identity: garnet-labs/openai-node / run 34261762053 / profile 01a0823a-be16-78ea-8000-0378511b048d; recorded d8e916000a3b71533d355db7342db41010b9c5e0 (refs/pull/42/merge); expected head 410740dbcea54f24e17a8cb6393acd7aa3a81e23"
+          ],
+          "receiptFingerprint": "31309bda2d76b4b18da279109390247dc6f902a538513f1e8d173b72d1ef1bd1"
+        }
+      }
+    ]
+  }
 }

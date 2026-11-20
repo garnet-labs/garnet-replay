@@ -1131,8 +1131,21 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": "uv",
-      "state": "pending",
-      "openedAt": "2026-09-18T16:57:48.221Z"
+      "state": "recorded",
+      "openedAt": "2026-09-18T16:57:48.221Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+        "checkedAt": "2026-11-20T05:02:00.842Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "public profile identity: garnet-labs/servers / run 35371539977 / profile 01a0b574-cb8c-7576-8bd1-e24f8e36c12a; recorded 251825b714e140fa951f51a782d7d71747c4b23e (refs/pull/2/merge); expected head 84eceb0b26b532664ac5dc90380d8bd8481905d0"
+        ],
+        "receiptFingerprint": "88cf346725962820f093d7ba100132dc5deab0d5b733dee3a8ee930f92a9f8cb"
+      },
+      "observedAt": "2026-11-20T05:02:00.842Z",
+      "source": "github-reconciliation"
     },
     {
       "upstreamPr": 4615,
@@ -1147,8 +1160,22 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": "uv",
-      "state": "pending",
-      "openedAt": "2026-09-19T06:01:49.984Z"
+      "state": "recorded",
+      "openedAt": "2026-09-19T06:01:49.984Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
+        "checkedAt": "2026-11-20T05:02:00.842Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "check settled: Build fetch concluded failure, Build git concluded cancelled, Build time concluded cancelled",
+          "public profile identity: garnet-labs/servers / run 35425508712 / profile 01a0b842-aa95-7080-b093-f8e53341abd0; recorded 64509d143c437b15c12788ab192a090d3f272b4d (refs/pull/5/merge); expected head 7c9ff0517f469e98b95933e289b41d0507527d5c"
+        ],
+        "receiptFingerprint": "50ba881301c16939f0dd32ad04c0ec11cacd2c7932a6ee56dc18c1b306756179"
+      },
+      "observedAt": "2026-11-20T05:02:00.842Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [
@@ -1176,7 +1203,20 @@
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "b15caf12da7a18acdee59b47c252c1b2aa16a31f",
+    "checkedAt": "2026-11-20T05:02:00.842Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1189,12 +1229,64 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "414baa5d15e49a0e5cffdda5ea311fdf0b64f9eb",
     "pr": 29
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T05:02:00.842Z",
+    "defaultBranch": "main",
+    "defaultSha": "b15caf12da7a18acdee59b47c252c1b2aa16a31f",
+    "inspectedPrs": 29,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/servers/pull/5",
+        "prState": "open",
+        "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
+        "previous": "453466d5e1ca2e5f58d344a99d501832414b9788",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "50ba881301c16939f0dd32ad04c0ec11cacd2c7932a6ee56dc18c1b306756179",
+        "verification": {
+          "status": "FAIL",
+          "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
+          "checkedAt": "2026-11-20T05:02:00.842Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "check settled: Build fetch concluded failure, Build git concluded cancelled, Build time concluded cancelled",
+            "public profile identity: garnet-labs/servers / run 35425508712 / profile 01a0b842-aa95-7080-b093-f8e53341abd0; recorded 64509d143c437b15c12788ab192a090d3f272b4d (refs/pull/5/merge); expected head 7c9ff0517f469e98b95933e289b41d0507527d5c"
+          ],
+          "receiptFingerprint": "50ba881301c16939f0dd32ad04c0ec11cacd2c7932a6ee56dc18c1b306756179"
+        }
+      },
+      {
+        "forkPr": 2,
+        "url": "https://github.com/garnet-labs/servers/pull/2",
+        "prState": "open",
+        "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+        "previous": "9d9f9b61e82aeb63fc903526af05847d34936f39",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "88cf346725962820f093d7ba100132dc5deab0d5b733dee3a8ee930f92a9f8cb",
+        "verification": {
+          "status": "FAIL",
+          "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
+          "checkedAt": "2026-11-20T05:02:00.842Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "public profile identity: garnet-labs/servers / run 35371539977 / profile 01a0b574-cb8c-7576-8bd1-e24f8e36c12a; recorded 251825b714e140fa951f51a782d7d71747c4b23e (refs/pull/2/merge); expected head 84eceb0b26b532664ac5dc90380d8bd8481905d0"
+          ],
+          "receiptFingerprint": "88cf346725962820f093d7ba100132dc5deab0d5b733dee3a8ee930f92a9f8cb"
+        }
+      }
+    ]
   }
 }

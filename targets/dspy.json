@@ -1490,8 +1490,17 @@
       "packageDir": null,
       "logicalId": "eca8f84c260cea3cf02648b6d83f3e1cc0a8ad506e5bbca08d8e3f4833377306",
       "attemptId": "ad27822e2b2a7478ecdb1f412003bc2b8beac087637491884ab6ae8b62aecb74",
-      "state": "undeterminable",
-      "openedAt": "2026-10-24T06:21:59.159Z"
+      "state": "recorded",
+      "openedAt": "2026-10-24T06:21:59.159Z",
+      "verification": {
+        "status": "PASS",
+        "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [],
+        "receiptFingerprint": "45e2c4c38e895d95b38c0a7b5e6307bcb756b881d51027b67f21ee3d08a6ac90"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
     },
     {
       "upstreamPr": 10705,
@@ -1514,15 +1523,254 @@
       "packageDir": null,
       "logicalId": "d7152b3566f80bf10ab87349a31cb10b790c44926f0f279b6156de27c7c0ce5e",
       "attemptId": "c2f1394b32f206dadaf8ae59b226f1b69288e1ad03ec5f27ea22760644f26e32",
-      "state": "undeterminable",
-      "openedAt": "2026-10-24T06:38:35.751Z"
+      "state": "recorded",
+      "openedAt": "2026-10-24T06:38:35.751Z",
+      "verification": {
+        "status": "FAIL",
+        "head": "cf5960d82264c5ee827528adef2164967ce99395",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized"
+        ],
+        "receiptFingerprint": "cf684cf29630306b5f9c6d268a9b1a01c0e166dbff13fa4d193572320b39e390"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 14,
+      "branch": "dependabot/uv/aiohttp-3.14.4",
+      "forkHeadSha": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "check settled: Run Tests (3.15) concluded cancelled, Run Tests (3.10) concluded cancelled, Run Tests (3.13) concluded cancelled, Run Tests (3.12) concluded cancelled, Run Tests (3.11) concluded cancelled, Run Tests (3.14) concluded failure",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "15f23e431fe65517f3ab6d89a8659e8738acf225b405030493fe2f517bce684d"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 13,
+      "branch": "dependabot/pip/docs/aiohttp-3.14.4",
+      "forkHeadSha": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "38c6fd20fa3685ab13a853c793b9f10abf9a0f365bd27b3529ef2220fb28d814"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 12,
+      "branch": "dependabot/pip/docs/tornado-6.6.1",
+      "forkHeadSha": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "373cc11e48d409428cbc829eb8fcec784cba683258efecba0e2d31b81e0a25b2"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 11,
+      "branch": "dependabot/pip/docs/soupsieve-4.0",
+      "forkHeadSha": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "11014680d7bb3679d257673bc09ef09dfd10dac4d7f4e8b503bcb943570fabc6"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 10,
+      "branch": "dependabot/pip/docs/pillow-13.0.0",
+      "forkHeadSha": "f131189122049169f175a9b44ec0f1e2b25399a4",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: no pair line on the comment",
+          "public permalink: no public profile link on the comment",
+          "public profile identity: no exact public run/profile selector on the record"
+        ],
+        "receiptFingerprint": "644bc404aea6a7a1b408c95690545c199ebd3cb3bfcc20eadd7ac1fa9293cc80"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 9,
+      "branch": "dependabot/uv/oauthlib-4.0.1",
+      "forkHeadSha": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [],
+        "receiptFingerprint": "9cc1b1e4825fbc2df8057711fd7acfaeb17488de1d03c95519c46e036c24e43d"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 8,
+      "branch": "dependabot/uv/authlib-1.9.1",
+      "forkHeadSha": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [],
+        "receiptFingerprint": "c8582c39b57c3a56db672adac8c49d6c8ad69fa49030b2d22519f9c3067ff4c3"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 6,
+      "branch": "dependabot/uv/joserfc-1.7.6",
+      "forkHeadSha": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [],
+        "receiptFingerprint": "5812a00f6f2ea75f1b8e78ef3a7a43cff075d4fae90250baf046549a5a77115d"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 5,
+      "branch": "dependabot/uv/mcp-1.30.0",
+      "forkHeadSha": "35c5227c1509f6324c4522289bd3020d02cac9f5",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "35c5227c1509f6324c4522289bd3020d02cac9f5",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [],
+        "receiptFingerprint": "44cdc7f85435817c7809066751462fc47c4c6ac1e8c737f8be68ff6d9903b01e"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 4,
+      "branch": "onboarding/reviewer-guidance",
+      "forkHeadSha": "2fc0049935672d48e5bc6384ec29043780bda08b",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "2fc0049935672d48e5bc6384ec29043780bda08b",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "ffd6a2344150548296631b887a37173547a1b1da7a6c8dfdf0324097db539e6a"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 1,
+      "branch": "onboarding/garnet-recording",
+      "forkHeadSha": "e093979d53527b63451464637acb7068f37338ce",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "e093979d53527b63451464637acb7068f37338ce",
+        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "reasons": [
+          "capture completeness: capture not declared; comparison undeterminable",
+          "comment finalized: record status null, not finalized",
+          "pair line: no pair line on the comment",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "b7b1a50e2307f0cf50f4fce6ef0fa06adcdafdd378902bcff784e4667dd8ed42"
+      },
+      "observedAt": "2026-11-20T04:53:08.830Z",
+      "source": "github-reconciliation"
     }
   ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "2c056aaf160d5424641b9fcc17630216ca23dd13",
+    "checkedAt": "2026-11-20T04:53:08.830Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -1535,7 +1783,7 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "setupPr": 1,
   "grounding": {
     "state": "pending",
@@ -1543,5 +1791,276 @@
     "defaultBranch": "main",
     "checkedSha": "395e928a4d0ca5074d34a85118f04820a477d44c",
     "pr": 15
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:53:08.830Z",
+    "defaultBranch": "main",
+    "defaultSha": "2c056aaf160d5424641b9fcc17630216ca23dd13",
+    "inspectedPrs": 15,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 14,
+        "url": "https://github.com/garnet-labs/dspy/pull/14",
+        "prState": "open",
+        "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "15f23e431fe65517f3ab6d89a8659e8738acf225b405030493fe2f517bce684d",
+        "verification": {
+          "status": "FAIL",
+          "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "check settled: Run Tests (3.15) concluded cancelled, Run Tests (3.10) concluded cancelled, Run Tests (3.13) concluded cancelled, Run Tests (3.12) concluded cancelled, Run Tests (3.11) concluded cancelled, Run Tests (3.14) concluded failure",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "15f23e431fe65517f3ab6d89a8659e8738acf225b405030493fe2f517bce684d"
+        }
+      },
+      {
+        "forkPr": 13,
+        "url": "https://github.com/garnet-labs/dspy/pull/13",
+        "prState": "open",
+        "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "38c6fd20fa3685ab13a853c793b9f10abf9a0f365bd27b3529ef2220fb28d814",
+        "verification": {
+          "status": "FAIL",
+          "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "38c6fd20fa3685ab13a853c793b9f10abf9a0f365bd27b3529ef2220fb28d814"
+        }
+      },
+      {
+        "forkPr": 12,
+        "url": "https://github.com/garnet-labs/dspy/pull/12",
+        "prState": "open",
+        "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "373cc11e48d409428cbc829eb8fcec784cba683258efecba0e2d31b81e0a25b2",
+        "verification": {
+          "status": "FAIL",
+          "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "373cc11e48d409428cbc829eb8fcec784cba683258efecba0e2d31b81e0a25b2"
+        }
+      },
+      {
+        "forkPr": 11,
+        "url": "https://github.com/garnet-labs/dspy/pull/11",
+        "prState": "open",
+        "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "11014680d7bb3679d257673bc09ef09dfd10dac4d7f4e8b503bcb943570fabc6",
+        "verification": {
+          "status": "FAIL",
+          "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "11014680d7bb3679d257673bc09ef09dfd10dac4d7f4e8b503bcb943570fabc6"
+        }
+      },
+      {
+        "forkPr": 10,
+        "url": "https://github.com/garnet-labs/dspy/pull/10",
+        "prState": "open",
+        "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "644bc404aea6a7a1b408c95690545c199ebd3cb3bfcc20eadd7ac1fa9293cc80",
+        "verification": {
+          "status": "FAIL",
+          "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: no pair line on the comment",
+            "public permalink: no public profile link on the comment",
+            "public profile identity: no exact public run/profile selector on the record"
+          ],
+          "receiptFingerprint": "644bc404aea6a7a1b408c95690545c199ebd3cb3bfcc20eadd7ac1fa9293cc80"
+        }
+      },
+      {
+        "forkPr": 9,
+        "url": "https://github.com/garnet-labs/dspy/pull/9",
+        "prState": "open",
+        "head": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
+        "previous": "395e928a4d0ca5074d34a85118f04820a477d44c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "9cc1b1e4825fbc2df8057711fd7acfaeb17488de1d03c95519c46e036c24e43d",
+        "verification": {
+          "status": "PASS",
+          "head": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [],
+          "receiptFingerprint": "9cc1b1e4825fbc2df8057711fd7acfaeb17488de1d03c95519c46e036c24e43d"
+        }
+      },
+      {
+        "forkPr": 8,
+        "url": "https://github.com/garnet-labs/dspy/pull/8",
+        "prState": "open",
+        "head": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
+        "previous": "395e928a4d0ca5074d34a85118f04820a477d44c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "c8582c39b57c3a56db672adac8c49d6c8ad69fa49030b2d22519f9c3067ff4c3",
+        "verification": {
+          "status": "PASS",
+          "head": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [],
+          "receiptFingerprint": "c8582c39b57c3a56db672adac8c49d6c8ad69fa49030b2d22519f9c3067ff4c3"
+        }
+      },
+      {
+        "forkPr": 6,
+        "url": "https://github.com/garnet-labs/dspy/pull/6",
+        "prState": "open",
+        "head": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
+        "previous": "395e928a4d0ca5074d34a85118f04820a477d44c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "5812a00f6f2ea75f1b8e78ef3a7a43cff075d4fae90250baf046549a5a77115d",
+        "verification": {
+          "status": "PASS",
+          "head": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [],
+          "receiptFingerprint": "5812a00f6f2ea75f1b8e78ef3a7a43cff075d4fae90250baf046549a5a77115d"
+        }
+      },
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/dspy/pull/5",
+        "prState": "open",
+        "head": "35c5227c1509f6324c4522289bd3020d02cac9f5",
+        "previous": "a35181044b541a3843815318d1acd7c66429d628",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "44cdc7f85435817c7809066751462fc47c4c6ac1e8c737f8be68ff6d9903b01e",
+        "verification": {
+          "status": "PASS",
+          "head": "35c5227c1509f6324c4522289bd3020d02cac9f5",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [],
+          "receiptFingerprint": "44cdc7f85435817c7809066751462fc47c4c6ac1e8c737f8be68ff6d9903b01e"
+        }
+      },
+      {
+        "forkPr": 4,
+        "url": "https://github.com/garnet-labs/dspy/pull/4",
+        "prState": "merged",
+        "head": "2fc0049935672d48e5bc6384ec29043780bda08b",
+        "previous": "a35181044b541a3843815318d1acd7c66429d628",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "ffd6a2344150548296631b887a37173547a1b1da7a6c8dfdf0324097db539e6a",
+        "verification": {
+          "status": "FAIL",
+          "head": "2fc0049935672d48e5bc6384ec29043780bda08b",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "ffd6a2344150548296631b887a37173547a1b1da7a6c8dfdf0324097db539e6a"
+        }
+      },
+      {
+        "forkPr": 3,
+        "url": "https://github.com/garnet-labs/dspy/pull/3",
+        "prState": "open",
+        "head": "cf5960d82264c5ee827528adef2164967ce99395",
+        "previous": "fd3c646370c12b1289f5419781116eb7cd1a5537",
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "cf684cf29630306b5f9c6d268a9b1a01c0e166dbff13fa4d193572320b39e390",
+        "verification": {
+          "status": "FAIL",
+          "head": "cf5960d82264c5ee827528adef2164967ce99395",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized"
+          ],
+          "receiptFingerprint": "cf684cf29630306b5f9c6d268a9b1a01c0e166dbff13fa4d193572320b39e390"
+        }
+      },
+      {
+        "forkPr": 2,
+        "url": "https://github.com/garnet-labs/dspy/pull/2",
+        "prState": "open",
+        "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
+        "previous": "a9a402e3210e0b93b10407c54f5bcf1e49123b9c",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "45e2c4c38e895d95b38c0a7b5e6307bcb756b881d51027b67f21ee3d08a6ac90",
+        "verification": {
+          "status": "PASS",
+          "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [],
+          "receiptFingerprint": "45e2c4c38e895d95b38c0a7b5e6307bcb756b881d51027b67f21ee3d08a6ac90"
+        }
+      },
+      {
+        "forkPr": 1,
+        "url": "https://github.com/garnet-labs/dspy/pull/1",
+        "prState": "merged",
+        "head": "e093979d53527b63451464637acb7068f37338ce",
+        "previous": null,
+        "scope": null,
+        "state": "recorded",
+        "receiptFingerprint": "b7b1a50e2307f0cf50f4fce6ef0fa06adcdafdd378902bcff784e4667dd8ed42",
+        "verification": {
+          "status": "FAIL",
+          "head": "e093979d53527b63451464637acb7068f37338ce",
+          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "reasons": [
+            "capture completeness: capture not declared; comparison undeterminable",
+            "comment finalized: record status null, not finalized",
+            "pair line: no pair line on the comment",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "b7b1a50e2307f0cf50f4fce6ef0fa06adcdafdd378902bcff784e4667dd8ed42"
+        }
+      }
+    ]
   }
 }

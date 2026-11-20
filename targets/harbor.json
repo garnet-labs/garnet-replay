@@ -203,12 +203,154 @@
       "observedAt": "2026-11-19T05:14:21.702Z"
     }
   ],
-  "replays": [],
+  "replays": [
+    {
+      "upstreamPr": null,
+      "forkPr": 7,
+      "branch": "dependabot/uv/adapters/kramabench/template/environment/nltk-3.10.4",
+      "forkHeadSha": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
+        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "no session residue: residue: \"harness\""
+        ],
+        "receiptFingerprint": "81f4c661b5d2fb23fc90126312c99a7ca367b0845ca47fa0d61ce868065ea851"
+      },
+      "observedAt": "2026-11-20T04:56:18.739Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 6,
+      "branch": "dependabot/uv/adapters/dacode/template/environment/nltk-3.10.4",
+      "forkHeadSha": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
+        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "no session residue: residue: \"harness\""
+        ],
+        "receiptFingerprint": "27fad5cd3f7e6ed02c6595f112bfbf492a6644b48158ebb807d4c4e641ae8545"
+      },
+      "observedAt": "2026-11-20T04:56:18.739Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 5,
+      "branch": "clean-run-records",
+      "forkHeadSha": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
+      "state": "undeterminable",
+      "verification": {
+        "status": "FAIL",
+        "head": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
+        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "reasons": [
+          "head-bound: head moved: record bf2a56a, current 50cdde3",
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "pair line: pair does not name the current PR commits",
+          "check settled: no check on the head commit belongs to run 44658476872, the run the record names",
+          "no session residue: residue: \"harness\"",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-5712-7901-81a3-9d6b5e2ef224; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-8f6c-732d-bea6-f02b7651589c; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-8036-738a-93ef-e0bcbc32b14d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-683f-7255-8dee-cf6be7a31e77; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-c69d-75b3-90e2-fe9d283db574; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-d294-7a2f-8dd3-d97ec7e203d3; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-49aa-72ac-b914-f229774e886f; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-e0af-79a1-ac3f-93fa4dd5981d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-09cf-7126-b9f1-c82701cc28fd; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-fbde-7255-9bd5-83aefc7bcc63; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-c56a-7e40-947b-3158dd1ffd8c; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-e0b8-7c13-9c17-e3a6ba7eb439; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-c10e-7e8b-88c2-15a46fe7943d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-a036-7646-b33d-81f648f561ac; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-3545-77bc-9c2f-6e1b1ea81703; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-56a8-7d0c-b14b-88bdb16487dc; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-3fb5-72d8-ac54-1658132a8a78; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-39ba-70e5-a2af-34644e2109e1; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-7695-7a59-b3ef-65591b0debb7; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-6655-7e93-8f04-60c29d3b8fb5; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5a91-7450-9e59-46aa3a57bfe5; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5383-7bdd-b032-343dd0031962; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-595a-7aab-8dcc-6ea0e1c87fa7; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-656b-75cc-addd-2ac42490ab55; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5ef2-74be-af04-f37d97c1a150; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-4ef2-779d-814c-3d23e2974516; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-6db1-724d-8b2a-57625e741a5b; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+          "public profile identity: garnet-labs/harbor / run 44658476856 / profile 01a1f6bb-3854-7fa2-a042-d9bbc0055f68; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second"
+        ],
+        "receiptFingerprint": "4343f15675a3e4a4391d97eec36879766ccb30d0c9575743965514e3326b7915"
+      },
+      "observedAt": "2026-11-20T04:56:18.739Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 4,
+      "branch": "network-policy-update",
+      "forkHeadSha": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
+        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "reasons": [],
+        "receiptFingerprint": "a985910eb80dffcbf731f61c4d0249081654e8633e5c58631f0626a62fb09aa9"
+      },
+      "observedAt": "2026-11-20T04:56:18.739Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 3,
+      "branch": "ci-network-policy",
+      "forkHeadSha": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
+        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "reasons": [
+          "capture completeness: record reports incomplete jobs; comparison undeterminable",
+          "comment finalized: record reports incomplete jobs",
+          "no session residue: residue: \"Devin\"",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "9041b3578e383eb1e7d31106dedd2d2d3db74be5cd6299f4c73b4d2c69ce5bd6"
+      },
+      "observedAt": "2026-11-20T04:56:18.739Z",
+      "source": "github-reconciliation"
+    }
+  ],
   "evidence": [],
   "cohorts": [],
   "consumption": [],
   "stage2": {
-    "state": "unstarted"
+    "state": "unstarted",
+    "defaultBranch": "main",
+    "checkedSha": "34c43106c00a211904f1cda1313223b9965046ae",
+    "checkedAt": "2026-11-20T04:56:18.739Z",
+    "files": [
+      "REVIEW.md"
+    ],
+    "missing": [
+      ".github/workflows/garnet-evidence-mirror.yml",
+      ".github/scripts/garnet-evidence-mirror.mjs",
+      ".github/scripts/garnet-rereview.mjs",
+      ".github/workflows/garnet-merge-safety.yml"
+    ],
+    "note": "1/5 stage 2 files on main; runtime integration and required-check policy not verified"
   },
   "ladder": {
     "4": {
@@ -221,12 +363,154 @@
       "state": "unstarted"
     }
   },
-  "stage": 0,
+  "stage": 1,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
     "defaultBranch": "main",
     "checkedSha": "e26966a026f872925979d8479b7ace236b68303f",
     "pr": 2
+  },
+  "reconciliation": {
+    "checkedAt": "2026-11-20T04:56:18.739Z",
+    "defaultBranch": "main",
+    "defaultSha": "34c43106c00a211904f1cda1313223b9965046ae",
+    "inspectedPrs": 7,
+    "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
+    "prs": [
+      {
+        "forkPr": 7,
+        "url": "https://github.com/garnet-labs/harbor/pull/7",
+        "prState": "open",
+        "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
+        "previous": "34c43106c00a211904f1cda1313223b9965046ae",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "81f4c661b5d2fb23fc90126312c99a7ca367b0845ca47fa0d61ce868065ea851",
+        "verification": {
+          "status": "FAIL",
+          "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
+          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "no session residue: residue: \"harness\""
+          ],
+          "receiptFingerprint": "81f4c661b5d2fb23fc90126312c99a7ca367b0845ca47fa0d61ce868065ea851"
+        }
+      },
+      {
+        "forkPr": 6,
+        "url": "https://github.com/garnet-labs/harbor/pull/6",
+        "prState": "open",
+        "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
+        "previous": "34c43106c00a211904f1cda1313223b9965046ae",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "27fad5cd3f7e6ed02c6595f112bfbf492a6644b48158ebb807d4c4e641ae8545",
+        "verification": {
+          "status": "FAIL",
+          "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
+          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "no session residue: residue: \"harness\""
+          ],
+          "receiptFingerprint": "27fad5cd3f7e6ed02c6595f112bfbf492a6644b48158ebb807d4c4e641ae8545"
+        }
+      },
+      {
+        "forkPr": 5,
+        "url": "https://github.com/garnet-labs/harbor/pull/5",
+        "prState": "open",
+        "head": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
+        "previous": "34c43106c00a211904f1cda1313223b9965046ae",
+        "scope": "pr-base",
+        "state": "undeterminable",
+        "receiptFingerprint": "4343f15675a3e4a4391d97eec36879766ccb30d0c9575743965514e3326b7915",
+        "verification": {
+          "status": "FAIL",
+          "head": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
+          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "reasons": [
+            "head-bound: head moved: record bf2a56a, current 50cdde3",
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "pair line: pair does not name the current PR commits",
+            "check settled: no check on the head commit belongs to run 44658476872, the run the record names",
+            "no session residue: residue: \"harness\"",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-5712-7901-81a3-9d6b5e2ef224; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-8f6c-732d-bea6-f02b7651589c; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-8036-738a-93ef-e0bcbc32b14d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-683f-7255-8dee-cf6be7a31e77; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-c69d-75b3-90e2-fe9d283db574; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-d294-7a2f-8dd3-d97ec7e203d3; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-49aa-72ac-b914-f229774e886f; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-e0af-79a1-ac3f-93fa4dd5981d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-09cf-7126-b9f1-c82701cc28fd; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-fbde-7255-9bd5-83aefc7bcc63; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-c56a-7e40-947b-3158dd1ffd8c; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b6-e0b8-7c13-9c17-e3a6ba7eb439; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-c10e-7e8b-88c2-15a46fe7943d; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-a036-7646-b33d-81f648f561ac; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-3545-77bc-9c2f-6e1b1ea81703; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b8-56a8-7d0c-b14b-88bdb16487dc; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-3fb5-72d8-ac54-1658132a8a78; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-39ba-70e5-a2af-34644e2109e1; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-7695-7a59-b3ef-65591b0debb7; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-6655-7e93-8f04-60c29d3b8fb5; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5a91-7450-9e59-46aa3a57bfe5; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5383-7bdd-b032-343dd0031962; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-595a-7aab-8dcc-6ea0e1c87fa7; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-656b-75cc-addd-2ac42490ab55; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-5ef2-74be-af04-f37d97c1a150; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-4ef2-779d-814c-3d23e2974516; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476872 / profile 01a1f6b7-6db1-724d-8b2a-57625e741a5b; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second",
+            "public profile identity: garnet-labs/harbor / run 44658476856 / profile 01a1f6bb-3854-7fa2-a042-d9bbc0055f68; recorded 47bf4654742058da928eeeaa130013bed87af0c5 (refs/pull/5/merge); recorded head_sha bf2a56a81623f947fd285b2712dc0c8e42899edd; expected head 50cdde36301ebab98034dad1ac3fb889dae7d51a; merge commit must have exactly two parents with expected head second"
+          ],
+          "receiptFingerprint": "4343f15675a3e4a4391d97eec36879766ccb30d0c9575743965514e3326b7915"
+        }
+      },
+      {
+        "forkPr": 4,
+        "url": "https://github.com/garnet-labs/harbor/pull/4",
+        "prState": "open",
+        "head": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
+        "previous": "db8d3db37c2fce53c56067a2bb5bfdcb7edca4dc",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "a985910eb80dffcbf731f61c4d0249081654e8633e5c58631f0626a62fb09aa9",
+        "verification": {
+          "status": "PASS",
+          "head": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
+          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "reasons": [],
+          "receiptFingerprint": "a985910eb80dffcbf731f61c4d0249081654e8633e5c58631f0626a62fb09aa9"
+        }
+      },
+      {
+        "forkPr": 3,
+        "url": "https://github.com/garnet-labs/harbor/pull/3",
+        "prState": "merged",
+        "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
+        "previous": "cd5672274d964b8d7c7c25ae1a25d5c5c846541c",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "9041b3578e383eb1e7d31106dedd2d2d3db74be5cd6299f4c73b4d2c69ce5bd6",
+        "verification": {
+          "status": "FAIL",
+          "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
+          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "reasons": [
+            "capture completeness: record reports incomplete jobs; comparison undeterminable",
+            "comment finalized: record reports incomplete jobs",
+            "no session residue: residue: \"Devin\"",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "9041b3578e383eb1e7d31106dedd2d2d3db74be5cd6299f4c73b4d2c69ce5bd6"
+        }
+      }
+    ]
   }
 }
