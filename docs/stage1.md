@@ -62,11 +62,17 @@ The plan, always printed before anything is written:
    the distance is known to be harmless.
    For alternate-base replays, `ensure-base` carries recorder entry workflows
    with push triggers including the alternate branch, then `wait-base-record`
-   requires successful push runs for expected entry recorders at that exact tip
-   before publishing the change. Existing successful runs proceed immediately.
-   Pending/no runs or unreadable Actions runs stop as `RECORD_PENDING` after at
-   most 45 minutes (30-second polling; API errors stop immediately); failed runs
-   stop with an error. The pure plan excludes callees and triggers whose branch
+   waits for observed selected push runs at that exact tip to finish before
+   publishing the change. Skipped runs and workflows whose jobs all skipped are
+   excluded. Selected workflows with no push run five minutes after the first
+   selected run appeared at that tip count as absent, not pending; the wait
+   detail and log name them. At least one Garnet recording job must run and
+   succeed, with an uploaded public profile matching the exact base SHA,
+   repository, run and profile ID. Any failed run or job is a hard stop.
+   Existing runs meeting these requirements proceed immediately. Otherwise the
+   gate waits at most 45 minutes (30-second polling); timeout or unreadable
+   Actions runs stop as `RECORD_PENDING`, and missing or unreadable public
+   profile evidence stays pending. The pure plan excludes callees and triggers whose branch
    or path filters do not provably accept the carry commit. Only rewritten
    workflow paths are assumed changed; an empty expected set refuses planning.
    Push triggers without branch filters stay as they are; unsupported shapes
