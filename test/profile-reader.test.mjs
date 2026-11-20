@@ -271,6 +271,29 @@ test("CursorPages with further pages withhold additions and explain the missing 
   assert.equal(captureAllowsComparison({ ...receipt, pageInfo: { hasNextPage: false, endCursor: "last-item" } }), true)
 })
 
+test("CursorPages missing previous pages cannot determine additions", () => {
+  const receipt = JSON.parse(readFileSync(new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url), "utf8"))
+  for (const pagination of [
+    { previous_cursor: "earlier" }, { previousCursor: "earlier" }, { prev_cursor: "earlier" },
+    { has_previous: true }, { hasPrevious: true }, { has_prev: true },
+    { pageInfo: { hasPreviousPage: true } }, { pageInfo: { previousCursor: "earlier" } },
+    { page_info: { has_previous_page: true } },
+  ]) {
+    const incomplete = structuredClone(receipt)
+    Object.assign(incomplete.profiles, pagination)
+    assert.equal(captureAllowsComparison(incomplete), false)
+    for (const [head, base] of [[incomplete, receipt], [receipt, incomplete], [incomplete, null]]) {
+      const report = compareProfileTrees(head, base)
+      assert.equal(report.added, null)
+      assert.equal(report.rows.length, 4)
+      assert.match(renderProfileTrees(report), /Profile pages are missing; additions cannot be determined/)
+    }
+  }
+  for (const previous_cursor of [null, ""]) {
+    assert.equal(captureAllowsComparison({ ...receipt, previous_cursor, has_previous: false, pageInfo: { hasPreviousPage: false, startCursor: "first-item" } }), true)
+  }
+})
+
 test("finalized PR profile fetching reuses exact selectors and binds both comparison sides", async () => {
   const calls = []
   const before = profile(PREVIOUS, TREES.profiles[0].associations.slice(0, 3))
