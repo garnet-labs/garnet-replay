@@ -244,6 +244,27 @@ test("two-commit, injected, instrumented and already-recording source bases use 
   }
 })
 
+test("alternate-base first commits refuse recorder edits before staging, but allow other or empty diffs", async () => {
+  const plan = planReplay({ ...input, firstCommitSha: "d".repeat(40), baseRecords: [workflow], baseWorkflowBodies: { [workflow]: body } })
+  const step = plan.steps.find((step) => step.id === "first-commit-paths")
+  assert.deepEqual(step.refusePaths, [workflow])
+  for (const paths of [[], ["app.js"], [workflow]]) {
+    const writes = []
+    const execution = executePlan({ ...plan, steps: [step] }, { log: () => {}, io: { mkdirp: () => {} }, exec: (_command, args) => {
+      if (args.includes("diff")) return paths.join("\0")
+      writes.push(args)
+      return ""
+    } })
+    if (paths.includes(workflow)) {
+      await assert.rejects(execution, /--first-commit edits alternate-base recording workflows/)
+      assert.deepEqual(writes, [])
+    } else {
+      const result = await execution
+      assert.deepEqual(result.firstCommitPaths, paths)
+    }
+  }
+})
+
 test("ensure-base upgrades an older carry commit by a non-force fast-forward and preserves source files", async (t) => {
   const work = mkdtempSync(join(tmpdir(), "base-baseline-"))
   t.after(() => rmSync(work, { recursive: true, force: true }))
