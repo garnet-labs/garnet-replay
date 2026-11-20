@@ -229,7 +229,7 @@ test("execution stops on moved plans and verifies the recorded head before savin
       events.push("live")
       return { plan, row: { forkPr: 4, forkHeadSha: "f".repeat(40) } }
     },
-    wait: async ({ sha }) => { assert.equal(sha, "f".repeat(40)); events.push("wait"); return { state: "recorded" } },
+    wait: async ({ sha, settleChecks }) => { assert.equal(sha, "f".repeat(40)); assert.equal(settleChecks, true); events.push("wait"); return { state: "recorded" } },
     verify: async () => { events.push("verify"); return { status: "PASS", head: "f".repeat(40), reasons: [] } },
     read: async () => { events.push("read"); return { state: "record", record: { head: "f".repeat(40), artifact: fixture } } },
     save: async () => { events.push("save"); saved = true },
