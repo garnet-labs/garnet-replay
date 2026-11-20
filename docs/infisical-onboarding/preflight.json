@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-20T03:22:20.602Z",
+  "checkedAt": "2026-11-20T03:25:16.342Z",
   "method": "git diff --binary <PR API base SHA> <PR head SHA> -- <all PR API paths>; git apply [--reverse] --check - against frozen main",
   "main": "f248a380c9032f888296930879d1075d80f12bbf",
   "rows": [
@@ -67,35 +67,31 @@
       "diffBytes": 1612
     },
     {
-      "number": 9694,
-      "title": "chore(ci): add Cipher visual check for the v4 app",
+      "number": 9022,
+      "title": "chore(deps): update backend dependencies and npm's bundled packages",
       "state": "closed",
       "merged": true,
-      "baseRef": "design/v4-controls-polish",
-      "base": "1659bfa7d5e99edcc70fdb8fcfcbeeeea4fea27b",
-      "head": "247fedbfc31bf59a60cc1769ba44b076420f7a5f",
+      "baseRef": "main",
+      "base": "614f069338b081afac879fdb6a54c3d73e8cde06",
+      "head": "7ca635b7181bd3cbb4593804ecfb2f423a70791e",
       "files": [
-        ".github/cipher-visual/README.md",
-        ".github/cipher-visual/capture.mjs",
-        ".github/cipher-visual/compare.mjs",
-        ".github/cipher-visual/package-lock.json",
-        ".github/cipher-visual/package.json",
-        ".github/cipher-visual/pages.json",
-        ".github/cipher-visual/scope.mjs",
-        ".github/workflows/cipher-visual.yml"
+        "Dockerfile.fips.standalone-infisical",
+        "Dockerfile.standalone-infisical",
+        "backend/package-lock.json",
+        "backend/package.json"
       ],
-      "changedFiles": 8,
+      "changedFiles": 4,
       "main": "f248a380c9032f888296930879d1075d80f12bbf",
       "apply": {
-        "ok": true
-      },
-      "reverse": {
         "ok": false,
-        "error": "error: .github/workflows/cipher-visual.yml: No such file or directory\nerror: .github/cipher-visual/scope.mjs: No such file or directory\nerror: .github/cipher-visual/pages.json: No such file or directory\nerror: .github/cipher-visual/package.json: No such file or directory\nerror: .github/cipher-visual/package-lock.json: No such file or directory\nerror: .github/cipher-visual/compare.mjs: No such file or directory\nerror: .github/cipher-visual/capture.mjs: No such file or directory\nerror: .github/cipher-visual/README.md: No such file or directory\n"
+        "error": "Frozen-main conflict already observed in prior merged-candidate screen; no longer an admission requirement."
       },
-      "recorderTriggered": false,
-      "workloadTouched": [],
-      "diffBytes": 45000
+      "workloadTouched": [
+        "backend/package-lock.json",
+        "backend/package.json"
+      ],
+      "recorderTriggered": true,
+      "selectionReason": "Merged backend dependency update; four files, fewer than other screened broad dependency updates; no default wording refusal; historical own-base requirement approved."
     },
     {
       "number": 9230,
@@ -1811,7 +1807,7 @@
       "diffBytes": 139691
     }
   ],
-  "selectionStatus": "Nine selected candidates; merged slot 9694 unresolved: no screened replacement passed forward patch check on frozen main.",
+  "selectionStatus": "Ten selected own-base candidates, five merged and five open; offline plans only, no hosted run or runtime verification.",
   "replacements": [
     {
       "original": 9293,
@@ -1830,9 +1826,25 @@
       "replacement": 9598,
       "group": "open",
       "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    },
+    {
+      "original": 9694,
+      "replacement": 9022,
+      "group": "merged",
+      "reason": "Merged backend dependency update; four files, fewer than other screened broad dependency updates; no default wording refusal; historical own-base requirement approved."
     }
   ],
-  "unfilled": {
+  "snykSearch": {
+    "query": "repo:Infisical/infisical is:pr is:open in:title Snyk",
+    "total": 2,
+    "numbers": [
+      8984,
+      9158
+    ],
+    "additionalAvailable": false,
+    "note": "No additional title-labelled Snyk PR found; author:snyk-bot search returned zero. New open candidates add dependencies with manifest and lockfile changes but are not dependency-only PRs."
+  },
+  "resolvedConstraint": {
     "original": 9694,
     "group": "merged",
     "reason": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying.",
@@ -1848,16 +1860,7 @@
       7957,
       6671
     ],
-    "method": "Unauthenticated public GitHub PR .diff piped to git apply --check against frozen main. Each exited 1; candidate 9157 detailed in rows."
-  },
-  "snykSearch": {
-    "query": "repo:Infisical/infisical is:pr is:open in:title Snyk",
-    "total": 2,
-    "numbers": [
-      8984,
-      9158
-    ],
-    "additionalAvailable": false,
-    "note": "No additional title-labelled Snyk PR found; author:snyk-bot search returned zero. New open candidates add dependencies with manifest and lockfile changes but are not dependency-only PRs."
+    "method": "Unauthenticated public GitHub PR .diff piped to git apply --check against frozen main. Each exited 1; candidate 9157 detailed in rows.",
+    "resolution": "Historical own-base approved; selected 9022. Frozen-main forward apply not required."
   }
 }

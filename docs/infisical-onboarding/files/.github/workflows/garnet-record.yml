@@ -2,7 +2,7 @@ name: Dependency recording
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'baseline/**']
     paths:
       - backend/package.json
       - backend/package-lock.json

@@ -14,6 +14,9 @@ the surrounding research report into a fork PR body.
    and reconcile with its safe merge plan before publication. Merge this
    onboarding PR on the fork before any replay. The workflow file change
    triggers the first recording, including a default-branch baseline on merge.
+   Push recording also covers `baseline/**`, so historical fork-only base
+   branches schedule their own dependency-install capture. Wait for that
+   capture before accepting the head's compared pair.
 2. One separate onboarding commit, routine title `ci: add review checks`:
    `tools/`, `.stamphog/`, `.github/merge-gate/`, `.github/scripts/`, and the
    other three workflows. Merge on fork `main`. Do not replace upstream
@@ -28,8 +31,19 @@ browser, Cipher visual-workload, or build command is measured.
 
 The recorder triggers only when either package manifest/lockfile or the
 recorder workflow changes. It does not record every code-only PR. PR 9694
-does not reach these filters and needs a replacement candidate; its visual
-workload is outside the declared scope in any case.
+does not reach these filters and is replaced by merged dependency PR 9022;
+its visual workload is outside the declared scope in any case.
+
+All ten selected replays use `base_branch=baseline/<number>`, carrying the
+approved recorder and reviewer guidance onto the exact historical source base.
+The resulting fork baseline tip differs from the raw upstream base SHA.
+For App comments, `replay verify` does **not** require `summary.previous` to
+equal that tip: it checks the current head and a recorded compared SHA, not
+historical-baseline selection. Before calling a pair valid for this cohort,
+independently require the finalized head record's compared SHA to equal the
+actual fork baseline tip, and inspect the successful baseline run's exact-SHA
+profile and capture. The planner pushes baseline and head without waiting for
+baseline finalization; scheduling alone does not establish comparison order.
 
 ## Gate modes
 

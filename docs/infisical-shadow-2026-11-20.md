@@ -20,18 +20,27 @@ manifests/lockfiles. The finder scanned 50 candidates; it did not record them.
 Exact staged files, provenance, credential requirements, and installation
 groups are in [the onboarding bundle](infisical-onboarding/README.md).
 
-## Revised selection — nine candidates, one unresolved slot
+## Final selection — ten historical own-base candidates
 
-The requested ten qualifying selections are **not complete**: no replacement
-for 9694 was found that both belongs to the merged group and forward-applies
-to frozen main. The other three substitutions below passed the unchanged
-pure planner, without custom messages, exceptions, or guard changes.
+The historical own-base requirement is now approved for every replay;
+forward-applying to frozen main is no longer required. Merged dependency PR
+9022 fills the 9694 slot: four changed files including backend manifest and
+lockfile, smaller than the other broad merged dependency updates screened.
+All ten pass the offline own-base planner without custom messages, exceptions,
+or guard changes. This is not a hosted prepare receipt or runtime verification.
+
+Final follow-up validation: ten-plan/group/trigger/wording assertions passed;
+YAML checks accepted main and nested baseline branches, rejected unrelated
+branches, and retained path filters/OIDC. The focused App-pair probe accepted
+a mismatched previous SHA and rejected missing pairs/stale heads, establishing
+the verifier limitation below. Existing ladder, pure-replay and replay-preflight
+suites reported **179 passed, 0 failed**. `git diff --check` was silent.
 
 | Slot / upstream PR | Group | One-line offline status |
 |---|---|---|
 | 9436 | merged | Retained; planner passes with `base_branch=baseline/9436`; frozen-main conflict avoided by explicit own-base replay. |
 | 9730 | merged | Retained; planner passes with `base_branch=baseline/9730`; frozen-main conflict avoided by explicit own-base replay. |
-| 9694 replacement | merged | **Unfilled**: original misses recorder filters; all ten screened merged dependency patches conflict with frozen main. |
+| 9022 ← 9694 | merged | Selected; four files including backend manifest/lockfile; planner passes with `base_branch=baseline/9022`; frozen-main conflict no longer blocks selection. |
 | 9230 | merged | Retained; planner passes with `base_branch=baseline/9230`; frozen-main conflict avoided, but install does not exercise Go/BDD behavior. |
 | 9157 ← 9293 | merged | Selected; dependency manifests/lockfiles in both packages, seven files; own-base planner passes despite frozen-main conflict. |
 | 9158 | open | Retained Snyk change; frozen-main apply succeeds; own-base planner passes. |
@@ -93,15 +102,40 @@ approved grounding, and healthy finalized records, and that upstream historical
 bases have no existing eligible recorder. Those live admission facts have not
 been checked. No install success or runtime verification is inferred.
 
-There is an additional recording boundary: the staged recorder's push filter
-is `branches: [main]`. Creating `baseline/<number>` does not itself schedule
-a recording on that branch. The own-base plans solve source-base selection,
-not baseline evidence availability. An exact historical baseline capture must
-be arranged and verified before expecting a compared execution-profile pair;
-no App fallback behavior was checked or assumed here. The reported planner
-passes are therefore not claims that hosted runtime verification would pass.
+The staged recorder now has push branches `[main, 'baseline/**']`, retaining
+the package-file and recorder-file path filters. The newly carried recorder
+file on a fresh fork-only baseline reaches those filters. Baseline pushes
+therefore schedule their own dependency-install captures. Existing branches
+with unexpected trees remain refused rather than overwritten. No run has
+actually been dispatched or captured here.
 
-### Remaining merged-slot constraint
+### Verification contract: head binding is not baseline binding
+
+`replay verify` does **not** enforce that an App record compares against the
+fork baseline tip. In `evaluateExhibit` (`lib/verify.mjs:145-150`), base
+supersession is checked only for a synthetic `garnet:replay` marker with
+`scope=pr-base-to-head`. For ordinary App comments,
+`lib/verify.mjs:188-203` accepts a valid `summary.previous` SHA and requires
+`summary.commit`/the commit marker to match the current PR head; it does not
+compare `summary.previous` to `pr.base.sha`. `verifyExhibit` authenticates
+the linked current-head profiles, not a separately fetched baseline profile.
+The existing ladder test explicitly passes an App pair whose previous SHA
+differs from the PR base; a focused offline probe reproduces that limitation.
+No verifier behavior was changed in this documentation/onboarding step.
+
+For this cohort require, in addition to `replay verify`: (1) capture the actual
+fork baseline tip SHA after recorder/guidance carry, (2) wait for its successful,
+finalized exact-SHA push profile, (3) require the finalized head record's
+compared SHA to equal that tip, and (4) retain both run/profile identities and
+capture status. The expected compared commit is the **fork baseline tip**,
+not the raw upstream base SHA, because onboarding carry creates a new commit.
+The planner does not pause between baseline push and PR publication; the new
+trigger alone does not prove baseline finalization precedes head comparison.
+App baseline selection/fallback and race handling have not been exercised.
+If the actual compared SHA differs, do not accept the intended pair merely
+because `replay verify` passes. Report the mismatch instead.
+
+### Resolved merged-slot constraint (screening history)
 
 Screened merged dependency candidates **9157, 9022, 8914, 8922, 8790, 9091,
 7913, 7898, 7957 and 6671** all returned exit 1 from a forward
@@ -111,19 +145,17 @@ SHA-256 of their downloaded diff. Original rows retain the local git-diff
 method. The screened list is not an exhaustive proof that no suitable merged
 PR exists. No zero-byte/invalid-input result was accepted as a patch check.
 
-**Decision needed:** permit a historical own-base merged dependency candidate
-for the remaining slot, or provide/continue searching for a merged candidate
-that forward-applies to frozen main. Until then the cohort remains nine
-selected candidates, not a completed final ten.
+The historical own-base decision resolves this constraint: 9022 is selected
+without claiming it forward-applies to frozen main.
 
-`plans.json` now contains all nine explicit own-base plans and hosted input
-values, with 9694 retained only as an unfilled slot. `preflight.json` preserves
-excluded original rows and the three replacement rows. No PAT was used and
+`plans.json` now contains all ten explicit own-base plans and hosted input
+values. `preflight.json` preserves excluded original rows and all four
+replacement rows. No PAT was used and
 no workflow was dispatched. The earlier harness suite remains applicable
 because no harness source changed; new offline plan/selection checks are
 reported in the handoff.
 
-Follow-up checks: nine own-base plans and three same-group replacements passed
+Prior follow-up checks: nine own-base plans and three same-group replacements passed
 offline assertions; both open replacements passed frozen-main patch checks;
 the unresolved slot remains explicitly excluded. The relevant existing suites
 (`pure-replay`, `replay-preflight`, `replay-interface`) reported **102 passed,

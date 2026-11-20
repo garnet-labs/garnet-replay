@@ -1,5 +1,5 @@
 {
-  "assumptions": "Offline candidate plans only; no fork admission or hosted prepare/start was run. All nine selected candidates explicitly use baseline/<number> through hosted base_branch, with the PR's own base plus carried recorder and approved grounding. Slot 9694 remains unresolved. Frozen main is only the onboarding-source placeholder, not the historical replay base. Real fork workflow/guidance blobs, recorder health and execution remain unverified.",
+  "assumptions": "All ten use explicit baseline/<number> branches from historical PR base plus carried recorder and approved reviewer grounding. Frozen main is only the onboarding-source placeholder. No fork admission, workflow dispatch, baseline capture or runtime verification has occurred.",
   "plans": [
     {
       "number": 9436,
@@ -131,9 +131,68 @@
       }
     },
     {
-      "number": 9694,
-      "status": "unfilled",
-      "error": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying."
+      "number": 9022,
+      "hypothetical": true,
+      "branch": "chore/update-6ym",
+      "baseBranch": "baseline/9022",
+      "title": "chore(deps): update backend dependencies and npm's bundled packages",
+      "message": "chore(deps): update backend dependencies and npm's bundled packages\n\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend/package-lock.json\n- backend/package.json",
+      "body": "4 files:\n\n- Dockerfile.fips.standalone-infisical\n- Dockerfile.standalone-infisical\n- backend/package-lock.json\n- backend/package.json\n",
+      "singleCommit": true,
+      "scope": "pr-base-to-head",
+      "changes": 4,
+      "renames": [],
+      "mode": "pure-replay",
+      "baseSetup": {
+        "id": "ensure-base",
+        "kind": "ensure-base",
+        "target": "garnet-labs/infisical",
+        "baseBranch": "baseline/9022",
+        "baseSha": "614f069338b081afac879fdb6a54c3d73e8cde06",
+        "carryFrom": "f248a380c9032f888296930879d1075d80f12bbf",
+        "carry": [
+          ".github/workflows/garnet-record.yml"
+        ],
+        "message": "ci: carry the fork's recording workflow onto the replay base\n\n- .github/workflows/garnet-record.yml",
+        "note": "set baseline/9022 on the fork to the change's base carrying the fork's recording workflow (skipped when it already does)"
+      },
+      "checkout": {
+        "id": "branch",
+        "kind": "write-local",
+        "note": "create chore/update-6ym from baseline/9022",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "-B",
+          "chore/update-6ym",
+          "origin/baseline/9022"
+        ]
+      },
+      "change": {
+        "id": "change-head",
+        "kind": "write-local",
+        "note": "the change itself",
+        "cmd": "git",
+        "args": [
+          "-C",
+          "/home/ubuntu/repos/garnet-replay/out/infisical/work",
+          "checkout",
+          "7ca635b7181bd3cbb4593804ecfb2f423a70791e",
+          "--",
+          "Dockerfile.fips.standalone-infisical",
+          "Dockerfile.standalone-infisical",
+          "backend/package-lock.json",
+          "backend/package.json"
+        ]
+      },
+      "hostedInputs": {
+        "slug": "infisical",
+        "number": "9022",
+        "base_branch": "baseline/9022",
+        "two_commit": false
+      }
     },
     {
       "number": 9230,
@@ -802,7 +861,7 @@
       "error": "upstream leak in outbound text (upstream repository reference 'Infisical/infisical'): \"27 files:\\n\\n- .github/actions/generate-openapi-spec/action.yml\\n- .github/workflows/check-api-for-breaking-changes.yml\\n- .\""
     }
   ],
-  "selectionStatus": "Nine selected candidates; merged slot 9694 unresolved: no screened replacement passed forward patch check on frozen main.",
+  "selectionStatus": "Ten selected own-base candidates, five merged and five open; offline plans only, no hosted run or runtime verification.",
   "guardRefusals": [
     {
       "original": 9293,
@@ -814,31 +873,24 @@
       "original": 8357,
       "replacement": 9599,
       "group": "open",
-      "reason": "Default body lists backend/src/db/schemas/certificate-cleanup-configs.ts; vocabulary matching is substring-based, so cleanup matches banned 'clean'. Hosted worker has no message override input."
+      "reason": "Default body lists backend/src/db/schemas/certificate-cleanup-configs.ts; substring vocabulary matching treats cleanup as banned 'clean'. Hosted worker has no message override input."
     },
     {
       "original": 8740,
       "replacement": 9598,
       "group": "open",
       "reason": "Default body lists tests/harness/infisical/infisical.go, matching forbidden owner/repo reference; hosted worker has no message override input."
+    },
+    {
+      "original": 9694,
+      "replacement": 9022,
+      "group": "merged",
+      "reason": "Merged backend dependency update; four files, fewer than other screened broad dependency updates; no default wording refusal; historical own-base requirement approved."
     }
   ],
-  "unfilled": {
-    "original": 9694,
-    "group": "merged",
-    "reason": "Original is outside recorder filters; ten screened merged dependency candidates conflict with frozen main. No candidate is falsely admitted as applying.",
-    "screened": [
-      9157,
-      9022,
-      8914,
-      8922,
-      8790,
-      9091,
-      7913,
-      7898,
-      7957,
-      6671
-    ],
-    "method": "Unauthenticated public GitHub PR .diff piped to git apply --check against frozen main. Each exited 1; candidate 9157 detailed in rows."
+  "baselineEvidence": {
+    "trigger": "push to main or baseline/**; package-file/recorder-file path filters retained",
+    "expectedPrevious": "Exact created fork baseline branch tip (including recorder and guidance), not raw upstream base SHA",
+    "verificationLimitation": "For App comments, replay verify validates head and presence of a syntactically valid compared SHA but does not require summary.previous to equal PR base SHA or fetch/authenticate a separate baseline profile. Operator must compare finalized record previous with actual baseline tip and inspect baseline capture."
   }
 }
