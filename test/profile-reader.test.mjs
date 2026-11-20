@@ -58,6 +58,30 @@ test("raw peers, summarized records and public envelopes retain all destinations
   assert.equal(readProfileTrees({ associations: [{ remote_names: [], remote_address: "192.0.2.1", ancestry: ["init", "curl"] }] })[0].destination, "192.0.2.1")
 })
 
+test("actions retain workflow identity even when job names and actions match", () => {
+  const first = profile()
+  first.run.workflow_path = ".github/workflows/install.yml"
+  const other = structuredClone(first)
+  other.run.workflow_path = ".github/workflows/check.yml"
+  assert.equal(readProfileTrees({ profiles: [first, other] }).length, 16)
+  const rerun = structuredClone(first)
+  rerun.run.run_id = "124"
+  assert.equal(readProfileTrees({ profiles: [first, rerun] }).length, 8)
+  assert.deepEqual(compareProfileTrees(first, rerun).added, [])
+  delete first.run.workflow_path
+  delete rerun.run.workflow_path
+  assert.equal(readProfileTrees({ profiles: [first, rerun] }).length, 16)
+  for (const metadata of ["github", "scenarios"]) {
+    const a = metadata === "github" ? { github: { workflow: "install", job: "job" } } : { scenarios: { github: { workflow: "install", job: "job" } } }
+    const b = structuredClone(a)
+    if (metadata === "github") b.github.workflow = "check"
+    else b.scenarios.github.workflow = "check"
+    a.egress = [{ name: "example.org", ancestry: ["init", "curl"] }]
+    b.egress = a.egress
+    assert.equal(readProfileTrees({ profiles: [a, b] }).length, 2)
+  }
+})
+
 test("empty associations are readable; absent, malformed and empty collections fail closed", () => {
   assert.deepEqual(readProfileTrees({ associations: [] }), [])
   assert.deepEqual(compareProfileTrees({ associations: [] }, { associations: [] }).added, [])
