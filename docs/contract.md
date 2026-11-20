@@ -75,7 +75,7 @@ request; cards and `verify` fail closed on them.
 |---|---|
 | `observed-runtime-behavior` | what the record shows on the head: workload and runner-background connection counts |
 | `comparison-result` | the verdict sentence between base and head at the stated scope |
-| `required-check-state` | the state of `garnet/evidence` or the recording check on this head |
+| `required-check-state` | the state of the recording check on this head; Actions no longer publishes `garnet/evidence` |
 | `reviewer-consumption-evidence` | a reviewer or agent cited this record, with the URL |
 | `unsupported-claim` | what the record does not carry: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened; plus the undeterminable reasons |
 

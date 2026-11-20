@@ -1,5 +1,10 @@
 # Reviewer consumption: generalized mechanism, roadmap, maintained artifacts
 
+Mechanism updated 2026-11-20: Actions-owned `garnet/evidence` was removed in
+`046d42b`. Re-review reads the finalized exact-head App record without check
+polling; merge enforcement is the separate `garnet/merge-safety` decision.
+Inventory and reviewer observations below retain their September dates.
+
 Research observed 2026-09-22 UTC across seven review agents (Devin Review, Greptile,
 Cursor Bugbot, GitHub Copilot code review, CodeRabbit, Qodo, Codex cloud review).
 Per-tool reports with source URLs live in the research sessions linked at the end.
@@ -39,8 +44,8 @@ deterministic paths in Stage C exist for that reason. The grounding line is a
 best-effort observation, never an enforcement point.
 
 Second timing problem: every tool reviews on `opened`/`synchronize`, which is before
-the recorder finishes. Unless a review is re-triggered after `garnet/evidence`
-binds, the reviewer reads an empty or stale mirror and correctly says "no evidence".
+the recorder finishes. Unless a review is re-triggered after the exact-head App
+record is finalized, the reviewer reads an empty or stale mirror and correctly says "no evidence".
 That is what the 2026-09-22 pnpm receipts show: Devin's first pass says
 `No runtime evidence for this head`, its second pass (after CI) cites the record.
 
@@ -51,14 +56,14 @@ Six layers; Garnet owns 1, 2, 5 and 6, the user's repository carries 3 and 4.
 | layer | owner | mechanism | fail-closed? |
 |---|---|---|---|
 | 1 evidence | Garnet action + recorder | head-bound record comment, `<!-- garnet:commit <sha> -->` marker | yes |
-| 2 delivery | privileged mirror workflow | copy the record into the PR description between `<!-- garnet:evidence:begin/end -->`; `garnet/evidence` check on the head | yes (required check) |
+| 2 delivery | privileged mirror workflow | copy the finalized head-bound record into the PR description between `<!-- garnet:evidence:begin/end -->` | exact-head record required; no evidence check published |
 | 3 instruction | repository | one canonical `REVIEW.md` + thin per-tool adapters that point at it | no (prose) |
-| 4 timing | mirror workflow | after `garnet/evidence` succeeds, request the review again (`/devin review`, `@coderabbitai review`, `@greptileai`, Bugbot API, `@codex review`, `/agentic_review`, Copilot re-request) deduplicated per head | n/a |
+| 4 timing | mirror workflow | after the exact-head App record is finalized, request the review again (`/devin review`, `@coderabbitai review`, `@greptileai`, Bugbot API, `@codex review`, `/agentic_review`, Copilot re-request) deduplicated per head | n/a |
 | 5 measurement | `replay consume` / `harvest` | tiered receipts (utterance, citation, observation, mention); `consumed` only for head-bound utterance/citation | strict |
-| 6 enforcement | branch protection | `garnet/evidence` required; reviewer output never gates | yes |
+| 6 enforcement | merge-safety workflow; branch protection configured separately | `garnet/merge-safety` runs `replay decide`; reviewer output never gates | merge passes; hold and undeterminable fail |
 
-The reviewer's grounding line is the **user-facing** output; `garnet/evidence` is the
-**merge** output. Keep them separate in copy and in telemetry.
+The reviewer's grounding line is the **user-facing** output; `garnet/merge-safety`
+is the separate **merge decision** output. Neither replaces `replay verify`.
 
 ## 4. Tool matrix (what to maintain per tool)
 
@@ -75,13 +80,14 @@ The reviewer's grounding line is the **user-facing** output; `garnet/evidence` i
 ## 5. Roadmap
 
 Stage A — make delivery correct (this quarter, replay stage2 template)
-1. Mirror workflow re-requests the configured reviewers after `garnet/evidence`
-   succeeds, once per head. This alone converts "no runtime evidence" first passes
-   into a second pass that can cite the record.
+1. Mirror workflow re-requests the configured reviewers after the exact-head App
+   record is finalized, once per head. A second pass can cite the record;
+   a request alone does not establish consumption or value.
 2. Ship the adapter set from section 6 through `replay stage2` so every fork gets
    `REVIEW.md` + `.coderabbit.yaml` + `.greptile/config.json` + `.cursor/BUGBOT.md`
    + `.github/copilot-instructions.md` in one commit.
-3. Keep `garnet/evidence` as the only required check.
+3. Configure merge-safety enforcement separately; do not require the absent
+   Actions `garnet/evidence` check.
 
 Stage B — measure the funnel (replay ledger)
 4. Add funnel columns to `consumption[]`: delivered (mirror present at head),
@@ -96,7 +102,7 @@ Stage C — deterministic path where a tool allows it
 6. Devin: `.agents/skills` skill that emits the exact line; Copilot: `.github/skills`
    skill using GitHub MCP to read the body and the check; Codex: `codex-action` job
    `needs:` the Garnet job with `--output-schema`.
-7. CodeRabbit custom pre-merge check that narrates `garnet/evidence` (informational,
+7. CodeRabbit custom pre-merge check that narrates the head-bound record (informational,
    never the gate).
 
 Stage D — public proof
@@ -113,8 +119,8 @@ Canonical, one copy each, in the runtime-review reference and templated by
 2. Mirror block format — `<!-- garnet:evidence:begin -->` … `<!-- garnet:commit <sha> -->`
    … `<!-- garnet:evidence:end -->`; the widest shared channel (section 2), not a
    proven input for every reviewer.
-3. `garnet/evidence` check semantics — the enforcement contract and its failure text
-   (Qodo and CodeRabbit surface failing-check text to the reviewer).
+3. `garnet/merge-safety` decision semantics — merge, hold, or undeterminable.
+   The removed Actions evidence check is not an enforcement surface.
 4. Re-trigger workflow step — post-evidence review request per tool, deduplicated per
    head SHA.
 5. Per-tool adapters, each ≤ 20 lines that point at `REVIEW.md`:
@@ -123,7 +129,7 @@ Canonical, one copy each, in the runtime-review reference and templated by
    `AGENTS.md` `## Code Review Rules` section.
 6. Agent skills — `.agents/skills/garnet-runtime-review/SKILL.md` (Devin) and
    `.github/skills/garnet-runtime-review/SKILL.md` (Copilot), same body.
-7. Verification fixture — the 10-minute recipe: open a PR, wait for `garnet/evidence`,
+7. Verification fixture — the recipe: open a PR, wait for its finalized exact-head record,
    trigger the reviewer, check the first line and `commit_id` via the API, then a
    negative test (empty commit, expect `undeterminable`).
 8. Consumption telemetry schema — the `consumption[]` row and receipt tiers, so

@@ -1,5 +1,24 @@
 # Worked examples
 
+## Current share-gate receipts (2026-11-20)
+
+Read-only `replay verify` output, abbreviated to the result and pair lines:
+
+```text
+PASS https://github.com/garnet-labs/E2B/pull/93 (head 00f2302)
+  [ok] pair line: pair 80594f5 (previous) → 00f2302 (this commit) from the record summary
+PASS https://github.com/garnet-labs/litellm/pull/153 (head e45b9a2)
+  [ok] pair line: pair 483103f (previous) → e45b9a2 (this commit) from the record summary
+FAIL https://github.com/garnet-labs/nodejs-goof/pull/4 (head 97edaf7)
+  [ok] pair line: pair b097a03 (previous) → 97edaf7 (this commit) from the record summary
+  [no] no session residue: residue: "Devin"
+```
+
+All three receipts are best-effort, scope `pr-base`; version transition is not
+derivable from the record. PASS means shareable for that scope, not complete
+capture or established attribution. Reverify before use. Operator commands and
+limits: [current state](state-2026-11-20.md).
+
 ## Outbound attribution reader (2026-11-20)
 
 Read a recorded profile without writing a ledger, dispatching a run, or changing

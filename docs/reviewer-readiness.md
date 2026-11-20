@@ -1,5 +1,10 @@
 # Reviewer readiness and golden path
 
+Current mechanism (2026-11-20): Actions no longer publishes `garnet/evidence`
+(`046d42b`). Re-review reads a finalized exact-head App record directly;
+`garnet/merge-safety` remains separate. References to the former check in the
+September proof rounds below are historical. See [current state](state-2026-11-20.md).
+
 Maintained ranking of the review tools Garnet evidence is delivered to, by how
 ready each one is to consume a head-bound Runtime Review record today. Every
 row cites what was observed, when, and where; a row without a proof column
@@ -12,7 +17,7 @@ vendor claims:
 | # | Question | Evidence that answers it |
 |---|---|---|
 | R1 | Channel: does the tool read the PR-description mirror? | vendor docs (documented / inferred / undocumented) plus an observed receipt whose detail exists only in the mirror |
-| R2 | Trigger: can it be re-requested once per head after `garnet/evidence` succeeds? | a documented comment command or API path that a workflow token can call |
+| R2 | Trigger: can it be re-requested once per head after the App record is finalized? | a documented comment command or API path that a workflow token can call |
 | R3 | Adapter: does a repository file steer its output? | the adapter listed in `docs/stage2.md` and a review that follows it |
 | R4 | Observed tier: what did it actually emit on garnet-labs forks? | `replay consume` / `replay harvest` receipts (utterance, citation, observation, mention) |
 | R5 | Value: did the evidence change or add anything a diff-only review would miss? | `replay uat` decision-impact and value-hypothesis rows with notes |
@@ -37,12 +42,12 @@ seven reviewer research reports summarised in `docs/consumption-roadmap.md`.
 
 1. Recorder on the fork posts the head-bound record (`live/templates/garnet-record.yml`
    or the fork's own recorder that `replay stage2 --dry-run` lists).
-2. `replay stage2` lands the mirror, the `garnet/evidence` gate, one `REVIEW.md`
+2. `replay stage2` lands the mirror, the `garnet/merge-safety` gate, one `REVIEW.md`
    and the adapters for the selected reviewers (default `devin,coderabbit,greptile`).
 3. The reviewer's first review says "no runtime evidence for this head"; that is
    correct, not a defect.
-4. After the finalized exact-head record and a successful `garnet/evidence`
-   check, the re-review job requests each configured reviewer once for that head.
+4. After the exact-head App record is finalized, the re-review job requests each
+   configured reviewer once for that head, without check polling.
 5. `replay consume <slug> --pr N` records the funnel; `replay uat` records the
    cold read, how the reviewer consumed the record, and whether it changed the
    decision.
@@ -76,8 +81,9 @@ generated files, each observed on the replay PRs and fixed in the harness:
   pagination.
 - A `workflow_run` job's own check lands on the default-branch commit, not the
   pull request head, so `garnet/evidence` never appeared on the replay and the
-  re-review step waited for a check that could not arrive. The gate now
-  publishes a `garnet/evidence` check run on the head with `checks: write`.
+  re-review step waited for a check that could not arrive. The gate then
+  published a `garnet/evidence` check run on the head with `checks: write` at
+  that time; this Actions-owned check has since been removed.
 - The App appends jobs to one comment as recorders finish; a mirror taken after
   the first recorder (codex: 3 of 4 jobs; dub: 1 of 2) carried the right head
   and an older record. The mirror now re-runs on every App comment edit and
