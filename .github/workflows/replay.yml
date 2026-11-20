@@ -15,6 +15,7 @@ on:
         type: string
         required: true
       request:
+        description: Correlation ID; for legacy starts only, a numeric prepare run ID when plan is empty
         type: string
         required: true
       plan:
@@ -60,8 +61,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PLAN_RUN: ${{ inputs.plan }}
+          REQUEST_ID: ${{ inputs.request }}
         run: |
-          [[ "$PLAN_RUN" =~ ^[0-9]+$ ]] || { echo "plan must be a run ID"; exit 1; }
+          PLAN_RUN=$(node --input-type=module -e 'import { preparedRunId } from "./lib/hosted-runner.mjs"; console.log(preparedRunId(process.env.PLAN_RUN, process.env.REQUEST_ID))')
           gh run download "$PLAN_RUN" --repo "$GITHUB_REPOSITORY" --name replay-job --dir "$RUNNER_TEMP/prepared"
       - name: Authenticate git with the fork token
         env:

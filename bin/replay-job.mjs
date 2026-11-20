@@ -64,7 +64,7 @@ try {
   write()
 } catch (error) {
   const reason = typeof error.reason === "string" ? error.reason : "REPLAY_FAILED"
-  Object.assign(job, { state: "blocked", reason, message: error.message })
+  Object.assign(job, { state: reason === "RECORD_PENDING" ? "pending" : "blocked", reason, message: error.message })
   write()
   const refusal = `[${reason}] ${error.message}`
   console.error(refusal)
