@@ -11,6 +11,12 @@ const comment = { body: `<!-- garnet-runtime-review -->\n<!-- garnet-control-pla
 const running = { name: "Garnet install proof", status: "in_progress", conclusion: null }
 const completed = { ...running, status: "completed", conclusion: "success" }
 
+test("hosted timeout fits baseline, first-record, head-record and settlement waits plus transfer time", () => {
+  const workflow = readFileSync(new URL("../.github/workflows/replay.yml", import.meta.url), "utf8")
+  const minutes = Number(/timeout-minutes:\s*(\d+)/.exec(workflow)?.[1])
+  assert.ok(minutes >= 4 * 45 + 60)
+})
+
 test("hosted plan IDs prefer plan, retain numeric request compatibility, and reject invalid inputs", () => {
   assert.equal(preparedRunId("44673507757", "correlation"), "44673507757")
   assert.equal(preparedRunId("44673507757", "123"), "44673507757")
