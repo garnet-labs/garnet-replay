@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSyn
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import test from "node:test"
-import { addPushBranch, baselinePushExpected, baseRecordState, canUpgradeBase } from "../lib/base-baseline.mjs"
+import { addPushBranch, baselinePushExpected, baseProfileMatches, baseRecordState, canUpgradeBase } from "../lib/base-baseline.mjs"
 import { waitForBaseRecord } from "../lib/wait.mjs"
 import { executePlan, planPureReplay, planReplay, renderPlan } from "../lib/replay-pr.mjs"
 import { executeReplayJob } from "../lib/replay-runner-worker.mjs"
@@ -18,7 +18,14 @@ const input = { slug: "example", upstream: "upstream/example", fork: "garnet-lab
   forkDefaultSha: "c".repeat(40), upstreamPr: 1, baseSha: sha, headSha: "b".repeat(40), baseBranch: branch,
   changes: [{ path: "app.js", status: "modified", previous: null }], recordWorkflows: [workflow], workflowBodies: { [workflow]: body } }
 const run = { id: 10, event: "push", head_branch: branch, head_sha: sha, path: workflow, status: "completed", conclusion: "success",
-  jobs: [{ name: "Install", status: "completed", conclusion: "success", steps: [{ name: "Run garnet-org/action@pin", status: "completed", conclusion: "success" }] }] }
+  jobs: [{ id: 42, name: "Install", status: "completed", conclusion: "success", steps: [{ name: "Run garnet-org/action@pin", status: "completed", conclusion: "success" }] }] }
+const profileId = "01234567-1234-1234-1234-0123456789ab"
+const profileLog = `Garnet Execution Profile report: https://app.garnet.ai/public/runs/10?profile=${profileId}`
+const profile = { run: { repository: input.fork, run_id: "10", profile_id: profileId, commit_sha: sha } }
+
+async function profileFetch() {
+  return new Response(JSON.stringify({ profile }))
+}
 
 test("push rewriting preserves events, appends flow/block branches after exclusions, and is idempotent", () => {
   for (const original of [body, body.replace("['master'] # keep", "\n      - master\n      - '!deps/**'"), body.replace("['master']", "['master', '!deps/**']"), body.replaceAll("\n", "\r\n")]) {
@@ -134,8 +141,8 @@ test("baseline waiting applies absence grace from the first selected run, includ
     let sleeps = 0
     const details = []
     const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow, "missing.yml"], timeoutMs: 400000, pollMs: 30000,
-      now: () => time, sleep: async (ms) => { time += ms; sleeps += 1 }, log: (line) => details.push(line),
-      exec: (_command, args) => JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: run.jobs }] : [{ workflow_runs: [{ ...run, ...(historical ? { created_at: new Date(0).toISOString() } : {}) }] }]) })
+      now: () => time, sleep: async (ms) => { time += ms; sleeps += 1 }, log: (line) => details.push(line), fetchImpl: profileFetch,
+      exec: (_command, args) => args.at(-1).endsWith("/logs") ? profileLog : JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: run.jobs }] : [{ workflow_runs: [{ ...run, ...(historical ? { created_at: new Date(0).toISOString() } : {}) }] }]) })
     assert.equal(result.state, "recorded")
     assert.equal(sleeps, historical ? 0 : 10)
     assert.match(details.at(-1), /missing.yml: absent after 5 min/)
@@ -148,9 +155,10 @@ test("baseline waiting succeeds, skips sleeping for existing success, stops fail
     let time = 0
     let calls = 0
     let sleeps = 0
-    const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 60, pollMs: 30, now: () => time,
+    const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 60, pollMs: 30, now: () => time, fetchImpl: profileFetch,
       sleep: async (ms) => { time += ms; sleeps += 1 }, exec: (command, args) => {
         assert.equal(command, "gh")
+        if (args.at(-1).endsWith("/logs")) return profileLog
         if (args.at(-1).endsWith("/jobs?per_page=100")) {
           if (extra.jobError instanceof Error) throw extra.jobError
           return JSON.stringify([{ jobs: extra.jobs === undefined ? run.jobs : extra.jobs }])
@@ -178,6 +186,57 @@ test("baseline waiting succeeds, skips sleeping for existing success, stops fail
   assert.equal((await wait([ready], { jobs: [] })).result.state, "failed")
   assert.equal((await wait([ready], { jobs: null })).result.state, "pending")
   assert.match((await wait([ready], { jobError: new Error("HTTP 403 jobs") })).result.detail, /HTTP 403 jobs/)
+})
+
+test("uploaded baseline profile identity rejects other repositories, runs, refs, profiles and commits", () => {
+  const matches = (value) => baseProfileMatches({ profile: value, repository: input.fork, runId: 10, profileId, branch, sha })
+  assert.equal(matches(profile), true)
+  assert.equal(matches({ run: { ...profile.run, ref: `refs/heads/${branch}` } }), true)
+  for (const run of [null, {}, { ...profile.run, repository: "other/repo" }, { ...profile.run, run_id: "11" },
+    { ...profile.run, ref: "refs/pull/1/merge" }, { ...profile.run, profile_id: "other" },
+    { ...profile.run, commit_sha: "b".repeat(40) }, { ...profile.run, head_sha: "b".repeat(40) }]) {
+    assert.equal(matches({ run }), false)
+  }
+  assert.equal(matches(null), false)
+})
+
+test("green jobs without uploaded exact-tip profiles stay pending, including auth skips and read errors", async () => {
+  for (const mode of ["ok", "no link", "auth skip", "log error", "API error", "wrong head", "wrong run"]) {
+    const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 0,
+      now: () => 0, fetchImpl: async () => {
+        if (mode === "API error") return new Response("unavailable", { status: 503 })
+        return new Response(JSON.stringify({ profile: mode === "wrong head" ? { run: { ...profile.run, commit_sha: "b".repeat(40) } } : profile }))
+      }, exec: (_command, args) => {
+        if (args.at(-1).includes("/logs")) {
+          if (mode === "log error") throw new Error("unreadable logs")
+          if (mode === "no link") return "Job succeeded without a profile"
+          if (mode === "auth skip") return `${profileLog}\nGarnet skipped this Runtime Review because no authentication mechanism was available`
+          return mode === "wrong run" ? profileLog.replace("/10?", "/11?") : profileLog
+        }
+        return JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: run.jobs }] : [{ workflow_runs: [run] }])
+      } })
+    assert.equal(result.state, mode === "ok" ? "recorded" : "pending", mode)
+    if (mode === "ok") assert.match(result.detail, new RegExp(`uploaded profile ${profileId} in run 10`))
+  }
+})
+
+test("baseline proof tries other successful jobs and caches logs while waiting for public upload visibility", async () => {
+  let time = 0
+  let reads = 0
+  let profiles = 0
+  const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 60, pollMs: 30,
+    now: () => time, sleep: async (ms) => { time += ms }, fetchImpl: async () => {
+      profiles += 1
+      return profiles === 1 ? new Response("not yet visible", { status: 404 }) : profileFetch()
+    }, exec: (_command, args) => {
+      if (args.at(-1).endsWith("/42/logs")) throw new Error("one job's logs unavailable")
+      if (args.at(-1).endsWith("/43/logs")) { reads += 1; return profileLog }
+      return JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: [run.jobs[0], { ...run.jobs[0], id: 43 }] }] : [{ workflow_runs: [run] }])
+    } })
+  assert.equal(result.state, "recorded")
+  assert.equal(result.polls, 2)
+  assert.equal(reads, 1)
+  assert.equal(profiles, 2)
 })
 
 test("baseline waiting defaults to 45 minutes and 30 seconds with injected clock/sleep", async () => {
@@ -210,9 +269,10 @@ test("executor stops pending or failed baseline waits before creating or publish
   const steps = [plan.steps.find((step) => step.id === "ensure-base"), plan.steps.find((step) => step.id === "wait-base-record"), { id: "should-not-publish", kind: "write-remote", target: input.fork, cmd: "git", args: ["push"] }]
   for (const [runs, expected] of [[[], /not ready/], [[{ ...run, conclusion: "failure" }], /concluded failure/], [[run], null]]) {
     const calls = []
-    const execution = executePlan({ ...plan, steps }, { io: { mkdirp: () => {}, writeFile: () => {} }, log: () => {}, wait: { timeoutMs: 0, enabled: false },
+    const execution = executePlan({ ...plan, steps }, { io: { mkdirp: () => {}, writeFile: () => {} }, log: () => {}, wait: { timeoutMs: 0, enabled: false, fetchImpl: profileFetch },
       exec: (command, args) => {
         calls.push([command, args])
+        if (command === "gh" && args.at(-1).endsWith("/logs")) return profileLog
         if (command === "gh") return JSON.stringify(args.at(-1).endsWith("/jobs?per_page=100") ? [{ jobs: run.jobs }] : [{ workflow_runs: runs }])
         if (args.includes("rev-parse")) return args.at(-1).endsWith("^{tree}") ? "tree" : sha
         if (args.includes("write-tree")) return "tree"
