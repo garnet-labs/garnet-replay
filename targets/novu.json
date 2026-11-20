@@ -1,0 +1,1316 @@
+{
+  "slug": "novu",
+  "upstream": "novuhq/novu",
+  "fork": "garnet-labs/novu",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13363,
+      "title": "ci(root): skip PR check jobs a change does not need fixes NV-9494",
+      "author": "ChmaraX",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T15:10:56Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".github/workflows/on-pr.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13376,
+      "title": "chore(root): Release 2026-11-19 13:53",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T13:53:33Z",
+      "kind": "code",
+      "transition": null,
+      "files": 100,
+      "paths": [
+        "apps/api/src/app/agents/conversation-runtime/runtime/bridge-executor.service.spec.ts",
+        "apps/api/src/app/agents/conversation-runtime/runtime/bridge-executor.service.ts",
+        "apps/api/src/app/environments-v1/bridge-secret-keys-cache.ts",
+        "apps/api/src/app/environments-v1/novu-bridge-client.ts",
+        "apps/api/src/app/environments-v1/usecases/delete-api-key/delete-api-key.usecase.spec.ts",
+        "apps/api/src/app/environments-v1/usecases/delete-api-key/delete-api-key.usecase.ts",
+        "apps/api/src/app/environments-v1/usecases/regenerate-api-keys/regenerate-api-keys.usecase.spec.ts",
+        "apps/api/src/app/environments-v1/usecases/regenerate-api-keys/regenerate-api-keys.usecase.ts",
+        "apps/api/src/app/human/human.module.ts",
+        "apps/api/src/app/shared/services/novu-tokens.service.spec.ts",
+        "apps/api/src/app/shared/services/novu-tokens.service.ts",
+        "apps/api/src/app/subscribers-v2/dtos/create-subscriber-token-response.dto.ts",
+        "apps/api/src/app/subscribers-v2/dtos/create-subscriber-token.dto.ts",
+        "apps/api/src/app/subscribers-v2/e2e/create-subscriber-token.e2e.ts",
+        "apps/api/src/app/subscribers-v2/subscribers.controller.ts",
+        "apps/api/src/app/subscribers-v2/subscribers.module.ts",
+        "apps/api/src/app/subscribers-v2/usecases/create-subscriber-token/create-subscriber-token.command.ts",
+        "apps/api/src/app/subscribers-v2/usecases/create-subscriber-token/create-subscriber-token.usecase.ts",
+        "apps/api/src/app/workflows-v1/usecases/change-template-active-status/change-template-active-status.usecase.ts",
+        "apps/api/src/app/workflows-v2/usecases/patch-workflow/patch-workflow.usecase.ts",
+        "apps/api/src/app/workflows-v2/usecases/test-http-endpoint/test-http-endpoint.usecase.ts",
+        "apps/api/swagger-spec.json",
+        "apps/dashboard/src/components/copilot-web-chat/copilot-launcher.tsx",
+        "apps/dashboard/src/components/copilot-web-chat/copilot-popover.tsx",
+        "apps/dashboard/src/components/copilot-web-chat/copilot-web-chat-utils.ts",
+        "apps/dashboard/src/components/workflow-editor/configure-workflow-form.tsx",
+        "apps/dashboard/src/components/workflow-editor/steps/http-request/use-copy-prompt.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-limit-upgrade-dialog.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-provider.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-tabs.tsx",
+        "apps/dashboard/src/components/workflow-row.tsx",
+        "apps/dashboard/src/hooks/use-create-workflow.ts",
+        "apps/human-dashboard/next.config.ts",
+        "apps/human-dashboard/public/images/use-cases/agent-chatgpt.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-claude.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-cursor.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-grok.png",
+        "apps/human-dashboard/public/images/use-cases/approval-check.svg",
+        "apps/human-dashboard/public/images/use-cases/article.svg",
+        "apps/human-dashboard/public/images/use-cases/bell.svg",
+        "apps/human-dashboard/public/images/use-cases/contacts.svg",
+        "apps/human-dashboard/public/images/use-cases/conversation.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-check.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-dither.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-dot.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-peak.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-pulse.svg",
+        "apps/human-dashboard/public/images/use-cases/invite.svg",
+        "apps/human-dashboard/public/images/use-cases/mcp-arrow.svg",
+        "apps/human-dashboard/public/images/use-cases/mcp.svg",
+        "apps/human-dashboard/public/images/use-cases/replies.svg",
+        "apps/human-dashboard/public/images/use-cases/setup-rays.png",
+        "apps/human-dashboard/public/images/use-cases/shield.svg",
+        "apps/human-dashboard/public/images/use-cases/stepper-dots.svg",
+        "apps/human-dashboard/public/images/use-cases/support.svg",
+        "apps/human-dashboard/public/images/use-cases/terminal.svg",
+        "apps/human-dashboard/src/app/use-cases/page.tsx",
+        "apps/human-dashboard/src/components/pages/channels/faq.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/agent-logo-stack.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/hero.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/listing-filters.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/listing.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/setup.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/teams.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/use-cases.module.css",
+        "apps/human-dashboard/src/components/sapien/closing.tsx",
+        "apps/human-dashboard/src/components/sapien/copy-button.tsx",
+        "apps/human-dashboard/src/components/sapien/faq.tsx",
+        "apps/human-dashboard/src/components/sapien/site-footer.tsx",
+        "apps/human-dashboard/src/data/use-cases.ts",
+        "apps/human-dashboard/src/lib/markdown-not-found.ts",
+        "apps/human-dashboard/src/lib/public-sitemap.ts",
+        "apps/human-dashboard/src/lib/seo.ts",
+        "apps/human-dashboard/tests/seo/site.spec.ts",
+        "apps/human-dashboard/tests/use-cases/filters.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/execute-http-request-step.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/execute-http-request-step.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.ts",
+        "docs/framework/errors.mdx",
+        "docs/platform/developer/api-keys.mdx",
+        "docs/platform/workflow/add-and-configure-steps/configure-action-steps/http-step.mdx",
+        "libs/application-generic/src/factories/push/handlers/apns.handler.ts",
+        "libs/application-generic/src/services/in-memory-lru-cache/in-memory-lru-cache.service.spec.ts",
+        "libs/application-generic/src/services/in-memory-lru-cache/in-memory-lru-cache.service.ts",
+        "libs/application-generic/src/services/in-memory-lru-cache/in-memory-lru-cache.store.ts",
+        "libs/application-generic/src/services/resource-validator.service.spec.ts",
+        "libs/application-generic/src/services/resource-validator.service.ts",
+        "libs/application-generic/src/usecases/execute-bridge-request/execute-framework-request.usecase.spec.ts",
+        "libs/application-generic/src/usecases/execute-bridge-request/execute-framework-request.usecase.ts",
+        "libs/application-generic/src/usecases/get-decrypted-secret-key/get-decrypted-secret-key.usecase.spec.ts",
+        "libs/application-generic/src/usecases/get-decrypted-secret-key/get-decrypted-secret-key.usecase.ts",
+        "libs/application-generic/src/usecases/preview/preview.usecase.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.spec.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.ts",
+        "libs/application-generic/src/utils/bridge-signing-keys.spec.ts",
+        "libs/application-generic/src/utils/bridge-signing-keys.ts",
+        "libs/application-generic/src/utils/hmac.spec.ts",
+        "libs/application-generic/src/utils/hmac.ts",
+        "libs/application-generic/src/utils/index.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13373,
+      "title": "refactor(worker,ws,application-generic): single typed registry for backend environment variables fixes NV-9505",
+      "author": "djabarovgeorge",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T11:10:11Z",
+      "kind": "code",
+      "transition": null,
+      "files": 33,
+      "paths": [
+        "AGENTS.md",
+        "apps/api/src/bootstrap.ts",
+        "apps/inbound-mail/src/main.ts",
+        "apps/inbound-mail/src/server/attachment-uploader.ts",
+        "apps/inbound-mail/src/server/inbound-mail.service.ts",
+        "apps/inbound-mail/src/server/index.ts",
+        "apps/inbound-mail/src/server/logger.ts",
+        "apps/inbound-mail/src/server/mailUtilities.ts",
+        "apps/worker/src/app.module.ts",
+        "apps/worker/src/app/shared/shared.module.ts",
+        "apps/worker/src/app/telemetry/usecases/machineInfoService.usecase.ts",
+        "apps/worker/src/app/telemetry/usecases/userInfoService.usecase.ts",
+        "apps/worker/src/app/telemetry/utils/sendDataToNovuTrace.utils.ts",
+        "apps/worker/src/app/workflow/services/active-jobs-metric.service.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message.base.ts",
+        "apps/worker/src/app/workflow/usecases/subscriber-job-bound/subscriber-job-bound.usecase.ts",
+        "apps/worker/src/app/workflow/workers/inbound-parse.worker.service.ts",
+        "apps/worker/src/app/workflow/workflow.module.ts",
+        "apps/worker/src/bootstrap.ts",
+        "apps/worker/src/config/worker-init.config.ts",
+        "apps/worker/src/config/worker-topics.spec.ts",
+        "apps/worker/src/config/worker-topics.ts",
+        "apps/ws/src/app.module.ts",
+        "apps/ws/src/bootstrap.ts",
+        "apps/ws/src/shared/shared.module.ts",
+        "apps/ws/src/socket/ws.gateway.ts",
+        "biome-plugins/no-process-env.grit",
+        "biome.json",
+        "libs/application-generic/src/config/env.schema.ts",
+        "libs/application-generic/src/config/env.spec.ts",
+        "libs/application-generic/src/config/env.ts",
+        "libs/application-generic/src/config/index.ts",
+        "libs/application-generic/src/services/in-memory-provider/utils.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13362,
+      "title": "feat(api-service,dal,human-dashboard,@agentinbox/cli,docs): Hermes and OpenClaw plugins, contacts' runs that follow the folder's settings, and full access fixes NV-9152",
+      "author": "LetItRock",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T13:54:25Z",
+      "kind": "code",
+      "transition": null,
+      "files": 82,
+      "paths": [
+        "agent-inbox-docs/connect.mdx",
+        "agent-inbox-docs/dashboard.mdx",
+        "agent-inbox-docs/listen.mdx",
+        "agent-inbox-docs/reference/cli.mdx",
+        "apps/api/src/app/human/dtos/human-host.dto.ts",
+        "apps/api/src/app/human/dtos/human-listen.dto.ts",
+        "apps/api/src/app/human/dtos/list-contacts.dto.ts",
+        "apps/api/src/app/human/e2e/human-contacts.e2e.ts",
+        "apps/api/src/app/human/e2e/human-hosts.e2e.ts",
+        "apps/api/src/app/human/e2e/human-listen.e2e.ts",
+        "apps/api/src/app/human/human-hosts.controller.ts",
+        "apps/api/src/app/human/human-interactions.controller.ts",
+        "apps/api/src/app/human/human.module.ts",
+        "apps/api/src/app/human/services/human-host-status.service.spec.ts",
+        "apps/api/src/app/human/services/human-host-status.service.ts",
+        "apps/api/src/app/human/services/human-listen-access.service.spec.ts",
+        "apps/api/src/app/human/services/human-listen-access.service.ts",
+        "apps/api/src/app/human/services/human-listen-messages.service.ts",
+        "apps/api/src/app/human/usecases/connect-host/connect-host.command.ts",
+        "apps/api/src/app/human/usecases/connect-host/connect-host.usecase.ts",
+        "apps/api/src/app/human/usecases/get-contact/get-contact.usecase.ts",
+        "apps/api/src/app/human/usecases/list-contacts/list-contacts.usecase.ts",
+        "apps/api/src/app/human/usecases/set-contact-listen-to/set-contact-listen-to.command.ts",
+        "apps/api/src/app/human/usecases/set-contact-listen-to/set-contact-listen-to.usecase.ts",
+        "apps/api/src/app/human/usecases/update-contact/update-contact.command.ts",
+        "apps/api/src/app/human/usecases/update-contact/update-contact.usecase.ts",
+        "apps/human-dashboard/src/app/(account)/(dashboard)/contacts/actions.ts",
+        "apps/human-dashboard/src/app/(account)/(dashboard)/contacts/contact-card-drawer.tsx",
+        "apps/human-dashboard/src/app/(account)/(dashboard)/contacts/contacts-table.tsx",
+        "apps/human-dashboard/src/app/(account)/(dashboard)/contacts/use-saved-switch.ts",
+        "apps/human-dashboard/src/components/connect/connect-agent-drawer.tsx",
+        "apps/human-dashboard/src/components/connect/host-setup-box.tsx",
+        "apps/human-dashboard/src/components/connect/host-steps.tsx",
+        "apps/human-dashboard/src/components/say-hi/say-hi-words.ts",
+        "apps/human-dashboard/src/lib/host-markdown.ts",
+        "apps/human-dashboard/src/lib/host-status.ts",
+        "apps/human-dashboard/src/lib/host-ways.spec.ts",
+        "apps/human-dashboard/src/lib/host-ways.ts",
+        "apps/human-dashboard/src/lib/hosts.spec.ts",
+        "apps/human-dashboard/src/lib/hosts.ts",
+        "apps/human-dashboard/src/lib/human-agent-api.ts",
+        "apps/human-dashboard/src/lib/human-contacts-api.ts",
+        "apps/human-dashboard/src/lib/human-onboarding.ts",
+        "apps/human-dashboard/src/lib/onboarding.ts",
+        "libs/dal/src/repositories/agent/agent.entity.ts",
+        "libs/dal/src/repositories/human-contact/human-contact.entity.ts",
+        "libs/dal/src/repositories/human-contact/human-contact.repository.ts",
+        "libs/dal/src/repositories/human-contact/human-contact.schema.ts",
+        "packages/agentinbox/src/api/listen.ts",
+        "packages/agentinbox/src/commands/contact-check.ts",
+        "packages/agentinbox/src/commands/conversation-tools.ts",
+        "packages/agentinbox/src/commands/listen.spec.ts",
+        "packages/agentinbox/src/commands/listen.ts",
+        "packages/agentinbox/src/index.ts",
+        "packages/agentinbox/src/listen/claude-code.spec.ts",
+        "packages/agentinbox/src/listen/claude-code.ts",
+        "packages/agentinbox/src/listen/claude-folder.spec.ts",
+        "packages/agentinbox/src/listen/claude-folder.ts",
+        "packages/agentinbox/src/listen/codex-folder.spec.ts",
+        "packages/agentinbox/src/listen/codex-folder.ts",
+        "packages/agentinbox/src/listen/codex.spec.ts",
+        "packages/agentinbox/src/listen/codex.ts",
+        "packages/agentinbox/src/listen/contact-guard.spec.ts",
+        "packages/agentinbox/src/listen/contact-guard.ts",
+        "packages/agentinbox/src/listen/conversation-tools.spec.ts",
+        "packages/agentinbox/src/listen/conversation-tools.ts",
+        "packages/agentinbox/src/listen/fake-api.fixture.ts",
+        "packages/agentinbox/src/listen/fake-claude.fixture.mjs",
+        "packages/agentinbox/src/listen/fake-codex-hook.fixture.mjs",
+        "packages/agentinbox/src/listen/fake-codex.fixture.mjs",
+        "packages/agentinbox/src/listen/fake-opencode.fixture.mjs",
+        "packages/agentinbox/src/listen/host-adapter.ts",
+        "packages/agentinbox/src/listen/hosts.ts",
+        "packages/agentinbox/src/listen/loop.spec.ts",
+        "packages/agentinbox/src/listen/loop.ts",
+        "packages/agentinbox/src/listen/opencode-folder.spec.ts",
+        "packages/agentinbox/src/listen/opencode-folder.ts",
+        "packages/agentinbox/src/listen/opencode.spec.ts",
+        "packages/agentinbox/src/listen/opencode.ts",
+        "packages/agentinbox/src/listen/state.ts",
+        "packages/agentinbox/src/listen/words.spec.ts",
+        "packages/agentinbox/src/listen/words.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13360,
+      "title": "feat(dashboard): add Agent Inbox use-cases page",
+      "author": "iatopilskii",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T13:11:19Z",
+      "kind": "code",
+      "transition": null,
+      "files": 43,
+      "paths": [
+        "apps/human-dashboard/next.config.ts",
+        "apps/human-dashboard/public/images/use-cases/agent-chatgpt.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-claude.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-cursor.svg",
+        "apps/human-dashboard/public/images/use-cases/agent-grok.png",
+        "apps/human-dashboard/public/images/use-cases/approval-check.svg",
+        "apps/human-dashboard/public/images/use-cases/article.svg",
+        "apps/human-dashboard/public/images/use-cases/bell.svg",
+        "apps/human-dashboard/public/images/use-cases/contacts.svg",
+        "apps/human-dashboard/public/images/use-cases/conversation.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-check.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-dither.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-dot.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-peak.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-pulse.svg",
+        "apps/human-dashboard/public/images/use-cases/invite.svg",
+        "apps/human-dashboard/public/images/use-cases/mcp-arrow.svg",
+        "apps/human-dashboard/public/images/use-cases/mcp.svg",
+        "apps/human-dashboard/public/images/use-cases/replies.svg",
+        "apps/human-dashboard/public/images/use-cases/setup-rays.png",
+        "apps/human-dashboard/public/images/use-cases/shield.svg",
+        "apps/human-dashboard/public/images/use-cases/stepper-dots.svg",
+        "apps/human-dashboard/public/images/use-cases/support.svg",
+        "apps/human-dashboard/public/images/use-cases/terminal.svg",
+        "apps/human-dashboard/src/app/use-cases/page.tsx",
+        "apps/human-dashboard/src/components/pages/channels/faq.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/agent-logo-stack.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/hero.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/listing-filters.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/listing.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/setup.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/teams.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/use-cases.module.css",
+        "apps/human-dashboard/src/components/sapien/closing.tsx",
+        "apps/human-dashboard/src/components/sapien/copy-button.tsx",
+        "apps/human-dashboard/src/components/sapien/faq.tsx",
+        "apps/human-dashboard/src/components/sapien/site-footer.tsx",
+        "apps/human-dashboard/src/data/use-cases.ts",
+        "apps/human-dashboard/src/lib/markdown-not-found.ts",
+        "apps/human-dashboard/src/lib/public-sitemap.ts",
+        "apps/human-dashboard/src/lib/seo.ts",
+        "apps/human-dashboard/tests/seo/site.spec.ts",
+        "apps/human-dashboard/tests/use-cases/filters.spec.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13358,
+      "title": "chore(root): Release 2026-11-18 11:13",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T11:13:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 38,
+      "paths": [
+        "apps/api/src/app/agents/channels/agent-config-resolver.service.ts",
+        "apps/api/src/app/agents/conversation-runtime/ingress/inbound-connection-context.resolver.spec.ts",
+        "apps/api/src/app/agents/conversation-runtime/ingress/inbound-connection-context.resolver.ts",
+        "apps/api/src/app/agents/conversation-runtime/ingress/inbound-turn.handler.spec.ts",
+        "apps/api/src/app/agents/conversation-runtime/ingress/inbound-turn.handler.ts",
+        "apps/api/src/app/agents/conversation-runtime/reply/admit-by-access-rule.spec.ts",
+        "apps/api/src/app/agents/conversation-runtime/reply/admit-by-access-rule.ts",
+        "apps/api/src/app/agents/conversation-runtime/runtime/conversation-turn.ts",
+        "apps/api/src/app/agents/e2e/agent-access-rule.e2e.ts",
+        "apps/api/src/app/agents/management/usecases/update-agent/update-agent.usecase.ts",
+        "apps/api/src/app/agents/shared/assert-subscriber-tokens-enabled.ts",
+        "apps/api/src/app/agents/shared/dtos/agent-behavior.dto.ts",
+        "apps/api/src/app/agents/shared/util/agent-access-rule.ts",
+        "apps/api/src/app/agents/shared/util/agent-inbound-replies.ts",
+        "apps/dashboard/src/api/agents.ts",
+        "apps/dashboard/src/components/agents/agent-behavior-section.tsx",
+        "apps/dashboard/src/hooks/use-are-conversational-agents-available.ts",
+        "apps/dashboard/src/pages/agents.tsx",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-chat.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-email.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-in-app.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-in-app.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-sms.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-sms.usecase.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message.base.ts",
+        "docs/platform/build-with-ai/mcp.mdx",
+        "docs/platform/developer/webhooks/event-types.mdx",
+        "docs/platform/developer/webhooks/webhooks.mdx",
+        "docs/platform/integrations/email/activity-tracking.mdx",
+        "docs/platform/integrations/push/push-activity-tracking.mdx",
+        "libs/dal/src/repositories/agent/agent.entity.ts",
+        "libs/dal/src/repositories/agent/agent.schema.ts",
+        "packages/framework/src/resources/agent/agent.types.ts",
+        "packages/shared/src/types/agent.ts",
+        "packages/shared/src/utils/novu-connect-cli.spec.ts",
+        "packages/shared/src/utils/novu-connect-cli.ts",
+        "packages/shared/src/utils/web-chat-connect-prompt.spec.ts"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13384,
+      "title": "feat(api-service): log calls made with API keys that have to be rotated fixes NV-9508",
+      "author": "LetItRock",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T21:38:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.nest.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13383,
+      "title": "feat(docs): add new images and enhance API keys documentation for better clarity fixes DOC-472",
+      "author": "jainpawan21",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T19:36:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "docs/images/developer-tools/api-keys-page.png",
+        "docs/images/developer-tools/generate-new-key.png",
+        "docs/images/developer-tools/regenerate-secret-key.png",
+        "docs/images/developer-tools/secret-keys-after-generate.png",
+        "docs/platform/developer/api-keys.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13382,
+      "title": "fix(api-service,dashboard): extend the API key revocation policy to subscriber hashes fixes NV-9508",
+      "author": "LetItRock",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T19:31:31Z",
+      "kind": "code",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        "apps/api/src/app/agents/web-chat/web-chat-publication.service.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.ts",
+        "apps/api/src/app/inbox/usecases/session/session.spec.ts",
+        "apps/api/src/app/inbox/usecases/session/session.usecase.ts",
+        "apps/api/src/app/integrations/usecases/generate-chat-oath-url/connect-context-verifier.service.ts",
+        "apps/api/src/app/subscribers/usecases/chat-oauth-callback/chat-oauth-callback.usecase.spec.ts",
+        "apps/api/src/app/subscribers/usecases/chat-oauth-callback/chat-oauth-callback.usecase.ts",
+        "apps/api/src/app/subscribers/usecases/chat-oauth/chat-oauth.usecase.spec.ts",
+        "apps/api/src/app/subscribers/usecases/chat-oauth/chat-oauth.usecase.ts",
+        "apps/api/src/app/widgets/usecases/initialize-session/initialize-session.usecase.ts",
+        "apps/dashboard/src/components/api-key-rotation-banner.tsx",
+        "apps/dashboard/src/hooks/use-fetch-api-keys.ts",
+        "packages/shared/src/types/feature-flags.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13381,
+      "title": "feat(api-service): record the caller address and key fingerprint of secret-key calls fixes NV-9518",
+      "author": "merrcury",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T19:16:30Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.ts",
+        "apps/api/src/app/auth/services/passport/newrelic.util.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13380,
+      "title": "fix(api-service): resolve the client IP from one trusted header fixes NV-9517",
+      "author": "djabarovgeorge",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T19:13:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "apps/api/src/app/agents/management/agent-runtime.controller.ts",
+        "apps/api/src/app/human/human-hosts.controller.ts",
+        "apps/api/src/app/inbox/inbox.controller.ts",
+        "apps/api/src/app/rate-limiting/guards/throttler.guard.ts",
+        "apps/api/src/app/shared/shared.module.ts",
+        "apps/api/src/app/shared/utils/client-ip.spec.ts",
+        "apps/api/src/app/shared/utils/client-ip.ts",
+        "apps/api/src/app/shared/utils/mappers.ts",
+        "apps/api/src/config/env.validators.ts",
+        "libs/application-generic/src/logging/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13379,
+      "title": "chore(root): Release 2026-11-19 18:03",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T18:03:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "apps/api/src/app.module.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.nest.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.ts",
+        "apps/api/src/app/auth/services/passport/newrelic.util.ts",
+        "apps/api/src/app/environments-v1/usecases/get-api-keys/get-api-keys.usecase.ts",
+        "apps/api/src/app/environments-v1/usecases/regenerate-api-keys/regenerate-api-keys.usecase.spec.ts",
+        "apps/api/src/app/shared/dtos/api-key.ts",
+        "apps/api/src/app/shared/shared.module.ts",
+        "apps/dashboard/src/components/api-key-rotation-banner.tsx",
+        "apps/dashboard/src/components/dashboard-layout.tsx",
+        "apps/dashboard/src/hooks/use-fetch-api-keys.ts",
+        "apps/dashboard/src/pages/api-keys.tsx",
+        "packages/shared/src/entities/apiKeys/apiKeys.interface.ts",
+        "packages/shared/src/types/feature-flags.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13378,
+      "title": "feat(dashboard): integration store empty states fixes NV-9491",
+      "author": "nikitagrossman",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T16:13:58Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "apps/api/src/app/support/dtos/data-sources-early-access.dto.ts",
+        "apps/api/src/app/support/dtos/provider-request.dto.ts",
+        "apps/api/src/app/support/support.controller.ts",
+        "apps/dashboard/public/images/data-sources/novu.svg",
+        "apps/dashboard/public/images/data-sources/segment.png",
+        "apps/dashboard/src/components/integrations/components/data-sources-early-access-dialog.tsx",
+        "apps/dashboard/src/components/integrations/components/data-sources-empty-state.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-channel-group.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-empty-channel.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-search-empty-state.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-store-add-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-store-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-store-zero-state.tsx",
+        "apps/dashboard/src/components/integrations/components/integrations-list.tsx",
+        "apps/dashboard/src/components/integrations/components/provider-request-dialog.tsx",
+        "apps/dashboard/src/components/integrations/components/utils/empty-channel-content.ts",
+        "apps/dashboard/src/components/integrations/components/utils/helpers.ts",
+        "apps/dashboard/src/components/integrations/components/utils/inbox-setup-prompt.ts",
+        "apps/dashboard/src/pages/integrations-list-page.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13377,
+      "title": "feat(api-service,dashboard): add an API key revocation policy fixes NV-9508",
+      "author": "LetItRock",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T15:15:34Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "apps/api/src/app.module.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.interceptor.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.nest.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.policy.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.spec.ts",
+        "apps/api/src/app/auth/api-key-revocation/api-key-revocation.service.ts",
+        "apps/api/src/app/auth/services/passport/newrelic.util.ts",
+        "apps/api/src/app/environments-v1/usecases/get-api-keys/get-api-keys.usecase.ts",
+        "apps/api/src/app/environments-v1/usecases/regenerate-api-keys/regenerate-api-keys.usecase.spec.ts",
+        "apps/api/src/app/shared/dtos/api-key.ts",
+        "apps/api/src/app/shared/shared.module.ts",
+        "apps/dashboard/src/components/api-key-rotation-banner.tsx",
+        "apps/dashboard/src/components/dashboard-layout.tsx",
+        "apps/dashboard/src/hooks/use-fetch-api-keys.ts",
+        "apps/dashboard/src/pages/api-keys.tsx",
+        "packages/shared/src/entities/apiKeys/apiKeys.interface.ts",
+        "packages/shared/src/types/feature-flags.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13375,
+      "title": "fix(dashboard): refine Agent Inbox use-cases layouts",
+      "author": "iatopilskii",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T13:33:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 17,
+      "paths": [
+        "apps/human-dashboard/public/images/use-cases/badge-chatgpt.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-claude.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-codex.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-cursor.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-hermes.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-openclaw.svg",
+        "apps/human-dashboard/public/images/use-cases/badge-opencode.svg",
+        "apps/human-dashboard/public/images/use-cases/hero-pulse.svg",
+        "apps/human-dashboard/public/images/use-cases/step-add.svg",
+        "apps/human-dashboard/public/images/use-cases/step-invite.svg",
+        "apps/human-dashboard/src/components/pages/use-cases/agent-logo-stack.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/hero.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/listing.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/setup.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/teams.tsx",
+        "apps/human-dashboard/src/components/pages/use-cases/use-cases.module.css",
+        "apps/human-dashboard/tests/use-cases/layout.spec.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13374,
+      "title": "fix(dashboard): animate the Copilot launcher between pill and circle fixes NV-9506",
+      "author": "djabarovgeorge",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T11:14:18Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/dashboard/src/components/copilot-web-chat/copilot-launcher.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13372,
+      "title": "fix(dashboard): animate the Copilot popover open and close fixes NV-9503",
+      "author": "djabarovgeorge",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T09:56:43Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "apps/dashboard/src/components/copilot-web-chat/copilot-launcher.tsx",
+        "apps/dashboard/src/components/copilot-web-chat/copilot-popover.tsx",
+        "apps/dashboard/src/components/copilot-web-chat/copilot-web-chat-utils.ts",
+        "mprocs.yaml"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13371,
+      "title": "fix(dashboard): show the Copilot canvas loading bar in popover mode fixes NV-9500",
+      "author": "djabarovgeorge",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T09:31:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "apps/dashboard/src/components/workflow-editor/workflow-tabs.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13370,
+      "title": "refactor(dashboard): show one integration store card per integration in the current environment fixes NV-9492",
+      "author": "nikitagrossman",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T09:14:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 8,
+      "paths": [
+        "apps/dashboard/src/components/integrations/components/integration-card-actions.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-channel-group.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-environment-filter.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-group-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-store-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integrations-list.tsx",
+        "apps/dashboard/src/pages/integrations-list-page.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13369,
+      "title": "chore(root): Release 2026-11-19 08:09",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T08:09:55Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "apps/api/src/app/workflows-v1/usecases/change-template-active-status/change-template-active-status.usecase.ts",
+        "apps/api/src/app/workflows-v2/usecases/patch-workflow/patch-workflow.usecase.ts",
+        "apps/dashboard/src/components/workflow-editor/configure-workflow-form.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-limit-upgrade-dialog.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-provider.tsx",
+        "apps/dashboard/src/components/workflow-row.tsx",
+        "apps/dashboard/src/hooks/use-create-workflow.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.ts",
+        "libs/application-generic/src/factories/push/handlers/apns.handler.ts",
+        "libs/application-generic/src/services/resource-validator.service.spec.ts",
+        "libs/application-generic/src/services/resource-validator.service.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.spec.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.ts",
+        "libs/dal/src/repositories/message/message.schema.ts",
+        "packages/providers/src/lib/push/apns/apns.provider.spec.ts",
+        "packages/providers/src/lib/push/apns/apns.provider.ts",
+        "packages/providers/src/lib/push/fcm/fcm.provider.spec.ts",
+        "packages/providers/src/lib/push/fcm/fcm.provider.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13368,
+      "title": "chore(root): Hotfix Release 2026-11-19 06:16",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T06:16:42Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".source",
+        "apps/api/src/exception-filter.spec.ts",
+        "apps/api/src/exception-filter.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13367,
+      "title": "fix(api-service): skip the error response when the response was already sent fixes NV-9497",
+      "author": "merrcury",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T05:00:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".source",
+        "apps/api/src/exception-filter.spec.ts",
+        "apps/api/src/exception-filter.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13366,
+      "title": "fix(api-service,worker,application-generic): self-hosted config pitfalls (Redis TLS flags, DASHBOARD_URL CORS) fixes NV-9496",
+      "author": "merrcury",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-18T17:32:21Z",
+      "kind": "code",
+      "transition": null,
+      "files": 19,
+      "paths": [
+        "apps/api/src/config/cors.config.spec.ts",
+        "apps/api/src/config/cors.config.ts",
+        "apps/api/src/config/env.validators.spec.ts",
+        "apps/api/src/config/env.validators.ts",
+        "apps/inbound-mail/src/config/env.validators.spec.ts",
+        "apps/inbound-mail/src/config/env.validators.ts",
+        "apps/worker/src/config/env.validators.spec.ts",
+        "apps/worker/src/config/env.validators.ts",
+        "apps/ws/src/config/env.validators.spec.ts",
+        "apps/ws/src/config/env.validators.ts",
+        "apps/ws/src/socket/ws.gateway.ts",
+        "libs/application-generic/src/config/index.ts",
+        "libs/application-generic/src/config/tls-flag.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/azure-cache-for-redis-cluster-provider.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/elasticache-cluster-provider.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/memory-db-cluster-provider.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/redis-provider.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/tls-flags.spec.ts",
+        "libs/application-generic/src/services/in-memory-provider/providers/variable-mappers.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13365,
+      "title": "fix(api-service): add environment createdAt index for GET /v1/messages",
+      "author": "scopsy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T16:40:53Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "libs/dal/src/repositories/message/message.schema.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13364,
+      "title": "feat(api-service,dashboard): block enabling workflows over the active workflow limit (NV-9495)",
+      "author": "scopsy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T15:40:29Z",
+      "kind": "code",
+      "transition": null,
+      "files": 11,
+      "paths": [
+        "apps/api/src/app/workflows-v1/usecases/change-template-active-status/change-template-active-status.usecase.ts",
+        "apps/api/src/app/workflows-v2/usecases/patch-workflow/patch-workflow.usecase.ts",
+        "apps/dashboard/src/components/workflow-editor/configure-workflow-form.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-limit-upgrade-dialog.tsx",
+        "apps/dashboard/src/components/workflow-editor/workflow-provider.tsx",
+        "apps/dashboard/src/components/workflow-row.tsx",
+        "apps/dashboard/src/hooks/use-create-workflow.ts",
+        "libs/application-generic/src/services/resource-validator.service.spec.ts",
+        "libs/application-generic/src/services/resource-validator.service.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.spec.ts",
+        "libs/application-generic/src/usecases/upsert-workflow/upsert-workflow.usecase.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13361,
+      "title": "fix(worker,providers): remove FCM tokens rejected as \"Device unregistered\" fixes NV-8760",
+      "author": "scopsy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T13:17:06Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.spec.ts",
+        "apps/worker/src/app/workflow/usecases/send-message/send-message-push.usecase.ts",
+        "libs/application-generic/src/factories/push/handlers/apns.handler.ts",
+        "packages/providers/src/lib/push/apns/apns.provider.spec.ts",
+        "packages/providers/src/lib/push/apns/apns.provider.ts",
+        "packages/providers/src/lib/push/fcm/fcm.provider.spec.ts",
+        "packages/providers/src/lib/push/fcm/fcm.provider.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13359,
+      "title": "feat(dashboard): browse integrations by channel in the integration store fixes NV-9492",
+      "author": "nikitagrossman",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T12:45:47Z",
+      "kind": "code",
+      "transition": null,
+      "files": 10,
+      "paths": [
+        "apps/dashboard/src/components/integrations/components/channel-tabs.tsx",
+        "apps/dashboard/src/components/integrations/components/create-integration-sidebar.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-card-actions.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-channel-group.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-environment-filter.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-group-card.tsx",
+        "apps/dashboard/src/components/integrations/components/integration-search-input.tsx",
+        "apps/dashboard/src/components/integrations/components/integrations-list.tsx",
+        "apps/dashboard/src/components/integrations/components/utils/helpers.ts",
+        "apps/dashboard/src/pages/integrations-list-page.tsx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13357,
+      "title": "fix(dashboard,shared): remove IS_EU agents gate and pass --region eu to novu connect fixes NV-9493",
+      "author": "scopsy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T10:53:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 5,
+      "paths": [
+        "apps/dashboard/src/hooks/use-are-conversational-agents-available.ts",
+        "apps/dashboard/src/pages/agents.tsx",
+        "packages/shared/src/utils/novu-connect-cli.spec.ts",
+        "packages/shared/src/utils/novu-connect-cli.ts",
+        "packages/shared/src/utils/web-chat-connect-prompt.spec.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13356,
+      "title": "fix(docs): enhance activity tracking documentation for email and push events fixes DOC-470",
+      "author": "jainpawan21",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T10:14:57Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        "docs/platform/developer/webhooks/event-types.mdx",
+        "docs/platform/developer/webhooks/webhooks.mdx",
+        "docs/platform/integrations/email/activity-tracking.mdx",
+        "docs/platform/integrations/push/push-activity-tracking.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 13355,
+      "title": "docs(docs): fix and extend per-client Novu MCP server setup instructions",
+      "author": "scopsy",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-18T09:51:57Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/platform/build-with-ai/mcp.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:34:20.423Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
