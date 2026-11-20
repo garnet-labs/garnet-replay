@@ -49,13 +49,14 @@ preserved, not upgraded by the reader. Re-run verification before sharing.
 
 **Attribution review**
 
-Head: <code>188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b</code> · Compared: <code>811e189dae5d3abc3633d41b05aa0bdae2051188</code> (profile unavailable)
+Head: <code>188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b</code> · Compared: <code>811e189dae5d3abc3633d41b05aa0bdae2051188</code> (comparison unavailable)
 
 Scope: <code>previous-push</code> · version transition: not derivable from the record.
 
+Capture is not complete; additions cannot be determined.
+
 **Needs review: not attributable to the runner.**
 
-Compared profile unavailable; additions cannot be determined.
 Host-rooted ancestry does not establish job origin.
 
 - <code>systemd › python3.14 › python3.14</code> → <code>168.63.129.16</code> (ports <code>32526, 80 (http)</code>) · detached-root · job <code>install</code>

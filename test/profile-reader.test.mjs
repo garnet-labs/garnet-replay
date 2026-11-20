@@ -139,6 +139,34 @@ test("a marker from a different commenter cannot supply the compared receipt", a
   }
 })
 
+test("declared capture limits on either side prevent additions but retain head review rows", async () => {
+  for (const changes of [{ capture_quality: "partial" }, { capture_quality: "not-complete" }, { capture_quality: "best-effort" }, { capture: { status: "partial" } }, { incomplete: 1 }]) {
+    for (const side of ["head", "compared"]) {
+      const head = profile()
+      const compared = profile(PREVIOUS)
+      Object.assign(side === "head" ? head : compared, changes)
+      const report = compareProfileTrees(head, compared)
+      assert.equal(report.added, null)
+      assert.equal(report.review.length, 5)
+      assert.match(renderProfileTrees(report), /Capture is not complete; additions cannot be determined/)
+    }
+  }
+  for (const side of [HEAD, PREVIOUS]) {
+    for (const changes of [{ capture_quality: "partial" }, { capture_quality: "not-complete" }, { capture_quality: "best-effort" }, { incomplete: 1 }]) {
+      const limited = comment(side, side === HEAD ? LINK : BASE_LINK)
+      limited.body = limited.body.replace(/<!-- garnet:summary (.*?) -->/, (_match, raw) => `<!-- garnet:summary ${JSON.stringify({ ...JSON.parse(raw), ...changes })} -->`)
+      const report = await profileAttributionForComment({ comment: side === HEAD ? limited : comment(), comments: [side === PREVIOUS ? limited : comment(PREVIOUS, BASE_LINK)], headSha: HEAD, repository: "garnet-labs/example" }, {
+        fetchImpl: async () => ({ ok: true, json: async () => ({ profile: profile() }) }),
+      })
+      assert.equal(report.added, null)
+      assert.equal(report.review.length, 5)
+      assert.match(renderProfileTrees(report), /Capture is not complete; additions cannot be determined/)
+    }
+  }
+  const empty = compareProfileTrees({ associations: [], capture_quality: "partial" }, { associations: [] })
+  assert.match(renderProfileTrees(empty), /additions cannot be determined/)
+})
+
 test("PR reader explicitly keeps comparison unavailable if the compared record is missing or unreadable", async () => {
   const input = { comment: comment(), comments: [comment(PREVIOUS, BASE_LINK)], headSha: HEAD, repository: "garnet-labs/example" }
   const options = { fetchImpl: async (url) => { if (url.includes("/122?")) throw new Error("missing compared profile"); return { ok: true, json: async () => ({ profile: profile() }) } } }
