@@ -96,6 +96,28 @@ test("repeated actions retain review requirements in either observation order", 
   assert.equal(readProfileTrees({ associations: [stepLinked] })[0].needsReview, false)
 })
 
+test("exported pairs prefer recorded PR heads over test-merge commits across profile shapes", () => {
+  const merge = "c".repeat(40)
+  const shapes = [
+    { run: { head_sha: HEAD, commit_sha: merge } },
+    { run: { commit_sha: merge, pull_request: { head: { sha: HEAD } } } },
+    { run: { commit_sha: merge }, pull_request: { head: { sha: HEAD } } },
+    { github: { head_sha: HEAD, sha: merge } },
+    { github: { sha: merge, pull: { head: { sha: HEAD } } } },
+    { scenarios: { github: { sha: merge, event: { pull_request: { head: { sha: HEAD } } } } } },
+  ]
+  for (const metadata of shapes) {
+    const raw = { ...metadata, associations: [] }
+    for (const record of [raw, { profile: raw }, { profiles: [raw] }]) {
+      const report = compareProfileTrees(record, record)
+      assert.deepEqual(report.pair.head, [HEAD])
+      assert.deepEqual(report.pair.compared, [HEAD])
+      assert.doesNotMatch(renderProfileTrees(report), new RegExp(merge))
+    }
+  }
+  assert.deepEqual(compareProfileTrees({ associations: [], run: { commit_sha: merge } }).pair.head, [merge])
+})
+
 test("empty associations are readable; absent, malformed and empty collections fail closed", () => {
   assert.deepEqual(readProfileTrees({ associations: [] }), [])
   assert.deepEqual(compareProfileTrees({ associations: [] }, { associations: [] }).added, [])
