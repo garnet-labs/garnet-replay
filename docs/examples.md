@@ -19,7 +19,8 @@ head-bound record and the existing exact public repository/run/profile/head
 identity checks, including merge-parent linkage.
 
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
-job. Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
+job, with the workflow path or name beside it when recorded.
+Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
 `devin-remote` is session-linked, except that container ancestry still needs review.
 Detached actions without that session root also need review. Container roots and
 host-rooted actions outside known runner services need attribution review even

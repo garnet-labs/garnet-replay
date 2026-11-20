@@ -179,6 +179,20 @@ test("text output distinguishes actions differing only by protocol", () => {
   assert.doesNotMatch(renderProfileTrees(compareProfileTrees({ associations: [action] })), /<code>TCP<\/code>|<code>UDP<\/code>/)
 })
 
+test("text rows show the workflow path or name alongside the job only when recorded", () => {
+  for (const metadata of [{ workflow_path: ".github/workflows/install.yml" }, { workflow: "Install dependencies" }]) {
+    const raw = profile()
+    Object.assign(raw.run, metadata)
+    const text = renderProfileTrees(compareProfileTrees(raw))
+    const workflow = metadata.workflow_path ?? metadata.workflow
+    for (const line of text.split("\n").filter((line) => line.startsWith("- "))) {
+      assert.equal(line.endsWith(` · job <code>install</code> · workflow <code>${workflow}</code>`), true)
+    }
+    assertVocabClean(text)
+  }
+  assert.doesNotMatch(renderProfileTrees(compareProfileTrees(profile())), / · workflow /)
+})
+
 test("file CLI reads a real recorded fixture and supports an explicit comparison", () => {
   const real = new URL("./fixtures/demo-profiles/30304258281.json", import.meta.url).pathname
   const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", real, "--base", real, "--json"], { encoding: "utf8" })
@@ -321,7 +335,7 @@ test("cards and verification expose attribution independently of an otherwise no
 
 test("card vocabulary and width guards check attribution copy but exempt quoted profile values", () => {
   const input = { slug: "example", forkPr: 1, headSha: HEAD, comment: comment() }
-  const attribution = compareProfileTrees({ associations: [{ remote_names: [`clean${"x".repeat(120)}`], ancestry: ["init", "curl"] }] })
+  const attribution = compareProfileTrees({ run: { workflow: `clean${"x".repeat(120)}` }, associations: [{ remote_names: [`clean${"x".repeat(120)}`], ancestry: ["init", "curl"] }] })
   assert.doesNotThrow(() => renderCard(buildModel({ ...input, attribution })))
   assert.throws(() => renderCard(buildModel({ ...input, attribution: { ...attribution, comparisonReason: "clean" } })), /banned vocabulary/)
   assert.throws(() => renderCard(buildModel({ ...input, attribution: { ...attribution, comparisonReason: "x".repeat(97) } })), /renderer-owned line exceeds phone width/)
