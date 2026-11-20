@@ -1,9 +1,92 @@
-# Infisical shadow queue — preparation only
+# Infisical shadow queue
 
-Status: blocked on fork creation and App admission. No fork was created, no
-fork PR was opened, and no hosted replay was dispatched in this handoff.
-The ten requested replays remain unrecorded. This is candidate/preparation
-evidence, not a runtime result or verified exhibit.
+## Live execution — 2026-11-20
+
+**Paused at 04:54Z by the revised schedule.** Infisical may use the hosted
+replay workflow and `GARNET_LABS_GITHUB_PAT` only during 09:00–10:00Z on
+November 20 UTC, then successive one-hour windows every ten hours
+(19:00–20:00Z November 20, 05:00–06:00Z November 21, and so on).
+No further dispatch, run watch, or PAT call was made after the stop notice.
+An accepted start is left alone, not cancelled. A run that failed on budget
+must be rerun in a permitted window, never counted as a completed result.
+
+The fork now exists on `main`. Recorder/reviewer onboarding merged through
+[fork PR 2](https://github.com/garnet-labs/infisical/pull/2), merge
+`291aed42e2616d1f4c4620a4029d0f3685f048c3`; deterministic review checks merged
+through [fork PR 3](https://github.com/garnet-labs/infisical/pull/3), merge
+`e884ecb0e8b765aa0e5a7356453470084bea01fb`. Both PRs contained one commit.
+No custom secret was added; the recorder uses OIDC.
+
+The recorder's [main push run](https://github.com/garnet-labs/infisical/actions/runs/44671660541)
+succeeded at exact SHA `291aed42e2616d1f4c4620a4029d0f3685f048c3`.
+Public profile `01a1f720-d7eb-7e88-9638-3d23017e7a89` and MCP agree on that
+run/repository/SHA. The App finalized a best-effort first-record comment on
+PR 2's head `e607d222076b6edf9c446a6951ede6237dd8b24f`, with `previous: null`
+and no incomplete jobs. No separate main-commit comment was found. The
+gate-only merge did not match recorder path filters. Neither onboarding PR
+is a passing replay exhibit: verification rejects PR 2's missing pair and
+closed state; PR 3 has no runtime record and is closed.
+
+Serial execution is requested in the table order below, using hosted
+`replay` from `devin/1795144182-infisical-target` and each historical
+`baseline/<number>`. Before each prepare/start, queued and in-progress
+replay runs must be absent. The initial queue observation at approximately
+04:10Z found PostHog start run `44671871618` in progress. Recent start inputs
+(as rendered in workflow run names) showed PostHog and n8n, but not Langfuse
+or Supabase. The first-start priority grace period ends at 04:40Z; that does
+not waive the empty-queue requirement. Cancelled runs are not results.
+
+| Upstream PR | Hosted status | Fork PR URL | Head sha7 | Baseline sha7 | App result / new destinations | Capture quality | Compared == baseline | Verify / first failing leg | StampHog / cited record |
+|---|---|---|---|---|---|---|---|---|---|
+| 9436 | Prepare succeeded; start accepted, last known queued; paused | None found at 04:54:31Z | — | — | Not observed | Unknown | Not checked | Not run | Not run |
+| 9730 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9022 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9230 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9157 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9158 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 8984 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9599 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9406 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+| 9598 | Paused; neither prepare nor start dispatched | Not created by this execution | — | — | Not recorded | Not recorded | Not checked | Not run | Not run |
+
+Hosted [prepare 44673479321](https://github.com/garnet-labs/garnet-replay/actions/runs/44673479321)
+for 9436 succeeded after the queue was checked empty at 04:18:03Z. Its
+artifact declares `state: prepared`, `baseBranch: baseline/9436`, and
+signature `feffca67de5d623e6253d9185997ed0fd7cfcc1355a32692111c286f389229aa`.
+Fork main was `e884ecb0e8b765aa0e5a7356453470084bea01fb`; the historical
+base is `1d92ce124c207f0fe13885220e502361b333ad35`.
+
+The first-start priority check was repeated at 04:52:52Z, after the
+30-minute grace period. Recent inputs showed non-cancelled PostHog and n8n
+starts; Langfuse and Supabase still had none in the preceding hour. Queued
+and in-progress replay lists were both empty immediately before dispatch.
+[Start 44677319496](https://github.com/garnet-labs/garnet-replay/actions/runs/44677319496)
+was accepted at 04:52:52Z, using prepare `44673479321`, the required harness
+ref, `base_branch=baseline/9436`, and `two_commit=false`. Its last observed
+status was `queued`. The attempted watcher exited with the following
+connection error; this is not a workflow conclusion:
+
+```text
+error connecting to api.github.com
+check your internet connection or https://githubstatus.com
+```
+
+The schedule stop arrived during connection-error backoff. No further
+hosted run status was fetched and no cancellation was attempted. Treat
+`44677319496` as potentially in flight until it is inspected in the next
+permitted window. A default-token fork PR listing at 04:54:31Z contained
+only onboarding PRs 2/3 and an independent dependency-update PR 1: no replay
+PR was visible. No baseline profile, head record, comparison, StampHog
+verdict, verification or card is claimed for this start. Inspect and, if
+budget-failed/cancelled, rerun this first replay before proceeding to 9730.
+
+Best-effort remains explicitly scoped; no partial, failed, stale or unbound
+record is a pass. Baseline equality is checked independently of the harness.
+
+## Historical preparation (superseded status)
+
+The following sections preserve the offline preparation and its then-current
+blockers. They are not the current fork/onboarding or runtime execution state.
 
 Branch: `devin/1795144182-infisical-target`.
 Intended fork: `garnet-labs/infisical` (not yet accessible when checked).
@@ -203,7 +286,7 @@ same-group replacement; no guard was bypassed. Seven hypothetical plans
 initially formed before the recorder filter was narrowed; 9694 is now marked
 refused in the saved plan summary, leaving six unrefused hypothetical plans.
 
-## Original requested cohort runtime result table (all still unrecorded)
+## Historical original-cohort placeholder table
 
 | Upstream PR | Fork PR | Fork head / compared pair | App result / new destinations | Capture | Verify / first failing leg | StampHog / cited record |
 |---|---|---|---|---|---|---|
@@ -240,7 +323,7 @@ This report and future fork comments are visually unverified. No GitHub
 Markdown desktop/phone review has been performed and no PR is being shown as
 a finished exhibit. No harness PR was created, marked ready, or merged.
 
-## Next boundary
+## Historical pre-onboarding boundary
 
 After fkj creates the fork, verify App coverage and project linkage before
 recording; then merge onboarding separately and inspect the initial finalized
