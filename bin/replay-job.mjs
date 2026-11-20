@@ -68,7 +68,7 @@ try {
   write()
   const refusal = `[${reason}] ${error.message}`
   console.error(refusal)
-  if (process.env.GITHUB_STEP_SUMMARY) {
+  if (typeof process.env.GITHUB_STEP_SUMMARY === "string" && process.env.GITHUB_STEP_SUMMARY !== "") {
     try { appendFileSync(process.env.GITHUB_STEP_SUMMARY, `\n## Replay blocked: ${reason}\n\n${error.message}\n`) } catch (summaryError) {
       console.error(`Could not write job summary: ${summaryError.message}`)
     }
