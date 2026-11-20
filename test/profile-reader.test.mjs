@@ -273,6 +273,7 @@ test("CursorPages with further pages withhold additions and explain the missing 
 
 test("CursorPages missing previous pages cannot determine additions", () => {
   const receipt = JSON.parse(readFileSync(new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url), "utf8"))
+  assert.equal(captureAllowsComparison({ ...receipt, previous: PREVIOUS }), true)
   for (const pagination of [
     { previous_cursor: "earlier" }, { previousCursor: "earlier" }, { prev_cursor: "earlier" },
     { has_previous: true }, { hasPrevious: true }, { has_prev: true },
