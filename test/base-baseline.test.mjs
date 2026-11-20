@@ -240,7 +240,7 @@ test("two-commit, injected, instrumented and already-recording source bases use 
     assert.ok(ids.indexOf("first-base-record") < ids.indexOf("first-check"))
   }
   for (const options of [{}, { record: "inject", ecosystem: "npm" }, { record: "instrument", instrument: { path: workflow, content: body, changes: ["Record install"], job: "install" } }]) {
-    assert.throws(() => planReplay({ ...input, ...options }), /commit 1 would be empty/)
+    assert.throws(() => planReplay({ ...input, ...options }), /commit 1 would be empty.*no automatic one-commit fallback/)
   }
 })
 
