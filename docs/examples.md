@@ -11,14 +11,17 @@ node bin/replay.mjs profile head.json --base compared.json --json
 node bin/replay.mjs profile https://github.com/garnet-labs/express/pull/91
 ```
 
-File input supports public associations, profile collections, raw network peers,
-and summarized egress. Files are observations supplied by the operator; the file
+File input supports public associations, profile collections (including CursorPage
+`items` lists in session receipts), raw network peers, and summarized egress.
+Files are observations supplied by the operator; the file
 reader does not certify capture completeness. PR input requires a finalized,
 head-bound record and the existing exact public repository/run/profile/head
 identity checks, including merge-parent linkage.
 
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
-job. Ancestry through `Runner.Worker` remains runner-linked. Container roots and
+job. Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
+`devin-remote` is session-linked, except that container ancestry still needs review.
+Detached actions without that session root also need review. Container roots and
 host-rooted actions outside known runner services need attribution review even
 when their recorded step says `Runner Processes`. Missing ancestry and other
 unlinked roots also need review. Host-rooted Python traffic may be a host service;

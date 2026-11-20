@@ -172,6 +172,36 @@ test("file CLI reads a real recorded fixture and supports an explicit comparison
   assert.notEqual(invalid.status, 0)
 })
 
+test("CursorPage receipts read every item through the CLI and retain detached and container review", () => {
+  const fixture = new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url)
+  const receipt = JSON.parse(readFileSync(fixture, "utf8"))
+  const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", fixture.pathname, "--json"], { encoding: "utf8" })
+  assert.equal(child.status, 0, child.stderr)
+  const report = JSON.parse(child.stdout)
+  assert.equal(report.rows.length, 4)
+  assert.deepEqual(new Set(report.rows.map((row) => row.job)), new Set(["install", "test"]))
+  for (const destination of ["registry.npmjs.org", "session.example"]) {
+    const row = report.rows.find((entry) => entry.destination === destination)
+    assert.equal(row.kind, "session-linked")
+    assert.equal(row.needsReview, false)
+  }
+  assert.equal(report.review.find((row) => row.destination === "example.com").kind, "detached-root")
+  assert.equal(report.review.find((row) => row.destination === "container.example").kind, "container-rooted")
+  assert.deepEqual(readProfileTrees(receipt.profiles), report.rows)
+  const partial = structuredClone(receipt)
+  partial.profiles.items[1].capture_quality = "partial"
+  assert.equal(compareProfileTrees(partial, receipt).added, null)
+  assert.deepEqual(compareProfileTrees(receipt, receipt).added, [])
+})
+
+test("CursorPage input rejects empty or malformed items instead of dropping them", () => {
+  assert.throws(() => readProfileTrees({ profiles: { items: [] } }), /collection is empty/)
+  assert.throws(() => readProfileTrees({ items: [null] }), /Profile must be an object/)
+  assert.throws(() => readProfileTrees({ items: [{}] }), /no readable outbound associations/)
+  assert.throws(() => readProfileTrees({ profiles: { items: null } }), /no readable outbound associations/)
+  assert.equal(attributionKind(["systemd", "devin-remote", "dockerd", "node"]), "container-rooted")
+})
+
 test("finalized PR profile fetching reuses exact selectors and binds both comparison sides", async () => {
   const calls = []
   const before = profile(PREVIOUS, TREES.profiles[0].associations.slice(0, 3))

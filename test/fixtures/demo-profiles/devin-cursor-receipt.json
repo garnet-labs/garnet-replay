@@ -1,0 +1,23 @@
+{
+  "fixture": "Synthetic CursorPage receipt; not recorded evidence",
+  "profiles": {
+    "items": [
+      {
+        "run": { "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "job": "install" },
+        "associations": [
+          { "remote_names": ["registry.npmjs.org"], "remote_ports": [443], "protocol": "TCP", "ancestry": ["systemd", "devin-remote", "bash", "npm"] },
+          { "remote_names": ["example.com"], "remote_ports": [443], "protocol": "TCP", "ancestry": ["systemd", "sh", "curl"] }
+        ]
+      },
+      {
+        "run": { "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "job": "test" },
+        "associations": [
+          { "remote_names": ["session.example"], "remote_ports": [443], "protocol": "TCP", "ancestry": ["systemd", "devin-remote", "bash", "node"] },
+          { "remote_names": ["container.example"], "remote_ports": [443], "protocol": "TCP", "ancestry": ["systemd", "devin-remote", "containerd-shim-runc-v2", "runc", "node"] }
+        ]
+      }
+    ],
+    "next_cursor": null,
+    "previous_cursor": null
+  }
+}
