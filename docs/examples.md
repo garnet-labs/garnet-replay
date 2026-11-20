@@ -17,7 +17,7 @@ reader does not certify capture completeness. PR input requires a finalized,
 head-bound record and the existing exact public repository/run/profile/head
 identity checks, including merge-parent linkage.
 
-The reader shows each outbound destination, its recorded ancestry, ports, and
+The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
 job. Ancestry through `Runner.Worker` remains runner-linked. Container roots and
 host-rooted actions outside known runner services need attribution review even
 when their recorded step says `Runner Processes`. Missing ancestry and other
@@ -25,9 +25,12 @@ unlinked roots also need review. Host-rooted Python traffic may be a host servic
 the warning does not claim that the job created it. No destination allowlist
 settles attribution.
 
-Comparison uses the destination, ancestry, ports, protocol, and job, not destination
+Comparison uses the repository, workflow (or fallback run), destination, ancestry,
+ports, protocol, and job, not destination
 equality alone. PR reads use earlier finalized comments bound to the exact compared
-commit when available. If the App has overwritten its only comment, the compared
+commit from the same App author when available. Declared capture other than complete,
+or incomplete jobs on either side, prevents additions from being determined.
+If the App has overwritten its only comment, the compared
 profile may be unavailable. The reader then reports the head's attribution limits
 without claiming which actions were added. An unreadable or mismatched profile
 produces an explicit review note, not an empty comparison.
@@ -59,9 +62,9 @@ Capture is not complete; additions cannot be determined.
 
 Host-rooted ancestry does not establish job origin.
 
-- <code>systemd › python3.14 › python3.14</code> → <code>168.63.129.16</code> (ports <code>32526, 80 (http)</code>) · detached-root · job <code>install</code>
-- <code>systemd › python3.14 › python3.14</code> → <code>169.254.169.254</code> (ports <code>80 (http)</code>) · detached-root · job <code>install</code>
-- <code>systemd › systemd › curl</code> → <code>sfrclak.com</code> (ports <code>8000</code>) · detached-root · job <code>install</code>
+- <code>systemd › python3.14 › python3.14</code> → <code>168.63.129.16</code> (ports <code>32526, 80 (http)</code>) · <code>TCP</code> · detached-root · job <code>install</code>
+- <code>systemd › python3.14 › python3.14</code> → <code>169.254.169.254</code> (ports <code>80 (http)</code>) · <code>TCP</code> · detached-root · job <code>install</code>
+- <code>systemd › systemd › curl</code> → <code>sfrclak.com</code> (ports <code>8000</code>) · <code>TCP</code> · detached-root · job <code>install</code>
 
 Review classification: **quiet-control**
 

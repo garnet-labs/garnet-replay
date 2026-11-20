@@ -151,6 +151,16 @@ test("reader rendering escapes captured HTML and does not imply job origin", () 
   assert.match(html, /Compared profile unavailable/)
 })
 
+test("text output distinguishes actions differing only by protocol", () => {
+  const action = { remote_names: ["example.org"], ancestry: ["init", "curl"], remote_ports: ["443"] }
+  const report = compareProfileTrees({ associations: [{ ...action, protocol: "TCP" }, { ...action, protocol: "UDP" }] })
+  assert.equal(report.rows.length, 2)
+  const lines = renderProfileTrees(report).split("\n").filter((line) => line.startsWith("- "))
+  assert.equal(lines.filter((line) => line.includes("<code>TCP</code>")).length, 1)
+  assert.equal(lines.filter((line) => line.includes("<code>UDP</code>")).length, 1)
+  assert.doesNotMatch(renderProfileTrees(compareProfileTrees({ associations: [action] })), /<code>TCP<\/code>|<code>UDP<\/code>/)
+})
+
 test("file CLI reads a real recorded fixture and supports an explicit comparison", () => {
   const real = new URL("./fixtures/demo-profiles/30304258281.json", import.meta.url).pathname
   const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", real, "--base", real, "--json"], { encoding: "utf8" })
