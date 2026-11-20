@@ -28,7 +28,8 @@ function purePlan(overrides = {}) {
   return planPureReplay({
     slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", upstreamPr: 501,
     upstreamTitle: "feat: add thing", baseSha: SHA_A, headSha: SHA_B, changes: CHANGES,
-    work: "/tmp/work", forkDefaultSha: SHA_C, recordWorkflows: RECORDERS, ...overrides,
+    work: "/tmp/work", forkDefaultSha: SHA_C, recordWorkflows: RECORDERS,
+    workflowBodies: Object.fromEntries((overrides.recordWorkflows ?? RECORDERS).map((path) => [path, "on:\n  push:\n    branches: ['main']\n  pull_request:\n"])), ...overrides,
   })
 }
 
@@ -547,7 +548,7 @@ test("executePlan: the base commit guard still rejects banned prose and invalid 
 
 test("two-commit replay: carried paths bypass vocabulary only in verbatim message lines", async () => {
   const path = ".github/workflows/cleanup_build_template.yml"
-  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), changes: CHANGES })
+  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), workflowBodies: { [path]: "on: pull_request\n" }, changes: CHANGES })
   const check = plan.steps.find((step) => step.id === "first-check")
   const commit = plan.steps.find((step) => step.id === "first-commit")
   const { exec, calls } = fakeExec([[/diff --cached --name-only/, path]])
@@ -558,7 +559,7 @@ test("two-commit replay: carried paths bypass vocabulary only in verbatim messag
 })
 
 test("two-commit replay: recorder checkout and execution are bound to the planned fork SHA", async () => {
-  const input = { ...purePlan({ baseBranch: "review/base" }), changes: CHANGES }
+  const input = { ...purePlan({ baseBranch: "review/base" }), workflowBodies: { [RECORDERS[0]]: "on: pull_request\n" }, changes: CHANGES }
   const plan = planReplay(input)
   const guard = plan.steps.find((step) => step.kind === "verify-fork-default")
   const checkout = plan.steps.find((step) => step.id === "first-fork-record")

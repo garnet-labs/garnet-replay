@@ -168,7 +168,9 @@ const changes = [
 function replayPlan(overrides = {}) {
   return planReplay({
     slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", forkDefaultSha: SHA_A, upstreamPr: 501,
-    upstreamTitle: depPr.title, baseSha: SHA_A, headSha: SHA_B, changes, firstPaths: ["pnpm-lock.yaml"], work: "/tmp/work", workExists: true, ...overrides,
+    upstreamTitle: depPr.title, baseSha: SHA_A, headSha: SHA_B, changes, firstPaths: ["pnpm-lock.yaml"], work: "/tmp/work", workExists: true,
+    workflowBodies: Object.fromEntries((overrides.recordWorkflows ?? []).map((path) => [path, "on: pull_request\n"])),
+    baseWorkflowBodies: Object.fromEntries((overrides.baseRecords ?? []).map((path) => [path, "on: pull_request\n"])), ...overrides,
   })
 }
 
@@ -238,6 +240,7 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
       work,
       baseBranch: "replay-base",
       baseRecords: [".github/workflows/ci.yml"],
+      baseWorkflowBodies: { ".github/workflows/ci.yml": "on: pull_request\n" },
       recordWorkflows: [],
     })
 
@@ -249,7 +252,8 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
     for (const text of [plan.body, plan.messages.first, plan.messages.change]) {
       assert.doesNotMatch(text, /Bumps|allowlist/)
     }
-    assert.ok(plan.steps.some((step) => step.id === "base-branch"))
+    assert.ok(plan.steps.some((step) => step.id === "ensure-base"))
+    assert.ok(plan.steps.some((step) => step.id === "wait-base-record"))
     assert.ok(!plan.steps.some((step) => step.id === "first-fork-record"))
     const runSteps = plan.steps.filter((step) => [
       "first-commit-paths", "first-check", "first-commit",
@@ -378,10 +382,13 @@ test("replay --pr: --base-branch opens against a fork branch set to the base and
   const recorder = ".github/workflows/garnet-ci.yml"
   const plan = replayPlan({ baseBranch: "sync/abc1234", recordWorkflows: [recorder] })
   const ids = plan.steps.map((s) => s.id)
-  const set = plan.steps.find((s) => s.id === "base-branch")
-  assert.equal(set.kind, "write-remote")
+  const set = plan.steps.find((s) => s.id === "ensure-base")
+  assert.equal(set.kind, "ensure-base")
   assert.equal(set.target, FORK)
-  assert.deepEqual(set.args.slice(-3), ["push", "origin", `${SHA_A}:refs/heads/sync/abc1234`])
+  assert.equal(set.baseSha, SHA_A)
+  assert.match(set.baseWorkflows[recorder], /push:/)
+  assert.ok(ids.indexOf("ensure-base") < ids.indexOf("wait-base-record"))
+  assert.ok(ids.indexOf("wait-base-record") < ids.indexOf("branch"))
   assert.deepEqual(plan.steps.find((s) => s.id === "branch").args.slice(-2), [plan.branch, "origin/sync/abc1234"])
   const carried = plan.steps.find((s) => s.id === "first-fork-record")
   assert.deepEqual(carried.args.slice(-3), [SHA_A, "--", recorder])
