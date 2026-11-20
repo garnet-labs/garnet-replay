@@ -261,6 +261,15 @@ test("cards and verification expose attribution independently of an otherwise no
   assert.doesNotMatch(renderCard(buildModel({ ...input, attribution: compareProfileTrees(profile(PREVIOUS, TREES.profiles[0].associations.slice(0, 3))) })), /Attribution review/)
 })
 
+test("card vocabulary and width guards check attribution copy but exempt quoted profile values", () => {
+  const input = { slug: "example", forkPr: 1, headSha: HEAD, comment: comment() }
+  const attribution = compareProfileTrees({ associations: [{ remote_names: [`clean${"x".repeat(120)}`], ancestry: ["init", "curl"] }] })
+  assert.doesNotThrow(() => renderCard(buildModel({ ...input, attribution })))
+  assert.throws(() => renderCard(buildModel({ ...input, attribution: { ...attribution, comparisonReason: "clean" } })), /banned vocabulary/)
+  assert.throws(() => renderCard(buildModel({ ...input, attribution: { ...attribution, comparisonReason: "x".repeat(97) } })), /renderer-owned line exceeds phone width/)
+  assert.match(renderCard(buildModel({ ...input, attribution })), /Needs review: not attributable to the runner/)
+})
+
 test("live verifier keeps its existing status and adds a review note without refetching head profiles", async () => {
   const calls = []
   const fetchImpl = async (url) => {
