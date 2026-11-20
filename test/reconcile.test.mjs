@@ -107,6 +107,20 @@ test("pending and stale receipts never become recorded", () => {
   assert.equal(reconcileTarget(target, snapshot([{ ...pr("FAIL"), comments: [{ ...comment, body: pending.replace(head, previous) }] }]), checkedAt).replays[0].state, "undeterminable")
 })
 
+test("only finalized accepted capture becomes recorded, independently of shareability", () => {
+  for (const quality of ["complete", "best-effort", "partial", "not declared"]) {
+    for (const incomplete of [0, 1]) {
+      const body = comment.body.replace('"capture_quality":"best-effort"', `"capture_quality":"${quality}","incomplete":${incomplete}`)
+      const observed = { ...pr("FAIL"), comments: [{ ...comment, body }] }
+      const result = reconcileTarget(target, snapshot([observed]), checkedAt)
+      assert.equal(result.replays[0].state, incomplete === 0 && ["complete", "best-effort"].includes(quality) ? "recorded" : "undeterminable")
+    }
+  }
+  const missing = comment.body.replace(',"capture_quality":"best-effort"', "")
+  const observed = { ...pr(), comments: [{ ...comment, body: missing }] }
+  assert.equal(reconcileTarget(target, snapshot([observed]), checkedAt).replays[0].state, "undeterminable")
+})
+
 test("collector uses injected verify and retains exceptions without claiming failure", async () => {
   let calls = 0
   const result = await collectReconciliation(target, { exec: inventoryExec, verify: async (url, { exec }) => {
