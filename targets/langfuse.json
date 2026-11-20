@@ -1,0 +1,3725 @@
+{
+  "slug": "langfuse",
+  "upstream": "langfuse/langfuse",
+  "fork": "garnet-labs/langfuse",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20134,
+      "title": "chore(deps): bump the rust-dependencies group across 1 directory with 11 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-12T15:42:46Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20101,
+      "title": "chore(deps): bump the rust-dependencies group across 1 directory with 10 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T19:57:46Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20087,
+      "title": "chore(deps): bump the rust-dependencies group across 1 directory with 9 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T16:16:50Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19831,
+      "title": "chore(deps): bump the rust-dependencies group across 1 directory with 8 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-05T22:55:30Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19253,
+      "title": "build(deps): bump the rust-dependencies group across 1 directory with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T22:55:00Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18916,
+      "title": "build(deps): bump the rust-dependencies group across 1 directory with 5 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-16T08:17:25Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/native/Cargo.lock",
+        "packages/native/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17911,
+      "title": "chore(deps): bump base64 from 0.22.1 to 0.23.1 in /ai-gateway in the rust-dependencies group",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-24T22:54:15Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "base64",
+        "from": "0.22.1",
+        "to": "0.23.1"
+      },
+      "files": 2,
+      "paths": [
+        "ai-gateway/Cargo.lock",
+        "ai-gateway/Cargo.toml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15978,
+      "title": "chore(deps): bump nanoid from 3.3.12 to 3.3.17",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-11T08:32:48Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nanoid",
+        "from": "3.3.12",
+        "to": "3.3.17"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15904,
+      "title": "chore(deps): bump dompurify from 3.4.12 to 3.4.13",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-07T16:11:45Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dompurify",
+        "from": "3.4.12",
+        "to": "3.4.13"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15817,
+      "title": "chore(deps): bump the prisma group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-05T22:57:06Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15762,
+      "title": "chore(deps): bump undici from 7.28.0 to 7.29.0",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-04T11:43:33Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "undici",
+        "from": "7.28.0",
+        "to": "7.29.0"
+      },
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15658,
+      "title": "chore(deps): bump the prisma group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-30T22:58:22Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15361,
+      "title": "chore(deps): bump next from 16.2.9 to 16.2.11",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-23T10:55:33Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "next",
+        "from": "16.2.9",
+        "to": "16.2.11"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15308,
+      "title": "chore(deps): bump dompurify from 3.4.11 to 3.4.12",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-22T13:50:45Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dompurify",
+        "from": "3.4.11",
+        "to": "3.4.12"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15283,
+      "title": "chore(deps): bump the next group across 1 directory with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-21T22:57:45Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/config-eslint/package.json",
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15240,
+      "title": "chore(deps): bump the next group with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-20T22:57:40Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "packages/config-eslint/package.json",
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19438,
+      "title": "chore(deps): bump dd-trace from 5.109.0 to 5.131.1 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-28T08:42:53Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dd-trace",
+        "from": "5.109.0",
+        "to": "5.131.1"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19188,
+      "title": "chore(deps-dev): bump @storybook/addon-vitest from 10.5.10 to 10.6.2 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T08:27:19Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@storybook/addon-vitest",
+        "from": "10.5.10",
+        "to": "10.6.2"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19187,
+      "title": "chore(deps-dev): bump storybook from 10.5.10 to 10.6.2 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T08:27:09Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "storybook",
+        "from": "10.5.10",
+        "to": "10.6.2"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19137,
+      "title": "build(deps): bump @modelcontextprotocol/sdk from 1.31.0 to 1.32.0 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-21T11:11:20Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@modelcontextprotocol/sdk",
+        "from": "1.31.0",
+        "to": "1.32.0"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18377,
+      "title": "chore(deps): bump @modelcontextprotocol/sdk from 1.29.0 to 1.31.0 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-07T07:09:03Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@modelcontextprotocol/sdk",
+        "from": "1.29.0",
+        "to": "1.31.0"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18157,
+      "title": "chore(deps): bump piscina from 5.3.0 to 5.3.2 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-02T09:11:43Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "piscina",
+        "from": "5.3.0",
+        "to": "5.3.2"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18146,
+      "title": "chore(deps): bump the rust-dependencies group in /ai-gateway with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-01T23:02:16Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "ai-gateway/Cargo.lock",
+        "ai-gateway/Cargo.toml",
+        "ai-gateway/src/observability/client.rs"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 16117,
+      "title": "build(deps): bump nanoid from 3.3.17 to 3.3.18 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-14T08:03:49Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nanoid",
+        "from": "3.3.17",
+        "to": "3.3.18"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15992,
+      "title": "ci(deps): bump nanoid from 3.3.16 to 3.3.17 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-08-11T11:22:18Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nanoid",
+        "from": "3.3.16",
+        "to": "3.3.17"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15359,
+      "title": "chore(deps): bump next from 16.2.9 to 16.2.11 in /web",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-23T10:49:59Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "next",
+        "from": "16.2.9",
+        "to": "16.2.11"
+      },
+      "files": 1,
+      "paths": [
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 9,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20543,
+      "title": "chore(deps): bump the rust-dependencies group in /ai-gateway with 3 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-19T22:55:18Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19830,
+      "title": "chore(deps): bump uuid from 1.28.0 to 1.29.0 in /ai-gateway in the rust-dependencies group across 1 directory",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-05T22:54:44Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "uuid",
+        "from": "1.28.0",
+        "to": "1.29.0"
+      },
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19476,
+      "title": "build(deps): bump the rust-dependencies group in /ai-gateway with 3 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-29T22:55:18Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19252,
+      "title": "chore(deps): bump the rust-dependencies group in /ai-gateway with 7 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-22T22:54:52Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18974,
+      "title": "build(deps): bump the rust-dependencies group in /ai-gateway with 3 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-16T17:29:43Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18899,
+      "title": "chore(deps): bump the rust-dependencies group in /ai-gateway with 2 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-15T22:54:31Z",
+      "kind": "dependency",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "ai-gateway/Cargo.lock"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15643,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 16 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-07-30T14:58:45Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 22,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/build-sandbox-microvm-image.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/ci-runtime-analyst.md",
+        ".github/workflows/claude-code-security-review.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/codespell.yml",
+        ".github/workflows/deploy.yml",
+        ".github/workflows/licencecheck.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/preview-build.yml",
+        ".github/workflows/promote-main-to-production.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/semgrep.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml",
+        ".github/workflows/stale_issues.yml",
+        ".github/workflows/storybook-preview.yml",
+        ".github/workflows/warm-caches.yml",
+        ".github/workflows/zizmor.yml"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15367,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 17 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-23T12:22:24Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 21,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/build-sandbox-microvm-image.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/claude-code-security-review.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/codespell.yml",
+        ".github/workflows/deploy.yml",
+        ".github/workflows/licencecheck.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/preview-build.yml",
+        ".github/workflows/promote-main-to-production.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/semgrep.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml",
+        ".github/workflows/stale_issues.yml",
+        ".github/workflows/storybook-preview.yml",
+        ".github/workflows/warm-caches.yml",
+        ".github/workflows/zizmor.yml"
+      ],
+      "gap": {
+        "total": 6,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15859,
+      "title": "ci(deps): bump the github-actions group with 5 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-08-06T23:03:03Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".github/aw/actions-lock.json",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/ci-runtime-analyst.md",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/stale_issues.yml",
+        ".github/workflows/zizmor.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15310,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 16 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-22T14:01:33Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 14,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/build-sandbox-microvm-image.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/licencecheck.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/preview-build.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml",
+        ".github/workflows/stale_issues.yml",
+        ".github/workflows/storybook-preview.yml",
+        ".github/workflows/warm-caches.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 15172,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 13 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-16T23:05:36Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 9,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/preview-build.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14957,
+      "title": "ci(deps): bump the github-actions group with 4 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-09T23:02:39Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/model-price-audit.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14861,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 9 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-07-07T18:17:54Z",
+      "kind": "code",
+      "transition": null,
+      "files": 20,
+      "paths": [
+        ".github/aw/actions-lock.json",
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/ci-runtime-analyst.lock.yml",
+        ".github/workflows/claude-code-security-review.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/codespell.yml",
+        ".github/workflows/deploy.yml",
+        ".github/workflows/licencecheck.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/promote-main-to-production.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/semgrep.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml",
+        ".github/workflows/storybook-preview.yml",
+        ".github/workflows/warm-caches.yml",
+        ".github/workflows/zizmor.yml",
+        ".github/zizmor.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 14819,
+      "title": "ci(deps): bump the github-actions group across 1 directory with 6 updates",
+      "author": "app/dependabot",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-07-06T16:12:59Z",
+      "kind": "workflow",
+      "transition": null,
+      "files": 16,
+      "paths": [
+        ".github/workflows/_deploy_ecs_service.yml",
+        ".github/workflows/claude-code-security-review.yml",
+        ".github/workflows/codeql.yml",
+        ".github/workflows/codespell.yml",
+        ".github/workflows/deploy.yml",
+        ".github/workflows/licencecheck.yml",
+        ".github/workflows/model-price-audit.yml",
+        ".github/workflows/pipeline.yml",
+        ".github/workflows/promote-main-to-production.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/sdk-api-spec.yml",
+        ".github/workflows/semgrep.yml",
+        ".github/workflows/snyk-web.yml",
+        ".github/workflows/snyk-worker.yml",
+        ".github/workflows/storybook-preview.yml",
+        ".github/workflows/zizmor.yml"
+      ],
+      "gap": {
+        "total": 5,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "workflow",
+            "points": 2,
+            "reason": "workflow surface changed"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:08:43.099Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20247,
+      "title": "chore(deps): bump express-rate-limit to 8.7.2",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-15T15:09:44Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "express-rate-limit",
+        "from": null,
+        "to": "8.7.2"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20226,
+      "title": "chore(deps): bump `@opentelemetry/instrumentation-http` to 0.222.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-14T05:19:51Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@opentelemetry/instrumentation-http",
+        "from": null,
+        "to": "0.222.0"
+      },
+      "files": 3,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20206,
+      "title": "chore(deps): bump hono to 4.13.16",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-13T15:12:39Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "hono",
+        "from": null,
+        "to": "4.13.16"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19442,
+      "title": "chore(deps): bump follow-redirects to 1.16.2",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-28T13:16:26Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "follow-redirects",
+        "from": null,
+        "to": "1.16.2"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19441,
+      "title": "chore(deps): bump dd-trace to 5.131.1",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-28T13:16:11Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dd-trace",
+        "from": null,
+        "to": "5.131.1"
+      },
+      "files": 4,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "web/package.json",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19436,
+      "title": "chore(deps): bump qs to 6.17.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-28T05:22:52Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "qs",
+        "from": null,
+        "to": "6.17.0"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19435,
+      "title": "chore(deps): bump postcss-selector-parser to 6.1.5",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-28T05:22:39Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "postcss-selector-parser",
+        "from": null,
+        "to": "6.1.5"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19315,
+      "title": "chore(deps): bump dompurify to 3.4.17",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-23T15:23:13Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dompurify",
+        "from": null,
+        "to": "3.4.17"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19254,
+      "title": "chore(deps): bump body-parser to 2.4.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-23T05:27:39Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "body-parser",
+        "from": null,
+        "to": "2.4.0"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 19178,
+      "title": "chore(deps): bump `@modelcontextprotocol/sdk` to 1.32.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-10-22T05:28:48Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@modelcontextprotocol/sdk",
+        "from": null,
+        "to": "1.32.0"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18512,
+      "title": "chore(deps): bump handlebars to 4.7.10",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-09T05:37:36Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "handlebars",
+        "from": null,
+        "to": "4.7.10"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18111,
+      "title": "chore(deps): bump dompurify to 3.4.16",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-01T05:33:45Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "dompurify",
+        "from": null,
+        "to": "3.4.16"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18060,
+      "title": "chore(deps): bump axios to 1.20.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-30T05:39:05Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "axios",
+        "from": null,
+        "to": "1.20.0"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18059,
+      "title": "chore(deps): bump `@grpc/grpc-js` to 1.14.5",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-30T05:38:54Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@grpc/grpc-js",
+        "from": null,
+        "to": "1.14.5"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18058,
+      "title": "chore(deps): bump ip-address to 10.7.1",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-30T05:38:42Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "ip-address",
+        "from": null,
+        "to": "10.7.1"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17994,
+      "title": "chore(deps): bump nodemailer to 10.0.9",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-28T09:20:28Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nodemailer",
+        "from": null,
+        "to": "10.0.9"
+      },
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17697,
+      "title": "chore(deps): bump hono to 4.13.7",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-21T05:34:33Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "hono",
+        "from": null,
+        "to": "4.13.7"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17570,
+      "title": "chore(deps): bump fast-uri to 3.1.8",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-17T05:36:13Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "fast-uri",
+        "from": null,
+        "to": "3.1.8"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17521,
+      "title": "chore(deps): bump proxy-addr to 2.0.8",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-16T05:33:09Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "proxy-addr",
+        "from": null,
+        "to": "2.0.8"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17459,
+      "title": "chore(deps): bump nodemailer to 10.0.5",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-15T05:45:58Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nodemailer",
+        "from": null,
+        "to": "10.0.5"
+      },
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17266,
+      "title": "chore(deps): bump csv-parse to 7.0.2",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-10T05:31:54Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "csv-parse",
+        "from": null,
+        "to": "7.0.2"
+      },
+      "files": 3,
+      "paths": [
+        "pnpm-lock.yaml",
+        "web/package.json",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17251,
+      "title": "chore(deps): bump vitest to 4.1.11",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T13:18:14Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "vitest",
+        "from": null,
+        "to": "4.1.11"
+      },
+      "files": 7,
+      "paths": [
+        "packages/eslint-plugin/package.json",
+        "packages/in-app-agent-sandbox-runtime/package.json",
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        "web/package.json",
+        "worker/package.json"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17249,
+      "title": "chore(deps): bump nodemailer to 9.1.1",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T13:17:54Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "nodemailer",
+        "from": null,
+        "to": "9.1.1"
+      },
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17214,
+      "title": "chore(deps): bump undici to 6.28.1",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T05:35:05Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "undici",
+        "from": null,
+        "to": "6.28.1"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17159,
+      "title": "chore(deps): bump undici to 7.29.1",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-08T05:37:43Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "undici",
+        "from": null,
+        "to": "7.29.1"
+      },
+      "files": 3,
+      "paths": [
+        "packages/shared/package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17053,
+      "title": "chore(deps): bump fast-uri to 3.1.7",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-04T11:47:12Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "fast-uri",
+        "from": null,
+        "to": "3.1.7"
+      },
+      "files": 2,
+      "paths": [
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml"
+      ],
+      "gap": {
+        "total": 11,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20167,
+      "title": "chore(deps): bump `@hono/node-server` to 2.1.6",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T05:19:51Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@hono/node-server",
+        "from": null,
+        "to": "2.1.6"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18513,
+      "title": "chore(deps): bump postcss-selector-parser to 7.1.6",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-09T05:37:49Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "postcss-selector-parser",
+        "from": null,
+        "to": "7.1.6"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18375,
+      "title": "chore(deps): bump sharp to 0.35.5",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-07T05:34:06Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "sharp",
+        "from": null,
+        "to": "0.35.5"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18327,
+      "title": "chore(deps): bump `@vue/server-renderer` to 3.5.43",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-06T12:11:03Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@vue/server-renderer",
+        "from": null,
+        "to": "3.5.43"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18326,
+      "title": "chore(deps): bump source-map-js to 1.2.2",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-06T12:10:52Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "source-map-js",
+        "from": null,
+        "to": "1.2.2"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18325,
+      "title": "chore(deps): bump smol-toml to 1.9.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-06T12:10:40Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "smol-toml",
+        "from": null,
+        "to": "1.9.0"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 18112,
+      "title": "chore(deps): bump brace-expansion to 1.1.21, 2.1.7, 5.0.12",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-10-01T05:33:55Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "brace-expansion",
+        "from": null,
+        "to": "1.1.21"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17917,
+      "title": "chore(deps): bump image-size to 2.0.4",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-25T05:35:23Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "image-size",
+        "from": null,
+        "to": "2.0.4"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17312,
+      "title": "chore(deps): bump sharp to 0.35.4",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-11T05:31:51Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "sharp",
+        "from": null,
+        "to": "0.35.4"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17311,
+      "title": "chore(deps): bump smol-toml to 1.8.0",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-11T05:31:38Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "smol-toml",
+        "from": null,
+        "to": "1.8.0"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17250,
+      "title": "chore(deps): bump sharp to 0.35.4",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-09T13:18:03Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "sharp",
+        "from": null,
+        "to": "0.35.4"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17065,
+      "title": "chore(deps): bump `@hono/node-server` to 1.19.17",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-04T13:37:54Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "@hono/node-server",
+        "from": null,
+        "to": "1.19.17"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 17054,
+      "title": "chore(deps): bump js-yaml to 3.15.2 and 4.3.2",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-09-04T11:47:23Z",
+      "kind": "dependency",
+      "transition": {
+        "name": "js-yaml",
+        "from": null,
+        "to": "3.15.2"
+      },
+      "files": 1,
+      "paths": [
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 7,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "dependency-only",
+            "points": 2,
+            "reason": "dependency-only diff, nothing else to read"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 20288,
+      "title": "chore(ai-gateway): sync Bedrock model API formats with model cards",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-16T08:28:17Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "web/src/features/ai-gateway/constants/bedrockModelApiFormats.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T03:10:17.514Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
