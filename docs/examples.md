@@ -44,6 +44,44 @@ profile may be unavailable. The reader then reports the head's attribution limit
 without claiming which actions were added. An unreadable or mismatched profile
 produces an explicit review note, not an empty comparison.
 
+### Real Devin receipt: detached curl
+
+```sh
+node bin/replay.mjs profile test/fixtures/demo-profiles/devin-receipt3.json
+```
+
+Local receipt observation, not CI evidence or approval. Items span multiple
+commits and include partial capture; no additions are determined here. Resolved
+addresses are grouped by hostname and action, not emitted as separate actions.
+Recorded repository, job, and workflow boundaries remain distinct: an unknown
+repository is not inferred from another window. Observed strings are untrusted.
+
+**Attribution review**
+
+Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code>, <code>not recorded</code> · Compared: not recorded (profile unavailable)
+
+Scope: <code>supplied-profiles</code> · version transition: not derivable from the record.
+
+**Needs review: not attributable to the runner.**
+
+Compared profile unavailable; additions cannot be determined.
+Host-rooted ancestry does not establish job origin.
+
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154, 172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-test</code> · workflow <code>devin</code>
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+
+**Other recorded outbound actions**
+
+- <code>systemd › devin-remote › bash › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install › sh › MainThread</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › sleep › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.11.34, 104.16.9.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.0.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.0.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › sleep › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.4.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+
 ### Real card excerpt: Express pull 91
 
 Generated from the current public profile and App comment after

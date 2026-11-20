@@ -298,6 +298,25 @@ test("resolved IPs group with their host across windows without creating compari
   assert.equal(readProfileTrees({ profiles: [base, head] }).length, 2)
 })
 
+test("review headings cover only flagged rows, with neutral actions in a separate section", () => {
+  const report = compareProfileTrees(JSON.parse(readFileSync(RECEIPT, "utf8")))
+  const text = renderProfileTrees(report)
+  const [review, neutral] = text.split("**Other recorded outbound actions**")
+  assert.match(review, /detached-root/)
+  assert.doesNotMatch(review, /session-linked|runner-linked|runner-background/)
+  assert.match(neutral, /session-linked/)
+  assert.doesNotMatch(neutral, /detached-root|Needs review:/)
+  const reviewOnly = renderProfileTrees(report, { reviewOnly: true })
+  assert.doesNotMatch(reviewOnly, /Other recorded outbound actions|session-linked/)
+  assert.match(reviewOnly, /detached-root/)
+  const ordinary = compareProfileTrees({ associations: [{ remote_names: ["example.org"], ancestry: ["Runner.Worker", "node"] }] })
+  assert.doesNotMatch(renderProfileTrees(ordinary), /Needs review:/)
+  assert.match(renderProfileTrees(ordinary), /Other recorded outbound actions/)
+  const card = renderCard(buildModel({ slug: "example", forkPr: 1, headSha: HEAD, comment: comment(), attribution: report }))
+  assert.match(card, /detached-root/)
+  assert.doesNotMatch(card, /session-linked/)
+})
+
 test("CursorPages with further pages withhold additions and explain the missing pages", () => {
   const receipt = JSON.parse(readFileSync(new URL("./fixtures/demo-profiles/devin-cursor-receipt.json", import.meta.url), "utf8"))
   assert.equal(captureAllowsComparison(receipt), true)
