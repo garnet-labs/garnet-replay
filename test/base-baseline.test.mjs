@@ -101,15 +101,45 @@ test("baseline state rejects unrelated success and requires every selected workf
   assert.equal(state([run]).state, "recorded")
   assert.equal(state([]).state, "pending")
   for (const fields of [{ event: "pull_request" }, { head_branch: "master" }, { head_sha: "b".repeat(40) }, { path: ".github/workflows/build.yml" }, { status: "queued" }, { status: "in_progress" }]) assert.equal(state([{ ...run, ...fields }]).state, "pending")
-  for (const conclusion of ["failure", "cancelled", "timed_out", "skipped", "neutral", null]) assert.equal(state([{ ...run, conclusion }]).state, "failed")
+  for (const conclusion of ["failure", "cancelled", "timed_out", "neutral", null]) assert.equal(state([{ ...run, conclusion }]).state, "failed")
+  assert.equal(state([{ ...run, conclusion: "skipped" }]).state, "pending")
   assert.equal(state([run], [workflow, ".github/workflows/other.yml"]).state, "pending")
   assert.equal(state([run, { ...run, id: 11, status: "in_progress", conclusion: null }]).state, "pending")
   assert.throws(() => state([], []), /recording workflow/)
   assert.equal(state([{ ...run, jobs: [] }]).state, "failed")
   assert.equal(state([{ ...run, jobs: undefined }]).state, "pending")
-  assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], conclusion: "skipped" }] }]).state, "failed")
+  assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], conclusion: "skipped" }] }]).state, "pending")
   assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], steps: [{ ...run.jobs[0].steps[0], conclusion: "skipped" }] }] }]).state, "failed")
   assert.equal(state([{ ...run, jobs: [{ ...run.jobs[0], steps: [{ name: "Unrelated successful step", status: "completed", conclusion: "success" }] }] }]).state, "failed")
+})
+
+test("baseline exclusions require a successful recorder and never conceal active or failed runs", () => {
+  const other = ".github/workflows/other.yml"
+  const state = (runs, nowMs = 300000) => baseRecordState({ runs, workflows: [workflow, other], branch, sha, nowMs, firstRunAt: 0 })
+  assert.equal(state([run], 299999).state, "pending")
+  assert.equal(state([run]).state, "recorded")
+  assert.match(state([run]).detail, /other.yml: absent after 5 min/)
+  for (const skipped of [{ ...run, path: other, conclusion: "skipped" }, { ...run, path: other, jobs: [{ ...run.jobs[0], conclusion: "skipped" }] }]) {
+    assert.equal(state([run, skipped], 0).state, "recorded")
+    assert.equal(state([skipped]).state, "pending")
+  }
+  assert.equal(state([run, { ...run, path: other, status: "in_progress" }]).state, "pending")
+  assert.equal(state([run, { ...run, path: other, conclusion: "failure" }]).state, "failed")
+  assert.equal(state([run, { ...run, id: 11, status: "queued" }]).state, "pending")
+})
+
+test("baseline waiting applies absence grace from the first selected run, including historical tips", async () => {
+  for (const historical of [true, false]) {
+    let time = 600000
+    let sleeps = 0
+    const details = []
+    const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow, "missing.yml"], timeoutMs: 400000, pollMs: 30000,
+      now: () => time, sleep: async (ms) => { time += ms; sleeps += 1 }, log: (line) => details.push(line),
+      exec: (_command, args) => JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: run.jobs }] : [{ workflow_runs: [{ ...run, ...(historical ? { created_at: new Date(0).toISOString() } : {}) }] }]) })
+    assert.equal(result.state, "recorded")
+    assert.equal(sleeps, historical ? 0 : 10)
+    assert.match(details.at(-1), /missing.yml: absent after 5 min/)
+  }
 })
 
 test("baseline waiting succeeds, skips sleeping for existing success, stops failed, and retains pending on timeout/API errors", async () => {
