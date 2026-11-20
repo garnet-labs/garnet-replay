@@ -304,6 +304,40 @@ test("two-commit, injected, instrumented and already-recording source bases use 
   }
 })
 
+test("alternate-base first-commit recorder conflicts and unreadable diffs stop before any fork write", async () => {
+  const plan = planReplay({ ...input, firstCommitSha: "d".repeat(40), baseRecords: [workflow], baseWorkflowBodies: { [workflow]: body } })
+  const index = plan.steps.findIndex((step) => step.id === "verify-first-commit-workflows")
+  const guard = plan.steps[index]
+  assert.ok(index >= 0)
+  assert.deepEqual(guard.refusePaths, [workflow])
+  assert.ok(plan.steps.findIndex((step) => step.id === "verify-first-commit") < index)
+  assert.ok(plan.steps.every((step, position) => !(step.kind === "write-remote" || step.kind === "ensure-base") || position > index))
+  for (const unreadable of [false, true]) {
+    const calls = []
+    await assert.rejects(executePlan({ ...plan, steps: plan.steps.slice(index) }, { log: () => {}, io: { mkdirp: () => {} }, exec: (command, args) => {
+      calls.push([command, args])
+      if (args.includes("diff")) {
+        if (unreadable) throw new Error("cannot read selected revision")
+        return `${workflow}\0`
+      }
+      throw new Error("must refuse before touching the base")
+    } }), unreadable ? /cannot read selected revision/ : /--first-commit edits alternate-base recording workflows/)
+    assert.equal(calls.length, 1)
+    assert.equal(calls[0][0], "git")
+    assert.ok(calls[0][1].includes("diff"))
+    assert.equal(calls.some(([, args]) => args.includes("push")), false)
+  }
+  for (const paths of [[], ["app.js"]]) {
+    const calls = []
+    await executePlan({ ...plan, steps: [guard] }, { log: () => {}, io: { mkdirp: () => {} }, exec: (_command, args) => {
+      calls.push(args)
+      return paths.join("\0")
+    } })
+    assert.equal(calls.length, 1)
+    assert.ok(calls[0].includes("diff"))
+  }
+})
+
 test("alternate-base first commits refuse recorder edits before staging, but allow other or empty diffs", async () => {
   const plan = planReplay({ ...input, firstCommitSha: "d".repeat(40), baseRecords: [workflow], baseWorkflowBodies: { [workflow]: body } })
   const step = plan.steps.find((step) => step.id === "first-commit-paths")
