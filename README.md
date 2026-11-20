@@ -114,18 +114,17 @@ the question needs an exact-head before/after pair. The pnpm result:
 
 ## Current status
 
-Latest state and the exact operator commands: [docs/state-2026-11-05.md](docs/state-2026-11-05.md).
+Latest state and the exact operator commands: [docs/state-2026-11-20.md](docs/state-2026-11-20.md).
 Use the hosted `replay` workflow (GitHub-hosted runner) for third-party forks; the local `--work` paths are for Garnet-authored repositories only.
 
 - Harness: all seven ladder commands, the `verify` share gate, identity and
   duplicate-admission guards, and the offline suite (`npm test`) are in place.
-- Evidence: recorded batches ([prospects](docs/prospect-batch.md),
-  [2026-09-24](docs/batch-2026-09-24.md)) produced successful recording jobs but
-  **no exhibit passes `replay verify`** yet. The recorder does not declare capture
-  completeness and public reports name merge refs instead of replay heads. The
-  viewer shows these records as observations scoped to the recorded jobs
-  ("capture not declared"); none clears the share gate, and no causal claim is
-  made from them.
+- Evidence: finalized, explicitly labelled best-effort records with no incomplete
+  jobs can clear `replay verify` as scoped results, not complete capture. Merge-ref
+  profiles need established executed-source linkage to the replay head. The
+  [current-state checks](docs/state-2026-11-20.md#what-works) name the pairs for
+  E2B#93 and litellm#153 (shareable), and nodejs-goof#4 (not shareable: session residue).
+  Older batches with undeclared capture remain observations, not shareable exhibits.
 - Walkthroughs for humans and agents (read evidence, hosted wizard, CLI,
   agent procedure, consumption, contributing): [docs/walkthroughs.md](docs/walkthroughs.md).
 - Agents: follow [SKILL.md](SKILL.md); open interface gaps are listed in
@@ -220,7 +219,7 @@ $R card   https://github.com/garnet-labs/posthog/pull/<N>       # out/posthog/pr
 $R cohort posthog --from-observations --limit 20                # out/posthog/cohort-<k>.md
 $R consume https://github.com/garnet-labs/posthog/pull/<N>      # reviewer/agent citation, receipts, check state
 $R harvest posthog --limit 40                                   # consume every recorded fork pull request
-$R stage2 posthog --dry-run                                     # evidence mirror + garnet/evidence gate
+$R stage2 posthog --dry-run                                     # evidence mirror + merge-safety gate
 $R status posthog
 ```
 
@@ -329,12 +328,14 @@ as unsupported and the run stops before writing. See [docs/stage1.md](docs/stage
 
 `replay stage2 <slug>` opens one pull request on the fork with an evidence mirror
 (`workflow_run`, resident on the default branch, never runs pull request code),
-an acceptance gate `garnet/evidence` that requires a record bound to the exact head,
+the `garnet/merge-safety` gate driven by `replay decide`,
 `REVIEW.md` grounding instructions for reviewers and review agents, thin per-tool
 adapter files, and a re-review step that asks the configured review tools
 (`--reviewers`, default `devin,coderabbit,greptile`) to look again once per head,
-only after `garnet/evidence` has succeeded for that exact head. The mirror and
-gate listen to every recording workflow that can run on a dependency change
+only after the App record for that exact head is finalized. Re-review does not
+poll a check. Actions no longer publishes `garnet/evidence`; do not require that
+absent check. The mirror listens to every recording workflow that can run on a
+dependency change
 (`--record-workflow <path>` narrows to one); existing mirror files stop the plan
 without `--replace-mirror`, and a fork workflow that already listens to
 the same recorder stops it outright.
@@ -380,7 +381,7 @@ Older surfaces stay: `known <pr-url>` turns an App comment into replay JSON,
 
 ## Docs
 
-- [docs/state-2026-11-05.md](docs/state-2026-11-05.md): what works, what is scoped, exact operator commands.
+- [docs/state-2026-11-20.md](docs/state-2026-11-20.md): what works, what is scoped, exact operator commands.
 
 - [docs/stage1.md](docs/stage1.md) — replay guide: choosing a candidate, both `live` modes, guards, waiting for the record
 - [docs/stage2.md](docs/stage2.md) — target workflow integration and consumption evidence

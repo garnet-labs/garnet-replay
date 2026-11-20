@@ -91,7 +91,9 @@ your own `gh` credentials. The full step list, including `--first-commit`,
 `replay consume <fork-pr-url>` reports whether a reviewer or agent cited the
 head-bound record; `replay harvest <slug>` does it across a fork;
 `replay stage2 <slug> --dry-run` plans the evidence mirror, the
-`garnet/evidence` gate and `REVIEW.md` ([stage2.md](stage2.md)). For pnpm,
+`garnet/merge-safety` gate and `REVIEW.md` ([stage2.md](stage2.md)). Re-review
+reads the finalized exact-head App record; Actions no longer publishes
+`garnet/evidence`. For pnpm,
 `replay upstream pnpm/pnpm --pr <N>` reads the upstream's own Garnet records
 without writing anything. Agent A/B scoring lives in `benchmark/agent-ab/`.
 

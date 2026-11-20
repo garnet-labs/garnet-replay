@@ -75,7 +75,7 @@ request; cards and `verify` fail closed on them.
 |---|---|
 | `observed-runtime-behavior` | what the record shows on the head: workload and runner-background connection counts |
 | `comparison-result` | the verdict sentence between base and head at the stated scope |
-| `required-check-state` | the state of `garnet/evidence` or the recording check on this head |
+| `required-check-state` | the state of the recording check on this head; Actions no longer publishes `garnet/evidence` |
 | `reviewer-consumption-evidence` | a reviewer or agent cited this record, with the URL |
 | `unsupported-claim` | what the record does not carry: compile or build success, file writes outside the recorded file kinds, secret reads, absence of behavior in unrecorded jobs, that nothing else happened; plus the undeterminable reasons |
 
@@ -93,9 +93,13 @@ any variance, the verdict is `undeterminable`.
 
 Live `verify` reads the anonymous API for each job's public run/profile link and
 requires the exact repository, run ID, profile ID, and current PR head SHA.
-Malformed selectors, missing identity, HTTP errors, and merge-ref identities
-fail the gate. This proves identity, not completeness or causality; declared
-complete capture is a separate required leg.
+Malformed selectors, missing identity and HTTP errors fail the gate. A
+merge-ref identity passes only with verified executed-source linkage (two
+parents, the PR head second) and a public profile whose `head_sha` is the
+current PR head. This proves identity, not completeness or
+causality. Accepted capture is a separate required leg: declared complete, or a
+finalized App record labelled `best-effort` with no incomplete jobs, which stays
+a scoped result.
 
 Cards quote all recorded job sections, including unchanged workload trees and
 runner background. They expose capture and the actual previous-recorded/head

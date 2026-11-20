@@ -22,7 +22,7 @@ not needed to make the core path clear.
 |---|---|
 | `live --prepared`, `--dependency`, `--allow-build`, `--record inject` | Specialized two-commit before/after experiments (prepared pairs, build-script transitions). |
 | `cohort`, `harvest`, `uat`, `decide` | Rates and scoring over many fork PRs; used by prospect and Sept batches. |
-| `stage2` | Opt-in target-workflow integration (evidence mirror, `garnet/evidence` check). |
+| `stage2` | Opt-in target-workflow integration (evidence mirror, `garnet/merge-safety` check, finalized-record re-review). |
 | `fork`, `refresh`, `repin` | Fork lifecycle; `repin` moves forks to the current harness pin. |
 | `known`, `pair`, `serve`, `seed-*` | Viewer and seed corpus. |
 | `benchmark/` | Agent A/B; single-pass, not a product claim. |
