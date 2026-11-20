@@ -1,0 +1,51 @@
+name: Dependency recording
+
+on:
+  push:
+    branches: [main, 'baseline/**']
+    paths:
+      - backend/package.json
+      - backend/package-lock.json
+      - frontend/package.json
+      - frontend/package-lock.json
+      - .github/workflows/garnet-record.yml
+  pull_request:
+    paths:
+      - backend/package.json
+      - backend/package-lock.json
+      - frontend/package.json
+      - frontend/package-lock.json
+      - .github/workflows/garnet-record.yml
+
+permissions: {}
+
+concurrency:
+  group: dependency-record-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  dep-install:
+    name: Backend and frontend dependency install
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '26'
+      - uses: garnet-org/action@673a06d87748bec49e4d8df22d371b2a3420aba4 # v2.5.2
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+      - name: Install frontend dependencies
+        if: ${{ !cancelled() }}
+        working-directory: frontend
+        run: npm ci
+      - name: Let sensor settle
+        if: always()
+        run: sleep 30
