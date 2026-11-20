@@ -1,5 +1,137 @@
 # Worked examples
 
+## Outbound attribution reader (2026-11-20)
+
+Read a recorded profile without writing a ledger, dispatching a run, or changing
+the App result:
+
+```sh
+node bin/replay.mjs profile test/fixtures/demo-profiles/30304258281.json
+node bin/replay.mjs profile head.json --base compared.json --json
+node bin/replay.mjs profile https://github.com/garnet-labs/express/pull/91
+```
+
+File input supports public associations, profile collections (including CursorPage
+`items` lists in session receipts), raw network peers, and summarized egress.
+Files are observations supplied by the operator; the file
+reader does not certify capture completeness. PR input requires a finalized,
+head-bound record and the existing exact public repository/run/profile/head
+identity checks, including merge-parent linkage.
+
+The reader processes supplied CursorPage items without fetching more pages.
+If a page declares more items or a next cursor, it reports missing pages and
+cannot determine additions, even when capture otherwise declares complete.
+
+The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
+job, with the workflow path or name beside it when recorded.
+Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
+`devin-remote` is session-linked, except that container ancestry still needs review.
+Detached actions without that session root also need review. Container roots and
+host-rooted actions outside known runner services need attribution review even
+when their recorded step says `Runner Processes`. Missing ancestry and other
+unlinked roots also need review. Host-rooted Python traffic may be a host service;
+the warning does not claim that the job created it. No destination allowlist
+settles attribution.
+
+Comparison uses the repository, workflow identity when recorded, destination, ancestry,
+ports, protocol, and job, not destination
+equality alone. Run IDs and refs do not distinguish actions; workflow references
+are normalized to their path. PR reads use earlier finalized comments bound to the exact compared
+commit from the same App author when available. Declared capture other than complete,
+or incomplete jobs on either side, prevents additions from being determined.
+If the App has overwritten its only comment, the compared
+profile may be unavailable. The reader then reports the head's attribution limits
+without claiming which actions were added. An unreadable or mismatched profile
+produces an explicit review note, not an empty comparison.
+
+### Real Devin receipt: detached curl
+
+```sh
+node bin/replay.mjs profile test/fixtures/demo-profiles/devin-receipt3.json
+```
+
+Local receipt observation, not CI evidence or approval. Items span multiple
+commits and include partial capture; no additions are determined here. Resolved
+addresses are grouped by hostname and action, not emitted as separate actions.
+Recorded repository, job, and workflow boundaries remain distinct: an unknown
+repository is not inferred from another window. Observed strings are untrusted.
+
+**Attribution review**
+
+Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code>, <code>not recorded</code> · Compared: not recorded (comparison unavailable)
+
+Scope: <code>supplied-profiles</code> · version transition: not derivable from the record.
+
+Capture is not complete; additions cannot be determined.
+
+**Needs review: not attributable to the runner.**
+
+Host-rooted ancestry does not establish job origin.
+
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154, 172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-test</code> · workflow <code>devin</code>
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+
+**Other recorded outbound actions**
+
+- <code>systemd › devin-remote › bash › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install › sh › MainThread</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › sleep › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.11.34, 104.16.9.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › bash › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.0.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.0.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+- <code>systemd › devin-remote › sleep › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.4.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code> · workflow <code>devin</code>
+
+### Real card excerpt: Express pull 91
+
+Generated from the current public profile and App comment after
+`replay verify https://github.com/garnet-labs/express/pull/91`. Verification returned
+`PASS` for the existing verification legs, with a separate attribution review
+note. This does not resolve job origin. The excerpt below ends before the quoted
+execution sections; the full card still retains every recorded job, workload row,
+background row, and job link. Existing App results and review classifications are
+preserved, not upgraded by the reader. Re-run verification before sharing.
+
+<!-- garnet:card slug=express pr=91 state=undeterminable -->
+### What ran, and what changed · pull request 91
+
+> Capture is best-effort; the App result is scoped to the recorded jobs.
+
+**Attribution review**
+
+Head: <code>188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b</code> · Compared: <code>811e189dae5d3abc3633d41b05aa0bdae2051188</code> (comparison unavailable)
+
+Scope: <code>previous-push</code> · version transition: not derivable from the record.
+
+Capture is not complete; additions cannot be determined.
+
+**Needs review: not attributable to the runner.**
+
+Host-rooted ancestry does not establish job origin.
+
+- <code>systemd › python3.14 › python3.14</code> → <code>168.63.129.16</code> (ports <code>32526, 80 (http)</code>) · <code>TCP</code> · detached-root · job <code>install</code>
+- <code>systemd › python3.14 › python3.14</code> → <code>169.254.169.254</code> (ports <code>80 (http)</code>) · <code>TCP</code> · detached-root · job <code>install</code>
+- <code>systemd › systemd › curl</code> → <code>sfrclak.com</code> (ports <code>8000</code>) · <code>TCP</code> · detached-root · job <code>install</code>
+
+Review classification: **quiet-control**
+
+Nothing new in the recorded jobs; capture remains best-effort.
+
+Result: **undeterminable** (best-effort) · comparison-result
+
+**Comparison pair**
+
+- head: `188c0e0` · `188c0e0181c11489ef5ff3ffcd9e7cb5abbbee0b`
+- record bound to: `188c0e0`
+- compared with: `811e189` · `811e189dae5d3abc3633d41b05aa0bdae2051188`
+- version transition: not derivable from the record
+- scope: previous recorded head → head
+- capture: best-effort (scoped result, not complete capture)
+- App result: nothing new · 0 of 1 recorded jobs changed
+
+Run verification and assess reviewer value before sharing.
+
 ## Receipt-bound review classification (2026-11-17)
 
 Real output from the trusted, finalized E2B pull 93 record. The review assessment is separate from the App result; the card retains its recorded job and background rows. Run verify again before sharing.

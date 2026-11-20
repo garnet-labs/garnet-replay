@@ -1,0 +1,14 @@
+{
+  "profiles": [{
+    "run": { "job": "install", "commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+    "associations": [
+      { "remote_names": ["registry.npmjs.org"], "remote_ports": ["443"], "ancestry": ["systemd", "Runner.Listener", "Runner.Worker", "bash", "node"], "github_step": "Install" },
+      { "remote_names": ["resolver.example"], "ancestry": ["systemd", "systemd-resolved"], "github_step": "99. Runner Processes" },
+      { "remote_names": ["github.example"], "ancestry": ["systemd", "hosted-compute-agent", "Runner.Listener"], "github_step": "99. Runner Processes" },
+      { "remote_names": ["registry.npmjs.org"], "remote_ports": ["8000"], "ancestry": ["systemd", "curl"], "github_step": "99. Runner Processes" },
+      { "remote_names": ["detached.example"], "ancestry": ["init", "wget"], "github_step": "Install" },
+      { "remote_names": ["container.example", "alias.example"], "ancestry": ["containerd-shim-runc-v2", "runc", "node"] },
+      { "remote_names": ["docker.example"], "ancestry": ["systemd", "dockerd", "docker-proxy"] }
+    ]
+  }]
+}
