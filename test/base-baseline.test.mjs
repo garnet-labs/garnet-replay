@@ -220,6 +220,24 @@ test("green jobs without uploaded exact-tip profiles stay pending, including aut
   }
 })
 
+test("baseline proof accepts logs after the hosted gh escape-sequence refusal", async () => {
+  let reads = 0
+  const result = await waitForBaseRecord({ fork: input.fork, branch, sha, workflows: [workflow], timeoutMs: 0,
+    fetchImpl: profileFetch,
+    exec: (_command, args) => {
+      if (args.includes(`repos/${input.fork}/actions/jobs/42/logs`)) {
+        reads += 1
+        if (!args.includes("--allow-escape-sequences")) throw Object.assign(new Error("gh failed"), {
+          stderr: "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+        })
+        return `\u001b[36m${profileLog}\u001b[0m`
+      }
+      return JSON.stringify(args.at(-1).includes("/jobs?") ? [{ jobs: run.jobs }] : [{ workflow_runs: [run] }])
+    } })
+  assert.equal(reads, 2)
+  assert.equal(result.state, "recorded")
+})
+
 test("baseline proof tries other successful jobs and caches logs while waiting for public upload visibility", async () => {
   let time = 0
   let reads = 0
