@@ -1,5 +1,53 @@
 # Infisical shadow queue
 
+## 09:00Z window — current execution
+
+Results branch: `devin/1795165388-infisical-results`, created from merged
+harness main `18c637f`. New hosted dispatches use ref `main`. All hosted
+replay and PAT calls stop by **09:55Z**. Prior sections below are retained
+as historical observations, not current execution status.
+
+The original 9436 start `44677319496` was a budget-blocked attempt, not a
+replay result or harness/plan failure. Its failed log above cleanup states:
+
+```text
+[RATE_LIMIT_LOW] GitHub REST budget is 0; at least 200 requests are required. Reset: 2026-11-20T05:00:27.000Z.
+```
+
+Its downloaded `replay-job/job.json` corroborates `state: blocked`,
+`reason: RATE_LIMIT_LOW`, and an empty `lines` array. No guard was bypassed
+and no code fix was needed. Fresh prepare `44707458702` was dispatched from
+`main` at 09:03:22Z, after queued/in-progress replay lists were both empty.
+
+Fresh prepare succeeded. Start `44707652477` was dispatched at 09:04:46Z
+with `plan=44707458702`, again after an idle queue observation. Its baseline
+push recorder `44707971409` succeeded at exact baseline tip
+`4abdbd5197abf2474b01e3ef7d68c03c48a2ed08`; both npm installs and sensor
+post-processing succeeded. The uploaded public profile
+`01a1f837-f0d8-7da5-a344-59879e12195d` matches repository, run, profile and
+exact commit using `baseProfileMatches` (true). An uploaded profile alone
+is not an App comparison or complete-capture claim.
+
+At 09:18Z a one-poll read-only invocation of `waitForBaseRecord` returned
+`state: recorded`, naming that exact baseline profile. Direct PAT reads also
+confirmed baseline job logs are readable (HTTP 200), but the hosted start
+remained in progress and no replay PR was visible. The hosted wait's reason
+is not yet known; a token permission failure or invalid baseline profile
+must not be inferred from a long-running job alone.
+
+| Source selection | Fork replay PR | Head | Baseline | App / new destinations | Capture | Compared == baseline | Verify / first failing leg | StampHog / record cited | Hosted prepare / start |
+|---|---|---|---|---|---|---|---|---|---|
+| 9436 | Not yet published | — | `4abdbd5` | Pending | Undeterminable | Pending | Not run | Not dispatched | `44707458702` / `44707652477` in progress |
+| 9730 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9022 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9230 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9157 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9158 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 8984 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9599 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9406 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+| 9598 | Not dispatched | — | — | — | — | — | Not run | Not dispatched | — |
+
 ## Live execution — 2026-11-20
 
 **Paused at 04:54Z by the revised schedule.** Infisical may use the hosted
