@@ -114,6 +114,22 @@ test("workflow references retain repository identity when repository metadata is
   assert.deepEqual(compareProfileTrees(head, base).added, [])
 })
 
+test("relative workflow paths and qualified references share an action identity", () => {
+  const head = profile(HEAD)
+  const base = profile(PREVIOUS)
+  head.run.workflow_path = ".github/workflows/install.yml"
+  base.run.workflow_ref = "garnet-labs/example/.github/workflows/install.yml@refs/heads/main"
+  assert.deepEqual(compareProfileTrees(head, base).added, [])
+  assert.deepEqual(compareProfileTrees(base, head).added, [])
+  assert.equal(readProfileTrees({ profiles: [base, head] }).length, 8)
+  assert.equal(readProfileTrees(head)[0].workflow, "garnet-labs/example/.github/workflows/install.yml")
+  head.run.workflow_path = "garnet-labs/example/.github/workflows/install.yml"
+  assert.deepEqual(compareProfileTrees(head, base).added, [])
+  delete head.run.repository
+  head.run.workflow_path = ".github/workflows/install.yml"
+  assert.equal(readProfileTrees(head)[0].workflow, ".github/workflows/install.yml")
+})
+
 test("repeated actions retain review requirements in either observation order", () => {
   const linked = { remote_names: ["example.org"], ancestry: ["Runner.Worker", "node"] }
   const missing = { ...linked, lineage_recorded: false }
@@ -198,7 +214,7 @@ test("text rows show the workflow path or name alongside the job only when recor
     const raw = profile()
     Object.assign(raw.run, metadata)
     const text = renderProfileTrees(compareProfileTrees(raw))
-    const workflow = metadata.workflow_path ?? metadata.workflow
+    const workflow = metadata.workflow_path === undefined ? metadata.workflow : `garnet-labs/example/${metadata.workflow_path}`
     for (const line of text.split("\n").filter((line) => line.startsWith("- "))) {
       assert.equal(line.endsWith(` · job <code>install</code> · workflow <code>${workflow}</code>`), true)
     }
