@@ -877,7 +877,7 @@ test("replay --pr: commit 1's message describes what it stages, not what the pla
   assert.match(renderPlan(differs), /commit 1 stages: the touched paths as the change found them \(master on the fork differs on at least one\)/)
   // --sync-fork and --base-branch start from the change's base, so the answer is known without a probe.
   assert.equal(replayPlan({ syncFork: true }).firstStages, "context")
-  assert.equal(replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-ci.yml"], firstPaths: [] }).firstStages, "context")
+  assert.throws(() => replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-ci.yml"], firstPaths: [] }), /commit 1 would be empty/)
   // Nothing to stage in commit 1 is refused at plan time, not at the checkout.
   assert.throws(() => replayPlan({ firstPaths: [], forkHoldsBase: true }), /already holds the touched paths .* pass --first <path>/)
   assert.throws(() => replayPlan({ syncFork: true, firstPaths: [] }), /pass --first <path>/)

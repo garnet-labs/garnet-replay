@@ -548,7 +548,7 @@ test("executePlan: the base commit guard still rejects banned prose and invalid 
 
 test("two-commit replay: carried paths bypass vocabulary only in verbatim message lines", async () => {
   const path = ".github/workflows/cleanup_build_template.yml"
-  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), workflowBodies: { [path]: "on: pull_request\n" }, changes: CHANGES })
+  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), firstPaths: ["src/a.ts"], workflowBodies: { [path]: "on: pull_request\n" }, changes: CHANGES })
   const check = plan.steps.find((step) => step.id === "first-check")
   const commit = plan.steps.find((step) => step.id === "first-commit")
   const { exec, calls } = fakeExec([[/diff --cached --name-only/, path]])
@@ -559,7 +559,7 @@ test("two-commit replay: carried paths bypass vocabulary only in verbatim messag
 })
 
 test("two-commit replay: recorder checkout and execution are bound to the planned fork SHA", async () => {
-  const input = { ...purePlan({ baseBranch: "review/base" }), workflowBodies: { [RECORDERS[0]]: "on: pull_request\n" }, changes: CHANGES }
+  const input = { ...purePlan({ baseBranch: "review/base" }), firstPaths: ["src/a.ts"], workflowBodies: { [RECORDERS[0]]: "on: pull_request\n" }, changes: CHANGES }
   const plan = planReplay(input)
   const guard = plan.steps.find((step) => step.kind === "verify-fork-default")
   const checkout = plan.steps.find((step) => step.id === "first-fork-record")
@@ -847,7 +847,7 @@ test("livePr: two-commit flag selects the existing two-state publisher", async (
   const exec = (command, args) => args[1]?.startsWith(`repos/${UPSTREAM}/git/trees/`) && args[1].includes(":.github/workflows")
     ? JSON.stringify({ tree: [] }) : fallback(command, args)
   for (const twoCommit of [false, true]) {
-    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit"] : [])], {
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit", "--first", "package.json"] : [])], {
       exec, log: () => {}, save: () => assert.fail("dry run must not save"),
     })
     assert.equal(result.plan.singleCommit === true, !twoCommit)
@@ -863,7 +863,7 @@ test("planReplay: code-interpreter carries one root and its six support workflow
   const input = {
     slug: "code-interpreter", upstream: "e2b-dev/code-interpreter", fork: "garnet-labs/code-interpreter", defaultBranch: "main",
     forkDefaultSha: SHA_C, upstreamPr: 248, upstreamTitle: "Update package", baseSha: SHA_A, headSha: SHA_B,
-    changes: [{ path: "chart_data_extractor/poetry.lock", status: "modified", previous: null }],
+    changes: [{ path: "chart_data_extractor/poetry.lock", status: "modified", previous: null }], firstPaths: ["chart_data_extractor/poetry.lock"],
     record: "fork-workflow", baseBranch: "rb/code-interpreter-248", recordWorkflows: [prefix + files[0]], workflowBodies,
   }
   const plan = planReplay(input)

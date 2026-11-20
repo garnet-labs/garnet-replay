@@ -198,13 +198,19 @@ test("two-commit, injected, instrumented and already-recording source bases use 
   for (const options of [{}, { record: "inject", ecosystem: "npm" },
     { record: "instrument", instrument: { path: workflow, content: body, changes: ["Record install"], job: "install" } },
     { baseRecords: [workflow], baseWorkflowBodies: { [workflow]: body }, firstPaths: ["app.js"] }]) {
-    const plan = planReplay({ ...input, ...options })
+    const plan = planReplay({ ...input, firstPaths: ["app.js"], ...options })
     const ids = plan.steps.map((step) => step.id)
     assert.ok(ids.indexOf("ensure-base") < ids.indexOf("wait-base-record"))
     assert.ok(ids.indexOf("wait-base-record") < ids.indexOf("branch"))
     const ensure = plan.steps.find((step) => step.id === "ensure-base")
     assert.equal(ensure.copyPaths.length, 0)
     assert.match(Object.values(ensure.baseWorkflows).join("\n"), /deps\/node-24-base/)
+    const preserve = plan.steps.find((step) => step.id === "first-base-record")
+    assert.deepEqual(preserve.args.slice(2), ["checkout", `origin/${branch}`, "--", ...ensure.carry])
+    assert.ok(ids.indexOf("first-base-record") < ids.indexOf("first-check"))
+  }
+  for (const options of [{}, { record: "inject", ecosystem: "npm" }, { record: "instrument", instrument: { path: workflow, content: body, changes: ["Record install"], job: "install" } }]) {
+    assert.throws(() => planReplay({ ...input, ...options }), /commit 1 would be empty/)
   }
 })
 
