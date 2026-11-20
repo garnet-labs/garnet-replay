@@ -231,6 +231,15 @@ test("ensure-base upgrades an older carry commit by a non-force fast-forward and
   git("update-ref", `refs/remotes/origin/${branch}`, defaultSha)
   const plan = planPureReplay({ ...input, work, workExists: true, baseSha, forkDefaultSha: defaultSha })
   let pushed = false
+  git("update-ref", `refs/remotes/origin/${plan.branch}`, defaultSha)
+  const guardExec = (command, args) => {
+    if (args[2] === "fetch") return ""
+    if (args[2] === "push") assert.fail("must refuse before upgrading a used base")
+    return git(...args.slice(2))
+  }
+  await assert.rejects(executePlan({ ...plan, steps: plan.steps.filter((step) => step.id === "ensure-base") }, { log: () => {}, exec: guardExec }), /already uses the current base tip/)
+  assert.equal(git("rev-parse", `refs/remotes/origin/${branch}`), defaultSha)
+  git("update-ref", "-d", `refs/remotes/origin/${plan.branch}`)
   const captured = await executePlan({ ...plan, steps: plan.steps.filter((step) => step.id === "ensure-base") }, { log: () => {}, exec: (command, args) => {
     assert.equal(command, "git")
     const subcommand = args[2]
