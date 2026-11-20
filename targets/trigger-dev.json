@@ -1,0 +1,1402 @@
+{
+  "slug": "trigger-dev",
+  "upstream": "triggerdotdev/trigger.dev",
+  "fork": "garnet-labs/trigger.dev",
+  "record": null,
+  "workload": null,
+  "notes": [],
+  "observations": [
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5145,
+      "title": "chore: release v4.8.8",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-20T01:41:11Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 28,
+      "paths": [
+        ".changeset/suspend-retry-refused.md",
+        ".server-changes/mcp-v15-scopes.md",
+        "hosting/k8s/helm/Chart.yaml",
+        "packages/build/CHANGELOG.md",
+        "packages/build/package.json",
+        "packages/cli-v3/CHANGELOG.md",
+        "packages/cli-v3/package.json",
+        "packages/convex/CHANGELOG.md",
+        "packages/convex/package.json",
+        "packages/core/CHANGELOG.md",
+        "packages/core/package.json",
+        "packages/linear/CHANGELOG.md",
+        "packages/linear/package.json",
+        "packages/python/CHANGELOG.md",
+        "packages/python/package.json",
+        "packages/react-hooks/CHANGELOG.md",
+        "packages/react-hooks/package.json",
+        "packages/redis-worker/CHANGELOG.md",
+        "packages/redis-worker/package.json",
+        "packages/rsc/CHANGELOG.md",
+        "packages/rsc/package.json",
+        "packages/schema-to-json/CHANGELOG.md",
+        "packages/schema-to-json/package.json",
+        "packages/slack/CHANGELOG.md",
+        "packages/slack/package.json",
+        "packages/trigger-sdk/CHANGELOG.md",
+        "packages/trigger-sdk/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5143,
+      "title": "chore: release v4.8.7",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-19T14:32:04Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 37,
+      "paths": [
+        ".changeset/chat-agent-ai-sdk-7-channel-files.md",
+        ".changeset/chat-agent-ai-sdk-7-compaction.md",
+        ".changeset/chat-agent-ai-sdk-7-steering.md",
+        ".changeset/chat-agent-bigint-tojson.md",
+        ".changeset/chat-agent-tool-results-json.md",
+        ".changeset/keepalive-wait-guard-reset.md",
+        ".changeset/session-concurrency-key-map.md",
+        ".server-changes/limit-worker-source-file-size.md",
+        ".server-changes/session-page-conversation-fixes.md",
+        ".server-changes/trace-filter-live-updates.md",
+        ".server-changes/webhook-url-reserved-addresses.md",
+        "hosting/k8s/helm/Chart.yaml",
+        "packages/build/CHANGELOG.md",
+        "packages/build/package.json",
+        "packages/cli-v3/CHANGELOG.md",
+        "packages/cli-v3/package.json",
+        "packages/convex/CHANGELOG.md",
+        "packages/convex/package.json",
+        "packages/core/CHANGELOG.md",
+        "packages/core/package.json",
+        "packages/linear/CHANGELOG.md",
+        "packages/linear/package.json",
+        "packages/python/CHANGELOG.md",
+        "packages/python/package.json",
+        "packages/react-hooks/CHANGELOG.md",
+        "packages/react-hooks/package.json",
+        "packages/redis-worker/CHANGELOG.md",
+        "packages/redis-worker/package.json",
+        "packages/rsc/CHANGELOG.md",
+        "packages/rsc/package.json",
+        "packages/schema-to-json/CHANGELOG.md",
+        "packages/schema-to-json/package.json",
+        "packages/slack/CHANGELOG.md",
+        "packages/slack/package.json",
+        "packages/trigger-sdk/CHANGELOG.md",
+        "packages/trigger-sdk/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5118,
+      "title": "chore: release v4.8.5",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T00:25:42Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 27,
+      "paths": [
+        ".changeset/node-november-2026-security-images.md",
+        "hosting/k8s/helm/Chart.yaml",
+        "packages/build/CHANGELOG.md",
+        "packages/build/package.json",
+        "packages/cli-v3/CHANGELOG.md",
+        "packages/cli-v3/package.json",
+        "packages/convex/CHANGELOG.md",
+        "packages/convex/package.json",
+        "packages/core/CHANGELOG.md",
+        "packages/core/package.json",
+        "packages/linear/CHANGELOG.md",
+        "packages/linear/package.json",
+        "packages/python/CHANGELOG.md",
+        "packages/python/package.json",
+        "packages/react-hooks/CHANGELOG.md",
+        "packages/react-hooks/package.json",
+        "packages/redis-worker/CHANGELOG.md",
+        "packages/redis-worker/package.json",
+        "packages/rsc/CHANGELOG.md",
+        "packages/rsc/package.json",
+        "packages/schema-to-json/CHANGELOG.md",
+        "packages/schema-to-json/package.json",
+        "packages/slack/CHANGELOG.md",
+        "packages/slack/package.json",
+        "packages/trigger-sdk/CHANGELOG.md",
+        "packages/trigger-sdk/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5109,
+      "title": "chore: release v4.8.6",
+      "author": "app/github-actions",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-10T18:11:13Z",
+      "kind": "install-surface",
+      "transition": null,
+      "files": 84,
+      "paths": [
+        ".changeset/bun-bytecode-worker.md",
+        ".changeset/bun-compiled-exec-path.md",
+        ".changeset/bun-missing-binary.md",
+        ".changeset/chat-agent-ai-sdk-7-step-input.md",
+        ".changeset/chat-agent-client-data-everywhere.md",
+        ".changeset/cli-bundle-outbase.md",
+        ".changeset/cli-command-error-format.md",
+        ".changeset/concurrency-key-per-limit.md",
+        ".changeset/deploy-warmup-command.md",
+        ".changeset/jwt-explicit-audience.md",
+        ".changeset/lazy-machine-id.md",
+        ".changeset/node-compile-cache.md",
+        ".changeset/notion-webhook-verification-token.md",
+        ".changeset/run-process-oom-kill.md",
+        ".changeset/scoped-run-credentials.md",
+        ".changeset/server-minted-public-tokens.md",
+        ".changeset/task-env-over-ipc.md",
+        ".changeset/task-env-startup-vars.md",
+        ".changeset/upgrade-esbuild-minimatch.md",
+        ".changeset/webhook-provider-config-fixes.md",
+        ".server-changes/alert-group-page-defer.md",
+        ".server-changes/alert-wizard-highlight.md",
+        ".server-changes/alerts-list-defer.md",
+        ".server-changes/api-key-ip-pills.md",
+        ".server-changes/dashboard-agent-alert-limits.md",
+        ".server-changes/dashboard-agent-alert-listing.md",
+        ".server-changes/dashboard-agent-confirm-alert-resolve.md",
+        ".server-changes/dashboard-agent-developer-reads.md",
+        ".server-changes/dashboard-agent-help-links-prefill.md",
+        ".server-changes/dashboard-agent-watch.md",
+        ".server-changes/dashboard-widget-watch.md",
+        ".server-changes/dialog-direct-load-hydration.md",
+        ".server-changes/env-vars-batch-delete.md",
+        ".server-changes/env-vars-compare.md",
+        ".server-changes/env-vars-key-panel.md",
+        ".server-changes/env-vars-needs-attention.md",
+        ".server-changes/env-vars-page-qol.md",
+        ".server-changes/env-vars-save-conflict.md",
+        ".server-changes/environment-encryption.md",
+        ".server-changes/fail-runs-dead-lettered-during-dequeue-recovery.md",
+        ".server-changes/fix-preview-waitpoint-callbacks.md",
+        ".server-changes/fix-restricted-key-packet-downloads.md",
+        ".server-changes/fix-scoped-waitpoint-key-reuse.md",
+        ".server-changes/fix-sole-owner-leave.md",
+        ".server-changes/github-ignored-branches.md",
+        ".server-changes/mcp-remote-trigger-source.md",
+        ".server-changes/oidc-catalog-hugging-face-openrouter.md",
+        ".server-changes/org-mfa-enforcement.md",
+        ".server-changes/pagination-page-numbers.md",
+        ".server-changes/pat-derived-token-revocation.md",
+        ".server-changes/pending-version-after-deploy.md",
+        ".server-changes/pending-version-promotion-lock.md",
+        ".server-changes/personal-access-token-custom-expiry.md",
+        ".server-changes/remote-mcp-server.md",
+        ".server-changes/sandbox-short-retries.md",
+        ".server-changes/scheduled-task-schedules-tab.md",
+        ".server-changes/supervisor-reuse-platform-connections.md",
+        ".server-changes/task-returned-while-resuming-from-wait.md",
+        "hosting/k8s/helm/Chart.yaml",
+        "packages/build/CHANGELOG.md",
+        "packages/build/package.json",
+        "packages/cli-v3/CHANGELOG.md",
+        "packages/cli-v3/package.json",
+        "packages/convex/CHANGELOG.md",
+        "packages/convex/package.json",
+        "packages/core/CHANGELOG.md",
+        "packages/core/package.json",
+        "packages/linear/CHANGELOG.md",
+        "packages/linear/package.json",
+        "packages/python/CHANGELOG.md",
+        "packages/python/package.json",
+        "packages/react-hooks/CHANGELOG.md",
+        "packages/react-hooks/package.json",
+        "packages/redis-worker/CHANGELOG.md",
+        "packages/redis-worker/package.json",
+        "packages/rsc/CHANGELOG.md",
+        "packages/rsc/package.json",
+        "packages/schema-to-json/CHANGELOG.md",
+        "packages/schema-to-json/package.json",
+        "packages/slack/CHANGELOG.md",
+        "packages/slack/package.json",
+        "packages/trigger-sdk/CHANGELOG.md",
+        "packages/trigger-sdk/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "gap": {
+        "total": 10,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "install-surface",
+            "points": 3,
+            "reason": "install-time execution surface changed"
+          },
+          {
+            "id": "lockfile",
+            "points": 2,
+            "reason": "lockfile delta"
+          },
+          {
+            "id": "manifest",
+            "points": 1,
+            "reason": "manifest changed"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5137,
+      "title": "docs: lead with agents, refresh screenshots and drop dated pages",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-17T12:28:02Z",
+      "kind": "code",
+      "transition": null,
+      "files": 42,
+      "paths": [
+        "docs/ai-chat/changelog.mdx",
+        "docs/ai-chat/mcp.mdx",
+        "docs/building-with-ai.mdx",
+        "docs/docs.json",
+        "docs/guides/ai-agents/overview.mdx",
+        "docs/guides/example-projects/claude-thinking-chatbot.mdx",
+        "docs/guides/example-projects/mastra-agents-with-memory.mdx",
+        "docs/guides/example-projects/meme-generator-human-in-the-loop.mdx",
+        "docs/guides/example-projects/vercel-ai-sdk-image-generator.mdx",
+        "docs/guides/examples/dall-e3-generate-image.mdx",
+        "docs/guides/examples/react-email.mdx",
+        "docs/guides/examples/scrape-hacker-news.mdx",
+        "docs/guides/introduction.mdx",
+        "docs/guides/use-cases/media-generation.mdx",
+        "docs/images/environment-variables-page.jpg",
+        "docs/images/environment-variables-panel.jpg",
+        "docs/images/replay-run-action.png",
+        "docs/images/replay-run-modal.png",
+        "docs/images/replay-runs-list-popover.png",
+        "docs/images/replay-runs-list.png",
+        "docs/images/run-log.png",
+        "docs/images/run-page.png",
+        "docs/images/tags-filtering.png",
+        "docs/images/tags-org-user.png",
+        "docs/images/terminal-completed-run.png",
+        "docs/images/trigger-cli-run-success.png",
+        "docs/images/troubleshooting-alerts-blank.png",
+        "docs/images/troubleshooting-alerts-disable-delete.png",
+        "docs/images/troubleshooting-alerts-modal.png",
+        "docs/introduction.mdx",
+        "docs/mcp-introduction.mdx",
+        "docs/migration-mergent.mdx",
+        "docs/quick-start.mdx",
+        "docs/realtime/overview.mdx",
+        "docs/realtime/react-hooks/overview.mdx",
+        "docs/realtime/react-hooks/streams.mdx",
+        "docs/realtime/react-hooks/subscribe.mdx",
+        "docs/realtime/react-hooks/triggering.mdx",
+        "docs/replaying.mdx",
+        "docs/self-hosting/docker.mdx",
+        "docs/snippets/realtime-examples-cards.mdx",
+        "docs/video-walkthrough.mdx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5135,
+      "title": "docs: update code samples to current Claude and OpenAI models",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-17T11:22:28Z",
+      "kind": "code",
+      "transition": null,
+      "files": 60,
+      "paths": [
+        "docs/ai-chat/actions.mdx",
+        "docs/ai-chat/anatomy.mdx",
+        "docs/ai-chat/backend.mdx",
+        "docs/ai-chat/background-injection.mdx",
+        "docs/ai-chat/chat-local.mdx",
+        "docs/ai-chat/compaction.mdx",
+        "docs/ai-chat/custom-agents.mdx",
+        "docs/ai-chat/error-handling.mdx",
+        "docs/ai-chat/fast-starts.mdx",
+        "docs/ai-chat/frontend.mdx",
+        "docs/ai-chat/lifecycle-hooks.mdx",
+        "docs/ai-chat/migrating-from-a-route-handler.mdx",
+        "docs/ai-chat/migrating-from-hydrate-messages.mdx",
+        "docs/ai-chat/overview.mdx",
+        "docs/ai-chat/patterns/branching-conversations.mdx",
+        "docs/ai-chat/patterns/database-persistence.mdx",
+        "docs/ai-chat/patterns/human-in-the-loop.mdx",
+        "docs/ai-chat/patterns/native-compaction.mdx",
+        "docs/ai-chat/patterns/persistence-and-replay.mdx",
+        "docs/ai-chat/patterns/redacting-telemetry.mdx",
+        "docs/ai-chat/patterns/skills.mdx",
+        "docs/ai-chat/patterns/sub-agents.mdx",
+        "docs/ai-chat/patterns/tool-result-auditing.mdx",
+        "docs/ai-chat/patterns/trusted-edge-signals.mdx",
+        "docs/ai-chat/patterns/version-upgrades.mdx",
+        "docs/ai-chat/pending-messages.mdx",
+        "docs/ai-chat/prompt-caching.mdx",
+        "docs/ai-chat/quick-start.mdx",
+        "docs/ai-chat/testing.mdx",
+        "docs/ai-chat/tools.mdx",
+        "docs/ai-chat/transcript-storage.mdx",
+        "docs/ai-chat/types.mdx",
+        "docs/ai/observability.mdx",
+        "docs/ai/prompts.mdx",
+        "docs/database-connections.mdx",
+        "docs/errors-retrying.mdx",
+        "docs/guides/ai-agents/chat-agent.mdx",
+        "docs/guides/ai-agents/claude-code-trigger.mdx",
+        "docs/guides/ai-agents/generate-translate-copy.mdx",
+        "docs/guides/ai-agents/respond-and-check-content.mdx",
+        "docs/guides/ai-agents/route-question.mdx",
+        "docs/guides/ai-agents/translate-and-refine.mdx",
+        "docs/guides/ai-agents/verify-news-article.mdx",
+        "docs/guides/examples/open-ai-with-retrying.mdx",
+        "docs/guides/examples/scrape-hacker-news.mdx",
+        "docs/guides/examples/vercel-ai-sdk.mdx",
+        "docs/guides/frameworks/nango.mdx",
+        "docs/introduction.mdx",
+        "docs/migrating-from-v3.mdx",
+        "docs/oidc/openrouter.mdx",
+        "docs/runs/metadata.mdx",
+        "docs/snippets/code/openai-retry.mdx",
+        "docs/snippets/migrate-v4-using-ai.mdx",
+        "docs/tasks/schemaTask.mdx",
+        "docs/tasks/streams.mdx",
+        "docs/webhooks/channels.mdx",
+        "docs/webhooks/human-in-the-loop.mdx",
+        "docs/webhooks/linear.mdx",
+        "docs/webhooks/session-routing.mdx",
+        "docs/webhooks/slack.mdx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5131,
+      "title": "docs: restore Brex, Composio and Intercom webhook provider pages",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-16T10:37:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 77,
+      "paths": [
+        "docs/docs.json",
+        "docs/guides/example-projects/resend-email-agent.mdx",
+        "docs/guides/examples/hookdeck-webhook.mdx",
+        "docs/guides/examples/stripe-webhook.mdx",
+        "docs/guides/frameworks/nextjs-webhooks.mdx",
+        "docs/guides/frameworks/remix-webhooks.mdx",
+        "docs/guides/frameworks/remix.mdx",
+        "docs/guides/frameworks/supabase-edge-functions-database-webhooks.mdx",
+        "docs/guides/frameworks/webhooks-guides-overview.mdx",
+        "docs/guides/introduction.mdx",
+        "docs/snippets/examples-cards.mdx",
+        "docs/snippets/vercel-docs-cards.mdx",
+        "docs/webhooks/channels.mdx",
+        "docs/webhooks/connect.mdx",
+        "docs/webhooks/custom-providers.mdx",
+        "docs/webhooks/deliveries.mdx",
+        "docs/webhooks/filters.mdx",
+        "docs/webhooks/how-it-works.mdx",
+        "docs/webhooks/human-in-the-loop.mdx",
+        "docs/webhooks/linear.mdx",
+        "docs/webhooks/overview.mdx",
+        "docs/webhooks/own-handler.mdx",
+        "docs/webhooks/pricing-and-limits.mdx",
+        "docs/webhooks/providers.mdx",
+        "docs/webhooks/providers/attio.mdx",
+        "docs/webhooks/providers/autumn.mdx",
+        "docs/webhooks/providers/brex.mdx",
+        "docs/webhooks/providers/cal-com.mdx",
+        "docs/webhooks/providers/calendly.mdx",
+        "docs/webhooks/providers/clerk.mdx",
+        "docs/webhooks/providers/composio.mdx",
+        "docs/webhooks/providers/discord.mdx",
+        "docs/webhooks/providers/docusign.mdx",
+        "docs/webhooks/providers/elevenlabs.mdx",
+        "docs/webhooks/providers/firecrawl.mdx",
+        "docs/webhooks/providers/github.mdx",
+        "docs/webhooks/providers/gitlab.mdx",
+        "docs/webhooks/providers/granola.mdx",
+        "docs/webhooks/providers/hookdeck.mdx",
+        "docs/webhooks/providers/infisical.mdx",
+        "docs/webhooks/providers/intercom.mdx",
+        "docs/webhooks/providers/jira.mdx",
+        "docs/webhooks/providers/langfuse.mdx",
+        "docs/webhooks/providers/linear.mdx",
+        "docs/webhooks/providers/loops.mdx",
+        "docs/webhooks/providers/metronome.mdx",
+        "docs/webhooks/providers/mux.mdx",
+        "docs/webhooks/providers/openai.mdx",
+        "docs/webhooks/providers/pagerduty.mdx",
+        "docs/webhooks/providers/plain.mdx",
+        "docs/webhooks/providers/planetscale.mdx",
+        "docs/webhooks/providers/recall-ai.mdx",
+        "docs/webhooks/providers/replicate.mdx",
+        "docs/webhooks/providers/resend.mdx",
+        "docs/webhooks/providers/retell.mdx",
+        "docs/webhooks/providers/sentry.mdx",
+        "docs/webhooks/providers/shopify.mdx",
+        "docs/webhooks/providers/slack.mdx",
+        "docs/webhooks/providers/square.mdx",
+        "docs/webhooks/providers/stripe.mdx",
+        "docs/webhooks/providers/supabase.mdx",
+        "docs/webhooks/providers/tailscale.mdx",
+        "docs/webhooks/providers/typeform.mdx",
+        "docs/webhooks/providers/vapi.mdx",
+        "docs/webhooks/providers/vercel.mdx",
+        "docs/webhooks/providers/whatsapp.mdx",
+        "docs/webhooks/providers/workos.mdx",
+        "docs/webhooks/providers/zendesk.mdx",
+        "docs/webhooks/public-beta.mdx",
+        "docs/webhooks/quick-start.mdx",
+        "docs/webhooks/session-routing.mdx",
+        "docs/webhooks/signing-secrets.mdx",
+        "docs/webhooks/slack.mdx",
+        "docs/webhooks/sources.mdx",
+        "docs/webhooks/verification.mdx",
+        "docs/webhooks/waiters.mdx",
+        "docs/webhooks/webhook-tasks.mdx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5124,
+      "title": "docs: restructure the webhooks docs with a page per provider",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T16:27:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 74,
+      "paths": [
+        "docs/docs.json",
+        "docs/guides/example-projects/resend-email-agent.mdx",
+        "docs/guides/examples/hookdeck-webhook.mdx",
+        "docs/guides/examples/stripe-webhook.mdx",
+        "docs/guides/frameworks/nextjs-webhooks.mdx",
+        "docs/guides/frameworks/remix-webhooks.mdx",
+        "docs/guides/frameworks/remix.mdx",
+        "docs/guides/frameworks/supabase-edge-functions-database-webhooks.mdx",
+        "docs/guides/frameworks/webhooks-guides-overview.mdx",
+        "docs/guides/introduction.mdx",
+        "docs/snippets/examples-cards.mdx",
+        "docs/snippets/vercel-docs-cards.mdx",
+        "docs/webhooks/channels.mdx",
+        "docs/webhooks/connect.mdx",
+        "docs/webhooks/custom-providers.mdx",
+        "docs/webhooks/deliveries.mdx",
+        "docs/webhooks/filters.mdx",
+        "docs/webhooks/how-it-works.mdx",
+        "docs/webhooks/human-in-the-loop.mdx",
+        "docs/webhooks/linear.mdx",
+        "docs/webhooks/overview.mdx",
+        "docs/webhooks/own-handler.mdx",
+        "docs/webhooks/pricing-and-limits.mdx",
+        "docs/webhooks/providers.mdx",
+        "docs/webhooks/providers/attio.mdx",
+        "docs/webhooks/providers/autumn.mdx",
+        "docs/webhooks/providers/cal-com.mdx",
+        "docs/webhooks/providers/calendly.mdx",
+        "docs/webhooks/providers/clerk.mdx",
+        "docs/webhooks/providers/discord.mdx",
+        "docs/webhooks/providers/docusign.mdx",
+        "docs/webhooks/providers/elevenlabs.mdx",
+        "docs/webhooks/providers/firecrawl.mdx",
+        "docs/webhooks/providers/github.mdx",
+        "docs/webhooks/providers/gitlab.mdx",
+        "docs/webhooks/providers/granola.mdx",
+        "docs/webhooks/providers/hookdeck.mdx",
+        "docs/webhooks/providers/infisical.mdx",
+        "docs/webhooks/providers/jira.mdx",
+        "docs/webhooks/providers/langfuse.mdx",
+        "docs/webhooks/providers/linear.mdx",
+        "docs/webhooks/providers/loops.mdx",
+        "docs/webhooks/providers/metronome.mdx",
+        "docs/webhooks/providers/mux.mdx",
+        "docs/webhooks/providers/openai.mdx",
+        "docs/webhooks/providers/pagerduty.mdx",
+        "docs/webhooks/providers/plain.mdx",
+        "docs/webhooks/providers/planetscale.mdx",
+        "docs/webhooks/providers/recall-ai.mdx",
+        "docs/webhooks/providers/replicate.mdx",
+        "docs/webhooks/providers/resend.mdx",
+        "docs/webhooks/providers/retell.mdx",
+        "docs/webhooks/providers/sentry.mdx",
+        "docs/webhooks/providers/shopify.mdx",
+        "docs/webhooks/providers/slack.mdx",
+        "docs/webhooks/providers/square.mdx",
+        "docs/webhooks/providers/stripe.mdx",
+        "docs/webhooks/providers/supabase.mdx",
+        "docs/webhooks/providers/tailscale.mdx",
+        "docs/webhooks/providers/typeform.mdx",
+        "docs/webhooks/providers/vapi.mdx",
+        "docs/webhooks/providers/vercel.mdx",
+        "docs/webhooks/providers/whatsapp.mdx",
+        "docs/webhooks/providers/workos.mdx",
+        "docs/webhooks/providers/zendesk.mdx",
+        "docs/webhooks/public-beta.mdx",
+        "docs/webhooks/quick-start.mdx",
+        "docs/webhooks/session-routing.mdx",
+        "docs/webhooks/signing-secrets.mdx",
+        "docs/webhooks/slack.mdx",
+        "docs/webhooks/sources.mdx",
+        "docs/webhooks/verification.mdx",
+        "docs/webhooks/waiters.mdx",
+        "docs/webhooks/webhook-tasks.mdx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5122,
+      "title": "docs: point webhook guides at hosted webhook endpoints",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-12T17:23:40Z",
+      "kind": "code",
+      "transition": null,
+      "files": 25,
+      "paths": [
+        "docs/docs.json",
+        "docs/guides/examples/stripe-webhook.mdx",
+        "docs/guides/frameworks/nextjs-webhooks.mdx",
+        "docs/guides/frameworks/remix-webhooks.mdx",
+        "docs/guides/frameworks/sequin.mdx",
+        "docs/guides/frameworks/supabase-edge-functions-basic.mdx",
+        "docs/guides/frameworks/supabase-edge-functions-database-webhooks.mdx",
+        "docs/guides/frameworks/webhooks-guides-overview.mdx",
+        "docs/guides/introduction.mdx",
+        "docs/guides/use-cases/data-processing-etl.mdx",
+        "docs/idempotency.mdx",
+        "docs/images/sequin-consumer-config.png",
+        "docs/images/sequin-final-run.png",
+        "docs/images/sequin-intro.png",
+        "docs/images/sequin-register-task.png",
+        "docs/images/sequin-sort-and-filter.png",
+        "docs/images/sequin-trace.png",
+        "docs/images/supabase-api-key.png",
+        "docs/images/supabase-create-webhook-1.png",
+        "docs/images/supabase-create-webhook-2.png",
+        "docs/images/supabase-create-webhook-3.png",
+        "docs/images/supabase-run-result.png",
+        "docs/migration-n8n.mdx",
+        "docs/snippets/examples-cards.mdx",
+        "docs/snippets/supabase-docs-cards.mdx"
+      ],
+      "gap": {
+        "total": 4,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          },
+          {
+            "id": "wide",
+            "points": 1,
+            "reason": "wide change surface (more than 20 files)"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5141,
+      "title": "fix(cli): honor --project-ref option in MCP server without local config",
+      "author": "Raph1710",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T11:51:00Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        ".changeset/fix-mcp-server-project-ref.md",
+        "packages/cli-v3/src/mcp/context.test.ts",
+        "packages/cli-v3/src/mcp/context.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5140,
+      "title": "fix(cli-v3): fallback to context projectRef option in getProjectRef (#5139)",
+      "author": "aftab8052tech",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-19T05:32:27Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "packages/cli-v3/src/mcp/context.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5138,
+      "title": "fix(core): check idempotency key catalog in isIdempotencyKey",
+      "author": "theeaashish",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-18T17:29:32Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/core/src/v3/idempotencyKeys.test.ts",
+        "packages/core/src/v3/idempotencyKeys.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5136,
+      "title": "docs: fix wrong samples, stale versions and broken links",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-17T12:23:20Z",
+      "kind": "code",
+      "transition": null,
+      "files": 18,
+      "paths": [
+        "docs/ai-chat/reference.mdx",
+        "docs/cli-init-commands.mdx",
+        "docs/config/extensions/prismaExtension.mdx",
+        "docs/deployment/preview-branches.mdx",
+        "docs/github-actions.mdx",
+        "docs/how-it-works.mdx",
+        "docs/limits.mdx",
+        "docs/management/overview.mdx",
+        "docs/manual-setup.mdx",
+        "docs/migrating-from-v3.mdx",
+        "docs/runs.mdx",
+        "docs/snippets/node-versions.mdx",
+        "docs/tasks/overview.mdx",
+        "docs/tasks/scheduled.mdx",
+        "docs/tasks/schemaTask.mdx",
+        "docs/triggering.mdx",
+        "docs/upgrading-packages.mdx",
+        "docs/video-walkthrough.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5134,
+      "title": "docs: make the agent setup prompt stand out on the quick start",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "OPEN",
+      "createdAt": "2026-11-17T10:48:10Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "docs/snippets/agent-setup-prompt.mdx",
+        "docs/style.css"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5133,
+      "title": "docs: update Supabase edge function guide to SDK v4",
+      "author": "app/claude",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-17T09:05:48Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/guides/frameworks/supabase-edge-functions-basic.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5132,
+      "title": "docs: update README features list",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-16T11:27:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "README.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5128,
+      "title": "fix(schedule-engine): extend cron trigger retry budget across short DB outages",
+      "author": "umeraamir69",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-14T06:28:15Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "internal-packages/schedule-engine/src/engine/workerCatalog.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5127,
+      "title": "fix(sdk): honor caller abort signals in retry.fetch",
+      "author": "umeraamir69",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-14T06:28:13Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "packages/trigger-sdk/src/v3/retry.test.ts",
+        "packages/trigger-sdk/src/v3/retry.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5126,
+      "title": "docs: reframe the how it works intro around AI agents",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T16:39:59Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/how-it-works.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5125,
+      "title": "docs: move v3 migration guide out of Getting started",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-13T16:36:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/docs.json"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5123,
+      "title": "fix(core): correct Stripe, Discord and Autumn webhook setup prompts",
+      "author": "jackbridger",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-13T15:48:56Z",
+      "kind": "code",
+      "transition": null,
+      "files": 4,
+      "paths": [
+        ".changeset/webhook-setup-prompts.md",
+        "apps/webapp/app/v3/webhookSetupPrompt.ts",
+        "apps/webapp/test/webhookSetupPrompt.test.ts",
+        "packages/core/src/v3/webhooks/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5121,
+      "title": "docs: point the changesets guide link at its new path",
+      "author": "abd1rahmane",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-12T15:46:01Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "CHANGESETS.md",
+        "CONTRIBUTING.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5119,
+      "title": "docs: list the November 2026 Node.js runtime versions",
+      "author": "ericallam",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-12T00:45:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        "docs/snippets/node-versions.mdx"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5115,
+      "title": "fix(webapp): preserve active side menu state on detail pages",
+      "author": "arnavbhure",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T05:44:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        ".server-changes/fix-side-menu-active-state.md",
+        "apps/webapp/app/components/navigation/OrganizationSettingsSideMenu.tsx",
+        "apps/webapp/app/components/navigation/SideMenu.tsx",
+        "apps/webapp/app/components/navigation/SideMenuItem.tsx",
+        "apps/webapp/app/components/navigation/sideMenuSections.tsx",
+        "apps/webapp/test/sideMenuPathActive.test.ts",
+        "apps/webapp/test/sideMenuSections.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5114,
+      "title": "fix(run-engine): requeue a failed restore at the run's queue position (#5104)",
+      "author": "granbellllc-png",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T01:30:08Z",
+      "kind": "code",
+      "transition": null,
+      "files": 3,
+      "paths": [
+        "internal-packages/run-engine/src/engine/systems/runAttemptSystem.ts",
+        "internal-packages/run-engine/src/engine/tests/restoreOutcome.test.ts",
+        "internal-packages/run-engine/src/run-queue/index.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5113,
+      "title": "fix(run-engine): record system failure when dequeue recovery nack dead-letters run (#5106)",
+      "author": "granbellllc-png",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T01:25:50Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "internal-packages/run-engine/src/engine/systems/dequeueSystem.ts",
+        "internal-packages/run-engine/src/engine/tests/dequeueRecoveryNackDlq.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5112,
+      "title": "fix(runs): do not apply default 7d period when explicit runIds are supplied (#5110)",
+      "author": "almagas",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T01:22:09Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/webapp/app/services/runsRepository/runsRepository.server.ts",
+        "apps/webapp/test/runsRepositoryConvert.runIds.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5111,
+      "title": "fix(runs): do not apply default 7d period when explicit runIds are supplied (#5110)",
+      "author": "granbellllc-png",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-11T01:21:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 2,
+      "paths": [
+        "apps/webapp/app/services/runsRepository/runsRepository.server.ts",
+        "apps/webapp/test/runsRepositoryConvert.runIds.test.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5108,
+      "title": "fix: remove ignored plugins changeset blocking release",
+      "author": "carderne",
+      "bot": false,
+      "state": "MERGED",
+      "createdAt": "2026-11-10T15:56:16Z",
+      "kind": "code",
+      "transition": null,
+      "files": 1,
+      "paths": [
+        ".changeset/scope-vocabulary-prompts-input-streams.md"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    },
+    {
+      "evidence_class": "candidate-evidence",
+      "upstreamPr": 5107,
+      "title": "fix(sdk): fallback for AbortSignal.any in chat transport on Safari < 17.4 (#5098)",
+      "author": "ghazy2001",
+      "bot": false,
+      "state": "CLOSED",
+      "createdAt": "2026-11-10T11:27:52Z",
+      "kind": "code",
+      "transition": null,
+      "files": 7,
+      "paths": [
+        "packages/trigger-sdk/src/v3/ai-shared.test.ts",
+        "packages/trigger-sdk/src/v3/ai-shared.ts",
+        "packages/trigger-sdk/src/v3/ai.ts",
+        "packages/trigger-sdk/src/v3/chat-client.ts",
+        "packages/trigger-sdk/src/v3/chat-server.ts",
+        "packages/trigger-sdk/src/v3/chat.test.ts",
+        "packages/trigger-sdk/src/v3/chat.ts"
+      ],
+      "gap": {
+        "total": 3,
+        "reasons": [
+          {
+            "id": "no-record",
+            "points": 3,
+            "reason": "no runtime record exists for this change"
+          }
+        ]
+      },
+      "observedAt": "2026-11-20T04:00:45.958Z"
+    }
+  ],
+  "replays": [],
+  "evidence": [],
+  "cohorts": [],
+  "consumption": [],
+  "stage2": {
+    "state": "unstarted"
+  },
+  "ladder": {
+    "4": {
+      "state": "unstarted"
+    },
+    "5": {
+      "state": "unstarted"
+    },
+    "6": {
+      "state": "unstarted"
+    }
+  },
+  "stage": 0
+}
