@@ -1335,12 +1335,12 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": null,
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-18T17:03:30.080Z",
       "verification": {
         "status": "FAIL",
         "head": "54891ad1d86c0c351fc8a65ed2bb4ad5276459b5",
-        "checkedAt": "2026-11-20T04:58:06.999Z",
+        "checkedAt": "2026-11-20T06:26:14.032Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1349,7 +1349,7 @@
         ],
         "receiptFingerprint": "14c91774d7974d4f0433032a457eae4c3135acecc007925acbe0d44b20a5527f"
       },
-      "observedAt": "2026-11-20T04:58:06.999Z",
+      "observedAt": "2026-11-20T06:26:14.032Z",
       "source": "github-reconciliation"
     },
     {
@@ -1361,7 +1361,7 @@
       "verification": {
         "status": "FAIL",
         "head": "23fa3949ded938402cdac9b4530b36d5100ffc87",
-        "checkedAt": "2026-11-20T04:58:06.999Z",
+        "checkedAt": "2026-11-20T06:26:14.032Z",
         "reasons": [
           "head-bound: head moved: record f474f5a, current 23fa394",
           "capture completeness: capture not declared; comparison undeterminable",
@@ -1377,7 +1377,7 @@
         ],
         "receiptFingerprint": "d464cd2774bff836f95630bcfe5a5bdd0902f887e4c386b3795bfbea8de09a47"
       },
-      "observedAt": "2026-11-20T04:58:06.999Z",
+      "observedAt": "2026-11-20T06:26:14.032Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1399,7 +1399,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "57132ca8ca44aac06d963e6011b8104cb0f13e1b",
-    "checkedAt": "2026-11-20T04:58:06.999Z",
+    "checkedAt": "2026-11-20T06:26:14.032Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1422,7 +1422,7 @@
       "state": "unstarted"
     }
   },
-  "stage": 1,
+  "stage": 0,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
@@ -1431,7 +1431,7 @@
     "pr": 28
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:58:06.999Z",
+    "checkedAt": "2026-11-20T06:26:14.032Z",
     "defaultBranch": "main",
     "defaultSha": "57132ca8ca44aac06d963e6011b8104cb0f13e1b",
     "inspectedPrs": 28,
@@ -1444,12 +1444,12 @@
         "head": "54891ad1d86c0c351fc8a65ed2bb4ad5276459b5",
         "previous": "3f25ab5cbfd5832651ad5cd587a23c74cf64ec8a",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "14c91774d7974d4f0433032a457eae4c3135acecc007925acbe0d44b20a5527f",
         "verification": {
           "status": "FAIL",
           "head": "54891ad1d86c0c351fc8a65ed2bb4ad5276459b5",
-          "checkedAt": "2026-11-20T04:58:06.999Z",
+          "checkedAt": "2026-11-20T06:26:14.032Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1471,7 +1471,7 @@
         "verification": {
           "status": "FAIL",
           "head": "23fa3949ded938402cdac9b4530b36d5100ffc87",
-          "checkedAt": "2026-11-20T04:58:06.999Z",
+          "checkedAt": "2026-11-20T06:26:14.032Z",
           "reasons": [
             "head-bound: head moved: record f474f5a, current 23fa394",
             "capture completeness: capture not declared; comparison undeterminable",

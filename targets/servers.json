@@ -1131,12 +1131,12 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": "uv",
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-18T16:57:48.221Z",
       "verification": {
         "status": "FAIL",
         "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
-        "checkedAt": "2026-11-20T05:02:00.842Z",
+        "checkedAt": "2026-11-20T06:48:24.458Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1144,7 +1144,7 @@
         ],
         "receiptFingerprint": "88cf346725962820f093d7ba100132dc5deab0d5b733dee3a8ee930f92a9f8cb"
       },
-      "observedAt": "2026-11-20T05:02:00.842Z",
+      "observedAt": "2026-11-20T06:48:24.458Z",
       "source": "github-reconciliation"
     },
     {
@@ -1160,12 +1160,12 @@
       "transition": null,
       "record": "instrument",
       "ecosystem": "uv",
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-19T06:01:49.984Z",
       "verification": {
         "status": "FAIL",
         "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
-        "checkedAt": "2026-11-20T05:02:00.842Z",
+        "checkedAt": "2026-11-20T06:48:24.458Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1174,7 +1174,7 @@
         ],
         "receiptFingerprint": "50ba881301c16939f0dd32ad04c0ec11cacd2c7932a6ee56dc18c1b306756179"
       },
-      "observedAt": "2026-11-20T05:02:00.842Z",
+      "observedAt": "2026-11-20T06:48:24.458Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1206,7 +1206,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "b15caf12da7a18acdee59b47c252c1b2aa16a31f",
-    "checkedAt": "2026-11-20T05:02:00.842Z",
+    "checkedAt": "2026-11-20T06:48:24.458Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1229,7 +1229,7 @@
       "state": "unstarted"
     }
   },
-  "stage": 1,
+  "stage": 0,
   "grounding": {
     "state": "pending",
     "source": "4253b0e490582e6f77c7ca368bb6006abd5beb7d",
@@ -1238,7 +1238,7 @@
     "pr": 29
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T05:02:00.842Z",
+    "checkedAt": "2026-11-20T06:48:24.458Z",
     "defaultBranch": "main",
     "defaultSha": "b15caf12da7a18acdee59b47c252c1b2aa16a31f",
     "inspectedPrs": 29,
@@ -1251,12 +1251,12 @@
         "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
         "previous": "453466d5e1ca2e5f58d344a99d501832414b9788",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "50ba881301c16939f0dd32ad04c0ec11cacd2c7932a6ee56dc18c1b306756179",
         "verification": {
           "status": "FAIL",
           "head": "7c9ff0517f469e98b95933e289b41d0507527d5c",
-          "checkedAt": "2026-11-20T05:02:00.842Z",
+          "checkedAt": "2026-11-20T06:48:24.458Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1273,12 +1273,12 @@
         "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
         "previous": "9d9f9b61e82aeb63fc903526af05847d34936f39",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "88cf346725962820f093d7ba100132dc5deab0d5b733dee3a8ee930f92a9f8cb",
         "verification": {
           "status": "FAIL",
           "head": "84eceb0b26b532664ac5dc90380d8bd8481905d0",
-          "checkedAt": "2026-11-20T05:02:00.842Z",
+          "checkedAt": "2026-11-20T06:48:24.458Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",

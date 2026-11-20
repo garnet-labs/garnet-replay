@@ -918,13 +918,13 @@
       "verification": {
         "status": "FAIL",
         "head": "d636c992b6510595d30c8223baa50c1f60008e90",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [
           "check settled: Dependency install (recorded) concluded failure"
         ],
         "receiptFingerprint": "ec9e395e60d0c6ba76ce092535f30bf65b1de73f8fe1d1e7ad51c0325ac67a5b"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     },
     {
@@ -936,13 +936,13 @@
       "verification": {
         "status": "FAIL",
         "head": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [
           "check settled: Dependency install (recorded) concluded failure"
         ],
         "receiptFingerprint": "855730ff75d2052e2f45a2a3cee8d93d76e0fb590f1b28bf7f8d9f5ffc5a3874"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     },
     {
@@ -954,13 +954,13 @@
       "verification": {
         "status": "FAIL",
         "head": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [
           "check settled: Dependency install (recorded) concluded failure"
         ],
         "receiptFingerprint": "9d8be362287cb4ae572793b72cbb3001969c635da6873908cb8a7f3997ca194b"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     },
     {
@@ -972,11 +972,11 @@
       "verification": {
         "status": "PASS",
         "head": "56604849d483c210795e7a79e5cdcca1552563bd",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [],
         "receiptFingerprint": "c445bf0d061817dd179a397cf069f59fd261a29a7922f713660655bc591c67cd"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     },
     {
@@ -988,14 +988,14 @@
       "verification": {
         "status": "FAIL",
         "head": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [
           "pair line: no pair line on the comment",
           "pull request open: state closed"
         ],
         "receiptFingerprint": "0c71182955f139479abfc0093eb4cd3afb4d634740e106cceb8fe2a76cf69c05"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     },
     {
@@ -1007,13 +1007,13 @@
       "verification": {
         "status": "FAIL",
         "head": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
-        "checkedAt": "2026-11-20T04:58:33.116Z",
+        "checkedAt": "2026-11-20T06:26:57.327Z",
         "reasons": [
           "check settled: Dependency install (recorded) concluded failure"
         ],
         "receiptFingerprint": "a8c0be03f89ecc8e796c632340f1e2d3a7d33c42911a9144e2018e09c8af2e5f"
       },
-      "observedAt": "2026-11-20T04:58:33.116Z",
+      "observedAt": "2026-11-20T06:26:57.327Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1035,7 +1035,7 @@
     "state": "unstarted",
     "defaultBranch": "dev",
     "checkedSha": "21f3c7d564605114e3be80c987882d01ba263058",
-    "checkedAt": "2026-11-20T04:58:33.116Z",
+    "checkedAt": "2026-11-20T06:26:57.327Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1067,7 +1067,7 @@
     "pr": 23
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:58:33.116Z",
+    "checkedAt": "2026-11-20T06:26:57.327Z",
     "defaultBranch": "dev",
     "defaultSha": "21f3c7d564605114e3be80c987882d01ba263058",
     "inspectedPrs": 23,
@@ -1085,7 +1085,7 @@
         "verification": {
           "status": "FAIL",
           "head": "d636c992b6510595d30c8223baa50c1f60008e90",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [
             "check settled: Dependency install (recorded) concluded failure"
           ],
@@ -1104,7 +1104,7 @@
         "verification": {
           "status": "FAIL",
           "head": "4e31ed38dd82f4ca9bee2b3a17d157df41152bce",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [
             "check settled: Dependency install (recorded) concluded failure"
           ],
@@ -1123,7 +1123,7 @@
         "verification": {
           "status": "FAIL",
           "head": "6ecd38870f5ee6839ed3c16fd79b44e0634d867f",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [
             "check settled: Dependency install (recorded) concluded failure"
           ],
@@ -1142,7 +1142,7 @@
         "verification": {
           "status": "PASS",
           "head": "56604849d483c210795e7a79e5cdcca1552563bd",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [],
           "receiptFingerprint": "c445bf0d061817dd179a397cf069f59fd261a29a7922f713660655bc591c67cd"
         }
@@ -1159,7 +1159,7 @@
         "verification": {
           "status": "FAIL",
           "head": "f6d3de75e54f0b6a38e15ff4d148b538b19e9fce",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [
             "pair line: no pair line on the comment",
             "pull request open: state closed"
@@ -1179,7 +1179,7 @@
         "verification": {
           "status": "FAIL",
           "head": "f41e3a3eb03710a658ddc869764b2cc8f0649a9e",
-          "checkedAt": "2026-11-20T04:58:33.116Z",
+          "checkedAt": "2026-11-20T06:26:57.327Z",
           "reasons": [
             "check settled: Dependency install (recorded) concluded failure"
           ],

@@ -1495,11 +1495,11 @@
       "verification": {
         "status": "PASS",
         "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [],
         "receiptFingerprint": "45e2c4c38e895d95b38c0a7b5e6307bcb756b881d51027b67f21ee3d08a6ac90"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1523,19 +1523,19 @@
       "packageDir": null,
       "logicalId": "d7152b3566f80bf10ab87349a31cb10b790c44926f0f279b6156de27c7c0ce5e",
       "attemptId": "c2f1394b32f206dadaf8ae59b226f1b69288e1ad03ec5f27ea22760644f26e32",
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-10-24T06:38:35.751Z",
       "verification": {
         "status": "FAIL",
         "head": "cf5960d82264c5ee827528adef2164967ce99395",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized"
         ],
         "receiptFingerprint": "cf684cf29630306b5f9c6d268a9b1a01c0e166dbff13fa4d193572320b39e390"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1543,11 +1543,11 @@
       "forkPr": 14,
       "branch": "dependabot/uv/aiohttp-3.14.4",
       "forkHeadSha": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1558,7 +1558,7 @@
         ],
         "receiptFingerprint": "15f23e431fe65517f3ab6d89a8659e8738acf225b405030493fe2f517bce684d"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1566,11 +1566,11 @@
       "forkPr": 13,
       "branch": "dependabot/pip/docs/aiohttp-3.14.4",
       "forkHeadSha": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1580,7 +1580,7 @@
         ],
         "receiptFingerprint": "38c6fd20fa3685ab13a853c793b9f10abf9a0f365bd27b3529ef2220fb28d814"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1588,11 +1588,11 @@
       "forkPr": 12,
       "branch": "dependabot/pip/docs/tornado-6.6.1",
       "forkHeadSha": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1602,7 +1602,7 @@
         ],
         "receiptFingerprint": "373cc11e48d409428cbc829eb8fcec784cba683258efecba0e2d31b81e0a25b2"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1610,11 +1610,11 @@
       "forkPr": 11,
       "branch": "dependabot/pip/docs/soupsieve-4.0",
       "forkHeadSha": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1624,7 +1624,7 @@
         ],
         "receiptFingerprint": "11014680d7bb3679d257673bc09ef09dfd10dac4d7f4e8b503bcb943570fabc6"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1632,11 +1632,11 @@
       "forkPr": 10,
       "branch": "dependabot/pip/docs/pillow-13.0.0",
       "forkHeadSha": "f131189122049169f175a9b44ec0f1e2b25399a4",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1646,7 +1646,7 @@
         ],
         "receiptFingerprint": "644bc404aea6a7a1b408c95690545c199ebd3cb3bfcc20eadd7ac1fa9293cc80"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1658,11 +1658,11 @@
       "verification": {
         "status": "PASS",
         "head": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [],
         "receiptFingerprint": "9cc1b1e4825fbc2df8057711fd7acfaeb17488de1d03c95519c46e036c24e43d"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1674,11 +1674,11 @@
       "verification": {
         "status": "PASS",
         "head": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [],
         "receiptFingerprint": "c8582c39b57c3a56db672adac8c49d6c8ad69fa49030b2d22519f9c3067ff4c3"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1690,11 +1690,11 @@
       "verification": {
         "status": "PASS",
         "head": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [],
         "receiptFingerprint": "5812a00f6f2ea75f1b8e78ef3a7a43cff075d4fae90250baf046549a5a77115d"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1706,11 +1706,11 @@
       "verification": {
         "status": "PASS",
         "head": "35c5227c1509f6324c4522289bd3020d02cac9f5",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [],
         "receiptFingerprint": "44cdc7f85435817c7809066751462fc47c4c6ac1e8c737f8be68ff6d9903b01e"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1722,13 +1722,13 @@
       "verification": {
         "status": "FAIL",
         "head": "2fc0049935672d48e5bc6384ec29043780bda08b",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "pull request open: state closed"
         ],
         "receiptFingerprint": "ffd6a2344150548296631b887a37173547a1b1da7a6c8dfdf0324097db539e6a"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     },
     {
@@ -1736,11 +1736,11 @@
       "forkPr": 1,
       "branch": "onboarding/garnet-recording",
       "forkHeadSha": "e093979d53527b63451464637acb7068f37338ce",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "e093979d53527b63451464637acb7068f37338ce",
-        "checkedAt": "2026-11-20T04:53:08.830Z",
+        "checkedAt": "2026-11-20T06:08:57.296Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1749,7 +1749,7 @@
         ],
         "receiptFingerprint": "b7b1a50e2307f0cf50f4fce6ef0fa06adcdafdd378902bcff784e4667dd8ed42"
       },
-      "observedAt": "2026-11-20T04:53:08.830Z",
+      "observedAt": "2026-11-20T06:08:57.296Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1760,7 +1760,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "2c056aaf160d5424641b9fcc17630216ca23dd13",
-    "checkedAt": "2026-11-20T04:53:08.830Z",
+    "checkedAt": "2026-11-20T06:08:57.296Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1793,7 +1793,7 @@
     "pr": 15
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:53:08.830Z",
+    "checkedAt": "2026-11-20T06:08:57.296Z",
     "defaultBranch": "main",
     "defaultSha": "2c056aaf160d5424641b9fcc17630216ca23dd13",
     "inspectedPrs": 15,
@@ -1806,12 +1806,12 @@
         "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "15f23e431fe65517f3ab6d89a8659e8738acf225b405030493fe2f517bce684d",
         "verification": {
           "status": "FAIL",
           "head": "58fc09dc209390b491a4db0b61778d89aea1e6b9",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1830,12 +1830,12 @@
         "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "38c6fd20fa3685ab13a853c793b9f10abf9a0f365bd27b3529ef2220fb28d814",
         "verification": {
           "status": "FAIL",
           "head": "0fcf8f3a8b50cef502003abbaaca26139fc12037",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1853,12 +1853,12 @@
         "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "373cc11e48d409428cbc829eb8fcec784cba683258efecba0e2d31b81e0a25b2",
         "verification": {
           "status": "FAIL",
           "head": "b0a1fb9afed505d6ad2e31fcb6f25ce30d526e19",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1876,12 +1876,12 @@
         "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "11014680d7bb3679d257673bc09ef09dfd10dac4d7f4e8b503bcb943570fabc6",
         "verification": {
           "status": "FAIL",
           "head": "b97cd3241db36543ee871fb3e2967e2acaf1a28a",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1899,12 +1899,12 @@
         "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "644bc404aea6a7a1b408c95690545c199ebd3cb3bfcc20eadd7ac1fa9293cc80",
         "verification": {
           "status": "FAIL",
           "head": "f131189122049169f175a9b44ec0f1e2b25399a4",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1927,7 +1927,7 @@
         "verification": {
           "status": "PASS",
           "head": "ffd721b464f45d8ab93468f468f76405b19e0ffe",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [],
           "receiptFingerprint": "9cc1b1e4825fbc2df8057711fd7acfaeb17488de1d03c95519c46e036c24e43d"
         }
@@ -1944,7 +1944,7 @@
         "verification": {
           "status": "PASS",
           "head": "f0743094ef8d2ad840b372dcb2bbbe1f13383b5c",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [],
           "receiptFingerprint": "c8582c39b57c3a56db672adac8c49d6c8ad69fa49030b2d22519f9c3067ff4c3"
         }
@@ -1961,7 +1961,7 @@
         "verification": {
           "status": "PASS",
           "head": "bf8e101e8cb16e67042582a82ce9f4074a6158dc",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [],
           "receiptFingerprint": "5812a00f6f2ea75f1b8e78ef3a7a43cff075d4fae90250baf046549a5a77115d"
         }
@@ -1978,7 +1978,7 @@
         "verification": {
           "status": "PASS",
           "head": "35c5227c1509f6324c4522289bd3020d02cac9f5",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [],
           "receiptFingerprint": "44cdc7f85435817c7809066751462fc47c4c6ac1e8c737f8be68ff6d9903b01e"
         }
@@ -1995,7 +1995,7 @@
         "verification": {
           "status": "FAIL",
           "head": "2fc0049935672d48e5bc6384ec29043780bda08b",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "pull request open: state closed"
           ],
@@ -2009,12 +2009,12 @@
         "head": "cf5960d82264c5ee827528adef2164967ce99395",
         "previous": "fd3c646370c12b1289f5419781116eb7cd1a5537",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "cf684cf29630306b5f9c6d268a9b1a01c0e166dbff13fa4d193572320b39e390",
         "verification": {
           "status": "FAIL",
           "head": "cf5960d82264c5ee827528adef2164967ce99395",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized"
@@ -2034,7 +2034,7 @@
         "verification": {
           "status": "PASS",
           "head": "bc02ea4b44893e4c02cb35b3156e7a1e846333ee",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [],
           "receiptFingerprint": "45e2c4c38e895d95b38c0a7b5e6307bcb756b881d51027b67f21ee3d08a6ac90"
         }
@@ -2046,12 +2046,12 @@
         "head": "e093979d53527b63451464637acb7068f37338ce",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "b7b1a50e2307f0cf50f4fce6ef0fa06adcdafdd378902bcff784e4667dd8ed42",
         "verification": {
           "status": "FAIL",
           "head": "e093979d53527b63451464637acb7068f37338ce",
-          "checkedAt": "2026-11-20T04:53:08.830Z",
+          "checkedAt": "2026-11-20T06:08:57.296Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",

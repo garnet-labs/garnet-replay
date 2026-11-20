@@ -170,14 +170,14 @@
       "verification": {
         "status": "FAIL",
         "head": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
-        "checkedAt": "2026-11-20T04:51:35.827Z",
+        "checkedAt": "2026-11-20T06:00:45.444Z",
         "reasons": [
           "check settled: test-structured-output / Summary concluded failure, test-structured-output / Test Basic Type Conversions concluded failure, test-structured-output / Test Execution File Format concluded failure, test-mcp-servers / test-mcp-integration concluded failure, test-mcp-servers / test-mcp-config-flag concluded failure, test-structured-output / Test Edge Cases concluded failure, test-structured-output / Test Output Name Sanitization concluded failure, test-base-action / test-prompt-file concluded failure, test-base-action / test-inline-prompt concluded failure, test-structured-output / Test Arrays and Objects concluded failure, test-settings / test-settings-inline-deny concluded failure, test-settings / test-settings-file-allow concluded failure, test-settings / test-settings-file-deny concluded failure, test-settings / test-settings-inline-allow concluded failure, test-custom-executables / test-custom-executables concluded failure",
           "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
         ],
         "receiptFingerprint": "0262411c284f448fdb77b76af45f360129b7223f0282b122a97bd334a31bd9b7"
       },
-      "observedAt": "2026-11-20T04:51:35.827Z",
+      "observedAt": "2026-11-20T06:00:45.444Z",
       "source": "github-reconciliation"
     },
     {
@@ -185,11 +185,11 @@
       "forkPr": 1,
       "branch": "onboarding/garnet-recording",
       "forkHeadSha": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
-        "checkedAt": "2026-11-20T04:51:35.827Z",
+        "checkedAt": "2026-11-20T06:00:45.444Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -198,7 +198,7 @@
         ],
         "receiptFingerprint": "c700fbf1c69bcc73f2c4097e17962a2ad60dce0b9f24eb2996e21f9131f861d1"
       },
-      "observedAt": "2026-11-20T04:51:35.827Z",
+      "observedAt": "2026-11-20T06:00:45.444Z",
       "source": "github-reconciliation"
     }
   ],
@@ -209,7 +209,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "a56df619bf41abdea17093d6f63f7e64da83763b",
-    "checkedAt": "2026-11-20T04:51:35.827Z",
+    "checkedAt": "2026-11-20T06:00:45.444Z",
     "files": [
       "REVIEW.md"
     ],
@@ -235,7 +235,7 @@
   "stage": 1,
   "setupPr": 1,
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:51:35.827Z",
+    "checkedAt": "2026-11-20T06:00:45.444Z",
     "defaultBranch": "main",
     "defaultSha": "a56df619bf41abdea17093d6f63f7e64da83763b",
     "inspectedPrs": 3,
@@ -253,7 +253,7 @@
         "verification": {
           "status": "FAIL",
           "head": "0f1f4c8c9506cdb56f78f4f328954a4aced7bd8a",
-          "checkedAt": "2026-11-20T04:51:35.827Z",
+          "checkedAt": "2026-11-20T06:00:45.444Z",
           "reasons": [
             "check settled: test-structured-output / Summary concluded failure, test-structured-output / Test Basic Type Conversions concluded failure, test-structured-output / Test Execution File Format concluded failure, test-mcp-servers / test-mcp-integration concluded failure, test-mcp-servers / test-mcp-config-flag concluded failure, test-structured-output / Test Edge Cases concluded failure, test-structured-output / Test Output Name Sanitization concluded failure, test-base-action / test-prompt-file concluded failure, test-base-action / test-inline-prompt concluded failure, test-structured-output / Test Arrays and Objects concluded failure, test-settings / test-settings-inline-deny concluded failure, test-settings / test-settings-file-allow concluded failure, test-settings / test-settings-file-deny concluded failure, test-settings / test-settings-inline-allow concluded failure, test-custom-executables / test-custom-executables concluded failure",
             "reviewer grounding: kit missing or conflicting on main; run replay ground <slug>"
@@ -268,12 +268,12 @@
         "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "c700fbf1c69bcc73f2c4097e17962a2ad60dce0b9f24eb2996e21f9131f861d1",
         "verification": {
           "status": "FAIL",
           "head": "dddfdac5907ffd07df05f58113d22d69f3e465f5",
-          "checkedAt": "2026-11-20T04:51:35.827Z",
+          "checkedAt": "2026-11-20T06:00:45.444Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
