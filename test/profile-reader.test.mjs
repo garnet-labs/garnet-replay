@@ -279,6 +279,30 @@ test("real receipt CursorPage data items read through the CLI without manual unw
   assert.throws(() => readProfileTrees({ items: [{ data: null }] }), /Profile must be an object/)
 })
 
+test("Devin description completeness limits comparisons through real receipt data windows", () => {
+  const receipt = JSON.parse(readFileSync(RECEIPT, "utf8"))
+  const complete = receipt.items[0]
+  const partial = receipt.items[1]
+  assert.match(partial.data.metadata.description, /^completeness=partial;/)
+  assert.equal(captureAllowsComparison(complete), true)
+  assert.equal(captureAllowsComparison(partial), false)
+  assert.equal(captureAllowsComparison(receipt), false)
+  for (const [head, base] of [[partial, complete], [complete, partial]]) {
+    const report = compareProfileTrees(head, base)
+    assert.equal(report.added, null)
+    assert.match(renderProfileTrees(report), /Capture is not complete; additions cannot be determined/)
+  }
+  const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", RECEIPT.pathname, "--base", RECEIPT.pathname, "--json"], { encoding: "utf8" })
+  assert.equal(child.status, 0, child.stderr)
+  const report = JSON.parse(child.stdout)
+  assert.equal(report.added, null)
+  assert.equal(report.comparison, "unavailable")
+  assert.match(report.comparisonReason, /additions cannot be determined/)
+  assert.equal(captureAllowsComparison({ metadata: { description: "" } }), true)
+  assert.equal(captureAllowsComparison({ metadata: { description: "completeness=unknown; command kind=test" } }), false)
+  assert.equal(captureAllowsComparison({ metadata: { description: "completeness=complete; completeness=partial" } }), false)
+})
+
 test("resolved IPs group with their host across windows without creating comparison additions", () => {
   const receipt = JSON.parse(readFileSync(RECEIPT, "utf8"))
   const rows = readProfileTrees(receipt)

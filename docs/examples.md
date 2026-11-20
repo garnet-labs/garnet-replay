@@ -58,13 +58,14 @@ repository is not inferred from another window. Observed strings are untrusted.
 
 **Attribution review**
 
-Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code>, <code>not recorded</code> · Compared: not recorded (profile unavailable)
+Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code>, <code>not recorded</code> · Compared: not recorded (comparison unavailable)
 
 Scope: <code>supplied-profiles</code> · version transition: not derivable from the record.
 
+Capture is not complete; additions cannot be determined.
+
 **Needs review: not attributable to the runner.**
 
-Compared profile unavailable; additions cannot be determined.
 Host-rooted ancestry does not establish job origin.
 
 - <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154, 172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-install</code> · workflow <code>devin</code>
