@@ -168,7 +168,9 @@ const changes = [
 function replayPlan(overrides = {}) {
   return planReplay({
     slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "master", forkDefaultSha: SHA_A, upstreamPr: 501,
-    upstreamTitle: depPr.title, baseSha: SHA_A, headSha: SHA_B, changes, firstPaths: ["pnpm-lock.yaml"], work: "/tmp/work", workExists: true, ...overrides,
+    upstreamTitle: depPr.title, baseSha: SHA_A, headSha: SHA_B, changes, firstPaths: ["pnpm-lock.yaml"], work: "/tmp/work", workExists: true,
+    workflowBodies: Object.fromEntries((overrides.recordWorkflows ?? []).map((path) => [path, "on: pull_request\n"])),
+    baseWorkflowBodies: Object.fromEntries((overrides.baseRecords ?? []).map((path) => [path, "on: pull_request\n"])), ...overrides,
   })
 }
 
@@ -238,6 +240,7 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
       work,
       baseBranch: "replay-base",
       baseRecords: [".github/workflows/ci.yml"],
+      baseWorkflowBodies: { ".github/workflows/ci.yml": "on: pull_request\n" },
       recordWorkflows: [],
     })
 
@@ -249,7 +252,8 @@ test("replay --pr: --first-commit stages the upstream trees for both commits", a
     for (const text of [plan.body, plan.messages.first, plan.messages.change]) {
       assert.doesNotMatch(text, /Bumps|allowlist/)
     }
-    assert.ok(plan.steps.some((step) => step.id === "base-branch"))
+    assert.ok(plan.steps.some((step) => step.id === "ensure-base"))
+    assert.ok(plan.steps.some((step) => step.id === "wait-base-record"))
     assert.ok(!plan.steps.some((step) => step.id === "first-fork-record"))
     const runSteps = plan.steps.filter((step) => [
       "first-commit-paths", "first-check", "first-commit",
@@ -378,10 +382,13 @@ test("replay --pr: --base-branch opens against a fork branch set to the base and
   const recorder = ".github/workflows/garnet-ci.yml"
   const plan = replayPlan({ baseBranch: "sync/abc1234", recordWorkflows: [recorder] })
   const ids = plan.steps.map((s) => s.id)
-  const set = plan.steps.find((s) => s.id === "base-branch")
-  assert.equal(set.kind, "write-remote")
+  const set = plan.steps.find((s) => s.id === "ensure-base")
+  assert.equal(set.kind, "ensure-base")
   assert.equal(set.target, FORK)
-  assert.deepEqual(set.args.slice(-3), ["push", "origin", `${SHA_A}:refs/heads/sync/abc1234`])
+  assert.equal(set.baseSha, SHA_A)
+  assert.match(set.baseWorkflows[recorder], /push:/)
+  assert.ok(ids.indexOf("ensure-base") < ids.indexOf("wait-base-record"))
+  assert.ok(ids.indexOf("wait-base-record") < ids.indexOf("branch"))
   assert.deepEqual(plan.steps.find((s) => s.id === "branch").args.slice(-2), [plan.branch, "origin/sync/abc1234"])
   const carried = plan.steps.find((s) => s.id === "first-fork-record")
   assert.deepEqual(carried.args.slice(-3), [SHA_A, "--", recorder])
@@ -870,7 +877,7 @@ test("replay --pr: commit 1's message describes what it stages, not what the pla
   assert.match(renderPlan(differs), /commit 1 stages: the touched paths as the change found them \(master on the fork differs on at least one\)/)
   // --sync-fork and --base-branch start from the change's base, so the answer is known without a probe.
   assert.equal(replayPlan({ syncFork: true }).firstStages, "context")
-  assert.equal(replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-ci.yml"], firstPaths: [] }).firstStages, "context")
+  assert.throws(() => replayPlan({ baseBranch: "sync/x", recordWorkflows: [".github/workflows/garnet-ci.yml"], firstPaths: [] }), /commit 1 would be empty/)
   // Nothing to stage in commit 1 is refused at plan time, not at the checkout.
   assert.throws(() => replayPlan({ firstPaths: [], forkHoldsBase: true }), /already holds the touched paths .* pass --first <path>/)
   assert.throws(() => replayPlan({ syncFork: true, firstPaths: [] }), /pass --first <path>/)

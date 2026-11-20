@@ -235,21 +235,22 @@ test("shared URL/local admission refuses missing guidance, allows explicit overr
 test("upstream-based plans carry approved guidance onto the base and two-commit replay", () => {
   const input = { slug: "example", fork: "garnet-labs/example", upstream: "upstream/example", defaultBranch: "main", upstreamPr: 1, upstreamTitle: "fix: update source", baseSha: "a".repeat(40), headSha: "b".repeat(40), changes: [{ path: "src/a.js", status: "modified", previous: null }], baseBranch: "review/base", recordWorkflows: [".github/workflows/ci.yml"], work: "/unused" }
   const grounding = { current: reviewerKit(), sha: "c".repeat(40) }
-  const pure = carryReviewerGuidance(planPureReplay({ ...input, forkDefaultSha: grounding.sha }), grounding)
+  const pure = carryReviewerGuidance(planPureReplay({ ...input, forkDefaultSha: grounding.sha, workflowBodies: { ".github/workflows/ci.yml": "on:\n  pull_request:\n" } }), grounding)
   const base = pure.steps.find((step) => step.kind === "ensure-base")
   assert.deepEqual(base.reviewerPaths, Object.keys(reviewerKit()))
   assert.equal(base.reviewerFrom, grounding.sha)
   assert.equal(pure.steps.filter((step) => step.cmd === "git" && step.args.includes("commit")).length, 1)
-  const two = carryReviewerGuidance(planReplay({ ...input, record: "inject", ecosystem: "npm" }), grounding)
-  assert.ok(two.steps.findIndex((step) => step.id === "carry-reviewers") < two.steps.findIndex((step) => step.id === "first-commit"))
+  const two = carryReviewerGuidance(planReplay({ ...input, firstPaths: ["src/a.js"], record: "inject", ecosystem: "npm" }), grounding)
+  const twoBase = two.steps.find((step) => step.kind === "ensure-base")
+  assert.deepEqual(twoBase.reviewerPaths, Object.keys(reviewerKit()))
+  assert.equal(twoBase.reviewerFrom, grounding.sha)
+  assert.ok(two.steps.indexOf(twoBase) < two.steps.findIndex((step) => step.id === "branch"))
   assert.ok(two.contextPaths.includes("REVIEW.md"))
   assert.ok(two.steps.findIndex((step) => step.id === "head-reviewers") > two.steps.findIndex((step) => step.id === "change-head"))
   assert.ok(two.steps.findIndex((step) => step.id === "head-reviewers") < two.steps.findIndex((step) => step.id === "change-commit"))
   assert.ok(pure.steps.some((step) => step.id === "reviewer-snapshot"))
-  for (const id of ["carry-reviewers-add", "head-reviewers-add"]) {
-    assert.deepEqual(two.steps.find((step) => step.id === id).args, ["-C", input.work, "add", "-f", "--", ...Object.keys(reviewerKit())])
-  }
-  const empty = carryReviewerGuidance(planReplay({ ...input, record: "inject", ecosystem: "npm" }), { current: {}, sha: grounding.sha })
+  assert.deepEqual(two.steps.find((step) => step.id === "head-reviewers-add").args, ["-C", input.work, "add", "-f", "--", ...Object.keys(reviewerKit())])
+  const empty = carryReviewerGuidance(planReplay({ ...input, firstPaths: ["src/a.js"], record: "inject", ecosystem: "npm" }), { current: {}, sha: grounding.sha })
   assert.deepEqual(empty.reviewerPaths, [])
   assert.throws(() => carryReviewerGuidance({ ...pure, paths: ["REVIEW.md"] }, grounding), /preserve reviewer guidance/)
   assert.throws(() => carryReviewerGuidance({ ...pure, steps: [...pure.steps, { id: "change-remove", args: ["rm", "--", "REVIEW.md"] }] }, grounding), /preserve reviewer guidance/)

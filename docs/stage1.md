@@ -52,13 +52,36 @@ The plan, always printed before anything is written:
    <base>:refs/heads/<default>`, which git refuses unless it is a fast-forward).
    With the fork at the base, commit 1 carries only the recording workflow, and
    its message says so. When the fork default branch must stay where it is,
-   `--base-branch <name>` sets a fork-only branch to the exact base instead and
-   opens the pull request against it; commit 1 then carries the fork's
-   recording workflow from the default branch, unless the base already runs a
-   recording workflow of its own, in which case commit 1 carries nothing. A
-   fork with several recording workflows needs `--record-workflow <path>` to
-   name the one carried. `--allow-behind` turns the stop into a warning when
+   `--base-branch <name>` starts a fork-only branch from the source base with
+   recording workflows and approved reviewer guidance carried onto it, then
+   opens the pull request against that branch. An ordinary onboarded replay
+   carries only the change in its one commit; specialized two-commit plans
+   retain their before/after sequence. A two-commit fork-workflow plan with
+   several recording workflows needs `--record-workflow <path>` to name the
+   entry workflow carried. `--allow-behind` turns the stop into a warning when
    the distance is known to be harmless.
+   For alternate-base replays, `ensure-base` carries recorder entry workflows
+   with push triggers including the alternate branch, then `wait-base-record`
+   waits for observed selected push runs at that exact tip to finish before
+   publishing the change. Skipped runs and workflows whose jobs all skipped are
+   excluded. Selected workflows with no push run five minutes after the first
+   selected run appeared at that tip count as absent, not pending; the wait
+   detail and log name them. At least one Garnet recording job must run and
+   succeed, with an uploaded public profile matching the exact base SHA,
+   repository, run and profile ID. Any failed run or job is a hard stop.
+   Existing runs meeting these requirements proceed immediately. Otherwise the
+   gate waits at most 45 minutes (30-second polling); timeout or unreadable
+   Actions runs stop as `RECORD_PENDING`, and missing or unreadable public
+   profile evidence stays pending. The pure plan excludes callees and triggers whose branch
+   or path filters do not provably accept the carry commit. Only rewritten
+   workflow paths are assumed changed; an empty expected set refuses planning.
+   Push triggers without branch filters stay as they are; unsupported shapes
+   refuse planning. Local and hosted execution use the same plan gate.
+   An older alternate base can be upgraded by a normal fast-forward commit only
+   if it contains the source base and both its differences from that base and
+   the proposed changes are confined to carried workflow/reviewer paths.
+   Nothing is force-pushed. This establishes a baseline run, not final-head
+   shareability: run `verify` for the actual pair before sharing.
    A recording workflow is any `pull_request` workflow that runs
    `garnet-org/action` itself or through a local reusable workflow
    (`uses: ./.github/workflows/…` or `$/.github/workflows/…`). A workflow runs

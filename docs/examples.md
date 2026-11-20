@@ -718,6 +718,28 @@ wizard output; the offline behavior is covered by `test/hosted-runner.test.mjs`.
 
 ## Preserving the selected base's Dependabot policy
 
+### Alternate-base baseline gate
+
+Read-only output on 2026-11-20:
+
+```sh
+node bin/replay.mjs live posthog --pr 125809 --base-branch deps/node-24-base --dry-run
+```
+
+```text
+branch: deps/node.js-24.22.3 · base: deps/node-24-base (set to the change's base) · scope: pr-base-to-head
+compares: fa45929 → 76633f2
+  set deps/node-24-base on the fork to the change's base carrying the recording workflow, unless it already does
+  wait for successful push recordings on garnet-labs/posthog@deps/node-24-base at the base tip (.github/workflows/ci-vendored-packages.yml, .github/workflows/garnet-ci.yml, .github/workflows/garnet-dependabot-livestream.yml, .github/workflows/garnet-python-toolchain.yml, .github/workflows/garnet-replay-headless.yml, .github/workflows/garnet-sentiment.yml); skip when already recorded
+dry run: nothing was executed.
+```
+
+These are selected plan lines, not recording evidence or a verified pair.
+The hosted attempt on the earlier head stopped at a skipped baseline workflow;
+it published no replay PR and produced no compared-commit pair line.
+
+### Selected-base policy
+
 Read-only CLI probe on 2026-09-11, after the five-prospect corrections:
 
 ```sh

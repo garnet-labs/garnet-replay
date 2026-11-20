@@ -28,7 +28,8 @@ function purePlan(overrides = {}) {
   return planPureReplay({
     slug: "posthog", upstream: UPSTREAM, fork: FORK, defaultBranch: "main", upstreamPr: 501,
     upstreamTitle: "feat: add thing", baseSha: SHA_A, headSha: SHA_B, changes: CHANGES,
-    work: "/tmp/work", forkDefaultSha: SHA_C, recordWorkflows: RECORDERS, ...overrides,
+    work: "/tmp/work", forkDefaultSha: SHA_C, recordWorkflows: RECORDERS,
+    workflowBodies: Object.fromEntries((overrides.recordWorkflows ?? RECORDERS).map((path) => [path, "on:\n  push:\n    branches: ['main']\n  pull_request:\n"])), ...overrides,
   })
 }
 
@@ -547,7 +548,7 @@ test("executePlan: the base commit guard still rejects banned prose and invalid 
 
 test("two-commit replay: carried paths bypass vocabulary only in verbatim message lines", async () => {
   const path = ".github/workflows/cleanup_build_template.yml"
-  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), changes: CHANGES })
+  const plan = planReplay({ ...purePlan({ baseBranch: "review/base", recordWorkflows: [path] }), firstPaths: ["src/a.ts"], workflowBodies: { [path]: "on: pull_request\n" }, changes: CHANGES })
   const check = plan.steps.find((step) => step.id === "first-check")
   const commit = plan.steps.find((step) => step.id === "first-commit")
   const { exec, calls } = fakeExec([[/diff --cached --name-only/, path]])
@@ -558,7 +559,7 @@ test("two-commit replay: carried paths bypass vocabulary only in verbatim messag
 })
 
 test("two-commit replay: recorder checkout and execution are bound to the planned fork SHA", async () => {
-  const input = { ...purePlan({ baseBranch: "review/base" }), changes: CHANGES }
+  const input = { ...purePlan({ baseBranch: "review/base" }), firstPaths: ["src/a.ts"], workflowBodies: { [RECORDERS[0]]: "on: pull_request\n" }, changes: CHANGES }
   const plan = planReplay(input)
   const guard = plan.steps.find((step) => step.kind === "verify-fork-default")
   const checkout = plan.steps.find((step) => step.id === "first-fork-record")
@@ -615,13 +616,14 @@ test("executePlan: ensure-base skips when the fork branch already carries the re
 
 test("executePlan: ensure-base refuses an unexpected remote tree", async () => {
   const plan = {
-    mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work",
+    mode: "pure-replay", singleCommit: true, slug: "posthog", upstream: UPSTREAM, fork: FORK, work: "/tmp/work", branch: "replay/change",
     steps: [{
       id: "ensure-base", kind: "ensure-base", target: FORK, baseBranch: "review/base", baseSha: SHA_A,
       carryFrom: SHA_C, carry: RECORDERS, message: "ci: carry the fork's recording workflow onto the replay base",
     }],
   }
   const { exec } = fakeExec([
+    [/refs\/remotes\/origin\/replay\/change/, ""],
     [/rev-parse --verify/, "tree-other\n"],
     [/write-tree/, "tree-carried\n"],
   ])
@@ -846,7 +848,7 @@ test("livePr: two-commit flag selects the existing two-state publisher", async (
   const exec = (command, args) => args[1]?.startsWith(`repos/${UPSTREAM}/git/trees/`) && args[1].includes(":.github/workflows")
     ? JSON.stringify({ tree: [] }) : fallback(command, args)
   for (const twoCommit of [false, true]) {
-    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit"] : [])], {
+    const result = await livePr(["posthog", "--pr", "501", "--base-branch", "review/base", "--dry-run", ...(twoCommit ? ["--two-commit", "--first", "src/a.ts"] : [])], {
       exec, log: () => {}, save: () => assert.fail("dry run must not save"),
     })
     assert.equal(result.plan.singleCommit === true, !twoCommit)
@@ -862,7 +864,7 @@ test("planReplay: code-interpreter carries one root and its six support workflow
   const input = {
     slug: "code-interpreter", upstream: "e2b-dev/code-interpreter", fork: "garnet-labs/code-interpreter", defaultBranch: "main",
     forkDefaultSha: SHA_C, upstreamPr: 248, upstreamTitle: "Update package", baseSha: SHA_A, headSha: SHA_B,
-    changes: [{ path: "chart_data_extractor/poetry.lock", status: "modified", previous: null }],
+    changes: [{ path: "chart_data_extractor/poetry.lock", status: "modified", previous: null }], firstPaths: ["chart_data_extractor/poetry.lock"],
     record: "fork-workflow", baseBranch: "rb/code-interpreter-248", recordWorkflows: [prefix + files[0]], workflowBodies,
   }
   const plan = planReplay(input)
