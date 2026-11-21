@@ -4,7 +4,10 @@
   "fork": "garnet-labs/supabase",
   "record": null,
   "workload": null,
-  "notes": [],
+  "notes": [
+    "November 20 shadow mirror (hosted, two_commit, base base/<dep>-b): fork PRs 149, 150, 151 verify PASS, best-effort capture, App outcome unchanged against commit 1 (the PR base has no record); fork PR 152 undeterminable (dependency install failed on the change commit); fork PR 147 closed (single-commit, outcome first, no pair). StampHog on 149-152 returned DRY-RUN (gates only; no Anthropic key on the fork).",
+    "Remaining picks need fresh baseline branches and wait on the recorder job-log fix: merged sentry/nextjs 8.49; pending katex 0.18.2, 3-update npm group, radix-ui 1.6.7, dotenv 18.0.7, @vercel/og 1.0.3."
+  ],
   "observations": [
     {
       "evidence_class": "candidate-evidence",
