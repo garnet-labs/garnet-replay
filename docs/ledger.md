@@ -19,6 +19,29 @@ blocked, the other targets did not start, and outreach is gated. See
 | dspy | [dspy#2](https://github.com/garnet-labs/dspy/pull/2) | upstream change 10706 | FAIL | capture completeness; public profile identity | [run 40069918928](https://app.garnet.ai/public/runs/40069918928?profile=01a16c95-5696-7d2e-9867-6515f75ca55e) |
 | skyvern | [skyvern#2](https://github.com/garnet-labs/skyvern/pull/2) | upstream change 9021 | FAIL | capture completeness; public profile identity | [run 40076776136](https://app.garnet.ai/public/runs/40076776136?profile=01a16d20-86d2-77c1-bb59-5e543ac3c448) |
 
+## November 13 stage-2 validation
+
+Validation run, **not an exhibit**. OpenHands upstream [#19707](https://github.com/OpenHands/OpenHands/pull/19707)
+→ fork [#44](https://github.com/garnet-labs/OpenHands/pull/44), head `baa10bf`,
+base branch `base/electron-45.2.3`; harness `59be2a9`.
+
+- Setup: fork [#42](https://github.com/garnet-labs/OpenHands/pull/42) (stage 2)
+  and [#43](https://github.com/garnet-labs/OpenHands/pull/43) (grounding re-vendor).
+- Hosted [start 43523789611](https://github.com/garnet-labs/garnet-replay/actions/runs/43523789611)
+  blocked: fork `main` was 180 commits behind; fixed with `--base-branch`.
+  Fresh [prepare 43524051068](https://github.com/garnet-labs/garnet-replay/actions/runs/43524051068)
+  succeeded; [start 43524189029](https://github.com/garnet-labs/garnet-replay/actions/runs/43524189029)
+  reached the record, then failed verification.
+- Draft hold observed. [Finalized head-bound record](https://github.com/garnet-labs/OpenHands/pull/44#issuecomment-6867150709)
+  observed: contract `10.0.0`, best-effort, first record, 1 of 2 CI jobs.
+  Wait reached `record bound`. Contract-11 parsing **not exercised**: the App
+  emitted contract 10 with no baseline line.
+- Devin Review **not requested**: `DEVIN_API_TOKEN` not set on the fork.
+  The [re-review step](https://github.com/garnet-labs/OpenHands/actions/runs/43527055638)
+  ran after finalization.
+- **Verify FAIL** on pair line: `no pair line on the comment`. **Not shareable.**
+  Still open: the Devin secret on the fork, and the App emitting contract 11.
+
 ## September 24 batch checkpoint
 
 Action v2.3.0 (`245ad6be`) through harness `821b1e0`: five fork PRs, five
