@@ -5,6 +5,7 @@ import { reconcile } from "../lib/commands.mjs"
 import { reconciliationSummary, renderTargetText } from "../lib/status.mjs"
 import { STAGE2_FILES } from "../lib/stage2.mjs"
 import { githubReadFetch } from "../lib/gh.mjs"
+import { receiptFingerprint } from "../lib/receipt.mjs"
 
 const head = "a".repeat(40)
 const previous = "b".repeat(40)
@@ -19,7 +20,7 @@ function snapshot(prs = []) {
 
 function pr(status = "PASS", sha = head) {
   return { number: 1, url: "https://github.com/garnet-labs/example/pull/1", branch: "dependency-update", head, state: "open", comments: [comment],
-    verification: { status, head: sha, reasons: status === "FAIL" ? ["session residue"] : [], receipt_fingerprint: "receipt" } }
+    verification: { status, head: sha, reasons: status === "FAIL" ? ["session residue"] : [], receipt_fingerprint: receiptFingerprint(comment.body) } }
 }
 
 function inventoryExec(command, args) {
@@ -75,6 +76,17 @@ test("PASS requires verifier success for this observed head; errors and moved he
   assert.equal(result.replays[0].upstreamPr, null)
 })
 
+test("verification cannot attach to a different receipt on the same head", () => {
+  for (const status of ["PASS", "FAIL"]) {
+    const changed = { ...pr(status), comments: [{ ...comment, body: `${comment.body}\nUpdated record` }] }
+    const result = reconcileTarget(target, snapshot([changed]), checkedAt)
+    assert.equal(result.replays[0].verification.status, "undeterminable")
+    assert.equal(result.replays[0].verification.receiptFingerprint, null)
+  }
+  const absent = { ...pr(), comments: [] }
+  assert.equal(reconcileTarget(target, snapshot([absent]), checkedAt).replays[0].verification.status, "undeterminable")
+})
+
 test("empty inventory proves no installation, not a cohort or a successful replay", () => {
   const result = reconcileTarget(target, { ...snapshot(), paths: [] }, checkedAt)
   assert.deepEqual(result.replays, [])
@@ -85,6 +97,20 @@ test("empty inventory proves no installation, not a cohort or a successful repla
   assert.equal(reconcileTarget(target, { ...snapshot(), paths: [STAGE2_FILES.review] }, checkedAt).stage2.state, "unstarted")
 })
 
+test("pending integration stays in flight only while its observed PR is open", () => {
+  const input = { ...target, stage2: { state: "in-flight", forkPr: 2, branch: "integration/setup" } }
+  const observed = observeTarget(input, { exec: inventoryExec })
+  assert.equal(observed.stage2PrState, "open")
+  for (const stage2PrState of ["open", "closed", null]) {
+    const result = reconcileTarget(input, { ...snapshot(), paths: [], stage2PrState }, checkedAt)
+    assert.equal(result.stage2.state, stage2PrState === "open" ? "in-flight" : "unstarted")
+    assert.equal(result.stage2.forkPr, 2)
+    assert.equal(result.stage2.files.length, 0)
+  }
+  assert.equal(observeTarget({ ...target, stage2: { state: "in-flight", forkPr: 99 } }, { exec: inventoryExec }).stage2PrState, null)
+  assert.equal(observeTarget({ ...target, stage2: { state: "in-flight", branch: "dependency-update" } }, { exec: inventoryExec }).stage2PrState, "open")
+})
+
 test("pending and stale receipts never become recorded", () => {
   for (const body of [comment.body.replace(head, previous), "<!-- garnet-control-plane-pending-pr-comment:1 -->"]) {
     const result = reconcileTarget(target, snapshot([{ ...pr("FAIL"), comments: [{ ...comment, body }] }]), checkedAt)
@@ -93,6 +119,20 @@ test("pending and stale receipts never become recorded", () => {
   const pending = `<!-- garnet:commit ${head} --><!-- garnet-control-plane-pending-pr-comment:1 -->`
   assert.equal(reconcileTarget(target, snapshot([{ ...pr("FAIL"), comments: [{ ...comment, body: pending }] }]), checkedAt).replays[0].state, "pending")
   assert.equal(reconcileTarget(target, snapshot([{ ...pr("FAIL"), comments: [{ ...comment, body: pending.replace(head, previous) }] }]), checkedAt).replays[0].state, "undeterminable")
+})
+
+test("only finalized accepted capture becomes recorded, independently of shareability", () => {
+  for (const quality of ["complete", "best-effort", "partial", "not declared"]) {
+    for (const incomplete of [0, 1]) {
+      const body = comment.body.replace('"capture_quality":"best-effort"', `"capture_quality":"${quality}","incomplete":${incomplete}`)
+      const observed = { ...pr("FAIL"), comments: [{ ...comment, body }] }
+      const result = reconcileTarget(target, snapshot([observed]), checkedAt)
+      assert.equal(result.replays[0].state, incomplete === 0 && ["complete", "best-effort"].includes(quality) ? "recorded" : "undeterminable")
+    }
+  }
+  const missing = comment.body.replace(',"capture_quality":"best-effort"', "")
+  const observed = { ...pr(), comments: [{ ...comment, body: missing }] }
+  assert.equal(reconcileTarget(target, snapshot([observed]), checkedAt).replays[0].state, "undeterminable")
 })
 
 test("collector uses injected verify and retains exceptions without claiming failure", async () => {

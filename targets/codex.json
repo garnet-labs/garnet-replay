@@ -1509,12 +1509,12 @@
       "transition": null,
       "record": "fork-workflow",
       "ecosystem": "cargo",
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-18T16:57:21.285Z",
       "verification": {
         "status": "FAIL",
         "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1526,7 +1526,7 @@
         ],
         "receiptFingerprint": "65435ae5ad7e9052977a69838215de28fbb3e382b0f90737ecfe06ab7aad3185"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1538,13 +1538,13 @@
       "verification": {
         "status": "FAIL",
         "head": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "public profile identity: garnet-labs/codex / run 43330331370 / profile 01a1d21f-b9b5-79cb-a891-6e848434600e; recorded dae851c61d950d41338d7a81aede82865e577212 (refs/pull/50/merge); expected head d68385fcc55586b7db1eeaf585cea294a94bc2b3"
         ],
         "receiptFingerprint": "8b4dc4756aadb036ae6c2bbfd3e043171b21f37012faa5bf96d3f47bd38135e6"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1552,11 +1552,11 @@
       "forkPr": 49,
       "branch": "maintenance/reviewer-guidance",
       "forkHeadSha": "11d9d0c902ee381acd73124539b87c188a3b896c",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1564,12 +1564,12 @@
           "pull request open: state closed",
           "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fd-d89e-7736-ae0b-32fefcaa6e19; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
           "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-8f23-79d6-bc2c-e0f6f9d8398d; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
-          "public profile identity: https://app.garnet.ai/public/runs/43324731954?profile=01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr49&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
+          "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
           "sensor coverage: repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); 3 of 5 jobs covered"
         ],
         "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1577,11 +1577,11 @@
       "forkPr": 39,
       "branch": "replay/depi-codex-backdoor",
       "forkHeadSha": "91bf2cc83246962963fc0ea307212a52abb27993",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "91bf2cc83246962963fc0ea307212a52abb27993",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1594,7 +1594,7 @@
         ],
         "receiptFingerprint": "cb2cef32cfac3ea3fa668d958df7941853b105205e6da9dd9b40d347d648231b"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1602,11 +1602,11 @@
       "forkPr": 38,
       "branch": "devin/1794375803-remove-status-publisher",
       "forkHeadSha": "b7afb15721e35a92727a7bf75285768c4ffe0367",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1620,7 +1620,7 @@
         ],
         "receiptFingerprint": "1a1aea8806cdca349bf4c125be96047d4f94f20026c11402cf265f5b043b92e9"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1628,11 +1628,11 @@
       "forkPr": 37,
       "branch": "cursor/repin-garnet-action-v2-5-2-0aec",
       "forkHeadSha": "334862252c7c14e3af500ccfb10a48e3e175d5be",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1645,7 +1645,7 @@
         ],
         "receiptFingerprint": "ac2834b08aac1349ac89d2a0844489753182ff9e47002ef0f63714841401f3e9"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1653,21 +1653,21 @@
       "forkPr": 36,
       "branch": "dependabot/cargo/codex-rs/zip-9.0.5",
       "forkHeadSha": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
           "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a82-2602-77e5-a217-9ccdda58ca59; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
           "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-f7aa-780f-b3ad-66b77953a541; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
-          "public profile identity: https://app.garnet.ai/public/runs/40987638780?profile=01a18a7f-6a8a-7b17-8798-a990b5489000&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr36&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout"
+          "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-6a8a-7b17-8798-a990b5489000; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62"
         ],
         "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1675,11 +1675,11 @@
       "forkPr": 35,
       "branch": "onboarding/reviewer-guidance",
       "forkHeadSha": "0b95df523b89f013ae8f3103b57a756d716df972",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "0b95df523b89f013ae8f3103b57a756d716df972",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -1689,7 +1689,7 @@
         ],
         "receiptFingerprint": "ae2b4c931a8941e82ac3fd056047cff4b453d6f6cbb69995bfcfbf6285f9c39c"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1697,23 +1697,23 @@
       "forkPr": 34,
       "branch": "cursor/sync-parent-garnet-v2-4-0-1755",
       "forkHeadSha": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
           "pull request open: state closed",
           "public profile identity: garnet-labs/codex / run 40368694540 / profile 01a17940-e080-7795-beb6-6fe22d079db9; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-          "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17942-3868-758e-a7c8-84b6f14e4a34&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+          "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17942-3868-758e-a7c8-84b6f14e4a34; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
           "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17940-f9fb-7278-8441-66d8c946ad09; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-          "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17941-3c72-7ed6-ab83-79b228b9a414&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout"
+          "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17941-3c72-7ed6-ab83-79b228b9a414; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8"
         ],
         "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1721,11 +1721,11 @@
       "forkPr": 33,
       "branch": "dependabot/npm_and_yarn/zod-4.6.6",
       "forkHeadSha": "71faa4b9034c53c29e16534e9dded2da658b0622",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1736,7 +1736,7 @@
         ],
         "receiptFingerprint": "4ea3c5d3c19a56393002d59b602549c6b206165e4ad0c2ed2fa354a74eea208e"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1744,11 +1744,11 @@
       "forkPr": 32,
       "branch": "dependabot/uv/sdk/python/black-26.10.1",
       "forkHeadSha": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1759,7 +1759,7 @@
         ],
         "receiptFingerprint": "23d7b2288783e473c802f59c857735cdcaf1d4fafb9b428b1394410d46967290"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1767,11 +1767,11 @@
       "forkPr": 31,
       "branch": "dependabot/npm_and_yarn/source-map-js-1.2.2",
       "forkHeadSha": "7505cf541d1e57c58666f56a24907bed237f3c5a",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1783,7 +1783,7 @@
         ],
         "receiptFingerprint": "19791ccad4cd5976c25b5686acc596bf8337324d896a04ef07b03b937560298d"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1791,11 +1791,11 @@
       "forkPr": 29,
       "branch": "chore/update-10jz",
       "forkHeadSha": "bbbc0a04039d03d8581947922bb507be8c3087c7",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1803,7 +1803,7 @@
         ],
         "receiptFingerprint": "2a73ee4611d866fb38e6e41489474ff816c578416532836f37e7dc99997dffbd"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1815,7 +1815,7 @@
       "verification": {
         "status": "FAIL",
         "head": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
@@ -1829,7 +1829,7 @@
         ],
         "receiptFingerprint": "1bdd94de1580292ccedbb67040eb199f356de05c49b8e167d89d141bb4796250"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1837,11 +1837,11 @@
       "forkPr": 27,
       "branch": "chore/update-zv6",
       "forkHeadSha": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1853,7 +1853,7 @@
         ],
         "receiptFingerprint": "6ef7378c25b453f5cb467d00ad9dfb958b714452a5fd3bf8d1be78f7654a4c15"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1865,7 +1865,7 @@
       "verification": {
         "status": "FAIL",
         "head": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "head-bound: head moved: record 86ddb02, current 6b67fe5",
           "capture completeness: capture not declared; comparison undeterminable",
@@ -1880,7 +1880,7 @@
         ],
         "receiptFingerprint": "c3997c11d0f1d2d0cac1f2c69ad4fbe451d9264b750eae76bd5b2c1a07690807"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1888,11 +1888,11 @@
       "forkPr": 24,
       "branch": "dependabot/npm_and_yarn/nanoid-3.3.18",
       "forkHeadSha": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1904,7 +1904,7 @@
         ],
         "receiptFingerprint": "e89cb7949ae76bef84d1505e68b7f6025e07099a137ecf7421a83b2279416aa1"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1912,11 +1912,11 @@
       "forkPr": 23,
       "branch": "dependabot/cargo/codex-rs/serde_with-3.21.0",
       "forkHeadSha": "d8c1bc255e2149d313f677f4e329d29d158be70d",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1928,7 +1928,7 @@
         ],
         "receiptFingerprint": "0169587169b81a75b24dcb707da759d77ac84a7b3d8bf6011d3f91e337732717"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1936,24 +1936,24 @@
       "forkPr": 22,
       "branch": "demo/fence-policy-evidence",
       "forkHeadSha": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
           "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
           "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ed-9e0e-77b2-8240-c405f48146b6; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
           "public profile identity: garnet-labs/codex / run 33113746057 / profile 01a044ec-d1a5-7292-8dd2-43b4f9f668be; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
-          "public profile identity: garnet-labs/codex / run 33113745974 / profile 01a044ec-723a-773c-b06c-a12684a8627b; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+          "public profile identity: https://app.garnet.ai/public/runs/33113745974?profile=01a044ec-723a-773c-b06c-a12684a8627b&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
           "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-8722-76ad-80a7-90ae468a5444; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
           "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-e488-7780-a80a-6a6cd2e9c0f2; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8"
         ],
         "receiptFingerprint": "8e6efbae6a6ca6a595aee4b652cef9b7cfb39acbbf9f03bd9288fdc3ca9b50c7"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1961,11 +1961,11 @@
       "forkPr": 21,
       "branch": "devin/1787849970-garnet-ci-evidence",
       "forkHeadSha": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1978,7 +1978,7 @@
         ],
         "receiptFingerprint": "c9c11d646a87185e1c50e654e4257d7acfa3eef66f40b58b79299e76ee5ee34a"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -1986,11 +1986,11 @@
       "forkPr": 20,
       "branch": "devin/sensor-start-diag",
       "forkHeadSha": "512638b2168e021cd7d36559ff706e8314c53d8d",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2004,7 +2004,7 @@
         ],
         "receiptFingerprint": "06c5d9a9d355997311dec828643ddd02f01efb699d8a4643a331267474de99ae"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2012,11 +2012,11 @@
       "forkPr": 19,
       "branch": "devin/1787842967-garnet-operational-package",
       "forkHeadSha": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2030,7 +2030,7 @@
         ],
         "receiptFingerprint": "5f02062cfe9e65fdc20572a599c5c6a1bddc6337f1ae8d1822741bc7899936a3"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2038,11 +2038,11 @@
       "forkPr": 18,
       "branch": "dependabot/uv/sdk/python/datamodel-code-generator-0.64.0",
       "forkHeadSha": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2054,7 +2054,7 @@
         ],
         "receiptFingerprint": "0700a29f4cbb41d8ea9b0c405db06723755134a251691405413b64982598a8d9"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2062,22 +2062,22 @@
       "forkPr": 17,
       "branch": "proof/dependabot-runtime-value",
       "forkHeadSha": "ea912deed938e921bf6e535e1609a99e77d8faa4",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
           "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
-          "public profile identity: https://app.garnet.ai/public/runs/32355306894?profile=01a01e8f-62f2-76db-8d4b-590492570c2e&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+          "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e8f-62f2-76db-8d4b-590492570c2e; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
           "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e93-8ed8-734a-a711-2863681f6f78; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
           "sensor coverage: Garnet dependency runtime proof: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
         ],
         "receiptFingerprint": "a1b536810990e9612473402fd26e94edf9882ad57c3deeb246f81c3b3535e6ec"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2085,11 +2085,11 @@
       "forkPr": 16,
       "branch": "proof/dependabot-garnet",
       "forkHeadSha": "d60d85dd4e71b3ae56cf3fc27925161922590355",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2102,7 +2102,7 @@
         ],
         "receiptFingerprint": "9b3d16301e1c0c877c734ca3ddb7878e7c55d16e8f6bc18cbcd25db9239701e6"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2110,11 +2110,11 @@
       "forkPr": 15,
       "branch": "review/openssl-grounded",
       "forkHeadSha": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2125,7 +2125,7 @@
         ],
         "receiptFingerprint": "e2d6ac6f40ee49d0d5d2d8c1123b7d1daf8f6da151034d3469c513f8ad0c5fe9"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2133,11 +2133,11 @@
       "forkPr": 14,
       "branch": "review/cargo-deny-base",
       "forkHeadSha": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2146,7 +2146,7 @@
         ],
         "receiptFingerprint": "9a4a80d5cae4c14475d29d95cb7802bbb3199052918992449db8fb5e1fcc4683"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2154,11 +2154,11 @@
       "forkPr": 9,
       "branch": "dependabot/cargo/tools/argument-comment-lint/tar-0.4.46",
       "forkHeadSha": "6807425507b1049ad067437bd7daed537a2669c0",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "6807425507b1049ad067437bd7daed537a2669c0",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2170,7 +2170,7 @@
         ],
         "receiptFingerprint": "00591f5331406388e0ad3a8fc9f10a0e4de9445031e4859226e4addd4e7b16f5"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2178,11 +2178,11 @@
       "forkPr": 8,
       "branch": "dependabot/cargo/codex-rs/openssl-0.10.80",
       "forkHeadSha": "de2baab8fb5432c88d3302d2a52317f92cda0638",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2194,7 +2194,7 @@
         ],
         "receiptFingerprint": "bcb9099601d88345a1794f569c65ba7d9c1da88bc657958e38ffb170f4f489a5"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2202,11 +2202,11 @@
       "forkPr": 5,
       "branch": "dependabot/cargo/codex-rs/rustls-webpki-0.103.13",
       "forkHeadSha": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2218,7 +2218,7 @@
         ],
         "receiptFingerprint": "38c8e0f0c0da1fccc33030387b40ff1ef2c1dfb4bfd4f0158c151f3d2f6872d8"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     },
     {
@@ -2226,11 +2226,11 @@
       "forkPr": 3,
       "branch": "dependabot/cargo/codex-rs/actix-http-3.12.1",
       "forkHeadSha": "59e800f340c74502a80a3a408c30d96fea0d96e2",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
-        "checkedAt": "2026-11-20T04:55:32.277Z",
+        "checkedAt": "2026-11-20T06:05:58.867Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -2242,7 +2242,7 @@
         ],
         "receiptFingerprint": "d619f45b41074878311f9cd7c9e9d2609b56121302548d23fc03aa1569cc2d75"
       },
-      "observedAt": "2026-11-20T04:55:32.277Z",
+      "observedAt": "2026-11-20T06:05:58.867Z",
       "source": "github-reconciliation"
     }
   ],
@@ -2264,7 +2264,7 @@
     "state": "in-flight",
     "defaultBranch": "main",
     "checkedSha": "25b918bba5233aedd45fc12578a2427d7d154168",
-    "checkedAt": "2026-11-20T04:55:32.277Z",
+    "checkedAt": "2026-11-20T06:05:58.867Z",
     "files": [
       ".github/workflows/garnet-evidence-mirror.yml",
       ".github/scripts/garnet-evidence-mirror.mjs",
@@ -2296,7 +2296,7 @@
     "pr": 51
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:55:32.277Z",
+    "checkedAt": "2026-11-20T06:05:58.867Z",
     "defaultBranch": "main",
     "defaultSha": "25b918bba5233aedd45fc12578a2427d7d154168",
     "inspectedPrs": 42,
@@ -2314,7 +2314,7 @@
         "verification": {
           "status": "FAIL",
           "head": "d68385fcc55586b7db1eeaf585cea294a94bc2b3",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "public profile identity: garnet-labs/codex / run 43330331370 / profile 01a1d21f-b9b5-79cb-a891-6e848434600e; recorded dae851c61d950d41338d7a81aede82865e577212 (refs/pull/50/merge); expected head d68385fcc55586b7db1eeaf585cea294a94bc2b3"
           ],
@@ -2328,12 +2328,12 @@
         "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
         "previous": "d7a6199525503a67c9bc83f4f4e9cc0425ec4b24",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50",
         "verification": {
           "status": "FAIL",
           "head": "11d9d0c902ee381acd73124539b87c188a3b896c",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -2341,7 +2341,7 @@
             "pull request open: state closed",
             "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fd-d89e-7736-ae0b-32fefcaa6e19; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
             "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-8f23-79d6-bc2c-e0f6f9d8398d; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
-            "public profile identity: https://app.garnet.ai/public/runs/43324731954?profile=01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr49&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
+            "public profile identity: garnet-labs/codex / run 43324731954 / profile 01a1d1fc-de56-7d36-a73a-8f9ef5ab1f8a; recorded 6cfbb15fe1a7fedf283fb3fda9b753b4a4b03757 (refs/pull/49/merge); expected head 11d9d0c902ee381acd73124539b87c188a3b896c",
             "sensor coverage: repo-checks / build-test: sensor did not start (the jibril service failed to start); rust-ci / Detect changed areas: sensor did not start (the jibril service failed to start); 3 of 5 jobs covered"
           ],
           "receiptFingerprint": "4a196f2aa09cecefd94c83c85fb5a8a4a6b461354db7180a8b72bb0836724a50"
@@ -2354,12 +2354,12 @@
         "head": "91bf2cc83246962963fc0ea307212a52abb27993",
         "previous": "d7a6199525503a67c9bc83f4f4e9cc0425ec4b24",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "cb2cef32cfac3ea3fa668d958df7941853b105205e6da9dd9b40d347d648231b",
         "verification": {
           "status": "FAIL",
           "head": "91bf2cc83246962963fc0ea307212a52abb27993",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -2380,12 +2380,12 @@
         "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
         "previous": "9f675c8c7cd4aab1e1c6770a4b8fcbd4397b91f2",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "1a1aea8806cdca349bf4c125be96047d4f94f20026c11402cf265f5b043b92e9",
         "verification": {
           "status": "FAIL",
           "head": "b7afb15721e35a92727a7bf75285768c4ffe0367",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -2407,12 +2407,12 @@
         "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
         "previous": "51770588983fa7b87700e5cdf1a2631b757d8be8",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "ac2834b08aac1349ac89d2a0844489753182ff9e47002ef0f63714841401f3e9",
         "verification": {
           "status": "FAIL",
           "head": "334862252c7c14e3af500ccfb10a48e3e175d5be",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -2433,18 +2433,18 @@
         "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
         "previous": "51770588983fa7b87700e5cdf1a2631b757d8be8",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3",
         "verification": {
           "status": "FAIL",
           "head": "dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
             "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a82-2602-77e5-a217-9ccdda58ca59; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
             "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-f7aa-780f-b3ad-66b77953a541; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62",
-            "public profile identity: https://app.garnet.ai/public/runs/40987638780?profile=01a18a7f-6a8a-7b17-8798-a990b5489000&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-codex-pr36&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout"
+            "public profile identity: garnet-labs/codex / run 40987638780 / profile 01a18a7f-6a8a-7b17-8798-a990b5489000; recorded 7247083b29693ae90ac6d156060d190a605c8760 (refs/pull/36/merge); expected head dd87ea4af02faa85b7cf9da9b0d6a0fc82f8cf62"
           ],
           "receiptFingerprint": "c845aa4c7559eb57b326f10eda5a76c0785f1457a12d11fc82d02f843e8874c3"
         }
@@ -2456,12 +2456,12 @@
         "head": "0b95df523b89f013ae8f3103b57a756d716df972",
         "previous": "2a73d0b1166a046b3a35ddff03231dadea65dc1e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "ae2b4c931a8941e82ac3fd056047cff4b453d6f6cbb69995bfcfbf6285f9c39c",
         "verification": {
           "status": "FAIL",
           "head": "0b95df523b89f013ae8f3103b57a756d716df972",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -2479,20 +2479,20 @@
         "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
         "previous": "4e0a2820ace562cba22d716c6abd3fcf0ce4c13a",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108",
         "verification": {
           "status": "FAIL",
           "head": "c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
             "pull request open: state closed",
             "public profile identity: garnet-labs/codex / run 40368694540 / profile 01a17940-e080-7795-beb6-6fe22d079db9; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-            "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17942-3868-758e-a7c8-84b6f14e4a34&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+            "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17942-3868-758e-a7c8-84b6f14e4a34; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
             "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17940-f9fb-7278-8441-66d8c946ad09; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8",
-            "public profile identity: https://app.garnet.ai/public/runs/40368694427?profile=01a17941-3c72-7ed6-ab83-79b228b9a414&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout"
+            "public profile identity: garnet-labs/codex / run 40368694427 / profile 01a17941-3c72-7ed6-ab83-79b228b9a414; recorded 13679fd07b5d9983108b1ecdc3252e4e2991ee34 (refs/pull/34/merge); expected head c66a95a4eb7347415cf14889ef503dfd0c549bb8"
           ],
           "receiptFingerprint": "686cdc6280bf6220edd88ac53dad2f3dfd028199782764e47574e6e64ecbc108"
         }
@@ -2504,12 +2504,12 @@
         "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
         "previous": "81160c048981b975bc67c22befe2966a574fa1a0",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "4ea3c5d3c19a56393002d59b602549c6b206165e4ad0c2ed2fa354a74eea208e",
         "verification": {
           "status": "FAIL",
           "head": "71faa4b9034c53c29e16534e9dded2da658b0622",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2528,12 +2528,12 @@
         "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
         "previous": "4e0a2820ace562cba22d716c6abd3fcf0ce4c13a",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "23d7b2288783e473c802f59c857735cdcaf1d4fafb9b428b1394410d46967290",
         "verification": {
           "status": "FAIL",
           "head": "c4a00dbd85db285c59ecf7ab970957c9a2acfd6e",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2552,12 +2552,12 @@
         "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "19791ccad4cd5976c25b5686acc596bf8337324d896a04ef07b03b937560298d",
         "verification": {
           "status": "FAIL",
           "head": "7505cf541d1e57c58666f56a24907bed237f3c5a",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2577,12 +2577,12 @@
         "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
         "previous": "24f1864bff2b5980572ceb1e95a504e96b2ddccc",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "2a73ee4611d866fb38e6e41489474ff816c578416532836f37e7dc99997dffbd",
         "verification": {
           "status": "FAIL",
           "head": "bbbc0a04039d03d8581947922bb507be8c3087c7",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2603,7 +2603,7 @@
         "verification": {
           "status": "FAIL",
           "head": "f0ebb1d4a5af39cb42d92ee3f321a9eefedb9617",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
@@ -2625,12 +2625,12 @@
         "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
         "previous": "01703d1fced0b4f09fc649a97d9a710748ff30f8",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "6ef7378c25b453f5cb467d00ad9dfb958b714452a5fd3bf8d1be78f7654a4c15",
         "verification": {
           "status": "FAIL",
           "head": "a7f477eb7ab5339e5fdccc73c70ad43e998ea0d5",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2655,7 +2655,7 @@
         "verification": {
           "status": "FAIL",
           "head": "6b67fe5bd2e4e7b6a2129b8c8c3955ebf9c066fd",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "head-bound: head moved: record 86ddb02, current 6b67fe5",
             "capture completeness: capture not declared; comparison undeterminable",
@@ -2678,12 +2678,12 @@
         "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
         "previous": "9320fbc0f7a164a9776da161f45e9a72678851d1",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "65435ae5ad7e9052977a69838215de28fbb3e382b0f90737ecfe06ab7aad3185",
         "verification": {
           "status": "FAIL",
           "head": "86e52221eb6178093f67db2b5cbb3da98872f2ce",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2703,12 +2703,12 @@
         "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "e89cb7949ae76bef84d1505e68b7f6025e07099a137ecf7421a83b2279416aa1",
         "verification": {
           "status": "FAIL",
           "head": "614bc749ef12a8024e05e71f5f9f4801fd11c87f",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2728,12 +2728,12 @@
         "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "0169587169b81a75b24dcb707da759d77ac84a7b3d8bf6011d3f91e337732717",
         "verification": {
           "status": "FAIL",
           "head": "d8c1bc255e2149d313f677f4e329d29d158be70d",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2753,19 +2753,19 @@
         "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
         "previous": "c33864052b0255014eeec14988b9d2d8fa44d09f",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "8e6efbae6a6ca6a595aee4b652cef9b7cfb39acbbf9f03bd9288fdc3ca9b50c7",
         "verification": {
           "status": "FAIL",
           "head": "727dfb2097bc2477ceb998eaa88f546f2be58fb8",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
             "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - macOS concluded cancelled, rust-ci / Argument comment lint - Linux concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
             "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ed-9e0e-77b2-8240-c405f48146b6; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
             "public profile identity: garnet-labs/codex / run 33113746057 / profile 01a044ec-d1a5-7292-8dd2-43b4f9f668be; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
-            "public profile identity: garnet-labs/codex / run 33113745974 / profile 01a044ec-723a-773c-b06c-a12684a8627b; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
+            "public profile identity: https://app.garnet.ai/public/runs/33113745974?profile=01a044ec-723a-773c-b06c-a12684a8627b&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
             "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-8722-76ad-80a7-90ae468a5444; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8",
             "public profile identity: garnet-labs/codex / run 33113746178 / profile 01a044ec-e488-7780-a80a-6a6cd2e9c0f2; recorded d8c34dd7af6c3098bcf7805cd8ab0c5c7f809e20 (refs/pull/22/merge); expected head 727dfb2097bc2477ceb998eaa88f546f2be58fb8"
           ],
@@ -2779,12 +2779,12 @@
         "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
         "previous": "d81e4bf175d3f410214c4b52cd719d0c8ca24067",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "c9c11d646a87185e1c50e654e4257d7acfa3eef66f40b58b79299e76ee5ee34a",
         "verification": {
           "status": "FAIL",
           "head": "5dd224167f6d755bf0b2eb50aa7f3120c6e68eec",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2805,12 +2805,12 @@
         "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "06c5d9a9d355997311dec828643ddd02f01efb699d8a4643a331267474de99ae",
         "verification": {
           "status": "FAIL",
           "head": "512638b2168e021cd7d36559ff706e8314c53d8d",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2832,12 +2832,12 @@
         "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
         "previous": "204311d983a0c7e5c7bfb9543b62abe51c6eab3a",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "5f02062cfe9e65fdc20572a599c5c6a1bddc6337f1ae8d1822741bc7899936a3",
         "verification": {
           "status": "FAIL",
           "head": "6606be8e74cc5c71655d3076b1bb895d69dcfced",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2859,12 +2859,12 @@
         "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
         "previous": "c0f5089d7799c86717971b3abc8dca4cf205f9c5",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "0700a29f4cbb41d8ea9b0c405db06723755134a251691405413b64982598a8d9",
         "verification": {
           "status": "FAIL",
           "head": "82bcc051ca4fb62d8d54ae494fad7172ac80d48b",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2884,17 +2884,17 @@
         "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
         "previous": "c8e1d967757dbab29c6926f87ee0902f880ecc56",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "a1b536810990e9612473402fd26e94edf9882ad57c3deeb246f81c3b3535e6ec",
         "verification": {
           "status": "FAIL",
           "head": "ea912deed938e921bf6e535e1609a99e77d8faa4",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
             "check settled: CI required concluded failure, rust-ci / CI results (required) concluded failure, rust-ci / Argument comment lint - Windows concluded failure, rust-ci / Argument comment lint - Linux concluded cancelled, rust-ci / Argument comment lint - macOS concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, Bazel / Verify release build on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Verify release build on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel clippy on windows-latest for x86_64-pc-windows-gnullvm concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-musl concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 3/4 concluded failure, Bazel / Bazel test on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 2/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for x86_64-apple-darwin concluded cancelled, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 4/4 concluded failure, Bazel / Bazel test on windows-latest for x86_64-pc-windows-gnullvm shard 1/4 concluded failure, Bazel / Bazel test on macos-15-xlarge for aarch64-apple-darwin concluded cancelled, Bazel / Bazel clippy on ubuntu-24.04 for x86_64-unknown-linux-gnu concluded cancelled, sdk / python-sdk concluded failure, cargo-deny / cargo-deny concluded failure, sdk / sdks concluded failure, repo-checks / build-test concluded failure",
-            "public profile identity: https://app.garnet.ai/public/runs/32355306894?profile=01a01e8f-62f2-76db-8d4b-590492570c2e&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
+            "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e8f-62f2-76db-8d4b-590492570c2e; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
             "public profile identity: garnet-labs/codex / run 32355306894 / profile 01a01e93-8ed8-734a-a711-2863681f6f78; recorded 955182ccfcb86d139bc6c35e7536266cb7cb6bda (refs/pull/17/merge); expected head ea912deed938e921bf6e535e1609a99e77d8faa4",
             "sensor coverage: Garnet dependency runtime proof: log unreadable; cargo-deny / cargo-deny: log unreadable; 0 of 2 jobs covered"
           ],
@@ -2908,12 +2908,12 @@
         "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "9b3d16301e1c0c877c734ca3ddb7878e7c55d16e8f6bc18cbcd25db9239701e6",
         "verification": {
           "status": "FAIL",
           "head": "d60d85dd4e71b3ae56cf3fc27925161922590355",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2934,12 +2934,12 @@
         "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
         "previous": "33a07c211618ce825b33e74729d5b912097e1a7c",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "e2d6ac6f40ee49d0d5d2d8c1123b7d1daf8f6da151034d3469c513f8ad0c5fe9",
         "verification": {
           "status": "FAIL",
           "head": "30e3ae3dd98eb147aa54ca9411f8aba987872fa9",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2958,12 +2958,12 @@
         "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
         "previous": "0df0c69c45c28404f7d759f8b3c9a5f7ff81a5ba",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "9a4a80d5cae4c14475d29d95cb7802bbb3199052918992449db8fb5e1fcc4683",
         "verification": {
           "status": "FAIL",
           "head": "8df7bb5fef52a0447d7f9f920bce27121434ca0f",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2980,12 +2980,12 @@
         "head": "6807425507b1049ad067437bd7daed537a2669c0",
         "previous": "cf24349b947816c3457a09851fe83d70fee75944",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "00591f5331406388e0ad3a8fc9f10a0e4de9445031e4859226e4addd4e7b16f5",
         "verification": {
           "status": "FAIL",
           "head": "6807425507b1049ad067437bd7daed537a2669c0",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -3005,12 +3005,12 @@
         "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "bcb9099601d88345a1794f569c65ba7d9c1da88bc657958e38ffb170f4f489a5",
         "verification": {
           "status": "FAIL",
           "head": "de2baab8fb5432c88d3302d2a52317f92cda0638",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -3030,12 +3030,12 @@
         "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "38c8e0f0c0da1fccc33030387b40ff1ef2c1dfb4bfd4f0158c151f3d2f6872d8",
         "verification": {
           "status": "FAIL",
           "head": "d55ee02e0e97585ef2fb078e3c3ce52034c02b83",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -3055,12 +3055,12 @@
         "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "d619f45b41074878311f9cd7c9e9d2609b56121302548d23fc03aa1569cc2d75",
         "verification": {
           "status": "FAIL",
           "head": "59e800f340c74502a80a3a408c30d96fea0d96e2",
-          "checkedAt": "2026-11-20T04:55:32.277Z",
+          "checkedAt": "2026-11-20T06:05:58.867Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",

@@ -60,11 +60,11 @@
       "forkPr": 11,
       "branch": "cursor/duckdb-legacy-extensions-b5b8",
       "forkHeadSha": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -75,7 +75,7 @@
         ],
         "receiptFingerprint": "f1ee57cce9267f1aec09315768f3070032d35b7d4c5afedc31a51d27a52a9bdf"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -83,11 +83,11 @@
       "forkPr": 10,
       "branch": "deps/oauthlib-pyasn1",
       "forkHeadSha": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -98,7 +98,7 @@
         ],
         "receiptFingerprint": "a2f87b51610d2fd027bfa791edb2658cd5d2483b93ee0a7530e331e2d493df99"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -106,11 +106,11 @@
       "forkPr": 8,
       "branch": "dependabot/npm_and_yarn/frontend/hey-api/openapi-ts-0.97.3",
       "forkHeadSha": "2105771ccfb47c9061fac8fb090d2041bb849afd",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -121,7 +121,7 @@
         ],
         "receiptFingerprint": "4124cf274858a993b4e45563922863a9a31c9af595819fac36d13e2386f6c1d8"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -129,11 +129,11 @@
       "forkPr": 7,
       "branch": "dependabot/uv/dnspython-2.9.2",
       "forkHeadSha": "16c0109f939f5c97a42044741045488e7bef9780",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "16c0109f939f5c97a42044741045488e7bef9780",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -144,7 +144,7 @@
         ],
         "receiptFingerprint": "8be29bd95030d62953feb6c14b0a05ebe8a679adccb2bd4f6ed6c5fb9a8727cf"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -152,21 +152,22 @@
       "forkPr": 6,
       "branch": "dependabot/pip/packages/tracecat-registry/dnspython-2.9.2",
       "forkHeadSha": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
           "pair line: no pair line on the comment",
           "check settled: test-all (registry) concluded cancelled, test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure, test-all (temporal) concluded cancelled",
+          "public profile identity: https://app.garnet.ai/public/runs/43572403340?profile=01a1d907-1b46-7b46-9fc5-19aab7822abf&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-tracecat-pr6&utm_content=execution_profile&utm_term=first_record: The operation was aborted due to timeout",
           "sensor coverage: test-all (temporal): log unreadable; test-all (registry): log unreadable; 2 of 4 jobs covered"
         ],
         "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -174,11 +175,11 @@
       "forkPr": 5,
       "branch": "ci/workflow-input-rc",
       "forkHeadSha": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -190,7 +191,7 @@
         ],
         "receiptFingerprint": "c68ad0ebe07f966e2a7b03aed3f5035ed6a6fc5e21aa15dd81980fc568bdb232"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     },
     {
@@ -198,11 +199,11 @@
       "forkPr": 3,
       "branch": "onboarding/garnet-recording",
       "forkHeadSha": "df3635516a0107cb2908573ca60144bde3a7cece",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "df3635516a0107cb2908573ca60144bde3a7cece",
-        "checkedAt": "2026-11-20T05:03:39.977Z",
+        "checkedAt": "2026-11-20T06:50:06.645Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -214,7 +215,7 @@
         ],
         "receiptFingerprint": "06f0acb3d1acf3aae700be2d32181dd0f6757795571cb70025b7f5dd710e4519"
       },
-      "observedAt": "2026-11-20T05:03:39.977Z",
+      "observedAt": "2026-11-20T06:50:06.645Z",
       "source": "github-reconciliation"
     }
   ],
@@ -225,7 +226,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "133730679fe98349c0e06bf26080dc92a2c4f09b",
-    "checkedAt": "2026-11-20T05:03:39.977Z",
+    "checkedAt": "2026-11-20T06:50:06.645Z",
     "files": [
       "REVIEW.md"
     ],
@@ -248,9 +249,9 @@
       "state": "unstarted"
     }
   },
-  "stage": 1,
+  "stage": 0,
   "reconciliation": {
-    "checkedAt": "2026-11-20T05:03:39.977Z",
+    "checkedAt": "2026-11-20T06:50:06.645Z",
     "defaultBranch": "main",
     "defaultSha": "133730679fe98349c0e06bf26080dc92a2c4f09b",
     "inspectedPrs": 11,
@@ -263,12 +264,12 @@
         "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "f1ee57cce9267f1aec09315768f3070032d35b7d4c5afedc31a51d27a52a9bdf",
         "verification": {
           "status": "FAIL",
           "head": "131f3a04bd1c6a22cb289585443cbfe37a2512f1",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -287,12 +288,12 @@
         "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "a2f87b51610d2fd027bfa791edb2658cd5d2483b93ee0a7530e331e2d493df99",
         "verification": {
           "status": "FAIL",
           "head": "1b1fea193784b89a22d09f5efb6929d59f8d1637",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -311,12 +312,12 @@
         "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "4124cf274858a993b4e45563922863a9a31c9af595819fac36d13e2386f6c1d8",
         "verification": {
           "status": "FAIL",
           "head": "2105771ccfb47c9061fac8fb090d2041bb849afd",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -335,12 +336,12 @@
         "head": "16c0109f939f5c97a42044741045488e7bef9780",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "8be29bd95030d62953feb6c14b0a05ebe8a679adccb2bd4f6ed6c5fb9a8727cf",
         "verification": {
           "status": "FAIL",
           "head": "16c0109f939f5c97a42044741045488e7bef9780",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -359,17 +360,18 @@
         "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b",
         "verification": {
           "status": "FAIL",
           "head": "1ee0b4cdbcfc948dfc5b2a6ee1a5491b3a3568b9",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
             "pair line: no pair line on the comment",
             "check settled: test-all (registry) concluded cancelled, test-all (unit) concluded cancelled, test-all (unit-sandbox) concluded failure, test-all (temporal) concluded cancelled",
+            "public profile identity: https://app.garnet.ai/public/runs/43572403340?profile=01a1d907-1b46-7b46-9fc5-19aab7822abf&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-tracecat-pr6&utm_content=execution_profile&utm_term=first_record: The operation was aborted due to timeout",
             "sensor coverage: test-all (temporal): log unreadable; test-all (registry): log unreadable; 2 of 4 jobs covered"
           ],
           "receiptFingerprint": "109103369c82d68fd7aa2bd91365366b18aab5a734df6b09e832e6583bd5ea6b"
@@ -382,12 +384,12 @@
         "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "c68ad0ebe07f966e2a7b03aed3f5035ed6a6fc5e21aa15dd81980fc568bdb232",
         "verification": {
           "status": "FAIL",
           "head": "4e5b3ebb32fc4539f865fda7d96f9045cc35b15b",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -407,12 +409,12 @@
         "head": "df3635516a0107cb2908573ca60144bde3a7cece",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "06f0acb3d1acf3aae700be2d32181dd0f6757795571cb70025b7f5dd710e4519",
         "verification": {
           "status": "FAIL",
           "head": "df3635516a0107cb2908573ca60144bde3a7cece",
-          "checkedAt": "2026-11-20T05:03:39.977Z",
+          "checkedAt": "2026-11-20T06:50:06.645Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",

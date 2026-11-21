@@ -333,11 +333,11 @@
       "verification": {
         "status": "PASS",
         "head": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [],
         "receiptFingerprint": "3fa61b75c8033c96ae207b7a5f2d598b0dd3685236f885d463cb7bb67a0f5ead"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     },
     {
@@ -345,11 +345,11 @@
       "forkPr": 42,
       "branch": "onboarding/single-recorder",
       "forkHeadSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -357,7 +357,7 @@
         ],
         "receiptFingerprint": "d39a0380aafe3253fe9913a533091fe1571cf0ecf760ac2d7667a024d5d821bc"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     },
     {
@@ -365,11 +365,11 @@
       "forkPr": 40,
       "branch": "onboarding/garnet-recording",
       "forkHeadSha": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -378,7 +378,7 @@
         ],
         "receiptFingerprint": "296c12727bd9f30228cf3c650a3a0f3c8ebd215b1c526d9f3862c5cee83ee6ac"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     },
     {
@@ -390,11 +390,11 @@
       "verification": {
         "status": "PASS",
         "head": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [],
         "receiptFingerprint": "e71e7c9e3107804aec772c3841a3fe8f3b801d4522ba2af0e7805e4259690d4c"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     },
     {
@@ -406,13 +406,13 @@
       "verification": {
         "status": "FAIL",
         "head": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [
           "pull request open: state closed"
         ],
         "receiptFingerprint": "da30db305da1e9f9c180f44ebccd21050353903e8a5aa7cb5c47a2376b661b7a"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     },
     {
@@ -424,7 +424,7 @@
       "verification": {
         "status": "FAIL",
         "head": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
-        "checkedAt": "2026-11-20T04:57:14.164Z",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: no machine summary on the record",
@@ -437,7 +437,42 @@
         ],
         "receiptFingerprint": "ab2d801115089ead42cb4139a30110cadbb1b99b9b07e9d5d0b992620bcb49e4"
       },
-      "observedAt": "2026-11-20T04:57:14.164Z",
+      "observedAt": "2026-11-20T06:25:04.284Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 45,
+      "branch": "dependency-update-44010",
+      "forkHeadSha": "586fa6356b3d0b11998ee13faac4bf9fabf839be",
+      "state": "recorded",
+      "verification": {
+        "status": "PASS",
+        "head": "586fa6356b3d0b11998ee13faac4bf9fabf839be",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
+        "reasons": [],
+        "receiptFingerprint": "c95f22fe59f8dc302e13664f999601a1b56cc3504e496880518b063554ab5910"
+      },
+      "observedAt": "2026-11-20T06:25:04.284Z",
+      "source": "github-reconciliation"
+    },
+    {
+      "upstreamPr": null,
+      "forkPr": 44,
+      "branch": "dependency-review-policy-20261120",
+      "forkHeadSha": "758e802b06a4e934df7b0c0aa025a4f4e3d531d8",
+      "state": "recorded",
+      "verification": {
+        "status": "FAIL",
+        "head": "758e802b06a4e934df7b0c0aa025a4f4e3d531d8",
+        "checkedAt": "2026-11-20T06:25:04.284Z",
+        "reasons": [
+          "no session residue: residue: \"Devin\"",
+          "pull request open: state closed"
+        ],
+        "receiptFingerprint": "6f670d9423654cbac63a2637d067535140cffb8a706d211e399f93181924f953"
+      },
+      "observedAt": "2026-11-20T06:25:04.284Z",
       "source": "github-reconciliation"
     }
   ],
@@ -447,8 +482,8 @@
   "stage2": {
     "state": "unstarted",
     "defaultBranch": "master",
-    "checkedSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
-    "checkedAt": "2026-11-20T04:57:14.164Z",
+    "checkedSha": "a2b36abb4d0d2bf802f2311237429eb7d2b51d6c",
+    "checkedAt": "2026-11-20T06:25:04.284Z",
     "files": [
       "REVIEW.md"
     ],
@@ -480,12 +515,49 @@
     "pr": 39
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:57:14.164Z",
+    "checkedAt": "2026-11-20T06:25:04.284Z",
     "defaultBranch": "master",
-    "defaultSha": "3b69d2db6b18312696c875dde02fd529010e15ef",
-    "inspectedPrs": 43,
+    "defaultSha": "a2b36abb4d0d2bf802f2311237429eb7d2b51d6c",
+    "inspectedPrs": 45,
     "selection": "open or merged PRs with a ledger replay, replay marker, or Runtime Review comment; upstream ancestry not inferred",
     "prs": [
+      {
+        "forkPr": 45,
+        "url": "https://github.com/garnet-labs/n8n/pull/45",
+        "prState": "open",
+        "head": "586fa6356b3d0b11998ee13faac4bf9fabf839be",
+        "previous": "ceb8618891fd31c11477517f98a49d180d4c17d7",
+        "scope": "previous-push",
+        "state": "recorded",
+        "receiptFingerprint": "c95f22fe59f8dc302e13664f999601a1b56cc3504e496880518b063554ab5910",
+        "verification": {
+          "status": "PASS",
+          "head": "586fa6356b3d0b11998ee13faac4bf9fabf839be",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
+          "reasons": [],
+          "receiptFingerprint": "c95f22fe59f8dc302e13664f999601a1b56cc3504e496880518b063554ab5910"
+        }
+      },
+      {
+        "forkPr": 44,
+        "url": "https://github.com/garnet-labs/n8n/pull/44",
+        "prState": "merged",
+        "head": "758e802b06a4e934df7b0c0aa025a4f4e3d531d8",
+        "previous": "3b69d2db6b18312696c875dde02fd529010e15ef",
+        "scope": "pr-base",
+        "state": "recorded",
+        "receiptFingerprint": "6f670d9423654cbac63a2637d067535140cffb8a706d211e399f93181924f953",
+        "verification": {
+          "status": "FAIL",
+          "head": "758e802b06a4e934df7b0c0aa025a4f4e3d531d8",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
+          "reasons": [
+            "no session residue: residue: \"Devin\"",
+            "pull request open: state closed"
+          ],
+          "receiptFingerprint": "6f670d9423654cbac63a2637d067535140cffb8a706d211e399f93181924f953"
+        }
+      },
       {
         "forkPr": 43,
         "url": "https://github.com/garnet-labs/n8n/pull/43",
@@ -498,7 +570,7 @@
         "verification": {
           "status": "PASS",
           "head": "4d78f96ca965825bb71e7ea09ab65cee4f582672",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [],
           "receiptFingerprint": "3fa61b75c8033c96ae207b7a5f2d598b0dd3685236f885d463cb7bb67a0f5ead"
         }
@@ -510,12 +582,12 @@
         "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
         "previous": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "d39a0380aafe3253fe9913a533091fe1571cf0ecf760ac2d7667a024d5d821bc",
         "verification": {
           "status": "FAIL",
           "head": "3b69d2db6b18312696c875dde02fd529010e15ef",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -531,12 +603,12 @@
         "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "296c12727bd9f30228cf3c650a3a0f3c8ebd215b1c526d9f3862c5cee83ee6ac",
         "verification": {
           "status": "FAIL",
           "head": "98ba9c3a2fec16a47dfdcc96877d39b335a5aa70",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -558,7 +630,7 @@
         "verification": {
           "status": "PASS",
           "head": "613cfbec6ff7fb54d25daa9460fc68c61e9926cb",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [],
           "receiptFingerprint": "e71e7c9e3107804aec772c3841a3fe8f3b801d4522ba2af0e7805e4259690d4c"
         }
@@ -575,7 +647,7 @@
         "verification": {
           "status": "FAIL",
           "head": "01ab7cce2f5a3a40c455ee56ec93317f500e375e",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [
             "pull request open: state closed"
           ],
@@ -594,7 +666,7 @@
         "verification": {
           "status": "FAIL",
           "head": "2a6e27f0c2265dbd5cbff15c57440bdf8d583bce",
-          "checkedAt": "2026-11-20T04:57:14.164Z",
+          "checkedAt": "2026-11-20T06:25:04.284Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: no machine summary on the record",

@@ -1540,11 +1540,11 @@
       "verification": {
         "status": "PASS",
         "head": "fce207f42e777e61e486f7f56e797c82d85b8622",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [],
         "receiptFingerprint": "57130e4907b31c5dfbe3a1717ef453f12cc69a2f4b238ace0cefcf29fc0bb6bd"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1556,13 +1556,13 @@
       "verification": {
         "status": "FAIL",
         "head": "da9185cf967a96e5c99f0640ba4910d04c630aa4",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "check settled: Run tests and pre-commit hooks concluded failure"
         ],
         "receiptFingerprint": "51e87088b3c6eee457ca94b030aa25c30bf95eb093ee9bc3460cd104eeb66895"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1574,13 +1574,13 @@
       "verification": {
         "status": "FAIL",
         "head": "1d933269ba74ad3f2109e413ffd41f2640d4fea3",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "check settled: Run tests and pre-commit hooks concluded failure"
         ],
         "receiptFingerprint": "9f231f19d363778f8ce9afd979257bbcb0701a05d04cc947b48c96c8b1a09ca0"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1592,13 +1592,13 @@
       "verification": {
         "status": "FAIL",
         "head": "6b67a9f13b0e3ff593c09be31a8d4f6668cacf79",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "check settled: Run tests and pre-commit hooks concluded failure"
         ],
         "receiptFingerprint": "3238959f0b5e92dd8b41f0eb48264b6b04dd7cc2f7a8d200f3c414bc83b43d79"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1610,13 +1610,13 @@
       "verification": {
         "status": "FAIL",
         "head": "c3aaa2fef84ecc5b84580f93fa58140fbbb34d5d",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "check settled: Run tests and pre-commit hooks concluded failure"
         ],
         "receiptFingerprint": "fb99d4ad2aa935c8de0486f63c1be554de5af27a188a45e1617e6179d0d055d2"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1628,7 +1628,7 @@
       "verification": {
         "status": "FAIL",
         "head": "3ea5b7e20cad5a323ab624d09c29b00336ddfbdc",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "pair line: no pair line on the comment",
           "check settled: Run tests and pre-commit hooks concluded failure",
@@ -1636,7 +1636,7 @@
         ],
         "receiptFingerprint": "4ae915c0808d40296afece27f0ba727a31c81d9e08e11bb37f01bc253e4f9fbe"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1644,11 +1644,11 @@
       "forkPr": 3,
       "branch": "dependabot/uv/filelock-4.2.1",
       "forkHeadSha": "4d4e6637ce3067770790732df6583cd2632e877e",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "4d4e6637ce3067770790732df6583cd2632e877e",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1656,7 +1656,7 @@
         ],
         "receiptFingerprint": "d8b97608ee26fce20c5b544292f5c9eabdb3f7233951a4e88799b79f06ee46f7"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     },
     {
@@ -1664,11 +1664,11 @@
       "forkPr": 1,
       "branch": "onboarding/garnet-recording",
       "forkHeadSha": "67b37717bdd3552ad030d44f57eaf1876ada1c37",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "67b37717bdd3552ad030d44f57eaf1876ada1c37",
-        "checkedAt": "2026-11-20T05:02:35.569Z",
+        "checkedAt": "2026-11-20T06:48:59.772Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1677,7 +1677,7 @@
         ],
         "receiptFingerprint": "919f7bce8b57bbfc09f86f999e2525b86c62b7f8641d00bb0e50741455488785"
       },
-      "observedAt": "2026-11-20T05:02:35.569Z",
+      "observedAt": "2026-11-20T06:48:59.772Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1688,7 +1688,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "a2d4b1e389509d2d2f6f7abd8850668952848a7a",
-    "checkedAt": "2026-11-20T05:02:35.569Z",
+    "checkedAt": "2026-11-20T06:48:59.772Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1721,7 +1721,7 @@
     "pr": 9
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T05:02:35.569Z",
+    "checkedAt": "2026-11-20T06:48:59.772Z",
     "defaultBranch": "main",
     "defaultSha": "a2d4b1e389509d2d2f6f7abd8850668952848a7a",
     "inspectedPrs": 9,
@@ -1739,7 +1739,7 @@
         "verification": {
           "status": "FAIL",
           "head": "da9185cf967a96e5c99f0640ba4910d04c630aa4",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "check settled: Run tests and pre-commit hooks concluded failure"
           ],
@@ -1758,7 +1758,7 @@
         "verification": {
           "status": "FAIL",
           "head": "1d933269ba74ad3f2109e413ffd41f2640d4fea3",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "check settled: Run tests and pre-commit hooks concluded failure"
           ],
@@ -1777,7 +1777,7 @@
         "verification": {
           "status": "FAIL",
           "head": "6b67a9f13b0e3ff593c09be31a8d4f6668cacf79",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "check settled: Run tests and pre-commit hooks concluded failure"
           ],
@@ -1796,7 +1796,7 @@
         "verification": {
           "status": "FAIL",
           "head": "c3aaa2fef84ecc5b84580f93fa58140fbbb34d5d",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "check settled: Run tests and pre-commit hooks concluded failure"
           ],
@@ -1815,7 +1815,7 @@
         "verification": {
           "status": "FAIL",
           "head": "3ea5b7e20cad5a323ab624d09c29b00336ddfbdc",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "pair line: no pair line on the comment",
             "check settled: Run tests and pre-commit hooks concluded failure",
@@ -1831,12 +1831,12 @@
         "head": "4d4e6637ce3067770790732df6583cd2632e877e",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "d8b97608ee26fce20c5b544292f5c9eabdb3f7233951a4e88799b79f06ee46f7",
         "verification": {
           "status": "FAIL",
           "head": "4d4e6637ce3067770790732df6583cd2632e877e",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1857,7 +1857,7 @@
         "verification": {
           "status": "PASS",
           "head": "fce207f42e777e61e486f7f56e797c82d85b8622",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [],
           "receiptFingerprint": "57130e4907b31c5dfbe3a1717ef453f12cc69a2f4b238ace0cefcf29fc0bb6bd"
         }
@@ -1869,12 +1869,12 @@
         "head": "67b37717bdd3552ad030d44f57eaf1876ada1c37",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "919f7bce8b57bbfc09f86f999e2525b86c62b7f8641d00bb0e50741455488785",
         "verification": {
           "status": "FAIL",
           "head": "67b37717bdd3552ad030d44f57eaf1876ada1c37",
-          "checkedAt": "2026-11-20T05:02:35.569Z",
+          "checkedAt": "2026-11-20T06:48:59.772Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
