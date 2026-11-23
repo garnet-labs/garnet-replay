@@ -68,13 +68,13 @@
       "transition": null,
       "record": "inject",
       "ecosystem": "pnpm",
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-11T17:15:10.961Z",
       "harnessSha": "6363ec516525479e857414f803f21cff6209ae67",
       "verification": {
         "status": "FAIL",
         "head": "74a34f98b93159867579d34b448926e5fc94712e",
-        "checkedAt": "2026-11-20T04:58:21.747Z",
+        "checkedAt": "2026-11-20T06:26:30.552Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -82,7 +82,7 @@
         ],
         "receiptFingerprint": "3de1cc122322e878d6b1ebe1a135210200995e62bb5448598fa8c8b074838b67"
       },
-      "observedAt": "2026-11-20T04:58:21.747Z",
+      "observedAt": "2026-11-20T06:26:30.552Z",
       "source": "github-reconciliation"
     },
     {
@@ -94,11 +94,11 @@
       "verification": {
         "status": "PASS",
         "head": "c526007cdf59dea01239a6c665692df97cd7efe3",
-        "checkedAt": "2026-11-20T04:58:21.747Z",
+        "checkedAt": "2026-11-20T06:26:30.552Z",
         "reasons": [],
         "receiptFingerprint": "8351084c870afb0c9fb41e188d53ebec726a9f3cbf26b6bba4c9cf9dbe529dd9"
       },
-      "observedAt": "2026-11-20T04:58:21.747Z",
+      "observedAt": "2026-11-20T06:26:30.552Z",
       "source": "github-reconciliation"
     },
     {
@@ -106,11 +106,11 @@
       "forkPr": 42,
       "branch": "garnet/dependency-audit-runtime-visibility",
       "forkHeadSha": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
-        "checkedAt": "2026-11-20T04:58:21.747Z",
+        "checkedAt": "2026-11-20T06:26:30.552Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -121,7 +121,7 @@
         ],
         "receiptFingerprint": "31309bda2d76b4b18da279109390247dc6f902a538513f1e8d173b72d1ef1bd1"
       },
-      "observedAt": "2026-11-20T04:58:21.747Z",
+      "observedAt": "2026-11-20T06:26:30.552Z",
       "source": "github-reconciliation"
     }
   ],
@@ -143,7 +143,7 @@
     "state": "unstarted",
     "defaultBranch": "master",
     "checkedSha": "ee5006a9a3a917df751d908a2c24c8b251a0e99c",
-    "checkedAt": "2026-11-20T04:58:21.747Z",
+    "checkedAt": "2026-11-20T06:26:30.552Z",
     "files": [
       "REVIEW.md"
     ],
@@ -168,7 +168,7 @@
   },
   "stage": 1,
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:58:21.747Z",
+    "checkedAt": "2026-11-20T06:26:30.552Z",
     "defaultBranch": "master",
     "defaultSha": "ee5006a9a3a917df751d908a2c24c8b251a0e99c",
     "inspectedPrs": 46,
@@ -186,7 +186,7 @@
         "verification": {
           "status": "PASS",
           "head": "c526007cdf59dea01239a6c665692df97cd7efe3",
-          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "checkedAt": "2026-11-20T06:26:30.552Z",
           "reasons": [],
           "receiptFingerprint": "8351084c870afb0c9fb41e188d53ebec726a9f3cbf26b6bba4c9cf9dbe529dd9"
         }
@@ -198,12 +198,12 @@
         "head": "74a34f98b93159867579d34b448926e5fc94712e",
         "previous": "c5dddb15638866f2eb902b54d0975c62b9ca96b4",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "3de1cc122322e878d6b1ebe1a135210200995e62bb5448598fa8c8b074838b67",
         "verification": {
           "status": "FAIL",
           "head": "74a34f98b93159867579d34b448926e5fc94712e",
-          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "checkedAt": "2026-11-20T06:26:30.552Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -219,12 +219,12 @@
         "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
         "previous": "eaa26a7b7cd650b4239f8a4c58047bb06be2f88b",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "31309bda2d76b4b18da279109390247dc6f902a538513f1e8d173b72d1ef1bd1",
         "verification": {
           "status": "FAIL",
           "head": "410740dbcea54f24e17a8cb6393acd7aa3a81e23",
-          "checkedAt": "2026-11-20T04:58:21.747Z",
+          "checkedAt": "2026-11-20T06:26:30.552Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",

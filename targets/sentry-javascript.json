@@ -193,12 +193,12 @@
       },
       "record": "prepared-workflow",
       "ecosystem": null,
-      "state": "recorded",
+      "state": "undeterminable",
       "openedAt": "2026-09-26T07:10:55.030Z",
       "verification": {
         "status": "FAIL",
         "head": "a3ab2c604fafb23985fb54526314d6fd03b27644",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -207,7 +207,7 @@
         ],
         "receiptFingerprint": "f799d670afce424237c812b8445ac9fffb251ab2c10b438e20285b46447d1b6c"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -219,13 +219,13 @@
       "verification": {
         "status": "FAIL",
         "head": "fe804d11c0233368f1b620bcd31dc640f36fd07c",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "b8729eeb81e915874f18d96d70f587ffd0eaa5e2a1e7262e4e04929fcd7b3198"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -237,13 +237,13 @@
       "verification": {
         "status": "FAIL",
         "head": "f5fefd6af272d23f4100663b515d74b78b8bd91c",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "44882d81e417f46e5eef2dfc52de1d32ec34fb60213cf0f4c0c0f3fdb5b15b7f"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -255,13 +255,13 @@
       "verification": {
         "status": "FAIL",
         "head": "eb1b3ef6bea0a9c4568eaa0576602602ede6a79c",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "19b246ee74a1f85732787b8a737b80088e09a2e8718db19a706b63732abbc1fc"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -269,11 +269,11 @@
       "forkPr": 91,
       "branch": "dependabot/npm_and_yarn/astro-7.4.7",
       "forkHeadSha": "c25792e60f6beeab7a753b0193b3d943ec9e68c8",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "c25792e60f6beeab7a753b0193b3d943ec9e68c8",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -281,7 +281,7 @@
         ],
         "receiptFingerprint": "8de8eff1fd4af1333c7aefa2a3bb2a6757ae3552162af86154743f460a94969a"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -289,18 +289,18 @@
       "forkPr": 90,
       "branch": "dependabot/npm_and_yarn/nuxt/schema-4.6.4",
       "forkHeadSha": "f15c059cc60a5c0186bf3dbb2996b87a176cfcfa",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "f15c059cc60a5c0186bf3dbb2996b87a176cfcfa",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs"
         ],
         "receiptFingerprint": "760f4536316400d6d07dfca23357226f4702ccbfa09b6210eedfc8a25ac9c539"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -308,18 +308,18 @@
       "forkPr": 89,
       "branch": "dependabot/npm_and_yarn/sveltejs/kit-3.1.1",
       "forkHeadSha": "99f307636a0c4ab2c5361af3d7edaf3767e9a085",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "99f307636a0c4ab2c5361af3d7edaf3767e9a085",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs"
         ],
         "receiptFingerprint": "04ecae0fe8ebcf99487b846815dcc388d768d8228412fb4f671c62a83526e2f1"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -327,18 +327,18 @@
       "forkPr": 88,
       "branch": "dependabot/npm_and_yarn/opentelemetry/instrumentation-http-0.222.0",
       "forkHeadSha": "38f43f781832c3029a142961c923c20b54ec0282",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "38f43f781832c3029a142961c923c20b54ec0282",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs"
         ],
         "receiptFingerprint": "786eb28fb7be532adf7c0e7c1447a689d05bb72023608355e5160aaa709484cd"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -346,11 +346,11 @@
       "forkPr": 87,
       "branch": "dependabot/npm_and_yarn/hono-4.13.16",
       "forkHeadSha": "5195105a80fe0069f2ee6534b0e6cb82233b1fa1",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "5195105a80fe0069f2ee6534b0e6cb82233b1fa1",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -358,7 +358,7 @@
         ],
         "receiptFingerprint": "4755953b7cd2481e04d7de6b0140d42132ae80893f28e5a8d280b0a963a72171"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -370,13 +370,13 @@
       "verification": {
         "status": "FAIL",
         "head": "f7e7067a10cd80028ec6e9d631c4c3b7a7a54dd9",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "85034b97db7b0a8efc3155643930df98afb3f9170e9fa7d273966f0cde943d14"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -388,13 +388,13 @@
       "verification": {
         "status": "FAIL",
         "head": "ef0f7a4747ac584354d8abc1afd3408bfbd0f4d4",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
         ],
         "receiptFingerprint": "66f04e05c73b772cbc35bb83c9f07eacd4f54005bdff06a24f329de5be1225d4"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -406,13 +406,13 @@
       "verification": {
         "status": "FAIL",
         "head": "47dd5678f51b773f2629eff7e7d272d41b00e346",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "e6341dfca09984a2513e7267091454ede6f0207e65be8121f05534710ddcaf25"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -424,7 +424,7 @@
       "verification": {
         "status": "FAIL",
         "head": "84714f7f2ce97aaf92d855ca5a3c91487e4fcb2f",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -434,7 +434,7 @@
         ],
         "receiptFingerprint": "60d927d5bf14561b3790e7ff5d83815d16767007afc8def303e869eeb27d837b"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -446,7 +446,7 @@
       "verification": {
         "status": "FAIL",
         "head": "a0bd0e79fc596a1859f2acbe0a5db7fe9fece91d",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -456,7 +456,7 @@
         ],
         "receiptFingerprint": "d138803089270304a48b94ce3af5f181305ff0327d75d73d26474b245fe385ef"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -468,7 +468,7 @@
       "verification": {
         "status": "FAIL",
         "head": "c584721b1ad47490c73ed9c8cffd4a10c9d8ce31",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -478,7 +478,7 @@
         ],
         "receiptFingerprint": "253f4afaf5cb91cd36c89dc546bc2c1f160f4816da0a620fd9b3010fbf461538"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -490,13 +490,13 @@
       "verification": {
         "status": "FAIL",
         "head": "80c99645b34f287a45d3263e7391b8a897d3588b",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, E2E sveltekit-cloudflare-pages Test concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
         ],
         "receiptFingerprint": "cdb5a6e545d9f1eb5944f95a19e9428033cfa847645a5be4265f50a2da47663f"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -508,7 +508,7 @@
       "verification": {
         "status": "FAIL",
         "head": "dc77991992db6747c1315aaa53d588a9bc73c2c1",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -518,7 +518,7 @@
         ],
         "receiptFingerprint": "9187cdae04e5dbba6f707f7a1f39aece28d1d60636c2350ea0fa83effd5f5f3e"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -530,7 +530,7 @@
       "verification": {
         "status": "FAIL",
         "head": "b6a2a434da0dda20cdc076a2f6b58301b203feea",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -540,7 +540,7 @@
         ],
         "receiptFingerprint": "cc4a81746f027e4c006ee90532327e12bf1ed8d697afbbe9b5b5da51b4a7d511"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -552,7 +552,7 @@
       "verification": {
         "status": "FAIL",
         "head": "85d8cc6995c4446198f7eaf988b1c70bc488f320",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -562,7 +562,7 @@
         ],
         "receiptFingerprint": "baebad35e0573dedf81950c1f5a9263e94cadfb420e8f236955511f8a8702980"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -574,7 +574,7 @@
       "verification": {
         "status": "FAIL",
         "head": "1fdd9eb9c60322b10e1788a4a46a8509ad6d1619",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -584,7 +584,7 @@
         ],
         "receiptFingerprint": "2dfa218ad20421db52b7e6c32396c697584b0299c9da665145bce2c27e86d5e5"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -596,7 +596,7 @@
       "verification": {
         "status": "FAIL",
         "head": "2ccd212cac88a1450cd29b075235826c13ebc71b",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "pair line: no pair line on the comment",
@@ -606,7 +606,7 @@
         ],
         "receiptFingerprint": "64b2860ba383ee4cbea02252779362d4cd52f3856f2dbebab0c8e87af4882d59"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -618,7 +618,7 @@
       "verification": {
         "status": "FAIL",
         "head": "b5f4834b07bff691a74a4821f1a108ed62561a43",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, E2E astro-4 Test concluded failure, Check lockfile concluded failure, Check file formatting concluded failure",
           "public profile identity: https://app.garnet.ai/public/runs/43549976913?profile=01a1d80e-150b-7329-98c9-79804275cf13&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-sentry-javascript-pr74&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
@@ -626,7 +626,7 @@
         ],
         "receiptFingerprint": "266fb3df3a8a90ea07ccd1fa7811bc0cd7027d11375cc6dfb26ef6e5564db103"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -638,7 +638,7 @@
       "verification": {
         "status": "FAIL",
         "head": "2a049d61eedc9645e4048c642e8c6a7d983ffc5a",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: record status \"recording\", not finalized",
           "public permalink: no public profile link on the comment",
@@ -648,7 +648,7 @@
         ],
         "receiptFingerprint": "b327c247ee0253cf6f535bd87eaa47c5ec1deca2ad1bbaf100ee1103130a4f12"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -660,7 +660,7 @@
       "verification": {
         "status": "FAIL",
         "head": "28fb9f1a062ac509005320805c838cc806cdfd3b",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure",
           "no session residue: residue: \"Devin\"",
@@ -669,7 +669,7 @@
         ],
         "receiptFingerprint": "47e52b4e695614714d4425b1fd0d593283c169dcc98a8fee848238b1cf6f1e83"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -681,7 +681,7 @@
       "verification": {
         "status": "FAIL",
         "head": "3963a1e3a2f64c4251f14967b58e10aa26b50aa6",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure",
           "no session residue: residue: \"Devin\"",
@@ -690,7 +690,7 @@
         ],
         "receiptFingerprint": "ad749957d8bbeeaea0143cc69d7ea691773b42567b5fe20b42a16526d26f2f7e"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -702,14 +702,14 @@
       "verification": {
         "status": "FAIL",
         "head": "5b5d4865ee58aacec2d1475749cd0f0439292166",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure",
           "no session residue: residue: \"Devin\""
         ],
         "receiptFingerprint": "bb2b8808707238412537a7c0dca541b57562401b9bca03ecbc584e73722bf8e0"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -721,14 +721,14 @@
       "verification": {
         "status": "FAIL",
         "head": "c31a7040581e4f78ff041b4fc5cedf6a2dc53f9d",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure",
           "no session residue: residue: \"Devin\""
         ],
         "receiptFingerprint": "d64cbe20d0363dbbe7c4280cfc8cc87e2b1f557474ea073ec9b9807454290db7"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -740,13 +740,13 @@
       "verification": {
         "status": "FAIL",
         "head": "17dbd7b42ca26d2cc9c645856a9053b6013d9eed",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
         ],
         "receiptFingerprint": "5d6031f6a7e926b7693d23e1bb894d0ed099f67849343b0df5886c91b989acfe"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -758,13 +758,13 @@
       "verification": {
         "status": "FAIL",
         "head": "ffdf0d177e7ebcf1fd20d8121a3def72493d4244",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure"
         ],
         "receiptFingerprint": "2d096b6fb5fbb04a8fb29bf9e7490b056cb7eff4833f20f798a97b1252038c77"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -776,13 +776,13 @@
       "verification": {
         "status": "FAIL",
         "head": "56174b7f14983477eb11954458ba93338b2af44b",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
         ],
         "receiptFingerprint": "0934cf3715d28b5c748bdeb9903b538acc4a2fe766f4f3c2c0e3bac04d8301ee"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -794,7 +794,7 @@
       "verification": {
         "status": "FAIL",
         "head": "62f08adea28997851c7ec99d35a5727ce787ebb7",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
           "pair line: no pair line on the comment",
@@ -806,7 +806,7 @@
         ],
         "receiptFingerprint": "1c2e6a3aad2ebe00a16da36d69b737b85b15b893121e8ec31615735c851bb502"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -814,11 +814,11 @@
       "forkPr": 56,
       "branch": "chore/nextjs-tunnel-route-warmup",
       "forkHeadSha": "fbd0cf51a3b5a072336b76892d80e98d3a339f22",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "fbd0cf51a3b5a072336b76892d80e98d3a339f22",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -830,7 +830,7 @@
         ],
         "receiptFingerprint": "78d49cf9daf5f0e614be793353340b9770275aea31866a1ddf364a716bab6e18"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -838,11 +838,11 @@
       "forkPr": 55,
       "branch": "chore/cloudflare-request-wrapper",
       "forkHeadSha": "84950a24a7176edf4ddb35a16f5ccacd7ffa532b",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "84950a24a7176edf4ddb35a16f5ccacd7ffa532b",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -850,7 +850,7 @@
         ],
         "receiptFingerprint": "881bd6d1fcfc0d9e8e3f40fd4b5cc942188db3d5fb070115e958753d21ee6ff0"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -862,7 +862,7 @@
       "verification": {
         "status": "FAIL",
         "head": "2a54ac43a37d8b9f76b97dd59381856c4d1accde",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "head-bound: head moved: record 694bf7a, current 2a54ac4",
           "capture completeness: capture not declared; comparison undeterminable",
@@ -873,7 +873,7 @@
         ],
         "receiptFingerprint": "3fe59721ad47437183fec83d409f4d485a93515bf8d1a71e6e4c66827f94420e"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -881,11 +881,11 @@
       "forkPr": 52,
       "branch": "ci/record-one-matrix-entry",
       "forkHeadSha": "31b3860c5ecfdf123a4ff745d0b0edd1437658cc",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "31b3860c5ecfdf123a4ff745d0b0edd1437658cc",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -895,7 +895,7 @@
         ],
         "receiptFingerprint": "d715cab69a63fd0c9fafa2e78a1aa8f2e7580577fc64f3e5e493163884e44613"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -903,21 +903,21 @@
       "forkPr": 51,
       "branch": "deps/tanstack-react-start-1.168.60",
       "forkHeadSha": "d1cf38a9a691e0471b54432edd3dc9cf20052faa",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "d1cf38a9a691e0471b54432edd3dc9cf20052faa",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
           "check settled: All required jobs passed or were skipped concluded failure, E2E tanstackstart-react Test concluded failure, E2E tanstackstart-react (tunnel-custom) Test concluded failure, E2E tanstackstart-react (tunnel-generated) Test concluded failure, E2E tanstackstart-react (tunnel-object) Test concluded failure, E2E tanstackstart-react (tunnel-static) Test concluded failure, Lint concluded failure",
-          "public profile identity: garnet-labs/sentry-javascript / run 39680453951 / profile 01a1606d-b129-768b-95a7-646baf796c20; recorded a5682590c05f1d35ebc73d5b69290e58d217278d (refs/pull/51/merge); expected head d1cf38a9a691e0471b54432edd3dc9cf20052faa",
+          "public profile identity: https://app.garnet.ai/public/runs/39680453951?profile=01a1606d-b129-768b-95a7-646baf796c20&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
           "sensor coverage: E2E tanstackstart-react (tunnel-object) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react (tunnel-generated) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react (tunnel-custom) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 5 jobs covered"
         ],
         "receiptFingerprint": "617c32267c3460d45a1c57be672eeef3c5aa3cc09c0e7276135c74e8c7270845"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -925,11 +925,11 @@
       "forkPr": 50,
       "branch": "chore/update-jot",
       "forkHeadSha": "9e428b72a8a3194256ce30242e47df480ad210b0",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "9e428b72a8a3194256ce30242e47df480ad210b0",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -939,7 +939,7 @@
         ],
         "receiptFingerprint": "d5bfbb1694d4bc72efbbbff6eddd62887b32fea3c8ff63544310d71683620138"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -947,11 +947,11 @@
       "forkPr": 47,
       "branch": "chore/github-hosted-runners",
       "forkHeadSha": "fb81975b45063907c8066c30cb7f777693c0aa1c",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "fb81975b45063907c8066c30cb7f777693c0aa1c",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -964,7 +964,7 @@
         ],
         "receiptFingerprint": "08c6bbb91f2483b35f9a6a21bf73eecef48d3367f9924b510c51d040a6fe6f4d"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -972,11 +972,11 @@
       "forkPr": 17,
       "branch": "chore/deps-fast-uri-3.1.8",
       "forkHeadSha": "422b77ed65552f9cf733c00ebf501fee68831628",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "422b77ed65552f9cf733c00ebf501fee68831628",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -984,7 +984,7 @@
         ],
         "receiptFingerprint": "6032a3479604d891a58aedd94e5787a3c0f74cab16c1521c6a47442ecc41c273"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -992,11 +992,11 @@
       "forkPr": 16,
       "branch": "chore/deps-ip-address-10.7.2",
       "forkHeadSha": "c76865b07c6e3998972358c276f6fca3ce988ee7",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "c76865b07c6e3998972358c276f6fca3ce988ee7",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1004,7 +1004,7 @@
         ],
         "receiptFingerprint": "9c7765d6ef4fc61b5ebf37c281dee7b197c76f71f5f401c6cbe20d03e6462453"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1012,11 +1012,11 @@
       "forkPr": 15,
       "branch": "chore/deps-moment-2.31.0",
       "forkHeadSha": "35e2e5ea985109a5c22af54005ce9fa96d5669cd",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "35e2e5ea985109a5c22af54005ce9fa96d5669cd",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1024,7 +1024,7 @@
         ],
         "receiptFingerprint": "687be1294da173d877baa0c942671890e8c7387dbc204003f0fad925f0a8d8c8"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1032,11 +1032,11 @@
       "forkPr": 14,
       "branch": "chore/bump-moment-2.31.0",
       "forkHeadSha": "0dc0bd5deba565ecb0f74c127f20b29da18bcefa",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "0dc0bd5deba565ecb0f74c127f20b29da18bcefa",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1044,7 +1044,7 @@
         ],
         "receiptFingerprint": "4c2edd53cfd755063d3545d4b36a70ee20fb6574d4bca756f6defa3efb25a5cc"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1052,11 +1052,11 @@
       "forkPr": 13,
       "branch": "chore/bump-fast-uri-3.1.8",
       "forkHeadSha": "e9cb72ae9b6e5a09b759737c5b9d91a12deb1709",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "e9cb72ae9b6e5a09b759737c5b9d91a12deb1709",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1066,7 +1066,7 @@
         ],
         "receiptFingerprint": "26e80bf0106f808f23bdcc6b34dc9afefc5859ddb37fede7ffc2a008594b7c30"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1074,11 +1074,11 @@
       "forkPr": 12,
       "branch": "chore/bump-ip-address-10.7.2",
       "forkHeadSha": "3f6654d77aaec71018466396e2692b21f1da7a11",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "3f6654d77aaec71018466396e2692b21f1da7a11",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1086,7 +1086,7 @@
         ],
         "receiptFingerprint": "1442ae1f168197aa5e73989d43c4d2a330580f41fa1a2a71b69ecb72feef06e4"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1094,21 +1094,20 @@
       "forkPr": 10,
       "branch": "deps/moment-2.31.0",
       "forkHeadSha": "61d54cf04af23a4676417603986b1cf6f8d5210f",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "61d54cf04af23a4676417603986b1cf6f8d5210f",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
           "check settled: All required jobs passed or were skipped concluded failure, E2E effect-4-node Test concluded failure, E2E tanstackstart-react-cloudflare Test (optional) concluded failure, E2E astro-7-static Test (optional) concluded failure, E2E vue-3 (canary) Test (optional) concluded failure, E2E solidstart-2 Test (optional) concluded failure, E2E react-send-to-sentry Test (optional) concluded failure, E2E node-mastra (latest) Test (optional) concluded failure, E2E sveltekit-3-cloudflare-workers Test (optional) concluded failure, E2E node-express-send-to-sentry-static Test (optional) concluded failure, E2E node-eve (latest) Test (optional) concluded failure, E2E nextjs-16 (canary, webpack) Test (optional) concluded failure, E2E react-router-8-cloudflare Test (optional) concluded failure, E2E nextjs-16 (canary, turbopack) Test (optional) concluded failure, E2E vue-3 (no Options API) Test (optional) concluded failure, E2E sveltekit-3 Test (optional) concluded failure, E2E node-fastify-6 Test (optional) concluded failure, E2E debug-id-sourcemaps Test (optional) concluded failure, E2E node-flue Test (optional) concluded failure, E2E node-eve (orchestrion) Test (optional) concluded failure, E2E nextjs-14 (latest) Test (optional) concluded failure, E2E nextjs-orpc Test (optional) concluded failure, E2E node-mastra Test (optional) concluded failure, E2E node-express-send-to-sentry Test (optional) concluded failure, E2E node-flue (latest) Test (optional) concluded failure, E2E nextjs-15 (turbo) Test (optional) concluded failure, E2E nextjs-16-standalone (canary, turbopack) Test (optional) concluded failure, E2E cloudflare-flue Test (optional) concluded failure, E2E gen-ai-libraries (cloudflare) Test (optional) concluded failure, E2E node-fastify-6 (tracer provider) Test (optional) concluded failure, E2E cloudflare-workers-send-to-sentry Test (optional) concluded failure, E2E node-express-mcp-v2 Test (optional) concluded failure, E2E node-eve Test (optional) concluded failure, E2E nextjs-15 (latest) Test (optional) concluded failure, E2E gen-ai-libraries Test (optional) concluded failure, E2E nextjs-14 (canary) Test (optional) concluded failure, E2E deno (latest) Test (optional) concluded failure, E2E cloudflare-agent Test (optional) concluded failure, E2E cloudflare-mastra Test (optional) concluded failure, E2E astro-7 Test (optional) concluded failure, Playwright bundle_tracing_replay_logs_metrics Tests concluded cancelled, Playwright esm (4/4) Tests concluded cancelled, Playwright esm (3/4) Tests concluded cancelled, Playwright bundle_tracing_logs_metrics Tests concluded cancelled, Playwright bundle_tracing_replay Tests concluded cancelled, Playwright bundle_replay_logs_metrics Tests concluded cancelled, Playwright bundle Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min webkit Tests concluded cancelled, Playwright esm (2/4) Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min firefox Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min Tests concluded cancelled, Playwright esm (1/4) Tests concluded cancelled, Playwright bundle_replay Tests concluded cancelled, Playwright bundle_tracing Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics Tests concluded cancelled, Playwright bundle_tracing_replay_feedback Tests concluded cancelled, Playwright bundle_logs_metrics Tests concluded cancelled, Playwright bundle_min Tests concluded cancelled, Lint concluded failure, Cloudflare Integration Tests concluded failure, Check file formatting concluded failure",
-          "public profile identity: garnet-labs/sentry-javascript / run 36653319064 / profile 01a0efed-77cd-7779-b362-4b9b0c2c174d; recorded 89b3da60ec0d77eb5ab05524e263033765fa1cdf (refs/pull/10/merge); expected head 61d54cf04af23a4676417603986b1cf6f8d5210f",
-          "sensor coverage: jobs of run 36653319064 could not be read"
+          "public profile identity: garnet-labs/sentry-javascript / run 36653319064 / profile 01a0efed-77cd-7779-b362-4b9b0c2c174d; recorded 89b3da60ec0d77eb5ab05524e263033765fa1cdf (refs/pull/10/merge); expected head 61d54cf04af23a4676417603986b1cf6f8d5210f"
         ],
         "receiptFingerprint": "680443979c4df1cfc74c1fde44e4714a38bf1da9054d81bbd1d93bcfee5c8cf8"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1116,11 +1115,11 @@
       "forkPr": 9,
       "branch": "deps/fast-uri-3.1.8",
       "forkHeadSha": "5ba9c0769a4bfca1908b2042795540ac355a7c1c",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "5ba9c0769a4bfca1908b2042795540ac355a7c1c",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1130,7 +1129,7 @@
         ],
         "receiptFingerprint": "05c795a22a62bc3d8df77a9e098ff84571ec4cb040e3763de74c67cef9909ce7"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     },
     {
@@ -1138,11 +1137,11 @@
       "forkPr": 8,
       "branch": "deps/ip-address-10.7.2",
       "forkHeadSha": "8cff558f7cf5f8219ad15bc37a9ab3e72a4a37ff",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "8cff558f7cf5f8219ad15bc37a9ab3e72a4a37ff",
-        "checkedAt": "2026-11-20T05:11:30.976Z",
+        "checkedAt": "2026-11-20T06:48:08.315Z",
         "reasons": [
           "capture completeness: capture not declared; comparison undeterminable",
           "comment finalized: record status null, not finalized",
@@ -1152,7 +1151,7 @@
         ],
         "receiptFingerprint": "a13c2b839eaa32095080b339cff0f7f1595d34909953acc3f5960323cea55b85"
       },
-      "observedAt": "2026-11-20T05:11:30.976Z",
+      "observedAt": "2026-11-20T06:48:08.315Z",
       "source": "github-reconciliation"
     }
   ],
@@ -1163,7 +1162,7 @@
     "state": "unstarted",
     "defaultBranch": "develop",
     "checkedSha": "f85a78262d1456c4b9c7e06d32406665336bb9de",
-    "checkedAt": "2026-11-20T05:11:30.976Z",
+    "checkedAt": "2026-11-20T06:48:08.315Z",
     "files": [
       "REVIEW.md"
     ],
@@ -1188,7 +1187,7 @@
   },
   "stage": 1,
   "reconciliation": {
-    "checkedAt": "2026-11-20T05:11:30.976Z",
+    "checkedAt": "2026-11-20T06:48:08.315Z",
     "defaultBranch": "develop",
     "defaultSha": "f85a78262d1456c4b9c7e06d32406665336bb9de",
     "inspectedPrs": 94,
@@ -1206,7 +1205,7 @@
         "verification": {
           "status": "FAIL",
           "head": "fe804d11c0233368f1b620bcd31dc640f36fd07c",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
           ],
@@ -1225,7 +1224,7 @@
         "verification": {
           "status": "FAIL",
           "head": "f5fefd6af272d23f4100663b515d74b78b8bd91c",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
           ],
@@ -1244,7 +1243,7 @@
         "verification": {
           "status": "FAIL",
           "head": "eb1b3ef6bea0a9c4568eaa0576602602ede6a79c",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
           ],
@@ -1258,12 +1257,12 @@
         "head": "c25792e60f6beeab7a753b0193b3d943ec9e68c8",
         "previous": "4617006af1f83d8347e7292d16c686e46038f48e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "8de8eff1fd4af1333c7aefa2a3bb2a6757ae3552162af86154743f460a94969a",
         "verification": {
           "status": "FAIL",
           "head": "c25792e60f6beeab7a753b0193b3d943ec9e68c8",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1279,12 +1278,12 @@
         "head": "f15c059cc60a5c0186bf3dbb2996b87a176cfcfa",
         "previous": "4617006af1f83d8347e7292d16c686e46038f48e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "760f4536316400d6d07dfca23357226f4702ccbfa09b6210eedfc8a25ac9c539",
         "verification": {
           "status": "FAIL",
           "head": "f15c059cc60a5c0186bf3dbb2996b87a176cfcfa",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs"
@@ -1299,12 +1298,12 @@
         "head": "99f307636a0c4ab2c5361af3d7edaf3767e9a085",
         "previous": "4617006af1f83d8347e7292d16c686e46038f48e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "04ecae0fe8ebcf99487b846815dcc388d768d8228412fb4f671c62a83526e2f1",
         "verification": {
           "status": "FAIL",
           "head": "99f307636a0c4ab2c5361af3d7edaf3767e9a085",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs"
@@ -1319,12 +1318,12 @@
         "head": "38f43f781832c3029a142961c923c20b54ec0282",
         "previous": "4617006af1f83d8347e7292d16c686e46038f48e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "786eb28fb7be532adf7c0e7c1447a689d05bb72023608355e5160aaa709484cd",
         "verification": {
           "status": "FAIL",
           "head": "38f43f781832c3029a142961c923c20b54ec0282",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs"
@@ -1339,12 +1338,12 @@
         "head": "5195105a80fe0069f2ee6534b0e6cb82233b1fa1",
         "previous": "4617006af1f83d8347e7292d16c686e46038f48e",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "4755953b7cd2481e04d7de6b0140d42132ae80893f28e5a8d280b0a963a72171",
         "verification": {
           "status": "FAIL",
           "head": "5195105a80fe0069f2ee6534b0e6cb82233b1fa1",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1365,7 +1364,7 @@
         "verification": {
           "status": "FAIL",
           "head": "f7e7067a10cd80028ec6e9d631c4c3b7a7a54dd9",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
           ],
@@ -1384,7 +1383,7 @@
         "verification": {
           "status": "FAIL",
           "head": "ef0f7a4747ac584354d8abc1afd3408bfbd0f4d4",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
           ],
@@ -1403,7 +1402,7 @@
         "verification": {
           "status": "FAIL",
           "head": "47dd5678f51b773f2629eff7e7d272d41b00e346",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure"
           ],
@@ -1422,7 +1421,7 @@
         "verification": {
           "status": "FAIL",
           "head": "84714f7f2ce97aaf92d855ca5a3c91487e4fcb2f",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1445,7 +1444,7 @@
         "verification": {
           "status": "FAIL",
           "head": "a0bd0e79fc596a1859f2acbe0a5db7fe9fece91d",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1468,7 +1467,7 @@
         "verification": {
           "status": "FAIL",
           "head": "c584721b1ad47490c73ed9c8cffd4a10c9d8ce31",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1491,7 +1490,7 @@
         "verification": {
           "status": "FAIL",
           "head": "80c99645b34f287a45d3263e7391b8a897d3588b",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, E2E sveltekit-cloudflare-pages Test concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
           ],
@@ -1510,7 +1509,7 @@
         "verification": {
           "status": "FAIL",
           "head": "dc77991992db6747c1315aaa53d588a9bc73c2c1",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1533,7 +1532,7 @@
         "verification": {
           "status": "FAIL",
           "head": "b6a2a434da0dda20cdc076a2f6b58301b203feea",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1556,7 +1555,7 @@
         "verification": {
           "status": "FAIL",
           "head": "85d8cc6995c4446198f7eaf988b1c70bc488f320",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1579,7 +1578,7 @@
         "verification": {
           "status": "FAIL",
           "head": "1fdd9eb9c60322b10e1788a4a46a8509ad6d1619",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1602,7 +1601,7 @@
         "verification": {
           "status": "FAIL",
           "head": "2ccd212cac88a1450cd29b075235826c13ebc71b",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "pair line: no pair line on the comment",
@@ -1625,7 +1624,7 @@
         "verification": {
           "status": "FAIL",
           "head": "b5f4834b07bff691a74a4821f1a108ed62561a43",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, E2E astro-4 Test concluded failure, Check lockfile concluded failure, Check file formatting concluded failure",
             "public profile identity: https://app.garnet.ai/public/runs/43549976913?profile=01a1d80e-150b-7329-98c9-79804275cf13&utm_source=github&utm_medium=pr_comment&utm_campaign=garnet-labs-sentry-javascript-pr74&utm_content=execution_profile&utm_term=no_change: The operation was aborted due to timeout",
@@ -1646,7 +1645,7 @@
         "verification": {
           "status": "FAIL",
           "head": "2a049d61eedc9645e4048c642e8c6a7d983ffc5a",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: record status \"recording\", not finalized",
             "public permalink: no public profile link on the comment",
@@ -1669,7 +1668,7 @@
         "verification": {
           "status": "FAIL",
           "head": "28fb9f1a062ac509005320805c838cc806cdfd3b",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure",
             "no session residue: residue: \"Devin\"",
@@ -1691,7 +1690,7 @@
         "verification": {
           "status": "FAIL",
           "head": "3963a1e3a2f64c4251f14967b58e10aa26b50aa6",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check lockfile concluded failure, Check file formatting concluded failure",
             "no session residue: residue: \"Devin\"",
@@ -1713,7 +1712,7 @@
         "verification": {
           "status": "FAIL",
           "head": "5b5d4865ee58aacec2d1475749cd0f0439292166",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure",
             "no session residue: residue: \"Devin\""
@@ -1733,7 +1732,7 @@
         "verification": {
           "status": "FAIL",
           "head": "c31a7040581e4f78ff041b4fc5cedf6a2dc53f9d",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure",
             "no session residue: residue: \"Devin\""
@@ -1753,7 +1752,7 @@
         "verification": {
           "status": "FAIL",
           "head": "17dbd7b42ca26d2cc9c645856a9053b6013d9eed",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
           ],
@@ -1772,7 +1771,7 @@
         "verification": {
           "status": "FAIL",
           "head": "ffdf0d177e7ebcf1fd20d8121a3def72493d4244",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure"
           ],
@@ -1791,7 +1790,7 @@
         "verification": {
           "status": "FAIL",
           "head": "56174b7f14983477eb11954458ba93338b2af44b",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "check settled: All required jobs passed or were skipped concluded failure, Check file formatting concluded failure, Check lockfile concluded failure"
           ],
@@ -1810,7 +1809,7 @@
         "verification": {
           "status": "FAIL",
           "head": "62f08adea28997851c7ec99d35a5727ce787ebb7",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "comment finalized: placeholder text present: \"<!-- garnet-control-plane-pending-pr-comment:\"",
             "pair line: no pair line on the comment",
@@ -1830,12 +1829,12 @@
         "head": "fbd0cf51a3b5a072336b76892d80e98d3a339f22",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "78d49cf9daf5f0e614be793353340b9770275aea31866a1ddf364a716bab6e18",
         "verification": {
           "status": "FAIL",
           "head": "fbd0cf51a3b5a072336b76892d80e98d3a339f22",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -1855,12 +1854,12 @@
         "head": "84950a24a7176edf4ddb35a16f5ccacd7ffa532b",
         "previous": "056054b42b538059e5ac4ac82fbf980c1ab79d6d",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "881bd6d1fcfc0d9e8e3f40fd4b5cc942188db3d5fb070115e958753d21ee6ff0",
         "verification": {
           "status": "FAIL",
           "head": "84950a24a7176edf4ddb35a16f5ccacd7ffa532b",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1881,7 +1880,7 @@
         "verification": {
           "status": "FAIL",
           "head": "2a54ac43a37d8b9f76b97dd59381856c4d1accde",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "head-bound: head moved: record 694bf7a, current 2a54ac4",
             "capture completeness: capture not declared; comparison undeterminable",
@@ -1900,12 +1899,12 @@
         "head": "31b3860c5ecfdf123a4ff745d0b0edd1437658cc",
         "previous": "baf4a835baea640f88a4c222d023220e478d2477",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "d715cab69a63fd0c9fafa2e78a1aa8f2e7580577fc64f3e5e493163884e44613",
         "verification": {
           "status": "FAIL",
           "head": "31b3860c5ecfdf123a4ff745d0b0edd1437658cc",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1923,17 +1922,17 @@
         "head": "d1cf38a9a691e0471b54432edd3dc9cf20052faa",
         "previous": "b33f4da148ef6542c95f225bef6be8eb2cc248e6",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "617c32267c3460d45a1c57be672eeef3c5aa3cc09c0e7276135c74e8c7270845",
         "verification": {
           "status": "FAIL",
           "head": "d1cf38a9a691e0471b54432edd3dc9cf20052faa",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
             "check settled: All required jobs passed or were skipped concluded failure, E2E tanstackstart-react Test concluded failure, E2E tanstackstart-react (tunnel-custom) Test concluded failure, E2E tanstackstart-react (tunnel-generated) Test concluded failure, E2E tanstackstart-react (tunnel-object) Test concluded failure, E2E tanstackstart-react (tunnel-static) Test concluded failure, Lint concluded failure",
-            "public profile identity: garnet-labs/sentry-javascript / run 39680453951 / profile 01a1606d-b129-768b-95a7-646baf796c20; recorded a5682590c05f1d35ebc73d5b69290e58d217278d (refs/pull/51/merge); expected head d1cf38a9a691e0471b54432edd3dc9cf20052faa",
+            "public profile identity: https://app.garnet.ai/public/runs/39680453951?profile=01a1606d-b129-768b-95a7-646baf796c20&utm_source=github&utm_medium=pr_comment: The operation was aborted due to timeout",
             "sensor coverage: E2E tanstackstart-react (tunnel-object) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react (tunnel-generated) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react (tunnel-custom) Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); E2E tanstackstart-react Test: sensor did not start (setup did not complete: Failed to create agent: Control plane request failed: POST /api/v1/agents (HTTP 500: internal server error)); 1 of 5 jobs covered"
           ],
           "receiptFingerprint": "617c32267c3460d45a1c57be672eeef3c5aa3cc09c0e7276135c74e8c7270845"
@@ -1946,12 +1945,12 @@
         "head": "9e428b72a8a3194256ce30242e47df480ad210b0",
         "previous": "ebda75a51183c091e5d4fd6e00e5eee147dc19b1",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "d5bfbb1694d4bc72efbbbff6eddd62887b32fea3c8ff63544310d71683620138",
         "verification": {
           "status": "FAIL",
           "head": "9e428b72a8a3194256ce30242e47df480ad210b0",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1969,12 +1968,12 @@
         "head": "fb81975b45063907c8066c30cb7f777693c0aa1c",
         "previous": null,
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "08c6bbb91f2483b35f9a6a21bf73eecef48d3367f9924b510c51d040a6fe6f4d",
         "verification": {
           "status": "FAIL",
           "head": "fb81975b45063907c8066c30cb7f777693c0aa1c",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -1995,12 +1994,12 @@
         "head": "422b77ed65552f9cf733c00ebf501fee68831628",
         "previous": "9e536af6bf391a45f0ba7cd37e980bdda88f1ec5",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "6032a3479604d891a58aedd94e5787a3c0f74cab16c1521c6a47442ecc41c273",
         "verification": {
           "status": "FAIL",
           "head": "422b77ed65552f9cf733c00ebf501fee68831628",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2016,12 +2015,12 @@
         "head": "c76865b07c6e3998972358c276f6fca3ce988ee7",
         "previous": "dbd6dd3f996703e435c953d8fb91ff4bc0262d5d",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "9c7765d6ef4fc61b5ebf37c281dee7b197c76f71f5f401c6cbe20d03e6462453",
         "verification": {
           "status": "FAIL",
           "head": "c76865b07c6e3998972358c276f6fca3ce988ee7",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2037,12 +2036,12 @@
         "head": "35e2e5ea985109a5c22af54005ce9fa96d5669cd",
         "previous": "9e536af6bf391a45f0ba7cd37e980bdda88f1ec5",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "687be1294da173d877baa0c942671890e8c7387dbc204003f0fad925f0a8d8c8",
         "verification": {
           "status": "FAIL",
           "head": "35e2e5ea985109a5c22af54005ce9fa96d5669cd",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2058,12 +2057,12 @@
         "head": "0dc0bd5deba565ecb0f74c127f20b29da18bcefa",
         "previous": "02e32e64f052b800f03546272ad23c4c0676a08d",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "4c2edd53cfd755063d3545d4b36a70ee20fb6574d4bca756f6defa3efb25a5cc",
         "verification": {
           "status": "FAIL",
           "head": "0dc0bd5deba565ecb0f74c127f20b29da18bcefa",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2079,12 +2078,12 @@
         "head": "e9cb72ae9b6e5a09b759737c5b9d91a12deb1709",
         "previous": "02e32e64f052b800f03546272ad23c4c0676a08d",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "26e80bf0106f808f23bdcc6b34dc9afefc5859ddb37fede7ffc2a008594b7c30",
         "verification": {
           "status": "FAIL",
           "head": "e9cb72ae9b6e5a09b759737c5b9d91a12deb1709",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2102,12 +2101,12 @@
         "head": "3f6654d77aaec71018466396e2692b21f1da7a11",
         "previous": "e07f4c69e0973467e6ebe5192969ef0def4c78cb",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "1442ae1f168197aa5e73989d43c4d2a330580f41fa1a2a71b69ecb72feef06e4",
         "verification": {
           "status": "FAIL",
           "head": "3f6654d77aaec71018466396e2692b21f1da7a11",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2123,18 +2122,17 @@
         "head": "61d54cf04af23a4676417603986b1cf6f8d5210f",
         "previous": "a4b844d28a6367e59827402bbf0ac2147c3e84a9",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "680443979c4df1cfc74c1fde44e4714a38bf1da9054d81bbd1d93bcfee5c8cf8",
         "verification": {
           "status": "FAIL",
           "head": "61d54cf04af23a4676417603986b1cf6f8d5210f",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
             "check settled: All required jobs passed or were skipped concluded failure, E2E effect-4-node Test concluded failure, E2E tanstackstart-react-cloudflare Test (optional) concluded failure, E2E astro-7-static Test (optional) concluded failure, E2E vue-3 (canary) Test (optional) concluded failure, E2E solidstart-2 Test (optional) concluded failure, E2E react-send-to-sentry Test (optional) concluded failure, E2E node-mastra (latest) Test (optional) concluded failure, E2E sveltekit-3-cloudflare-workers Test (optional) concluded failure, E2E node-express-send-to-sentry-static Test (optional) concluded failure, E2E node-eve (latest) Test (optional) concluded failure, E2E nextjs-16 (canary, webpack) Test (optional) concluded failure, E2E react-router-8-cloudflare Test (optional) concluded failure, E2E nextjs-16 (canary, turbopack) Test (optional) concluded failure, E2E vue-3 (no Options API) Test (optional) concluded failure, E2E sveltekit-3 Test (optional) concluded failure, E2E node-fastify-6 Test (optional) concluded failure, E2E debug-id-sourcemaps Test (optional) concluded failure, E2E node-flue Test (optional) concluded failure, E2E node-eve (orchestrion) Test (optional) concluded failure, E2E nextjs-14 (latest) Test (optional) concluded failure, E2E nextjs-orpc Test (optional) concluded failure, E2E node-mastra Test (optional) concluded failure, E2E node-express-send-to-sentry Test (optional) concluded failure, E2E node-flue (latest) Test (optional) concluded failure, E2E nextjs-15 (turbo) Test (optional) concluded failure, E2E nextjs-16-standalone (canary, turbopack) Test (optional) concluded failure, E2E cloudflare-flue Test (optional) concluded failure, E2E gen-ai-libraries (cloudflare) Test (optional) concluded failure, E2E node-fastify-6 (tracer provider) Test (optional) concluded failure, E2E cloudflare-workers-send-to-sentry Test (optional) concluded failure, E2E node-express-mcp-v2 Test (optional) concluded failure, E2E node-eve Test (optional) concluded failure, E2E nextjs-15 (latest) Test (optional) concluded failure, E2E gen-ai-libraries Test (optional) concluded failure, E2E nextjs-14 (canary) Test (optional) concluded failure, E2E deno (latest) Test (optional) concluded failure, E2E cloudflare-agent Test (optional) concluded failure, E2E cloudflare-mastra Test (optional) concluded failure, E2E astro-7 Test (optional) concluded failure, Playwright bundle_tracing_replay_logs_metrics Tests concluded cancelled, Playwright esm (4/4) Tests concluded cancelled, Playwright esm (3/4) Tests concluded cancelled, Playwright bundle_tracing_logs_metrics Tests concluded cancelled, Playwright bundle_tracing_replay Tests concluded cancelled, Playwright bundle_replay_logs_metrics Tests concluded cancelled, Playwright bundle Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min webkit Tests concluded cancelled, Playwright esm (2/4) Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min firefox Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics_min Tests concluded cancelled, Playwright esm (1/4) Tests concluded cancelled, Playwright bundle_replay Tests concluded cancelled, Playwright bundle_tracing Tests concluded cancelled, Playwright bundle_tracing_replay_feedback_logs_metrics Tests concluded cancelled, Playwright bundle_tracing_replay_feedback Tests concluded cancelled, Playwright bundle_logs_metrics Tests concluded cancelled, Playwright bundle_min Tests concluded cancelled, Lint concluded failure, Cloudflare Integration Tests concluded failure, Check file formatting concluded failure",
-            "public profile identity: garnet-labs/sentry-javascript / run 36653319064 / profile 01a0efed-77cd-7779-b362-4b9b0c2c174d; recorded 89b3da60ec0d77eb5ab05524e263033765fa1cdf (refs/pull/10/merge); expected head 61d54cf04af23a4676417603986b1cf6f8d5210f",
-            "sensor coverage: jobs of run 36653319064 could not be read"
+            "public profile identity: garnet-labs/sentry-javascript / run 36653319064 / profile 01a0efed-77cd-7779-b362-4b9b0c2c174d; recorded 89b3da60ec0d77eb5ab05524e263033765fa1cdf (refs/pull/10/merge); expected head 61d54cf04af23a4676417603986b1cf6f8d5210f"
           ],
           "receiptFingerprint": "680443979c4df1cfc74c1fde44e4714a38bf1da9054d81bbd1d93bcfee5c8cf8"
         }
@@ -2146,12 +2144,12 @@
         "head": "5ba9c0769a4bfca1908b2042795540ac355a7c1c",
         "previous": "8b4c5322189a1397ab2a9d4001b2e2f1f27ee6c5",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "05c795a22a62bc3d8df77a9e098ff84571ec4cb040e3763de74c67cef9909ce7",
         "verification": {
           "status": "FAIL",
           "head": "5ba9c0769a4bfca1908b2042795540ac355a7c1c",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2169,12 +2167,12 @@
         "head": "8cff558f7cf5f8219ad15bc37a9ab3e72a4a37ff",
         "previous": "ff3e3544dd87b150f9d8812f8d5447319b045263",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "a13c2b839eaa32095080b339cff0f7f1595d34909953acc3f5960323cea55b85",
         "verification": {
           "status": "FAIL",
           "head": "8cff558f7cf5f8219ad15bc37a9ab3e72a4a37ff",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",
@@ -2192,12 +2190,12 @@
         "head": "a3ab2c604fafb23985fb54526314d6fd03b27644",
         "previous": "ce383063c1df2081e65264435d85d130d9cba551",
         "scope": null,
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "f799d670afce424237c812b8445ac9fffb251ab2c10b438e20285b46447d1b6c",
         "verification": {
           "status": "FAIL",
           "head": "a3ab2c604fafb23985fb54526314d6fd03b27644",
-          "checkedAt": "2026-11-20T05:11:30.976Z",
+          "checkedAt": "2026-11-20T06:48:08.315Z",
           "reasons": [
             "capture completeness: capture not declared; comparison undeterminable",
             "comment finalized: record status null, not finalized",

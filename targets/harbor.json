@@ -209,11 +209,11 @@
       "forkPr": 7,
       "branch": "dependabot/uv/adapters/kramabench/template/environment/nltk-3.10.4",
       "forkHeadSha": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
-        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "checkedAt": "2026-11-20T06:18:54.923Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -221,7 +221,7 @@
         ],
         "receiptFingerprint": "81f4c661b5d2fb23fc90126312c99a7ca367b0845ca47fa0d61ce868065ea851"
       },
-      "observedAt": "2026-11-20T04:56:18.739Z",
+      "observedAt": "2026-11-20T06:18:54.923Z",
       "source": "github-reconciliation"
     },
     {
@@ -229,11 +229,11 @@
       "forkPr": 6,
       "branch": "dependabot/uv/adapters/dacode/template/environment/nltk-3.10.4",
       "forkHeadSha": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
-        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "checkedAt": "2026-11-20T06:18:54.923Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -241,7 +241,7 @@
         ],
         "receiptFingerprint": "27fad5cd3f7e6ed02c6595f112bfbf492a6644b48158ebb807d4c4e641ae8545"
       },
-      "observedAt": "2026-11-20T04:56:18.739Z",
+      "observedAt": "2026-11-20T06:18:54.923Z",
       "source": "github-reconciliation"
     },
     {
@@ -253,7 +253,7 @@
       "verification": {
         "status": "FAIL",
         "head": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
-        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "checkedAt": "2026-11-20T06:18:54.923Z",
         "reasons": [
           "head-bound: head moved: record bf2a56a, current 50cdde3",
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
@@ -292,7 +292,7 @@
         ],
         "receiptFingerprint": "4343f15675a3e4a4391d97eec36879766ccb30d0c9575743965514e3326b7915"
       },
-      "observedAt": "2026-11-20T04:56:18.739Z",
+      "observedAt": "2026-11-20T06:18:54.923Z",
       "source": "github-reconciliation"
     },
     {
@@ -304,11 +304,11 @@
       "verification": {
         "status": "PASS",
         "head": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
-        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "checkedAt": "2026-11-20T06:18:54.923Z",
         "reasons": [],
         "receiptFingerprint": "a985910eb80dffcbf731f61c4d0249081654e8633e5c58631f0626a62fb09aa9"
       },
-      "observedAt": "2026-11-20T04:56:18.739Z",
+      "observedAt": "2026-11-20T06:18:54.923Z",
       "source": "github-reconciliation"
     },
     {
@@ -316,11 +316,11 @@
       "forkPr": 3,
       "branch": "ci-network-policy",
       "forkHeadSha": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
-      "state": "recorded",
+      "state": "undeterminable",
       "verification": {
         "status": "FAIL",
         "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
-        "checkedAt": "2026-11-20T04:56:18.739Z",
+        "checkedAt": "2026-11-20T06:18:54.923Z",
         "reasons": [
           "capture completeness: record reports incomplete jobs; comparison undeterminable",
           "comment finalized: record reports incomplete jobs",
@@ -329,7 +329,7 @@
         ],
         "receiptFingerprint": "9041b3578e383eb1e7d31106dedd2d2d3db74be5cd6299f4c73b4d2c69ce5bd6"
       },
-      "observedAt": "2026-11-20T04:56:18.739Z",
+      "observedAt": "2026-11-20T06:18:54.923Z",
       "source": "github-reconciliation"
     }
   ],
@@ -340,7 +340,7 @@
     "state": "unstarted",
     "defaultBranch": "main",
     "checkedSha": "34c43106c00a211904f1cda1313223b9965046ae",
-    "checkedAt": "2026-11-20T04:56:18.739Z",
+    "checkedAt": "2026-11-20T06:18:54.923Z",
     "files": [
       "REVIEW.md"
     ],
@@ -372,7 +372,7 @@
     "pr": 2
   },
   "reconciliation": {
-    "checkedAt": "2026-11-20T04:56:18.739Z",
+    "checkedAt": "2026-11-20T06:18:54.923Z",
     "defaultBranch": "main",
     "defaultSha": "34c43106c00a211904f1cda1313223b9965046ae",
     "inspectedPrs": 7,
@@ -385,12 +385,12 @@
         "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
         "previous": "34c43106c00a211904f1cda1313223b9965046ae",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "81f4c661b5d2fb23fc90126312c99a7ca367b0845ca47fa0d61ce868065ea851",
         "verification": {
           "status": "FAIL",
           "head": "7354d7878b9c481e07d4290fa5929a49b9cc43dd",
-          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "checkedAt": "2026-11-20T06:18:54.923Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -406,12 +406,12 @@
         "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
         "previous": "34c43106c00a211904f1cda1313223b9965046ae",
         "scope": "pr-base",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "27fad5cd3f7e6ed02c6595f112bfbf492a6644b48158ebb807d4c4e641ae8545",
         "verification": {
           "status": "FAIL",
           "head": "fba0e026b31806b01fc477b11b448ed2d424f2fa",
-          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "checkedAt": "2026-11-20T06:18:54.923Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
@@ -432,7 +432,7 @@
         "verification": {
           "status": "FAIL",
           "head": "50cdde36301ebab98034dad1ac3fb889dae7d51a",
-          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "checkedAt": "2026-11-20T06:18:54.923Z",
           "reasons": [
             "head-bound: head moved: record bf2a56a, current 50cdde3",
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
@@ -484,7 +484,7 @@
         "verification": {
           "status": "PASS",
           "head": "1368aa0b9288ead7d8f027ffbe7e0d9fb52209d2",
-          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "checkedAt": "2026-11-20T06:18:54.923Z",
           "reasons": [],
           "receiptFingerprint": "a985910eb80dffcbf731f61c4d0249081654e8633e5c58631f0626a62fb09aa9"
         }
@@ -496,12 +496,12 @@
         "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
         "previous": "cd5672274d964b8d7c7c25ae1a25d5c5c846541c",
         "scope": "previous-push",
-        "state": "recorded",
+        "state": "undeterminable",
         "receiptFingerprint": "9041b3578e383eb1e7d31106dedd2d2d3db74be5cd6299f4c73b4d2c69ce5bd6",
         "verification": {
           "status": "FAIL",
           "head": "e2ec841ca6b8520232a040e7ce9335b98b4cf40e",
-          "checkedAt": "2026-11-20T04:56:18.739Z",
+          "checkedAt": "2026-11-20T06:18:54.923Z",
           "reasons": [
             "capture completeness: record reports incomplete jobs; comparison undeterminable",
             "comment finalized: record reports incomplete jobs",
