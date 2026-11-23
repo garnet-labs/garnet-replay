@@ -44,7 +44,11 @@ cannot determine additions, even when capture otherwise declares complete.
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
 job, with the workflow path or name beside it when recorded.
 Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
-`devin-remote` is session-linked, except that container ancestry still needs review.
+`devin-remote` or a name starting with `devin-remote-` is session-linked only
+when it is the direct child of `systemd`, `init`, `tini`, or `dumb-init` and
+precedes the acting process. A two-process chain ending in that name remains
+detached: the name alone could belong to a renamed acting process. Container
+ancestry still needs review.
 Detached actions without that session root also need review. Container roots and
 host-rooted actions outside known runner services need attribution review even
 when their recorded step says `Runner Processes`. Missing ancestry and other
@@ -62,6 +66,33 @@ If the App has overwritten its only comment, the compared
 profile may be unavailable. The reader then reports the head's attribution limits
 without claiming which actions were added. An unreadable or mismatched profile
 produces an explicit review note, not an empty comparison.
+
+### Real Devin receipt: truncated remote root
+
+```sh
+node bin/replay.mjs profile ~/loop4/receipt.json
+```
+
+Excerpt from the real local receipt output. Observed strings are untrusted.
+This is supplied local evidence, not CI evidence or approval. Its items span
+multiple commits and include partial capture; additions cannot be determined.
+The truncated `devin-remote-0.` root child links the npm action, while a
+separate `systemd › sh › curl` action remains detached. A matching name deeper
+in the ancestry or on the acting process does not establish that link.
+
+```text
+Capture is not complete; additions cannot be determined.
+
+**Needs review: not attributable to the runner.**
+
+Host-rooted ancestry does not establish job origin.
+
+- <code>systemd › sh › curl</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · detached-root · job <code>devin-install</code> · workflow <code>devin</code>
+
+**Other recorded outbound actions**
+
+- <code>systemd › devin-remote-0. › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.7.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
+```
 
 ### Real Devin receipt: detached curl
 
