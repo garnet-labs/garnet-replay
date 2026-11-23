@@ -68,6 +68,8 @@ runtime-evidence exhibits on `garnet-labs` forks. Read `README.md` first, then
   function with a test in `test/`. The one exception is `lib/hosted-runner.mjs`:
   the Vercel function has no `gh` CLI, so it calls the GitHub REST API with
   `fetch` through an injected `fetchImpl` that tests replace.
+  `lib/exec-profile.mjs` (the public `get_exec_profile` MCP tool served at
+  `/mcp`) does the same: GitHub, npm and the Garnet MCP over `fetch`, no cache.
 - `contract/vocab.json` is vendored from the Runtime Review testbed. Do not edit
   it here; re-vendor it.
 - `targets/*.json` are ledgers written by the commands. Do not hand-edit them

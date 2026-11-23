@@ -92,6 +92,25 @@ npm test                      # offline regression suite
 node bin/replay.mjs --help
 ```
 
+## Public execution-profile lookup (`get_exec_profile`)
+
+The hosted viewer also serves a public MCP endpoint, `https://garnet-replay.vercel.app/mcp`
+(Streamable HTTP, no sign-in), with one read-only tool, `get_exec_profile`. Give it exactly one of:
+
+- `pr`: a GitHub pull request; returns profiles bound to its current head and the App result bound to that head.
+- `pkg`: an npm `name[@version]`; returns dependency replays that install it and its source CI at the release commit.
+- `repo`: `owner/repo` (optional `runID`); returns the newest recorded run.
+
+The result (`garnet.exec-profile/v1`) lists every execution chain from `lib/profile-reader.mjs`,
+the rows needing review, `status` (`recorded`, `partial`, `no-profile`) and every `limits` gap.
+It is a record, not a verdict. Install the agent skill:
+
+```sh
+npx skills add https://github.com/garnet-labs/garnet-replay/tree/main/skills/garnet-exec-profile
+claude mcp add --transport http garnet-exec-profile https://garnet-replay.vercel.app/mcp
+node bin/replay.mjs exec-profile --pr https://github.com/garnet-labs/claude-code-action/pull/2   # same lookup, CLI
+```
+
 ## Start here: what the upstream already records
 
 If the upstream's own CI already runs `garnet-org/action`, read its records
