@@ -257,6 +257,27 @@ test("CursorPage receipts read every item through the CLI and retain detached an
   assert.deepEqual(compareProfileTrees(receipt, receipt).added, [])
 })
 
+test("real-shaped receipt recognizes truncated and full remote roots without matching lookalikes", () => {
+  const fixture = new URL("./fixtures/demo-profiles/devin-remote-prefix.json", import.meta.url)
+  const receipt = JSON.parse(readFileSync(fixture, "utf8"))
+  const rows = readProfileTrees(receipt)
+  assert.equal(rows.length, 6)
+  for (const destination of ["registry.npmjs.org", "full.example", "exact.example"]) {
+    const row = rows.find((entry) => entry.destination === destination)
+    assert.equal(row.kind, "session-linked")
+    assert.equal(row.needsReview, false)
+  }
+  for (const destination of ["suffix.example", "prefix.example", "example.com"]) {
+    const row = rows.find((entry) => entry.destination === destination)
+    assert.equal(row.kind, "detached-root")
+    assert.equal(row.needsReview, true)
+  }
+  assert.deepEqual(rows.find((row) => row.destination === "registry.npmjs.org").ancestry, ["systemd", "devin-remote-0.", "npm install"])
+  assert.equal(captureAllowsComparison(receipt), false)
+  assert.equal(attributionKind(["systemd", "devin-remote-0.", "dockerd", "node"]), "container-rooted")
+  assert.equal(attributionKind(["systemd", "devin-remote-0.", "Runner.Worker", "node"]), "runner-linked")
+})
+
 test("CursorPage input rejects empty or malformed items instead of dropping them", () => {
   assert.throws(() => readProfileTrees({ profiles: { items: [] } }), /collection is empty/)
   assert.throws(() => readProfileTrees({ items: [null] }), /Profile must be an object/)
