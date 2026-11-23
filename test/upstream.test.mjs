@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 
-import { acrossProfiles, isShard, readJobLog, renderUpstreamReport, summarizeUpstreamProfile } from "../lib/upstream.mjs"
+import { acrossProfiles, collectUpstream, isShard, readJobLog, renderUpstreamReport, summarizeUpstreamProfile } from "../lib/upstream.mjs"
 
 const HEAD = "dafaf8c57aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 const worker = ["systemd", "Runner.Listener", "Runner.Worker", "bash", "pn", "node"]
@@ -32,6 +32,29 @@ test("readJobLog finds the action SHA, profile links and the fork auth skip", ()
   assert.equal(read.links.length, 1)
   assert.equal(read.authSkipped, false)
   assert.equal(readJobLog("Garnet skipped this Runtime Review because no authentication mechanism was available: x").authSkipped, true)
+})
+
+test("upstream collection reads profile links after the gh escape-sequence refusal", async () => {
+  let reads = 0
+  const result = await collectUpstream("garnet-labs/example", 1, {
+    exec: (_command, args) => {
+      const path = args[1]
+      if (path.endsWith("/logs")) {
+        reads += 1
+        if (!args.includes("--allow-escape-sequences")) throw new Error("the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway")
+        return "\u001b[36mhttps://app.garnet.ai/public/runs/10?profile=01a0fbb7-d94f-7f2e-b642-8cca9a3029bc\u001b[0m"
+      }
+      if (path.endsWith("/pulls/1")) return JSON.stringify({ head: { repo: { full_name: "garnet-labs/example" }, sha: HEAD, ref: "deps/update" } })
+      if (path.includes("/commits?")) return JSON.stringify([{ sha: HEAD }])
+      if (path.includes("/jobs?")) return JSON.stringify({ jobs: [{ id: 42, steps: [{ name: "Run garnet-org/action", conclusion: "success" }] }] })
+      if (path.includes("/actions/runs?")) return JSON.stringify({ workflow_runs: [{ id: 10, head_repository: { full_name: "garnet-labs/example" }, head_sha: HEAD }] })
+      throw new Error(`unexpected API path: ${path}`)
+    },
+    fetchImpl: async () => new Response(JSON.stringify({ profile: null })),
+  })
+  assert.equal(reads, 2)
+  assert.equal(result.jobs[0].profiles.length, 1)
+  assert.equal(result.jobs[0].profiles[0].runId, "10")
 })
 
 test("summarizeUpstreamProfile keeps workload egress with lineage and sets shards, addresses and runner rows aside", () => {
