@@ -13,7 +13,11 @@
               { "remote_names": ["exact.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remote"], "process": "npm install" }] },
               { "remote_names": ["suffix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remotex"], "process": "npm install" }] },
               { "remote_names": ["prefix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "xdevin-remote"], "process": "npm install" }] },
-              { "remote_names": ["example.com"], "remote_ports": [443], "protocol": "TCP", "unattributed": true, "proc_trees": [{ "ancestry": ["systemd", "sh"], "process": "curl" }] }
+              { "remote_names": ["example.com"], "remote_ports": [443], "protocol": "TCP", "unattributed": true, "proc_trees": [{ "ancestry": ["systemd", "sh"], "process": "curl" }] },
+              { "remote_names": ["deep.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "sh", "devin-remote-x"], "process": "curl" }] },
+              { "remote_names": ["acting.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "sh"], "process": "devin-remote-x" }] },
+              { "remote_names": ["short-exact.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd"], "process": "devin-remote" }] },
+              { "remote_names": ["short-prefix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd"], "process": "devin-remote-0." }] }
             ]
           }
         }
