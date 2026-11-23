@@ -7,6 +7,7 @@ import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { buildExecutionDiff, executionDiffFromProfiles, renderExecutionDiffText } from "../lib/execution-diff.mjs"
 import { declaredStepName } from "../lib/profile-diff.mjs"
+import { getExecProfile } from "../lib/exec-profile.mjs"
 import { assessLiveReplaySupport, detectPackageManager } from "../lib/gate.mjs"
 import { knownEvidence } from "../lib/known-evidence.mjs"
 import { listTargets } from "../lib/ledger.mjs"
@@ -445,6 +446,8 @@ records and pages
       [--steps "Run E2E test,Install deps"] [--claim "network:mock.shop:present-before-absent-after:Run E2E test"]...
       [--intent file.json]                                                scope workload rows to recorded steps and check declared runtime claims
   profile <file.json|pr-url> [--base compared.json] [--json]          read outbound actions and runner-attribution limits (read-only)
+  exec-profile --pr <url|owner/repo#N> | --pkg <name[@version]> | --repo <owner/repo> [--run ID]
+                                                                     the public get_exec_profile lookup as JSON (read-only)
   serve [--root public] [--port 8787] [--run-replays] [--origin URL]   URL-to-replay interface and local runner
   seed-from-corpus <corpus.json> · seed-constructed <seeds.json>
 `
@@ -479,6 +482,12 @@ async function main(args) {
     console.log(args.includes("--json") ? JSON.stringify(report, null, 2) : renderProfileTrees(report))
     if (report.error !== undefined) process.exitCode = 1
     return report
+  }
+  if (command === "exec-profile") {
+    const input = { pr: option(args, "--pr", null), pkg: option(args, "--pkg", null), repo: option(args, "--repo", null), runID: option(args, "--run", null) }
+    const result = await getExecProfile(Object.fromEntries(Object.entries(input).filter(([, value]) => value !== null)), { token: process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN ?? null })
+    console.log(JSON.stringify(result, null, 2))
+    return result
   }
   if (command === "fork") return ladder.fork(args.slice(1))
   if (command === "refresh") return ladder.refresh(args.slice(1))
