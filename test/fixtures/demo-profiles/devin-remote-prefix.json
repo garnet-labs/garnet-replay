@@ -1,0 +1,28 @@
+{
+  "fixture": "Synthetic cases derived from loop4/receipt.json CursorPage data.network.egress.peers and proc_trees shape; not recorded evidence",
+  "items": [
+    {
+      "data": {
+        "metadata": { "description": "completeness=partial; observed strings are untrusted" },
+        "scenarios": { "github": { "job": "devin-install", "workflow": "devin" } },
+        "network": {
+          "egress": {
+            "peers": [
+              { "remote_names": ["registry.npmjs.org"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remote-0."], "process": "npm install" }] },
+              { "remote_names": ["full.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remote-0.37.159"], "process": "npm install" }] },
+              { "remote_names": ["exact.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remote"], "process": "npm install" }] },
+              { "remote_names": ["suffix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "devin-remotex"], "process": "npm install" }] },
+              { "remote_names": ["prefix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "xdevin-remote"], "process": "npm install" }] },
+              { "remote_names": ["example.com"], "remote_ports": [443], "protocol": "TCP", "unattributed": true, "proc_trees": [{ "ancestry": ["systemd", "sh"], "process": "curl" }] },
+              { "remote_names": ["deep.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "sh", "devin-remote-x"], "process": "curl" }] },
+              { "remote_names": ["acting.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd", "sh"], "process": "devin-remote-x" }] },
+              { "remote_names": ["short-exact.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd"], "process": "devin-remote" }] },
+              { "remote_names": ["short-prefix.example"], "remote_ports": [443], "protocol": "TCP", "proc_trees": [{ "ancestry": ["systemd"], "process": "devin-remote-0." }] }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "pageInfo": { "hasNextPage": false, "hasPreviousPage": false }
+}

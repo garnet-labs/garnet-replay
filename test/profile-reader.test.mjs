@@ -257,6 +257,34 @@ test("CursorPage receipts read every item through the CLI and retain detached an
   assert.deepEqual(compareProfileTrees(receipt, receipt).added, [])
 })
 
+test("real-shaped receipt recognizes truncated and full remote roots without matching lookalikes", () => {
+  const fixture = new URL("./fixtures/demo-profiles/devin-remote-prefix.json", import.meta.url)
+  const receipt = JSON.parse(readFileSync(fixture, "utf8"))
+  const rows = readProfileTrees(receipt)
+  assert.equal(rows.length, 10)
+  for (const destination of ["registry.npmjs.org", "full.example", "exact.example"]) {
+    const row = rows.find((entry) => entry.destination === destination)
+    assert.equal(row.kind, "session-linked")
+    assert.equal(row.needsReview, false)
+  }
+  for (const destination of ["suffix.example", "prefix.example", "example.com", "deep.example", "acting.example", "short-exact.example", "short-prefix.example"]) {
+    const row = rows.find((entry) => entry.destination === destination)
+    assert.equal(row.kind, "detached-root")
+    assert.equal(row.needsReview, true)
+  }
+  assert.deepEqual(rows.find((row) => row.destination === "registry.npmjs.org").ancestry, ["systemd", "devin-remote-0.", "npm install"])
+  assert.equal(captureAllowsComparison(receipt), false)
+  assert.equal(attributionKind(["systemd", "devin-remote-0.", "dockerd", "node"]), "container-rooted")
+  assert.equal(attributionKind(["systemd", "devin-remote-0.", "Runner.Worker", "node"]), "runner-linked")
+  for (const root of ["systemd", "init", "tini", "dumb-init"]) {
+    assert.equal(attributionKind([root, "devin-remote-0.", "npm install"]), "session-linked")
+    assert.equal(attributionKind([root, "sh", "devin-remote-x", "curl"]), "detached-root")
+    assert.equal(attributionKind([root, "sh", "devin-remote-x"]), "detached-root")
+    assert.equal(attributionKind([root, "devin-remote-0."]), "detached-root")
+  }
+  assert.equal(attributionKind(["bash", "devin-remote-0.", "npm install"]), "runner-unlinked")
+})
+
 test("CursorPage input rejects empty or malformed items instead of dropping them", () => {
   assert.throws(() => readProfileTrees({ profiles: { items: [] } }), /collection is empty/)
   assert.throws(() => readProfileTrees({ items: [null] }), /Profile must be an object/)
