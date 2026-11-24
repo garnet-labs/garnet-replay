@@ -281,6 +281,17 @@ test("per-tree SSH receipt attribution survives deduplication without linking un
   }
 })
 
+test("a changed SSH attribution needs review without adding an execution chain", () => {
+  const receipt = (unattributed) => ({ network: { egress: { peers: [{
+    remote_names: ["agent.example"],
+    unattributed,
+    proc_trees: [{ ancestry: ["systemd", "sshd", "bash"], process: "curl", attribution: "session-linked" }],
+  }] } } })
+  const report = compareProfileTrees(receipt(true), receipt(false))
+  assert.deepEqual(report.review.map(row => row.kind), ["detached-root"])
+  assert.deepEqual(report.added, [])
+})
+
 test("unmarked SSH execution chains keep the legacy ancestry classification", () => {
   assert.equal(attributionKind(["systemd", "sshd", "bash", "curl"]), "runner-background")
   for (const name of ["sshd-session", "sshd-session: u", "sshd: user"]) {
