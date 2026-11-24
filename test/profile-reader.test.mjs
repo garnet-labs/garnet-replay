@@ -321,7 +321,7 @@ test("real-shaped dev-api page skips three association-free items without implyi
 
 test("mixed pages count empty associations, but never suppress malformed recorded actions", () => {
   const recorded = profile()
-  for (const empty of [{}, { network: {} }, { network: { egress: {} } }, { associations: [] }, { network: { egress: { peers: [] } } }]) {
+  for (const empty of [{}, { network: {} }, { network: { egress: {} } }]) {
     const page = { items: [{ data: empty }, { data: recorded }] }
     assert.equal(compareProfileTrees(page).emptyItems.head, 1)
     assert.match(renderProfileTrees(compareProfileTrees(page)), /1 item carried no outbound associations/)
@@ -331,6 +331,21 @@ test("mixed pages count empty associations, but never suppress malformed recorde
     assert.throws(() => readProfileTrees({ items: [recorded, malformed] }))
   }
   assert.throws(() => readProfileTrees({ items: [{}, { network: {} }] }), /no readable outbound associations/)
+})
+
+test("explicit empty outbound arrays are recorded zero, not skipped items", () => {
+  for (const source of [{ associations: [] }, { egress: [] }, { egress: { unique_domains: [] } }, { network: { egress: { peers: [] } } }]) {
+    const zero = { items: [{ data: source }] }
+    assert.deepEqual(readProfileTrees(zero), [])
+    assert.equal(captureAllowsComparison(zero), true)
+    assert.equal(compareProfileTrees(zero).emptyItems, undefined)
+    assert.deepEqual(compareProfileTrees(zero, zero).added, [])
+    const report = compareProfileTrees({ items: [profile()] }, zero)
+    assert.equal(report.comparison, "available")
+    assert.ok(report.added.length > 0)
+    assert.equal(report.emptyItems, undefined)
+    assert.doesNotMatch(renderProfileTrees(report), /carried no outbound associations/)
+  }
 })
 
 test("real receipt CursorPage data items read through the CLI without manual unwrapping", () => {
