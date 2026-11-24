@@ -292,6 +292,17 @@ test("a changed SSH attribution needs review without adding an execution chain",
   assert.deepEqual(report.added, [])
 })
 
+test("unattributed SSH peers preserve runner and container precedence", () => {
+  for (const [process, kind] of [["Runner.Worker", "runner-linked"], ["containerd", "container-rooted"]]) {
+    const [row] = readProfileTrees({ network: { egress: { peers: [{
+      remote_names: ["agent.example"],
+      unattributed: true,
+      proc_trees: [{ ancestry: ["systemd", "sshd", process], process: "curl" }],
+    }] } } })
+    assert.equal(row.kind, kind)
+  }
+})
+
 test("unmarked SSH execution chains keep the legacy ancestry classification", () => {
   assert.equal(attributionKind(["systemd", "sshd", "bash", "curl"]), "runner-background")
   for (const name of ["sshd-session", "sshd-session: u", "sshd: user"]) {

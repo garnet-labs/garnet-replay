@@ -91,7 +91,8 @@ Claude Code Lima capture, with unrelated fields omitted:
 
 Without the marker, the existing ancestry rules apply: plain `sshd`
 is recognized as runner background. An explicitly unattributed SSH peer
-and a separate `systemd › curl` chain read as `detached-root` and need review.
+without a recognized workload root and a separate `systemd › curl` chain
+read as `detached-root` and need review.
 
 Ancestry through `devin-remote` or a name starting with `devin-remote-` is session-linked only
 when it is the direct child of `systemd`, `init`, `tini`, or `dumb-init` and
