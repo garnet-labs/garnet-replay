@@ -71,8 +71,30 @@ cannot determine additions, even when capture otherwise declares complete.
 
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
 job, with the workflow path or name beside it when recorded.
-Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
-`devin-remote` or a name starting with `devin-remote-` is session-linked only
+Ancestry through `Runner.Worker` remains runner-linked.
+In a local receipt, an SSH execution chain is `session-linked` when its process
+tree carries the receipt's explicit attribution. Here is one peer from the
+Claude Code Lima capture, with unrelated fields omitted:
+
+```json
+{
+  "remote_address": "64.239.123.1",
+  "remote_names": ["64.239.123.1", "ai-gateway.vercel.sh"],
+  "remote_ports": ["443"],
+  "proc_trees": [{
+    "process": "claude",
+    "ancestry": ["systemd", "sshd", "sshd", "sshd", "bash", "MainThread"],
+    "attribution": "session-linked"
+  }]
+}
+```
+
+Without the marker, the existing ancestry rules apply: plain `sshd`
+is recognized as runner background. An explicitly unattributed SSH peer
+without a recognized workload root and a separate `systemd › curl` chain
+read as `detached-root` and need review.
+
+Ancestry through `devin-remote` or a name starting with `devin-remote-` is session-linked only
 when it is the direct child of `systemd`, `init`, `tini`, or `dumb-init` and
 precedes the acting process. A two-process chain ending in that name remains
 detached: the name alone could belong to a renamed acting process. Container
