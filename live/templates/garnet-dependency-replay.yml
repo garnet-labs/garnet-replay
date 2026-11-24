@@ -43,7 +43,7 @@ jobs:
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - uses: garnet-org/action@673a06d87748bec49e4d8df22d371b2a3420aba4 # v2.5.2, OIDC default
+      - uses: garnet-org/action@7106b4f608f40dd8df44e44346066fdccbae4433 # v2.5.3, OIDC default
         id: garnet
         # Distinct names avoid the control-plane agent dedupe index collision between matrix legs.
         env:
