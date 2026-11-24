@@ -260,19 +260,22 @@ test("CursorPage receipts read every item through the CLI and retain detached an
 test("per-tree SSH receipt attribution survives deduplication without linking unrelated or detached traffic", () => {
   const tree = { ancestry: ["systemd", "sshd-session: u", "bash"], process: "claude" }
   const peer = (destination, procTree, fields = {}) => ({ remote_names: [destination], proc_trees: [procTree], ...fields })
-  const linked = peer("agent.example", { ...tree, attribution: "session-linked" })
-  const unmarked = peer("agent.example", tree)
-  for (const duplicates of [[linked, unmarked], [unmarked, linked]]) {
+  const linked = peer("agent.example", { ...tree, attribution: "session-linked" }, { remote_address: "192.0.2.1" })
+  const outside = peer("agent.example", { ...tree, attribution: "session-linked" }, { remote_address: "192.0.2.2", unattributed: true })
+  for (const duplicates of [[linked, outside], [outside, linked]]) {
     const rows = readProfileTrees({ network: { egress: { peers: [
       ...duplicates,
       peer("unrelated.example", tree),
       peer("outside.example", { ...tree, attribution: "session-linked" }, { unattributed: true }),
       peer("detached.example", { ancestry: ["systemd"], process: "curl", attribution: "session-linked" }),
     ] } } })
-    assert.deepEqual(Object.fromEntries(rows.map(row => [row.destination, [row.kind, row.needsReview]])), {
-      "agent.example": ["session-linked", false],
+    assert.deepEqual(rows.filter(row => row.destination === "agent.example").map(row => [row.kind, row.needsReview, row.addresses]), [
+      ["detached-root", true, ["192.0.2.2"]],
+      ["session-linked", false, ["192.0.2.1"]],
+    ])
+    assert.deepEqual(Object.fromEntries(rows.filter(row => row.destination !== "agent.example").map(row => [row.destination, [row.kind, row.needsReview]])), {
       "unrelated.example": ["runner-background", false],
-      "outside.example": ["runner-background", false],
+      "outside.example": ["detached-root", true],
       "detached.example": ["detached-root", true],
     })
   }
