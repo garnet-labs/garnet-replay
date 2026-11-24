@@ -72,6 +72,11 @@ cannot determine additions, even when capture otherwise declares complete.
 The reader shows each outbound destination, its recorded ancestry, ports, protocol, and
 job, with the workflow path or name beside it when recorded.
 Ancestry through `Runner.Worker` remains runner-linked. Ancestry through
+In a local receipt, an SSH execution chain is `session-linked` when its process
+tree carries the receipt's explicit attribution. An unmarked SSH chain stays
+`runner-background`; a separate `systemd › curl` chain still reads as
+`detached-root` and needs review.
+
 `devin-remote` or a name starting with `devin-remote-` is session-linked only
 when it is the direct child of `systemd`, `init`, `tini`, or `dumb-init` and
 precedes the acting process. A two-process chain ending in that name remains

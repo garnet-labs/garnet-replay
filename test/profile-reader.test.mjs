@@ -257,6 +257,27 @@ test("CursorPage receipts read every item through the CLI and retain detached an
   assert.deepEqual(compareProfileTrees(receipt, receipt).added, [])
 })
 
+test("per-tree SSH receipt attribution survives deduplication without linking unrelated or detached traffic", () => {
+  const tree = { ancestry: ["systemd", "sshd-session: u", "bash"], process: "claude" }
+  const peer = (destination, procTree, fields = {}) => ({ remote_names: [destination], proc_trees: [procTree], ...fields })
+  const linked = peer("agent.example", { ...tree, attribution: "session-linked" })
+  const unmarked = peer("agent.example", tree)
+  for (const duplicates of [[linked, unmarked], [unmarked, linked]]) {
+    const rows = readProfileTrees({ network: { egress: { peers: [
+      ...duplicates,
+      peer("unrelated.example", tree),
+      peer("outside.example", { ...tree, attribution: "session-linked" }, { unattributed: true }),
+      peer("detached.example", { ancestry: ["systemd"], process: "curl", attribution: "session-linked" }),
+    ] } } })
+    assert.deepEqual(Object.fromEntries(rows.map(row => [row.destination, [row.kind, row.needsReview]])), {
+      "agent.example": ["session-linked", false],
+      "unrelated.example": ["runner-background", false],
+      "outside.example": ["runner-background", false],
+      "detached.example": ["detached-root", true],
+    })
+  }
+})
+
 test("real-shaped receipt recognizes truncated and full remote roots without matching lookalikes", () => {
   const fixture = new URL("./fixtures/demo-profiles/devin-remote-prefix.json", import.meta.url)
   const receipt = JSON.parse(readFileSync(fixture, "utf8"))
