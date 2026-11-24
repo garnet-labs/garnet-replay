@@ -1,0 +1,5 @@
+{
+  "fixture": "Association-free CursorPage items, reduced from the missing-network shape in loop5/devapi.json.",
+  "items": [{ "data": { "scenarios": { "github": { "job": "devin-test" } } } }],
+  "pageInfo": { "hasNextPage": false, "hasPreviousPage": false }
+}

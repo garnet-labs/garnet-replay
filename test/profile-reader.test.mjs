@@ -348,6 +348,18 @@ test("explicit empty outbound arrays are recorded zero, not skipped items", () =
   }
 })
 
+test("an entirely unreadable compared page errors even when comparison is incomplete", () => {
+  const fixture = new URL("./fixtures/demo-profiles/no-outbound-items.json", import.meta.url)
+  const missing = JSON.parse(readFileSync(fixture, "utf8"))
+  for (const base of [missing, { profiles: missing }, { ...missing, capture_quality: "partial" }]) {
+    assert.throws(() => compareProfileTrees(profile(), base), /Profile carries no readable outbound associations/)
+  }
+  const head = new URL("./fixtures/demo-profiles/devapi-mixed-items.json", import.meta.url)
+  const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", head.pathname, "--base", fixture.pathname], { encoding: "utf8" })
+  assert.equal(child.status, 1)
+  assert.match(child.stderr, /Profile carries no readable outbound associations/)
+})
+
 test("real receipt CursorPage data items read through the CLI without manual unwrapping", () => {
   const receipt = JSON.parse(readFileSync(RECEIPT, "utf8"))
   assert.equal(receipt.items.length, 11)
