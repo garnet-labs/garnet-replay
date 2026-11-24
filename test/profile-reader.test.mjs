@@ -333,6 +333,22 @@ test("mixed pages count empty associations, but never suppress malformed recorde
   assert.throws(() => readProfileTrees({ items: [{}, { network: {} }] }), /no readable outbound associations/)
 })
 
+test("present scalar network and egress containers are malformed, not missing data", () => {
+  const recorded = profile()
+  for (const value of ["invalid", "", 42, 0, false, true, null]) {
+    for (const malformed of [{ network: value }, { egress: value }, { network: { egress: value } }]) {
+      const error = /Profile carries malformed outbound associations/
+      assert.throws(() => readProfileTrees(malformed), error)
+      assert.throws(() => readProfileTrees({ ...recorded, ...malformed }), error)
+      for (const items of [[recorded, malformed], [malformed, recorded]]) {
+        const page = { items: items.map((data) => ({ data })) }
+        assert.throws(() => readProfileTrees(page), error)
+        assert.throws(() => compareProfileTrees(recorded, page), error)
+      }
+    }
+  }
+})
+
 test("explicit empty outbound arrays are recorded zero, not skipped items", () => {
   for (const source of [{ associations: [] }, { egress: [] }, { egress: { unique_domains: [] } }, { network: { egress: { peers: [] } } }]) {
     const zero = { items: [{ data: source }] }
