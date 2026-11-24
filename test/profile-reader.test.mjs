@@ -156,7 +156,7 @@ test("exported pairs prefer recorded PR heads over test-merge commits across pro
     { scenarios: { github: { sha: merge, event: { pull_request: { head: { sha: HEAD } } } } } },
   ]
   for (const metadata of shapes) {
-    const raw = { ...metadata, associations: [] }
+    const raw = { ...metadata, associations: [{ remote_names: ["example.com"], ancestry: ["Runner.Worker", "node"] }] }
     for (const record of [raw, { profile: raw }, { profiles: [raw] }]) {
       const report = compareProfileTrees(record, record)
       assert.deepEqual(report.pair.head, [HEAD])
@@ -285,12 +285,52 @@ test("real-shaped receipt recognizes truncated and full remote roots without mat
   assert.equal(attributionKind(["bash", "devin-remote-0.", "npm install"]), "runner-unlinked")
 })
 
-test("CursorPage input rejects empty or malformed items instead of dropping them", () => {
+test("CursorPage input rejects unreadable collections and malformed items", () => {
   assert.throws(() => readProfileTrees({ profiles: { items: [] } }), /collection is empty/)
   assert.throws(() => readProfileTrees({ items: [null] }), /Profile must be an object/)
   assert.throws(() => readProfileTrees({ items: [{}] }), /no readable outbound associations/)
   assert.throws(() => readProfileTrees({ profiles: { items: null } }), /no readable outbound associations/)
   assert.equal(attributionKind(["systemd", "devin-remote", "dockerd", "node"]), "container-rooted")
+})
+
+test("real-shaped dev-api page skips three association-free items without implying complete capture", () => {
+  const fixture = new URL("./fixtures/demo-profiles/devapi-mixed-items.json", import.meta.url)
+  const page = JSON.parse(readFileSync(fixture, "utf8"))
+  const readable = { items: page.items.filter((item) => item.data.network !== undefined) }
+  assert.deepEqual(readProfileTrees(page), readProfileTrees(readable))
+  assert.equal(readProfileTrees(page).length, 4)
+  assert.equal(captureAllowsComparison(page), false)
+  const report = compareProfileTrees(page, readable)
+  assert.deepEqual(report.emptyItems, { head: 3, compared: 0 })
+  assert.equal(report.comparison, "unavailable")
+  assert.equal(report.added, null)
+  assert.ok(report.pair.head.includes("62252d4fe153dfac463b65eadc6296c73588cba3"))
+  const output = renderProfileTrees(report)
+  assert.match(output, /Capture is not complete; additions cannot be determined/)
+  assert.match(output, /Head: 3 items carried no outbound associations/)
+  assert.doesNotMatch(output, /No outbound actions requiring attribution review/)
+  assertVocabClean(output)
+  const baseline = compareProfileTrees(readable, { profiles: page })
+  assert.deepEqual(baseline.emptyItems, { head: 0, compared: 3 })
+  assert.equal(baseline.added, null)
+  assert.match(renderProfileTrees(baseline), /Compared: 3 items carried no outbound associations/)
+  const child = spawnSync(process.execPath, ["bin/replay.mjs", "profile", fixture.pathname], { encoding: "utf8" })
+  assert.equal(child.status, 0, child.stderr)
+  assert.match(child.stdout, /3 items carried no outbound associations/)
+})
+
+test("mixed pages count empty associations, but never suppress malformed recorded actions", () => {
+  const recorded = profile()
+  for (const empty of [{}, { network: {} }, { network: { egress: {} } }, { associations: [] }, { network: { egress: { peers: [] } } }]) {
+    const page = { items: [{ data: empty }, { data: recorded }] }
+    assert.equal(compareProfileTrees(page).emptyItems.head, 1)
+    assert.match(renderProfileTrees(compareProfileTrees(page)), /1 item carried no outbound associations/)
+    assert.throws(() => readProfileTrees({ items: [{ data: empty }] }), /no readable outbound associations/)
+  }
+  for (const malformed of [null, { associations: "invalid" }, { associations: [{ ancestry: [] }] }, { associations: [{ remote_names: [4] }] }]) {
+    assert.throws(() => readProfileTrees({ items: [recorded, malformed] }))
+  }
+  assert.throws(() => readProfileTrees({ items: [{}, { network: {} }] }), /no readable outbound associations/)
 })
 
 test("real receipt CursorPage data items read through the CLI without manual unwrapping", () => {
