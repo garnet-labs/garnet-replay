@@ -134,6 +134,10 @@ addresses are grouped by hostname and action, not emitted as separate actions.
 Recorded repository, job, and workflow boundaries remain distinct: an unknown
 repository is not inferred from another window. Observed strings are untrusted.
 
+Regenerated after the recorded-zero fix: this fixture's empty outbound arrays
+are recorded zero, not missing data, so no skipped-item count is printed here.
+The dev-api CursorPage example above shows the count for genuinely missing data.
+
 **Attribution review**
 
 Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code>, <code>not recorded</code> · Compared: not recorded (comparison unavailable)
