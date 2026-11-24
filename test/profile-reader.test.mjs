@@ -274,10 +274,18 @@ test("per-tree SSH receipt attribution survives deduplication without linking un
       ["session-linked", false, ["192.0.2.1"]],
     ])
     assert.deepEqual(Object.fromEntries(rows.filter(row => row.destination !== "agent.example").map(row => [row.destination, [row.kind, row.needsReview]])), {
-      "unrelated.example": ["runner-background", false],
+      "unrelated.example": ["detached-root", true],
       "outside.example": ["detached-root", true],
       "detached.example": ["detached-root", true],
     })
+  }
+})
+
+test("unmarked SSH execution chains keep the legacy ancestry classification", () => {
+  assert.equal(attributionKind(["systemd", "sshd", "bash", "curl"]), "runner-background")
+  for (const name of ["sshd-session", "sshd-session: u", "sshd: user"]) {
+    assert.equal(attributionKind(["systemd", name, "bash", "curl"]), "detached-root")
+    assert.equal(attributionKind(["systemd", name, "bash", "curl"], "", true), "session-linked")
   }
 })
 
