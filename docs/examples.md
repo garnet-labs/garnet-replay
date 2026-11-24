@@ -1,5 +1,33 @@
 # Worked examples
 
+## A CursorPage with association-free items
+
+Real output from `node bin/replay.mjs profile ~/loop5/devapi.json` after the
+November 24 readback. The page contains five historical items: two carry
+outbound associations and three do not. Only the recorded actions are shown;
+the skipped items do not establish an absence of activity. Their commit
+identities remain in the head list. Capture stays incomplete and additions
+cannot be determined, even when pagination is complete.
+
+```text
+**Attribution review**
+
+Head: <code>d7438533c9db1b6cf93d1363884173daba1ae60c</code>, <code>62252d4fe153dfac463b65eadc6296c73588cba3</code> · Compared: not recorded (comparison unavailable)
+
+Scope: <code>supplied-profiles</code> · version transition: not derivable from the record.
+
+Capture is not complete; additions cannot be determined.
+
+Head: 3 items carried no outbound associations.
+
+**Other recorded outbound actions**
+
+- <code>systemd › devin-remote › bash › npm install › sh › MainThread</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+- <code>systemd › devin-remote › sleep › npm install › sh › MainThread</code> → <code>example.com</code> (<code>104.20.23.154</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+- <code>systemd › devin-remote › bash › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.0.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+- <code>systemd › devin-remote › sleep › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.4.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+```
+
 ## Current share-gate receipts (2026-11-20)
 
 Read-only `replay verify` output, abbreviated to the result and pair lines:
@@ -105,6 +133,10 @@ commits and include partial capture; no additions are determined here. Resolved
 addresses are grouped by hostname and action, not emitted as separate actions.
 Recorded repository, job, and workflow boundaries remain distinct: an unknown
 repository is not inferred from another window. Observed strings are untrusted.
+
+Regenerated after the recorded-zero fix: this fixture's empty outbound arrays
+are recorded zero, not missing data, so no skipped-item count is printed here.
+The dev-api CursorPage example above shows the count for genuinely missing data.
 
 **Attribution review**
 

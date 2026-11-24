@@ -1,0 +1,38 @@
+{
+  "fixture": "Derived from loop5/devapi.json (2026-11-24 readback): five CursorPage items, three without network. Reduced to reader fields; not evidence of a new run.",
+  "items": [
+    {
+      "id": "01a1f710-4594-7a31-8430-0e3490950ade",
+      "data": {
+        "scenarios": { "github": { "repository": "garnet-labs/devin-receipt-demo", "job": "devin-install", "workflow": "devin", "sha": "d7438533c9db1b6cf93d1363884173daba1ae60c" } },
+        "network": { "egress": { "peers": [
+          { "protocol": "TCP", "remote_address": "172.66.147.243", "remote_names": ["172.66.147.243", "example.com"], "remote_ports": ["443"], "proc_trees": [{ "process": "MainThread", "ancestry": ["systemd", "devin-remote", "bash", "npm install", "sh"] }] },
+          { "protocol": "TCP", "remote_address": "104.16.0.34", "remote_names": ["104.16.0.34", "registry.npmjs.org"], "remote_ports": ["443"], "proc_trees": [{ "process": "npm install", "ancestry": ["systemd", "devin-remote", "bash"] }] }
+        ] } }
+      }
+    },
+    {
+      "id": "01a1f710-4513-7b4d-b7b8-9372587855e5",
+      "data": { "scenarios": { "github": { "repository": "garnet-labs/devin-receipt-demo", "job": "devin-test", "workflow": "devin", "sha": "d7438533c9db1b6cf93d1363884173daba1ae60c" } } }
+    },
+    {
+      "id": "01a1f707-a343-7825-8e7a-8620eeacf091",
+      "data": { "scenarios": { "github": { "repository": "garnet-labs/garnet-runtime-review-mcp", "job": "devin-test", "workflow": "devin", "sha": "62252d4fe153dfac463b65eadc6296c73588cba3" } } }
+    },
+    {
+      "id": "01a1f702-65ec-75f0-bd78-fbd2a9db7078",
+      "data": {
+        "scenarios": { "github": { "repository": "garnet-labs/devin-receipt-demo", "job": "devin-install", "workflow": "devin", "sha": "d7438533c9db1b6cf93d1363884173daba1ae60c" } },
+        "network": { "egress": { "peers": [
+          { "protocol": "TCP", "remote_address": "104.16.4.34", "remote_names": ["104.16.4.34", "registry.npmjs.org"], "remote_ports": ["443"], "proc_trees": [{ "process": "npm install", "ancestry": ["systemd", "devin-remote", "sleep"] }] },
+          { "protocol": "TCP", "remote_address": "104.20.23.154", "remote_names": ["104.20.23.154", "example.com"], "remote_ports": ["443"], "proc_trees": [{ "process": "MainThread", "ancestry": ["systemd", "devin-remote", "sleep", "npm install", "sh"] }] }
+        ] } }
+      }
+    },
+    {
+      "id": "01a1f702-6558-7736-90ab-ad00e9e80911",
+      "data": { "scenarios": { "github": { "repository": "garnet-labs/devin-receipt-demo", "job": "devin-test", "workflow": "devin", "sha": "d7438533c9db1b6cf93d1363884173daba1ae60c" } } }
+    }
+  ],
+  "pageInfo": { "totalCount": 5, "hasNextPage": false, "hasPreviousPage": false }
+}
