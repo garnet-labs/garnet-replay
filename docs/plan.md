@@ -35,7 +35,7 @@ demo beacon package in a garnet-labs demo repository. It is a real pull request
 with a real kernel record, not a third-party incident.
 
 The generated workflow uses `id-token: write`, no `GARNET_API_TOKEN`, and pins
-`garnet-org/action@7106b4f608f40dd8df44e44346066fdccbae4433` (release v2.5.3).
+`garnet-org/action@24833a47c19aad605bb10bcd9b8cad8f318ca187` (release v2.6.0).
 
 ## Comparison target
 
@@ -117,5 +117,5 @@ test/*.test.mjs                node:test; renderer --assert; schema validation; 
 - Website PR #141 is closed unmerged.
 - The last observed `garnet/runtime-evidence` status for PR #31 was pending,
   not green.
-- Repin the action to release v2.5.3.
+- Repin the action to release v2.6.0.
 - Do not modify protected `garnet-org` repositories.

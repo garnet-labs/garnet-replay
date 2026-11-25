@@ -105,7 +105,7 @@ Operator conventions (not guard checks):
   requests from other repositories receive neither and degrade to a local
   record.
 - The action pin in `live/templates/garnet-record.yml` is the commit covered by
-  release `v2.5.3` (`GARNET_ACTION_PIN` in `lib/replay-pr.mjs`). Move existing
+  release `v2.6.0` (`GARNET_ACTION_PIN` in `lib/replay-pr.mjs`). Move existing
   forks with `replay repin <slug>`; never edit their workflows by hand. Since
   v2.3.0 the companion GitHub App owns the Runtime Review comment; the action
   posts none.
