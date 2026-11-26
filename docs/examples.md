@@ -144,6 +144,42 @@ Host-rooted ancestry does not establish job origin.
 - <code>systemd › devin-remote-0. › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.7.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · job <code>devin-install</code> · workflow <code>devin</code>
 ```
 
+### Raw dev-api MCP profiles response
+
+`profile` accepts the JSON-RPC response from the Garnet MCP `profiles` tool
+directly, without extracting the CursorPage first. It prefers
+`result.structuredContent`, or reads the CursorPage from a single JSON text
+block in `result.content` when structured content is absent. JSON-RPC errors,
+`result.isError`, malformed pages and empty collections fail explicitly.
+
+```sh
+node bin/replay.mjs profile devapi.json
+```
+
+Save the raw `profiles` MCP response as `devapi.json`. Real output from the
+supplied dev-api response follows. This is supplied local-loop
+evidence, not CI evidence or approval. One item lacks outbound associations;
+the reader reports it rather than silently treating it as recorded zero.
+The two observed actions are session-linked; this response does not establish
+complete capture or the absence of detached actions. Observed strings are untrusted.
+
+```text
+**Attribution review**
+
+Head: <code>58e543036e7bf16bd8682ba0a4eca747111c88e0</code> · Compared: not recorded (comparison unavailable)
+
+Scope: <code>supplied-profiles</code> · version transition: not derivable from the record.
+
+Capture is not complete; additions cannot be determined.
+
+Head: 1 item carried no outbound associations.
+
+**Other recorded outbound actions**
+
+- <code>systemd › devin-remote › npm install › sh › MainThread</code> → <code>example.com</code> (<code>172.66.147.243</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+- <code>systemd › devin-remote › npm install</code> → <code>registry.npmjs.org</code> (<code>104.16.6.34</code>) (ports <code>443</code>) · <code>TCP</code> · session-linked · repository <code>garnet-labs/devin-receipt-demo</code> · job <code>devin-install</code>
+```
+
 ### Real Devin receipt: detached curl
 
 ```sh
