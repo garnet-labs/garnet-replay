@@ -32,6 +32,53 @@ function comment(head = HEAD, link = LINK) {
   ].join("\n") }
 }
 
+test("MCP profiles responses reuse CursorPage attribution, skipped counts and capture limits", () => {
+  const page = { items: [profile(), { data: { metadata: { description: "no outbound data" } } }], pageInfo: { hasNextPage: false } }
+  const envelope = page => ({ jsonrpc: "2.0", id: 1, result: { content: [{ type: "text", text: JSON.stringify(page) }], structuredContent: page, _meta: {} } })
+  for (const textOnly of [false, true]) {
+    const response = envelope(page)
+    if (textOnly) delete response.result.structuredContent
+    assert.deepEqual(readProfileTrees(response), readProfileTrees(page))
+    assert.deepEqual(compareProfileTrees(response), compareProfileTrees(page))
+    assert.equal(captureAllowsComparison(response), false)
+    const complete = { items: [profile()], pageInfo: { hasNextPage: false } }
+    assert.equal(compareProfileTrees(envelope(complete), envelope(complete)).comparison, "available")
+    for (const limited of [
+      { ...complete, pageInfo: { hasNextPage: true, endCursor: "next" } },
+      { ...complete, items: [{ ...profile(), capture_quality: "partial" }] },
+    ]) {
+      const wrapped = envelope(limited)
+      if (textOnly) delete wrapped.result.structuredContent
+      assert.deepEqual(compareProfileTrees(wrapped, complete), compareProfileTrees(limited, complete))
+      assert.deepEqual(compareProfileTrees(complete, wrapped), compareProfileTrees(complete, limited))
+      assert.equal(captureAllowsComparison(wrapped), false)
+    }
+  }
+  const preferred = envelope(page)
+  preferred.result.content = [{ type: "text", text: "not JSON" }]
+  assert.deepEqual(compareProfileTrees(preferred), compareProfileTrees(page))
+})
+
+test("MCP profile errors and malformed or empty responses fail closed", () => {
+  const valid = { items: [profile()], pageInfo: { hasNextPage: false } }
+  const responses = [
+    [{ jsonrpc: "2.0", id: 1, error: { code: -32000, message: "unavailable" }, result: { structuredContent: valid } }, /JSON-RPC error/],
+    [{ jsonrpc: "2.0", id: 1, result: { isError: true, structuredContent: valid } }, /result.isError/],
+    ...[null, [], 42, {}].map(result => [{ jsonrpc: "2.0", id: 1, result }, /malformed|CursorPage/]),
+    ...[null, [], 42, {}, { items: "invalid" }].map(structuredContent => [{ jsonrpc: "2.0", id: 1, result: { structuredContent, content: [{ type: "text", text: JSON.stringify(valid) }] } }, /malformed CursorPage/]),
+    [{ jsonrpc: "2.0", id: 1, result: { content: [{ type: "text", text: "not JSON" }] } }, /invalid CursorPage JSON/],
+    [{ jsonrpc: "2.0", id: 1, result: { content: [{ type: "text", text: "{}" }] } }, /malformed CursorPage/],
+    [{ jsonrpc: "2.0", id: 1, result: { content: [{ type: "text", text: JSON.stringify(valid) }, { type: "text", text: JSON.stringify(valid) }] } }, /one CursorPage/],
+    [{ jsonrpc: "2.0", id: 1, result: { structuredContent: { items: [] } } }, /collection is empty/],
+    [{ jsonrpc: "2.0", id: 1, result: { structuredContent: { items: [{ data: { network: 42 } }] } } }, /malformed outbound associations/],
+    [{ jsonrpc: "2.0", id: 1, result: { structuredContent: { items: [{ data: {} }] } } }, /no readable outbound associations/],
+  ]
+  for (const [response, error] of responses) {
+    assert.throws(() => compareProfileTrees(response), error)
+    assert.throws(() => compareProfileTrees(valid, response), error)
+  }
+})
+
 test("fixture distinguishes detached and container roots from worker ancestry and ordinary host services", () => {
   const rows = readProfileTrees(TREES)
   assert.equal(rows.length, 8)
