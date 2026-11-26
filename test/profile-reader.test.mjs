@@ -64,6 +64,10 @@ test("MCP profile errors and malformed or empty responses fail closed", () => {
   const responses = [
     [{ jsonrpc: "2.0", id: 1, error: { code: -32000, message: "unavailable" }, result: { structuredContent: valid } }, /JSON-RPC error/],
     [{ jsonrpc: "2.0", id: 1, result: { isError: true, structuredContent: valid } }, /result.isError/],
+    ...["true", "false", 1, 0, null, {}, []].flatMap(hasNextPage => [false, true].map(textOnly => {
+      const page = { ...valid, pageInfo: { hasNextPage } }
+      return [{ jsonrpc: "2.0", id: 1, result: textOnly ? { content: [{ type: "text", text: JSON.stringify(page) }] } : { structuredContent: page } }, /malformed CursorPage pagination/]
+    })),
     ...[null, [], 42, {}].map(result => [{ jsonrpc: "2.0", id: 1, result }, /malformed|CursorPage/]),
     ...[null, [], 42, {}, { items: "invalid" }].map(structuredContent => [{ jsonrpc: "2.0", id: 1, result: { structuredContent, content: [{ type: "text", text: JSON.stringify(valid) }] } }, /malformed CursorPage/]),
     [{ jsonrpc: "2.0", id: 1, result: { content: [{ type: "text", text: "not JSON" }] } }, /invalid CursorPage JSON/],
