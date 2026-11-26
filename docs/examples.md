@@ -153,10 +153,11 @@ block in `result.content` when structured content is absent. JSON-RPC errors,
 `result.isError`, malformed pages and empty collections fail explicitly.
 
 ```sh
-node bin/replay.mjs profile /home/ubuntu/attachments/bfe43147-d9fc-4660-9c11-75480f972c5a/devapi.json
+node bin/replay.mjs profile devapi.json
 ```
 
-Real output from the supplied dev-api response. This is supplied local-loop
+Save the raw `profiles` MCP response as `devapi.json`. Real output from the
+supplied dev-api response follows. This is supplied local-loop
 evidence, not CI evidence or approval. One item lacks outbound associations;
 the reader reports it rather than silently treating it as recorded zero.
 The two observed actions are session-linked; this response does not establish
