@@ -994,6 +994,14 @@ dry run: nothing was executed.
 
 ## Consumption of a recorded fork pull request
 
+For [litellm #171](https://github.com/garnet-labs/litellm/pull/171), the current head `f2c4902` first finalized at `2026-11-26T04:23:15Z` in the App comment's body history. The [Devin inline receipt](https://github.com/garnet-labs/litellm/pull/171#discussion_r4703839120) stays attributed to its original head, `efecde6`, not the current head to which GitHub remapped the line. The report shows:
+
+| check | state | detail | claim class |
+|---|---|---|---|
+| record timing | yes | first finalized for this head at 2026-11-26T04:23:15Z | reviewer-consumption-evidence |
+
+When body history is unavailable, the report says `record finalization time unknown`; the comment's REST update time is not used as a substitute.
+
 `replay consume https://github.com/garnet-labs/pnpm/pull/66` (run 2026-09-22). The first receipt row is a negative statement about the head ("No runtime evidence for this head"): it is kept, but it is not head-bound and does not count as consumption. The second row is the head-bound citation that does.
 
 <!-- garnet:consume pr=https://github.com/garnet-labs/pnpm/pull/66 head=ae2920fc99dbaa9069d8c258225b1c6a8df56904 consumed=true -->

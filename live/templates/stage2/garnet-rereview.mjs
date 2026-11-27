@@ -7,10 +7,10 @@ import { pathToFileURL } from "node:url";
  * A finalized best-effort record still triggers reviews, and the mirror carries
  * the capture qualifier. A pending or absent record requests nothing.
  *
- * Contract: one request per head (a marker comment is the lock), only after a
+ * Contract: one request per reviewer per head, only after a
  * finalized record from a trusted author is bound to the exact head, only for
- * the reviewers listed in GARNET_REVIEWERS. API requests go out before the lock comment so a
- * failed request leaves no lock and the next run retries. Nothing here judges
+ * the reviewers listed in GARNET_REVIEWERS. Only sent requests are recorded;
+ * the head is locked once every configured request was sent. Nothing here judges
  * the pull request. Cursor Bugbot ignores `bugbot run` posted by a bot, so it
  * is requested through Cursor's Bugbot API with a repository secret.
  * Required environment: GITHUB_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
@@ -22,6 +22,7 @@ const RUNTIME_REVIEW_MARKER = "<!-- garnet-runtime-review -->"
 const PENDING_MARKER = "garnet-control-plane-pending-pr-comment"
 const COMMIT_RE = /<!--\s*garnet:commit\s+([0-9a-f]{40})\s*-->/
 const SUMMARY_RE = /<!-- garnet:summary (\{.*?\}) -->/
+const SENT_RE = /^<!-- garnet:rereview-sent ([0-9a-f]{40}) ([a-z]+(?:,[a-z]+)*) -->$/m
 const TRUSTED_AUTHORS = new Set([
   "garnet-runtime-review[bot]",
   "garnet-runtime-review-dev[bot]",
@@ -111,7 +112,7 @@ export function isFinalizedRecordFor(comment, head) {
   if (summary === null) return false
   try {
     const parsed = JSON.parse(summary[1])
-    return parsed !== null && typeof parsed === "object" && (parsed.status === undefined || parsed.status === "finalized")
+    return parsed !== null && typeof parsed === "object" && parsed.status === "finalized"
   } catch {
     return false
   }
@@ -127,18 +128,33 @@ export function alreadyRequestedFor(comments, head) {
   return comments.some((comment) => typeof comment?.body === "string" && comment.body.includes(marker))
 }
 
+function pendingReviewers(comments, head, reviewers) {
+  const sent = new Set()
+  for (const comment of comments) {
+    if (typeof comment?.body !== "string") continue
+    const receipt = SENT_RE.exec(comment.body)
+    if (receipt !== null && receipt[1] === head) {
+      for (const reviewer of receipt[2].split(",")) sent.add(reviewer)
+    } else if (alreadyRequestedFor([comment], head)) {
+      return []
+    }
+  }
+  return reviewers.filter((reviewer) => !sent.has(reviewer))
+}
+
 /**
- * The single comment that re-triggers every mention-driven reviewer and holds
- * the per-head lock for API-driven ones.
- * @param {string[]} reviewers configured reviewers
+ * Render the dispatch comment for this batch of sent requests.
+ * @param {string[]} reviewers reviewers whose requests are being sent
  * @param {string} head
+ * @param {{complete?: boolean, track?: boolean}} [outcome]
  * @returns {string}
  */
-export function renderRequestComment(reviewers, head) {
+export function renderRequestComment(reviewers, head, { complete = true, track = false } = {}) {
   const sha7 = head.slice(0, 7)
   const lines = reviewers.filter((name) => name in MENTIONS).map((name) => MENTIONS[name])
   return [
-    rereviewMarker(head),
+    ...(complete ? [rereviewMarker(head)] : []),
+    ...(track ? [`<!-- garnet:rereview-sent ${head} ${reviewers.join(",")} -->`] : []),
     ...lines,
     "",
     `Runtime evidence for head \`${sha7}\` is bound to this pull request; requesting review again so it is read with the record present.`,
@@ -210,7 +226,7 @@ export async function main() {
     return
   }
   const comments = await listComments()
-  if (alreadyRequestedFor(comments, headSha)) {
+  if (pendingReviewers(comments, headSha, reviewers).length === 0) {
     console.log(`Reviews were already requested for head ${headSha.slice(0, 7)}; nothing to do.`)
     return
   }
@@ -224,7 +240,7 @@ export async function main() {
     return
   }
   let latestComments = await listComments()
-  if (alreadyRequestedFor(latestComments, headSha)) {
+  if (pendingReviewers(latestComments, headSha, reviewers).length === 0) {
     console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run; nothing to do.`)
     return
   }
@@ -239,7 +255,8 @@ export async function main() {
     return
   }
   latestComments = await listComments()
-  if (alreadyRequestedFor(latestComments, headSha)) {
+  const pending = pendingReviewers(latestComments, headSha, reviewers)
+  if (pending.length === 0) {
     console.log(`Reviews were requested for head ${headSha.slice(0, 7)} by another run while waiting; nothing to do.`)
     return
   }
@@ -247,14 +264,27 @@ export async function main() {
     console.log(`No finalized record bound to head ${headSha.slice(0, 7)}; reviews are not requested without evidence.`)
     return
   }
-  const requested = []
-  if (reviewers.includes("devin") && await requestDevin(pr.html_url)) requested.push("devin")
-  if (reviewers.includes("copilot") && await requestCopilot(pr.html_url)) requested.push("copilot")
-  if (reviewers.includes("bugbot") && await requestBugbot(pr.html_url)) requested.push("bugbot")
-  const body = renderRequestComment(reviewers, headSha, requested)
-  await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
-  const mentioned = reviewers.filter((name) => name in MENTIONS)
-  console.log(`posted one re-review request for head ${headSha.slice(0, 7)}: mentioned ${mentioned.join(", ") || "none"}; API requested ${requested.join(", ") || "none"}`)
+  const dispatch = { devin: requestDevin, copilot: requestCopilot, bugbot: requestBugbot }
+  const sent = []
+  const errors = []
+  for (const reviewer of pending) {
+    if (reviewer in MENTIONS) {
+      sent.push(reviewer)
+      continue
+    }
+    try {
+      if (await dispatch[reviewer](pr.html_url)) sent.push(reviewer)
+    } catch (error) {
+      errors.push(error)
+      console.error(`${reviewer}: request failed: ${error.message}`)
+    }
+  }
+  if (sent.length > 0) {
+    const body = renderRequestComment(sent, headSha, { complete: sent.length === pending.length, track: true })
+    await github(`/repos/${repo}/issues/${prNumber}/comments`, { method: "POST", body: JSON.stringify({ body }) })
+    console.log(`sent re-review requests for head ${headSha.slice(0, 7)}: ${sent.join(", ")}`)
+  }
+  if (errors.length > 0) throw new AggregateError(errors, "One or more re-review requests failed")
 }
 
 /**
