@@ -1,5 +1,15 @@
 # Worked examples
 
+## Paired runtime-record benchmark
+
+The [Nov 27 report](../benchmark/record-value/README.md#results-nov-27-snapshot)
+links each scored PR to its App record. This is the generated row for the
+Nov 24–29 subset as of that snapshot, not the full planned cohort:
+
+| Source | Paired PRs | P(yes), source | P(yes), with record | Flips at 0.5 | Judge delta (0–3) | 95% cluster bootstrap interval |
+|---|---:|---:|---:|---:|---:|---:|
+| Nov 24–29 | 2 (2 changes) | 0.087 | 0.319 | 0 | 1.000 | 1.000 to 1.000 |
+
 ## A CursorPage with association-free items
 
 Real output from `node bin/replay.mjs profile ~/loop5/devapi.json` after the
