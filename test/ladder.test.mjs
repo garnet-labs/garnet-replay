@@ -15,7 +15,7 @@ import { allowBuildScripts, buildScriptList, bumpManifest, lockedVersions, planA
 import { buildModel, classify, extractChains, renderCard } from "../lib/card.mjs"
 import { assertAggregatesMatchRows, renderCohort, tally } from "../lib/cohort.mjs"
 import { nextCommand, nextStage, renderTargetText, stageRows } from "../lib/status.mjs"
-import { RECEIPT_TIERS, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
+import { RECEIPT_TIERS, consumePr, describeFunnel, describeSignals, evaluateConsumption, mirrorStaleness, recordDestinations, renderConsumeReport, renderHarvestReport, tallyReceipts } from "../lib/consume.mjs"
 import { evaluateExhibit, findResidue, verifyExhibit, verifyExitCode } from "../lib/verify.mjs"
 import { reviewerKit } from "../lib/ground.mjs"
 import { DEFAULT_REVIEWERS, REVIEWERS, REVIEWER_ADAPTERS, competingListeners, parseReviewers, planStage2, recorderNames, renderStage2Plan } from "../lib/stage2.mjs"
@@ -1467,6 +1467,7 @@ const RECORD_BODY = `<!-- garnet-runtime-review -->
 
 [View this run in Garnet →](https://app.garnet.ai/public/runs/123?profile=00000000-0000-4000-8000-000000000000)
 `
+const RECORD_EDITS = [{ editedAt: "2026-09-20T12:00:00Z", diff: RECORD_BODY }]
 
 test("card: head-bound record renders the finding, pair, scope, chains and link; incomplete evidence fails closed", () => {
   const comment = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY }
@@ -1570,6 +1571,60 @@ test("consume: a head-bound citation counts with a recording check and no Action
   assert.match(renderConsumeReport(cited, { prUrl: `https://github.com/${FORK}/pull/77` }), /reviewer/)
 })
 
+test("consume: an inline finding stays with its original head across a sticky comment edit", () => {
+  const record = { node_id: "IC_record", user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, updated_at: "2026-09-20T13:00:00Z" }
+  const olderBody = RECORD_BODY.replaceAll(SHA_B, SHA_A)
+  const later = { diff: RECORD_BODY, editedAt: "2026-09-20T12:10:00Z" }
+  const earlier = { diff: olderBody, editedAt: "2026-09-20T12:00:00Z" }
+  const finding = {
+    user: { login: "devin-ai-integration[bot]" }, original_commit_id: SHA_A, commit_id: SHA_B,
+    created_at: "2026-09-20T12:05:00Z",
+    body: `Read this runtime record: https://app.garnet.ai/public/runs/123?profile=00000000-0000-4000-8000-000000000000`,
+  }
+  const exec = (command, args) => {
+    assert.equal(command, "gh")
+    if (args[0] === "pr" && args[1] === "view") return JSON.stringify({ headRefOid: SHA_B })
+    if (args[1] === "graphql") {
+      assert.ok(args.includes("id=IC_record"))
+      const next = !args.includes("cursor=page-2")
+      return JSON.stringify({ data: { node: { includesCreatedEdit: true, userContentEdits: {
+        totalCount: 2, nodes: [next ? later : earlier], pageInfo: { hasNextPage: next, endCursor: next ? "page-2" : null },
+      } } } })
+    }
+    if (args[1].endsWith("/pulls/77/comments")) return JSON.stringify([finding])
+    if (args[1].endsWith("/pulls/77/reviews")) return "[]"
+    if (args.at(-1).endsWith("/check-runs?per_page=100")) return '[{"check_runs":[]}]'
+    assert.fail(`unexpected gh args: ${args.join(" ")}`)
+  }
+  const { result } = consumePr(`https://github.com/${FORK}/pull/77`, { exec, comments: [record] })
+  assert.equal(result.recordAt, later.editedAt)
+  assert.equal(result.receipts[0].commit, SHA_A.slice(0, 7))
+  assert.equal(result.receipts[0].onHead, false)
+  assert.equal(result.consumed, false)
+
+  const onOriginalHead = evaluateConsumption({
+    pr: { headRefOid: SHA_A }, comments: [{ ...record, body: olderBody }], recordEdits: [later, earlier], reviewComments: [finding],
+  })
+  assert.equal(onOriginalHead.recordAt, earlier.editedAt)
+  assert.equal(onOriginalHead.receipts[0].onHead, true)
+  assert.equal(onOriginalHead.consumed, true)
+})
+
+test("consume: REST timestamps do not establish when a body finalized", () => {
+  const pr = { headRefOid: SHA_B }
+  const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY, created_at: "2026-09-20T11:00:00Z", updated_at: "2026-09-20T13:00:00Z" }
+  const reply = { user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${SHA_B.slice(0, 7)}): one new connection.` }
+  const result = evaluateConsumption({ pr, comments: [record, reply] })
+  assert.equal(result.recordAt, null)
+  assert.equal(result.funnel.consumedHow[0].path, "unknown")
+  assert.match(renderConsumeReport(result, { prUrl: `https://github.com/${FORK}/pull/77` }), /record finalization time unknown/)
+
+  const rereview = { body: `<!-- garnet:rereview-sent ${SHA_B} coderabbit -->`, created_at: "2026-09-20T12:01:00Z" }
+  const known = evaluateConsumption({ pr, comments: [record, rereview, reply], recordEdits: RECORD_EDITS })
+  assert.equal(known.funnel.rereviewRequested, true)
+  assert.equal(known.funnel.consumedHow[0].path, "after-record")
+})
+
 test("consume: weaker receipts are kept per tier without becoming consumption", () => {
   const pr = { headRefOid: SHA_B, author: { login: "dependabot[bot]" }, body: "x" }
   const record = { user: { login: "garnet-runtime-review[bot]" }, body: RECORD_BODY }
@@ -1635,7 +1690,7 @@ test("consume: the funnel records delivery, visibility, re-request, attention, g
   assert.deepEqual(nothing.funnel, { delivered: false, visible: false, rereviewRequested: false, attention: false, grounded: false, observation: false, consumedHow: [], coldRead: null, decisionImpact: "unknown", attribution: "unknown", valueHypothesis: "unknown" })
 
   const grounded = evaluateConsumption({
-    pr, comments: [
+    pr, recordEdits: RECORD_EDITS, comments: [
       record, rereview,
       { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "No Garnet runtime record yet; reviewing the diff only." },
       { id: 2, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:20:00Z", body: `Runtime evidence (Garnet, head ${sha7}): the installer reached storage.googleapis.com, as the record shows.` },
@@ -1662,14 +1717,14 @@ test("consume: the funnel records delivery, visibility, re-request, attention, g
   assert.match(line, /cold-read not yet rated · decision-impact unknown · attribution unknown · value-hypothesis unknown/)
   assert.match(renderConsumeReport(grounded, { prUrl: `https://github.com/${FORK}/pull/77` }), /^funnel: delivered yes/m)
 
-  const preRecordOnly = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, comments: [record, { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): looks fine.` }] })
+  const preRecordOnly = evaluateConsumption({ pr: { headRefOid: SHA_B, body: "x" }, recordEdits: RECORD_EDITS, comments: [record, { id: 1, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): looks fine.` }] })
   assert.equal(preRecordOnly.consumed, false)
   assert.equal(preRecordOnly.funnel.delivered, true)
   assert.equal(preRecordOnly.funnel.attention, false, "a receipt written before the record is not attention to it")
   assert.equal(preRecordOnly.funnel.grounded, false)
 
   const staleReview = evaluateConsumption({
-    pr, comments: [record],
+    pr, recordEdits: RECORD_EDITS, comments: [record],
     reviews: [{ user: { login: "greptile[bot]" }, state: "COMMENTED", commit_id: SHA_A, submitted_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new outbound connection.` }],
   })
   assert.equal(staleReview.consumed, false, "a review on an older commit does not consume")
@@ -1678,7 +1733,7 @@ test("consume: the funnel records delivery, visibility, re-request, attention, g
   assert.equal(staleReview.funnel.attention, true, "the reviewer did write after the record")
 
   const diffOnly = evaluateConsumption({
-    pr, comments: [record, { id: 3, user: { login: "greptile[bot]" }, created_at: "2026-09-20T12:30:00Z", body: "Lockfile drift: the `pnpm-lock.yaml` change is unrelated to the manifest bump." }],
+    pr, recordEdits: RECORD_EDITS, comments: [record, { id: 3, user: { login: "greptile[bot]" }, created_at: "2026-09-20T12:30:00Z", body: "Lockfile drift: the `pnpm-lock.yaml` change is unrelated to the manifest bump." }],
   })
   assert.equal(diffOnly.receipts.length, 0)
   assert.equal(diffOnly.funnel.attention, true, "a reviewer response with no runtime receipt is attention without grounding")
@@ -1686,7 +1741,7 @@ test("consume: the funnel records delivery, visibility, re-request, attention, g
   assert.equal(diffOnly.funnel.observation, false)
 
   const priorDestination = evaluateConsumption({
-    pr, comments: [record, { id: 4, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "The installer talks to storage.googleapis.com during postinstall." }],
+    pr, recordEdits: RECORD_EDITS, comments: [record, { id: 4, user: { login: "coderabbitai[bot]" }, created_at: "2026-09-20T11:00:00Z", body: "The installer talks to storage.googleapis.com during postinstall." }],
   })
   assert.equal(priorDestination.funnel.observation, false, "a destination named before the record existed is not an observation of it")
   assert.equal(priorDestination.funnel.attention, false)
@@ -1748,7 +1803,7 @@ test("consume: negative, pre-record and repository-link utterances never advance
   }
 
   const early = evaluateConsumption({
-    pr, comments: [
+    pr, recordEdits: RECORD_EDITS, comments: [
       record,
       { id: 4, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T11:00:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
       { id: 5, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:30:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
@@ -1814,7 +1869,7 @@ test("consume: negative runtime findings stay head-bound; negative permalinks an
   assert.equal(unavailable.receipts[2].headBound, true)
 
   const placeholder = evaluateConsumption({
-    pr,
+    pr, recordEdits: [{ ...RECORD_EDITS[0], editedAt: "2026-09-20T12:10:00Z" }],
     comments: [
       record,
       { id: 7, user: { login: "devin-ai-integration[bot]" }, created_at: "2026-09-20T12:05:00Z", body: `Runtime evidence (Garnet, head ${sha7}): one new connection.` },
@@ -2125,7 +2180,7 @@ function recordComment(body, login = "garnet-runtime-review[bot]") {
 }
 const FINAL_RECORD = `<!-- garnet-runtime-review -->\n<!-- garnet:commit ${HEAD40} -->\n<!-- garnet:summary {"status":"finalized","chains":2} -->\nRuntime Review`
 
-function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40, HEAD40], latestComments = comments, afterWaitComments = latestComments, failRequest = false } = {}) {
+function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40, HEAD40], latestComments = comments, afterWaitComments = latestComments, failRequest = false, reviewers = "coderabbit", devinToken = "", failDevin = false } = {}) {
   const script = `
     const comments = ${JSON.stringify(comments)};
     const latestComments = ${JSON.stringify(latestComments)};
@@ -2152,15 +2207,23 @@ function runRereview({ comments = [recordComment(FINAL_RECORD)], heads = [HEAD40
         if (method === "GET") return { ok: true, status: 200, json: async () => calls.some((call) => call.method === "WAIT") ? afterWaitComments : commentRead++ === 0 ? comments : latestComments };
         if (method === "POST") return { ok: ${!failRequest}, status: ${failRequest ? 503 : 201}, json: async () => ({}), text: async () => "unavailable" };
       }
+      if (path === "/v3/enterprise/pr-reviews" && method === "POST") {
+        return { ok: ${!failDevin}, status: ${failDevin ? 503 : 201} };
+      }
       throw new Error("Unexpected request: " + method + " " + path);
     };
     const { main } = await import(${JSON.stringify(new URL("../live/templates/stage2/garnet-rereview.mjs", import.meta.url).href)});
-    await main();
+    try {
+      await main();
+    } catch (error) {
+      if (!${failDevin} || !(error instanceof AggregateError)) throw error;
+      calls.push({ method: "ERROR", message: error.errors[0].message });
+    }
     console.log(JSON.stringify(calls));
   `
   const output = execFileSync(process.execPath, ["--input-type=module", "--eval", script], {
     encoding: "utf8",
-    env: { ...process.env, GITHUB_TOKEN: "test-token", GITHUB_REPOSITORY: "o/r", PR_NUMBER: "1", HEAD_SHA: HEAD40, GARNET_REVIEWERS: "coderabbit", GITHUB_API_URL: "https://api.github.com" },
+    env: { ...process.env, GITHUB_TOKEN: "test-token", GITHUB_REPOSITORY: "o/r", PR_NUMBER: "1", HEAD_SHA: HEAD40, GARNET_REVIEWERS: reviewers, GITHUB_API_URL: "https://api.github.com", DEVIN_API_TOKEN: devinToken, DEVIN_API_URL: "https://api.devin.ai", DEVIN_ORG_ID: "" },
     stdio: ["ignore", "pipe", "pipe"],
   })
   return JSON.parse(output.trim().split("\n").at(-1))
@@ -2185,6 +2248,39 @@ test("re-review: a pending record requests nothing", () => {
   assert.ok(runRereview({ comments }).every((call) => call.method === "GET"))
 })
 
+test("re-review: a legacy summary without explicit finalized status requests nothing", () => {
+  const comments = [recordComment(FINAL_RECORD.replace('"status":"finalized",', ""))]
+  assert.ok(runRereview({ comments }).every((call) => call.method === "GET"))
+})
+
+test("re-review: a missing Devin token leaves a partial request retryable without repeating the mention", () => {
+  const record = recordComment(FINAL_RECORD)
+  assert.ok(runRereview({ reviewers: "devin" }).every((call) => call.method === "GET"))
+  const reviewers = "devin,coderabbit"
+  const first = runRereview({ reviewers }).filter((call) => call.method === "POST")
+  assert.equal(first.length, 1)
+  const partial = first[0].body
+  assert.match(partial.body, /^@coderabbitai review$/m)
+  assert.equal(alreadyRequestedFor([partial], HEAD40), false)
+
+  const comments = [record, partial]
+  const retry = runRereview({ comments, reviewers, devinToken: "test-devin" }).filter((call) => call.method === "POST")
+  assert.deepEqual(retry.map((call) => call.path), ["/v3/enterprise/pr-reviews", "/repos/o/r/issues/1/comments"])
+  const complete = retry[1].body
+  assert.doesNotMatch(complete.body, /^@/m)
+  assert.equal(alreadyRequestedFor([complete], HEAD40), true)
+  assert.ok(runRereview({ comments: [...comments, complete], reviewers, devinToken: "test-devin" }).every((call) => call.method === "GET"))
+})
+
+test("re-review: an API failure is surfaced without locking out that reviewer", () => {
+  const reviewers = "devin,coderabbit"
+  const calls = runRereview({ reviewers, devinToken: "test-devin", failDevin: true })
+  const partial = calls.find((call) => call.method === "POST" && call.path === "/repos/o/r/issues/1/comments").body
+  assert.match(calls.at(-1).message, /devin: POST .*503/)
+  assert.equal(alreadyRequestedFor([partial], HEAD40), false)
+  const retry = runRereview({ comments: [recordComment(FINAL_RECORD), partial], reviewers, devinToken: "test-devin" })
+  assert.ok(retry.some((call) => call.method === "POST" && call.path === "/v3/enterprise/pr-reviews"))
+})
 test("re-review: an absent record requests nothing", () => {
   assert.ok(runRereview({ comments: [] }).every((call) => call.method === "GET"))
 })
@@ -2297,6 +2393,9 @@ test("consume: a URL without a matching target requires an explicit slug", () =>
 test("verify: the fork's re-review lock comment is not session residue, other comments still are", () => {
   const lock = `<!-- garnet:rereview ${SHA_B} -->\n@greptileai review\nNot requested (repository secret absent): devin.`
   assert.equal(findResidue("routine body", [lock]), null)
+  const partial = renderRequestComment(["devin"], SHA_B, { complete: false, track: true })
+  assert.equal(findResidue("routine body", [partial]), null)
+  assert.equal(findResidue("routine body", [`${partial}\nReviewed by Devin`]), "Devin")
   assert.equal(findResidue("routine body", [lock, "Reviewed by Devin"]), "Devin")
   assert.equal(findResidue("see app.devin.ai/x", [lock]), "app.devin.ai")
 })
