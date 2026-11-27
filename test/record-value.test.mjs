@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import { test } from "node:test"
-import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueHasVerification, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareExclusions, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
+import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueHasVerification, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueRetrySnapshot, recordValueShareExclusions, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
 
 const head = "a".repeat(40)
 const previous = "b".repeat(40)
@@ -60,6 +60,18 @@ test("share exclusions retain identifiers and reasons without links", () => {
     { url, evidence: `${url}#issuecomment-1`, reason: "Replay share gate did not pass", failedLegs: ["pull request open"] },
     { url: `${url}1`, evidence: `${url}1`, reason: "No App record" },
   ]), ["- `garnet-labs/posthog#276`: Replay share gate did not pass (pull request open)"])
+})
+
+test("a targeted diff retry preserves unrelated rows and leaves the entire snapshot intact on throttling", () => {
+  const unrelated = { url: `${url}1`, diff: "saved diff" }
+  const target = { url, reason: "Earlier exclusion", diff: "saved target inputs" }
+  const prior = { included: [unrelated], incomplete: [target], ineligible: 0 }
+  const retried = recordValueRetrySnapshot(prior, url, { included: [], ineligible: 0,
+    incomplete: [{ url, reason: "New exclusion" }] })
+  assert.strictEqual(retried.included[0], unrelated)
+  assert.deepEqual(retried.incomplete, [{ url, reason: "New exclusion" }])
+  assert.strictEqual(recordValueRetrySnapshot(prior, url, { included: [], ineligible: 0,
+    incomplete: [{ url, reason: "GitHub rate limit", rateLimited: true }] }), prior)
 })
 
 test("only added outbound leaves are counted, not dotted processes", () => {

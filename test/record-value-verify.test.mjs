@@ -16,6 +16,6 @@ test("authenticated verification marks a throttled leg incomplete even when the 
     fetchImpl: async () => new Response(null, { status: 403, headers: { "x-ratelimit-remaining": "0" } }),
   })
   assert.deepEqual(await recordValueShareStatus(row, verify), {
-    reason: "Replay share gate incomplete: GitHub rate limit", evidence: "record",
+    reason: "Replay share gate incomplete: GitHub rate limit", evidence: "record", rateLimited: true,
   })
 })

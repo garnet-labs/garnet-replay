@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import { ghAsync, run } from "../../lib/gh.mjs"
 import { parsePrUrl } from "../../lib/receipt.mjs"
-import { recordValueFileDiff, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../../lib/record-value.mjs"
+import { recordValueFileDiff, recordValueHasVerification, recordValueReceipt, recordValueRetrySnapshot, recordValueShareStatus, recordValueSource } from "../../lib/record-value.mjs"
 import { replayGithubToken } from "../../lib/replay-request.mjs"
 import { verifyRecordValueExhibit } from "./verify.mjs"
 
@@ -42,6 +42,10 @@ const incomplete = []
 let ineligible = 0
 let scanned = 0
 
+function isRateLimited(error) {
+  return /rate limit|HTTP 429/i.test(String(error.stderr ?? error.message))
+}
+
 async function collect(url) {
   let metadata = {}
   try {
@@ -73,8 +77,10 @@ async function collect(url) {
       try {
         const files = (await api("--paginate", "--slurp", `${root}/pulls/${number}/files?per_page=100`)).flat()
         diff = recordValueFileDiff(files, first.changed_files)
-      } catch {
-        incomplete.push({ url, ...metadata, reason: "Neither full PR diff nor complete per-file patches were readable", evidence: receipt.appUrl })
+      } catch (error) {
+        const rateLimited = isRateLimited(error)
+        incomplete.push({ url, ...metadata, reason: rateLimited ? "GitHub rate limit prevented collection" : "Neither full PR diff nor complete per-file patches were readable",
+          evidence: receipt.appUrl, rateLimited })
         return
       }
     }
@@ -89,7 +95,9 @@ async function collect(url) {
     qualified.push({ url, ...metadata, ...receipt, baseSha: first.base.sha, title: last.title, body: last.body ?? "", diff, diffSource })
   } catch (error) {
     const code = /HTTP (\d+)/.exec(error.stderr ?? "")?.[1]
-    incomplete.push({ url, ...metadata, reason: code === undefined ? "Could not fetch or parse requested GitHub evidence" : `GitHub HTTP ${code}`, evidence: url })
+    const rateLimited = isRateLimited(error)
+    const reason = rateLimited ? "GitHub rate limit prevented collection" : code === undefined ? "Could not fetch or parse requested GitHub evidence" : `GitHub HTTP ${code}`
+    incomplete.push({ url, ...metadata, reason, evidence: url, rateLimited })
   }
 }
 
@@ -97,7 +105,9 @@ const prior = retryDiff ? JSON.parse(await readFile(join(output, "rows.json"), "
 if (retryDiff && !prior.incomplete.some(row => row.url === retryDiff)) {
   throw new Error("Retry URL must be in the snapshot's incomplete list")
 }
-if (prior !== null) qualified.push(...prior.included)
+if (prior !== null && !prior.included.every(recordValueHasVerification)) {
+  throw new Error("Snapshot contains a row without matching passing replay verification; rerun full collection")
+}
 const queue = retryDiff ? [retryDiff] : [...urls.filter(url => preferred.has(url)), ...urls.filter(url => !preferred.has(url))]
 await Promise.all(Array.from({ length: 10 }, async () => {
   while (queue.length > 0) {
@@ -124,10 +134,10 @@ const ordered = rows => rows.sort((a, b) => a.url.localeCompare(b.url, "en"))
 await mkdir(output, { recursive: true })
 const snapshot = prior === null ? {
   cutoff, candidates: urls.length, indexed: new Set(indexed.flat()).size, ledger: new Set(ledgerUrls).size,
-  ineligible, included, incomplete,
-} : { ...prior, ineligible: prior.ineligible + ineligible, included,
-  incomplete: prior.incomplete.filter(row => row.url !== retryDiff).concat(incomplete) }
-snapshot.included = ordered(snapshot.included)
-snapshot.incomplete = ordered(snapshot.incomplete)
-await writeFile(join(output, "rows.json"), JSON.stringify(snapshot, null, 2) + "\n")
-console.log(`wrote ${output}/rows.json: ${snapshot.included.length} eligible, ${snapshot.incomplete.length} incomplete, ${snapshot.ineligible} not eligible`)
+  ineligible, included: ordered(included), incomplete: ordered(incomplete),
+} : recordValueRetrySnapshot(prior, retryDiff, { included, incomplete, ineligible })
+if (snapshot === prior) console.log("Retry rate-limited; left snapshot unchanged")
+else {
+  await writeFile(join(output, "rows.json"), JSON.stringify(snapshot, null, 2) + "\n")
+  console.log(`wrote ${output}/rows.json: ${snapshot.included.length} eligible, ${snapshot.incomplete.length} incomplete, ${snapshot.ineligible} not eligible`)
+}
