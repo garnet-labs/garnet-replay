@@ -1,14 +1,17 @@
 import { readFile, writeFile } from "node:fs/promises"
 import { parseVersionTransition, transitionPhrase } from "../../lib/observe.mjs"
-import { recordValueMetrics } from "../../lib/record-value.mjs"
+import { recordValueHasVerification, recordValueMetrics } from "../../lib/record-value.mjs"
 import { scoreRecordValueRow, scorer } from "./score.mjs"
 
 const dir = "out/record-value"
+const cohort = JSON.parse(await readFile(`${dir}/rows.json`, "utf8"))
+if (!cohort.included.every(recordValueHasVerification)) {
+  throw new Error("Snapshot contains a row without matching passing replay verification; rerun collection")
+}
 const judgeModel = process.env.RECORD_VALUE_JUDGE ?? "openai/gpt-4.1-mini"
 const key = process.env.AI_GATEWAY_API_KEY
 if (!key) throw new Error("AI_GATEWAY_API_KEY is required for the independent judge")
 
-const cohort = JSON.parse(await readFile(`${dir}/rows.json`, "utf8"))
 const health = await (await fetch(`${scorer}/health`, { signal: AbortSignal.timeout(10_000) })).json()
 if (health.status !== "ready" || health.model !== "jevos-v5") throw new Error("Local jevos-v5 is not ready")
 

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import { test } from "node:test"
-import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
+import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueHasVerification, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
 
 const head = "a".repeat(40)
 const previous = "b".repeat(40)
@@ -40,13 +40,19 @@ test("record-value admits only usable current-head positive workload changes", (
 test("share gating admits only a pass on the collected head and receipt", async () => {
   const row = { url, headSha: head, ...recordValueReceipt(pr, [comment()]) }
   const pass = { status: "PASS", head, receipt_fingerprint: row.fingerprint }
-  assert.equal(await recordValueShareStatus(row, async input => { assert.equal(input, url); return pass }), null)
+  const verified = await recordValueShareStatus(row, async input => { assert.equal(input, url); return pass })
+  assert.equal(recordValueHasVerification({ ...row, ...verified }), true)
+  assert.equal(recordValueHasVerification(row), false)
+  assert.equal(recordValueHasVerification({ ...row, ...verified, url: `${url}1` }), false)
+  assert.equal(recordValueHasVerification({ ...row, ...verified, headSha: previous }), false)
+  assert.equal(recordValueHasVerification({ ...row, ...verified, fingerprint: "f".repeat(64) }), false)
+  assert.equal(recordValueHasVerification({ ...row, verification: { ...verified.verification, status: "FAIL" } }), false)
   assert.deepEqual(await recordValueShareStatus(row, async () => ({ ...pass, status: "FAIL", legs: [{ name: "no session residue", ok: false }] })), {
     reason: "Replay share gate did not pass", evidence: row.appUrl, failedLegs: ["no session residue"],
   })
-  assert.notEqual(await recordValueShareStatus(row, async () => ({ ...pass, head: previous })), null)
-  assert.notEqual(await recordValueShareStatus(row, async () => ({ ...pass, receipt_fingerprint: "different" })), null)
-  assert.notEqual(await recordValueShareStatus(row, async () => { throw new Error("Unavailable") }), null)
+  assert.equal((await recordValueShareStatus(row, async () => ({ ...pass, head: previous }))).verification, undefined)
+  assert.equal((await recordValueShareStatus(row, async () => ({ ...pass, receipt_fingerprint: "different" }))).verification, undefined)
+  assert.equal((await recordValueShareStatus(row, async () => { throw new Error("Unavailable") })).verification, undefined)
 })
 
 test("only added outbound leaves are counted, not dotted processes", () => {

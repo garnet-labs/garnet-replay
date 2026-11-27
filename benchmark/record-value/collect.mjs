@@ -97,6 +97,7 @@ const prior = retryDiff ? JSON.parse(await readFile(join(output, "rows.json"), "
 if (retryDiff && !prior.incomplete.some(row => row.url === retryDiff)) {
   throw new Error("Retry URL must be in the snapshot's incomplete list")
 }
+if (prior !== null) qualified.push(...prior.included)
 const queue = retryDiff ? [retryDiff] : [...urls.filter(url => preferred.has(url)), ...urls.filter(url => !preferred.has(url))]
 await Promise.all(Array.from({ length: 10 }, async () => {
   while (queue.length > 0) {
@@ -109,11 +110,11 @@ let verified = 0
 await Promise.all(Array.from({ length: 2 }, async () => {
   while (qualified.length > 0) {
     const row = qualified.shift()
-    const shareExclusion = await recordValueShareStatus(row, verify)
-    if (shareExclusion === null) included.push(row)
+    const checked = await recordValueShareStatus(row, verify)
+    if (checked.verification !== undefined) included.push({ ...row, ...checked })
     else {
       const { url, source, group, createdAt, headSha } = row
-      incomplete.push({ url, source, group, createdAt, headSha, ...shareExclusion })
+      incomplete.push({ url, source, group, createdAt, headSha, ...checked })
     }
     verified += 1
     if (verified % 10 === 0) console.log(`verified ${verified} qualifying receipts; ${included.length} shareable`)
@@ -124,7 +125,7 @@ await mkdir(output, { recursive: true })
 const snapshot = prior === null ? {
   cutoff, candidates: urls.length, indexed: new Set(indexed.flat()).size, ledger: new Set(ledgerUrls).size,
   ineligible, included, incomplete,
-} : { ...prior, ineligible: prior.ineligible + ineligible, included: prior.included.concat(included),
+} : { ...prior, ineligible: prior.ineligible + ineligible, included,
   incomplete: prior.incomplete.filter(row => row.url !== retryDiff).concat(incomplete) }
 snapshot.included = ordered(snapshot.included)
 snapshot.incomplete = ordered(snapshot.incomplete)
