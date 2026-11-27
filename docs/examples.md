@@ -8,7 +8,7 @@ Nov 24–29 subset as of that snapshot, not the full planned cohort:
 
 | Source | Paired PRs | P(yes), source | P(yes), with record | Flips at 0.5 | Judge delta (0–3) | 95% cluster bootstrap interval |
 |---|---:|---:|---:|---:|---:|---:|
-| Nov 24–29 | 9 (9 changes) | 0.191 | 0.320 | 0 | 0.667 | 0.222 to 1.222 |
+| Nov 24–29 | 2 (2 changes) | 0.087 | 0.319 | 0 | 1.000 | 1.000 to 1.000 |
 
 ## A CursorPage with association-free items
 

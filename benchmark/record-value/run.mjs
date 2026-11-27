@@ -32,7 +32,7 @@ await Promise.all(Array.from({ length: 3 }, async () => {
 const orderRows = rows => rows.sort((a, b) => a.url.localeCompare(b.url, "en"))
 orderRows(paired)
 orderRows(incomplete)
-const sources = [...new Set(cohort.included.map(x => x.source).concat("Nov 24–29"))].sort()
+const sources = [...new Set(cohort.included.map(x => x.source).concat("Nov 20 PostHog shadow mirrors", "Nov 24–29"))].sort()
 const metrics = Object.fromEntries([["All sources", recordValueMetrics(paired)],
   ...sources.map(source => [source, recordValueMetrics(paired.filter(row => row.source === source))])])
 const format = n => n.toFixed(3)
@@ -47,7 +47,7 @@ const report = [
   "|---|---:|---:|---:|---:|---:|---:|",
   ...Object.entries(metrics).map(metricLine), "",
   "Positive judge delta means the record-assisted input was more useful. P(yes) measures whether the diff explains the behavior, not accuracy; a decrease may be appropriate. This is a model-scored, changed-only study, not evidence of improved approval accuracy. Neither arm ran PR code.", "",
-  "[PostHog #276](https://github.com/garnet-labs/posthog/pull/276) and [#277](https://github.com/garnet-labs/posthog/pull/277) are separate observations of one upstream change and share a bootstrap cluster. The Nov 24–29 row is a partial, as-of snapshot, not the planned 30 PRs + 20 reruns.", "",
+  "[PostHog #276](https://github.com/garnet-labs/posthog/pull/276) and [#277](https://github.com/garnet-labs/posthog/pull/277) are variants of one upstream change and use the same cluster when admitted. The Nov 24–29 row is a partial, as-of snapshot, not the planned 30 PRs + 20 reruns.", "",
   "| PR | Source | Record | Compared → head commits | Scope | Version transition | P(yes): source → record | Judge: source → record | Omitted diff characters |",
   "|---|---|---|---|---|---|---:|---:|---:|",
   ...paired.map(row => `| [${new URL(row.url).pathname.slice(1).replace("/pull/", "#")}](${row.url}) | ${row.source} | [${row.capture}](${row.appUrl}) | \`${row.comparedSha}\` → \`${row.headSha}\` | ${cell(row.scope)} | ${cell(row.transition ?? "Not derivable from PR title")} | ${format(row.probabilities.source)} → ${format(row.probabilities.record)} | ${row.judge.source} → ${row.judge.record} | ${row.omitted.diff} |`),

@@ -1,6 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises"
 import { join } from "node:path"
-import { ghAsync, githubReadFetch, run } from "../../lib/gh.mjs"
+import { ghAsync, run } from "../../lib/gh.mjs"
 import { parsePrUrl } from "../../lib/receipt.mjs"
 import { recordValueFileDiff, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../../lib/record-value.mjs"
 import { verifyExhibit } from "../../lib/verify.mjs"
@@ -12,7 +12,7 @@ const env = { ...process.env, GH_TOKEN: process.env.GARNET_LABS_GITHUB_PAT ?? pr
 const gh = (args, options = {}) => ghAsync(args, { env, maxBuffer: 24 * 1024 * 1024, ...options })
 const api = async (...args) => JSON.parse(await gh(["api", ...args]))
 const exec = (command, args, options) => run(command, args, { ...options, env })
-const verify = url => verifyExhibit(url, { exec, fetchImpl: githubReadFetch({ exec }) })
+const verify = url => verifyExhibit(url, { exec, token: env.GH_TOKEN })
 
 async function search(window) {
   const pages = await api("--paginate", "--slurp", "-X", "GET", "search/issues",
@@ -33,6 +33,7 @@ const named = [276, 277, 278, 280, 282].map(n => `https://github.com/garnet-labs
 const urls = [...new Set([...named, ...indexed.flat(), ...ledgerUrls].filter(url => url.startsWith("https://github.com/garnet-labs/")))]
   .sort((a, b) => a.localeCompare(b, "en"))
 const preferred = new Set(named)
+const qualified = []
 const included = []
 const incomplete = []
 let ineligible = 0
@@ -82,13 +83,7 @@ async function collect(url) {
       incomplete.push({ url, ...metadata, reason: "Diff unavailable or PR/evidence changed during collection", evidence: receipt.appUrl })
       return
     }
-    const row = { url, ...metadata, ...receipt, baseSha: first.base.sha, title: last.title, body: last.body ?? "", diff, diffSource }
-    const shareExclusion = await recordValueShareStatus(row, verify)
-    if (shareExclusion !== null) {
-      incomplete.push({ url, ...metadata, ...shareExclusion })
-      return
-    }
-    included.push(row)
+    qualified.push({ url, ...metadata, ...receipt, baseSha: first.base.sha, title: last.title, body: last.body ?? "", diff, diffSource })
   } catch (error) {
     const code = /HTTP (\d+)/.exec(error.stderr ?? "")?.[1]
     incomplete.push({ url, ...metadata, reason: code === undefined ? "Could not fetch or parse requested GitHub evidence" : `GitHub HTTP ${code}`, evidence: url })
@@ -104,7 +99,21 @@ await Promise.all(Array.from({ length: 10 }, async () => {
   while (queue.length > 0) {
     await collect(queue.shift())
     scanned += 1
-    if (scanned % 100 === 0) console.log(`inspected ${scanned}/${urls.length} PRs; ${included.length} admitted`)
+    if (scanned % 100 === 0) console.log(`inspected ${scanned}/${urls.length} PRs; ${qualified.length} qualifying receipts`)
+  }
+}))
+let verified = 0
+await Promise.all(Array.from({ length: 2 }, async () => {
+  while (qualified.length > 0) {
+    const row = qualified.shift()
+    const shareExclusion = await recordValueShareStatus(row, verify)
+    if (shareExclusion === null) included.push(row)
+    else {
+      const { url, source, group, createdAt, headSha } = row
+      incomplete.push({ url, source, group, createdAt, headSha, ...shareExclusion })
+    }
+    verified += 1
+    if (verified % 10 === 0) console.log(`verified ${verified} qualifying receipts; ${included.length} shareable`)
   }
 }))
 const ordered = rows => rows.sort((a, b) => a.url.localeCompare(b.url, "en"))
