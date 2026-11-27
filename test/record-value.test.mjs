@@ -48,6 +48,13 @@ test("share gating admits only a pass on the collected head and receipt", async 
   assert.notEqual(await recordValueShareStatus(row, async () => { throw new Error("Unavailable") }), null)
 })
 
+test("only added outbound leaves are counted, not dotted processes", () => {
+  const body = folds.replace("  ├─ python3.12", "+ ├─ python3.12").replace("− └─ old.example[.]net", "+ └─ curl.exe")
+  assert.deepEqual(recordValueChanges(body).map(row => [row.destination, row.chain]), [
+    ["downloads.example[.]net", "bash › node › python3.12"],
+  ])
+})
+
 test("the source arm receives the concern but neither the record nor the description mirror", () => {
   const receipt = recordValueReceipt(pr, [comment()])
   const row = { title: "Update download", body: "Reason\n<!-- garnet:evidence:begin -->\nmirror leak\n<!-- garnet:evidence:end -->", diff: "x".repeat(4000),
