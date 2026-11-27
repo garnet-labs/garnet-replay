@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { readFile } from "node:fs/promises"
 import { test } from "node:test"
 import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
 
@@ -53,6 +54,14 @@ test("only added outbound leaves are counted, not dotted processes", () => {
   assert.deepEqual(recordValueChanges(body).map(row => [row.destination, row.chain]), [
     ["downloads.example[.]net", "bash › node › python3.12"],
   ])
+})
+
+test("legacy App job folds have an uncaptained workload diff with marked connection leaves", async () => {
+  const body = await readFile(new URL("./fixtures/app/dspy-4.pr-comment.md", import.meta.url), "utf8")
+  assert.deepEqual(recordValueChanges(body).map(({ job, destination, chain }) => ({ job, destination, chain })), [{
+    job: "Lint, Test, and Build / Run MCP v2 Tests", destination: "dualstack.python.map.fastly[.]net", chain: "Runner.Worker › bash › uv",
+  }])
+  assert.deepEqual(recordValueChanges(folds.replace(/<sub>Workload[^\n]*\n\n```diff[\s\S]*?```\n/, "")), [])
 })
 
 test("the source arm receives the concern but neither the record nor the description mirror", () => {
