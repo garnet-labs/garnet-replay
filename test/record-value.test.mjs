@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
 import { test } from "node:test"
-import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueSource } from "../lib/record-value.mjs"
+import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
 
 const head = "a".repeat(40)
 const previous = "b".repeat(40)
@@ -34,6 +34,18 @@ test("record-value admits only usable current-head positive workload changes", (
   assert.equal(recordValueReceipt(pr, [comment({ capture_quality: "partial" })]).status, "incomplete")
   assert.equal(recordValueReceipt(pr, [comment({ outcome: "unchanged", added: 0 })]).status, "not eligible")
   assert.equal(recordValueReceipt(pr, [{ ...comment(), user: { login: "contributor" } }]).status, "incomplete")
+})
+
+test("share gating admits only a pass on the collected head and receipt", async () => {
+  const row = { url, headSha: head, ...recordValueReceipt(pr, [comment()]) }
+  const pass = { status: "PASS", head, receipt_fingerprint: row.fingerprint }
+  assert.equal(await recordValueShareStatus(row, async input => { assert.equal(input, url); return pass }), null)
+  assert.deepEqual(await recordValueShareStatus(row, async () => ({ ...pass, status: "FAIL", legs: [{ name: "no session residue", ok: false }] })), {
+    reason: "Replay share gate did not pass", evidence: row.appUrl, failedLegs: ["no session residue"],
+  })
+  assert.notEqual(await recordValueShareStatus(row, async () => ({ ...pass, head: previous })), null)
+  assert.notEqual(await recordValueShareStatus(row, async () => ({ ...pass, receipt_fingerprint: "different" })), null)
+  assert.notEqual(await recordValueShareStatus(row, async () => { throw new Error("Unavailable") }), null)
 })
 
 test("the source arm receives the concern but neither the record nor the description mirror", () => {

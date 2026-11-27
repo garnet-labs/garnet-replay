@@ -1,8 +1,9 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises"
 import { join } from "node:path"
-import { ghAsync } from "../../lib/gh.mjs"
+import { ghAsync, githubReadFetch, run } from "../../lib/gh.mjs"
 import { parsePrUrl } from "../../lib/receipt.mjs"
-import { recordValueFileDiff, recordValueReceipt, recordValueSource } from "../../lib/record-value.mjs"
+import { recordValueFileDiff, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../../lib/record-value.mjs"
+import { verifyExhibit } from "../../lib/verify.mjs"
 
 const output = "out/record-value"
 const cutoff = new Date().toISOString()
@@ -10,6 +11,8 @@ const retryDiff = process.argv[2] === "--retry-diff" ? process.argv[3] : null
 const env = { ...process.env, GH_TOKEN: process.env.GARNET_LABS_GITHUB_PAT ?? process.env.GH_TOKEN }
 const gh = (args, options = {}) => ghAsync(args, { env, maxBuffer: 24 * 1024 * 1024, ...options })
 const api = async (...args) => JSON.parse(await gh(["api", ...args]))
+const exec = (command, args, options) => run(command, args, { ...options, env })
+const verify = url => verifyExhibit(url, { exec, fetchImpl: githubReadFetch({ exec }) })
 
 async function search(window) {
   const pages = await api("--paginate", "--slurp", "-X", "GET", "search/issues",
@@ -79,7 +82,13 @@ async function collect(url) {
       incomplete.push({ url, ...metadata, reason: "Diff unavailable or PR/evidence changed during collection", evidence: receipt.appUrl })
       return
     }
-    included.push({ url, ...metadata, ...receipt, baseSha: first.base.sha, title: last.title, body: last.body ?? "", diff, diffSource })
+    const row = { url, ...metadata, ...receipt, baseSha: first.base.sha, title: last.title, body: last.body ?? "", diff, diffSource }
+    const shareExclusion = await recordValueShareStatus(row, verify)
+    if (shareExclusion !== null) {
+      incomplete.push({ url, ...metadata, ...shareExclusion })
+      return
+    }
+    included.push(row)
   } catch (error) {
     const code = /HTTP (\d+)/.exec(error.stderr ?? "")?.[1]
     incomplete.push({ url, ...metadata, reason: code === undefined ? "Could not fetch or parse requested GitHub evidence" : `GitHub HTTP ${code}`, evidence: url })
