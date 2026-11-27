@@ -3,7 +3,8 @@ import { join } from "node:path"
 import { ghAsync, run } from "../../lib/gh.mjs"
 import { parsePrUrl } from "../../lib/receipt.mjs"
 import { recordValueFileDiff, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../../lib/record-value.mjs"
-import { verifyExhibit } from "../../lib/verify.mjs"
+import { replayGithubToken } from "../../lib/replay-request.mjs"
+import { verifyRecordValueExhibit } from "./verify.mjs"
 
 const output = "out/record-value"
 const cutoff = new Date().toISOString()
@@ -12,7 +13,9 @@ const env = { ...process.env, GH_TOKEN: process.env.GARNET_LABS_GITHUB_PAT ?? pr
 const gh = (args, options = {}) => ghAsync(args, { env, maxBuffer: 24 * 1024 * 1024, ...options })
 const api = async (...args) => JSON.parse(await gh(["api", ...args]))
 const exec = (command, args, options) => run(command, args, { ...options, env })
-const verify = url => verifyExhibit(url, { exec, token: env.GH_TOKEN })
+const token = env.GH_TOKEN ?? replayGithubToken(exec)
+if (typeof token !== "string" || token === "") throw new Error("GitHub authentication is required for replay verification")
+const verify = url => verifyRecordValueExhibit(url, { exec, token })
 
 async function search(window) {
   const pages = await api("--paginate", "--slurp", "-X", "GET", "search/issues",
