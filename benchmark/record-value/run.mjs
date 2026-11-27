@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises"
 import { parseVersionTransition, transitionPhrase } from "../../lib/observe.mjs"
-import { recordValueHasVerification, recordValueMetrics } from "../../lib/record-value.mjs"
+import { recordValueHasVerification, recordValueMetrics, recordValueShareExclusions } from "../../lib/record-value.mjs"
 import { scoreRecordValueRow, scorer } from "./score.mjs"
 
 const dir = "out/record-value"
@@ -40,6 +40,7 @@ const metrics = Object.fromEntries([["All sources", recordValueMetrics(paired)],
   ...sources.map(source => [source, recordValueMetrics(paired.filter(row => row.source === source))])])
 const format = n => n.toFixed(3)
 const cell = value => (value ?? "Not stated").replaceAll("|", "\\|")
+const shareExclusions = recordValueShareExclusions(cohort.incomplete)
 const metricLine = ([source, metric]) => metric === null ? `| ${source} | 0 | — | — | — | — | — |`
   : `| ${source} | ${metric.pairs} (${metric.groups} changes) | ${format(metric.meanYes.source)} | ${format(metric.meanYes.record)} | ${metric.flips} | ${format(metric.meanJudgeDelta)} | ${metric.judgeDelta95?.map(format).join(" to ") ?? "—"} |`
 const report = [
@@ -50,10 +51,12 @@ const report = [
   "|---|---:|---:|---:|---:|---:|---:|",
   ...Object.entries(metrics).map(metricLine), "",
   "Positive judge delta means the record-assisted input was more useful. P(yes) measures whether the diff explains the behavior, not accuracy; a decrease may be appropriate. This is a model-scored, changed-only study, not evidence of improved approval accuracy. Neither arm ran PR code.", "",
-  "[PostHog #276](https://github.com/garnet-labs/posthog/pull/276) and [#277](https://github.com/garnet-labs/posthog/pull/277) are variants of one upstream change and use the same cluster when admitted. The Nov 24–29 row is a partial, as-of snapshot, not the planned 30 PRs + 20 reruns.", "",
+  "The two variants of the same Nov 20 PostHog upstream change use one cluster when admitted. The Nov 24–29 row is a partial, as-of snapshot, not the planned 30 PRs + 20 reruns.", "",
   "| PR | Source | Record | Compared → head commits | Scope | Version transition | P(yes): source → record | Judge: source → record | Omitted diff characters |",
   "|---|---|---|---|---|---|---:|---:|---:|",
   ...paired.map(row => `| [${new URL(row.url).pathname.slice(1).replace("/pull/", "#")}](${row.url}) | ${row.source} | [${row.capture}](${row.appUrl}) | \`${row.comparedSha}\` → \`${row.headSha}\` | ${cell(row.scope)} | ${cell(row.transition ?? "Not derivable from PR title")} | ${format(row.probabilities.source)} → ${format(row.probabilities.record)} | ${row.judge.source} → ${row.judge.record} | ${row.omitted.diff} |`),
+  "", `## Share-gate exclusions (${shareExclusions.length})`, "",
+  ...(shareExclusions.length === 0 ? ["None."] : shareExclusions),
   "", "Collection exclusions and model failures are in the generated `rows.json` and `results.json` with evidence URLs. A missing record or unusable comparison is incomplete, not clean.", "",
 ]
 await writeFile(`${dir}/results.json`, JSON.stringify({

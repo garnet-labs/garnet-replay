@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
 import { test } from "node:test"
-import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueHasVerification, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
+import { recordValueArms, recordValueChanges, recordValueFileDiff, recordValueHasVerification, recordValueJudge, recordValueMetrics, recordValueReceipt, recordValueShareExclusions, recordValueShareStatus, recordValueSource } from "../lib/record-value.mjs"
 
 const head = "a".repeat(40)
 const previous = "b".repeat(40)
@@ -53,6 +53,13 @@ test("share gating admits only a pass on the collected head and receipt", async 
   assert.equal((await recordValueShareStatus(row, async () => ({ ...pass, head: previous }))).verification, undefined)
   assert.equal((await recordValueShareStatus(row, async () => ({ ...pass, receipt_fingerprint: "different" }))).verification, undefined)
   assert.equal((await recordValueShareStatus(row, async () => { throw new Error("Unavailable") })).verification, undefined)
+})
+
+test("share exclusions retain identifiers and reasons without links", () => {
+  assert.deepEqual(recordValueShareExclusions([
+    { url, evidence: `${url}#issuecomment-1`, reason: "Replay share gate did not pass", failedLegs: ["pull request open"] },
+    { url: `${url}1`, evidence: `${url}1`, reason: "No App record" },
+  ]), ["- `garnet-labs/posthog#276`: Replay share gate did not pass (pull request open)"])
 })
 
 test("only added outbound leaves are counted, not dotted processes", () => {
