@@ -714,8 +714,10 @@ test("card vocabulary and width guards check attribution copy but exempt quoted 
 
 test("live verifier keeps its existing status and adds a review note without refetching head profiles", async () => {
   const calls = []
+  let gateComplete = false
   const fetchImpl = async (url) => {
     calls.push(url)
+    if (url.includes("/api/public/")) assert.equal(gateComplete, url.includes("/122?"))
     let body
     if (url.includes("/api/public/")) body = { profile: url.includes("/122?") ? profile(PREVIOUS, TREES.profiles[0].associations.slice(0, 3)) : profile() }
     else if (url.includes("/public/")) return { status: 200 }
@@ -727,7 +729,9 @@ test("live verifier keeps its existing status and adds a review note without ref
     else assert.fail(`Unexpected URL ${url}`)
     return { ok: true, json: async () => body }
   }
-  const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", { fetchImpl, exec: (_command, args) => kitResponse(args) })
+  const result = await verifyExhibit("https://github.com/garnet-labs/example/pull/1", {
+    fetchImpl, exec: (_command, args) => kitResponse(args), onGateComplete: () => { gateComplete = true },
+  })
   assert.equal(result.status, "PASS", JSON.stringify(result.reasons))
   assert.equal(result.attribution.added.length, 5)
   assert.equal(calls.filter((url) => url.includes("/api/public/runs/123?")).length, 1)
